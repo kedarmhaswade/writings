@@ -1,0 +1,32 @@
+\documentclass[a4paper,10pt]{article}
+%\usepackage{fix-cm}
+\usepackage{geometry}
+\geometry{
+    bottom=0mm,
+    left=10mm,
+    right=0mm,
+}
+\usepackage{polyglossia}
+\setdefaultlanguage{sanskrit}
+\setotherlanguages{marathi,english}
+\setmainfont[Mapping=velthuis-sanskrit,Script=Devanagari,Language=Default]{Sanskrit2003}
+\newfontfamily\marathifont[Mapping=velthuis-sanskrit,Script=Devanagari,Language=Default]{Shobhika}
+%\usepackage{lscape}
+
+\begin{document}
+\edef~{\string~}
+\pagenumbering{gobble}
+%\begin{landscape}
+\begin{center}
+\textmarathi{
+\fontsize{7.5in}{9in}\selectfont 
+phu\clearpage
+le\clearpage
+to\clearpage
+.duu\clearpage
+na\clearpage
+ye\clearpage
+}
+%\end{landscape}
+\end{center}
+\end{document}

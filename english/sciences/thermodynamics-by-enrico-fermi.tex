@@ -1,0 +1,256 @@
+\documentclass[11pt]{article}         %% What type of document you're writing.
+
+%%%%% Preamble
+
+%% Packages to use
+
+\usepackage{amsmath,amsfonts,amssymb}   %% AMS mathematics macros
+\usepackage{hyperref}
+\usepackage{chemfig}
+\usepackage{graphicx}
+\usepackage{todonotes}
+\renewcommand{\footnotesize}{\fontsize{6pt}{7pt}\selectfont}
+
+%% Title Information.
+
+\title{Notes: Thermodynamics by Enrico Fermi}
+\author{Kedar Mhaswade}
+%% \date{2 July 2004}           %% By default, LaTeX uses the current date
+
+%%%%% The Document
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This article consists of the author's notes on Fermi's book, Thermodynamics, published by Dover. Along with the main text, it has several appendixes that ingest relevant material from other sources. Each source is appropriately cited. Cross-referencing modern sources, use of current terminology, and author's personal reflections may have resulted in deviating a little from the book, but care has been taken to keep this deviation small.
+\end{abstract}
+
+\section{Preface}
+This elementary treatise on pure thermodynamics is based on the course notes taken by Dr. Lloyd Motz. The course was given by Enrico Fermi during the summer of 1936 at Columbia University, New York.
+\section{Introduction}
+\label{sec: introduction}
+Thermodynamics is mainly concerned with
+\begin{itemize}
+    \item The transformation of heat into mechanical work, and
+    \item The (opposite) transformation of mechanical work into heat.
+\end{itemize}
+Heat was thought of as some kind of fluid by the physicists of the 19\textsuperscript{th} century. This theory, the so called \emph{Caloric Theory}, was rendered obsolete\footnote{In science, progress happens by gathering evidence against existing theories. See \url{https://en.wikipedia.org/wiki/Superseded_theories_in_science}} by the \emph{Mechanical Theory of Heat} which was, among others, developed by Sadie Carnot, James Joule, and Rudolph Clausius. 
+
+If we consider the \emph{thermal phenomena} as the \emph{disordered} motions of atoms and molecules, then the study of heat must be considered a special branch of mechanics: \emph{Statistical Mechanics}. In Statistical Mechanics, only average properties of large number of particles are to be considered. This branch began with the work of Maxwell, Boltzmann, and Gibbs. It leads to a very satisfactory interpretation of the fundamental laws of thermodynamics.
+
+In this book, however, a \emph{pure} thermodynamic approach is described. The fundamental laws are assumed as postulates (equivalents of mathematical axioms) based on experimental evidence, and conclusions are drawn from them \emph{without} entering into the kinetic mechanism. This is likely to be unsatisfactory since one is not able to see in detail how things really work. For the sake of completion, it is recommended that the results obtained by a purely thermodynamic approach are at least superficially confirmed with a kinetic interpretation.
+
+\section{Thermodynamic Systems}
+\label{sec: thermosys}
+\subsection{The state of a system and its transformations}
+\label{sec: state-transformations}
+
+The \emph{state} of a system in mechanics is completely specified at an instant of time if the \emph{position} and \emph{velocity} of each mass-point of the system are specified. In three dimensions, for a system composed of $N$ mass-points, this requires the knowledge of $6N$ ($x, y, z, v_x, v_y, v_z$) \emph{state} variables.
+
+In thermodynamics, a different concept of the \emph{state} of the system is introduced because of the difficulty of specifying the state variables of a very large ensemble of particles that the system comprises of; knowing the values of state variables of each of mass-points would be superfluous.
+
+Here are a few motivating examples to lead us to a thermodynamic definition of the state of a system:
+\begin{enumerate}
+    \item \textbf{A system composed of a chemically defined homegeneous fluid}. We can measure its temperature $t$, the volume $V$, and the pressure $p$. In cases for which the ratio of surface to volume is very large (e.g. a finely grained substance) the surface (\emph{shape}) must also be considered. For a given amount of the substance in a system, these three quantities are not independent, but connected by a general relationship called the \emph{equation of state}: 
+\begin{equation}
+\label{eqn: pvt}
+        f(p, V, t) = 0
+\end{equation}
+
+        Solving this equation helps express one of the three variables in terms of the other two. Therefore, the \emph{state} of the system is completely defined by any two of the three quantities, $p$, $V$, and $t$. The two quantities can be conveniently represented on a cartesian coordinate plane like a $V,p$--plane where $V$ is plotted on the horizontal axis and $p$ on the vertical axis. The points representing states of equal temperature lie on a curve called an \emph{isothermal}.
+        
+    \item \textbf{A system composed of a chemically defined homogenous solid}. Treating the solid as a fluid may be sufficient for practical purposes, but we may need to consider pressures acting in different directions to represent the state. An \emph{isotropic pressure} is often assumed.
+
+    \item \textbf{A system composed of a homogeneous mixture of several chemical compounds}. In this case, the concentrations of various chemicals in the mixture affect the state.
+        
+    \item \textbf{A nonhomogeneous system}. To represent the state of such a system, it is often divided into a number of homogeneous parts (finitely many or infinitely many). Thermodynamics seldom concerns the systems consisting of infinitely many homogeneous parts.
+
+    \item \textbf{A system containing moving parts}. In pure thermodynamics we assume that different parts of the system are either at rest or moving so slowly that their kinetic energies can be neglected\footnote{Q: Is a heat engine, with a rapidly moving piston, \emph{not} a theromodynamic system then?}. If that is not the case, then one must also specify the velocities of the moving parts to specify the state of the system completely.
+\end{enumerate}
+
+Since \emph{thermodynamic state} has \emph{macroscopic} variables like temperature, it appears that knowing thermodynamic state is not enough to know the dynamic state of a system. This is because a thermodynamic state (completely specified by, for instance, temperature and volume) may be the result of many distinct states of molecular motion. It may be said that a given thermodynamic state is an \emph{ensemble} of dynamic states that the system is passing through.
+
+Particularly important among the thermodynamic states of a system are the \emph{states of equilibrium} or \emph{equilibrium states}. These states have the property of \emph{not varying so long as the external conditions remain unchanged}. A gas enclosed in a container of constant volume is in [a state of] equilibrium when its pressure is constant throughout and its temperature is equal to that of its environment\footnote{Q: What about an insulated container that has a gas at a temperature higher than its surroundings?}.
+
+It is also important to consider \emph{transformations} of a system from an initial state to a final state through a series of intermediate states. On a $Vp$--plane, for instance, such a transformation may be represented as a curve connecting the two points representing the initial and final states. 
+
+A transformation is [said to be] \emph{reversible} when the successive states of the transformation differ by infinitesimals from equilibrium states (or from each other). A reversible transformation can connect only those initial and final states which are \emph{equilibrium states}. 
+
+\textbf{A reversible transformation can be realized in practice by changing the external conditions so slowly that the system has time to adjust itself gradually to the altered conditions}. For example, we can produce a reversible expansion of a gas by enclosing it in a cylinder with a movable piston and moving the piston outward \emph{very slowly}. If we were to move the piston rapidly, currents would be set up in the expanding gaseous mass and the intermediate states would no longer be equilibrium states.
+
+If we transform a system reversibly from an initial state A to a final state B, we can then take the system by means of the reverse transformation from B to A through the same succession of intermediate states (which are also equilibrium states) but in the reverse order. The key to such transformation is to make changes slowly. Thus, the gas expanded to a final volume can be compressed back to its original volume by moving the piston inward very slowly.
+
+\textbf{During a transformation, the system can perform positive or negative external work}. Consider the body in Figure \ref{fig: cylinder-and-piston}.
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.2\linewidth]{cylinder-piston.jpg}
+    \caption{A body enclosed in a cylinder with a movable piston}
+    \label{fig: cylinder-and-piston}
+\end{figure}
+
+If the piston of area $S$ moves by an infinitesimal distance, $dh$, an infinitesimal amount of work, $dL$ is performed, since the displacement is parallel to the force:
+\begin{equation}
+\label{eqn: dl}
+    dL = p\cdot S\cdot dh
+\end{equation}
+
+Since $p\cdot dh = dV$, we may write\footnote{This applies in case of irregular boundaries as well}:
+\begin{equation}
+\label{eqn: pdv}
+    dL = p\cdot dV
+\end{equation}
+
+For a \emph{finite} transformation, the work done by the system is obtained by integrating equation (\ref{eqn: pdv}):
+\begin{equation}
+\label{eqn: work-done}
+    L = \int_{A}^{B}p\cdot dV
+\end{equation}
+where the integral is taken over the entire transformation.
+
+In case of a transformation represented in terms of a curve on a $Vp$--plane as shown in Figure \ref{fig: transformation}, the work done can be represented by:
+\begin{equation}
+\label{eqn: transformation-work-done}
+    L = \int_{V_A}^{V_B}p\cdot dV
+\end{equation}
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.3\linewidth]{transformation.jpg}
+    \caption{Transformation from $V_A$ to $V_B$ on a $Vp$--plane}
+    \label{fig: transformation}
+\end{figure}
+
+\textbf{Transformations for which initial and final states are the same are especially important}. These are called the \emph{cyclical transformations} which can be represented by a \emph{closed curve} such as the curve \emph{ABCD} on a \emph{Vp}--plane.
+
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.3\linewidth]{cyclic-transformation.jpg}
+    \caption{Cyclical Transformation $ABCD$ on a $Vp$--plane}
+    \label{fig: cyclic-transformation}
+\end{figure}
+
+The total work done (positive) is equal to the difference between the two areas $ABCC'A'A$ and $ADCC'A'A$.
+\textbf{The sign convention is such that positive work is performed by the system on the environment}\footnote{See \url{https://en.m.wikipedia.org/wiki/Isochoric_process}}. 
+
+A few cases of interest emerge:
+\begin{enumerate}
+    \item Heating or cooling of contents of a sealed, inelastic container. Since the container does not deform, this is a constant-volume process which does no external work ($dV = 0$). It is also called \emph{Isochoric Process}. It is a \emph{quasi\footnote{Literally, having some resemblance, as if, apparently but not really, seemingly; e.g. a quasi success}-static} process.
+    \item The reversible expansion of an ideal gas can be used as an example of a process during which the pressure of the gas is constant. Such a process is called the \emph{Isobaric Process}. Wikipedia has a worked out example at \url{https://en.m.wikipedia.org/wiki/Isobaric_process#Examples_of_isobaric_processes}. Note that the piston must move slowly to keep the pressure constant.
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.3\linewidth]{isobaric.png}
+    \caption{Isobaric Process}
+    \label{fig: isobaric-process}
+\end{figure}
+    \item An \emph{Isothermal Process}\footnote{See \url{https://en.m.wikipedia.org/wiki/Isothermal_process}} is a change of a system, in which the temperature remains constant: $\Delta T=0$. This typically occurs when a system is in contact with an outside thermal reservoir (heat bath), and the change in the system will occur slowly enough to allow the system to continue to adjust to the temperature of the reservoir through heat exchange.
+\end{enumerate}
+
+\subsection{Ideal or Perfect Gases}
+\label{sec: ideal-perfect-gases}
+The equation of state of a system composed of a certain quantity of gas occupying a volume \emph{V} at the temperature \emph{t} and pressure $p$ can be approximately expressed by a very simple analytical \footnote{One that seperates a whole into its elements.} law. 
+
+\textbf{We now change the scale of temperature from \emph{t} to a new scale \emph{T}}. We agree upon its definition as \textbf{the temperature indicated by a gas thermometer in which the thermometric gas is kept at a very low constant pressure}. Then, $T\propto V$. It is known that the readings of the thermometer are \emph{largely independent} of the nature of the gas used \footnote{Provided that the gas is far from condensation; \emph{phase changes} are ruled out.}. Later, \todo{add section} we will define $T$ by \emph{general thermodynamic considerations} independently of gas properties.
+
+This scale is called the \emph{absolute temperature} scale. On this scale, the \emph{difference} between the freezing and boiling points of water at $1$ atmospheric pressure is $100$. On this scale, the freezing point of water corresponds to $273.15$. In the honor of Lord Kelvin, this unit is denoted by $K$ (without the $^\circ$ symbol).
+
+The equation of state of a system composed by $m$ grams of a gas whose molecular weight\footnote{Unfortunately, science texts have used the two terms, \emph{mass} and \emph{weight}, in a confusing manner. Sometimes they imply the \emph{same thing} and sometimes they don't.} is $M$ is given approximately by:
+\begin{equation}
+    \label{sec: gas-equation}
+    pV = \frac{m}{M}RT
+\end{equation}
+$R$ is a \emph{universal constant} whose value is the same for all gases: $R=8.314\times 10^7$
+
+\section{Linear Fit}
+\label{sec: linear fit}
+Consider a linear equation $y = m x + b$ through the two points.  We will
+first determine the slope $m$ of the line in Section~\ref{sec: slope}, and we
+will then determine the $y$-intercept $b$ of the line in Section~\ref{sec:
+intercept}.
+
+\subsection{Slope}
+\label{sec: slope}
+
+The slope of the line passing through the two points is given by the forumula
+$$
+	m 
+	= \frac{\Delta y}{\Delta x} 
+	= \frac{y_2 - y_1}{x_2 - x_1}
+	.
+$$
+Plugging in our two points, we find the slope of the line between them is
+\begin{equation}
+\label{eqn: slope}
+	m 
+	= \frac{1 - 16}{3 - (-1)}
+	= - \frac{15}{4}
+	.
+\end{equation}
+
+\subsection{Intercept}
+\label{sec: intercept}
+
+To find the $y$-intercept of the line, we start with the point-slope form of
+the line of slope $m$ through the point $(x_0, y_0)$:
+$$
+	y - y_0 = m (x - x_0)
+	.
+$$
+We plug in the point $(x_0, y_0) = (-1, 16)$ and the slope we found
+previously~\eqref{eqn: slope} to obtain the equation
+$$
+	y - 16 = - \frac{15}{4} (x + 1)
+	.
+$$
+Solving for $y$, we find the slope-intercept form of the line:
+\begin{align*}
+	y 
+	&= - \frac{15}{4} x - \frac{15}{4} + 16 \\
+	&= - \frac{15}{4} x + \frac{49}{4}
+	.
+\end{align*}
+Therefore, the $y$-intercept is $b = 49/4$, and the equation 
+$y = - \frac{15}{4} x + \frac{49}{4}$ describes the line through the two
+points.
+
+\section{Exponential Fit}
+\label{sec: exponential fit}
+
+Let us consider the exponential function $y = A e^{k x}$.  For this function
+to pass through both points, we must find constants $A$ and $k$ that satisfy
+both equations $16 = A e^{-k}$ and $1 = A e^{3 k}$.  To solve these two
+simultaneous equations, we first take the ratio of the two equations, which
+gives us a single equation involving only $k$:
+$$
+	16
+	= \frac{A e^{-k}}{A e^{3 k}}
+	= e^{-4 k}
+	.
+$$
+We can take the natural logarithm of this equation to solve for $k$:
+$$
+	-4k = \ln(16) = 4 \ln (2)
+	,
+$$
+which means $k = - \ln(2)$.
+
+We can then use this value of $k$, along with either of the two points to
+solve for $A$.  Let us consider the point $(-1, 16)$:
+$$
+	16 = A e^{(-\ln(2))(-1)} = A e^{\ln{2}} = 2 A
+	.
+$$
+Solving for $A$, we find $A = 8$, and the exponential equation through both
+points is
+$$
+	y
+	= 8 e^{-\ln(2) x}
+	= 8 2^{-x}
+	= 8 \left( \frac{1}{2} \right)^x
+	.
+$$
+\listoftodos
+\end{document}
+

@@ -1,0 +1,141 @@
+\documentclass[10pt]{article}         %% What type of document you're writing.
+
+%%%%% Preamble
+
+%% Packages to use
+
+\usepackage{amsmath,amsfonts,amssymb}   %% AMS mathematics macros
+
+%% Title Information.
+
+\title{Basic \LaTeX{} Template}
+\author{William J. Turner}
+%% \date{2 July 2004}           %% By default, LaTeX uses the current date
+
+%%%%% The Document
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This paper computes the distance between two points and fits both linear and
+exponential functions through the two points.
+\end{abstract}
+
+\section{Introduction}
+Consider the two points $(-1,16)$ and $(3,1)$.  Section~\ref{sec: distance}
+computes the distance between these two points.  Section~\ref{sec: linear fit}
+computes a linear equation $y = m x + b$ through the two points, and
+Section~\ref{sec: exponential fit} fits a exponential equation $y = A e^{k x}$
+through the two points.
+
+\section{Distance}
+\label{sec: distance}
+We can use the distance formula
+\begin{equation}
+\label{eqn: distance}
+	d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}
+\end{equation}
+to determine the distance between any two points $(x_1, y_1)$ and $(x_2, y_2)$
+in $\mathbb{R}^2$.  For our example, $(x_1, y_1) = (-1, 16)$ and $(x_2, y_2) =
+(3, 1)$, so plugging these values into the distance formula~\eqref{eqn:
+distance} tell us the distance between the two points is
+$$
+	d 
+	= \sqrt{(3 - (-1))^2 + (1 - 16)^2}
+	= \sqrt{4^2 + (-15)^2}
+	= \sqrt{241}
+	.
+$$
+
+\section{Linear Fit}
+\label{sec: linear fit}
+Consider a linear equation $y = m x + b$ through the two points.  We will
+first determine the slope $m$ of the line in Section~\ref{sec: slope}, and we
+will then determine the $y$-intercept $b$ of the line in Section~\ref{sec:
+intercept}.
+
+\subsection{Slope}
+\label{sec: slope}
+
+The slope of the line passing through the two points is given by the forumula
+$$
+	m 
+	= \frac{\Delta y}{\Delta x} 
+	= \frac{y_2 - y_1}{x_2 - x_1}
+	.
+$$
+Plugging in our two points, we find the slope of the line between them is
+\begin{equation}
+\label{eqn: slope}
+	m 
+	= \frac{1 - 16}{3 - (-1)}
+	= - \frac{15}{4}
+	.
+\end{equation}
+
+\subsection{Intercept}
+\label{sec: intercept}
+
+To find the $y$-intercept of the line, we start with the point-slope form of
+the line of slope $m$ through the point $(x_0, y_0)$:
+$$
+	y - y_0 = m (x - x_0)
+	.
+$$
+We plug in the point $(x_0, y_0) = (-1, 16)$ and the slope we found
+previously~\eqref{eqn: slope} to obtain the equation
+$$
+	y - 16 = - \frac{15}{4} (x + 1)
+	.
+$$
+Solving for $y$, we find the slope-intercept form of the line:
+\begin{align*}
+	y 
+	&= - \frac{15}{4} x - \frac{15}{4} + 16 \\
+	&= - \frac{15}{4} x + \frac{49}{4}
+	.
+\end{align*}
+Therefore, the $y$-intercept is $b = 49/4$, and the equation 
+$y = - \frac{15}{4} x + \frac{49}{4}$ describes the line through the two
+points.
+
+\section{Exponential Fit}
+\label{sec: exponential fit}
+
+Let us consider the exponential function $y = A e^{k x}$.  For this function
+to pass through both points, we must find constants $A$ and $k$ that satisfy
+both equations $16 = A e^{-k}$ and $1 = A e^{3 k}$.  To solve these two
+simultaneous equations, we first take the ratio of the two equations, which
+gives us a single equation involving only $k$:
+$$
+	16
+	= \frac{A e^{-k}}{A e^{3 k}}
+	= e^{-4 k}
+	.
+$$
+We can take the natural logarithm of this equation to solve for $k$:
+$$
+	-4k = \ln(16) = 4 \ln (2)
+	,
+$$
+which means $k = - \ln(2)$.
+
+We can then use this value of $k$, along with either of the two points to
+solve for $A$.  Let us consider the point $(-1, 16)$:
+$$
+	16 = A e^{(-\ln(2))(-1)} = A e^{\ln{2}} = 2 A
+	.
+$$
+Solving for $A$, we find $A = 8$, and the exponential equation through both
+points is
+$$
+	y
+	= 8 e^{-\ln(2) x}
+	= 8 2^{-x}
+	= 8 \left( \frac{1}{2} \right)^x
+	.
+$$
+\end{document}
+

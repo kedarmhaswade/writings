@@ -1,0 +1,173 @@
+%9 Thanks to: https://tex.stackexchange.com/q/565173/64425
+\documentclass[a4paper, 12pt]{article}
+\usepackage{geometry}
+\geometry{
+    bottom=20mm,
+    left=20mm,
+    right=20mm,
+}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{sanskrit}
+\setotherlanguages{marathi,english}
+% Main font for Sanskrit: Sanskrit2003
+\setmainfont[Mapping=velthuis-sanskrit,Script=Devanagari,Language=Default]{Sanskrit2003}
+% Other font (for Marathi): Shobhika
+\newfontfamily\marathifont[Mapping=velthuis-sanskrit,Script=Devanagari,Language=Default]{Shobhika}
+\newfontfamily\englishfont[Language=English]{IBM Plex Sans}
+% Other well-designed fonts for devanagari: Yashovenu, Yashomudra, Mortel
+\newcommand \sansletter[1]{
+    \fontsize{1in}{1.2in}\selectfont 
+    #1
+}
+\usepackage{xcolor}
+\newcommand \eng[1]{
+    \textenglish{#1}
+}
+\newcommand \sans[1]{
+    \textsanskrit{#1}
+}
+\newcommand \shortsansletter[1]{
+    \textcolor{red}{\sansletter{#1}}
+}
+\newcommand \longsansletter[1]{
+    \textcolor{blue}{\sansletter{#1}}
+}
+\begin{document}
+\def\dev{\edef~{\string~}\textsanskrit}
+\edef~{\string~}
+\section {
+    \eng{Introduction}
+}
+\eng{
+    Sanskrit (\sans{sa.msk.rtam}), like Greek and Latin, is an \emph{inflected} language. This means it shows \emph{alteration in form especially by adding affixes}. The bulk of grammatical information is carried by morphology (i.e. the rules for forming admissible words).
+
+    A \emph{morpheme} which is the minimal meaningful language unit, is of one of these types:
+    \begin{enumerate}
+        \item nominal stem (adjectives, pronouns, and indeclinables(\sans{avyayam}))
+            \begin{itemize}
+                \item primary 
+                \item secondary 
+                    \begin{itemize}
+                        \item derived from other nominals via affixation (e.g. \sans{kuru} + \sans{a = kaurava, nara} + \sans{tva = naratva})
+                        \item derived from verbal roots via affixation (e.g. \sans{gam} + \sans{ana = gamana, k.r} + \sans{t.r = kart.r})
+                        \item compounds (e.g. \sans{nara} + \sans{pati = narapati, cakra} + \sans{paa.ni = cakrapaa.ni})
+                    \end{itemize}
+            \end{itemize}
+        \item verbal root (\sans{dhaatu.h})
+            \begin{itemize}
+                \item primary
+                \item secondary
+            \end{itemize}
+        \item indeclinables (\sans{avyayam})
+            \begin{itemize}
+                \item particles (e.g. \sans{upari})
+                \item pre-positions (e.g. \sans{adhi, pari, anu})
+                \item post-positions
+                \item adverbs (e.g. \sans{satatam})
+                \item connectives (e.g. \sans{ca, vaa})
+                \item (occasionally) nouns
+            \end{itemize}
+    \end{enumerate}
+
+    The nominal stem is characterized by gender as an \emph{intrinsic property} and it is grammatical, usually unrelated to semantics (though the living beings are usually masculine or feminine). There are three genders:
+    \begin{itemize}
+        \item masculine,
+        \item feminine, and
+        \item neuter
+    \end{itemize}
+    Between masculine and feminine, the former is \emph{generic}, meaning it takes precedence. For pronouns, neuter is the most generic.
+
+    Declension of nouns (as we shall later see, declension serves the same purpose that prepositions serve in English) is affected by several factors such as 
+    their 
+    \begin{itemize}
+        \item gender (masculine, feminine, neuter), 
+        \item final sound or sounds of the stem (e.g. \sans{akaaraanta, n-kaaraanta}), 
+        \item number (singular, dual, and plural), and 
+        \item case (\sans{prathamaa}: nominative -- I, \sans{dvitiiyaa}: accusative -- II, \sans{t.rtiiyaa}: instrumental -- III, \sans{caturthii}: dative -- IV, \sans{pa~ncamii}: ablative -- V, \sans{.sa.s.Tii}: genitive -- VI, \sans{saptamii}: locative -- VII, \sans{sa.mbodhanam}: vocative -- VIII). The following list may help describe the usual purpose of cases:
+            \begin{enumerate}
+                \item nominative -- serving as or indicating the \emph{subject} of the verb (\sans{kartaa})
+                \item accusative -- serving as or indicating the \emph{(direct) object} of the verb (\sans{karma})
+                \item instrumental -- serving or acting as a \emph{means} or aid (\sans{saadhana, kara.na})
+                \item dative -- serving as the \emph{(indirect) object} or the recipient (beneficiary) of the action of the verb (\sans{sampradaanam})
+                \item ablative -- indicating the \emph{source or separation} of the agent, instrument, or location (\sans{apaadaanam})
+                \item genitive -- expressing \emph{ownership} (--)
+                \item locative -- designating the \emph{place or state or action} denoted by the verb (\sans{adhikara.nam})
+                \item vocative -- identifying the person being \emph{addressed} (\sans{sambodhanam})
+            \end{enumerate}
+    \end{itemize}
+
+    Here is the declension of a masculine \sans{akaaraanta} word \sans{deva}:
+
+}
+\begin{table}[h]
+    \centering
+\begin{tabular}{|c|c|c|c|}
+    \hline 
+    \eng{Singular} (\sans{ekavacanam}) & \eng{Dual} (\sans{dvivacanam}) & \eng{Plural} (\sans{bahuvacanam}) &\\
+\hline
+    \sans{deva.h} & \sans{devau} & \sans{devaa.h} & \sans{prathamaa}\\
+\hline
+    \sans{deva.m (devam)} & \sans{devau} & \sans{devaan} & \sans{dvitiiyaa}\\
+\hline
+    \sans{devena} & \sans{devaabhyaa.m (devaabhyaam)} & \sans{devai.h} & \sans{t.rtiiyaa}\\
+\hline
+    \sans{devaaya} & \sans{devaabhyaa.m (devaabhyaam)} & \sans{devebhya.h} & \sans{caturthii}\\
+\hline
+    \sans{devaat} & \sans{devaabhyaa.m (devaabhyaam)} & \sans{devebhya.h} & \sans{pa~ncamii}\\
+\hline
+    \sans{devasya} & \sans{devayo.h} & \sans{devaanaa.m (devaanaam)} & \sans{.sa.s.Tii}\\
+\hline
+    \sans{deve} & \sans{devayo.h} & \sans{deve.su} & \sans{saptamii}\\
+\hline
+    \sans{he deva} & \sans{he devau} & \sans{he devaa.h} & \sans{sambodhanam}\\
+\hline
+\end{tabular}
+\end{table}
+
+\eng {
+    The verbal system is more complex and in the vedic system it is even more so [than the classical system]. The book describes complexities of the vedic verbal system and mentions that classical verbal system gradually got rid of a lot of constructs from the former. The language evolved to favor nominal sentences over verbal sentences. \textbf{However, it seems imperative to me to know at least a few constructs like, for example, \sans{lakaaraa.h}}.
+
+
+    The most remarkable feature of the classical language is the \emph{compounds} especially their phenomenal length. Here is an example from Jayadeva's \sans{giitagovinda: \\
+    candanacarcitaniilakalevarapiitavasanavanamaalii\\
+    kelicalanma.niku.n.dalama.n.dita ga.n.dayuga.h smita"saalii\\
+  }
+
+}
+    \section {
+    \eng{The} sa.msk.rta \eng{Alphabet}
+}
+\subsection{\eng{Basics}}
+\subsubsection{\eng{Vowels (not combined)}}
+\eng{
+    There are 13 vowels of which 5 are \textcolor{red}{short} (\textsanskrit{~rhasva}\footnote{\eng{The eyelash repha is not being rendered correctly, sorry}}) and 8 are \textcolor{blue}{long} (\textsanskrit{diirgha}).
+}
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+    \shortsansletter{a} &
+    \longsansletter{aa}\\ 
+    \hline
+    \shortsansletter{i} &
+    \longsansletter{ii} \\
+    \hline
+    \shortsansletter{u} &
+    \longsansletter{uu} \\
+    \hline
+    \shortsansletter{.r} &
+    \longsansletter{.R}\\
+    \hline
+    \shortsansletter{.l} &
+    \sansletter{ }\\
+    \hline
+    \longsansletter{e} &
+    \longsansletter{ai}\\
+    \hline
+    \longsansletter{o} &
+    \longsansletter{au}\\
+\hline
+\end{tabular}
+\end{center}
+
+\end{document}

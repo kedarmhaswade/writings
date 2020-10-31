@@ -1,0 +1,18 @@
+\documentclass[a6paper]{article}
+% \documentclass[12pt]{article}        
+\usepackage[margin=5mm]{geometry}
+\usepackage{tgheros}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amsfonts,amssymb}   %% AMS mathematics macros
+\renewcommand*\familydefault{\sfdefault}
+\begin{document}
+\textbf{Problem}. A 4-digit number $yyzz$ is a perfect square. Find it.
+
+\textbf{Solution}. Let $S=yyzz$.
+$$
+    S = 1100y+11z
+      = 11\cdot(100y+z)
+$$
+$100y+z$ is of the form $y0z$ since $1 \le y \le 9$, $0 \le z \le 9$. For $S$ to be a perfect square, $y0z = 11\cdot pz$ where $pz$ is itself a 2-digit perfect square. Furthermore, $pz \cdot 11 = pz \cdot (1 + 10) = pz + pz0 = y0z$, which implies\footnote{It may be easier to see it more clearly if one writes the conventional, column-wise long multiplication for $pz \times 11 = y0z$} that $y = p+1$ and $p+z=10$. Therefore, $pz=64, p=6, z=4, y=7,$ and $S=7744$.
+\end{document}
+

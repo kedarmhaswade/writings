@@ -1,0 +1,2929 @@
+%&LaTeX
+%=================================================================
+%
+% This is the file pcml-i-15.tex,  the source file for Volume I of
+% A Problem Course in Mathematical Logic  [Version 1.5]
+% Copyright (c) 1994-1999 by Stefan Bilaniuk.
+%
+% Department of Mathematics          office:  705 748-1474
+% Trent University                     home:  705 755-1193
+% Peterborough,  Ontario
+% Canada    K9J 7B8                  e-mail:  sbilaniuk@trentu.ca
+% 
+%   home page:  http://www.trentu.ca/academic/math/sb/stefan.html
+%
+% Typeset using LaTeX with the AMS-LaTeX 1.2 and AMS-Fonts 2.1  
+% packages.  If you have problems,  please contact the author.
+%
+% pcml-i-15.tex is copyright (c) 1994-1999 by Stefan Bilaniuk.
+% It may,  however,  be freely distributed,  stored,  copied,   
+% and used until 31 December,  2000,  subject to the following 
+% conditions:
+% 1. If modified in any way,  it may not be redistributed without
+%    the express written permission of the author.
+% 2. It may not be sold or distributed at a profit,  but only to
+%    recover the cost of transmission or reproduction.
+% 3. After 31 December,  2000,  it may no longer be stored,  
+%    typeset,  distributed,  or reproduced in any form without the
+%    express written permission of the author.
+%    
+%=================================================================
+
+% If you change the document class or the size option,  you may
+% need to recompile the index.
+\documentclass[12pt]{amsbook}
+\usepackage{amssymb}
+
+\newcommand{\proves}{\vdash}
+\newcommand{\nproves}{\nvdash}
+\newcommand{\nmodels}{\nvDash}
+\newcommand{\restricted}{\!\upharpoonright\!}
+\newcommand{\fromto}{\leftrightarrow}
+\newcommand{\tover}[2]{\genfrac{}{}{0pt}{2}{#1}{#2}}
+
+\renewcommand{\thepart}{\Roman{part}}
+\renewcommand{\thechapter}{\arabic{chapter}}
+\providecommand{\mathsc}[1]{\ensuremath{\text{\textsc{#1}}}}
+\setcounter{tocdepth}{0}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[chapter]
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prob}[thm]{Problem}
+
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[chapter]
+\newtheorem{exmp}{Example}[chapter]
+
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}            %\renewcommand{\therem}{}
+\newtheorem*{note}{Note}             %\renewcommand{\thenote}{}
+
+\newenvironment{clue}[1]%
+{\begin{proof}[\ref{#1}]}%
+{\renewcommand{\qed}{}\end{proof}}
+% Correct usage:  \begin{clue}{<label>}
+%                 <text of hint>
+%                 \end{clue}
+
+\newenvironment{poem}[1]%
+{\begin{verse} \mbox{}\\ {\bf #1}\\ \mbox{}\\}%
+{\end{verse}}
+% Correct usage:  \begin{poem}{<title>}
+%                 <body of poem with lines separated by '\\'>
+%                 \end{poem}
+
+\newenvironment{question}[1]%
+{\begin{proof}[#1]}%
+{\renewcommand{\qed}{}\end{proof}}
+% Correct usage:  \begin{question}{<name of question>}
+%                 <text of question>
+%                 \end{question}
+
+% Uncomment "\makeindex" if you need to recompile the index.
+% (See The LaTeX Manual for information on how to do so.)
+%\makeindex
+
+
+\begin{document}
+
+\frontmatter
+
+\title{A Problem Course in \\ Mathematical Logic \\ 
+{\em Version 1.5\/} \\ \mbox{} \\ Volume I \\ Propositional and \\ First-Order Logic}
+\author{Stefan Bilaniuk}
+\date{????}
+\address{Department of Mathematics\newline
+\indent Trent University\newline
+\indent Peterborough,  Ontario\newline
+\indent Canada  K9J 7B8}
+\email{sbilaniuk@trentu.ca}
+\thanks{ {\em A Problem Course In Mathematical Logic\/} \newline
+{\em Volume I:  Propositional and First-Order Logic\/} \newline
+{\sc Version 1.5} \newline
+Copyright \copyright 1994--1999 by Stefan Bilaniuk.}
+\keywords{propositional logic,  first-order logic}
+\subjclass{03}
+\begin{abstract}
+This is a text for a problem-oriented undergraduate course in mathematical logic.  It covers the basics of propositional and first-order logic through the Soundness,  Completeness,  and Compactness Theorems.  Volume II,  {\em Computation\/},  covers the basics of computability using Turing machines and recursive functions,  the Incompleteness Theorems,  and complexity theory through the P and NP.
+
+Information on availabality and the conditions under which this book may be used and reproduced are given in the preface.  
+
+This book was typeset using \LaTeX,  using the \AmS-\LaTeX\ and \AmS Fonts packages of the American Mathematical Society.
+\end{abstract}
+
+\maketitle
+\tableofcontents
+
+
+%
+% Preface to "A Problem Course in Mathematical Logic"
+%
+
+\chapter*{Preface}
+
+This book is intended to be the basis for a problem-oriented full-year course in mathematical logic for students with a modicum of mathematical sophistication.  Volume I covers the basics of propositional and first-order logic through the Soundness,  Completeness,  and Compactness Theorems,  plus some material on applications of the Compactness Theorem.  It could easily be used for a one-semester course on these topics.  Volume II covers the basics of computability using Turing machines and recursive functions,  the Incompleteness Theorem,  and basic complexity theory;  it could also be used as for a one-semester course on these topics.
+
+In keeping with the modified Moore-method,  this book supplies definitions,  problems,  and statements of results,  along with some explanations,  examples,  and hints.  The intent is for the students,  individually or in groups,  to learn the material by solving the problems and proving the results for themselves.  Besides constructive criticism,  it will probably be necessary for the instructor to supply further hints or direct the students to other sources from time to time.  Just how this text is used will,  of course,  depend on the instructor and students in question.  However,  it is probably {\em not\/} appropriate for a conventional lecture-based course nor for a really large class.
+
+The material presented in this volume is somewhat stripped-down.  Various concepts and topics that are often covered in introductory mathematical logic courses are given very short shrift or omitted entirely,  among them normal forms,  definability,  and model theory.\footnote{Future versions of both volumes may include more -- or less! -- material.  Feel free to send suggestions,  corrections,  criticisms,  and the like --- I'll feel free to ignore them or use them.}  Instructors might consider having students do projects on additional material if they wish to to cover it.  A diagram giving the dependence of the chapters in this volume can be found in the Introduction.
+
+
+\subsection*{Acknowledgements}
+Various people and institutions deserve the credit for this text:  All the people who developed the subject.  My teachers and colleagues,  especially Gregory H. Moore,  whose mathematical logic course convinced me that I wanted to do the stuff.  The students at Trent University who suffered,  suffer,  and will suffer through assorted versions of this text.  Trent University and the taxpayers of Ontario,  who paid my salary.  Ohio University,  where I spent my sabbatical in 1995--96.  All the people and organizations who developed the software and hardware with which this book was prepared.  Anyone else I've missed.
+
+Any blame properly accrues to the author.
+
+\subsection*{Conditions}
+This book may be freely transmitted,  stored,  copied,  and used until 31 December,  2000,  subject to the following restrictions:\footnote{If you violate these restrictions,  I will be flattered,  but you will still be in the wrong.}
+\begin{enumerate}
+\item It may not be modified in any way without the express written permission of the author.
+\item It may not be sold at a profit,  but only to recover the cost of reproduction.
+\item After 31 December,  2000,  it may no longer be reproduced,  stored,  or transmitted in any form without the express written permission of the author,  except that printed copies existing as of 31 December,  2000,  may be retained and used after this date.
+\end{enumerate}
+
+The reason for the time-limit is that I hope to improve this book and make a new version available.\footnote{Who knows,  maybe even find a publisher\dots}
+
+\subsection*{Availability}
+The URL of the home page for {\em A Problem Course In Mathematical Logic\/},  with links to \LaTeX,  PostScript,  and Portable Document Format (pdf) files of the latest available releases of both volumes,  is:
+\begin{itemize}
+\item {\tt http://www.trentu.ca/mathematics/sb/misc/pcml.html}
+\end{itemize}
+A text-only information file and \LaTeX,  PostScript,  and Portable Document Format (pdf) files of the latest release of both volumes can be accessed by anonymous ftp in the directory:
+\begin{itemize}
+\item {\tt ftp://ftp.trentu.ca/pub/sbilaniuk/pcml/}
+\end{itemize}
+Please note that in addition to \LaTeX\ you will need the \AmS-\LaTeX\ and \AmS Fonts packages to typeset and print either volume.
+
+If you have any problems,  feel free to contact the author at the addresses given on the title page,  preferably by e-mail,  for assistance or even to ask for a paper copy.
+
+\subsection*{Author's Opinion}
+It's not great,  but the price is right!
+
+
+\mainmatter
+
+
+%
+% Introduction to "A Problem Course in Mathematical Logic I"
+%
+
+\chapter*{Introduction}
+
+\subsection*{Mathematical Logic}
+What sets mathematics aside from other disciplines is its reliance on proof as the principal technique for determining truth,  where science,  for example,  relies on (carefully analyzed) experience.  So what is a proof?  Practically speaking,  it is any reasoned argument accepted as a proof by other mathematicians.\footnote{If you are not a mathematician,  gentle reader,  you are hereby temporarily promoted.}  A more precise definition is needed,  however,  if one wishes to discover what mathematical reasoning can accomplish in principle.  This is one of the reasons for studying mathematical logic,  which is also pursued for its own sake and finding new tools to use in the rest of mathematics and in related fields.
+
+In any case,  mathematical logic \index{mathematical logic} \index{logic mathematical} is concerned with formalizing and analyzing the kinds of reasoning used in the rest of mathematics.  The point of mathematical logic is not to try to do mathematics {\em per se\/} completely formally --- the practical problems involved in doing so are usually such as to make this an exercise in frustration --- but to study formal logical systems as mathematical objects in their own right in order to (informally!) prove things about them.  For this reason,  the formal systems developed in this book are optimized to be easy to prove things about,  rather than to be easy to use.  Natural deductive \index{logic natural deductive} \index{natural deductive logic} systems such as those developed by philosophers to formalize logical reasoning are equally capable in principle and much easier to actually use,  but harder to prove things about.
+
+Part of the problem with formalizing mathematical reasoning is the necessity of precisely specifying the language(s) in which it is to be done.  The natural languages\index{language natural} spoken by humans won't do:  they are so complex and continually changing as to be impossible to pin down completely.  By contrast,\index{language formal} the languages which underly formal logical systems are,  like programming languages,  much simpler and less flexible than natural languages but rigidly defined.  A formal logical system also requires the careful specification of the allowable rules of reasoning,  plus some notion of how to interpret statements in the underlying language and determine their truth.  The real fun lies in the relationship between interpretation of statements,  truth,  and reasoning.  
+
+This volume develops the basics of two kinds of formal logical systems,  propositional logic and first-order logic.  Propositional logic \index{logic propositional} \index{propositional logic} attempts to make precise the relationships that certain connectives like {\em not\/},\index{not}   {\em and\/},\index{and}  {\em or\/},\index{or}   and {\em if \dots then\/}\index{if \dots then}  are  used to express in English.  While it has uses,  propositional logic is not powerful enough to formalize most mathematical discourse.  For one thing,  it cannot handle the concepts expressed by {\em all\/}\index{all} and {\em there is\/}\index{there is}.  First-order logic \index{logic first-order} \index{first-order logic} adds {\em all\/} and {\em there is\/} to those which propositional logic could handle,  and suffices,  in principle,  to formalize most mathematical reasoning.  To be sure,  it will not handle concepts which arise outside of mathematics,  such as {\em possible\/} and {\em relevant\/},  among many others.  (Trying to incorporate such concepts into systems extending first-order logic is a substantial industry in philosophy,  but of marginal interest in mathematics.)  Propositional logic,  which is much simpler,  will be dealt with first in order to gain some experience in dealing with formal systems before tackling first-order logic.  Besides,  some of the results about propositional logic carry over to first-order logic with little change.
+
+\subsection*{Approach}
+This book supplies definitions and statements of results,  plus some explanations and a number of problems and examples,  but no proofs of the results.  The hope is that you,  gentle reader,  will learn the material presented here by solving the problems and proving the results for yourself.  Brief hints are supplied for almost all of the problems and results,  but if these do not suffice,  you should consult your peers,  your instructor,  or other texts.
+
+\subsection*{Prerequisites}
+In principle,  not much is needed by way of prior mathematical knowledge to define and prove the basic facts about propositional and first-order logic.  Some knowledge of the natural numbers and a little set theory suffices;  the former will be assumed and the latter is very briefly summarized in Appendix~\ref{ap:sets}.  What really {\em is\/} needed to get anywhere with the material developed here is competence in handling abstraction and proofs,  especially proofs by induction.  The experience provided by a rigorous introductory course in algebra,  analysis,  or discrete mathematics ought to be sufficient.  Some problems and examples draw on concepts from other parts of mathematics;  students who are not already familiar with these should consult texts in the appropriate subjects for the necessary definitions.  
+
+\subsection*{Other Sources and Further Reading}
+\cite{HE:MIL},  \cite{JM:IML},  and \cite{YM:CML} are texts which go over similar ground (and much more),  while \cite{JB:HML} and \cite{CK:MT} are good references for more advanced material.  Entertaining accounts of some related topics may be found in \cite{DH:GEB} and \cite{RP:ENM}.  Those interested in natural deductive systems might try \cite{MB:LB},  which has a very clean presentation.
+
+\subsection*{Credit}
+Almost no attempt has been made to give due credit to those who developed and refined the ideas,  results,  and proofs mentioned in this work.  In mitigation,  it would often be difficult to assign credit fairly because many people were involved,  frequently having interacted in complicated ways.  (Which really means that I'm too lazy to do it.  I apologize to those who have been hurt by this.)  Those interested in who did what should start by consulting other texts or reference works covering similar material. 
+
+\subsection*{Chapter Dependencies}
+The following diagram indicates how the chapters in this volume depend on one another,  with the exception of a few isolated problems or results.
+
+\vspace{10mm}
+
+\begin{picture}(283,283)
+
+\put(47,257){\framebox(21,21){1}}
+\put(5,215){\framebox(21,21){2}}
+\put(89,215){\framebox(21,21){3}}
+\put(47,173){\framebox(21,21){4}}
+\put(47,131){\framebox(21,21){5}}
+\put(5,89){\framebox(21,21){6}}
+\put(89,89){\framebox(21,21){7}}
+\put(47,47){\framebox(21,21){8}}
+\put(47,5){\framebox(21,21){9}}
+
+\put(58,257){\vector(-2,-1){42}}   % 1 -> 2
+\put(58,257){\vector(2,-1){42}}    % 1 -> 3
+\put(16,215){\vector(2,-1){42}}    % 2 -> 4
+\put(100,215){\vector(-2,-1){42}}  % 3 -> 4
+\put(100,215){\vector(0,-1){105}}  % 3 -> 7
+\put(58,131){\vector(-2,-1){42}}   % 5 -> 6
+\put(58,131){\vector(2,-1){42}}    % 5 -> 7
+\put(16,89){\vector(2,-1){42}}     % 6 -> 8
+\put(100,89){\vector(-2,-1){42}}   % 7 -> 8
+\put(58,47){\vector(0,-1){21}}     % 8 -> 9
+
+\end{picture}
+
+
+\part*{Propositional Logic}
+
+
+
+%
+% First chapter of "A Problem Course in Mathematical Logic"
+%
+
+\chapter{Language} \label{ch:one}
+
+Propositional logic\index{propositional logic} \index{logic propositional} (sometimes called sentential\index{sentential logic}\index{logic sentential} or predicate logic\index{predicate logic}\index{logic predicate}) attempts to formalize the reasoning that can be done with connectives like {\em not\/},  {\em and\/},  {\em or\/},  and {\em if \dots then\/}.  We will define the formal language of propositional logic\index{language propositional},  $\mathcal{L}_P$\index{$\mathcal{L}_P$},  by specifying its symbols and rules for assembling these symbols into the formulas of the language.  
+
+\begin{defn} \label{d:symb} \index{symbols}
+The {\em symbols\/} of $\mathcal{L}_P$ are:
+\begin{enumerate}
+\item Parentheses:  ( and ). \index{parentheses} \index{$($} \index{$)$}
+\item Connectives:  $\lnot$ and $\to$. \index{connectives} \index{$\lnot$} \index{$\to$} 
+\item Atomic formulas:  $A_0$,  $A_1$,  $A_2$, \dots,  $A_n$, \dots \index{formulas atomic} \index{atomic formulas} \index{$A_n$}
+\end{enumerate}
+\end{defn}
+
+We still need to specify the ways in which the symbols of $\mathcal{L}_P$ can be put together.
+
+\begin{defn} \label{d:form} \index{formula}
+The {\em formulas\/} of $\mathcal{L}_P$ are those finite sequences or strings of the symbols given in Definition~\ref{d:symb} which satisfy the following rules:
+\begin{enumerate}
+\item Every atomic formula is a formula.
+\item If $\alpha$ is a formula,  then $(\lnot \alpha)$ is a formula.
+\item If $\alpha$ and $\beta$ are formulas,  then $(\alpha \to \beta)$ is
+a formula.
+\item No other sequence of symbols is a formula.
+\end{enumerate}
+\end{defn}
+
+We will often use lower-case Greek characters\index{Greek characters} to represent formulas,  as we did in the definition above,  and upper-case Greek characters to represent sets of formulas.\footnote{The Greek alphabet is given in Appendix~\ref{ap:greek}.}  All formulas in Chapters~\ref{ch:one}--\ref{ch:four} will be assumed to be formulas of $\mathcal{L}_P$ unless stated otherwise.
+
+What do these definitions mean?  The parentheses are just punctuation:\index{punctuation} their only purpose is to group other symbols together.  (One could get by without them;  see Problem~\ref{p:pn}.)  $\lnot$\index{$\lnot$} and $\to$\index{$\to$} are supposed to represent the connectives\index{connectives} {\em not\/}\index{not} and {\em if \dots then\/}\index{if \dots then} respectively. The atomic formulas\index{atomic formulas}\index{formulas atomic},  $A_0$,  $A_1$, \dots,\index{$A_n$}  are meant to represent statements that cannot be broken down any further using our connectives,  such as ``The moon is made of cheese.''  Thus,  one might translate the the English sentence ``If the moon is red,  it is not made of cheese'' into the formula $(A_0 \to (\lnot A_1))$ of $\mathcal{L}_P$ by using $A_0$ to represent ``The moon is red'' and $A_1$ to represent ``The moon is made of cheese.''  Note that the truth of the formula depends on the interpretation of the atomic sentences which appear in it.  Using the interpretations just given of $A_0$ and $A_1$,  the formula $(A_0 \to (\lnot A_1))$ is true,  but if we instead use $A_0$ and $A_1$ to interpret ``My telephone is ringing'' and ``Someone is calling me'',  respectively,  $(A_0 \to (\lnot A_1))$ is false.
+
+Definition~\ref{d:form} says that that every atomic formula is a formula and every other formula is built from shorter formulas using the connectives and parentheses in particular ways.  For example,  $A_{1123}$,  $(A_2 \to (\lnot A_0))$,  and $(((\lnot A_1) \to (A_1 \to A_7) ) \to A_7)$ are all formulas,  but $X_3$,  $(A_5)$,  $()\lnot A_{41}$,  $A_5 \to A_7$,  and $(A_2 \to (\lnot A_0)$ are not. 
+
+\begin{prob} \label{p:one1}
+Why are the following {\em not\/} formulas of $\mathcal{L}_P$?  There might be more than one reason\dots
+\begin{enumerate}
+\item $A_{-56}$
+\item $(Y \to A)$
+\item $(A_7 \leftarrow A_4)$
+\item $A_7 \to (\lnot A_5))$
+\item $(A_8 A_9 \to A_{1043998}$
+\item $(((\lnot A_1) \to (A_\ell \to A_7) \to A_7)$
+\end{enumerate}
+\end{prob}
+
+\begin{prob} \label{p:lrp}
+Show that every formula of $\mathcal{L}_P$ has the same number of left parentheses as it has of right parentheses.
+\end{prob}
+
+\begin{prob} \label{p:one3}
+Suppose $\alpha$ is any formula of $\mathcal{L}_P$.  Let $\ell(\alpha)$ be the length of $\alpha$ as a sequence of symbols and let $p(\alpha)$ be the number of parentheses (counting both left and right parentheses) in $\alpha$.  What are the minimum and maximum values of $p(\alpha) /  \ell(\alpha)$?
+\end{prob}
+
+\begin{prob} \label{p:one4}
+Suppose $\alpha$ is any formula of $\mathcal{L}_P$.  Let $s(\alpha)$ be the number of atomic formulas in $\alpha$ (counting repetitions) and let $c(\alpha)$ be the number of occurrences of $\to$ in $\alpha$.  Show that $s(\alpha) = c(\alpha) + 1$.
+\end{prob}
+
+\begin{prob} \label{p:lof}
+What are the possible lengths of formulas of $\mathcal{L}_P$?  Prove it.
+\end{prob}
+
+\begin{prob} \label{p:pn} \index{parentheses doing without}
+Find a way for doing without parentheses or other punctuation symbols in defining a formal language for propositional logic.
+\end{prob}
+
+\begin{prop} \label{p:foc}
+Show that the set of formulas of $\mathcal{L}_P$ is countable.
+\end{prop}
+
+\subsection*{Informal Conventions}  At first glance,  $\mathcal{L}_P$ may not seem capable of breaking down English sentences with connectives other than {\em not\/} and {\em if \dots then\/}.  However,  the sense of many other connectives\index{connectives} can be captured by these two by using suitable circumlocutions.  We will use the symbols $\land$\index{$\land$},  $\lor$\index{$\lor$},  and $\fromto$\index{$\fromto$} to represent {\em and\/}\index{and},  {\em or\/}\index{or},\footnote{We will use {\em or\/} inclusively,  so that ``$A$ or $B$'' is still true if both of $A$ and $B$ are true.} and {\em if and only if\/}\index{if and only if} respectively.  Since they are not among the symbols of $\mathcal{L}_P$,  we will use them as abbreviations\index{abbreviations} for certain constructions involving only $\lnot$ and $\to$.  Namely,  
+\begin{itemize}
+\item $(\alpha \land \beta)$ is short for $(\lnot (\alpha \to (\lnot \beta)))$, 
+\item $(\alpha \lor \beta)$ is short for $( (\lnot \alpha) \to \beta)$,  and 
+\item $(\alpha \fromto \beta)$ is short for $((\alpha \to \beta) \land (\beta \to \alpha))$.  
+\end{itemize}
+Interpreting $A_0$ and $A_1$ as before,  for example,  one could translate the English sentence ``The moon is red and made of cheese'' as $(A_0 \land A_1)$.  (Of course this is really $(\lnot (A_0 \to (\lnot A_1)))$,  {\em i.e.\/}  ``It is not the case that if the moon is green,  it is not made of cheese.'')  $\land$,  $\lor$, and $\fromto$ were not included among the official symbols of $\mathcal{L}_P$ partly because we can get by without them and partly because leaving them out makes it easier to prove things about $\mathcal{L}_P$.
+
+\begin{prob} \label{p:one8}
+Take a couple of English sentences with several connectives and translate them into formulas of $\mathcal{L}_P$.  You may use $\land$,  $\lor$,  and $\fromto$ if appropriate.
+\end{prob}
+
+\begin{prob} \label{p:one9}
+Write out $((\alpha \lor \beta) \land (\beta \to \alpha))$ using only $\lnot$ and $\to$.
+\end{prob}
+
+For the sake of readability,  we will occasionally use some informal conventions that let us get away with writing fewer parentheses:\index{parentheses conventions}\index{conventions,  parentheses}
+\begin{itemize}
+\item  We will usually drop the outermost parentheses in a formula,  writing $\alpha \to \beta$ instead of $(\alpha \to \beta)$ and $\lnot \alpha$ instead of $(\lnot \alpha)$.  
+\item We will let $\lnot$ take precedence over $\to$ when parentheses are missing,  so $\lnot \alpha \to \beta$ is short for $((\lnot\alpha) \to \beta)$,  and fit the informal connectives into this scheme by letting the order of precedence be $\lnot$,  $\land$,  $\lor$,  $\to$,  and $\fromto$.
+\item Finally,  we will group repetitions of $\to$,  $\lor$,  $\land$,  or $\fromto$  to the right when parentheses are missing,  so  $\alpha \to \beta \to \gamma$ is short for $(\alpha \to (\beta \to \gamma))$.  
+\end{itemize}
+Just like formulas using $\lor$,  $\land$,  or $\lnot$,  formulas in which parentheses have been omitted as above are not official formulas of $\mathcal{L}_P$,  they are convenient abbreviations for official formulas of $\mathcal{L}_P$.  Note that a precedent for the precedence convention can be found in the way that $\cdot$ commonly takes precedence over $+$ in writing arithmetic formulas.
+
+\begin{prob} \label{p:one10}
+Write out $\lnot (\alpha \fromto \lnot \delta ) \land \beta \to \lnot \alpha \to \gamma$ first with the missing parentheses included and then as an official formula of $\mathcal{L}_P$.
+\end{prob}
+
+The following notion will be needed later on.
+
+\begin{defn} \label{d:subf} \index{subformula} \index{$\mathcal{S}$}
+Suppose $\varphi$ is a formula of $\mathcal{L}_P$.  The set of {\em subformulas\/} of $\varphi$,  $\mathcal{S}(\varphi)$,  is defined as follows.
+\begin{enumerate}
+\item If $\varphi$ is an atomic formula,  then $\mathcal{S}(\varphi) = \{ \varphi \}$.
+\item If $\varphi$ is $(\lnot \alpha)$,  then $\mathcal{S}(\varphi) = \mathcal{S}(\alpha) \cup \{ (\lnot\alpha) \}$.
+\item If $\varphi$ is $(\alpha \to \beta)$,  then $\mathcal{S}(\varphi) = \mathcal{S}(\alpha) \cup \mathcal{S}(\beta) \cup \{ (\alpha \to \beta) \}$.
+\end{enumerate}
+\end{defn}
+
+For example,  if $\varphi$ is $(((\lnot A_1) \to A_7) \to (A_8 \to A_1))$,  then $\mathcal{S}(\varphi)$ includes $A_1$, $A_7$, $A_8$, $(\lnot A_1)$,  $(A_8 \to A_1)$, $((\lnot A_1) \to A_7)$, and $(((\lnot A_1) \to A_7) \to (A_8 \to A_1))$ itself.
+
+Note that if you write out a formula with all the official parentheses,  then the subformulas are just the parts of the formula enclosed by matching parentheses,  plus the atomic formulas.  In particular,  every formula is a subformula of itself.  Note that some subformulas of formulas involving our informal abbreviations $\lor$,  $\land$,  or $\fromto$ will be most conveniently written using these abbreviations.  For example,  if $\psi$ is $A_4 \to A_1 \lor A_4$,  then 
+\[
+\mathcal{S}(\psi) = \{\, A_1,\, A_4,\, (\lnot A_1),\, (A_1 \lor A_4),\, (A_4 \to (A_1 \lor A_4)) \,\}\, .
+\]
+(As an exercise,  where did $(\lnot A_1)$ come from?)
+
+\begin{prob} \label{p:one11}
+Find all the subformulas of each of the following formulas.
+\begin{enumerate}
+\item $(\lnot ((\lnot A_{56}) \to A_{56}))$
+\item $A_9 \to A_8 \to \lnot (A_{78} \to \lnot \lnot A_0)$
+\item $\lnot A_0 \land \lnot A_1 \fromto \lnot (A_0 \lor A_1)$
+\end{enumerate}
+\end{prob}
+
+
+\subsection*{Unique Readability}
+The slightly paranoid --- er,  truly rigorous --- might ask whether Definitions \ref{d:symb} and \ref{d:form} actually ensure that the formulas of $\mathcal{L}_P$ are unambiguous,  {\em i.e.\/} can be read in only one way according to the rules given in Definition \ref{d:form}.  To actually prove this one must add to Definition \ref{d:symb} the requirement that all the symbols of $\mathcal{L}_P$ are distinct and that no symbol is a subsequence of any other symbol.  With this addition,  one can prove the following:
+
+\begin{thm}[Unique Readability Theorem] \label{t:ur} \index{Unique Readability Theorem} \index{formula unique readability} \index{unique readability of formulas}
+A formula of $\mathcal{L}_P$ must satisfy exactly one of conditions 1--3 in Definition \ref{d:form}.
+\end{thm}
+
+
+%
+% Second chapter of "A Problem Course in Mathematical Logic"
+%
+
+\chapter{Truth Assignments} \label{ch:two}
+
+Whether a given formula $\varphi$ of $\mathcal{L}_P$ is true or false usually depends on how we interpret the atomic formulas which appear in $\varphi$.  For example,  if $\varphi$ is the atomic formula $A_2$ and we interpret it as ``$2 + 2 = 4$'',  it is true,  but if we interpret it as ``The moon is made of cheese'',  it is false.  Since we don't want to commit ourselves to a single interpretation --- after all,  we're really interested in general logical relationships --- we will define how any assignment of {\em truth values\/}\index{truth values} $T$\index{$T$} (``true'') and $F$\index{$F$} (``false'') to atomic formulas of $\mathcal{L}_P$ can be extended to all other formulas.  We will also get a reasonable definition of what it means for a formula of $\mathcal{L}_P$ to follow logically from other formulas.  
+
+\begin{defn} \label{d:tras} \index{truth assignment} \index{assignment truth}
+A {\em truth assignment\/} is a function $v$ whose domain is the set of all formulas of $\mathcal{L}_P$ and whose range is the set $\{ T, F \}$ of truth values,  such that:
+\begin{enumerate}
+\item $v(A_n)$ is defined for every atomic formula $A_n$.
+\item For any formula $\alpha$,
+  \begin{displaymath}
+    v(\, (\lnot\alpha)\, ) = \begin{cases}
+      T & \text{if $v(\alpha) = F$} \\
+      F & \text{if $v(\alpha) = T$.}
+    \end{cases}
+  \end{displaymath}
+\item For any formulas $\alpha$ and $\beta$,
+  \begin{displaymath}
+    v(\, (\alpha \to \beta)\, ) = \begin{cases}
+      F & \text{if $v(\alpha)=T$ and $v(\beta)=F$} \\
+      T & \text{otherwise.}
+    \end{cases}
+  \end{displaymath}
+\end{enumerate}
+\end{defn}
+
+Given interpretations of all the atomic formulas of $\mathcal{L}_P$,  the corresponding truth assignment would give each atomic formula representing a true statement the value $T$ and every atomic formula representing a false statement the value $F$.  Note that we have not defined how to handle any truth values besides $T$ and $F$ in $\mathcal{L}_P$.  Logics with other truth values have uses,  but are not relevant in most of mathematics.
+
+For an example of how non-atomic formulas are given truth values on the basis of the truth values given to their components, suppose $v$ is a truth assignment such that $v(A_0) = T$ and $v(A_1) = F$. Then $v(\, ((\lnot A_1) \to (A_0 \to A_1))\, )$ is determined from $v(\, (\lnot A_1)\, )$ and $v(\, (A_0 \to A_1)\, )$ according to clause 3 of Definition~\ref{d:tras}.  In turn,  $v(\, (\lnot A_1)\, )$ is determined from of $v(A_1)$ according to clause 2 and $v(\, (A_0 \to A_1)\, )$ is determined from $v(A_1)$ and $v(A_0)$ according to clause 3.  Finally,  by clause 1,  our truth assignment must be defined for all atomic formulas to begin with;  in this case,  $v(A_0) = T$ and $v(A_1) = F$.  Thus $v(\, (\lnot A_1)\, ) = T$ and $v(\, (A_0 \to A_1)\, ) = F$,  so $v(\, ((\lnot A_1) \to (A_0 \to A_1))\, ) = F$.
+
+A convenient way to write out the determination of the truth value of a formula on a given truth assignment is to use a {\em truth table\/}\index{truth table}:  list all the subformulas of the given formula across the top in order of length and then fill in their truth values on the bottom from left to right.  Except for the atomic formulas at the extreme left,  the truth value of each subformula will depend on the truth values of the subformulas to its left.  For the example above,  one gets something like: 
+\[\begin{array}{c|c|c|c|c}
+A_0 & A_1 & (\lnot A_1) & (A_0 \to A_1) & (\lnot A_1) \to (A_0 \to A_1)) \\ \hline
+T & F & T & F & F
+\end{array}\]
+
+\begin{prob} \label{p:two1}
+Suppose $v$ is a truth assignment such that $v(A_0) = v(A_2) = T$ and $v(A_1) = v(A_3) = F$.  Find $v(\alpha)$ if $\alpha$ is:
+\begin{enumerate}
+\item $\lnot A_2 \to \lnot A_3$
+\item $\lnot A_2 \to A_3$
+\item $\lnot ( \lnot A_0 \to A_1)$
+\item $A_0 \lor A_1$
+\item $A_0 \land A_1$
+\end{enumerate}
+\end{prob}
+
+The use of finite truth tables to determine what truth value a particular truth assignment gives a particular formula is justified by the following proposition,  which asserts that only the truth values of the atomic sentences in the formula matter.
+
+\begin{prop} \label{p:tav}
+Suppose $\delta$ is any formula and $u$ and $v$ are truth assignments such that $u(A_n) = v(A_n)$ for all atomic formulas $A_n$ which occur in $\delta$.  Then $u(\delta) = v(\delta)$.
+\end{prop}
+
+\begin{cor} \label{c:tav}
+Suppose $u$ and $v$ are truth assignments such that $u(A_n) = v(A_n)$ for every atomic formula $A_n$.  Then $u = v$,  {\em i.e.\/} $u(\varphi) = v(\varphi)$ for every formula $\varphi$.
+\end{cor}
+
+\begin{prop} \label{p:tif}
+If $\alpha$ and $\beta$ are formulas and $v$ is a truth assignment,  then:
+\begin{enumerate}
+\item $v(\lnot \alpha) = T$ if and only if $v(\alpha) = F$.
+\item $v(\alpha \to \beta) = T$ if and only if $v(\beta) = T$ whenever $v(\alpha) = T$;
+\item $v(\alpha \land \beta) = T$ if and only if $v(\alpha) = T$ and $v(\beta) = T$;
+\item $v(\alpha \lor \beta) = T$ if and only if $v(\alpha) = T$ or $v(\beta) = T$;  and
+\item $v(\alpha \fromto \beta) = T$ if and only if $v(\alpha) = v(\beta)$.
+\end{enumerate}
+\end{prop}
+
+Truth tables\index{truth table} are often used even when the formula in question is not broken down all the way into atomic formulas.  For example,  if $\alpha$ and $\beta$ are any formulas and we know that $\alpha$ is true but $\beta$ is false,  then the truth of $(\alpha \to (\lnot \beta))$ can be determined by means of the following table:
+\[
+\begin{array}{c|c|c|c}
+\alpha & \beta & (\lnot \beta) & (\alpha \to (\lnot \beta)) \\ \hline
+T & F & T & T 
+\end{array}
+\]
+
+
+\begin{defn} 
+If $v$ is a truth assignment and $\varphi$ is a formula,  we will often say that $v$ {\em satisfies\/}\index{satisfies} $\varphi$ if $v(\varphi) = T$.  Similarly,  if $\Sigma$ is a set of formulas,  we will often say that $v$ satisfies $\Sigma$ if $v(\sigma) = T$ for every $\sigma \in \Sigma$.  We will say that $\varphi$ (respectively,  $\Sigma$) is {\em satisfiable\/}\index{satisfiable} if there is some truth assignment which satisfies it.
+\end{defn}
+
+\begin{defn} \label{d:taco} \index{tautology} \index{contradiction}
+A formula $\varphi$ is a {\em tautology\/} if it is satisfied by every truth assignment.  A formula $\psi$ is a {\em contradiction\/} if there is no truth assignment which satisfies it.
+\end{defn}
+
+For example,  $(A_4 \to A_4)$ is a tautology while $(\lnot (A_4 \to A_4))$ is a contradiction,  and $A_4$ is a formula which is neither.  One can check whether a given formula is a tautology,  contradiction,  or neither,  by grinding out a complete truth table\index{truth table} for it,  with a separate line for each possible assignment of truth values to the atomic subformulas of the formula.  For $A_3 \to (A_4 \to A_3)$ this gives \index{truth table}
+\[\begin{array}{c|c|c|c}
+A_3 & A_4 & A_4 \to A_3 & A_3 \to (A_4 \to A_3) \\
+\hline
+T & T & T & T \\
+T & F & T & T \\
+F & T & F & T \\
+F & F & T & T
+\end{array}\]
+so $A_3 \to (A_4 \to A_3)$ is a tautology.  Note that,  by Proposition \ref{p:tav},  we need only consider the possible truth values of the atomic sentences which actually occur in a given formula.
+
+One can often use truth tables\index{truth table} to determine whether a given formula is a tautology or a contradiction even when it is not broken down all the way into atomic formulas.  For example,  if $\alpha$ is any formula,  then the table
+\[\begin{array}{c|c|c}
+\alpha &  (\alpha \to \alpha) & (\lnot (\alpha \to \alpha)) \\ \hline
+T & T & F \\
+F & T & F
+\end{array}\]
+demonstrates that $(\lnot (\alpha \to \alpha))$ is a contradiction,  no matter which formula of $\mathcal{L}_P$ $\alpha$ actually is.
+
+\begin{prop} \label{p:two5}
+If $\alpha$ is any formula,  then $((\lnot \alpha) \lor \alpha)$ is a tautology and $((\lnot \alpha) \land \alpha)$ is a  contradiction.
+\end{prop}
+
+\begin{prop} \label{p:two6}
+A formula $\beta$ is a tautology if and only if $\lnot \beta$ is a contradiction.
+\end{prop}
+
+After all this warmup,  we are finally in a position to define what it means for one formula to follow logically from other formulas.  
+
+\begin{defn} \label{d:imp} \index{implies} \index{$\models$} \index{$\nmodels$}
+A set of formulas $\Sigma$ {\em implies\/} a formula $\varphi$,  written as $\Sigma \models \varphi$,  if every truth assignment $v$ which satisfies $\Sigma$ also satisfies $\varphi$.  We will often write $\Sigma \nmodels \varphi$ if it is not the case that $\Sigma \models \varphi$.  In the case where $\Sigma$ is empty,  we will usually write $\models \varphi$ instead of $\emptyset \models \varphi$.
+
+Similarly,  if $\Delta$ and $\Gamma$ are sets of formulas,  then $\Delta$ {\em implies\/} $\Gamma$,  written as $\Delta \models \Gamma$,  if every truth assignment $v$ which satisfies $\Delta$ also satisfies $\Gamma$.
+\end{defn}
+
+For example,  $\{\, A_3 ,\, (A_3 \to \lnot A_7) \,\} \models \lnot A_7$,  but $\{\, A_8 ,\, (A_5 \to A_8) \,\} \nmodels A_5$.  (There is a truth assignment which makes $A_8$ and $A_5 \to A_8$ true,  but $A_5$ false.)  Note that a formula $\varphi$ is a tautology if and only if $\models \varphi$,  and a contradiction if and only if $\models (\lnot \varphi)$. 
+
+\begin{prop} \label{p:two6a}
+If $\Gamma$ and $\Sigma$ are sets of formulas such that $\Gamma \subseteq \Sigma$,  then $\Sigma \models \Gamma$.
+\end{prop}
+
+\begin{prob} \label{p:two7}
+How can one check whether or not $\Sigma \models \varphi$ for a formula $\varphi$ and a finite set of formulas $\Sigma$?
+\end{prob}
+
+\begin{prop} \label{p:moto}
+Suppose $\Sigma$ is a set of formulas and $\psi$ and $\rho$ are formulas.  Then $\Sigma \cup \{\psi\} \models \rho$ if and only if $\Sigma \models \psi \to \rho$.
+\end{prop}
+
+\begin{prop} \label{p:sanc}
+A set of formulas $\Sigma$ is satisfiable if and only if there is no contradiction $\chi$ such that $\Sigma \models \chi$.
+\end{prop}
+
+
+
+%
+% Third chapter of "A Problem Course in Mathematical Logic"
+%
+
+\chapter{Deductions} \label{ch:three}
+
+In this chapter we develop a way of defining logical implication that does not rely on any notion of truth,  but only on manipulating sequences of formulas,  namely formal proofs or deductions.  (Of course,  any way of defining logical implication had better be compatible with that given in Chapter \ref{ch:two}.) To define these,  we first specify a suitable set of formulas which we can use freely as premisses in deductions.
+
+\begin{defn} \index{axiom schema} \index{axiom} \index{A1} \index{A2} \index{A3}
+The three {\em axiom schema\/} of $\mathcal{L}_P$ are:
+\begin{description}
+\item[A1] $(\alpha \to (\beta \to \alpha))$
+\item[A2] $((\alpha \to (\beta \to \gamma)) \to ((\alpha \to \beta) \to
+(\alpha \to \gamma)))$
+\item[A3] $(((\lnot\beta)\to (\lnot\alpha)) \to ( ((\lnot\beta) \to \alpha) \to \beta ) )$.
+\end{description}
+Replacing $\alpha$,  $\beta$,  and $\gamma$ by particular formulas of $\mathcal{L}_P$ in any one of the schemas A1,  A2,  or A3 gives an {\em axiom\/} of $\mathcal{L}_P$.
+\end{defn}
+
+For example,  $(A_1 \to (A_4 \to A_1))$ is an axiom,  being an instance of axiom schema A1,  but $(A_9 \to (\lnot A_0))$ is not an axiom as it is not the instance of any of the schema.  As had better be the case,  every axiom is always true:
+
+\begin{prop} \label{p:axta}
+Every axiom of $\mathcal{L}_P$ is a tautology.
+\end{prop}
+
+Second,  we specify our one (and only!) rule of inference\index{rule of inference}\index{inference rule}.\footnote{Natural deductive systems,  which are usually more convenient to actually execute deductions in than the system being developed here,  compensate for having few or no axioms by having many rules of inference.}
+
+\begin{defn}[Modus Ponens] \index{Modus Ponens}
+Given the formulas $\varphi$ and $(\varphi \to \psi)$,  one may infer $\psi$.
+\end{defn}
+
+We will usually refer to Modus Ponens by its initials,  MP.\index{MP}  Like any rule of inference worth its salt,  MP preserves truth.
+
+\begin{prop} \label{p:snd}
+Suppose $\varphi$ and $\psi$ are formulas.  Then $\{\, \varphi ,\, (\varphi \to \psi) \,\} \models \psi$.
+\end{prop}
+
+With axioms and a rule of inference in hand,  we can execute formal proofs in $\mathcal{L}_P$.
+
+\begin{defn} \label{d:ded} \index{deduction} \index{proof}
+Let $\Sigma$ be a set of formulas.  A {\em deduction\/} or {\em proof\/} from $\Sigma$ in $\mathcal{L}_P$ is a finite sequence $\varphi_1 \varphi_2 \dots \varphi_n$ of formulas such that for each $k \le n$,
+\begin{enumerate}
+\item $\varphi_k$ is an axiom,  or
+\item $\varphi_k \in \Sigma$,  or
+\item there are $i,j < k$ such that $\varphi_k$ follows from $\varphi_i$ and $\varphi_j$ by MP.
+\end{enumerate}
+A formula of $\Sigma$ appearing in the deduction is called a {\em premiss\/}\index{premiss}.  $\Sigma$ {\em proves\/}\index{proves} a formula $\alpha$,  written as $\Sigma \proves \alpha$,\index{$\proves$}  if $\alpha$ is the last formula of a deduction from $\Sigma$.  We'll usually write $\proves \alpha$ for $\emptyset \proves \alpha$,  and take $\Sigma \proves \Delta$ to mean that $\Sigma \proves \delta$ for every formula $\delta \in \Delta$. 
+\end{defn}
+
+In order to make it easier to verify that an alleged deduction really is one,  we will number the formulas in a deduction,  write them out in order on separate lines,  and give a justification for each formula.  Like the additional connectives and conventions for dropping parentheses in Chapter \ref{ch:one},  this is not officially a part of the definition of a deduction.
+
+\begin{exmp} \label{e:one}
+Let us show that $\proves \varphi \to \varphi$.
+\begin{enumerate}
+\item $(\varphi \to ((\varphi \to \varphi) \to \varphi)) \to ((\varphi \to (\varphi \to \varphi)) \to (\varphi \to \varphi))$ \hfill A2
+\item $\varphi \to ((\varphi \to \varphi) \to \varphi)$ \hfill A1
+\item $(\varphi \to (\varphi \to \varphi)) \to (\varphi \to \varphi)$
+\hfill 1,2 MP
+\item $\varphi \to (\varphi \to \varphi)$ \hfill A1
+\item $\varphi \to \varphi$ \hfill 3,4 MP
+\end{enumerate}
+Hence $\proves \varphi \to \varphi$,  as desired.  Note that indication of the formulas from which formulas 3 and 5 beside the mentions of MP.
+\end{exmp}
+
+\begin{exmp} \label{e:two}
+Let us show that $\{\, \alpha \to \beta,\, \beta \to \gamma \,\} \proves \alpha \to \gamma$.  
+\begin{enumerate}
+\item $(\beta \to \gamma) \to (\alpha \to (\beta \to \gamma))$ \hfill A1
+\item $\beta \to \gamma$ \hfill Premiss
+\item $\alpha \to (\beta \to \gamma)$ \hfill 1,2 MP
+\item $(\alpha \to (\beta \to \gamma)) \to ((\alpha \to \beta) \to (\alpha \to \gamma))$ \hfill A2
+\item $(\alpha \to \beta) \to (\alpha \to \gamma)$ \hfill 4,3 MP
+\item $\alpha \to \beta$ \hfill Premiss
+\item $\alpha \to \gamma$ \hfill 5,6 MP
+\end{enumerate}
+Hence $\{\, \alpha \to \beta,\, \beta \to \gamma \,\} \proves \alpha \to \gamma$,  as desired.
+\end{exmp}
+
+It is frequently convenient to save time and effort by simply referring to a deduction one has already done instead of writing it again as part of another deduction.  If you do so,  please make sure you appeal only to deductions that have already been carried out.
+
+\begin{exmp} \label{e:three}
+Let us show that $\proves (\lnot \alpha \to \alpha) \to \alpha$.
+\begin{enumerate}
+\item $( \lnot \alpha \to \lnot \alpha) \to (( \lnot \alpha \to \alpha ) \to \alpha )$ \hfill A3
+\item $\lnot\alpha \to \lnot\alpha$ \hfill Example~\ref{e:one}
+\item $(\lnot \alpha \to \alpha) \to \alpha$ \hfill 1,2 MP
+\end{enumerate}
+Hence $\proves (\lnot \alpha \to \alpha) \to \alpha$,  as desired.  To be completely formal,  one would have to insert the deduction given in Example \ref{e:one} (with $\varphi$ replaced by $\lnot \alpha$ throughout) in place of line 2 above and renumber the old line 3.
+\end{exmp}
+
+\begin{prob} \label{p:ded}
+Show that if $\alpha$,  $\beta$,  and $\gamma$ are formulas,  then
+\begin{enumerate}
+\item $\{\, \alpha \to (\beta \to \gamma),\, \beta\,\} \proves 
+\alpha \to \gamma$
+\item $\proves \alpha \lor \lnot \alpha$
+\end{enumerate}
+\end{prob}
+
+\begin{exmp} \label{e:four}
+Let us show that $\proves \lnot\lnot \beta \to \beta$.
+\begin{enumerate}
+\item $(\lnot\beta \to \lnot\lnot\beta) \to ((\lnot\beta \to \lnot\beta) \to \beta)$ \hfill A3
+\item $\lnot\lnot\beta \to (\lnot\beta \to \lnot\lnot\beta)$ \hfill A1
+\item $\lnot\lnot\beta \to ((\lnot\beta \to \lnot\beta) \to \beta)$
+\hfill 1,2 Example~\ref{e:two}
+\item $\lnot\beta \to \lnot\beta$ \hfill Example~\ref{e:one}
+\item $\lnot\lnot \beta \to \beta$ \hfill 3,4 Problem~\ref{p:ded}.1
+\end{enumerate}
+Hence $\proves \lnot\lnot \beta \to \beta$,  as desired.
+\end{exmp}
+
+
+Certain general facts are sometimes handy:
+
+\begin{prop} \label{p:three3a}
+If $\varphi_1 \varphi_2 \dots \varphi_n$ is a deduction of $\mathcal{L}_P$,  then $\varphi_1  \dots \varphi_\ell$ is also a deduction of $\mathcal{L}_P$ for any $\ell$ such that $1 \le \ell \le n$.
+\end{prop}
+
+\begin{prop} \label{p:dmp}
+If $\Gamma \proves \delta$ and $\Gamma \proves \delta \to \beta$,  then $\Gamma \proves \beta$.
+\end{prop}
+
+\begin{prop} \label{p:three5}
+If $\Gamma \subseteq \Delta$ and $\Gamma \proves \alpha$,  then $\Delta \proves \alpha$.
+\end{prop}
+
+\begin{prop} \label{p:three6}
+If $\Gamma \proves \Delta$ and $\Delta \proves \sigma$,  then $\Gamma \proves \sigma$.
+\end{prop}
+
+
+The following theorem often lets one take substantial shortcuts when trying to show that certain deductions exist in $\mathcal{L}_P$,  even though it doesn't give us the deductions explicitly.  
+
+\begin{thm}[Deduction Theorem] \label{t:ded} \index{Deduction Theorem}
+If $\Sigma$ is any set of formulas and $\alpha$ and $\beta$ are any formulas,  then $\Sigma \proves \alpha \to \beta$ if and only if $\Sigma \cup \{ \alpha \} \proves \beta$.
+\end{thm}
+
+
+\begin{exmp} \label{e:five}
+Let us show that $\proves \varphi \to \varphi$.  By the Deduction Theorem it is enough to show that $\{ \varphi \} \proves \varphi$,  which is trivial:
+\begin{enumerate}
+\item $\varphi$ \hfill Premiss
+\end{enumerate}
+Compare this to the deduction in Example~\ref{e:one}.
+\end{exmp}
+
+\begin{prob} \label{p:prov}
+Appealing to previous deductions and the Deduction Theorem if you wish,  show that:
+\begin{enumerate}
+\item $\{ \delta, \lnot\delta \} \proves \gamma$
+\item $\proves \varphi \to \lnot\lnot \varphi$
+\item $\proves (\lnot \beta \to \lnot \alpha) \to (\alpha \to \beta)$
+\item $\proves (\alpha \to \beta) \to (\lnot \beta \to \lnot \alpha)$
+\item $\proves (\beta \to \lnot \alpha) \to (\alpha \to \lnot \beta)$
+\item $\proves (\lnot \beta \to \alpha) \to (\lnot \alpha \to \beta)$
+\item $\proves \sigma \to (\sigma \lor \tau)$
+\item $\{ \alpha \land \beta \} \proves \beta$
+\item $\{ \alpha \land \beta \} \proves \alpha$
+\end{enumerate}
+\end{prob}
+
+
+
+%
+% Chapter 4 of "A Problem Course in Mathematical Logic"
+%
+
+\chapter{Soundness and Completeness} \label{ch:four}
+
+How are deduction and implication related,  given that they were defined in completely different ways?   We have some evidence that they behave alike;  compare,  for example,  Proposition~\ref{p:moto} and the Deduction Theorem.  It had better be the case that if there is a deduction of a formula $\varphi$ from a set of premisses $\Sigma$,  then $\varphi$ is implied by $\Sigma$.  (Otherwise,  what's the point of defining deductions?)  It would also be nice for the converse to hold:  whenever $\varphi$ is implied by $\Sigma$,  there is a deduction of $\varphi$ from $\Sigma$.  (So anything which is true can be proved.)  The Soundness and Completeness Theorems say that both ways do hold,  so $\Sigma \proves \varphi$ if and only if $\Sigma \models \varphi$,  {\em i.e.\/} $\proves$ and $\models$ are equivalent for propositional logic.  One direction is relatively straightforward to prove\dots
+
+\begin{thm}[Soundness Theorem] \label{t:psnd} \index{Soundness Theorem} 
+If $\Delta$ is a set of formulas and $\alpha$ is a formula such that $\Delta \proves \alpha$,  then $\Delta \models \alpha$.
+\end{thm}
+
+\dots but for the other direction we need some additional concepts.
+
+\begin{defn} \label{d:cons}
+A set of formulas $\Gamma$ is {\em inconsistent\/}\index{inconsistent} if $\Gamma \proves \lnot(\alpha \to \alpha)$ for some formula $\alpha$,  and {\em consistent\/}\index{consistent} if it is not inconsistent.
+\end{defn}
+
+For example,   $\{ A_{41} \}$ is consistent by Proposition~\ref{p:stoc},  but it follows from Problem~\ref{p:prov} that $\{ A_{13}, \lnot A_{13} \}$ is inconsistent.
+
+\begin{prop} \label{p:stoc}
+If a set of formulas is satisfiable,  then it is consistent.
+\end{prop}
+
+\begin{prop} \label{p:inca}
+Suppose $\Delta$ is an inconsistent set of formulas.  Then $\Delta \proves \psi$ for any formula $\psi$.
+\end{prop}
+
+\begin{prop} \label{p:cmp}
+Suppose $\Sigma$ is an inconsistent set of formulas.  Then there is a finite subset $\Delta$ of $\Sigma$ such that $\Delta$ is inconsistent.  
+\end{prop}
+
+\begin{cor} \label{c:cmp}
+A set of formulas $\Gamma$ is consistent if and only if every finite subset of $\Gamma$ is consistent.
+\end{cor}
+
+To obtain the Completeness Theorem requires one more definition.
+
+\begin{defn} \label{d:mxc} \index{maximally consistent} \index{consistent maximally}
+A set of formulas $\Sigma$ is {\em maximally consistent} if $\Sigma$ is consistent but $\Sigma \cup \{\varphi\}$ is inconsistent for any $\varphi \notin \Sigma$.
+\end{defn}
+
+That is,  a set of formulas is maximally consistent if it is consistent,  but there is no way to add any other formula to it and keep it consistent.  
+
+\begin{prob} \label{p:emc}
+Suppose $v$ is a truth assignment.  Show that $\Sigma = \{\, \varphi \mid v(\varphi) = T \,\}$ is maximally consistent.
+\end{prob}
+
+We will need some facts concerning maximally consistent theories.
+
+\begin{prop} \label{p:inmc}
+If $\Sigma$ is a maximally consistent set of formulas,  $\varphi$ is a formula,  and $\Sigma \proves \varphi$,  then $\varphi \in \Sigma$.
+\end{prop}
+
+\begin{prop} \label{p:nimc}
+Suppose $\Sigma$ is a maximally consistent set of formulas and $\varphi$ is a formula.  Then $\lnot\varphi \in \Sigma$ if and only if $\varphi \notin \Sigma$.
+\end{prop}
+
+\begin{prop} \label{p:iimc}
+Suppose $\Sigma$ is a maximally consistent set of formulas and $\varphi$ and $\psi$ are formulas.  Then $\varphi \to \psi \in \Sigma$ if and only if $\varphi \notin \Sigma$ or $\psi \in \Sigma$.
+\end{prop}
+
+It is important to know that any consistent set of formulas can be expanded to a maximally consistent set.
+
+\begin{thm} \label{t:exmc}
+Suppose $\Gamma$ is a consistent set of formulas.  Then there is a maximally consistent set of formulas $\Sigma$ such that $\Gamma \subseteq \Sigma$.
+\end{thm}
+
+Now for the main event!
+
+\begin{thm} \label{t:saco}
+A set of formulas is consistent if and only if it is satisfiable.
+\end{thm}
+
+Theorem~\ref{t:saco} gives the equivalence between $\proves$ and $\models$ in slightly disguised form. 
+
+\begin{thm}[Completeness Theorem] \label{t:pcmpl} \index{Completeness Theorem}
+If $\Delta$ is a set of formulas and $\alpha$ is a formula such that $\Delta \models \alpha$,  then $\Delta \proves \alpha$.
+\end{thm}
+
+It follows that anything provable from a given set of premisses must be true if the premisses are,  and {\em vice versa\/}.  The fact that $\proves$ and $\models$ are actually equivalent can be very convenient in situations where one is easier to use than the other.  For example,  most parts of Problems~\ref{p:ded} and \ref{p:prov} are much easier to do with truth tables instead of deductions,  even if one makes use of the Deduction Theorem.
+
+Finally,  one more consequence of Theorem~\ref{t:saco}.  
+
+\begin{thm}[Compactness Theorem] \label{t:pcpct} \index{Compactness Theorem}
+A set of formulas $\Gamma$ is satisfiable if and only if every finite subset of $\Gamma$ is satisfiable.
+\end{thm}
+
+We will not look at any uses of the Compactness Theorem now,  but we will consider a few applications of its counterpart for first-order logic in Chapter~\ref{ch:nine}.
+
+
+\part*{First-Order Logic}
+
+
+%
+% Chapter 5 of "A Problem Course in Mathematical Logic"
+%
+
+\chapter{Languages} \label{ch:five}
+
+As noted in the Introduction,  propositional logic has obvious deficiencies as a tool for mathematical reasoning.  First-order logic\index{first-order logic}\index{logic first-order} remedies enough of these to be adequate for formalizing most ordinary mathematics.  It does have enough in common with propositional logic to let us recycle some of the material in Chapters 1--4.  
+
+A few informal words about how first-order languages\index{first-order languages}\index{language first-order} work are in order.  In mathematics one often deals with structures consisting of a set of elements plus various operations on them or relations among them.  To cite three common examples,  a group is a set of elements plus a binary operation on these elements satisfying certain conditions,  a field is a set of elements plus two binary operations on these elements satisfying certain conditions,  and a graph is a set of elements plus a binary relation with certain properties.  In most such cases,  one frequently uses symbols naming the operations or relations in question,  symbols for variables which range over the set of elements,  symbols for logical connectives such as {\em not\/} and {\em for all\/},  plus auxiliary symbols such as parentheses,  to write formulas which express some fact about the structure in question.  For example,  if $(G,\cdot)$ is a group,  one might express the associative law by writing something like
+\[
+\forall x\, \forall y\, \forall z\; x\cdot (y\cdot z) = (x\cdot y)\cdot z\, ,
+\]
+it being understood that the variables range over the set $G$ of group elements.  A formal language to do as much will require some or all of these: symbols for various logical notions and for variables,  some for functions or relations,  plus auxiliary symbols.  It will also be necessary to specify rules for putting the symbols together to make formulas,  for interpreting the meaning and determining the truth of these formulas,  and for making inferences in deductions.
+
+For a concrete example,  consider elementary number theory.  The set of elements under discussion is the set of natural numbers $\mathbb N = \{\, 0,1,2,3,4, \dots \}$.  One might need symbols or names for certain interesting numbers,  say $0$ and $1$;  for variables over $\mathbb{N}$ such as $n$ and $x$;  for functions on $\mathbb{N}$,  say $\cdot$ and $+$;  and for relations,  say $=$,  $<$,  and $|$.  In addition,  one is likely to need symbols for punctuation,  such as $($ and $)$;  for logical connectives,  such as $\lnot$ and $\to$;  and for quantifiers,  such as $\forall$ (``for all'') and $\exists$ (``there exists'').  A statement of mathematical English such as ``For all $n$ and $m$,  if $n$ divides $m$,  then $n$ is less than or equal to $m$'' can then be written as a cool formula like 
+\[
+\forall n \forall m \, (n \mid m \to (n < m \land n = m)) \, .
+\]
+
+The extra power of first-order logic comes at a price:  greater complexity.  First,  there are many first-order languages one might wish to use,  practically one for each subject,  or even problem,  in mathematics.\footnote{It is possible to formalize almost all of mathematics in a single first-order language,  like that of set theory or category theory.  However,  trying to actually do most mathematics in such a language is so hard as to be pointless.}  We will set up our definitions and general results,  however,  to apply to a wide range of them.\footnote{Specifically,  to countable one-sorted first-order languages with equality.}
+
+As with $\mathcal{L}_P$,  our formal language for propositional logic,  first-order languages are defined by specifying their symbols and how these may be assembled into formulas.
+
+\begin{defn} \label{d:sym} \index{symbols} \index{symbols logical} \index{symbols non-logical}
+The {\em symbols\/} of a first-order language $\mathcal{L}$\index{$\mathcal{L}$} include:
+\begin{enumerate}
+\item Parentheses:  $($ and $)$. \index{parentheses} \index{$($} \index{$)$}
+\item Connectives:  $\lnot$ and $\to$. \index{connectives} \index{$\lnot$} \index{$\to$}
+\item Quantifier:  $\forall$. \index{quantifier universal} \index{$\forall$}
+\item Variables:  $v_0$,  $v_1$,  $v_2$,  \dots,  $v_n$,  \dots \index{variable} \index{$v_n$}
+\item Equality:  $=$. \index{equality} \index{$=$}
+\item A (possibly empty) set of {\em constant\/} symbols. \index{constant}
+\item For each $k \ge 1$,  a (possibly empty) set of {\em $k$-place function\/} symbols. \index{function $k$-place} \index{function}
+\item For each $k \ge 1$,  a (possibly empty) set of {\em $k$-place relation\/} (or {\em predicate\/}) symbols. \index{relation $k$-place} \index{relation} \index{predicate}
+\end{enumerate}
+The symbols described in parts 1--5 are the {\em logical\/} symbols of $\mathcal{L}$,  shared by every first-order language,  and the rest are the {\em non-logical\/} symbols of $\mathcal{L}$,  which usually depend on what the language's intended use. 
+\end{defn}
+
+\begin{note}
+It is possible to define first-order languages without $=$,  so $=$ is considered a non-logical symbol by many authors.  While such languages have some uses,  they are uncommon in ordinary mathematics.
+
+Observe that any first-order language $\mathcal{L}$ has countably many logical symbols.  It may have uncountably many symbols if it has uncountably many non-logical symbols.  {\em Unless explicitly stated otherwise,  we will assume that every first-order language we encounter has only countably many non-logical symbols.\/}  Most of the results we will prove actually hold for countable and uncountable first-order languages alike,  but some require heavier machinery to prove for uncountable languages.
+\end{note}
+
+Just as in $\mathcal{L}_P$,  the parentheses are just punctuation\index{punctuation} while the connectives,  $\lnot$\index{$\lnot$} and $\to$\index{$\to$},  are intended to express {\em not\/}\index{not} and {\em if \dots then\/}\index{if \dots then}.  However,  the rest of the symbols are new and are intended to express ideas that cannot be handled by $\mathcal{L}_P$.  The quantifier\index{quantifier universal} symbol,  $\forall$\index{$\forall$},  is meant to represent {\em for all\/}\index{for all},  and is intended to be used with the variable symbols,  {\em e.g.\/} $\forall v_4$.  The constant\index{constant} symbols are meant to be names for particular elements of the structure under discussion.  $k$-place function\index{function $k$-place} symbols are meant to name particular functions which map $k$-tuples of elements of the structure to elements of the structure.  $k$-place relation\index{relation $k$-place} symbols are intended to name particular $k$-place relations among elements of the structure.\footnote{Intuitively,  a relation or predicate\index{predicate} expresses some (possibly arbitrary) relationship among one or more objects.  For example,  ``$n$ is prime'' is a 1-place relation on the natural numbers,  $<$ is a 2-place or binary relation\index{relation binary} on the rationals,  and $\vec{a} \times (\vec{b} \times \vec{c}) = \vec{0}$ is a 3-place relation on $\mathbb{R}^3$.  Formally,  a $k$-place relation\index{relation $k$-place} on a set $X$ is just a subset of $X^k$,  {\em i.e.\/} the collection of sequences of length $k$ of elements of $X$ for which the relation is true.}  Finally,  $=$\index{$=$} is a special binary relation\index{relation binary} symbol intended to represent equality\index{equality}.
+
+\begin{exmp} \label{e:lannt}
+Since the logical symbols are always the same,  first-order languages are usually defined by specifying the non-logical symbols.  A formal language for elementary number theory like that unofficially described above,  call it $\mathcal{L}_{NT}$\index{$\mathcal{L}_{NT}$},  can be defined as follows. 
+\begin{itemize}
+\item Constant symbols:  $0$ and $1$
+\item Two $2$-place function symbols:  $+$ and $\cdot$
+\item Two binary relation symbols:  $<$ and $|$
+\end{itemize}
+Each of these symbols is intended to represent the same thing it does in informal mathematical usage:  $0$ and $1$ are intended to be names for the numbers zero and one,  $+$ and $\cdot$ names for the operations of addition and multiplications,  and $<$ and $|$ names for the relations ``less than'' and ``divides''.  (Note that we could,  in principle,  interpret things completely differently -- let $0$ represent the number forty-one,  $+$ the operation of exponentiation,  and so on -- or even use the language to talk about a different structure -- say the real numbers,  $\mathbb{R}$,  with $0$,  $1$,  $+$,  $\cdot$,  and $<$ representing what they usually do and,  just for fun,  $|$ interpreted as ``is not equal to''.  More on this in Chapter \ref{ch:six}.)  We will usually use the same symbols in our formal languages that we use informally for various common mathematical objects.  This convention\index{convention for common symbols} can occasionally cause confusion if it is not clear whether an expression involving these symbols is supposed to be an expression in a formal language or not.  
+\end{exmp}
+
+\begin{exmp} \label{e:lan}
+Here are some other first-order languages.   Recall that we need only specify the non-logical symbols in each case and note that some parts of Definitions \ref{d:ter} and \ref{d:for} may be irrelevant for a given language\index{language} if it is missing the appropriate sorts of non-logical symbols.
+\begin{enumerate}
+  \item  The language of pure equality,  $\mathcal{L}_=$:\index{$\mathcal{L}_=$}
+    \begin{itemize}
+      \item No non-logical symbols at all.
+    \end{itemize}
+  \item A language for fields,  $\mathcal{L}_F$:\index{$\mathcal{L}_F$}
+    \begin{itemize}
+      \item Constant symbols:  $0$,  $1$
+      \item $2$-place function symbols:  $+$,  $\cdot$
+    \end{itemize}
+  \item A language for set theory,  $\mathcal{L}_S$:\index{$\mathcal{L}_S$}
+    \begin{itemize}
+      \item $2$-place relation symbol:  $\in$
+    \end{itemize}
+  \item A language for linear orders,  $\mathcal{L}_O$:\index{$\mathcal{L}_O$}
+    \begin{itemize}
+      \item $2$-place relation symbol:  $<$
+    \end{itemize}
+  \item Another language for elementary number theory,  $\mathcal{L}_N$:\index{$\mathcal{L}_N$}
+    \begin{itemize}
+      \item Constant symbol:  $0$
+      \item $1$-place function symbol:  $S$
+      \item $2$-place function symbols:  $+$, $\cdot$, $E$
+    \end{itemize}
+    Here $0$ is intended to represent zero,  $S$ the successor function,  {\em i.e.\/}  $S(n) = n + 1$,  and $E$ the exponential function,  {\em i.e.\/}  $E(n,m) = n^m$.
+  \item A ``worst-case'' countable language,  $\mathcal{L}_1$:\index{$\mathcal{L}_1$}
+    \begin{itemize}
+      \item Constant symbols:  $c_1$,  $c_2$,  $c_3$,  \dots
+      \item For each $k \ge 1$,  $k$-place function symbols:  $f^k_1$,  $f^k_2$,  $f^k_3$,  \dots
+      \item For each $k \ge 1$,  $k$-place relation symbols:  $P^k_1$,  $P^k_2$,  $P^k_3$,  \dots
+    \end{itemize}
+    This language has no use except as an abstract example.
+\end{enumerate}
+\end{exmp}
+
+
+It remains to specify how to form valid formulas from the symbols of a first-order language $\mathcal{L}$.  This will be more complicated than it was for $\mathcal{L}_P$.  In fact,  we first need to define a type of expression in $\mathcal{L}$ which has no counterpart in propositional logic.
+
+\begin{defn} \label{d:ter} \index{term}
+The {\em terms\/} of a first-order language $\mathcal{L}$ are those finite sequences of symbols of $\mathcal{L}$ which satisfy the following rules:
+\begin{enumerate}
+\item Every variable symbol $v_n$ is a term.
+\item Every constant symbol $c$ is a term.
+\item If $f$ is a $k$-place function symbol and $t_1$,  \dots, $t_k$ are terms,  then $f t_1 \dots t_k$ is also a term.
+\item Nothing else is a term.
+\end{enumerate}
+\end{defn}
+
+That is,  a term is an expression which represents some (possibly
+indeterminate) element of the structure under discussion.  For example,  in $\mathcal{L}_{NT}$ or $\mathcal{L}_N$,   $+ v_0 v_1$ (informally,  $v_0 + v_1$ ) is a term,  though precisely which natural number it represents depends on what values are assigned to the variables $v_0$ and $v_1$.   
+
+\begin{prob} \label{p:five1}
+Which of the following are terms of one of the languages defined in Examples \ref{e:lannt} and \ref{e:lan}?  If so,  which of these language(s) are they terms of;  if not,  why not?
+\begin{enumerate}
+\item $\cdot v_2$
+\item $+ 0 \cdot + v_6 1 1$
+\item $|1+v_30$
+\item $(<E101 \to +11)$
+\item $++\cdot +00000$
+\item $f^3_4f^2_7 c_4 v_9 c_1 v_4$
+\item $\cdot v_5 (+1v_8)$
+\item $< v_6 v_2$
+\item $1 + 0$
+\end{enumerate}
+\end{prob}
+
+Note that in languages with no function symbols all terms have length one.
+
+\begin{prob} \label{p:five2}
+Choose one of the languages defined in Examples \ref{e:lannt} and \ref{e:lan} which has terms of length greater than one and determine the possible lengths of terms of this language.
+\end{prob}
+
+\begin{prop} \label{p:fcmt}
+The set of terms of a countable first-order language $\mathcal{L}$ is countable.
+\end{prop}
+
+Having defined terms,  we can finally define first-order formulas.
+
+\begin{defn} \label{d:for} \index{formula}
+The {\em formulas\/} of a first-order language $\mathcal{L}$ are the finite sequences of the symbols of $\mathcal{L}$ satisfying the following rules:
+\begin{enumerate}
+\item If $P$ is a $k$-place relation symbol and $t_1$,  \dots,
+$t_k$ are terms,  then  $P t_1 \dots t_k$ is a formula.
+\item If $t_1$ and $t_2$ are terms,  then $= t_1 t_2$ is a formula.
+\item If $\alpha$ is a formula,  then $(\lnot \alpha)$ is a formula.
+\item If $\alpha$ and $\beta$ are formulas,  then $(\alpha \to \beta)$ is a formula.
+\item If $\varphi$ is a formula and $v_n$ is a variable,  then $\forall v_n \varphi$ is a formula.
+\item Nothing else is a formula.
+\end{enumerate}
+Formulas of form 1 or 2 will often be referred to as the {\em atomic formulas\/}\index{atomic formulas} \index{formulas atomic} of $\mathcal{L}$. 
+\end{defn}
+
+Note that three of the conditions in Definition \ref{d:for} are borrowed directy from propositional logic.  As before,  we will exploit the way formulas are built up in making definitions and in proving results by induction on the length of a formula.  We will also recycle the use of lower-case Greek characters\index{Greek characters} to refer to formulas and of upper-case Greek characters to refer to sets of formulas.
+
+\begin{prob} \label{p:five4}
+Which of the following are formulas of one of the languages defined in Examples \ref{e:lannt} and \ref{e:lan}?  If so,  which of these language(s) are they formulas of;  if not,  why not?
+\begin{enumerate}
+\item $= 0 + v_7 \cdot 1 v_3$
+\item $(\lnot = v_1 v_1)$
+\item $(| v_2 0 \to \cdot 0 1)$
+\item $(\lnot \forall v_5 (= v_5 v_5))$
+\item $< +01 |v_1v_3$
+\item $(v_3 = v_3 \to \forall v_5 \, v_3 = v_5)$
+\item $\forall v_6 (= v_6 0 \to \forall v_9 (\lnot | v_9 v_6))$ 
+\item $\forall v_8 < +11 v_4$
+\end{enumerate}
+\end{prob}
+
+\begin{prob} \label{p:five5}
+Show that every formula of a first-order language has the same number of left parentheses as of right parentheses.
+\end{prob}
+
+\begin{prob} \label{p:five6}
+Choose one of the languages defined in Examples \ref{e:lannt} and \ref{e:lan} and determine the possible lengths of formulas of this language.
+\end{prob}
+
+\begin{prop} \label{p:five7}
+A countable first-order language $\mathcal{L}$ has countably many formulas.
+\end{prop}
+
+
+In practice,  devising a formal language intended to deal with a particular (kind of) structure isn't the end of the job:  one must also specify axioms\index{axiom} in the language that the structure(s) one wishes to study should satisfy.  Defining satisfaction is officially done in the next chapter,  but it is usually straightforward to unofficially figure out what a formula in the language is supposed to mean. 
+
+\begin{prob} \label{p:for}
+In each case,  write down a formula of the given language expressing the given informal statement.
+\begin{enumerate}
+\item ``Addition is associative'' in $\mathcal{L}_F$.
+\item ``There is an empty set'' in $\mathcal{L}_S$.
+\item ``Between any two distinct elements there is a third element'' in $\mathcal{L}_O$.
+\item ``$n^0 = 1$ for every $n$ different from $0$'' in $\mathcal{L}_N$.
+\item ``There is only one thing'' in $\mathcal{L}_=$.
+\end{enumerate}
+\end{prob}
+
+\begin{prob} \label{p:fole}
+Define first-order languages to deal with the following structures and,  in each case,  an appropriate set of axioms in your language:
+\begin{enumerate}
+\item Groups.
+\item Graphs.
+\item Vector spaces.
+\end{enumerate}
+\end{prob}
+
+We will need a few additional concepts and facts about formulas of first-order logic later on.  First,  what are the subformulas of a formula?  
+
+\begin{prob}  \label{p:five10} \index{subformula}
+Define the set of subformulas of a formula $\varphi$ of a first-order language $\mathcal{L}$.
+\end{prob}
+
+For example,  if $\varphi$ is
+\[
+(((\lnot \forall v_1\, (\lnot =v_1c_7) ) \to P^2_3 v_5 v_8) \to \forall v_8 ( = v_8 f^3_5 c_0 v_1 v_5 \to P^1_2 v_8 ))
+\] 
+in the language $\mathcal{L}_1$,  then the set of subformulas of $\varphi$,  $\mathcal{S}(\varphi)$,  ought to include 
+\begin{itemize}
+\item $=v_1c_7$, $P^2_3 v_5 v_8$, $= v_8 f^3_5 c_0 v_1 v_5$, $P^1_2 v_8$,  
+\item $(\lnot =v_1c_7)$, $(= v_8 f^3_5 c_0 v_1 v_5 \to P^1_2 v_8)$,  
+\item $\forall v_1\, (\lnot =v_1c_7)$, $\forall v_8 (= v_8 f^3_5 c_0 v_1 v_5 \to P^1_2 v_8)$,  
+\item $(\lnot \forall v_1\, (\lnot =v_1c_7))$,
+\item $(\lnot \forall v_1\, (\lnot =v_1c_7) ) \to P^2_3 v_5 v_8)$,  and 
+\item $(((\lnot \forall v_1\, (\lnot =v_1c_7) ) \to P^2_3 v_5 v_8) \to \forall v_8 (= v_8 f^3_5 c_0 v_1 v_5 \to P^1_2 v_8 ))$ itself.
+\end{itemize}
+
+Second,  we will need a concept that has no counterpart in propositional logic.
+
+\begin{defn} \label{d:frv} \index{variable free} \index{free variable} \index{variable bound} \index{bound variable}
+Suppose $x$ is a variable of a first-order language $\mathcal{L}$.  Then $x$ {\em occurs free\/} in a formula $\varphi$ of $\mathcal{L}$ is defined as follows:
+\begin{enumerate}
+\item If $\varphi$ is atomic,  then $x$ occurs free in $\varphi$ if and only if $x$ occurs in $\varphi$.
+\item If $\varphi$ is $(\lnot \alpha)$,  then $x$ occurs free in $\varphi$ if and only if $x$ occurs free in $\alpha$.
+\item If $\varphi$ is $(\beta \to \delta)$,  then $x$ occurs free in $\varphi$ if and only if $x$ occurs free in $\beta$ or in $\delta$.
+\item If $\varphi$ is $\forall v_k \, \psi$,  then $x$ occurs free in $\varphi$ if and only if $x$ is different from $v_k$ and $x$ occurs free in $\psi$.
+\end{enumerate}
+An occurrence of $x$ in $\varphi$ which is not free is said to be {\em bound\/}.  A formula $\sigma$ of $\mathcal{L}$ in which no variable occurs free is said to be a {\em sentence\/}.\index{sentence}
+\end{defn}
+
+Part 4 is the key:  it asserts that an occurrence of a variable $x$ is bound instead of free if it is in the ``scope'' of an occurrence of $\forall x$.  For example,  $v_7$ is free in $\forall v_5 \, = v_5 v_7$,  but $v_5$ is not.  Different occurences of a given variable in a formula may be free or bound,  depending on where they are;  {\em e.g.\/} $v_6$ occurs both free and bound in $\forall v_0 \, (= v_0 f^1_3 v_6 \to (\lnot \forall v_6 \, P^1_9 v_6))$.
+
+\begin{prob}  \label{p:five11} \index{scope of a quantifier} \index{quantifier,  scope of}
+Give a precise definition of the scope of a quantifier.
+\end{prob}
+
+Note the distinction between sentences and ordinary formulas introduced in the last part of Definition 5.4.  As we shall see,  sentences are often more tractable and useful theoretically than ordinary formulas.
+
+\begin{prob} \label{p:five12}
+Which of the formulas you gave in solving Problem~\ref{p:for} are sentences?
+\end{prob}
+
+Finally,  we will eventually need to consider a relationship between first-order languages.
+
+\begin{defn} \label{d:exlan} \index{extension of a language} \index{language extension of}
+A first-order language $\mathcal{L}'$ is an {\em extension\/} of a first-order language $\mathcal{L}$,  sometimes written as $\mathcal{L} \subseteq \mathcal{L}'$,  if every non-logical symbol of $\mathcal{L}$ is a non-logical symbol of the same kind of $\mathcal{L}'$.
+\end{defn}
+
+For example,  every first-order language is an extension of $\mathcal{L}_=$.
+
+\begin{prob} \label{p:five13}
+Which of the languages given in Example \ref{e:lan} are extensions of other languages given in Example \ref{e:lan}?
+\end{prob}
+
+\begin{prop} \label{p:exlan}
+Suppose $\mathcal{L}$ is a first-order language and $\mathcal{L}'$ is an extension of $\mathcal{L}$.   Then every formula $\varphi$ of $\mathcal{L}$ is a formula of $\mathcal{L}'$.
+\end{prop}
+
+\subsection*{Common Conventions}
+
+As with propositional logic,  we will often use abbreviations\index{abbreviations} and informal conventions to simplify the writing of formulas in first-order languages.  In particular,  we will use the same additional connectives we used in propositional logic,  plus an additional quantifier,  $\exists$ (``there exists''):  
+\begin{itemize}
+\item $(\alpha \land \beta)$ is short for $(\lnot (\alpha \to (\lnot \beta)))$\index{$\land$}.
+\item $(\alpha \lor \beta)$ is short for $( (\lnot \alpha) \to \beta)$\index{$\lor$}.
+\item $(\alpha \fromto \beta)$ is short for $((\alpha \to \beta) \land (\beta \to \alpha))$\index{$\fromto$}.
+\item $\exists v_k \varphi$ is short for $(\lnot \forall v_k (\lnot \varphi))$\index{$\exists$}.
+\end{itemize}
+($\forall$\index{$\forall$} is often called the universal quantifier \index{universal quantifier} \index{quantifier universal} and $\exists$ is often called the existential quantifier.) \index{existential quantifier} \index{quantifier existential} 
+
+Parentheses \index{parentheses conventions} \index{conventions,  parentheses} will often be omitted in formulas according to the same conventions we used in propositional logic,  with the modification that $\forall$ and $\exists$ take precedence over all the logical connectives:
+\begin{itemize}
+\item  We will usually drop the outermost parentheses in a formula,  writing $\alpha \to \beta$ instead of $(\alpha \to \beta)$ and $\lnot \alpha$ instead of $(\lnot \alpha)$.  
+\item We will let $\forall$ take precedence over $\lnot$,  and $\lnot$ take precedence over $\to$ when parentheses are missing,  and fit the informal abbreviations into this scheme by letting the order of precedence be $\forall$,  $\exists$,  $\lnot$,  $\land$,  $\lor$,  $\to$,  and $\fromto$.
+\item Finally,  we will group repetitions of $\to$,  $\lor$,  $\land$,  or $\fromto$  to the right when parentheses are missing,  so  $\alpha \to \beta \to \gamma$ is short for $(\alpha \to (\beta \to \gamma))$.  
+\end{itemize}
+For example,  $\exists v_k \lnot \alpha \to \forall v_n \beta$ is short for $((\lnot \forall v_k (\lnot (\lnot\alpha))) \to \forall v_n \beta)$.  On the other hand,  we will sometimes add parentheses and arrange things in unofficial ways to make terms and formulas easier to read.  In particular we will often write
+\begin{enumerate}
+\item $f(t_1,\dots,t_k)$ for $ft_1\dots t_k$ if $f$ is a $k$-place function symbol and $t_1$, \dots,  $t_k$ are terms,
+\item $s \circ t$ for $\circ st$ if $\circ$ is a $2$-place function symbol and $s$ and $t$ are terms,  
+\item $P(t_1, \dots, t_k)$ for $Pt_1 \dots t_k$ if $P$ is a $k$-place relation symbol and $t_1$, \dots,  $t_k$ are terms,   
+\item $s \bullet t$ for $\bullet st$ if $\bullet$ is a $2$-place relation symbol and $s$ and $t$ are terms,  and
+\item $s=t$ for $=st$ if $s$ and $t$ are terms,  and
+\item enclose terms in parentheses to group them.
+\end{enumerate}
+Thus,  we could write the formula $= +1 \cdot 0 v_6 \cdot 11$ of $\mathcal{L}_{NT}$ as $1 + (0 \cdot v_6) = 1 \cdot 1$.
+
+As was observed in Example \ref{e:lannt},  it is customary in devising a formal language to recycle the same symbols used informally for the given objects.  In situations where we want to talk about symbols without committing ourselves to a particular one,  such as when talking about first-order languages in general,  we will often use ``generic'' choices:
+\begin{itemize}
+\item $a$,  $b$,  $c$, \dots  for constant\index{constant} symbols;
+\item $x$, $y$, $z$, \dots for variable\index{variable} symbols;
+\item $f$,  $g$,  $h$, \dots for function\index{function} symbols;
+\item $P$, $Q$, $R$,  \dots for relation\index{relation} symbols;  and 
+\item $r$, $s$, $t$, \dots for generic terms\index{term}.
+\end{itemize}
+These can be thought of as variables in the metalanguage\footnote{The metalanguage is the language\index{language},   mathematical English in this case,  in which we talk {\em about\/} a language.  The theorems we prove about formal logic are,  strictly speaking,  metatheorems\index{metatheorem},  as opposed to the theorems\index{theorem} proved within a formal logical system.  For more of this kind of stuff,  read some philosophy\dots}\index{metalanguage} ranging over different kinds objects of first-order logic,  much as we're already using lower-case Greek characters as variables which range over formulas.  (In fact,  we have already used some of these conventions in this chapter\dots)
+
+
+\subsection*{Unique Readability}
+
+The slightly paranoid might ask whether Definitions \ref{d:sym},  \ref{d:ter} and \ref{d:for} actually ensure that the terms and formulas of a first-order language $\mathcal{L}$ are unambiguous,  {\em i.e.\/} cannot be read in more than one way.  As with $\mathcal{L}_P$,  to actually prove this one must assume that all the symbols of $\mathcal{L}$ are distinct and that no symbol is a subsequence of any other symbol.  It then follows that:
+
+\begin{thm} \label{t:urt} \index{unique readibility of terms}
+Any term of a first-order language $\mathcal{L}$ satisfies exactly one of conditions 1--3 in Definition \ref{d:ter}.
+\end{thm}
+
+\begin{thm}[Unique Readability Theorem] \label{t:urf} \index{unique readability of formulas}  \index{formula unique readability} \index{Unique Readability Theorem}
+Any formula of a first-order language satisfies exactly one of conditions 1--5 in Definition \ref{d:for}.
+\end{thm}
+
+
+%
+% Chapter 6 of "A Problem Course in Mathematical Logic"
+%
+
+\chapter{Structures and Models} \label{ch:six}
+
+Defining truth and implication in first-order logic is a lot harder than it was in propositional logic.  First-order languages are intended to deal with mathematical objects like groups or linear orders,  so it makes little sense to speak of the truth of a formula without specifying a context.  For example,  one can write down a formula expressing the commutative law in a language for group theory,  $\forall x\, \forall y\, x \cdot y = y \cdot x$,  but whether it is true or not depends on which group we're dealing with.  It follows that we need to make precise which mathematical objects or structures a given first-order language can be used to discuss and how,  given a suitable structure,  formulas in the language are to be interpreted.  Such a structure for a given language should supply most of the ingredients needed to interpret formulas of the language.  
+Throughout this chapter,  let $\mathcal{L}$ be an arbitrary fixed countable first-order language.  All formulas will be assumed to be formulas of $\mathcal{L}$ unless stated otherwise.
+
+\begin{defn} \label{d:str} \index{structure}
+A {\em structure\/} $\mathfrak{M}$ for $\mathcal{L}$ consists of the following:
+\begin{enumerate}
+\item A non-empty set $M$,  often written as $|\mathfrak{M}|$,  called the {\em universe\/} of $\mathfrak{M}$.\index{universe}
+\item For each constant symbol $c$ of $\mathcal{L}$,  an element $c^{\mathfrak{M}}$ of $M$.\index{constant}
+\item For each $k$-place function symbol $f$ of $\mathcal{L}$,  a function $f^{\mathfrak{M}} : M^k \to M$,  {\em i.e.\/} a $k$-place function on $M$.\index{function}
+\item For each $k$-place relation symbol $P$ of $\mathcal{L}$,  a relation $P^{\mathfrak{M}} \subseteq M^k$,  {\em i.e.\/} a $k$-place relation on $M$.\index{relation}
+\end{enumerate}
+\end{defn}
+
+That is,  a structure supplies an underlying set of elements plus interpretations for the various non-logical symbols of the language:  constant symbols are interpreted by particular elements of the underlying set,  function symbols by functions on this set,  and relation symbols by relations among elements of this set.
+
+It is customary to use upper-case ``gothic'' characters\index{gothic characters} such as $\mathfrak{M}$\index{$\mathfrak{M}$} and $\mathfrak{N}$\index{$\mathfrak{N}$} for structures.  
+
+For example,  consider $\mathfrak{Q} = (\mathbb{Q}, <)$,  where $<$ is the usual ``less than'' relation on the rationals.  This is a structure for $\mathcal{L}_O$,  the language for linear orders defined in Example~\ref{e:lan};  it supplies a $2$-place relation to interpret the language's $2$-place relation symbol.  $\mathfrak{Q}$ is {\em not\/} the only possible structure for $\mathcal{L}_O$:  $(\mathbb{R}, < )$,  $(\{0\}, \emptyset)$,  and $(\mathbb{N}, \mathbb{N}^2)$ are three others among infinitely many more.  (Note that in these cases the relation symbol $<$ is interpreted by relations on the universe which are not linear orders.  One can ensure that a structure satisfy various conditions beyond what Definition~\ref{d:str} guarantees by requiring appropriate formulas to be true when interpreted in the structure.)  On the other hand,  $(\mathbb{R})$ is not a structure for $\mathcal{L}_O$ because it lacks a binary relation to interpret the symbol $<$ by,  while $(\mathbb{N}, 0, 1, +, \cdot, |, <)$ is not a structure for $\mathcal{L}_O$ because it has two binary relations where $\mathcal{L}_O$ has a symbol only for one,  plus constants and functions for which $\mathcal{L}_O$ lacks symbols.   
+
+\begin{prob} \label{p:six1}
+The first-order languages referred to below were all defined in Example~\ref{e:lan}.
+\begin{enumerate}
+\item Is $(\emptyset)$ a structure for $\mathcal{L}_=$?
+\item Determine whether $\mathfrak Q = (\mathbb{Q}, <)$ is a structure for each of $\mathcal{L}_=$,  $\mathcal{L}_F$,  and $\mathcal{L}_S$.
+\item Give three different structures for $\mathcal{L}_F$ which are not fields.
+\end{enumerate}
+\end{prob}
+
+To determine what it means for a given formula to be true in a structure for the corresponding language,  we will also need to specify how to interpret the variables when they occur free.  (Bound variables have the associated quantifier to tell us what to do.)  
+
+\begin{defn} \label{d:ass} \index{assignment}
+Let $V = \{\, v_0, v_1, v_2, \dots \,\}$ be the set of all variable\index{variable} symbols of $\mathcal{L}$ and suppose $\mathfrak{M}$ is a structure for $\mathcal{L}$.  A function $s : V \to |\mathfrak{M}|$ is said to be an {\em assignment\/} for $\mathfrak{M}$.
+\end{defn}
+
+Note that these are {\em not\/} truth assignments like those for $\mathcal{L}_P$.  An assignment just interprets each variable in the language by an element of the universe of the structure.  Also,  as long as the universe of the structure has more than one element,  any variable can be interpreted in more than one way.  Hence there are usually many different possible assignments for a given structure.
+
+\begin{exmp} \label{e:as}
+Consider the structure $\mathfrak{R} = (\mathbb{R},0,1,+,\cdot)$ for $\mathcal{L}_F$.  Each of the following functions $V \to \mathbb{R}$ is an assignment for $\mathfrak{R}$:
+\begin{enumerate}
+\item $p(v_n) = \pi$ for each $n$,
+\item $r(v_n) = e^n$ for each $n$,  and
+\item $s(v_n) = n + 1$ for each $n$.
+\end{enumerate}
+In fact,  {\em every\/} function $V \to \mathbb{R}$ is an assignment for $\mathfrak{R}$.
+\end{exmp}
+
+In order to use assignments to determine whether formulas are true in a structure,  we need to know how to use an assignment to interpret each term of the language as an element of the universe.
+
+\begin{defn} \label{d:exas} \index{assignment extended}
+Suppose $\mathfrak{M}$ is a structure for $\mathcal{L}$ and $s \colon V \to |\mathfrak{M}|$ is an assignment for $\mathfrak{M}$.  Let $T$ be the set of all terms\index{term} of $\mathcal{L}$.  Then the {\em extended assignment\/} $\mathbf{s} \colon T \to |\mathfrak{M}|$ is defined inductively as follows:
+\begin{enumerate}
+\item For each variable $x$,  $\mathbf{s}(x) = s(x)$.\index{variable}
+\item For each constant symbol $c$,  $\mathbf{s}(c) = c^{\mathfrak{M}}$.\index{constant}
+\item For every $k$-place function symbol $f$ and terms $t_1$, \dots, $t_k$,  
+\[ \mathbf{s}(f t_1 \dots t_k) = f^{\mathfrak{M}} (\mathbf{s}(t_1), \dots, \mathbf{s}(t_k) ). \]\index{function}
+\end{enumerate}
+\end{defn}
+
+\begin{exmp} \label{e:exas}
+Let $\mathfrak{R}$ be the structure for $\mathcal{L}_F$ given in Example \ref{e:as},  and let $\mathbf{p}$,  $\mathbf{r}$,  and $\mathbf{s}$ be the extended assignments corresponding to the assignments $p$,  $r$,  and $s$ defined in Example \ref{e:as}.  Consider the term $+ \cdot v_6 v_0 + 0 v_3$ of $\mathcal{L}_F$.  Then:
+\begin{enumerate}
+\item $\mathbf{p}(+ \cdot v_6 v_0 + 0 v_3) = \pi^2 + \pi$,
+\item $\mathbf{r}(+ \cdot v_6 v_0 + 0 v_3) = e^6 + e^3$,  and
+\item $\mathbf{s}(+ \cdot v_6 v_0 + 0 v_3) = 11$.
+\end{enumerate}
+Here's why for the last one:  since $s(v_6) = 7$,  $s(v_0) = 1$,  $s(v_3) = 4$,  and $\mathbf{s}(0) = 0$ (by part 2 of Definition \ref{d:exas}),  it follows from part 3 of Definition \ref{d:exas} that $\mathbf{s}(+ \cdot v_6 v_0 + 0 v_3) = (7 \cdot 1) + (0 + 4) = 7 + 4 = 11$.
+\end{exmp}
+
+\begin{prob} \label{pb:exas}
+$\mathfrak{N} = (\mathbb{N}, 0, S, +, \cdot, E)$ is a structure for $\mathcal{L}_N$.  Let $s \colon V \to \mathbb{N}$ be the assignment defined by $s(v_k) = k + 1$.  What are $\mathbf{s}( E + v_{19} v_1 \cdot 0 v_{45})$ and $\mathbf{s}(SSS + E 0 v_6 v_7 )$?
+\end{prob}
+
+\begin{prop} \label{p:eau}
+$\mathbf s$ is unique,  {\em i.e.\/} given an assignment $s$,  no other function $T \to |\mathfrak{M}|$ satisfies conditions 1--3 in Definition~\ref{d:exas}.
+\end{prop}
+
+With Definitions \ref{d:ass} and \ref{d:exas} in hand,  we can take our first cut at defining what it means for a first-order formula to be true. 
+
+\begin{defn} \label{d:sat} \index{assignment}
+Suppose $\mathfrak{M}$ is a structure for $\mathcal{L}$,  $s$ is an assignment for $\mathfrak{M}$,  and $\varphi$ is a formula of $\mathcal{L}$.  Then $\mathfrak{M} \models \varphi [s]$ is defined as follows:\index{$\models$}
+\begin{enumerate}
+\item If $\varphi$ is $t_1 = t_2$ for some terms $t_1$ and $t_2$,  then $\mathfrak{M} \models \varphi [s]$ if and only if $\mathbf{s}(t_1) = \mathbf{s}(t_2)$.
+\item If $\varphi$ is $P t_1 \dots t_k$ for some $k$-place relation symbol $P$ and terms $t_1$,  \dots,  $t_k$,  then $\mathfrak{M} \models \varphi [s]$ if and only if $(\mathbf{s}(t_1), \dots, \mathbf{s}(t_k)) \in P^{\mathfrak{M}}$,  {\em i.e.\/}  $P^{\mathfrak{M}}$ is true of $(\mathbf{s}(t_1), \dots, \mathbf{s}(t_k))$.
+\item If $\varphi$ is $(\lnot \psi)$ for some formula $\psi$,  then $\mathfrak{M} \models \varphi [s]$ if and only if it is not the case that $\mathfrak{M} \models \psi [s]$.
+\item If $\varphi$ is $(\alpha \to \beta)$,  then $\mathfrak{M} \models \varphi [s]$ if and only if $\mathfrak{M} \models \beta [s]$ whenever $\mathfrak{M} \models \alpha [s]$,  {\em i.e.\/} unless $\mathfrak{M} \models \alpha [s]$ but not $\mathfrak{M} \models \beta [s]$.
+\item If $\varphi$ is $\forall x \, \delta$ for some variable $x$,  then $\mathfrak{M} \models \varphi [s]$ if and only if for all $m \in |\mathfrak{M}|$,  $\mathfrak{M} \models \delta [s(x|m)]$,  where $s(x|m)$ is the assignment given by
+  \begin{displaymath}
+    s(x|m)(v_k) = \begin{cases}
+      s(v_k) & \text{if $v_k$ is different from $x$} \\
+      m & \text{if $v_k$ is $x$.}
+    \end{cases}
+  \end{displaymath}
+\end{enumerate}
+If $\mathfrak{M} \models \varphi [s]$,  we shall say that $\mathfrak{M}$ {\em satisfies $\varphi$ on assignment\/}\index{satisfies} $s$ or that $\varphi$ {\em is true in $\mathfrak{M}$ on assignment\/}\index{truth in a structure} $s$.  We will often write $\mathfrak{M} \nmodels \varphi [s]$ if it is not the case that $\mathfrak{M} \models \varphi [s]$.\index{$\nmodels$}  Also,  if $\Gamma$ is a set of formulas of $\mathcal{L}$,  we shall take $\mathfrak{M} \models \Gamma [s]$ to mean that $\mathfrak{M} \models \gamma [s]$ for every formula $\gamma$ in $\Gamma$ and say that $\mathfrak{M}$ {\em satisfies $\Gamma$ on assignment\/} $s$.  Similarly,  we shall take $\mathfrak{M} \nmodels \Gamma [s]$ to mean that $\mathfrak{M} \nmodels \gamma [s]$ for {\em some\/} formula $\gamma$ in $\Gamma$.
+\end{defn}
+
+Clauses 1 and 2 are pretty straightforward and clauses 3 and 4 are essentially identical to the corresponding parts of Definition~\ref{d:tras}.  The key clause is 5,  which says that $\forall$ should be interpreted as ``for all elements of the universe''.  
+
+\begin{exmp}
+Let $\mathfrak{R}$ be the structure for $\mathcal{L}_F$ and $s$ the assignment for $\mathfrak{R}$ given in Example \ref{e:as},  and consider the formula $\forall v_1\, (= v_3 \cdot 0 v_1 \to = v_3 0)$ of $\mathcal{L}_F$.  We can verify that $\mathfrak{R} \models \forall v_1\, (= v_3 \cdot 0 v_1 \to = v_3 0) \, [s]$ as follows:
+\[
+\begin{aligned}
+\mbox{} &\mathfrak{R} \models \forall v_1\, (= v_3 \cdot 0 v_1 \to = v_3 0) \, [s] \\
+\iff &\text{for all $a \in |\mathfrak{R}|$,\ } \mathfrak{R} \models (= v_3 \cdot 0 v_1 \to = v_3 0) \, [s(v_1|a)]  \\
+\iff &\text{for all $a \in |\mathfrak{R}|$, if $\mathfrak{R} \models  = v_3 \cdot 0 v_1 \, [s(v_1|a)]$,} \\
+ & \;\;\; \text{then $\mathfrak{R} \models  = v_3 0 \, [s(v_1|a)]$} \\
+\iff &\text{for all $a \in |\mathfrak{R}|$, if $\mathbf{s}(v_1|a)(v_3) = \mathbf{s}(v_1|a)(\cdot 0 v_1)$,} \\
+ & \;\;\; \text{then $\mathbf{s}(v_1|a)(v_3) = \mathbf{s}(v_1|a)(0)$} \\
+\iff &\text{for all $a \in |\mathfrak{R}|$,  if $\mathbf{s}(v_3) = \mathbf{s}(v_1|a)(0) \cdot \mathbf{s}(v_1|a)(v_1)$,  then $\mathbf{s}(v_3) = 0$} \\
+\iff &\text{for all $a \in |\mathfrak{R}|$,  if $s(v_3) = 0 \cdot a$,  then $s(v_3) = 0$} \\
+\iff &\text{for all $a \in |\mathfrak{R}|$,  if $4 = 0 \cdot a$,  then $4 = 0$} \\
+\iff &\text{for all $a \in |\mathfrak{R}|$,  if $4 = 0$,  then $4 = 0$} \\
+\end{aligned}
+\]
+\dots which last is true whether or not $4 = 0$ is true or false.
+\end{exmp}
+
+\begin{prob} \label{p:six4}
+Let $\mathfrak{N}$ be the structure for $\mathcal{L}_N$ in Problem \ref{pb:exas}.  Let $p : V \to \mathbb{N}$ be defined by $p(v_{2k}) = k$ and $p(v_{2k+1}) = k$.  Verify that
+\begin{enumerate}
+\item $\mathfrak{N} \models \forall w \, (\lnot Sw = 0) \, [p]$ and 
+\item $\mathfrak{N} \nmodels \forall x \exists y \, x + y = 0 \, [p]$.
+\end{enumerate}
+\end{prob}
+
+\begin{prop} \label{p:six5}
+Suppose $\mathfrak{M}$ is a structure for $\mathcal{L}$,  $s$ is an assignment for $\mathfrak{M}$,  $x$ is a variable,  and $\varphi$ is a formula of a first-order language $\mathcal{L}$.  Then $\mathfrak{M} \models \exists x\, \varphi [s]$ if and only if $\mathfrak{M} \models \varphi [s(x|m)]$ for some $m \in |\mathfrak{M}|$.
+\end{prop}
+
+Working with particular assignments is difficult but,  while sometimes unavoidable,  not always necessary.
+
+\begin{defn} \label{d:mod} \index{model} \index{true in a structure} \index{$\models$}
+Suppose $\mathfrak{M}$ is a structure for $\mathcal{L}$,  and $\varphi$ a formula of $\mathcal{L}$.  Then $\mathfrak{M} \models \varphi$ if and only if $\mathfrak{M} \models \varphi [s]$ for every assignment $s : V \to |\mathfrak{M}|$ for $\mathfrak{M}$.  $\mathfrak{M}$ is a {\em model\/} of $\varphi$ or that $\varphi$ is {\em true\/} in $\mathfrak{M}$ if $\mathfrak{M} \models \varphi$.  We will often write $\mathfrak{M} \nmodels \psi$ if it is not the case that $\mathfrak{M} \models \psi$. 
+
+Similarly,  if $\Gamma$ is a set of formulas,  we will write $\mathfrak{M} \models \Gamma$ if $\mathfrak{M} \models \gamma$ for every formula $\gamma \in \Gamma$,  and say that $\mathfrak{M}$ is a {\em model\/}\index{model} of $\Gamma$ or that $\mathfrak{M}$ {\em satisfies\/}\index{satisfies} $\Gamma$.  A formula or set of formulas is {\em satisfiable\/}\index{satisfiable} if there is some structure $\mathfrak{M}$ which satisfies it.  We will often write $\mathfrak{M} \nmodels \Gamma$ if it is not the case that $\mathfrak{M} \models \Gamma$.\index{$\nmodels$}
+\end{defn}
+
+\begin{note}
+$\mathfrak{M} \nmodels \varphi$ does {\em not\/} mean that for every assignment $s : V \to |\mathfrak{M}|$,  it is not the case that $\mathfrak{M} \models \varphi [s]$.  It only means that that there is {\em some\/} assignment $r : V \to |\mathfrak{M}|$ for which $\mathfrak{M} \models \varphi [r]$ is not true.
+\end{note}
+
+\begin{prob} \label{p:ord}
+$\mathfrak{Q} = (\mathbb{Q},<)$ is a structure for  $\mathcal{L}_O$.  For each of the following formulas $\varphi$ of $\mathcal{L}_O$,  determine whether or not $\mathfrak{Q} \models \varphi$.
+\begin{enumerate}
+\item $\forall v_0\, \exists v_2\, v_0 < v_2$
+\item $\exists v_1\, \forall v_3\, (v_1 < v_3 \to v_1 = v_3)$
+\item $\forall v_4\, \forall v_5\, \forall v_6 (v_4 < v_5 \to (v_5 < v_6 \to v_4 < v_6))$
+\end{enumerate}
+\end{prob}
+
+The following facts are counterparts of sorts for Proposition~\ref{p:tav}.  Their point is that what a given assignment does with a given term or formula depends only on the assignment's values on the (free) variables of the term or formula.
+
+\begin{lem}  \label{l:six7}
+Suppose $\mathfrak{M}$ is a structure for $\mathcal{L}$,  $t$ is a term of $\mathcal{L}$,  and $r$ and $s$ are assignments for $\mathfrak{M}$ such that $r(x) = s(x)$ for every variable $x$ which occurs in $t$.  Then $\mathbf{r}(t) = \mathbf{s}(t)$.
+\end{lem}
+
+\begin{prop} \label{p:six8}
+Suppose $\mathfrak{M}$ is a structure for $\mathcal{L}$,  $\varphi$ is a formula of $\mathcal{L}$,  and $r$ and $s$ are assignments for $\mathfrak{M}$ such that $r(x) = s(x)$ for every variable $x$ which occurs free in $\varphi$.  Then $\mathfrak{M} \models \varphi [r]$ if and only if $\mathfrak{M} \models \varphi [s]$.
+\end{prop}
+
+\begin{cor} \label{c:six9}
+Suppose $\mathfrak{M}$ is a structure for $\mathcal{L}$ and $\sigma$ is a sentence of $\mathcal{L}$.  Then $\mathfrak{M} \models \sigma$ if and only if there is some assignment $s : V \to |\mathfrak{M}|$ for $\mathfrak{M}$ such that $\mathfrak{M} \models \sigma [s]$.
+\end{cor}
+
+Thus sentences are true or false in a structure independently of any particular assignment.  This does not necessarily make life easier when trying to verify whether a sentence is true in a structure -- try doing Problem~\ref{p:ord} again with the above results in hand -- but it does let us simplify things on occasion when proving things about sentences rather than formulas.
+
+We recycle a sense in which we used $\models$\index{$\models$} in propositional logic.
+
+\begin{defn} 
+Suppose $\Gamma$ is a set of formulas of $\mathcal{L}$ and $\psi$ is a formula of $\mathcal{L}$.  Then $\Gamma$ {\em implies\/}\index{implies} $\psi$,  written as $\Gamma \models \psi$,  if $\mathfrak{M} \models \psi$ whenever $\mathfrak{M} \models \Gamma$ for every structure $\mathfrak{M}$ for $\mathcal{L}$.
+
+Similarly,  if $\Gamma$ and $\Delta$ are sets of formulas of $\mathcal{L}$,  then $\Gamma$ {\em implies\/} $\Delta$,  written as $\Gamma \models \Delta$,  if $\mathfrak{M} \models \Delta$ whenever $\mathfrak{M} \models \Gamma$ for every structure $\mathfrak{M}$ for $\mathcal{L}$.  
+
+We will usually write $\models \dots$ for $\emptyset \models \dots$.
+\end{defn}
+
+\begin{prop} \label{p:inf}
+Suppose $\alpha$ and $\beta$ are formulas of some first-order language.  Then $\{\, (\alpha \to \beta),\,  \alpha\, \} \models \beta$.
+\end{prop}
+
+\begin{prop} \label{p:six12}
+Suppose $\Sigma$ is a set of formulas and $\psi$ and $\rho$ are formulas of some first-order language.  Then $\Sigma \cup \{\psi\} \models \rho$ if and only if $\Sigma \models (\psi \to \rho)$.
+\end{prop}
+
+\begin{defn}
+A formula $\psi$ of $\mathcal{L}$ is a {\em tautology\/}\index{tautology} if it is true in every structure,  {\em i.e.\/} if $\models \psi$.  $\psi$ is a {\em contradiction\/}\index{contradiction} if $\lnot \psi$ is a tautology,  {\em i.e.\/} if $\models \lnot \psi$.
+\end{defn}
+
+For some trivial examples,  let $\varphi$ be a formula of $\mathcal{L}$ and $\mathfrak{M}$ a structure for $\mathcal{L}$.  Then $\mathfrak{M} \models \{ \varphi \}$ if and only if $\mathfrak{M} \models \varphi$,  so it must be the case that $\{ \varphi \} \models \varphi$.  It is also easy to check that $\varphi \to \varphi$ is a tautology and $\lnot (\varphi \to \varphi)$ is a contradiction.
+
+\begin{prob} \label{p:taut}
+Show that $\forall y\, y = y$ is a tautology and that $\exists y\, \lnot y = y$ is a contradiction.
+\end{prob}
+
+\begin{prob} \label{p:cont}
+Suppose $\varphi$ is a contradiction.  Show that $\mathfrak{M} \models \varphi [s]$ is false for every structure $\mathfrak{M}$ and assignment $s : V \to |\mathfrak{M}|$ for $\mathfrak{M}$.
+\end{prob}
+
+\begin{prob} \label{p:six13}
+Show that a set of formulas $\Sigma$ is satisfiable if and only if there is no contradiction $\chi$ such that $\Sigma \models \chi$.
+\end{prob}
+
+The following fact is a counterpart of Proposition \ref{p:tif}.
+
+\begin{prop} \label{p:mif}
+Suppose $\mathfrak{M}$ is a structure for $\mathcal{L}$ and $\alpha$ and $\beta$ are sentences of $\mathcal{L}$.  Then:
+\begin{enumerate}
+\item $\mathfrak{M} \models \lnot\alpha$ if and only if $\mathfrak{M} \nmodels \alpha$.
+\item $\mathfrak{M} \models \alpha \to \beta$ if and only if $\mathfrak{M} \models \beta$ whenever $\mathfrak{M} \models \alpha$.
+\item $\mathfrak{M} \models \alpha \lor \beta$ if and only if $\mathfrak{M} \models \alpha$ or $\mathfrak{M} \models \beta$.
+\item $\mathfrak{M} \models \alpha \land \beta$ if and only if $\mathfrak{M} \models \alpha$ and $\mathfrak{M} \models \beta$.
+\item $\mathfrak{M} \models \alpha \fromto \beta$ if and only if $\mathfrak{M} \models \alpha$ exactly when $\mathfrak{M} \models \beta$.
+\item $\mathfrak{M} \models \forall x\, \alpha$ if and only if $\mathfrak{M} \models \alpha$.
+\item $\mathfrak{M} \models \exists x\, \alpha$ if and only if there is some $m \in |\mathfrak{M}|$ so that $\mathfrak{M} \models \alpha\, [s(x|m)]$ for every assignment $s$ for $\mathfrak{M}$.
+\end{enumerate}
+\end{prop}
+
+\begin{prob}  \label{p:mif2}
+How much of Proposition \ref{p:mif} must remain true if $\alpha$ and $\beta$ are not sentences?
+\end{prob}
+
+Recall that by Proposition \ref{p:exlan} a formula of a first-order language is also a formula of any extension of the language.  The following relationship between extension languages and satisfiability will be needed later on.
+
+\begin{prop} \label{p:exsat}
+Suppose $\mathcal{L}$ is a first-order language,  $\mathcal{L}'$ is an extension of $\mathcal{L}$,  and $\Gamma$ is a set of formulas of $\mathcal{L}$.  Then $\Gamma$ is satisfiable in a structure for $\mathcal{L}$ if and only if $\Gamma$ is satisfiable in a structure for $\mathcal{L}'$.
+\end{prop}
+
+One last bit of terminology\dots
+
+\begin{defn} \label{d:ax} \index{axiom} \index{theory} \index{$\text{Th}$}
+If $\mathfrak{M}$ is a structure for $\mathcal{L}$,  then the {\em theory\/} of $\mathfrak{M}$ is just the set of all sentences of $\mathcal{L}$ true in $\mathfrak{M}$,  {\em i.e.\/}
+\[
+\text{Th}(\mathfrak{M}) = \{\, \tau \mid \tau \text{\ is a sentence and\ } \mathfrak{M} \models \tau \,\}.
+\]
+If $\Delta$ is a set of sentences and $\mathcal{S}$ is a collection of structures,  then $\Delta$ is a set of (non-logical) {\it axioms\/} for $\mathcal{S}$ if for every structure $\mathfrak{M}$,  $\mathfrak{M} \in \mathcal{S}$ if and only if $\mathfrak{M} \models \Delta$.
+\end{defn}
+
+\begin{exmp}
+Consider the sentence $\exists x\, \exists y\, ( (\lnot x = y) \land \forall z\, (z = x \lor z = y))$ of $\mathcal{L}_=$.  Every structure of $\mathcal{L}_=$ satisfying this sentence must have exactly two elements in its universe,  so $\{\, \exists x\, \exists y\, ( (\lnot x = y) \land \forall z\, (z = x \lor z = y)) \,\}$ is a set of non-logical axioms for the collection of sets of cardinality $2$:
+\[
+\{\, \mathfrak{M} \mid \mathfrak{M} \text{\ is a structure for\ } \mathcal{L}_= \text{\ with exactly $2$ elements} \,\} \, . 
+\]
+\end{exmp}
+
+\begin{prob} \label{p:six16}
+In each case,  find a suitable language and a set of axioms in it for the given collection of structures.
+\begin{enumerate}
+\item Sets of size 3.
+\item Bipartite graphs.
+\item Commutative groups.
+\item Fields of characteristic 5.
+\end{enumerate}
+\end{prob}
+
+
+
+%
+% Chapter 7 of "A Problem Course in Mathematical Logic"
+%
+
+\chapter{Deductions} \label{ch:seven}
+
+Deductions in first-order logic are not unlike deductions in propositional logic.  Of course,  some changes are necessary to handle the various additional features of propositional logic,  especially quantifiers.  In particular,  one of the new axioms requires a tricky preliminary definition.  Roughly,  the problem is that we need to know when we can replace occurrences of a variable in a formula by a term without letting any variable in the term get captured by a quantifier.
+
+Throughout this chapter,  let $\mathcal{L}$ be a fixed arbitrary first-order language.  Unless stated otherwise,  all formulas will be assumed to be formulas of $\mathcal{L}$.
+
+
+\begin{defn} \label{d:subs} \index{substitutable}
+Suppose $x$ is a variable,  $t$ is a term,  and $\varphi$ is a formula.  Then {\em $t$ is substitutable for $x$ in $\varphi$\/} is defined as follows:
+\begin{enumerate}
+\item If $\varphi$ is atomic,  then $t$ is substitutable for $x$ in $\varphi$. 
+\item If $\varphi$ is $(\lnot \psi)$,  then $t$ is substitutable for $x$ in $\varphi$ if and only if $t$ is substitutable for $x$ in $\psi$.
+\item If $\varphi$ is $(\alpha \to \beta)$,  then $t$ is substitutable for $x$ in $\varphi$ if and only if $t$ is substitutable for $x$ in $\alpha$ and $t$ is substitutable for $x$ in $\beta$.
+\item If $\varphi$ is $\forall y \, \delta$,  then $t$ is substitutable for $x$ in $\varphi$ if and only if either 
+ \begin{enumerate}
+  \item $x$ does not occur free in $\varphi$,  or 
+  \item if $y$ does not occur in $t$ and $t$ is substitutable for $x$ in $\delta$.
+  \end{enumerate}
+\end{enumerate}
+\end{defn}
+
+For example,  $x$ is always substitutable for itself in any formula $\varphi$ and $\varphi^x_x$ is just $\varphi$ (see Problem~\ref{p:subs}).  On the other hand,  $y$ is not substitutable for $x$ in $\forall y\, x = y$ because if $x$ were to be replaced by $y$,  the new instance of $y$ would be ``captured'' by the quantifier $\forall y$.  This makes a difference to the truth of the formula.  The truth of $\forall y\, x = y$ depends on the structure in which it is interpreted --- it's true if the universe has only one element and false otherwise --- but $\forall y\, y = y$ is a tautology by Problem~\ref{p:taut} so it is true in any structure whatsoever.  This sort of difficulty makes it necessary to be careful when substituting for variables.
+
+\begin{defn} \label{d:subst} \index{substitution}
+Suppose $x$ is a variable,  $t$ is a term,  and $\varphi$ is a formula.  If $t$ is substitutable for $x$ in $\varphi$,  then $\varphi^x_t$ ({\em i.e.\/} $\varphi$ with $t$ substituted for $x$) is defined as follows:\index{$\varphi^x_t$}
+\begin{enumerate}
+\item If $\varphi$ is atomic,  then $\varphi^x_t$ is the formula obtained by replacing each occurrence of $x$ in $\varphi$ by $t$. 
+\item If $\varphi$ is $(\lnot \psi)$,  then $\varphi^x_t$ is the formula $(\lnot \psi^x_t)$.
+\item If $\varphi$ is $(\alpha \to \beta)$,  then $\varphi^x_t$ is the formula $(\alpha^x_t \to \beta^x_t)$.
+\item If $\varphi$ is $\forall y \, \delta$,  then $\varphi^x_t$ is the formula 
+ \begin{enumerate}
+  \item $\forall y \, \delta$ if $x$ is $y$,  and 
+  \item $\forall y \, \delta^x_t$ if $x$ isn't $y$.
+ \end{enumerate}
+\end{enumerate}
+\end{defn}
+
+
+\begin{prob} \label{p:subs}
+\begin{enumerate}
+\item Is $x$ substitutable for $z$ in $\psi$ if $\psi$ is $z = x \to \forall z\, z = x$?  If so,  what is $\psi^z_x$?
+\item Show that if $t$ is any term and $\sigma$ is a sentence,  then $t$ is substitutable in $\sigma$ for any variable $x$.  What is $\sigma^x_t$?
+\item Show that if $t$ is a term in which no variable occurs that occurs in the formula $\varphi$,  then $t$ is substitutable in $\varphi$ for any variable $x$.
+\item Show that $x$ is substitutable for $x$ in $\varphi$ for any variable $x$ and any formula $\varphi$,  and that $\varphi^x_x$ is just $\varphi$.
+\end{enumerate}
+\end{prob}
+
+Along with the notion of substitutability,  we need an additional notion in order to define the logical axioms of $\mathcal{L}$.  
+
+\begin{defn} \index{generalization}
+If $\varphi$ is any formula and $x_1$, \dots, $x_n$ are any  variables,  then $\forall x_1 \dots \forall x_n \, \varphi$ is said to be a {\em generalization\/} of $\varphi$.
+\end{defn}
+
+For example,  $\forall y\, \forall x\, (x = y \to fx = fy)$ and  $\forall z\, (x = y \to fx = fy)$ are (different) generalizations of $x = y \to fx = fy$,  but $\forall x\, \exists y\,  (x = y \to fx = fy)$ is not.  Note that the variables being quantified don't have to occur in the formula being generalized.
+
+\begin{lem} \label{l:gen}
+Any generalization of a tautology is a tautology.
+\end{lem}
+
+\begin{defn} \label{d:axs} \index{axiom schema}
+Every first-order language $\mathcal{L}$ has eight {\em logical axiom schema\/}:
+\begin{description}
+\item[A1] $(\alpha \to (\beta \to \alpha))$ \index{A1}
+\item[A2] $((\alpha \to (\beta \to \gamma)) \to ((\alpha \to \beta) \to (\alpha \to \gamma)))$ \index{A2}
+\item[A3] $(((\lnot \beta)\to (\lnot \alpha)) \to (((\lnot \beta) \to \alpha) \to \beta))$ \index{A3}
+\item[A4] $(\forall x \, \alpha \to \alpha^x_t)$,  if $t$ is substitutable for $x$ in $\alpha$. \index{A4}
+\item[A5] $(\forall x \, (\alpha \to \beta) \to (\forall x \, \alpha \to \forall x \, \beta))$ \index{A5}
+\item[A6] $(\alpha \to \forall x \, \alpha)$,  if $x$ does not occur free in $\alpha$. \index{A6}
+\item[A7] $x = x$ \index{A7}
+\item[A8] $(x = y \to (\alpha \to \beta))$,  if $\alpha$ is atomic and $\beta$ is obtained from $\alpha$ by replacing some occurrences (possibly all or none) of $x$ in $\alpha$ by $y$. \index{A8}
+\end{description}
+Plugging in any particular formulas of $\mathcal{L}$ for $\alpha$,  $\beta$,  and $\gamma$,  and any particular variables for $x$ and $y$,  in any of A1--A8 gives a {\em logical axiom\/}\index{logical axiom}\index{axiom logical} of $\mathcal{L}$.  In addition,  any generalization of a logical axiom of $\mathcal{L}$ is also a logical axiom of $\mathcal{L}$.
+\end{defn}
+
+The reason for calling the instances of A1--A8 the logical axioms,  instead of just axioms,  is to avoid conflict with Definition~\ref{d:ax}.
+
+\begin{prob} \label{p:seven3}
+Determine whether or not each of the following formulas is a logical axiom.
+\begin{enumerate}
+\item $\forall x\, \forall z\, (x = y \to (x = c \to x = y))$
+\item $x = y \to (y = z \to z = x)$
+\item $\forall z\, (x = y \to (x = c \to y = c))$
+\item $\forall w\, \exists x\, (Pwx \to Pww) \to \exists x\, (Pxx \to Pxx)$
+\item $\forall x\, (\forall x\, c = fxc \to \forall x\, \forall x\, c = fxc)$
+\item $(\exists x\, Px \to \exists y\, \forall z\, Rzfy) \to ( (\exists x\, Px \to \forall y\, \lnot \forall z\, Rzfy) \to \forall x\, \lnot Px)$
+\end{enumerate}
+\end{prob}
+
+\begin{prop} \label{p:seven4}
+Every logical axiom is a tautology.
+\end{prop}
+
+Note that we have recycled our axiom schemas A1---A3 from propositional logic.  We will also recycle MP as the sole rule of inference\index{rule of inference} for first-order logic.  
+
+\begin{defn}[Modus Ponens] \index{Modus Ponens}
+Given the formulas $\varphi$ and $(\varphi \to \psi)$,  one may infer $\psi$.
+\end{defn}
+
+As in propositional logic,  we will usually refer to Modus Ponens by its initials,  MP\index{MP}.  That MP preserves truth in the sense of Chapter \ref{ch:six} follows from Problem \ref{p:inf}.  Using the logical axioms and MP,  we can execute deductions in first-order logic just as we did in propositional logic.
+
+\begin{defn} \index{deduction} \index{proof}
+Let $\Delta$ be a set of formulas of the first-order language $\mathcal{L}$.  A {\em deduction\/} or {\em proof\/} from $\Delta$ in $\mathcal{L}$ is a finite sequence $\varphi_1 \varphi_2 \dots \varphi_n$ of formulas of $\mathcal{L}$ such that for each $k \le n$,
+\begin{enumerate}
+\item $\varphi_k$ is a logical axiom,  or
+\item $\varphi_k \in \Delta$,  or
+\item there are $i,j < k$ such that $\varphi_k$ follows from $\varphi_i$ and $\varphi_j$ by MP.
+\end{enumerate}
+A formula of $\Delta$ appearing in the deduction is usually referred to as a {\em premiss\/}\index{premiss} of the deduction.  $\Delta$ {\em proves\/}\index{proves} a formula $\alpha$,  written as $\Delta \proves \alpha$,\index{$\proves$}  if $\alpha$ is the last formula of a deduction from $\Delta$.  We'll usually write $\proves \alpha$ instead of $\emptyset \proves \alpha$.  Finally,  if $\Gamma$ and $\Delta$ are sets of formulas,  we'll take $\Gamma \proves \Delta$ to mean that $\Gamma \proves \delta$ for every formula $\delta \in \Delta$.  
+\end{defn}
+
+\begin{note}
+We have reused the axiom schema,  the rule of inference,  and the definition of deduction from propositional logic.  It follows that any deduction of propositional logic can be converted into a deduction of first-order logic simply by replacing the formulas of $\mathcal{L}_P$ occurring in the deduction by first-order formulas.  Feel free to appeal to the deductions in the exercises and problems of Chapter~\ref{ch:three}.  {\em You should probably review the Examples and Problems of Chapter~\ref{ch:three} before going on,  since most of the rest of this Chapter concentrates on what is {\em different\/} about deductions in first-order logic.\/}
+\end{note}
+
+\begin{exmp} \label{e:apf}
+We'll show that  $\{ \alpha \} \proves \exists x\, \alpha$ for any first-order formula $\alpha$ and any variable $x$.
+\begin{enumerate}
+\item $(\forall x\, \lnot\alpha \to \lnot\alpha) \to (\alpha \to \lnot \forall x\, \lnot \alpha)$ \hfill Problem~\ref{p:prov}.5
+\item $\forall x\, \lnot\alpha \to \lnot\alpha$ \hfill A4
+\item $\alpha \to \lnot \forall x\, \lnot \alpha$ \hfill 1,2 MP
+\item $\alpha$ \hfill Premiss
+\item $\lnot \forall x\, \lnot \alpha$ \hfill 3,4 MP
+\item $\exists x\, \alpha$ \hfill Definition of $\exists$
+\end{enumerate}
+Strictly speaking,  the last line is just for our convenience,  like $\exists$ itself.
+\end{exmp}
+
+\begin{prob} \label{p:deds}
+Show that:
+\begin{enumerate}
+\item $\proves \forall x\, \varphi \to \forall y\, \varphi^x_y$,  if $y$ does not occur at all in $\varphi$.
+\item $\proves \alpha \lor \lnot \alpha$.
+\item $\{ c = d \} \proves \forall z\, Qazc \to Qazd$.
+\item $\proves x = y \to y = x$.
+\item $\{ \exists x\, \alpha \} \proves \alpha$ if $x$ does not occur free in $\alpha$.
+\end{enumerate}
+\end{prob}
+
+Many general facts about deductions can be recycled from propositional logic,  including the Deduction Theorem.
+
+\begin{prop} \label{p:seven5a}
+If $\varphi_1 \varphi_2 \dots \varphi_n$ is a deduction of $\mathcal{L}$,  then $\varphi_1  \dots \varphi_\ell$ is also a deduction of $\mathcal{L}$ for any $\ell$ such that $1 \le \ell \le n$.
+\end{prop}
+
+\begin{prop} \label{p:seven6}
+If $\Gamma \proves \delta$ and $\Gamma \proves \delta \to \beta$,  then $\Gamma \proves \beta$.
+\end{prop}
+
+\begin{prop} \label{p:bim}
+If $\Gamma \subseteq \Delta$ and $\Gamma \proves \alpha$,  then $\Delta \proves \alpha$.
+\end{prop}
+
+\begin{prop} \label{p:seven8}
+Then if $\Gamma \proves \Delta$ and $\Delta \proves \sigma$,  then $\Gamma \proves \sigma$.
+\end{prop}
+
+\begin{thm}[Deduction Theorem] \label{t:fded} \index{Deduction Theorem}
+If $\Sigma$ is any set of formulas and $\alpha$ and $\beta$ are any formulas,  then $\Sigma \proves \alpha \to \beta$ if and only if $\Sigma \cup \{ \alpha \} \proves \beta$.
+\end{thm}
+
+Just as in propositional logic,  the Deduction Theorem is useful because it often lets us take shortcuts when trying to show that deductions exist.  There is also another result about first-order deductions which often supplies useful shortcuts.
+
+\begin{thm}[Generalization Theorem] \label{t:gen} \index{Generalization Theorem}
+Suppose $x$ is a variable,  $\Gamma$ is a set of formulas in which $x$ does not occur free,  and $\varphi$ is a formula such that $\Gamma \proves \varphi$.  Then $\Gamma \proves \forall x \, \varphi$.
+\end{thm}
+
+\begin{thm}[Generalization On Constants] \label{t:genc} \index{Generalization On Constants}
+Suppose that $c$ is a constant symbol,  $\Gamma$ is a set of formulas in which $c$ does not occur,  and $\varphi$ is a formula such that $\Gamma \proves \varphi$.  Then there is a variable $x$ which does not occur in $\varphi$ such that $\Gamma \proves \forall x \, \varphi^c_x$.\footnote{$\varphi^c_x$ is $\varphi$ with every occurence of the constant $c$ replaced by $x$.}  Moreover,  there is a deduction of $\forall x \, \varphi^c_x$ from $\Gamma$ in which $c$ does not occur.
+\end{thm}
+
+\begin{exmp}
+We'll show that if $\varphi$ and $\psi$ are any formulas,  $x$ is any variable,  and $\proves \varphi \to \psi$,  then $\proves \forall x\, \varphi \to \forall x\, \psi$.
+
+Since $x$ does not occur free in any formula of $\emptyset$,  it follows from $\proves \varphi \to \psi$ by the Generalization Theorem that $\proves \forall x\, (\varphi \to \psi)$.  But then
+\begin{enumerate}
+\item $\forall x\, (\varphi \to \psi)$ \hfill above
+\item $\forall x\, (\varphi \to \psi) \to (\forall x\, \varphi \to \forall x\, \psi)$ \hfill A5
+\item $\forall x\, \varphi \to \forall x\, \psi$ \hfill 1,2 MP
+\end{enumerate}
+is the tail end of a deduction of $\forall x\, \varphi \to \forall x\, \psi$ from $\emptyset$.
+\end{exmp}
+
+\begin{prob} \label{p:seven12}
+Show that:
+\begin{enumerate}
+\item $\proves \forall x\, \forall y\, \forall z\, ( x = y \to (y = z \to x = z) )$.
+\item $\proves \forall x\, \alpha \to \exists x\, \alpha$.
+\item $\proves \exists x \, \gamma \to \forall x\, \gamma$ if $x$ does not occur free in $\gamma$.
+\end{enumerate}
+\end{prob}
+
+We conclude with a bit of terminology.
+
+\begin{defn} \index{theory} \index{$\text{Th}$}
+If $\Sigma$ is a set of sentences,  then the {\em theory\/} of $\Sigma$ is  
+\[
+\mathrm{Th}(\Sigma) = \{\, \tau \mid \tau \text{\ is a sentence and\ } \Sigma \proves \tau \,\}.
+\]  
+\end{defn}
+
+That is,  the theory of $\Sigma$ is just the collection of all sentences which can be proved from $\Sigma$.
+
+
+%
+% Chapter 8 of "A Problem Course in Mathematical Logic"
+%
+
+\chapter{Soundness and Completeness} \label{ch:eight}
+
+As with propositional logic,  first-order logic had better satisfy the Soundness Theorem and it is desirable that it satisfy the Completeness Theorem.  These theorems do hold for first-order logic.  The Soundness Theorem is proved in a way similar to its counterpart for propositional logic,  but the Completeness Theorem will require a fair bit of additional work.\footnote{This is not too surprising because of the greater complexity of first-order logic.  Also,  it turns out that first-order logic is about as powerful as a logic can get and still have the Completeness Theorem hold.}  It is in this extra work that the distinction between formulas and sentences becomes useful.
+
+Let $\mathcal{L}$ be a fixed countable first-order language throughout this chapter.  All formulas will be assumed to be formulas of $\mathcal{L}$ unless stated otherwise.
+
+First,  we rehash many of the definitions and facts we proved for propositional logic in Chapter~\ref{ch:four} for first-order logic.
+
+\begin{thm}[Soundness Theorem] \label{t:fsnd} \index{Soundness Theorem}
+If $\alpha$ is a sentence and $\Delta$ is a set of sentences such that $\Delta \proves \alpha$,  then $\Delta \models \alpha$.
+\end{thm}
+
+\begin{defn} \index{consistent} \index{inconsistent}
+A set of sentences $\Gamma$ is {\em inconsistent\/} if $\Gamma \proves \lnot (\psi \to \psi)$ for some formula $\psi$,  and is {\em consistent\/} if it is not inconsistent. 
+\end{defn}
+
+Recall that a set of sentences $\Gamma$ is satisfiable if $\mathfrak{M} \models \Gamma$ for some structure $\mathfrak{M}$.
+
+\begin{prop} \label{p:sacon}
+If a set of sentences $\Gamma$ is satisfiable,  then it is consistent.
+\end{prop}
+
+\begin{prop} \label{p:eight4}
+Suppose $\Delta$ is an inconsistent set of sentences.  Then $\Delta \proves \psi$ for any formula $\psi$.
+\end{prop}
+
+\begin{prop} \label{p:eight5}
+Suppose $\Sigma$ is an inconsistent set of sentences.  Then there is a finite subset $\Delta$ of $\Sigma$ such that $\Delta$ is inconsistent.
+\end{prop}
+
+\begin{cor} \label{c:eight6}
+A set of sentences $\Gamma$ is consistent if and only if every finite subset of $\Gamma$ is consistent.
+\end{cor}
+
+\begin{defn} \index{maximally consistent} \index{consistent maximally}
+A set of sentences $\Sigma$ is {\em maximally consistent} if $\Sigma$ is consistent but $\Sigma \cup \{\tau\}$ is inconsistent whenever $\tau$ is a sentence such that $\tau \notin \Sigma$.
+\end{defn}
+
+One quick way of finding examples of maximally consistent sets is given by the following proposition.
+
+\begin{prop} \label{p:smac}
+If $\mathfrak{M}$ is a structure,  then $\text{Th}(\mathfrak{M})$ is a maximally consistent set of sentences.
+\end{prop}
+
+\begin{exmp} \label{e:maxcon}
+$\mathfrak{M} = \left( \{ 5 \} \right)$ is a structure for $\mathcal{L}_=$,  so $\text{Th}(\mathfrak{M})$ is a maximally consistent set of sentences.  Since it turns out that $\text{Th}(\mathfrak{M}) = \text{Th}\left( \{\, \forall x\, \forall y\, x=y \,\} \right)$,  this also gives us an example of a set of sentences $\Sigma = \{\, \forall x\, \forall y\, x=y \,\}$ such that $\text{Th}(\Sigma)$ is maximally consistent.
+\end{exmp}
+
+\begin{prop} \label{p:eight8}
+If $\Sigma$ is a maximally consistent set of sentences,  $\tau$ is a sentence,  and $\Sigma \proves \tau$,  then $\tau \in \Sigma$.
+\end{prop}
+
+\begin{prop} \label{p:eight9}
+Suppose $\Sigma$ is a maximally consistent set of sentences and $\tau$ is a sentence.  Then $\lnot\tau \in \Sigma$ if and only if $\tau \notin \Sigma$.
+\end{prop}
+
+\begin{prop} \label{p:eight10}
+Suppose $\Sigma$ is a maximally consistent set of sentences and $\varphi$ and $\psi$ are any sentences.  Then $\varphi \to \psi \in \Sigma$ if and only if $\varphi \notin \Sigma$ or $\psi \in \Sigma$.
+\end{prop}
+
+\begin{thm} \label{t:etmc}
+Suppose $\Gamma$ is a consistent set of sentences.  Then there is a maximally consistent set of sentences $\Sigma$ with $\Gamma \subseteq \Sigma$.
+\end{thm}
+
+The counterparts of these notions and facts for propositional logic sufficed to prove the Completeness Theorem,  but here we will need some additional tools.  The basic problem is that instead of defining a suitable truth assignment from a maximally consistent set of formulas,  we need to construct a suitable structure from a maximally consistent set of sentences.  Unfortunately,  structures for first-order languages are usually more complex than truth assignments for propositional logic.
+The following definition supplies the key new idea we will use to prove the Completeness Theorem.  
+
+\begin{defn} \index{witnesses}
+Suppose $\Sigma$ is a set of sentences and $C$ is a set of (some of the) constant symbols of $\mathcal{L}$.  Then $C$ is a {\em set of witnesses\/} for $\Sigma$ in $\mathcal{L}$ if for every formula $\varphi$ of $\mathcal{L}$ with at most one free variable $x$,  there is a constant symbol $c \in C$ such that $\Sigma \proves \exists x\, \varphi \to \varphi^x_c$.
+\end{defn}
+
+The idea is that every element of the universe which $\Sigma$ proves must exist is named,  or ``witnessed'',  by a constant symbol in $C$.  Note that if $\Sigma \proves \lnot \exists x\, \varphi$,  then $\Sigma \proves \exists x\, \varphi \to \varphi^x_c$ for any constant symbol $c$.
+
+\begin{prop} \label{p:eight14}
+Suppose $\Gamma$ and $\Sigma$ are sets of sentences of $\mathcal{L}$,  $\Gamma \subseteq \Sigma$,  and $C$ is a set of witnesses for $\Gamma$ in $\mathcal{L}$.  Then $C$ is a set of witnesses for $\Sigma$ in $\mathcal{L}$. 
+\end{prop}
+
+\begin{exmp} \label{e:rw}
+Let $\mathcal{L}'_O$ be the first-order language with a single 2-place relation symbol,  $<$,  and countably many constant symbols,  $c_q$ for each $q \in \mathbb{Q}$.  Let $\Sigma$ include all the sentences
+\begin{enumerate}
+\item $c_p < c_q$,  for every $p,q \in \mathbb{Q}$ such that $p < q$,
+\item $\forall x\, (\lnot x < x)$,
+\item $\forall x\, \forall y\, (x < y \lor x = y \lor y < x)$,
+\item $\forall x\, \forall y\, \forall z\, (x < y \to (y < z \to x < z))$,
+\item $\forall x\, \forall y\, (x < y \to \exists z\, (x < z \land z < y))$,
+\item $\forall x\, \exists y\, (x < y)$,  and 
+\item $\forall x\, \exists y\, (y < x)$.
+\end{enumerate}
+In effect,  $\Sigma$ asserts that $<$ is a linear order on the universe (2--4) which is dense (5) and has no endpoints (6--7),  and which has a suborder isomorphic to $\mathbb{Q}$ (1).  Then $C = \{\, c_q \mid q \in \mathbb{Q} \,\}$ is a set of witnesses for $\Sigma$ in $\mathcal{L}'_O$.
+\end{exmp}
+
+In the example above,  one can ``reverse-engineer'' a model for the set of sentences in question from the set of witnesses simply by letting the universe of the structure {\em be\/} the set of witnesses.  One can also define the necessary relation interpreting $<$ in a pretty obvious way from $\Sigma$.\footnote{Note,  however,  that an isomorphic copy of $\mathbb{Q}$ is not the only structure for $\mathcal{L}'_O$ satisfying $\Sigma$.  For example,  $\mathfrak{R} = (\mathbb{R},<, q + \pi \colon q \in \mathbb{Q})$ will also satisfy $\Sigma$ if we intepret $c_q$ by $q + \pi$.}  This example is obviously contrived:  there are no constant symbols around which are not witnesses,  $\Sigma$ proves that distinct constant symbols aren't equal to to each other,  there is little by way of non-logical symbols needing interpretation,  and $\Sigma$ explicitly includes everything we need to know about $<$.  
+
+In general,  trying to build a model for a set of sentences $\Sigma$ in this way runs into a number of problems.  First,  how do we know whether $\Sigma$ has a set of witnesses at all?  Many first-order languages have few or no constant symbols,  after all.  Second,  if $\Sigma$ has a set of witnesses $C$,  it's unlikely that we'll be able to get away with just letting the universe of the model be $C$.  What if  $\Sigma \proves c = d$ for some distinct witnesses $c$ and $d$?   Third,  how do we handle interpreting constant symbols which are not in $C$?  Fourth,  what if $\Sigma$ doesn't prove enough about whatever relation and function symbols exist to let us define interpretations of them in the structure under construction?  (Imagine,  if you like,  that someone hands you a copy of Joyce's {\em Ulysses\/} and asks you to produce a complete road map of Dublin on the basis of the book.  Even if it has no geographic contradictions,  you are unlikely to find all the information in the novel needed to do the job.)  Finally,  even if $\Sigma$ does prove all we need to define functions and relations on the universe to interpret the function and relation symbols,  just how do we do it?   Getting around all these difficulties requires a fair bit of work.  One can get around many by sticking to maximally consistent sets of sentences in suitable languages. 
+
+\begin{lem} \label{l:eight12}
+Suppose $\Sigma$ is a set of sentences,  $\varphi$ is any formula,  and $x$ is any variable.  Then $\Sigma \proves \varphi$ if and only if $\Sigma \proves \forall x\, \varphi$.
+\end{lem}
+
+\begin{thm} \label{t:exmcw}
+Suppose $\Gamma$ is a consistent set of sentences of $\mathcal{L}$.  Let $C$ be an infinite countable set of constant symbols which are {\em not\/} symbols of $\mathcal{L}$,  and let $\mathcal{L}' = \mathcal{L} \cup C$ be the language obtained by adding the constant symbols in $C$ to the symbols of $\mathcal{L}$.  Then there is a maximally consistent set $\Sigma$ of sentences  of $\mathcal{L}'$ such that $\Gamma \subseteq \Sigma$ and $C$ is a set of witnesses for $\Sigma$.  
+\end{thm}
+
+This theorem allows one to use a certain measure of brute force:  No set of witnesses?  Just add one!  The set of sentences doesn't decide enough?  Decide {\em everything\/} one way or the other!
+
+\begin{thm} \label{t:mfc}
+Suppose $\Sigma$ is a maximally consistent set of sentences and $C$ is a set of witnesses for $\Sigma$.  Then there is a structure $\mathfrak{M}$ such that $\mathfrak{M} \models \Sigma$.  
+\end{thm}
+
+The important part here is to define $\mathfrak{M}$ --- proving that $\mathfrak{M} \models \Sigma$ is tedious but fairly straightforward if you have the right definition.  Proposition \ref{p:exsat} now lets us deduce the fact we really need.
+
+\begin{cor} \label{p:eight17}
+Suppose $\Gamma$ is a consistent set of sentences of a first-order language $\mathcal{L}$.  Then there is a structure $\mathfrak{M}$ for $\mathcal{L}$ satisfying $\Gamma$.
+\end{cor}
+
+With the above facts in hand,  we can rejoin our proof of Soundness and Completeness,  already in progress:
+
+\begin{thm} \label{t:sacof}
+A set of sentences $\Sigma$ in $\mathcal{L}$ is consistent if and only if it is satisfiable.
+\end{thm}
+
+The rest works just like it did for propositional logic.
+
+\begin{thm}[Completeness Theorem] \label{t:fcmpl} \index{Completeness Theorem}
+If $\alpha$ is a sentence and $\Delta$ is a set of sentences such that $\Delta \models \alpha$,  then $\Delta \proves \alpha$.
+\end{thm}
+
+It follows that in a first-order logic,  as in propositional logic,  a sentence is implied by some set of premisses if and only if it has a proof from those premisses.
+
+\begin{thm}[Compactness Theorem] \label{p:fcmpct} \index{Compactness Theorem}
+A set of sentences $\Delta$ is satisfiable if and only if every finite subset of $\Delta$ is satisfiable.
+\end{thm}
+
+
+%
+% Chapter 9 of "A Problem Course in Mathematical Logic"
+%
+
+\chapter{Applications of Compactness} \label{ch:nine} \index{Compactness Theorem, applications of}
+
+After wading through the preceding chapters,  it should be obvious that first-order logic is,  in principle,  adequate for the job it was originally developed for:  the essentially philosophical exercise of formalizing most of mathematics.  As something of a bonus,  first-order logic can supply useful tools for doing ``real'' mathematics.  The Compactness Theorem is the simplest of these tools and glimpses of two ways of using it are provided below.
+
+
+\subsection*{From the finite to the infinite}
+
+Perhaps the simplest use of the Compactness Theorem is to show that if there exist arbitrarily large finite objects of some type,  then there must also be an infinite object of this type.  
+
+\begin{exmp} \label{e:com}
+We will use the Compactness Theorem to show that there is an infinite commutative group in which every element is of order $2$,  {\em i.e.\/} such that $g \cdot g = e$ for every element $g$. 
+
+Let $\mathcal{L}_G$\index{$\mathcal{L}_G$} be the first-order language with just two non-logical symbols:
+\begin{itemize}  
+\item Constant symbol:  $e$
+\item 2-place function symbol:  $\cdot$
+\end{itemize}
+Here $e$ is intended to name the group's identity element and $\cdot$ the group operation.  Let $\Sigma$ be the set of sentences of $\mathcal{L}_G$ including:
+\begin{enumerate}
+\item The axioms for a commutative group:
+\begin{itemize}
+\item $\forall x\, x\cdot e = x$
+\item $\forall x\, \exists y\, x \cdot y = e$
+\item $\forall x\, \forall y\, \forall z\, x \cdot (y \cdot z) = (x \cdot y) \cdot z$
+\item $\forall x\, \forall y\, y \cdot x = x \cdot y$
+\end{itemize}
+\item A sentence which asserts that every element of the universe is of order $2$:
+\begin{itemize}
+\item $\forall x\, x \cdot x = e$
+\end{itemize}
+\item For each $n \ge 2$,  a sentence,  $\sigma_n$,  which asserts that there are at least $n$ different elements in the universe:
+\begin{itemize}
+\item $\exists x_1\, \dots \exists x_n\, ( (\lnot x_1 = x_2) \land (\lnot x_1 = x_3) \land \dots \land (\lnot x_{n-1} = x_n))$
+\end{itemize} 
+\end{enumerate}
+
+We claim that every finite subset of $\Sigma$ is satisfiable.  The most direct way to verify this is to show how,  given a finite subset $\Delta$ of $\Sigma$,  to produce a model $\mathfrak{M}$ of $\Delta$.  Let $n$ be the largest integer such that $\sigma_n \in \Delta \cup \{ \sigma_2 \}$ (Why is there such an $n$?) and choose an integer $k$ such that $2^k \ge n$.  Define a structure $(G,\circ)$ for $\mathcal{L}_G$ as follows:
+\begin{itemize}
+\item $G = \{\, \langle a_\ell \mid 1 \le \ell \le k \rangle \mid a_\ell = 0 \text{\ or\ } 1 \,\}$
+\item $\langle a_\ell \mid 1 \le \ell \le k \rangle \circ \langle b_\ell \mid 1 \le \ell \le k \rangle = \langle a_\ell + b_\ell \pmod 2 \mid 1 \le \ell \le k \rangle$
+\end{itemize}
+That is,  $G$ is the set of binary sequences of length $k$ and $\circ$ is coordinatewise addition modulo $2$ of these sequences.  It is easy to check that $(G,\circ)$ is a commutative group with $2^k$ elements in which every element has order $2$.  Hence $(G,\circ) \models \Delta$,  so $\Delta$ is satisfiable.
+
+Since every finite subset of $\Sigma$ is satisfiable,  it follows by the Compactness Theorem that $\Sigma$ is satisfiable.  A model of $\Sigma$,  however,  must be an infinite commutative group in which every element is of order $2$.  (To be sure,  it is quite easy to build such a group directly;  for example,  by using coordinatewise addition modulo $2$ of infinite binary sequences.)
+\end{exmp}
+
+\begin{prob} \label{p:nine1}
+Use the Compactness Theorem to show that there is an infinite
+\begin{enumerate}
+\item bipartite graph,
+\item non-commutative group,  and
+\item field of characteristic 3,
+\end{enumerate}
+and also give concrete examples of such objects.
+\end{prob}
+
+Most applications of this method,  including the ones above,  are not really interesting:  it is usually more valuable,  and often easier,  to directly construct examples of the infinite objects in question rather than just show such must exist.  Sometimes,  though,  the technique can be used to obtain a non-trivial result more easily than by direct methods.  We'll use it to prove an important result from graph theory,  Ramsey's Theorem.  Some definitions first:  
+
+\begin{defn}
+If $X$ is a set,  let the set of unordered pairs of elements of $X$ be $[X]^2 = \{\, \{a,b\} \mid a,b \in X \text{\ and\ } a \ne b \,\}$.  (See Definition~\ref{d:sed}.)
+\begin{enumerate}
+\item A {\em graph\/} \index{graph} is a pair $(V,E)$ such that $V$ is a non-empty set and $E \subseteq [V]^2$.  Elements of $V$ are called {\em vertices\/}\index{vertex} of the graph and elements of $E$ are called {\em edges\/}\index{edge}.
+\item A {\em subgraph\/}\index{subgraph} of $(V,E)$ is a pair $(U,F)$,  where $U \subset V$ and $F = E \cap [U]^2$.
+\item A subgraph $(U,F)$ of $(V,E)$ is a {\em clique\/}\index{clique} if $F = [U]^2$.
+\item A subgraph $(U,F)$ of $(V,E)$ is an {\em independent set\/}\index{independent set} if $F = \emptyset$.
+\end{enumerate}
+\end{defn}
+
+That is,  a graph is some collection of vertices,  some of which are joined to one another.  A subgraph is just a subset of the vertices,  together with all edges joining vertices of this subset in the whole graph.  It is a clique if it happens that the original graph joined every vertex in the subgraph to all other vertices in the subgraph,  and an independent set if it happens that the original graph joined none of the vertices in the subgraph to each other.  The question of when a graph must have a clique or independent set of a given size is of some interest in many applications,  especially in dealing with colouring problems.  
+
+\begin{thm}[Ramsey's Theorem] \label{t:ram} \index{Ramsey's Theorem}
+For every $n \ge 1$ there is an integer $R_n$ such that any graph with at least $R_n$ vertices has a clique with $n$ vertices or an independent set with $n$ vertices.
+\end{thm}
+
+$R_n$\index{$R_n$} is the {\em $n$th Ramsey number\/}.\index{Ramsey number}  It is easy to see that $R_1 = 1$ and $R_2 = 2$,  but $R_3$ is already $6$,  and $R_n$ grows very quickly as a function of $n$ thereafter.  Ramsey's Theorem is fairly hard to prove directly,  but the corresponding result for infinite graphs is comparatively straightforward.
+
+\begin{lem} \label{l:irt} \index{Infinite Ramsey's Theorem} \index{Ramsey's Theorem Infinite}
+If $(V,E)$ is a graph with infinitely many vertices,  then it has an infinite clique or an infinite independent set.
+\end{lem}
+
+A relatively quick way to prove Ramsey's Theorem is to first prove its infinite counterpart,  Lemma \ref{l:irt},  and then get Ramsey's Theorem out of it by way of the Compactness Theorem.  (If you're an ambitious minimalist,  you can try to do this using the Compactness Theorem for propositional logic instead!)
+
+
+\subsection*{Elementary equivalence and non-standard models}
+
+One of the common uses for the Compactness Theorem is to construct ``non-standard'' models\index{non-standard model} of the theories satisfied by various standard mathematical structures.  Such a model satisfies all the same first-order sentences as the standard model,  but differs from it in some way not expressible in the first-order language in question.  This brings home one of the intrinsic limitations of first-order logic:  it can't always tell essentially different structures apart.  Of course,  we need to define just what constitutes essential difference.
+
+\begin{defn}
+Suppose $\mathcal{L}$ is a first-order language and $\mathfrak{N}$ and $\mathfrak{M}$ are two structures for $\mathcal{L}$.  Then $\mathfrak{N}$ and $\mathfrak{M}$ are:
+\begin{enumerate}
+\item {\em isomorphic\/},\index{isomorphism of structures}  written as $\mathfrak{N} \cong \mathfrak{M}$,  if there is a function $F \colon |\mathfrak{N}| \to |\mathfrak{M}|$ such that
+\begin{enumerate}
+\item $F$ is $1-1$ and onto,
+\item $F(c^{\mathfrak{N}}) = c^{\mathfrak{M}}$ for every constant symbol $c$ of $\mathcal{L}$,
+\item $F(f^{\mathfrak{N}}(a_1, \dots, a_k) = f^{\mathfrak{M}}(F(a_1), \dots, F(a_k))$ for every $k$-place function symbol $f$ of $\mathcal{L}$ and elements $a_1, \dots, a_k \in |\mathfrak{N}|$,  and
+\item $P^{\mathfrak{N}}(a_1, \dots, a_k)$ holds if and only if $P^{\mathfrak{N}}(F(a_1), \dots, F(a_k))$ for every $k$-place relation symbol of $\mathcal{L}$ and elements $a_1$, \dots, $a_k$ of $|\mathfrak{N}|$;
+\end{enumerate}
+and
+\item {\em elementarily equivalent\/},\index{elementary equivalence} \index{equivalence,  elementary}  written as $\mathfrak{N} \equiv \mathfrak{M}$,  if $\text{\rm Th}(\mathfrak{N}) = \text{\rm Th}(\mathfrak{M})$,  {\em i.e.\/} if $\mathfrak{N} \models \sigma$ if and only if $\mathfrak{M} \models \sigma$ for every sentence $\sigma$ of $\mathcal{L}$.
+\end{enumerate}
+\end{defn}
+
+That is,  two structures for a given language are isomorphic if they are structurally identical and elementarily equivalent if no statement in the language can distinguish between them.  Isomorphic structures are elementarily equivalent:
+
+\begin{prop} \label{p:nine4}
+Suppose $\mathcal{L}$ is a first-order language and $\mathfrak{N}$ and $\mathfrak{M}$ are structures for $\mathcal{L}$ such that $\mathfrak{N} \cong \mathfrak{M}$.  Then $\mathfrak{N} \equiv \mathfrak{M}$.
+\end{prop}
+
+However,  as the following application of the Compactness Theorem shows,  elementarily equivalent structures need not be isomorphic:
+
+\begin{exmp}
+Note that $\mathfrak{C} = (\mathbb{N})$ is an infinite structure for $\mathcal{L}_=$.  Expand $\mathcal{L}_=$ to $\mathcal{L}_R$ by adding a constant symbol $c_r$ for every real number $r$,  and let $\Sigma$ be the set of sentences of $\mathcal{L}_=$ including
+\begin{itemize}
+\item every sentence $\tau$ of $\text{\rm Th}(\mathfrak{C})$,  {\em i.e.\/} such that $\mathfrak{C} \models \tau$,  and
+\item $\lnot c_r = c_s$ for every pair of real numbers $r$ and $s$ such that $r \ne s$.
+\end{itemize}
+Every finite subset of $\Sigma$ is satisfiable.  (Why?)  Thus,  by the Compactness Theorem,  there is a structure $\mathfrak{U}'$ for $\mathcal{L}_R$ satisfying $\Sigma$,  and hence $\text{\rm Th}(\mathfrak{C})$.  The structure $\mathfrak{U}$ obtained by dropping the interpretations of all the constant symbols $c_r$ from $\mathfrak{U}'$ is then a structure for $\mathcal{L}_=$ which satisfies $\text{\rm Th}(\mathfrak{C})$.  Note that $|\mathfrak{U}| = |\mathfrak{U}'|$ is at least large as the set of all real numbers $\mathbb{R}$,  since $\mathfrak{U}'$ requires a distinct element of the universe to interpret each constant symbol $c_r$ of $\mathcal{L}_R$.
+
+Since $\text{\rm Th}(\mathfrak{C})$ is a maximally consistent set of sentences of $\mathcal{L}_=$ by Problem \ref{p:smac},  it follows from the above that $\mathfrak{C} \equiv \mathfrak{U}$.  On the other hand,  $\mathfrak{C}$ cannot be isomorphic to $\mathfrak{U}$ because there cannot be an onto map between a countable set,  such as $\mathbb{N} = |\mathfrak{C}|$,  and a set which is at least as large as $\mathbb{R}$,  such as $|\mathfrak{U}|$.
+\end{exmp}
+
+In general,  the method used above can be used to show that if a set of sentences in a first-order language has an infinite model,  it has many different ones.  In $\mathcal{L}_=$ that is essentially all that can happen:
+
+\begin{prop} \label{p:nine5}
+Two structures for $\mathcal{L}_=$ are elementarily equivalent if and only if they are isomorphic or infinite.
+\end{prop}
+
+\begin{prob} \label{p:nine6}
+Let $\mathfrak{N} = (\mathbb{N}, 0, 1, S, +, \cdot, E)$ be the standard structure for $\mathcal{L}_N$.  Use the Compactness Theorem to show there is a structure $\mathfrak{M}$ for $\mathcal{L}_N$ such that $\mathfrak{N} \equiv \mathfrak{N}$ but not $\mathfrak{N} \cong \mathfrak{M}$.
+\end{prob}
+
+Note that because $\mathfrak{N}$ and $\mathfrak{M}$ both satisfy $\text{\rm Th}(\mathfrak{N})$,  which is maximally consistent by Problem \ref{p:smac},  there is absolutely no way of telling them apart in $\mathcal{L}_N$.
+
+\begin{prop} \label{p:nine7}
+Every model of $\text{\rm Th}(\mathfrak{N})$ which is {\em not\/} isomorphic to $\mathfrak{N}$ has
+\begin{enumerate}
+\item an isomorphic copy of $\mathfrak{N}$ embedded in it,
+\item an infinite number,  {\em i.e.\/} one larger than all of those in the copy of $\mathfrak{N}$,  and
+\item an infinite decreasing sequence.
+\end{enumerate}
+\end{prop}
+
+The apparent limitation of first-order logic that non-isomorphic structures may be elementarily equivalent can actually be useful.  A non-standard model\index{non-standard model} may have features that make it easier to work with than the standard model one is really interested in.  Since both structures satisfy exactly the same sentences,  if one uses these features to prove that some statement expressible in the given first-order language is true about the non-standard structure,  one gets for free that it must be true of the standard structure as well.  A prime example of this idea is the use of non-standard models of the real numbers\index{non-standard models of the reals} containing infinitesimals (numbers which are infinitely small but different from zero) in some areas of analysis.
+
+\begin{thm} \label{t:nsr}
+Let $\mathfrak{R} = (\mathbb{R}, 0, 1, +, \cdot)$ be the field of real numbers,  considered as a structure for $\mathcal{L}_F$.  Then there is a model of $\text{Th}(\mathfrak{R})$ which contains a copy of $\mathbb{R}$ and in which there is an infinitesimal\index{infinitesimal}.
+\end{thm}
+
+The non-standard models of the real numbers\index{non-standard models of the reals} actually used in analysis are usually obtained in more sophisticated ways in order to have more information about their internal structure.  It is interesting to note that infinitesimals were the intuition behind calculus for Leibniz when it was first invented,  but no one was able to put their use on a rigourous footing until Abraham Robinson did so in 1950.
+
+
+
+\part*{Hints}
+\setcounter{chapter}{0}
+
+
+%
+% Hints for Chapter 1 of "A Problem Course in Mathematical Logic"
+%
+
+\chapter{Hints}
+
+\begin{clue}{p:one1}
+Symbols not in the language,  unbalanced parentheses,  lack of connectives\dots
+\end{clue}
+
+\begin{clue}{p:lrp}
+Proceed by induction on the length of the formula or on the number of connectives in the formula.
+\end{clue}
+
+\begin{clue}{p:one3}
+Compute $p(\alpha) /  \ell(\alpha)$ for a number of examples and look for patterns.  Getting a minimum value should be pretty easy.
+\end{clue}
+
+\begin{clue}{p:one4}
+Proceed by induction on the length of or on the number of connectives in the formula.
+\end{clue}
+
+\begin{clue}{p:lof}
+Construct examples of formulas of all the short lengths that you can,  and then see how you can make longer formulas out of short ones.
+\end{clue}
+
+\begin{clue}{p:pn}
+Hewlett-Packard sells calculators that use such a trick.  A similar one is used in Definition \ref{d:ter}.
+\end{clue}
+
+\begin{clue}{p:foc}
+Observe that $\mathcal{L}_P$ has countably many symbols and that every formula is a finite sequence of symbols.  The relevant facts from set theory are given in Appendix \ref{ap:sets}.
+\end{clue}
+
+\begin{clue}{p:one8}
+Stick several simple statements together with suitable connectives.
+\end{clue}
+
+\begin{clue}{p:one9}
+This should be straightforward.
+\end{clue}
+
+\begin{clue}{p:one10}
+Ditto.
+\end{clue}
+
+\begin{clue}{p:one11}
+To make sure you get all the subformulas,  write out the formula in official form with all the parentheses.
+\end{clue}
+
+\begin{clue}{t:ur}
+Proceed by induction on the length or number of connectives of the formula.
+\end{clue}
+
+
+%
+% Hints for Chapter 2 of "A Problem Course in Mathematical Logic"
+%
+
+\chapter{Hints}
+
+\begin{clue}{p:two1}
+Use truth tables.
+\end{clue}
+
+\begin{clue}{p:tav}
+Proceed by induction on the length of $\delta$ or on the number of connectives in $\delta$.
+\end{clue}
+
+\begin{clue}{c:tav}
+Use Proposition \ref{p:tav}.
+\end{clue}
+
+\begin{clue}{p:tif}
+In each case,  unwind Definition \ref{d:tras} and the definitions of the abbreviations.
+\end{clue}
+
+\begin{clue}{p:two5}
+Use truth tables.
+\end{clue}
+
+\begin{clue}{p:two6}
+Use Definition \ref{d:taco} and Proposition \ref{p:tif}.
+\end{clue}
+
+\begin{clue}{p:two6a}
+If a truth assignment satisfies every formula in $\Sigma$ and every formula in $\Gamma$ is also in $\Sigma$,  then\dots
+\end{clue}
+
+\begin{clue}{p:two7}
+Grinding out an appropriate truth table will do the job.  Why is it important that $\Sigma$ be finite here?
+\end{clue}
+
+\begin{clue}{p:moto}
+Use Definition \ref{d:imp} and Proposition \ref{p:tif}.
+\end{clue}
+
+\begin{clue}{p:sanc}
+Use Definitions \ref{d:taco} and \ref{d:imp}.  If you have trouble trying to prove one of the two directions directly,  try proving its contrapositive instead.
+\end{clue}
+
+
+
+%
+% Hints for Chapter 3 of "A Problem Course in Mathematical Logic"
+%
+
+\chapter{Hints}
+
+\begin{clue}{p:axta}
+Truth tables are probably the best way to do this.
+\end{clue}
+
+\begin{clue}{p:snd}
+Look up Proposition \ref{p:tif}.
+\end{clue}
+
+\begin{clue}{p:ded}
+There are usually many different deductions with a given conclusion,  so you shouldn't take the following hints as gospel.
+\begin{enumerate}
+\item Use A2 and A1.
+\item Recall what $\lor$ abbreviates.
+\end{enumerate}
+\end{clue}
+
+\begin{clue}{p:three3a}
+You need to check that $\varphi_1 \dots \varphi_\ell$ satisfies the three conditions of Definition~\ref{d:ded};  you know $\varphi_1 \dots \varphi_n$ does.
+\end{clue}
+
+\begin{clue}{p:dmp}
+Put together a deduction of $\beta$ from $\Gamma$ from the deductions of $\delta$ and $\delta \to \beta$ from $\Gamma$.
+\end{clue}
+
+\begin{clue}{p:three5}
+Examine Definition \ref{d:ded} carefully.
+\end{clue}
+
+\begin{clue}{p:three6}
+The key idea is similar to that for proving Proposition \ref{p:dmp}.
+\end{clue}
+
+\begin{clue}{t:ded}
+One direction follows from Proposition \ref{p:dmp}.  For the other direction,  proceed by induction on the length of the shortest proof of $\beta$ from $\Sigma \cup \{ \alpha \}$.
+\end{clue}
+
+\begin{clue}{p:prov}
+Again,  don't take these hints as gospel.  Try using the Deduction Theorem in each case,  plus
+\begin{enumerate}
+\item A3.
+\item A3 and Problem \ref{p:ded}.
+\item A3.
+\item A3,  Problem \ref{p:ded},  and Example \ref{e:two}.
+\item Some of the above parts and Problem \ref{p:ded}.
+\item Ditto.
+\item Use the definition of $\lor$ and one of the above parts.
+\item Use the definition of $\land$ and one of the above parts.
+\item Aim for $\lnot\alpha \to (\alpha \to \lnot\beta)$ as an intermediate step.
+\end{enumerate}
+\end{clue}
+
+
+
+%
+% Hints for Chapter 4 of "A Problem Course in Mathematical Logic"
+%
+
+\chapter{Hints}
+
+
+\begin{clue}{t:psnd}
+Use induction on the length of the deduction and Proposition \ref{p:snd}.
+\end{clue}
+
+\begin{clue}{p:stoc}
+Assume,  by way of contradiction,  that the given set of formulas is inconsistent.  Use the Soundness Theorem to show that it can't be satisfiable.
+\end{clue}
+
+\begin{clue}{p:inca}
+First show that $\{ \lnot(\alpha \to \alpha) \} \proves \psi$.
+\end{clue}
+
+\begin{clue}{p:cmp}
+Note that deductions are finite sequences of formulas.
+\end{clue}
+
+\begin{clue}{c:cmp}
+Use Proposition \ref{p:cmp}.
+\end{clue}
+
+\begin{clue}{p:emc}
+Use Proposition \ref{p:stoc},  the definition of $\Sigma$,  and Proposition \ref{p:tif}.
+\end{clue}
+
+\begin{clue}{p:inmc}
+Assume,  by way of contradiction,  that $\varphi \notin \Sigma$.  Use Definition \ref{d:mxc} and the Deduction Theorem to show that $\Sigma$ must be inconsistent.
+\end{clue}
+
+\begin{clue}{p:nimc}
+Use Definition \ref{d:mxc} and Problem \ref{p:prov}.
+\end{clue}
+
+\begin{clue}{p:iimc}
+Use Definition \ref{d:mxc} and Proposition \ref{p:nimc}.
+\end{clue}
+
+\begin{clue}{t:exmc}
+Use Proposition \ref{p:foc} and induction on a list of all the formulas of $\mathcal{L}_P$.
+\end{clue}
+
+\begin{clue}{t:saco}
+One direction is just Proposition \ref{p:stoc}.  For the other,  expand the set of formulas in question to a maximally consistent set of formulas $\Sigma$ using Theorem \ref{t:exmc},  and define a truth assignment $v$ by setting $v(A_n) = T$ if and only if $A_n \in \Sigma$.  Now use induction on the length of $\varphi$ to show that $\varphi \in \Sigma$ if and only if $v$ satisfies $\varphi$.
+\end{clue}
+
+\begin{clue}{t:pcmpl}
+Prove the contrapositive using Theorem \ref{t:saco}.
+\end{clue}
+
+\begin{clue}{t:pcpct}
+Put Corollary \ref{c:cmp} together with Theorem \ref{t:saco}.
+\end{clue}
+
+
+
+%
+% Hints for Chapter 5 of "A Problem Course in Mathematical Logic"
+%
+
+\chapter{Hints}
+
+
+\begin{clue}{p:five1}
+Try to disassemble each string using Definition \ref{d:ter}.  Note that some might be valid terms of more than one of the given languages.
+\end{clue}
+
+\begin{clue}{p:five2}
+This is similar to Problem \ref{p:lof}.
+\end{clue}
+
+\begin{clue}{p:fcmt}
+This is similar to Proposition \ref{p:foc}.
+\end{clue}
+
+\begin{clue}{p:five4}
+Try to disassemble each string using Definitions \ref{d:ter} and \ref{d:for}.  Note that some might be valid formulas of more than one of the given languages.
+\end{clue}
+
+\begin{clue}{p:five5}
+This is just like Problem \ref{p:lrp}.
+\end{clue}
+
+\begin{clue}{p:five6}
+This is similar to Problem \ref{p:lof}.  You may wish to use your solution to Problem \ref{p:five2}.
+\end{clue}
+
+\begin{clue}{p:five7}
+This is similar to Proposition \ref{p:foc}.
+\end{clue}
+
+\begin{clue}{p:for}
+You might want to rephrase some of the given statements to make them easier to formalize.
+\begin{enumerate}
+\item Look up associativity if you need to.
+\item``There is an object such that every object is not in it.''
+\item This should be easy.
+\item Ditto.
+\item ``Any two things must be the same thing.''
+\end{enumerate}
+\end{clue}
+
+\begin{clue}{p:fole}
+If necessary,  don't hesitate to look up the definitions of the given structures.
+\begin{enumerate}
+\item Read the discussion at the beginning of the chapter.
+\item You really need only one non-logical symbol.
+\item There are two sorts of objects in a vector space,  the vectors themselves and the scalars of the field,  which you need to be able to tell apart.
+\end{enumerate}
+\end{clue}
+
+\begin{clue}{p:five10}
+Use Definition \ref{d:for} in the same way that Definition \ref{d:form} was used in Definition \ref{d:subf}.  
+\end{clue}
+
+\begin{clue}{p:five11}
+The scope of a quantifier ought to be a certain subformula of the formula in which the quantifier occurs.
+\end{clue}
+
+\begin{clue}{p:five12}
+Check to see whether they satisfy Definition \ref{d:frv}.
+\end{clue}
+
+\begin{clue}{p:five13}
+Check to see which pairs satisfy Definition \ref{d:exlan}.
+\end{clue}
+
+\begin{clue}{p:exlan}
+Proceed by induction on the length of $\varphi$ using Definition \ref{d:for}.
+\end{clue}
+
+\begin{clue}{t:urt}
+This is similar to Theorem \ref{t:ur}.
+\end{clue}
+
+\begin{clue}{t:urf}
+This is similar to Theorem \ref{t:ur} and uses Theorem~\ref{t:urt}.
+\end{clue}
+
+
+
+%
+% Hints for Chapter 6 of "A Problem Course in Mathematical Logic"
+%
+
+\chapter{Hints}
+
+
+\begin{clue}{p:six1}
+In each case,  apply Definition \ref{d:str}.
+\begin{enumerate}
+\item This should be easy.
+\item Ditto.
+\item Invent objects which are completely different except that they happen to have the right number of the right kind of components.
+\end{enumerate}
+\end{clue}
+
+\begin{clue}{pb:exas}
+Figure out the relevant values of $s(v_n)$ and apply Definition \ref{d:exas}.
+\end{clue}
+
+\begin{clue}{p:eau}
+Suppose $\mathbf{s}$ and $\mathbf{r}$ both extend the assignment $s$.  Show that $\mathbf{s}(t) = \mathbf{r}(t)$ by induction on the length of the term $t$.
+\end{clue}
+
+\begin{clue}{p:six4}
+Unwind the formulas using Definition \ref{d:sat} to get informal statements whose truth you can determine.
+\end{clue}
+
+\begin{clue}{p:six5}
+Unwind the abbreviation $\exists$ and use Definition~\ref{d:sat}. 
+\end{clue}
+
+\begin{clue}{p:ord}
+Unwind each of the formulas using Definitions~\ref{d:sat} and \ref{d:mod} to get informal statements whose truth you can determine.
+\end{clue}
+
+\begin{clue}{l:six7}
+This is much like Proposition \ref{p:eau}.
+\end{clue}
+
+\begin{clue}{p:six8}
+Proceed by induction on the length of the formula using Definition \ref{d:sat} and Lemma \ref{l:six7}.
+\end{clue}
+
+\begin{clue}{c:six9}
+How many free variables does a sentence have?
+\end{clue}
+
+\begin{clue}{p:inf}
+Use Definition \ref{d:sat}.
+\end{clue}
+
+\begin{clue}{p:taut}
+Unwind the sentences in question using Definition \ref{d:sat}.
+\end{clue}
+
+\begin{clue}{p:six12}
+Use Definitions \ref{d:sat} and \ref{d:mod};  the proof is similar in form to the proof of Proposition \ref{p:moto}.
+\end{clue}
+
+\begin{clue}{p:six13}
+Use Definitions \ref{d:sat} and \ref{d:mod};  the proof is similar in form to the proof for Problem \ref{p:sanc}.
+\end{clue}
+
+\begin{clue}{p:mif}
+Use Definitions \ref{d:sat} and \ref{d:mod} in each case,  plus the meanings of our abbreviations.
+\end{clue}
+
+\begin{clue}{p:exsat}
+In one direction,  you need to add appropriate objects to a structure;  in the other,  delete them.  In both cases,  you still have to verify that $\Gamma$ is still satisfied.
+\end{clue}
+
+\begin{clue}{p:six16}
+Here are some appropriate languages.
+\begin{enumerate}
+\item $\mathcal{L}_=$
+\item Modify your language for graph theory from Problem~\ref{p:fole} by adding a 1-place relation symbol.
+\item Use your language for group theory from Problem~\ref{p:fole}.
+\item $\mathcal{L}_F$
+\end{enumerate}
+\end{clue}
+
+
+%
+% Chapter 7 of "A Problem Course in Mathematical Logic"
+%
+
+\chapter{Hints}
+
+
+\begin{clue}{p:subs}
+\begin{enumerate}
+\item Use Definition \ref{d:subs}.
+\item Ditto.
+\item Ditto.
+\item Proceed by induction on the length of the formula $\varphi$.
+\end{enumerate}
+\end{clue}
+
+\begin{clue}{l:gen}
+Use the definitions and facts about $\models$ from Chapter \ref{ch:six}.
+\end{clue}
+
+\begin{clue}{p:seven3}
+Check each case against the schema in Definition \ref{d:axs}.  Don't forget that any generalization of a logical axiom is also a logical axiom.
+\end{clue}
+
+\begin{clue}{p:seven4}
+You need to show that any instance of the schemas A1--A8 is a tautology and then apply Lemma \ref{l:gen}.  That each instance of schemas A1--A3 is a tautology follows from Proposition \ref{p:mif}.  For A4--A8 you'll have to use the definitions and facts about $\models$ from Chapter 6.
+\end{clue}
+
+\begin{clue}{p:deds}
+You may wish to appeal to the deductions that you made or were given in Chapter \ref{ch:three}.
+\begin{enumerate}
+\item Try using A4 and A6.
+\item You don't need A4--A8 here.
+\item Try using A4 and A8.
+\item A8 is the key;  you may need it more than once.
+\item This is just A6 in disguise.
+\end{enumerate}
+\end{clue}
+
+\begin{clue}{p:seven5a}
+This is just like its counterpart for propositional logic.
+\end{clue}
+
+\begin{clue}{p:seven6}
+Ditto.
+\end{clue}
+
+\begin{clue}{p:bim}
+Ditto.
+\end{clue}
+
+\begin{clue}{p:seven8}
+Ditto.
+\end{clue}
+
+\begin{clue}{t:fded}
+Ditto.
+\end{clue}
+
+\begin{clue}{t:gen}
+Proceed by induction on the length of the shortest proof of $\varphi$ from $\Gamma$.
+\end{clue}
+
+\begin{clue}{t:genc}
+Ditto.
+\end{clue}
+
+\begin{clue}{p:seven12}
+As usual,  don't take the following suggestions as gospel.
+\begin{enumerate}
+\item Try using A8.
+\item Start with Example \ref{e:apf}.
+\item Start with part of Problem \ref{p:deds}.
+\end{enumerate}
+\end{clue}
+
+
+
+%
+% Hints for Chapter 8 of "A Problem Course in Mathematical Logic"
+%
+
+\chapter{Hints}
+
+\begin{clue}{t:fsnd}
+This is similar to the proof of the Soundness Theorem for propositional logic,  using Proposition \ref{p:inf} in place of Proposition \ref{p:snd}.
+\end{clue}
+
+\begin{clue}{p:sacon}
+This is similar to its counterpart for prpositional logic,  Proposition \ref{p:stoc}.  Use Proposition \ref{p:inf} instead of Proposition \ref{p:snd}.
+\end{clue}
+
+\begin{clue}{p:eight4}
+This is just like its counterpart for propositional logic.
+\end{clue}
+
+\begin{clue}{p:eight5}
+Ditto.
+\end{clue}
+
+\begin{clue}{c:eight6}
+Ditto.
+\end{clue}
+
+\begin{clue}{p:smac}
+This is a counterpart to Problem \ref{p:emc};  use Proposition \ref{p:sacon} instead of Proposition \ref{p:stoc} and Proposition \ref{p:mif} instead of Proposition \ref{p:tif}.
+\end{clue}
+
+\begin{clue}{p:eight8}
+This is just like its counterpart for propositional logic.
+\end{clue}
+
+\begin{clue}{p:eight9}
+Ditto
+\end{clue}
+
+\begin{clue}{p:eight10}
+Ditto.
+\end{clue}
+
+\begin{clue}{t:etmc}
+This is much like its counterpart for propositional logic,  Theorem \ref{t:exmc}.
+\end{clue}
+
+\begin{clue}{p:eight14}
+Use Proposition \ref{p:bim}.
+\end{clue}
+
+\begin{clue}{l:eight12}
+Use the Generalization Theorem for the hard direction.
+\end{clue}
+
+\begin{clue}{t:exmcw}
+This is essentially a souped-up version of Theorem~\ref{t:etmc}.  To ensure that $C$ is a set of witnesses of the maximally consistent set of sentences,  enumerate all the formulas $\varphi$ of $\mathcal{L}'$ with one free variable and take care of one at each step in the inductive construction.
+\end{clue}
+
+\begin{clue}{t:mfc}
+To construct the required structure,  $\mathfrak{M}$,  proceed as follows.  Define an equivalence relation $\sim$ on $C$ by setting $c \sim d$ if and only if $c = d \in \Sigma$,  and let $[c] = \{\, a \in C \mid a \sim c \,\}$ be the equivalence class of $c \in C$.  The universe of $\mathfrak{M}$ will be $M = \{\, [c] \mid c \in C \,\}$.  For each $k$-place function symbol $f$ define $f^{\mathfrak{M}}$ by setting $f^{\mathfrak{M}}([a_1], \dots, [a_k]) =[b]$ if and only if $fa_1\dots a_k = b$ is in $\Sigma$.  Define the interpretations of constant symbols and relation symbols in a similar way.  You need to show that all these things are well-defined,  and then show that $\mathfrak{M} \models \Sigma$.
+\end{clue}
+
+\begin{clue}{p:eight17}
+Expand $\Gamma$ to a maximally consistent set of sentences with a set of witnesses in a suitable extension of $\mathcal{L}$, apply Theorem \ref{t:mfc},  and then cut down the resulting structure to one for $\mathcal{L}$.
+\end{clue}
+
+\begin{clue}{t:sacof}
+One direction is just Proposition \ref{p:sacon}.  For the other,  use Corollary \ref{p:eight17}.
+\end{clue}
+
+\begin{clue}{t:fcmpl}
+This follows from Theorem \ref{t:sacof} in the same way that the Completeness Theorem for propositional logic followed from Theorem \ref{t:saco}.
+\end{clue}
+
+\begin{clue}{p:fcmpct}
+This follows from Theorem \ref{t:sacof} in the same way that the Compactness Theorem for propositional logic followed from Theorem \ref{t:saco}.
+\end{clue}
+
+
+
+%
+% Hints for Chapter 9 of "A Problem Course in Mathematical Logic"
+%
+
+\chapter{Hints}
+
+\begin{clue}{p:nine1}
+In each case,  apply the trick used in Example~\ref{e:com}.  For definitions and the concrete examples,  consult texts on combinatorics and abstract algebra.
+\end{clue}
+
+\begin{clue}{t:ram}
+Suppose Ramsey's Theorem fails for some $n$.  Use the Compactness Theorem to get a contradiction to Lemma \ref{l:irt} by showing there must be an infnite graph with no clique or independent set of size $n$.
+\end{clue}
+
+\begin{clue}{l:irt}
+Inductively define a sequence $a_0$,  $a_1$,  \dots,  of vertices so that for every $n$,  either it is the case that for all $k \ge n$ there is an edge joining $a_n$ to $a_k$ or it is the case that for all $k \ge n$ there is no edge joining $a_n$ to $a_k$.  There will then be a subsequence of the sequence which is an infinite clique or a subsequence which is an infinite independent set. 
+\end{clue}
+
+\begin{clue}{p:nine4}
+The key is to figure out how,  given an assignment for one structure,  one should define the corresponding assignment in the other structure.  After that,  proceed by induction using the definition of satisfaction.
+\end{clue}
+
+\begin{clue}{p:nine5}
+When are two finite structures for $\mathcal{L}_=$ elementarily equivalent?
+\end{clue}
+
+\begin{clue}{p:nine6}
+In a suitable expanded language,  consider $\text{\rm Th}(\mathfrak{N})$ together with the sentences $\exists x\, 0 + x =  c$,  $\exists x\, S0 + x =  c$,  $\exists x\, SS0 + x =  c$,  \dots
+\end{clue}
+
+\begin{clue}{p:nine7}
+Suppose $\mathfrak{M} \models \text{\rm Th}(\mathfrak{N})$ but is not isomorphic to $\mathfrak{N}$.
+\begin{enumerate}
+\item Consider the subset of $|\mathfrak{M}|$ given by $0^{\mathfrak{M}}$,  $S^{\mathfrak{M}}(0^{\mathfrak{M}})$,  $S^{\mathfrak{M}}(S^{\mathfrak{M}}(0^{\mathfrak{M}}))$,  \dots
+\item If it didn't have one,  it would be a copy of $\mathfrak{N}$.
+\item Start with a infinite number and work down.
+\end{enumerate}
+\end{clue}
+
+\begin{clue}{t:nsr}
+Expand $\mathcal{L}_F$ by throwing in a constant symbol for every real number,  plus an extra one,  and take it from there.
+\end{clue}
+
+
+
+\part*{Appendices}
+\appendix
+
+
+%
+% Appendix to "A Problem Course in Mathematical Logic"
+%
+
+\chapter{A Little Set Theory} \label{ap:sets} \index{set theory}
+
+This apppendix is meant to provide an informal summary of the notation,  definitions, and facts about sets needed in Chapters \ref{ch:one}--\ref{ch:nine}.  For a proper introduction to elementary set theory,  try \cite{PH:NST} or \cite{JH:OST}.  
+
+
+\begin{defn} \label{d:sed}
+Suppose $X$ and $Y$ are sets.  Then 
+\begin{enumerate}
+\item  $a \in X$ means that $a$ is an {\em element\/} of ({\em i.e.\/} a thing in) the set $X$.\index{element} \index{$\in$}
+\item $X$ is a subset of $Y$,  written as $X \subseteq Y$,  if $a \in Y$ for every $a \in X$.\index{subset} \index{$\subseteq$}
+\item The {\em union\/} of $X$ and $Y$ is $X \cup Y = \{\, a \mid a \in X \text{\ or\ } a \in Y \,\}$.\index{union} \index{$\cup$}
+\item The {\em intersection\/} of $X$ and $Y$ is $X \cap Y = \{\, a \mid a \in X \text{\ and\ } a \in Y \,\}$.\index{intersection} \index{$\cap$}
+\item The {\em complement of\/} $Y$ {\em relative to\/} $X$ is $X \setminus Y = \{\, a \mid a \in X \text{\ and\ } a \notin Y \,\}$. \index{complement} \index{$\setminus$}
+\item The {\em cross product\/} of $X$ and $Y$ is $X \times Y = \{\, (a,b) \mid a \in X \text{\ and\ } b \in Y \,\}$. \index{cross product} \index{$\times$}
+\item The {\em power set\/} of $X$ is $\mathcal{P}(X) = \{\, Z \mid Z \subseteq X \,\}$.  \index{power set} \index{$\mathcal{P}$}
+\item $[X]^k = \{\, Z \mid Z \subseteq X \text{\ and\ } |Z| = k \,\}$ is the set of subsets of $X$ of size $k$. \index{$[X]^k$}
+\end{enumerate}
+\end{defn}
+
+If all the sets being dealt with are all subsets of some fixed set $Z$,  the complement of $Y$,  $\Bar{Y}$\index{$\Bar{Y}$},  is usually taken to mean the complement of $Y$ relative to $Z$.  It may sometimes be necessary to take unions,  intersections,  and cross products of more than two sets.
+
+\begin{defn}
+Suppose $A$ is a set and $\mathbf{X} = \{\, X_a \mid a \in A \,\}$ is a family of sets indexed by $A$.  Then 
+\begin{enumerate}
+\item The union of $\mathbf{X}$ is the set $\bigcup \mathbf{X} = \{\, z \mid \exists a \in A \colon z \in X_a \,\}$.\index{union}
+\item The intersection of $\mathbf{X}$ is the set $\bigcap \mathbf{X} = \{\, z \mid \forall a \in A \colon z \in X_a \,\}$.\index{intersection} 
+\item The cross product of $\mathbf{X}$ is the set of sequences (indexed by $A$) $\prod \mathbf{X} = \prod_{a \in A} X_a = \{\, (\, z_a \mid a \in A \,) \mid \forall a \in A \colon z_a \in X_a \,\}$.\index{cross product} \index{$\prod$}
+\end{enumerate}
+ We will denote the cross product of a set $X$ with itself taken $n$ times ({\em i.e.\/} the set of all sequences of length $n$ of elements of $X$) by $X^n$. \index{$X^n$}
+\end{defn}
+
+\begin{defn}
+If $X$ is any set,  a {\em $k$-place relation on $X$\/} is a subset $R \subseteq X^k$. \index{relation, $k$-place}
+\end{defn}
+
+For example,  the set $E = \{\, 0, 2, 3, \dots \,\}$ of even natural numbers is a $1$-place relation on $\mathbb{N}$,  $D = \{\, (x,y) \in \mathbb{N}^2 \mid x \text{\ divides\ } y \,\}$ is a $2$-place relation on $\mathbb{N}$,  and $S = \{\, (a,b,c) \in \mathbb{N}^3 \mid a + b = c \,\}$ is a $3$-place relation on $\mathbb{N}$.  $2$-place relations are usually called binary relations.\index{relation, binary}
+
+\begin{defn}
+A set $X$ is {\em finite\/}\index{finite} if there is some $n \in \mathbb{N}$ such that $X$ has $n$ elements,  and is {\em infinite\/}\index{infinite} otherwise.  $X$ is {\em countable\/}\index{countable} if it is infinite and there is a 1-1 onto function $f : \mathbb{N} \to X$,  and {\em uncountable\/}\index{uncountable} if it is infinite but not countable.
+\end{defn}
+
+Various infinite sets occur frequently in mathematics,  such as $\mathbb{N}$\index{$\mathbb{N}$} (the natural numbers),  $\mathbb{Q}$\index{$\mathbb{Q}$} (the rational numbers),  and $\mathbb{R}$\index{$\mathbb{R}$} (the real numbers).  Many of these are uncountable,  such as $\mathbb{R}$.  The basic facts about countable sets needed to do the problems are the following.
+
+\begin{prop}
+\begin{enumerate}
+\item If $X$ is a countable set and $Y \subseteq X$,  then $Y$ is either finite or a countable.
+\item Suppose $\mathbf{X} = \{\, X_n \mid n \in \mathbb{N} \,\}$ is a finite or countable family of sets such that each $X_n$ is either finite or countable.  Then $\bigcup \mathbf{X}$ is also finite or countable.
+\item If $X$ is a non-empty finite or countable set,  then $X^n$ is finite or countable for each $n \ge 1$.
+\item If $X$ is a non-empty finite or countable set,  then the set of all finite sequences of elements of $X$,  $X^{<\omega} = \bigcup_{n \in \mathbb{N}} X^n$ is countable.
+\end{enumerate}
+\end{prop}
+
+The properly sceptical reader will note that setting up propositional or first-order logic formally requires that we have some set theory in hand,  but formalizing set theory itself requires one to have first-order logic.\footnote{Which came first,  the chicken\index{chicken} or the egg\index{egg}?  Since,  biblically speaking,  ``In the beginning was the Word'',\index{Word}\index{John} maybe we ought to plump for alphabetical order.  Which begs the question:  In which alphabet?}
+
+
+
+%
+% Appendix to "A Problem Course in Mathematical Logic"
+%
+
+\chapter{The Greek Alphabet} \label{ap:greek} \index{Greek characters}
+
+\begin{center}
+\mbox{
+\begin{tabular}{cccl}
+$\text{A}$ & $\alpha$ & & alpha \\
+$\text{B}$ & $\beta$ & & beta \\
+$\Gamma$ & $\gamma$ & & gamma \\
+$\Delta$ & $\delta$ & & delta \\
+$\text{E}$ & $\epsilon$ & $\varepsilon$ & epsilon \\
+$\text{Z}$ & $\zeta$ & & zeta \\
+$\text{H}$ & $\eta$ & & eta \\
+$\Theta$ & $\theta$ & $\vartheta$ & theta \\
+$\text{I}$ & $\iota$ & & iota \\
+$\text{K}$ & $\kappa$ & & kappa \\
+$\Lambda$ & $\lambda$ & & lambda \\
+$\text{M}$ & $\mu$ & & mu \\
+$\text{N}$ & $\nu$ & & nu \\
+$\text{O}$ & $o$ & & omicron \\
+$\Xi$ & $\xi$ & & xi \\
+$\Pi$ & $\pi$ & $\varpi$ & pi \\
+$\text{P}$ & $\rho$ & $\varrho$ & rho \\
+$\Sigma$ & $\sigma$ & $\varsigma$ & sigma \\
+$\text{T}$ & $\tau$ & & tau \\
+$\Upsilon$ & $\upsilon$ & & upsilon \\
+$\Phi$ & $\phi$ & $\varphi$ & phi \\
+$\text{X}$ & $\chi$ & & chi \\
+$\Psi$ & $\psi$ & & psi \\
+$\Omega$ & $\omega$ & & omega
+\end{tabular}
+}
+\end{center}
+
+
+
+%
+% Appendix to "A Problem Course in Mathematical Logic"
+%
+
+\chapter{Logic Limericks} \label{ap:lim} \index{limericks}
+
+
+\begin{poem}{Deduction Theorem} \index{Deduction Theorem}
+A Theorem fine is Deduction,\\
+For it allows work-reduction:\\
+To show ``A implies B'',\\
+Assume A and prove B;\\
+Quite often a simpler production.
+\end{poem}
+
+\begin{poem}{Generalization Theorem} \index{Generalization Theorem}
+When in premiss the variable's bound,\\
+To get a ``for all'' without wound,\\
+Generalization.\\
+Not globalization;\\
+Stay away from that management sound!
+\end{poem}
+
+\begin{poem}{Soundness Theorem} \index{Soundness Theorem}
+It's a critical logical creed:\\
+Always check that it's safe to proceed. \\
+To tell us deductions \\
+Are truthful productions, \\
+It's the Soundness of logic we need.
+\end{poem}
+
+\begin{poem}{Completeness Theorem} \index{Completeness Theorem}
+The Completeness of logics is G\"odel's. \\
+'Tis advice for looking for m\"odels: \\
+They're always existent \\
+For statements consistent, \\
+Most helpful for logical lab\"ors.
+\end{poem}
+
+
+\backmatter
+
+
+%
+% Bibliography for "A Problem Course in Mathematical Logic I"
+%
+
+
+\begin{thebibliography}{99}
+
+\bibitem{JB:HML}
+Jon Barwise (ed.), {\em Handbook of Mathematical Logic\/}, North Holland,
+Amsterdam, 1977, ISBN 0-7204-2285-X.
+
+\bibitem{MB:LB}
+Merrie Bergman,  James Moor,  and Jack Nelson,  {\em The Logic Book\/}, 
+Random House,  NY,  1980,  ISBN 0-394-32323-8.
+
+\bibitem{CK:MT}
+C.C. Chang and H.J. Keisler, {\em Model Theory\/}, third ed., North
+Holland, Amsterdam, 1990.
+
+\bibitem{HE:MIL}
+Herbert~B. Enderton, {\em A Mathematical Introduction to Logic\/},
+Academic Press, New York, 1972.
+
+\bibitem{PH:NST}
+Paul~R. Halmos, {\em Naive Set Theory\/}, Undergraduate Texts in
+Mathematics, Springer-Verlag, New York, 1974, ISBN 0-387-90092-6.
+
+\bibitem{JH:OST}
+James~M. Henle, {\em An Outline of Set Theory\/}, Problem Books in
+Mathematics, Springer-Verlag, New York, 1986, ISBN 0-387-96368-5.
+
+\bibitem{DH:GEB}
+Douglas~R. Hofstadter, {\em G\"odel, Escher, Bach\/}, Random House, New
+York, 1979, ISBN 0-394-74502-7.
+
+\bibitem{JM:IML}
+Jerome Malitz, {\em Introduction to Mathematical Logic\/},
+Springer-Verlag, New York, 1979, ISBN 0-387-90346-1.
+
+\bibitem{YM:CML}
+Yu.I. Manin, {\em A Course in Mathematical Logic\/}, Graduate Texts in
+Mathematics~53, Springer-Verlag, New York, 1977, ISBN 0-387-90243-0.
+
+\bibitem{RP:ENM}
+Roger Penrose, {\em The Emperor's New Mind}, Oxford University Press,
+Oxford, 1989.
+
+\end{thebibliography}
+
+
+
+%
+% Index for "A Problem Course in Mathematical Logic"
+%
+
+\begin{theindex}
+
+  \item $($, 7, 24
+  \item $)$, 7, 24
+  \item $=$, 24, 25
+  \item $\cap$, 79
+  \item $\cup$, 79
+  \item $\exists$, 30
+  \item $\forall$, 24, 25, 30
+  \item $\fromto$, 9, 30
+  \item $\in$, 79
+  \item $\land$, 9, 30
+  \item $\lnot$, 7, 24, 25
+  \item $\lor$, 9, 30
+  \item $\models$, 14, 35, 37
+  \item $\nmodels$, 14, 36, 37
+  \item $\prod$, 79
+  \item $\proves$, 16, 43
+  \item $\setminus$, 79
+  \item $\subseteq$, 79
+  \item $\times$, 79
+  \item $\to$, 7, 24, 25
+  
+  \indexspace
+  
+  \item $A_n$, 7
+  \item $F$, 11
+  \item $\varphi^x_t$, 42
+  \item $\mathcal{L}$, 24
+  \item $\mathcal{L}_=$, 26
+  \item $\mathcal{L}_1$, 26
+  \item $\mathcal{L}_F$, 26
+  \item $\mathcal{L}_G$, 51
+  \item $\mathcal{L}_N$, 26
+  \item $\mathcal{L}_{NT}$, 25
+  \item $\mathcal{L}_O$, 26
+  \item $\mathcal{L}_P$, 7
+  \item $\mathcal{L}_S$, 26
+  \item $\mathfrak{M}$, 33
+  \item $\mathbb{N}$, 80
+  \item $\mathfrak{N}$, 33
+  \item $\mathcal{P}$, 79
+  \item $\mathbb{Q}$, 80
+  \item $\mathbb{R}$, 80
+  \item $R_n$, 53
+  \item $\mathcal{S}$, 10
+  \item $T$, 11
+  \item $\text{Th}$, 39, 45
+  \item $v_n$, 24
+  \item $X^n$, 79
+  \item $[X]^k$, 79
+  \item $\Bar{Y}$, 79
+
+  \indexspace
+
+  \item abbreviations, 9, 30
+  \item all, 2
+  \item and, 2, 9
+  \item assignment, 34, 35
+    \subitem extended, 35
+    \subitem truth, 11
+  \item atomic formulas, 7, 27
+  \item axiom, 15, 28, 39
+    \subitem logical, 43
+    \subitem schema, 15, 42
+      \subsubitem A1, 15, 42
+      \subsubitem A2, 15, 42
+      \subsubitem A3, 15, 42
+      \subsubitem A4, 42
+      \subsubitem A5, 42
+      \subsubitem A6, 42
+      \subsubitem A7, 42
+      \subsubitem A8, 42
+
+  \indexspace
+
+  \item bound variable, 29
+
+  \indexspace
+
+  \item chicken, 80
+  \item clique, 52
+  \item Compactness Theorem, 20, 50
+    \subitem applications of, 51
+  \item complement, 79
+  \item Completeness Theorem, 20, 50, 83
+  \item connectives, 7, 9, 24
+  \item consistent, 19, 47
+    \subitem maximally, 19, 48
+  \item constant, 24, 25, 31, 33, 35
+  \item contradiction, 13, 38
+  \item convention
+    \subitem common symbols, 25
+    \subitem parentheses, 9, 30
+  \item countable, 80
+  \item cross product, 79
+
+  \indexspace
+
+  \item deduction, 16, 43
+  \item Deduction Theorem, 17, 44, 83
+
+  \indexspace
+
+  \item edge, 52
+  \item egg, 80
+  \item element, 79
+  \item elementary equivalence, 54
+  \item equality, 24, 25
+  \item equivalence
+    \subitem elementary, 54
+  \item existential quantifier, 30
+  \item extension of a language, 30
+
+  \indexspace
+
+  \item finite, 80
+  \item first-order 
+    \subitem languages, 23
+    \subitem logic, 2, 23
+  \item for all, 25
+  \item formula, 7, 27
+    \subitem atomic, 7, 27
+    \subitem unique readability, 10, 32
+  \item free variable, 29
+  \item function, 24, 31, 33, 35
+    \subitem $k$-place, 24, 25
+
+  \indexspace
+
+  \item generalization, 42
+  \item Generalization Theorem, 45, 83
+    \subitem on Constants, 45
+  \item gothic characters, 33
+  \item graph, 52
+  \item Greek characters, 7, 28, 81
+
+  \indexspace
+
+  \item if and only if, 9
+  \item if \dots then, 2, 7, 25
+  \item implies, 14, 38
+  \item inconsistent, 19, 47
+  \item independent set, 52
+  \item inference rule, 15
+  \item infinite, 80
+  \item Infinite Ramsey's Theorem, 53
+  \item infinitesimal, 55
+  \item intersection, 79
+  \item isomorphism of structures, 53
+
+  \indexspace
+
+  \item John, 80
+
+  \indexspace
+
+  \item language, 26, 31
+    \subitem extension of, 30
+    \subitem first-order, 23
+    \subitem formal, 1
+    \subitem natural, 1
+    \subitem propositional, 7
+  \item limericks, 83
+  \item logic 
+    \subitem first-order, 2, 23
+    \subitem mathematical, 1
+    \subitem natural deductive, 1
+    \subitem predicate, 7
+    \subitem propositional, 2, 7
+    \subitem sentential, 7
+  \item logical axiom, 43
+
+  \indexspace
+
+  \item mathematical logic, 1
+  \item maximally consistent, 19, 48
+  \item metalanguage, 31
+  \item metatheorem, 31
+  \item model, 37
+  \item Modus Ponens, 15, 43
+  \item MP, 15, 43
+
+  \indexspace
+
+  \item natural deductive logic, 1
+  \item non-standard model, 53, 55
+    \subitem of the real numbers, 55
+  \item not, 2, 7, 25
+
+  \indexspace
+
+  \item or, 2, 9
+
+  \indexspace
+
+  \item parentheses, 7, 24
+    \subitem conventions, 9, 30
+    \subitem doing without, 8
+  \item power set, 79
+  \item predicate, 24, 25
+  \item predicate logic, 7
+  \item premiss, 16, 43
+  \item proof, 16, 43
+  \item propositional logic, 2, 7
+  \item proves, 16, 43
+  \item punctuation, 7, 25
+
+  \indexspace
+
+  \item quantifier 
+    \subitem existential, 30
+    \subitem scope of, 30
+    \subitem universal, 24, 25, 30
+
+  \indexspace
+
+  \item Ramsey number, 53
+  \item Ramsey's Theorem, 53
+    \subitem Infinite, 53
+  \item relation, 24, 31, 33
+    \subitem $k$-place, 24, 25, 79
+    \subitem binary, 25, 80
+  \item rule of inference, 15, 43
+
+  \indexspace
+
+  \item satisfiable, 13, 37
+  \item satisfies, 13, 36, 37
+  \item scope of a quantifier, 30
+  \item sentence, 29
+  \item sentential logic, 7
+  \item set theory, 79
+  \item Soundness Theorem, 19, 47, 83
+  \item structure, 33
+  \item subformula, 10, 29
+  \item subgraph, 52
+  \item subset, 79
+  \item substitutable, 41
+  \item substitution, 41
+  \item symbols, 7, 24
+    \subitem logical, 24
+    \subitem non-logical, 24
+
+  \indexspace
+
+  \item tautology, 13, 38
+  \item term, 26, 31, 35
+    \subitem unique readability, 32
+  \item theorem, 31
+  \item theory, 39, 45
+  \item there is, 2
+  \item truth 
+    \subitem assignment, 11
+    \subitem in a structure, 36, 37
+    \subitem table, 12, 13
+    \subitem values, 11
+
+  \indexspace
+
+  \item uncountable, 80
+  \item union, 79
+  \item unique readability 
+    \subitem of formulas, 10, 32
+    \subitem of terms, 32
+  \item Unique Readability Theorem, 10, 32
+  \item universal quantifier, 30
+  \item universe, 33
+
+  \indexspace
+
+  \item variable, 24, 31, 34, 35
+    \item bound, 29
+    \item free, 29
+  \item vertex, 52
+
+  \indexspace
+
+  \item witnesses, 48
+  \item Word, 80
+
+\end{theindex}
+
+
+\end{document}

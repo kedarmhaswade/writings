@@ -1,0 +1,376 @@
+\documentclass[a4paper]{article}
+\usepackage[margin=20mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,amsfonts}   %% AMS mathematics macros
+% https://tex.stackexchange.com/a/304576/64425
+\usepackage{epigraph, varwidth}
+\setlength{\epigraphwidth}{0.8\textwidth}
+\usepackage{url}
+\renewcommand{\epsilon}{\varepsilon}
+\renewcommand{\theta}{\vartheta}
+\renewcommand{\kappa}{\varkappa}
+\renewcommand{\rho}{\varrho} % remember my teacher and friend Adalberto!
+\renewcommand{\phi}{\varphi}
+%\usepackage{newtxtext,newtxmath}
+\newtheorem{theorem}{Theorem}
+
+\begin{document}
+\begin{theorem}
+    \label{theorem: fta}
+    \textsc{Fundamental Theorem of Arithmetic}. A positive integer $p>1$ is a product of prime numbers in essentially one way only.
+\end{theorem}
+\epigraph
+{
+    The theorem can be proved by mathematical induction plus some simple but skilled ingenuity. E. Zermelo $\mathellipsis$ gave such a proof in 1912 and published it in 1934. \emph{Others imitated him}.
+}
+{
+    ---\textit{Eric Temple Bell \cite{math-queen-servant}}
+}
+\begin{proof}
+    We shall provide our own proof based on \emph{strong induction}, perhaps it will be an imitatation of Zermelo's $\mathellipsis$.
+
+\noindent\textbf{Bases}:
+        
+        We prove that the proposition holds for the integers: 2, 3, 4, 5, and 6:
+        \begin{center}
+            \begin{tabular}{|r|l|}
+            \hline
+                Number & Expressed as the \emph{unique} product of primes\\
+            \hline
+            2 & 2\\
+            \hline
+            3 & 3\\
+            \hline
+            4 & $2\times 2$\\
+            \hline
+            5 & 5\\
+            \hline
+            6 & $2\times 3$\\
+            \hline
+            \end{tabular}
+        \end{center}
+        From the above, it is trivial to see that the proposition is true for \emph{all} integers in $[2, 6]$; each of the numbers is either a prime number or a unique product of prime numbers. 
+
+\noindent\textbf{Inductive hypotheses}:
+
+        Each of the integers from $2$ to $n$ can be expressed as a \emph{unique product} of prime numbers.  These are the inductive hypotheses, we shall assume them to be true.
+        
+\noindent\textbf{Induction}:
+
+        We will prove the conditional statement of which the inductive hypotheses are the antecedent and $P_{n+1}$ the consequent\footnote{See \cite{suber-math-ind} for details}, i.e., we prove that $P_0 \wedge P_1 \wedge \dots \wedge P_n \implies P_{n+1}$ where $P$ denotes our proposition that every integer can be expressed as a \emph{unique product} of primes\footnote{This is also called the \emph{prime factorization} of an integer $n > 1$}.
+
+        \begin{center}
+            \begin{tabular}{|r|l|}
+            \hline
+                Number & Expressed as the \emph{unique} product of primes\\
+            \hline
+            2 & 2\\
+            \hline
+            3 & 3\\
+            \hline
+            \vdots & \vdots\\
+            \hline
+                \(n_1\) & $p_{11}\times p_{12}\times \dots \times p_{1a}$ (these are $a$ primes)\\
+            \hline
+                \(n_3\) & $p_{31}\times p_{32}\times \dots \times p_{3c}$ (these are $c$ primes)\\
+            \hline
+                \(n_4\) & $p_{41}\times p_{42}\times \dots \times p_{4d}$ (these are $d$ primes)\\
+            \hline
+                \(n_2\) & $p_{21}\times p_{22}\times \dots \times p_{2b}$ (these are $b$ primes)\\
+            \hline
+            \vdots & \vdots\\
+            \hline
+                \(n\) & $p_{n1}\times p_{n2}\times \dots \times p_{nk}$ (these are $k$ primes)\\
+            \hline
+            \end{tabular}
+        \end{center}
+
+        Just for convenience, prime factors of numbers 
+        in the above table are arranged in a non-decreasing order.
+
+ \noindent\textbf{Existence}:\\
+    Consider the number $n+1$. Two cases emerge:
+    \begin{enumerate}
+        \item $n+1$ is prime. Clearly, $P_{n+1}$ is true in this case. 
+        \item $n+1$ is not prime. Then there must be two factors of $n+1$ whose product is $n+1$. Let the two factors be $n_1$ and $n_2$. Then, from inductive hypotheses, $n_1$ and $n_2$ can themselves be expressed as unique products of $a$ and $b$ primes respectively.
+            \begin{align*}
+                n + 1 
+                &= n_1 \times n_2\\
+                &= (p_{11}\times p_{12}\times \dots \times p_{1a}) \times
+                   (p_{21}\times p_{22}\times \dots \times p_{2b})
+            \end{align*}
+            Thus, $n+1$ can be expressed as a product of $a+b$ primes.
+    \end{enumerate}
+    In either case, $n+1$ can be expressed as a product of primes.
+
+ \noindent\textbf{Uniqueness}:\\
+    The same two cases for $n+1$ emerge:
+    \begin{enumerate}
+        \item $n+1$ is prime. Then, by definition, its only prime factor is $n+1$ which gives a \emph{unique} prime factorization. 
+        \item $n+1$ is not prime. Let it have two \emph{different} prime factorizations (because of the two pairs $n_1, n_2$ and $n_3, n_4$): $n+1 = n_1\times n_2 = n_3\times n_4$. 
+             Let there be no prime that is common between $a+b$ primes in $n_1\times n_2$ and $c+d$ primes in $n_3\times n_4$:
+             \begin{align*}
+                n + 1\\
+             &= (p_{11}\times p_{12}\times \dots \times p_{1a}) \times
+                (p_{21}\times p_{22}\times \dots \times p_{2b})\\
+             &= (p_{31}\times p_{32}\times \dots \times p_{3c}) \times
+                (p_{41}\times p_{42}\times \dots \times p_{4d})
+            \end{align*}
+    \end{enumerate}
+
+\noindent\textbf{Conclusion}:
+\end{proof}
+\begin{theorem}
+    \label{theorem: div-by-9}
+    The remainder when any number $p \in \mathbb{N}$ is divided by $9$ is the same as the remainder when the sum of digits of $p$ is divided by $9$.
+\end{theorem}
+\begin{proof}
+    We use mathematical induction on the number of digits in $p$. Concretely, we use the notation $a \bmod b$ to denote the remainder when $a$ is divided by $b$ ($a, b \in \mathbb{N}$). 
+
+    \textbf{Basis}: The sum of digits of a single-digit number is the number itself. This trivially proves that the proposition $P$ of the theorem holds for all single-digit numbers, i.e., $P(1)$ is true. 
+
+    \textbf{Inductive hypothesis}: Let the remainder when a $k$-digit number, 
+    $
+        p_k = d_{k}d_{k-1}\dots d_{2}d_{1} 
+    $,
+    is divided by $9$ be $r_k$:
+    \begin{equation}
+        \label{eqn: pk-mod-9}
+        p_k \bmod 9 = r_k
+    \end{equation}
+    where $0 \le r_k < 9$.
+    
+
+    We assume that $P$ holds for $p_k$. Let $s_k$ denote the sum of digits of $p_k$. The inductive hypothesis then becomes
+    \begin{equation}
+        \label{eqn: sk-mod-9-ind-hyp}
+        p_k \bmod 9 = r_k \implies s_k \bmod 9 = r_k
+    \end{equation}
+    where
+    $$
+        s_k = \sum_{i=1}^{k} d_i
+    $$
+
+    \textbf{Induction}: To form $p_{k+1}$, a $(k+1)$-digit number, we juxtapose a digit $d_0$ to $p_k$. Then it follows that 
+    $$
+        p_{k+1} = 10\cdot p_k + d_0 = 9\cdot p_k + p_k + d_0
+    $$
+    and since $(9\cdot p_k) \bmod 9 = 0$,
+    \begin{equation}
+        \label{eqn: p-k+1-mod-9}
+        p_{k+1} \bmod 9 = (p_k \bmod 9 + d_0 \bmod 9) \bmod 9
+    \end{equation}
+    From (\ref{eqn: pk-mod-9}), 
+    \begin{equation}
+        \label{eqn: use-rk-from-ind-hyp}
+        p_{k+1} \bmod 9 = (r_k + d_0 \bmod 9) \bmod 9
+    \end{equation}
+    Now, the sum of digits of $p_{k+1}$: 
+    \begin{equation}
+        \label{eqn: sk+1-definition}
+        s_{k+1} = s_k + d_0
+    \end{equation}
+    and hence
+    $$
+        s_{k+1} \bmod 9 = (s_k \bmod 9 + d_0 \bmod 9) \bmod 9
+    $$
+    which, from inductive hypothesis (\ref{eqn: sk-mod-9-ind-hyp}), becomes
+    \begin{equation}
+        \label{eqn: s-k+1-mod-9}
+        s_{k+1} \bmod 9 = (r_k + d_0 \bmod 9) \bmod 9
+    \end{equation}
+
+    \textbf{Conclusion}: Since the right hand sides of (\ref{eqn: use-rk-from-ind-hyp}) and (\ref{eqn: s-k+1-mod-9}) are the same, 
+    $$
+        p_{k+1} \bmod 9 = s_{k+1} \bmod 9
+    $$
+    Togther, the Basis and Induction prove the theorem.
+\end{proof}
+Next, we provide an alternate proof.
+\begin{proof}
+    Let $p$ be a $k$-digit natural number
+    $$
+        p = d_{k-1}d_{k-2}\dots d_0
+    $$
+    and
+    $$
+        s = d_{k-1} + d_{k-2} + \dots + d_0
+    $$
+    be the sum of its digits.
+    \begin{align*}
+        \therefore p 
+        &= \sum_{i=0}^{k-1}10^{i}\cdot d_i \\
+        &= \sum_{i=0}^{k-1}(9+1)^i\cdot d_i \\
+    \end{align*}
+    We use binomial expansion to get:
+    \begin{align*}
+        p
+        &= \sum_{i=0}^{k-1}({i \choose 0}\cdot 9^i + {i \choose 1}\cdot 9^{i-1} + {i \choose 2}\cdot 9^{i-2} + \dots + {i \choose i-1}\cdot 9 + {i \choose i}\cdot 1)\cdot d_i\\
+        &= \sum_{i=0}^{k-1}(m + 1)\cdot d_i\\
+    \end{align*}
+    where $m$ is a multiple of $9$.
+    \begin{align*}
+        p
+        &= (m + 1)\cdot (d_0 + d_1 + \dots + d_{k-1})\\
+        &= (m + 1)\cdot s\\
+        \therefore p \bmod 9 
+        &= m \bmod 9 + s \bmod 9\\
+        &= s \bmod 9
+    \end{align*}
+    since $m \bmod 9$, the remainder when a multiple of 9 is divided by 9, is $0$.
+\end{proof}
+\begin{theorem}
+    \label{theorem: de-moivre-fib}
+    The $n^{th}$ fibonacci number, $fib(n)$, can be expressed as \large{$fib(n)=\frac{\phi^n - \hat{\phi}^{n}}{\sqrt{5}}$},
+    where $\phi = \frac{1+\sqrt{5}}{2}$ and $\hat{\phi} = \frac{1-\sqrt{5}}{2}$ (Abraham De Moivre's theorem).
+\end{theorem}
+\begin{proof}
+    $\phi$ and $\hat{\phi}$ are the two roots of the equation $x^2=x+1$, or equivalently, $x = 1 + \frac{1}{x}$. 
+    Therefore,  
+    \begin{equation}
+        \label{eqn: phieq}
+        \phi = 1 + \frac{1}{\phi}
+    \end{equation}
+    and
+    \begin{equation}
+        \label{eqn: phihateq}
+        \hat{\phi} = 1 + \frac{1}{\hat{\phi}}
+    \end{equation}
+
+    The fibonacci sequence is recursively defined as follows:
+    \begin{equation}
+        \label{eqn: fibdef}
+        fib(n)=
+        \begin{cases}
+            1 &\mbox{if } n = 1\\
+            1 &\mbox{if } n = 2\\
+            fib(n-1) + fib(n-2) &\mbox otherwise
+        \end{cases}
+    \end{equation}
+    The first few terms of fibonacci sequence are: $1, 1, 2, 3, 5, 8, 13$.
+    We use mathematical induction to prove the theorem.\\
+
+    \textbf{Basis}: It is trivial to verify that the theorem holds for $n = 2$:
+    \begin{align*}
+        fib(2)
+        &= \frac{\phi^2 - \hat{\phi}^2}{\sqrt{5}}\\
+        &= \frac{1}{\sqrt{5}}\cdot \frac{1}{4}\cdot (6+2\sqrt{5}-6+2\sqrt{5})\\
+        &= 1
+    \end{align*}
+    and $n = 1$:
+    \begin{align*}
+        fib(1) 
+        &= \frac{\phi^1 - \hat{\phi}^1}{\sqrt{5}}\\
+        &= \frac{\frac{1+\sqrt{5}}{2}-\frac{1-\sqrt{5}}{2}}{\sqrt{5}}\\
+        &= \frac{\frac{2\cdot \sqrt{5}}{2}}{\sqrt{5}}\\
+        &= 1
+    \end{align*}
+
+    \textbf{Inductive hypothesis}:
+    We \emph{assume} that the hypothesis holds for $n$ and $n-1$, i.e.
+    \begin{equation}
+        \label{eqn: fibn-ind-hyp}
+        fib(n)=\frac{\phi^{n} - \hat{\phi}^{n}}{\sqrt{5}}
+    \end{equation}
+    and
+    \begin{equation}
+        \label{eqn: fibn-1-ind-hyp}
+        fib(n-1)=\frac{\phi^{n-1} - \hat{\phi}^{n-1}}{\sqrt{5}}
+    \end{equation}
+
+    \textbf{Induction}: We need to prove that inductive hypothesis is true for $n+1$ \emph{assuming} it holds for \emph{both} $n, n-1$. In other words, we need to prove that
+    $$
+        fib(n+1)=\frac{\phi^{n+1} - \hat{\phi}^{n+1}}{\sqrt{5}}
+    $$
+
+    From (\ref{eqn: fibdef}),
+    \begin{align*}
+            fib(n+1) 
+            &= fib(n) + fib(n-1)\\
+            &= \frac{\phi^n - \hat{\phi}^{n}}{\sqrt{5}} + \frac{\phi^{n-1} - \hat{\phi}^{n-1}}{\sqrt{5}}\\
+            &= \frac{(\phi^n + \phi^{n-1})-(\hat{\phi}^n + \hat{\phi}^{n-1})}{\sqrt{5}} \dots from~inductive~hypothesis~(\ref{eqn: fibn-ind-hyp}), (\ref{eqn: fibn-1-ind-hyp})\\
+            &= \frac{\phi^{n}(1 + \frac{1}{\phi}) - \hat{\phi}^{n}(1 + \frac{1}{\hat\phi})}{\sqrt{5}}\\
+            &= \frac{\phi^{n}(\phi) - \hat{\phi}^{n}(\hat\phi)}{\sqrt{5}} \dots from~(\ref{eqn: phieq}),~(\ref{eqn: phihateq})\\
+    \end{align*}
+    \begin{equation}
+        \label{eqn: fibn+1-ind-hyp}
+            fib(n+1) = \frac{\phi^{n+1} - \hat\phi^{n+1}}{\sqrt{5}} 
+    \end{equation}
+
+    \textbf{Conclusion}: De Moivre's theorem follows from (\ref{eqn: fibn-ind-hyp}), (\ref{eqn: fibn-1-ind-hyp}), and (\ref{eqn: fibn+1-ind-hyp}).
+
+\end{proof}
+
+\begin{theorem}
+    \label{theorem: rel-prime}
+    The natural numbers $x$ and $y$ are relatively prime (i.e. $GCD(x, y) = 1$). Prove that $x$ and $x \pm y$ are relatively prime.
+\end{theorem} 
+\begin{proof}
+    Let us say that $x$ and $y$ are relatively prime, but $x$ and $x + y$ are \emph{not}.
+    This means that $1$ is the only common factor of $x$ and $y$ but that some natural number, $f > 1$, is a common factor of $x$ and $x + y$.
+    Let
+    \begin{equation}
+        \label{eqn: x}
+        x = f\cdot q_{1}
+    \end{equation}
+    where $q_{1} \in \mathbb{N}$, and
+    \begin{equation}
+        \label{eqn: x+y}
+        x + y = f\cdot q_{2}
+    \end{equation}
+    where $q_{2} \in \mathbb{N}$. 
+    
+    Let $y > x$. By substituting $x$ from (\ref{eqn: x}) and rearranging the terms, we get
+    \begin{equation}
+        \label{eqn: subst}
+        y = f\cdot(q_2 - q_1)
+    \end{equation}
+    where $(q_2 - q_1) \in \mathbb{Z}$.
+
+    From (\ref{eqn: x}) and (\ref{eqn: subst}) it follows that $f > 1$ is a \emph{common factor} of both $x$ and $y$ implying that they are \emph{not} relatively prime. This is a contradiction since we started with the proposition that $x$ and $y$ are relatively prime. A similar argument can be made to prove that $x$ and $x - y$ are relatively prime too.
+
+\end{proof}
+\begin{theorem}
+    \label{theorem: euclid-gcd}
+    Let $GCD(m, n)$ denote the greatest common divisor of two nonnegative integers, $m$ and $n$. Prove that $GCD(m, n) = GCD(m-n, n)$.
+\end{theorem} 
+
+\begin{proof}
+    Without the loss of generality, let $m > n$. A \emph{sorted sequence} of all factors of $m$ ($p$ factors) and $n$ ($q$ factors) can be written:
+\begin{equation}
+\label{eqn: s1}
+    S_1 = f_{m(1)}, f_{m(2)}, \dots, \underline{f_{m(i)}}, \dots, f_{m(p)} 
+\end{equation}
+    where $f_{m(i)} < f_{m(j)} \forall i < j$ and $p \in \mathbb{N}, p \ge 2$. Clearly, $f_{m(1)} = 1$, and $f_{m(p)} = m$.
+\begin{equation}
+\label{eqn: s2}
+    S_2 = f_{n(1)}, f_{n(2)}, \dots, \underline{f_{n(j)}}, \dots, f_{n(q)}
+\end{equation}
+    where $f_{n(i)} < f_{n(j)} \forall i < j$ and $q \in \mathbb{N}, q \ge 2$.
+
+Let $GCD(m, n) = f_{m(i)} = f_{n(j)}$. Then, by definition, 
+\begin{equation}
+\label{eqn: gcd1}
+    m = GCD(m, n) \cdot q_{m}
+\end{equation}
+\begin{equation}
+\label{eqn: gcd2}
+    n = GCD(m, n) \cdot q_{n}
+\end{equation}
+where $q_{m}, q_{n} \in \mathbb{N}$ are the respective multiples.
+
+    Subtracting  (\ref{eqn: gcd2}) from (\ref{eqn: gcd1}), 
+\begin{equation}
+\label{eqn: m-minus-n}
+    m - n = GCD(m, n) \cdot (q_{m} - q_{n})
+\end{equation}
+    The numbers $q_{m}$ and $q_{n}$ must be relatively prime, because, if they were not, $GCD(m, n)$ would be greater than $f_{m(i)}$ or $f_{n(j)}$. It then follows that $q_{n}$ and $q_{m}-q_{n}$ are relatively prime too (See Theorem \ref{theorem: rel-prime}). Therefore, from (\ref{eqn: gcd2}) and (\ref{eqn: m-minus-n}), 
+$$
+GCD(m-n, n) = GCD(m, n)
+$$
+\end{proof}
+\begin{thebibliography}{00}
+    \bibitem{math-queen-servant} Bell, Eric Temple. MATHEMATICS Queen and Servant of Science. G. Bell \& Sons, Ltd: London. Page 231.
+    \bibitem{suber-math-ind} Peter Suber, "Mathematical Induction". On the WWW at \url{https://legacy.earlham.edu/~peters/courses/logsys/math-ind.htm}.
+\end{thebibliography}
+
+\end{document}

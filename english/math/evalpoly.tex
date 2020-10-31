@@ -1,0 +1,66 @@
+\documentclass[a4paper]{article}
+\usepackage[margin=25mm]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\pagenumbering{gobble}
+\usepackage{verbatim}
+\usepackage{epigraph, varwidth}
+\usepackage{hyperref}
+
+% Keywords command
+\providecommand{\keywords}[1]
+{
+  \small
+  \textbf{\textit{Keywords---}} #1
+}
+
+\title{Math Play and Discovery}
+\author{Author Mhaswade Kedar$^{1}$ \\
+        \small $^{1}$Free Learner's School\\
+}
+\date{} % Comment this line to show today's date
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+    This paper brings out the importance of leisure and play in understanding of mathematics and computing in a \emph{free environment}. The author describes a personal experience of a student's discovery of an elegant solution to an elementary problem of evaluating a polynomial.
+\end{abstract} \hspace{10pt}
+
+\keywords{math education, free play, polynomials, discovery}
+\section{Introduction}
+\label{sec: intro}
+This paper is a personal account of how playful and free environment assists in discoveries in subject matter that is being discussed in an unconventional classroom. The environment discussed here is that of \emph{Free Learner's School}, a registered homeschool. Author does \emph{not} intend to demonstrate homeschooling as an effective way of educating children. He only wants to demonstrate how free play helps discovery. This kind of setup can be, in spirit, be created in a more conventional school.
+
+The main protagonists are a high school student named Vappor and an instructor named Drake. Drake, the author of this paper, is a computer science graduate and has worked in the software industry. He does not have a formal degree in education. Vappor is familiar with some high school mathematics (no calculus yet) and computer programming. Among the ideas in programming, he is particularly attracted to \emph{recursion}. He developed a liking for the idea of recursion when Drake introduced him to recursion as a way of solving problems or perhaps as a \emph{way of thinking}. In this regard, Drake's observations have been similar to those of Seymour Papert's\cite{papert}:
+\renewcommand{\epigraphsize}{\small}
+\setlength{\epigraphwidth}{0.9\textwidth}
+\epigraph
+{
+Of all ideas I have introduced to children, recursion stands out as the one idea that is particularly able to evoke an excited response.
+}
+{\textit{Seymour Papert}}
+
+In this paper, we will stick to the facts as they happened in a discussion session between Drake and Vappor. No attempt to dramatize the interaction has been made; we will stick to facts. Since this is a personal account, however, the discussion is not \emph{formal} in the truest sense of the word.
+
+\section{Some Background}
+\label{sec: background}
+Typical \emph{sessions} of discussion between Vappor and Drake are more of an \emph{exploratory} kind. There is usually a book to guide the discussion, a computer connected to the Internet, a couple of chairs, a couple of comforters to lie down on, papers and pencils, and lots of time for exploration. There is no urge to complete a particular section from the book. There is a schedule of sorts, but it is followed more in its spirit rather than as a rule. There is a curriculum mainly to help stick to some kind of backbone while doing the exploration of ideas. In other words, it is \emph{unlike} the formal environment present in a typical classroom that the mathematician Keith Devlin\cite{devlin} has described (emphasis author's):
+\epigraph
+{
+    In the first scene, \emph{by far the most common}, you will see the students sitting in neatly organized rows, facing the teacher, who stands at the front. On the desk in front of each student you will likely see a textbook, a notebook, a pen or pencil, and perhaps a calculator. At the start of each class, the teacher will spend some time at the whiteboard, explaining some new rule or technique and working through one or two examples. Then the students will open their textbooks and proceed to work through a number of assigned examples whose solutions require \emph{the technique they have just been shown}. They will for the most part work alone, and in silence.
+}
+{\textit{Keith Devlin}}
+
+Drake is not completely sure if his is a right way of teaching a high-schooler like Vappor, but \emph{both of them} have decided to give it a try. We will not go into the details of exactly why such [sadly very uncommon] environment was chosen for the study of mathematics and other subjects since they are orthogonal to the premise of this paper. As far as they can both tell, the sessions are fun and both of them usually feel that they are \emph{learning} something.
+\begin{thebibliography}{00}
+\bibitem{papert} Papert, Seymour. MINDSTORMS Children, Computers, and Powerful Ideas. Basic Books, Inc., Publishers / New York. Page 71.
+\bibitem{devlin} Devlin, Keith. In Math You Have to Remember, In Other Subjects You Can Think About It. MAA Devlin's Angle: \url{https://www.maa.org/external_archive/devlin/devlin_06_10.html}. June 2010.
+\end{thebibliography}
+
+% Word count
+% \verbatiminput{\jobname.wordcount.tex}
+
+\end{document}

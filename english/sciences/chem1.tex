@@ -1,0 +1,341 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{epigraph, varwidth}
+\usepackage{longtable}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{chemfig}
+\usepackage{gensymb}
+\usepackage{mhchem}
+\usepackage{color, colortbl}
+\usepackage{xcolor}
+\definecolor{rnmgreen}{rgb}{0.549, 0.929, 0}
+\definecolor{noblepink}{rgb}{0.898,0.741, 0.898}
+\definecolor{alkalibeige}{rgb}{0.867,0.682,0.027}
+\definecolor{alkalineyellow}{rgb}{0.945,0.945,0.396}
+\definecolor{metalloid}{rgb}{0.6196,0.898,0.831}
+\definecolor{lanthorange}{rgb}{0.965,0.831,0.635}
+\definecolor{actipink}{rgb}{0.98,0.8,0.859}
+\definecolor{transred}{rgb}{0.941,0.737,0.737}
+\definecolor{postblue}{rgb}{0.675,0.875,0.926}
+\definecolor{unk}{rgb}{0.933,0.933,0.933}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    urlcolor=cyan,
+}
+\urlstyle{same}
+
+\begin{document}
+\listoftodos
+\section{Atoms, Molecules, and Ions}
+\label{sec: a-m-i}
+\subsection{The Periodic Table}
+\label{sec: pt}
+The Periodic Table is like the mathematical axioms of chemistry. Everyone interested in chemistry should know these axioms readily. There are so many ways in which you can look at the Periodic Table! The ultimate resource for the periodic table is \url{https://ptable.com}.
+\begin{center}
+            \begin{longtable}{l}
+            \caption{Element's class legend} \label{tab: the-color-legend} \\
+            \endfirsthead
+            \endhead
+            \cellcolor{rnmgreen}Reactive non metal\\ 
+            \cellcolor{alkalibeige}Alkali metal\\ 
+            \cellcolor{alkalineyellow}Alkaline earth metal\\ 
+            \cellcolor{lanthorange}Lanthanoids\\ 
+            \cellcolor{actipink}Actinoids\\ 
+            \cellcolor{transred}Transition metals\\ 
+            \cellcolor{postblue}Post-transition metals\\ 
+            \cellcolor{metalloid}Metalloids\\ 
+            \cellcolor{unk}Unknown\\ 
+            \end{longtable}
+\begin{longtable}{|l|l|l|l|}
+\caption{The Periodic Table of Elements} \label{tab: the-ptable} \\
+\hline
+    Z & Symbol & Name & A\textsubscript{r, short}\\
+\hline
+\endfirsthead
+\endhead
+    1 & H & \cellcolor{rnmgreen}Hydrogen & 1.008\\
+ \hline
+    2 & He & \cellcolor{noblepink}Helium & 4.0026\\
+ \hline
+ \hline
+    3 & Li & \cellcolor{alkalibeige}Lithium & 6.94\\
+ \hline
+    4 & Be & \cellcolor{alkalineyellow}Beryllium & 9.0122\\
+ \hline
+    5 & B & \cellcolor{metalloid}Boron & 10.81\\
+ \hline
+    6 & C &\cellcolor{rnmgreen}Carbon & 12.011\\
+ \hline
+    7 & N &\cellcolor{rnmgreen}Nitrogen & 14.007\\
+ \hline
+    8 & O &\cellcolor{rnmgreen}Oxygen & 15.999\\
+ \hline
+    9 & F &\cellcolor{rnmgreen}Fluorine & 18.998\\
+ \hline
+    10 & Ne &\cellcolor{noblepink}Neon & 20.18\\
+ \hline
+ \hline
+    11 & Na & \cellcolor{alkalibeige}Sodium (Natrium) & 22.99\\
+ \hline
+    12 & Mg &\cellcolor{alkalineyellow}Magnesium & 24.305\\
+ \hline
+    13 & Al & \cellcolor{postblue}Aluminum & 26.982\\
+ \hline
+    14 & Si & \cellcolor{metalloid}Silicon & 28.085\\
+ \hline
+    15 & P & \cellcolor{rnmgreen}Phosphorus & 30.974\\
+ \hline
+    16 & S & \cellcolor{rnmgreen}Sulfur & 32.06\\
+ \hline
+    17 & Cl & \cellcolor{rnmgreen}Chlorine & 35.45\\
+ \hline
+    18 & Ar &\cellcolor{noblepink}Argon & 39.95\\
+ \hline
+ \hline
+    19 & K & \cellcolor{alkalibeige}Potassium (Kalium) & 39.098\\
+ \hline
+    20 & Ca & \cellcolor{alkalineyellow}Calcium & 40.078\\
+ \hline
+    21 & Sc & \cellcolor{transred}Scandium & 44.956\\
+ \hline
+    22 & Ti & \cellcolor{transred}Titanium & 47.867\\
+ \hline
+    23 & V & \cellcolor{transred}Vanadium & 50.942\\
+ \hline
+    24 & Cr & \cellcolor{transred}Chromium & 51.996\\
+ \hline
+    25 & Mn & \cellcolor{transred}Manganese & 54.938\\
+ \hline
+    26 & Fe & \cellcolor{transred}Iron (Ferrum) & 55.845\\
+ \hline
+    27 & Co & \cellcolor{transred}Cobalt & 58.933\\
+ \hline
+    28 & Ni & \cellcolor{transred}Nickel & 58.693\\
+ \hline
+    29 & Cu & \cellcolor{transred}Copper & 63.546\\
+ \hline
+    30 & Zn & \cellcolor{transred}Zinc & 65.38\\
+ \hline
+    31 & Ga & \cellcolor{postblue}Gallium & 69.723\\
+ \hline
+    32 & Ge & \cellcolor{metalloid}Germanium & 72.63\\
+ \hline
+    33 & As & \cellcolor{metalloid}Arsenic & 74.922\\
+ \hline
+    34 & Se & \cellcolor{rnmgreen}Selenium & 78.971\\
+ \hline
+    35 & Br & \cellcolor{rnmgreen}Bromine & 79.904\\
+ \hline
+    36 & Kr &\cellcolor{noblepink}Krypton & 83.798\\
+ \hline
+ \hline
+    37 & Rb & \cellcolor{alkalibeige}Rubidium & 85.468\\
+ \hline
+    38 & Sr & \cellcolor{alkalineyellow}Strontium & 87.62\\
+ \hline
+    39 & Y & \cellcolor{transred}Yttrium & 88.906\\
+ \hline
+    40 & Zr & \cellcolor{transred}Zirconium & 91.224\\
+ \hline
+    41 & Nb & \cellcolor{transred}Niobium & 92.906\\
+ \hline
+    42 & Mo & \cellcolor{transred}Molymbdenum & 95.95\\
+ \hline
+    43 & Tc & \cellcolor{transred}Technetium & (98)\footnote{This and other values in a pair of parentheses indicates the absence of a \emph{stable} isotope.}\\
+ \hline
+    44 & Ru & \cellcolor{transred}Ruthenium & 101.07\\
+ \hline
+    45 & Rh & \cellcolor{transred}Rhodium & 102.91\\
+ \hline
+    46 & Pd & \cellcolor{transred}Palladium & 106.42\\
+ \hline
+    47 & Ag & \cellcolor{transred}Argentum (Silver) & 107.87\\
+ \hline
+    48 & Cd & \cellcolor{transred}Cadmium & 112.41\\
+ \hline
+    49 & In & \cellcolor{postblue}Indium & 114.82\\
+ \hline
+    50 & Tn & \cellcolor{postblue}Stannum (Tin) & 118.71\\
+ \hline
+    51 & Sb & \cellcolor{metalloid}Stibium (Antimony) & 121.76\\
+ \hline
+    52 & Te & \cellcolor{metalloid}Tellurium & 127.60\\
+ \hline
+    53 & I & \cellcolor{rnmgreen}Iodine & 126.90\\
+ \hline
+    54 & Xe &\cellcolor{noblepink}Xenon & 131.29\\
+ \hline
+ \hline
+    55 & Cs & \cellcolor{alkalibeige}Caesium & 132.91\\
+ \hline
+    56 & Ba & \cellcolor{alkalineyellow}Barium & 137.33\\
+ \hline
+    57 & La & \cellcolor{lanthorange}Lanthanum & 138.91\\
+ \hline
+    58 & Ce & \cellcolor{lanthorange}Cerium & 140.12\\
+ \hline
+    59 & Pr & \cellcolor{lanthorange}Praseodymium & 140.91\\
+ \hline
+    60 & Nd & \cellcolor{lanthorange}Neodymium & 144.24\\
+ \hline
+    61 & Pm & \cellcolor{lanthorange}Promethium & (145)\\
+ \hline
+    62 & Sm & \cellcolor{lanthorange}Samarium & 150.36\\
+ \hline
+    63 & Eu & \cellcolor{lanthorange}Europium & 151.96\\
+ \hline
+    64 & Gd & \cellcolor{lanthorange}Gadolinium & 157.25\\
+ \hline
+    65 & Tb & \cellcolor{lanthorange}Terbium & 158.93\\
+ \hline
+    66 & Dy & \cellcolor{lanthorange}Dysprosium & 162.50\\
+ \hline
+    67 & Ho & \cellcolor{lanthorange}Holmium & 164.93\\
+ \hline
+    68 & Er & \cellcolor{lanthorange}Erbium & 167.26\\
+ \hline
+    69 & Tm & \cellcolor{lanthorange}Thulium & 168.93\\
+ \hline
+    70 & Yb & \cellcolor{lanthorange}Ytterbium & 173.05\\
+ \hline
+    71 & Lu & \cellcolor{lanthorange}Lutetium & 174.97\\
+ \hline
+    72 & Hf & \cellcolor{transred}Hafnium & 178.49\\
+ \hline
+    73 & Ta & \cellcolor{transred}Tantalum & 180.95\\
+ \hline
+    74 & W & \cellcolor{transred}Wolfram (Tungsten) & 183.84\\
+ \hline
+    75 & Re & \cellcolor{transred}Rhenium & 186.21\\
+ \hline
+    76 & Os & \cellcolor{transred}Osmium & 190.23\\
+ \hline
+    77 & Ir & \cellcolor{transred}Iridium & 192.22\\
+ \hline
+    78 & Pt & \cellcolor{transred}Platinum & 195.08\\
+ \hline
+    79 & Au & \cellcolor{transred}Aurum (Gold) & 196.97\\
+ \hline
+    80 & Hg & \cellcolor{transred}Hydrargyrum (Mercury) & 200.59\\
+ \hline
+    81 & Tl & \cellcolor{postblue}Thallium & 204.38\\
+ \hline
+    82 & Pb & \cellcolor{postblue}Plumbum (Lead) & 207.2\\
+ \hline
+    83 & Bi & \cellcolor{postblue}Bismuth & 208.98\\
+ \hline
+    84 & Po & \cellcolor{postblue}Polonium & (209)\\
+ \hline
+    85 & At & \cellcolor{metalloid}Astatine & (210)\\
+ \hline
+    86 & Rn & \cellcolor{noblepink}Radon & (222)\\
+ \hline
+ \hline
+    87 & Fr & \cellcolor{alkalibeige}Francium & (223)\\
+ \hline
+    88 & Fr & \cellcolor{alkalineyellow}Radium & (226)\\
+ \hline
+    89 & Ac & \cellcolor{actipink}Actinium & (227)\\
+ \hline
+    90 & Th & \cellcolor{actipink}Thorium & 232.04\\
+ \hline
+    91 & Pa & \cellcolor{actipink}Protactinium & 231.04\\
+ \hline
+    92 & U & \cellcolor{actipink}Uranium & 238.03\\
+ \hline
+    93 & Np & \cellcolor{actipink}Neptunium & (237)\\
+ \hline
+    94 & Pu & \cellcolor{actipink}Plutonium & (244)\\
+ \hline
+    95 & Am & \cellcolor{actipink}Americium & (243)\\
+ \hline
+    96 & Cm & \cellcolor{actipink}Curium & (247)\\
+ \hline
+    97 & Bk & \cellcolor{actipink}Berkelium & (247)\\
+ \hline
+    98 & Cf & \cellcolor{actipink}Californium & (251)\\
+ \hline
+    99 & Es & \cellcolor{actipink}Einsteinium & (252)\\
+ \hline
+    100 & Fm & \cellcolor{actipink}Fermium & (257)\\
+ \hline
+    101 & Md & \cellcolor{actipink}Mendelevium & (258)\\
+ \hline
+    102 & No & \cellcolor{actipink}Nobelium & (259)\\
+ \hline
+    103 & Lr & \cellcolor{actipink}Lawrencium & (266)\\
+ \hline
+\end{longtable}
+\end{center}
+
+Elements are classified as:
+\begin{itemize}
+    \item Metals
+        \begin{itemize}
+            \item Alkali metals (Li, Na, K, Rb, Cs, Fr)
+            \item Alkaline earth metals (Be, Mg, Ca, Sr, Ba, Ra)
+            \item Lanthanoids (La, Ce, Pr, Nd, Pm, Sm, Eu, Gd, Tb, Dy, Ho, Er, Tm, Yb, Lu)
+            \item Actinoids (Ac, Th, Pa, U, Np, Pu, Am, Cm, Bk, Cf, Es, Fm, Md, No, Lr)
+            \item Transition metals
+            \item Post-transition metals
+        \end{itemize}
+    \item Metalloids
+    \item Nonmetals
+        \begin{itemize}
+            \item Reactive nonmetals(H, ) 
+            \item Noble gases
+        \end{itemize}
+\end{itemize}
+\subsection{Molecular and Ionic Compounds}
+\label{sec: molecular-ionic}
+
+In ordinary chemical reactions, the nucleus of each atom (and thus the identity of the element) remains unchanged. Electrons, however, can be added to atoms, removed from atoms, or shared with other atoms. 
+
+During the formation of some compounds, atoms gain or lose electrons, and form electrically charged particles called \emph{ions}.
+\begin{enumerate}
+    \item \emph{Cations} have a positive charge. Cations go to \emph{Cathode} in an electrochemical cell.
+    \item \emph{Anions} have a negative charge. Anions go to \emph{Anode} in an electrochemical cell.
+\end{enumerate}
+
+Metals readily lose the electrons when, for example, they dissolve in an aqueous solution to release ions: \emph{Na} forms the $Na^+$ ion, \emph{Ca} forms the $Ca^{2+}$ ion.
+
+One can predict if an atom will create cation or anion by looking at its position in the periodic table.
+
+\section{Stoichiometry of Chemical Reactions}
+\renewcommand{\epigraphsize}{\small}
+\setlength{\epigraphwidth}{0.8\textwidth}
+\epigraph
+{
+    Meeting of two personalities is like the contact of two chemical substances; if there is a reaction, both are transformed.
+}
+{
+    \textit{Carl Jung}
+}
+
+\label{sec: stoichiometry}
+Stoichiometry helps us determine the \textit{quantitative relations} between \textit{reactants} and \textit{products}. This section also describes various common reactions and their types. Conditions also need to be right for the reactions to take place. Balancing reactions in a \textit{chemical equation} (for matter and charge) is also given sufficient treatment.
+
+\section{Todo's} 
+\todo[inline]{Complete this section later}
+\section{Entropy}
+Entropy is a confusing term. It pays to understand what it means.
+At his webpage, \url{https://energyandentropy.com/page/index.html}, Professor Leff asks several questions that challenge the notion that entropy measures the amount of \textit{disorder} in the system. Unfortunately, the disorder metaphor is usually applied \textit{inconsistently} when explaining entropy. Some counterexamples are also ignored:
+\begin{itemize}
+    \item It \textit{appears} that entropy increases with volume. But water provides a counterexample. Water contracts when heated from 0\degree C to 4\degree C, however, its numerical entropy increases.
+    \item It is known that the numerical entropy of 2 kg ice is more than that of 1 kg ice. Since it is still ice, how is more \textit{quantity} of ice more \textit{disordered}?
+\end{itemize}
+
+\subsection{Energy-entropy Connection}
+
+\section{Reactions}
+\begin{itemize}
+    \item \chemfig{R~C=0-R}
+    \item \chemfig{A*5(-B=C-D)}
+    \item \chemfig{H-C(-[2]H)(-[6]H)-C(=[1]O)-[7]H}
+\end{itemize}
+
+\end{document}
