@@ -1,0 +1,168 @@
+%9 Thanks to: https://tex.stackexchange.com/q/565173/64425
+\documentclass[a4paper, 12pt]{article}
+\usepackage{geometry}
+\geometry{
+    bottom=20mm,
+    left=20mm,
+    right=20mm,
+}
+
+\usepackage{polyglossia}
+\usepackage{xcolor}
+\usepackage{longtable}
+% languages
+\setdefaultlanguage{english}
+\setotherlanguages{sanskrit}
+% fonts
+\setmainfont[Language=Default]{IBM Plex Sans}
+\newfontfamily\sanskritfont[Mapping=velthuis-sanskrit,Script=Devanagari,Language=Default]{Sanskrit2003}
+
+\newcommand \eng[1]{
+    \textenglish{#1}
+}
+\newcommand \sans[1]{
+    \textsanskrit{#1}
+}
+\newcommand \titlesansletter[1]{
+    \textcolor{red}{
+        \fontsize{1in}{1.2in}\selectfont
+        #1
+    }
+}
+\newcommand \titleengletter[1]{
+    \textcolor{red}{
+        \fontsize{1in}{1.2in}\selectfont
+        \eng{#1}
+    }
+}
+\newcommand\alphatable[2]{
+    \begin{center}
+    \begin{longtable}{|l|r|l|l|l|}
+    \caption{#1 words}\\
+    \hline
+        \textbf{No} & \textbf{English} & \textbf{\sans{devanaagarii}} & \textbf{Gender (f, m, n)} & \textbf{Root and/or Usage Notes} \\
+    \hline
+    \endfirsthead
+    \multicolumn{5}{c}%
+    {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
+    \hline
+        \textbf{No} & \textbf{English} & \textbf{\sans{devanaagarii}} & \textbf{Gender (f, m, n)} & \textbf{Root and/or Usage Notes} \\
+    \hline
+    \endhead
+    \hline \multicolumn{4}{r}{\textit{Continued on next page}} \\
+    \endfoot
+    \hline
+    \endlastfoot
+        #2
+    \hline
+    \end{longtable}
+    \end{center}
+    \newpage
+}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    anchorcolor=brown
+}
+
+\begin{document}
+
+\def\dev{\edef~{\string~}\textsanskrit}
+\edef~{\string~}
+
+\title{\eng {10,000 Everyday Words}}
+\author{\sans{kedaara mhasava.de, novhembara 2020}} 
+\date{\vspace{-5ex}}
+\maketitle
+
+\section {
+    \eng {Introduction}
+}
+    For a long time, the author of this document was looking for a list of words that a beginning \sans{sa.msk.rta} student, who is comfortable with English, might like to know. The reader is assumed to be able to read both English and \sans{devanaagarii} text. The format is designed to be simple, and perhaps, primitive. Keep the following in mind:
+\begin{itemize}
+    \item The focus of this document is on things that one can \emph{sense} rather than think of.
+    \item The document is primarily a list of nominal words (i.e. nouns and \emph{occasionally} pronouns and adjectives)
+    \item The document consists of lexically sorted (according to the English alphabet) lists of nominal words.
+    \item Special attention is given to the simplicity and uniformity of the text. By no means are the lists comprehensive. Excellent works are available on the WWW for other purposes. In fact, this compilation refers to many of these works. Citing those is something that the author intends to soon do.
+\end{itemize}
+\newpage
+
+\section{
+    \titleengletter{a}
+}
+\newcounter{recno}
+\newcommand\rownumber{\stepcounter{recno}\arabic{recno}}
+% alphabet table begin
+\setcounter{recno}{0}
+\alphatable{a}{
+\hline
+    \rownumber & actor & \sans{abhinetaa} & m & 
+    \sans{(abhinet.r) amita.h eka.h abhinetaa| sa.h naa.take abhinaya.m karoti|}\\
+\hline
+    \rownumber & adult & \sans{prau.dha.h} & m & 
+    \sans{devadatta.h prau.dha-puru.sa.h|}\\
+\hline
+    \rownumber & aeroplane & \sans{vimaanam} & n & 
+    \sans{tena vimaanena aham aagatavaan|}\\
+\hline
+    \rownumber & air & \sans{vaayu.h} & m & 
+    \sans{vaayu.h kutra naasti?}\\
+\hline
+    \rownumber & ant & \sans{pipiilika.h} & m & 
+    \sans{e.sa.h pipiilika.h| sa.h suuk.sma.h|}\\
+\hline
+    \rownumber & apple & \sans{sevaphalam} & n & 
+    \sans{tat sevaphalam| sevaphala.m v.rk.se asti| aha.m sevaphalam icchaami|}\\
+\hline
+    \rownumber & arrow & \sans{baa.na.h} & m & 
+    \sans{sa.h arjunasya baa.na.h|}\\
+}
+% alphabet table end
+
+\section{
+    \titleengletter{b}
+}
+\setcounter{recno}{0}
+\alphatable{b}{
+\hline
+    \rownumber & bed & \sans{ma~nca.h} & m & 
+    \sans{aha.m ma~nce upavi"saami|}\\
+\hline
+    \rownumber & bottle & \sans{kuupii} & f & 
+    \sans{saa kuupii| kuupyaa.m jalam asti|}\\
+\hline
+    \rownumber & boy & \sans{baalaka.h} & m & 
+    \sans{sa.h baalaka.h | tasya naama ga.ne"sa.h|}\\
+\hline
+    \rownumber & bug & \sans{matku.na.h} & m & 
+    \sans{g.rhe matku.naa.h santi| te maa.m da.m"santi|}\\
+}
+
+\section{
+    \titleengletter{c}
+}
+\setcounter{recno}{0}
+\alphatable{c}{
+\hline
+    \rownumber & cat & \sans{maarjaara.h} & m & 
+    \sans{tasya maarjaarasya var.na.h "sveta.h|}\\
+\hline
+    \rownumber & cat & \sans{bi.daalaa} & f & 
+    \sans{saa bi.daalaa api "svetavar.niiyaa|}\\
+\hline
+    \rownumber & color & \sans{var.na.h} & m & 
+    \sans{"sveta.h tasya var.na.h| }\\
+}
+
+\section{
+    \titleengletter{d}
+}
+\setcounter{recno}{0}
+\alphatable{d}{
+\hline
+    \rownumber & ... & \sans{...} & ... & 
+    \sans{...}\\
+}
+\end{document}
