@@ -11,8 +11,8 @@
 *.cb
 *.cb2
 .*.lb
-# no need to version pdf files
-*.pdf 
+# sometimes .pdf are needed
+# *.pdf 
 
 ## Intermediate documents:
 *.dvi
