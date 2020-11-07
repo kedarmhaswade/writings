@@ -7,6 +7,8 @@
 \usepackage{fontspec}
 \usepackage{titlesec}
 \usepackage{lettrine}
+\usepackage{epigraph, varwidth}
+\setlength{\epigraphwidth}{0.8\textwidth}
 % sectioning used with \paragraph{at subsubsubsection}
 \setcounter{secnumdepth}{4}
 \titleformat{\paragraph}
@@ -19,13 +21,18 @@
 \newfontfamily\marathifont[Mapping=velthuis-sanskrit,Script=Devanagari,Language=Marathi]{Shobhika}
 \usepackage{hyperref}
 \hypersetup{
+    backref,
     colorlinks=true,
-    linkcolor=blue,
     filecolor=magenta,
+    linkcolor=blue,
     urlcolor=cyan,
 }
 \urlstyle{same}
 \begin{document}
+\title{Self-study Notes on OpenStax AP Biology Books and Other Resources}
+\author{Kedar Mhaswade}
+\date{2020-21}
+\maketitle
 \def\dev{\edef~{\string~}\textmarathi}
 \section{The Cell}
 \subsection{Cell Structure}
@@ -41,7 +48,7 @@
         as well as the small activation energy required for the exergonic reactions.
     \item ATP is a \textit{relatively} simple molecule: C\textsubscript{10}H\textsubscript{16}N\textsubscript{5}O\textsubscript{13}P\textsubscript{3} %$C_{10}H_{16}N_{5}O_{13}P_{3}$
         \begin{itemize}
-            \item It has adenosine bound to three phosphate groups that are named alpha- (closest to ribose), beta-, and gamma-phospate (farthest from ribose).
+            \item It has adenosine bound to three phosphate groups that are named alpha- (closest to ribose), beta-, and gamma-phosphate (farthest from ribose).
             \item Adenosine is a \textit{nucleoside}---a compound commonly found in DNA or RNA, consisting of a purine or pyrimidine base linked to a sugar.
         \end{itemize}
     \item ATP \textit{hydrolyzes} to ADP (Adenosine Di-Phosphate) and inorganic phosphate. Regeneration of ATP requires energy to be supplied. Thus, hydrolysis of ATP is reversible: \\
@@ -50,7 +57,7 @@
 \end{itemize}
 
 \subsection{Photosynthesis}
-\emph{Many oragnisms} access stored energy by \emph{eating} or \emph{ingesting (consuming)} other organisms: \textmarathi{jiivo jiivasya jiivanam|}. All of this energy can be traced back to photosynthesis.
+\emph{Many organisms} access stored energy by \emph{eating} or \emph{ingesting (consuming)} other organisms: \textmarathi{jiivo jiivasya jiivanam|}. All of this energy can be traced back to photosynthesis.
 \subsubsection{Overview}
 Photosynthesis is the \emph{only} biological process that can capture the energy in sunlight and convert it into the energy stored in the covalent bonds of sugar molecules. Additionally, it acts as a source of oxygen necessary for \emph{many} living organisms.
 
@@ -128,4 +135,68 @@ A location on a chromosome is called \textbf{locus} and a gene is said to be loc
 \subsubsection{Control of the Cell Cycle}
 \subsubsection{Cancer and the Cell Cycle}
 \subsubsection{Prokaryotic Cell Division}
+
+\section{Unit 3: Genetics}
+\subsection{Meiosis and Sexual Reproduction}
+\subsection{Mendel's Experiments and Heredity}
+
+\subsubsection{Mendel's Experiments and the Laws of Probability}
+Johann Gregor Mendel conducted experiments to demonstrate the existence of genes long before the term was coined. His experiments are an exemplary lesson in the ``design and execution of scientific experiments''. Mendel is regarded as the father of modern genetics.
+
+\subsubsection{Extra: Mendel's Experiments (Refers to Various Resources)}
+Mendel wanted to investigate if there was a \emph{general law} for the formation and development of \emph{hybrids}, something he noted had not been previously formulated \cite{mendel-fisher}: 
+\epigraph
+{
+    Those who survey the work done in this department will arrive at the conviction that among all the numerous experiments made, \emph{not one has been carried out to such an extent and in such a way as to make it possible to determine the number of different forms under which the offspring of hybrids appear}, or to arrange these forms with certainty according to their separate generations, or definitely to ascertain their statistical relations.
+}
+{
+    ---\textit{Johann Gregor Mendel \cite{mendel-fisher}}
+}
+
+Mendel and his colleagues carried out their experiments for nearly a decade (1856-1865). Mendel required \cite{mendel-fisher} that the experimental plant must
+\begin{enumerate}
+    \item possess constant differentiating factors
+    \item be capable, during flowering, of protecting from the influence of \emph{foreign pollen}
+\end{enumerate}
+
+After careful analysis of various options, Mendel chose ``garden pea'' (\emph{Pisum Sativum L.}) to experiment with. He decided to experiment with the garden pea and examine following traits:
+\begin{enumerate}
+    \item Seed shape: Round or Wrinkled (a \emph{seed\footnote{A characteristic that can be ascertained by simply analyzing the seed}} characterestic)
+    \item Cotyledon (the first leaves that sprout out of the seed upon germination) color: Yellow or Green (a seed characteristic)
+    \item Seed-coat color: Colored or White (a \emph{plant\footnote{A characteristic that can only be ascertained by waiting for a plant to grow from the seed} characteristic})
+    \item Pod shape: Inflated or Constricted (a plant characteristic)
+    \item Pod color: Green or Yellow (a plant characteristic)
+    \item Flower position: Axial (along the stem) or Terminal (at the end of the stem) (a plant characteristic)
+    \item Stem length: Long (6--7 feet) or Short (less than a foot) (a plant characteristic)
+\end{enumerate}
+
+An interesting and somewhat philosophical question arises: ``Chicken first or egg first?'' Mendel tried to answer it from what he had available: Generations of true-bred plants. 
+
+There is a lot of terminology here and we need to understand just what the \emph{key terms} mean before proceeding. We should also put ourselves into Mendel's shoes and try to reason the way he did. Explaining what Mendel did using the modern Genetics terms is likely to be disappointing. For example, we shouldn't be using a term like \emph{homozygous} because Mendel didn't even know what that term meant. Of course, at some point we should reconcile all of this in terms of contemporary knowledge. 
+
+Here are the key terms in the order of their dependence (i.e. a term appearing later in the list will depend on the terms appearing before):
+\begin{enumerate}
+    \item \textbf{Characteristic}:
+    \item \textbf{True-bred}: This is an adjective, typically applied to a plant or species. It also applies to a Characteristic.
+\end{enumerate}
+
+\subsubsection{Characteristics and Traits}
+\subsubsection{Laws of Inheritance}
+
+\subsection{Modern Understandings of Inheritance}
+\subsection{DNA Structure and Function}
+\subsection{Genes and Proteins}
+\subsection{Gene Regulation}
+\subsection{Biotechnology and Genomics}
+
+\section{Unit 4: Evolution}
+\subsection{Evolution and Origin of Species}
+\subsection{The Evolution of Populations}
+\subsection{Phylogenies and the History of Life}
+
+\section{Unit 5: Viruses}
+
+\begin{thebibliography}{00}
+    \bibitem{mendel-fisher} Allan Franklin, A. W. F. Edwards, Daniel J. Fairbanks, Daniel L. Hartl. Ending the Fisher-Mendel Controversy. University of Pittsburgh Press, 2008. Page 2.
+\end{thebibliography}
 \end{document}
