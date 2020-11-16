@@ -1,5 +1,6 @@
 \documentclass[12pt]{article}
 \usepackage{chemfig}
+\usepackage{carbohydrates}
 \usepackage{graphicx}
 \usepackage{gensymb}
 \usepackage[version=4]{mhchem}
@@ -7,6 +8,7 @@
 \usepackage{fontspec}
 \usepackage{titlesec}
 \usepackage{lettrine}
+\usepackage{xcolor}
 \usepackage{epigraph, varwidth}
 \setlength{\epigraphwidth}{0.8\textwidth}
 % sectioning used with \paragraph{at subsubsubsection}
@@ -19,6 +21,7 @@
 \setdefaultlanguage{english}
 \setotherlanguages{marathi}
 \newfontfamily\marathifont[Mapping=velthuis-sanskrit,Script=Devanagari,Language=Marathi]{Shobhika}
+\usepackage{soul}
 \usepackage{hyperref}
 \hypersetup{
     backref,
@@ -28,13 +31,121 @@
     urlcolor=cyan,
 }
 \urlstyle{same}
+% new commands
+\newcommand{\ctext}[3]{
+    \colorbox{#2}{\parbox{0.9\textwidth}{\textcolor{#1}{#3}}}
+}
+% new commands
 \begin{document}
 \title{Self-study Notes on OpenStax AP Biology Books and Other Resources}
 \author{Kedar Mhaswade}
 \date{2020-21}
 \maketitle
 \def\dev{\edef~{\string~}\textmarathi}
-\section{The Cell}
+\section{Unit 1: The Chemistry of Life}
+\subsection{The Study of Life}
+\subsection{The Chemical Foundation of Life}
+\subsection{Biological Macromolecules}
+\subsubsection{Introduction}
+\lettrine[lines=2]{F}{ood provides} the body with the nutrients it needs to survive. Many of these nutrients are ``macro'' or large molecules necessary for and built by living things. They are \emph{necessary} because humans have evolved to use them for survival: 
+\begin{itemize}
+    \item amino acids in protein for healthy bone and muscle, 
+    \item fats to build new cells, store energy, and digest properly, 
+    \item carbohydrates to drive all living processes, and
+    \item nucleic acids to carry genetic information.
+\end{itemize}
+
+Even so, an \emph{imbalance} in our consumption of these macromolecules may lead to health problems. My personal view here is that since all humans are different (however similar they may be) and there are many theories of a general human diet and human feelings are involved in defining what ``health'' means, it is best to spend some time understanding oneself and one's reactions to dietary components. Such a knowledge about oneself is often illusive because humans are very complex multicellular organisms. Whereas macromolecules are absolutely essetial, there are nutrients like vitamins and minerals that have now become equally essential (in much smaller quantities as compared to macromolecules identified above), perhaps not for survival, but to  \emph{manage} health problems and age gracefully.
+\subsubsection{Synthesis of Biological Macromolecules}
+Biological Macromolecules (BMm's henceforth) are made of atoms of 6 elements: S, P, O, N, C, H. A majority of cell's \emph{dry mass} is made of BMm's. 
+\paragraph{Dehydration Synthesis}
+BMm's are \emph{polymers} which are chains of \emph{monomers} joined by covalent bonds. A common polymer is the disaccharide \emph{maltose}: \ce{C12H22O11} which is formed when two glucose (\ce{C6H12O6}) molecules combine releasing a water molecule:\\
+\ce{2C6H12O11 -> C12H22O11 + H2O}\\
+
+\setchemfig{cram width=2pt}
+\schemestart
+\chemname
+{\chemfig{
+([2,0.5]-)([6,0.5]-HO)-[1]([2,0.5]-\ce{CH2OH})([6,0.5]-H)-O-[7]% rightmost C
+([2,0.5]-H)([6,0.5,,,red]-OH)<[5] 
+([2,0.5]-H)([6,0.5]-OH)-[4,,,,line width=2pt]([2,0.5]-OH)([6,0.5]-)>[3]
+}}
+{D-Glucose}
+\+
+\chemname
+{\chemfig{
+([2,0.5]-)([6,0.5]-HO)-[1]([2,0.5]-\ce{CH2OH})([6,0.5]-H)-O-[7]% rightmost C
+([2,0.5]-H)([6,0.5,,,red]-OH)<[5] 
+([2,0.5]-H)([6,0.5]-OH)-[4,,,,line width=2pt]([2,0.5]-OH)([6,0.5]-)>[3]
+}}
+{D-Glucose}
+\arrow(.mid east--.mid west)
+\schemestop
+\vspace{1cm}
+\par\medskip
+\schemestart
+\chemname
+{\chemfig{
+([2,0.5]-)([6,0.5]-HO)-[1]([2,0.5]-\ce{CH2OH})([6,0.5]-H)-O-[7]% rightmost C left glucose
+([2,0.5]-H)([7]-O-[1]
+([2,0.5]-H)-[1]([2,0.5]-\ce{CH2OH})([6,0.5]-)-[0]O-[7]
+([2,0.5]-H)([6,0.5]-OH)
+<[5]
+([2,0.5]-H)([6,0.5]-OH)-[4,,,,line width=2pt]([2,0.5]-OH)([6,0.5]-)>[3]
+)
+<[5]
+([2,0.5]-H)([6,0.5]-OH)-[4,,,,line width=2pt]([2,0.5]-OH)([6,0.5]-)>[3]
+}}
+{Maltose}
+\+
+\chemname{\chemfig{H_2O}}{Water}
+\schemestop
+
+The monomers share electrons as they form covalent bonds. It is called ``dehydration synthesis'' because it literally means formation (of a polymer, in this case) while losing water.
+
+\paragraph{Hydrolysis}
+An almost opposite of Dehydration Synthesis is Hydrolysis which literally means separation (-lysis) with water (hydro-). Thus, the energy contained in bonds of polymers is released when they react with water (water is split into hydrogen and hydroxyl ions) and monomers are created.
+
+\ctext{black}{lime}{
+    Dehydration Synthesis \emph{requires} energy and releases water to form [polymer] bonds.
+}
+\par
+\ctext{white}{purple}{
+    Hydrolysis requires water and \emph{releases} energy stored in [polymer] bonds.
+}
+
+\paragraph{Enzymes}
+Both these kinds of reaction require enzymes that are \emph{specific} to the BMm's:
+\begin{table}[htbp!]
+  \begin{center}
+    \caption{Enzymes for Hydrolysis of BMm's}
+    \label{tab:enzymes-bmms}
+    \begin{tabular}{|r|l|} 
+      \hline
+      \textbf{BMm} & \textbf{Enzymes}\\
+      \hline
+      Carbohydrates & amylase, sucrase, lactase, or maltase\\
+      \hline
+      Proteins & pepsin, peptidase, hydrochloric acid\\
+      \hline
+      Lipids & lipase\\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+
+
+\ctext{black}{teal}{
+    \small{
+        We wonder how life formed on Earth. In 1953, Stanley Miller and Harold Urey developed an apparatus to model early conditions on earth. They wanted to test if \emph{organic molecules could form from inorganic precursors believed to exist very early in Earth’s history}. They used boiling water to mimic early Earth’s oceans. Steam from the “ocean” combined with methane, ammonia, and hydrogen gases from the early Earth’s atmosphere and was exposed to electrical sparks to act as lightning. As the gas mixture cooled and condensed, \emph{it was found to contain organic compounds, such as amino acids and nucleotides}. According to the \textbf{abiogenesis theory} (the original evolution of life or living organisms from inorganic or inanimate substances), these organic molecules came together to form the earliest form of life about 3.5 billion years ago.
+   }
+}
+\subsubsection{Carbohydrates}
+\subsubsection{Lipids}
+\subsubsection{Proteins}
+\subsubsection{Nucleic Acids}
+
+\section{Unit 2: The Cell}
 \subsection{Cell Structure}
 \subsection{Structure and Function of Plasma Membranes}
 \subsection{Metabolism}

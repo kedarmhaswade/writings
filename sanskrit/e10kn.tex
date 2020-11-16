@@ -1,4 +1,4 @@
-%9 Thanks to: https://tex.stackexchange.com/q/565173/64425
+% Thanks to: https://tex.stackexchange.com/q/565173/64425
 \documentclass[a4paper, 12pt]{article}
 \usepackage{geometry}
 \geometry{
@@ -10,6 +10,7 @@
 \usepackage{polyglossia}
 \usepackage{xcolor}
 \usepackage{longtable}
+\usepackage{fontawesome}
 % languages
 \setdefaultlanguage{english}
 \setotherlanguages{sanskrit}
@@ -24,7 +25,7 @@
     \textsanskrit{#1}
 }
 \newcommand \sansword[1]{
-    \textsanskrit{\textcolor{brown}{#1}}
+    \textsanskrit{\textcolor{orange}{#1}}
 }
 \newcommand \titlesansletter[1]{
     \textcolor{red}{
@@ -35,12 +36,12 @@
 \newcommand \titleengletter[1]{
     \textcolor{red}{
         \fontsize{0.6in}{0.72in}\selectfont
-        \eng{#1}
+        #1
     }
 }
 \newcommand\alphatable[2]{
     \begin{center}
-        \begin{longtable}{|p{1cm}|p{3cm}|l|p{2cm}|p{6cm}|}
+        \begin{longtable}{|p{1cm}|p{3cm}|l|p{1.5cm}|p{5.5cm}|}
     \caption{#1 words}\\
     \hline
         \textbf{No} & \textbf{English} & \textbf{\sansword{devanaagarii}} & \textbf{Gender} & \textbf{Notes} \\
@@ -117,6 +118,15 @@
     \rownumber & air & \sansword{vaayu.h} & m & 
     \sansword{vaayu.h kutra naasti?}\\
 \hline
+    \rownumber & animal & \sansword{pa"su.h} & m & 
+    \sansword{vane bahava.h pa"sava.h santi|}\\
+\hline
+    \rownumber & \targetword{animal} & \sansword{praa.nii} & m & 
+    \sansword{praa.nisa"ngrahaalaye (\eng{zoo}) praa.nina.h santi|}\\
+\hline
+    \rownumber & \targetword{answer} & \sansword{uttaram} & n & 
+    \sansword{tasya \hyperlink{question}{pra"snasya} uttaram atra naasti|}\faSmileO\\
+\hline
     \rownumber & ant & \sansword{pipiilika.h} & m & 
     \sansword{e.sa.h pipiilika.h| sa.h suuk.sma.h|}\\
 \hline
@@ -124,7 +134,7 @@
     \sansword{tat sevaphalam| sevaphala.m v.rk.se asti| aha.m sevaphalam icchaami|}\\
 \hline
     \rownumber & arrow & \sansword{baa.na.h} & m & 
-    \sansword{sa.h arjunasya baa.na.h|}\\
+    \sansword{sa.h arjunasya baa.na.h|} \faLongArrowUp\\
 \hline
     \rownumber & arrow & \sansword{i.su.h} & m & 
     \sansword{i.su.h ityukte (\eng{means}) baa.na.h|}\\
@@ -143,8 +153,14 @@
     \rownumber & banana & \sansword{kadaliiphalam} & n & 
     \sansword{kadaliiphala.m mahya.m rocate|}\\
 \hline
-    \rownumber & bed & \sansword{ma~nca.h} & m & 
+    \rownumber & \targetword{bank} \faBank & \sansword{vittako.sa.h} & m & 
+    \sansword{janaa.h vittako.se \hyperlink{money}{vitta.m} sthaapayanti|}\\
+\hline
+    \rownumber & bed \faBed & \sansword{ma~nca.h} & m & 
     \sansword{aha.m ma~nce upavi"saami|}\\
+\hline
+    \rownumber & bicycle \faBicycle & \sansword{dvicakrikaa} & f & 
+    \sansword{aha.m dvicakrikayaa \hyperlink{shop}{aapa.na.m} gacchami|}\\
 \hline
     \rownumber & boat & \sansword{naukaa} & f & 
     \sansword{saa naukaa| janaa.h naukayaa gacchanti|}\\
@@ -153,7 +169,7 @@
     \sansword{chaatra.h pustaka.m uccai.h (\eng{aloud}) pa.thati|}\\
 \hline
     \rownumber & \targetword{body} & \sansword{"sariiram} & n & 
-    \sansword{"sariiramaadya.m (= "sariiram + aadyam \eng{i.e. first, prime}) khalu (\eng{true}) dharmasaadhanam|}\\
+    \sansword{"sariiramaadya.m (= "sariiram\eng{+}aadyam (\eng{first, prime})) khalu (\eng{true}) dharmasaadhanam|}\\
 \hline
     \rownumber & bottle & \sansword{kuupii} & f & 
     \sansword{saa kuupii| kuupyaa.m jalam asti|}\\
@@ -189,6 +205,12 @@
     \rownumber & computer & \sansword{sa"nga.naka.h} & m & 
     \sansword{raama.h sa"nga.nakaat vaidyutpustaka.m (\eng{ebook}) pa.Tati|}\\
 \hline
+    \rownumber & crow & \sansword{kaaka.h} & m & 
+    \sansword{kaaka.h k.r.s.na.h (\eng{black})| \hyperlink{cuckoo}{pika.h} api k.r.s.na.h|}\\
+\hline
+    \rownumber & \targetword{cuckoo} & \sansword{pika.h} & m & 
+    \sansword{ko bheda pikakaakayo.h?}\\
+\hline
     \rownumber & customer & \sansword{graahaka.h} & m & 
     \sansword{graahaka.h devo bhava|}(May the customer be the god!)\\
 }
@@ -199,11 +221,17 @@
 \setcounter{recno}{0}
 \alphatable{d}{
 \hline
+    \rownumber & \targetword{deer} & \sansword{m.rga.h} & m & 
+    \sansword{m.rgaa.h vane viharanti|}\\
+\hline
     \rownumber & dog & \sansword{"sunaka.h} & m & 
     \sansword{raatrau "sunakaa.h kimartha.m bha.santi (\eng{bark})?}\\
 \hline
     \rownumber & \targetword{door} & \sansword{dvaaram} & n & 
     \sansword{etat dvaara.m tat \hyperlink{window}{vaataayanam}|}\\
+\hline
+    \rownumber & \targetword{duck} & \sansword{baka.h} & m & 
+    \sansword{ko bheda (\eng{difference}) ha.msabakayo.h?}\\
 }
 
 \section{
@@ -222,8 +250,20 @@
 \setcounter{recno}{0}
 \alphatable{f}{
 \hline
+    \rownumber & fan (ventilator) & \sansword{vyajanam} & n & 
+    \sansword{\hyperlink{summer}{grii.smakaale} vyajanaani aava"syakaani|}\\
+\hline
     \rownumber & finger & \sansword{a"ngulii} & f & 
     \sansword{mama \hyperlink{hand}{haste} pa~nca a"ngulya.h santi|}\\
+\hline
+    \rownumber & \targetword{fish} & \sansword{matsya.h} & m & 
+    \sansword{\hyperlink{fisherman}{dhiivara.h} matsyaan aanayati|}\\
+\hline
+    \rownumber & fish & \sansword{miina.h} & m & 
+    \sansword{miina.h jale a.tati (\eng{wanders})|}\\
+\hline
+    \rownumber & \targetword{fisherman} & \sansword{dhiivara.h} & m & 
+    \sansword{dhiivara.h \hyperlink{fish}{matsyaan} aanayati|}\\
 \hline
     \rownumber & fly & \sansword{mak.sikaa} & f & 
     \sansword{g.rhe \hyperlink{mosquito}{mak.sikaa.h} santi|}\\
@@ -231,8 +271,14 @@
     \rownumber & food & \sansword{annam} & n & 
     \sansword{jiivanaaya annam aava"syakam (\eng{essential})|}\\
 \hline
+    \rownumber & \targetword{fox} & \sansword{"s.rgaala.h} & m & 
+    \sansword{"s.rgaala.h dhuurta.h (\eng{shrewd})|}\\
+\hline
     \rownumber & foot & \sansword{paada.h} & m & 
     \sansword{aha.m paadaabhyaa.m calaami|}\\
+\hline
+    \rownumber & \targetword{frog} & \sansword{ma.n.duuka.h} & m & 
+    \sansword{sa.h ma.n.duuka.h \hyperlink{well}{kuupe} viharati|}\\
 }
 
 \section{
@@ -246,6 +292,9 @@
 \hline
     \rownumber & glass & \sansword{kaaca.h} & m & 
     \sansword{jala.m kaacapaatre asti|}\\
+\hline
+    \rownumber & \targetword{gold} & \sansword{suvar.nam} & n & 
+    \sansword{suvar.naat aabhara.naani (\eng{ornaments}) kriiyante (\eng{are made})|}\\
 }
 
 \section{
@@ -259,7 +308,56 @@
 \hline
     \rownumber & hand & \sansword{kara.h} & m & 
     \sansword{prabhaate karadar"sanam!}\\
+\hline
+    \rownumber & horse & \sansword{a"sva.h} & m & 
+    \sansword{e.sa.h a"sva.h sa.h gaja.h|}\\
+\hline
+    \rownumber & house & \sansword{g.rham} & n & 
+    \sansword{mama g.rham anyatra asti|}\\
+\hline
+    \rownumber & horse & \sansword{haya.h} & m & 
+    \sansword{haya.h ityukte a"sva.h|}\\
 }
+
+\section{
+    \titleengletter{i}
+}
+\setcounter{recno}{0}
+\alphatable{i}{
+\hline
+    \rownumber & \targetword{ink} & \sansword{ma"sii} & f & 
+    \sansword{ma"sii lekhanyaam asti | ma"sii kuupyaam api asti|}\\
+\hline
+    \rownumber & \targetword{idol} & \sansword{muurti.h} & f & 
+    \sansword{devaalaye raamasya \hyperlink{gold}{suvar.na}-muurti.h asti|}\\
+}
+
+\section{
+    \titleengletter{j}
+}
+\setcounter{recno}{0}
+\alphatable{j}{
+\hline
+    \rownumber & jackal & \sansword{jambuka.h} & m & 
+    \sansword{jambuka.h ityukte \hyperlink{fox}{"s.rgaala.h}|}\\
+\hline
+    \rownumber & jewel & \sansword{ratnam} & n & 
+    \sansword{trii.ni ratnaani jalam anna.m subhaa.sita.m ca|}\\
+}
+
+\section{
+    \titleengletter{k}
+}
+\setcounter{recno}{0}
+\alphatable{k}{
+\hline
+    \rownumber & \targetword{kind} & \sansword{dayaalu.h} & m & 
+    \sansword{hari"scandra.h dayaalu.h raajaa|}\\
+\hline
+    \rownumber & \targetword{king} & \sansword{raajaa} & m & 
+    \sansword{hari"scandra.h dayaalu.h raajaa (\eng{root:} raajan)|}\\
+}
+
 \section{
     \titleengletter{l}
 }
@@ -277,6 +375,15 @@
 \hline
     \rownumber & life-form (creature) & \sansword{jiiva.h} & m & 
     \sansword{jiivo jiivasya jiivanam|}\\
+\hline
+    \rownumber & light (that illuminates) & \sansword{prakaa"sa.h} & m & 
+    \sansword{suuryasya prakaa"sa.h tejasvii (\eng{bright})|}\\
+\hline
+    \rownumber & \targetword{lion} & \sansword{si.mha.h} & m & 
+    \sansword{si.mha.h eka.h bala"saalii (\eng{strong}) \hyperlink{animal}{pa"su.h}|}\\
+\hline
+    \rownumber & \targetword{luck} & \sansword{bhaagyam} & n & 
+    \sansword{mama bhaagyam aho (\eng{a word showing wonder or surprise}) bhaagyam|}\\
 }
 
 \section{
@@ -284,6 +391,21 @@
 }
 \setcounter{recno}{0}
 \alphatable{m}{
+\hline
+    \rownumber & \targetword{milk}  & \sansword{dugdham} & n & 
+    \sansword{aha.m dinaante (dina\eng{+}ante = \eng{at the end of the day}) dugdha.m pibaami|}\\
+\hline
+    \rownumber & mirror  & \sansword{darpa.na.h} & m & 
+    \sansword{darpa.na.h kutra asti? darpa.na.h snaanag.rhe asti|}\\
+\hline
+    \rownumber & money & \sansword{dhanam} & n & 
+    \sansword{yasya dhana.m sa.h dhanika.h|}\\
+\hline
+    \rownumber & \targetword{money} & \sansword{vittam} & n & 
+    \sansword{vittako.saat aha.m vitta.m sviikaromi|}\\
+\hline
+    \rownumber & \targetword{monkey} & \sansword{vaanara.h} & m & 
+    \sansword{vaanaraa.h asmaaka.m puurvajaa.h (\eng{ancestor})|}\\
 \hline
     \rownumber & \targetword{mosquito} (any fly) & \sansword{ma"saka.h} & m & 
     \sansword{g.rhe ma"sakaa.h api santi|}\\
@@ -312,6 +434,35 @@
 \hline
     \rownumber & pilot & \sansword{vaimaanika.h} & m & 
     \sansword{samiira.h vaimaanika.h| sa.h \hyperlink{aeroplane}{vimaana.m} caalayati|}\\
+\hline
+    \rownumber & plant & \sansword{sasyam} & n & 
+    \sansword{etat sasya.m sa.h \hyperlink{tree}{v.rk.sa.h}|}\\
+\hline
+    \rownumber & price & \sansword{muulyam} & n & 
+    \sansword{etasya \hyperlink{toy}{krii.danakasya} muulya.m kim?}\\
+\hline
+    \rownumber & prize & \sansword{paarito.sikam} & n & 
+    \sansword{pradhaanaacaarya.h (pradhaana \eng{+} aacaarya.h \eng{= principal, head priest}) chaatrebhya.h paarito.sikaa.ni yacchati (\eng{gives})|}\\
+}
+
+\section{
+    \titleengletter{q}
+}
+\setcounter{recno}{0}
+\alphatable{q}{
+\hline
+    \rownumber & \targetword{question} & \sansword{pra"sna.h} & m & 
+    \sansword{etasya pra"snasya \hyperlink{answer}{uttaram anyatra} asti|}\\
+}
+
+\section{
+    \titleengletter{r}
+}
+\setcounter{recno}{0}
+\alphatable{r}{
+\hline
+    \rownumber & river & \sansword{nadii} & f & 
+    \sansword{tatra asti kaaverii naama (\eng{named, called}) nadii|}\\
 }
 
 \section{
@@ -326,6 +477,18 @@
     \rownumber & \targetword{school} & \sansword{"saalaa} & f & 
     \sansword{"saalaa baalakebhya.h eva|}\\
 \hline
+    \rownumber & \targetword{sea} & \sansword{saagara.h} & m & 
+    \sansword{e.sa.h saagara.h vi"saala.h| tasya ta.ta.h diirgha.h|}\\
+\hline
+    \rownumber & \targetword{sea-shore} & \sansword{saagarata.ta.h} & m & 
+    \sansword{e.sa.h saagara.h vi"saala.h| saagarata.ta.h diirgha.h ca|}\\
+\hline
+    \rownumber & shoe & \sansword{padatraa.nam} & n & 
+    \sansword{mama padatraa.ne na sta.h|}\\
+\hline
+    \rownumber & \targetword{shop} & \sansword{aapa.na.h} & m & 
+    \sansword{etasmin aapa.ne bahuuni \hyperlink{toy}{kri.danakaani} santi|}\\
+\hline
     \rownumber & sight (of something) & \sansword{dar"sanam} & n & 
     \sansword{saaya"nkaale suuryadar"sana.m manoharam (\eng{charming})|}\\
 \hline
@@ -334,6 +497,15 @@
 \hline
     \rownumber & spoon & \sansword{camasa.h} & m & 
     \sansword{camasena aha.m vya~njana.m khaadaami|}\\
+\hline
+    \rownumber & \targetword{summer} & \sansword{grii.smakaala.h} & m & 
+    \sansword{caitravai"saakhayo.h grii.smakaala.h|}\\
+\hline
+    \rownumber & swan & \sansword{ha.msa.h} & m & 
+    \sansword{ha.msa.h "sveta.h \hyperlink{duck}{baka.h} "sveta.h (\eng{white})|}\\
+\hline
+    \rownumber & sword & \sansword{kha.dga.h} & m & 
+    \sansword{"sivaajiimahaaraajasya kha.dga.h|}\\
 }
 
 \section{
@@ -345,16 +517,25 @@
     \rownumber & \targetword{table} & \sansword{utpii.Tikaa} & f & 
     \sansword{ca.saka.h ca.sakaadhaanii ca tasyaa.h utpii.Tikaayaa.h upari sta.h|}\\
 \hline
+    \rownumber & \targetword{tiger} & \sansword{vyaaghra.h} & m & 
+    \sansword{vyaaghra.h \hyperlink{deer}{m.rgam} anudhaavati (\eng{chase})|}\\
+\hline
     \rownumber & time (as in time immemorial) & \sansword{kaala.h} & m & 
     \sansword{kaalaaya tasmai nama.h (\eng{hail})|}\\
 \hline
     \rownumber & time (as in wall-clock time) & \sansword{samaya.h} & m & 
     \sansword{idaanii.m samaya.h ka.h?}\\
 \hline
+    \rownumber & tooth & \sansword{danta.h} & m & 
+    \sansword{aha.m dantakuurce.na dantaan prak.saalayaami (\eng{wash})|}\\
+\hline
     \rownumber & \targetword{town} & \sansword{graama.h} & m & 
     \sansword{aha.m \hyperlink{city}{nagaraat} graama.m gacchaami|}\\
 \hline
-    \rownumber & tree & \sansword{v.rk.sa.h} & m & 
+    \rownumber & \targetword{toy} & \sansword{krii.danakam} & n & 
+    \sansword{aham \hyperlink{shop}{aapa.naat} krii.danaka.m krii.naami| (\eng{buy})}\\
+\hline
+    \rownumber & \targetword{tree} & \sansword{v.rk.sa.h} & m & 
     \sansword{aamrav.rk.sa.h vi"saala.h| tasmin bahava.h aamraphalaani santi|}\\
 }
 
@@ -366,6 +547,9 @@
 \hline
     \rownumber & vehicle & \sansword{vaahanam} & n & 
     \sansword{sure"sa.h vaahana.m caalayati|(\eng{drives})}\\
+\hline
+    \rownumber & vessel (container) & \sansword{paatram} & n & 
+    \sansword{aha.m paatra.m jalena phenakena ca prak.saalayaami|}\\
 }
 
 \section{
@@ -376,6 +560,9 @@
 \hline
     \rownumber & \targetword{window} & \sansword{vaataayanam} & n & 
     \sansword{etat vaataayana.m tat \hyperlink{door}{dvaaram}|}\\
+\hline
+    \rownumber & \targetword{well} (a water well)& \sansword{kuupa.h} & m & 
+    \sansword{tasmin kuupe \hyperlink{frog}{ma.n.duukaa.h} santi|}\\
 }
 \iffalse
 \section{

@@ -1,0 +1,85 @@
+\documentclass[12pt]{article}
+\usepackage{chemfig}
+\usepackage[version=4]{mhchem}
+\usepackage{verbatim}
+\usepackage{gensymb}
+
+\begin{document}
+\section{} \label{form:1}
+\chemname{\chemfig{A-B(-[1]W-X)(-[7]Y-Z)-C}}{Simple Branching at B $\pm45\degree$}
+\begin{verbatim}
+{\chemfig{A-B(-[1]W-X)(-[7]Y-Z)-C}}
+\end{verbatim}
+
+\section{} \label{form:2}
+\chemname
+{\chemfig{A?[a]-B(-[1]W?[a,2,red]-X)(-[7]Y-Z)-C}}
+{Join A-W in (\ref{form:1})}
+\begin{verbatim}
+{\chemfig{A?[a]-B(-[1]W?[a,2,red]-X)(-[7]Y-Z)-C}}
+\end{verbatim}
+
+\section{} \label{form:3}
+\chemname
+{\chemfig{A?[a]-B(-[1]W?[a,2,red]-X?[c])(-[7]Y-Z?[d])-C?[c]?[d]}}
+{Join C-X and C-Z in (\ref{form:2})}
+\begin{verbatim}
+{\chemfig{A?[a]-B(-[1]W?[a,2,red]-X?[c])(-[7]Y-Z?[d])-C?[c]?[d]}}
+\end{verbatim}
+
+\section{} \label{form:4}
+\chemname
+{\chemfig{A?[a]-B(-[1]W?[a,2,red]-X?[c])(-[7]Y-Z?[d])-C?[c,{<:},red]?[d,{>},blue]}}
+{C-Z in (\ref{form:3}) is right cram and C-X is left cram dashed, red}
+\begin{verbatim}
+{\chemfig{A?[a]-B(-[1]W?[a,2,red]-X?[c])
+                 (-[7]Y-Z?[d])-C?[c,{<:},red]?[d,{>},blue]}}
+
+\end{verbatim}
+
+\section{} \label{form:gluco-haworth}
+\setchemfig{cram width=0.6ex}
+\chemname
+{\chemfig{
+([2,0.5]-)([6,0.5]-HO)-[1]([2,0.5]-\ce{CH2OH})([6,0.5]-H)-O-[7]% rightmost C
+([2,0.5]-H)([6,0.5,,,red]-OH)<[5] 
+([2,0.5]-H)([6,0.5]-OH)-[4,,,,line width=2pt]([2,0.5]-OH)([6,0.5]-)>[3]
+}}
+{D-glucopyranose (Glucose) Haworth Projection}
+\begin{verbatim}
+{\chemfig{
+([2,0.5]-)([6,0.5]-HO)-[1]([2,0.5]-\ce{CH2OH})([6,0.5]-H)-O-[7]([2,0.5]-H)
+([6,0.5,,,red]-OH)<[5] 
+([2,0.5]-H)([6,0.5]-OH)-[4,,,,line width=2pt]([2,0.5]-OH)([6,0.5]-)>[3]
+}}
+\end{verbatim}
+
+\section{} \label{form:malto-haworth}
+\setchemfig{cram width=0.6ex}
+\chemname
+{\chemfig{
+([2,0.5]-)([6,0.5]-HO)-[1]([2,0.5]-\ce{CH2OH})([6,0.5]-H)-O-[7]% rightmost C left glucose
+([2,0.5]-H)([7]-O-[1]
+([2,0.5]-H)-[1]([2,0.5]-\ce{CH2OH})([6,0.5]-)-[0]O-[7]
+([2,0.5]-H)([6,0.5]-OH)
+<[5]
+([2,0.5]-H)([6,0.5]-OH)-[4,,,,line width=2pt]([2,0.5]-OH)([6,0.5]-)>[3]
+)
+<[5]
+([2,0.5]-H)([6,0.5]-OH)-[4,,,,line width=2pt]([2,0.5]-OH)([6,0.5]-)>[3]
+}}
+{Maltose Haworth Projection}
+\begin{verbatim}
+{\chemfig{
+([2,0.5]-)([6,0.5]-HO)-[1]([2,0.5]-\ce{CH2OH})([6,0.5]-H)-O-[7]% rightmost C left glucose 
+([2,0.5]-H)([7]-O-[1]
+([2,0.5]-H)-[1]([2,0.5]-\ce{CH2OH})([6,0.5]-)-[0]O-[7]
+([2,0.5]-H)([6,0.5]-OH)
+<[5]
+([2,0.5]-H)([6,0.5]-OH)-[4,,,,line width=2pt]([2,0.5]-OH)([6,0.5]-)>[3]
+)
+<[5]
+([2,0.5]-H)([6,0.5]-OH)-[4,,,,line width=2pt]([2,0.5]-OH)([6,0.5]-)>[3]
+}}
+\end{verbatim}
+\end{document}

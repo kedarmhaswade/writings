@@ -1,0 +1,49 @@
+\documentclass[a4paper]{article}
+\usepackage[margin=20mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,amsfonts}   %% AMS mathematics macros
+\renewcommand{\epsilon}{\varepsilon}
+\renewcommand{\theta}{\vartheta}
+\renewcommand{\kappa}{\varkappa}
+\renewcommand{\rho}{\varrho} % remember my teacher and friend Adalberto!
+\renewcommand{\phi}{\varphi}
+
+\begin{document}
+\textbf{Problem: 1959 IMO -- Romania}: For every integer $n$ prove that the fraction 
+$$
+\frac{21n + 4}{14n + 3}
+$$
+cannot be reduced further.
+\begin{proof}
+    $\frac{21n+4}{14n+3}$ cannot be reduced further if its numerator and denominator are \emph{relatively prime}, that is, they only have 1 as the common factor. Thus, we need to prove that $21n+4$ and $14n+3$ are relatively prime for all $n \in \mathbb{N}$.
+    
+    When $n$ is even, $21n+4$ (since it is even) and $14n+3$ (since it is odd) are relatively prime.
+
+    Let $n=2k+1$ which makes $n$ odd for every $k \in \mathbb{N}$. Thus, we need to prove that $42k+25$ and $28k+17$ are relatively prime $\forall k \in \mathbb{N}$.
+
+\end{proof}
+\end{document}
+
+% latex ignores this :-)
+    Instead, let us assume that $21n+4$ and $14n+3$ have the highest common factor $q > 1$ for some $n$. Then,
+\begin{equation}
+    \label{num}
+    21n + 4 = q\cdot x 
+\end{equation}
+and
+\begin{equation}
+    \label{den}
+    14n + 3 = q\cdot y 
+\end{equation}
+    where $n, q, x, y \in \mathbb{N}$
+
+Note that $x$ and $y$ are relatively prime because if they were not, then they would have some other factor common between them and then $q$ would not be the \emph{highest} common factor of $21n+4$ and $14n+3$.
+
+    Adding and subtracting (\ref{num}) and (\ref{den}) we get:
+    \begin{equation}
+        \label{add}
+        q\cdot (x + y) = 35n + 7
+    \end{equation}
+    \begin{equation}
+        \label{sub}
+        q\cdot (x - y) = 7n + 1
+    \end{equation}
