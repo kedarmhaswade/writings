@@ -1,0 +1,23 @@
+% Thanks to: https://tex.stackexchange.com/q/565173/64425
+\documentclass[a6paper]{article}
+\usepackage{geometry}
+\geometry{
+    bottom=20mm,
+    left=20mm,
+    right=10mm,
+}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{sanskrit}
+\setotherlanguages{marathi,english}
+% Main font for Sanskrit: Yashovenu
+\setmainfont[Mapping=velthuis-sanskrit,Script=Devanagari,Language=Default]{Yashovenu}
+% Other font (for Marathi): Noto Serif Devanagari
+\newfontfamily\marathifont[Mapping=velthuis-sanskrit,Script=Devanagari,Language=Default]{Noto Serif Devanagari}
+% Other well-designed fonts for devanagari: Sanskrit2003, Mukta, Yashomudra, Mortel
+
+\begin{document}
+\def\dev{\edef~{\string~}\textmarathi }
+uccaara.navi.saye mama eka.h pra"sna.h asti | ``svarapa"scaat visargasya uccaara.nam katham kara.niiyam?'' iti| 
+`a' svarapa"scaat visargoccaara.na.m bhavati deva.h iti| `aa' svarapa"scaat visargoccaara.na.m katham? ``maalaa'' padasya prathamaavibhaktibahuvacanaruupasya uccaara.na.m ``maalaaha'' vaa ``maalaahaa'' vaa? evameva ``kavi'' padasya t.rtiiyaavibhaktibahuvacanaruupasya uccaara.nam ``kavibhiha'' vaa ``kavibhihi'' vaa? evameva anyasvare.svapi| atra ko.api niyama.h vartate vaa?
+\end{document}
