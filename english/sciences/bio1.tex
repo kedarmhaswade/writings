@@ -28,7 +28,8 @@
     colorlinks=true,
     filecolor=magenta,
     linkcolor=blue,
-    urlcolor=cyan,
+    urlcolor=violet,
+    citecolor=blue,
 }
 \urlstyle{same}
 % new commands
@@ -58,7 +59,7 @@
 Even so, an \emph{imbalance} in our consumption of these macromolecules may lead to health problems. My personal view here is that since all humans are different (however similar they may be) and there are many theories of a general human diet and human feelings are involved in defining what ``health'' means, it is best to spend some time understanding oneself and one's reactions to dietary components. Such a knowledge about oneself is often illusive because humans are very complex multicellular organisms. Whereas macromolecules are absolutely essetial, there are nutrients like vitamins and minerals that have now become equally essential (in much smaller quantities as compared to macromolecules identified above), perhaps not for survival, but to  \emph{manage} health problems and age gracefully.
 \subsubsection{Synthesis of Biological Macromolecules}
 Biological Macromolecules (BMm's henceforth) are made of atoms of 6 elements: S, P, O, N, C, H. A majority of cell's \emph{dry mass} is made of BMm's. 
-\paragraph{Dehydration Synthesis}
+\paragraph{Dehydration Synthesis}\label{sec: dehydration synthesis}
 BMm's are \emph{polymers} which are chains of \emph{monomers} joined by covalent bonds. A common polymer is the disaccharide \emph{maltose}: \ce{C12H22O11} which is formed when two glucose (\ce{C6H12O6}) molecules combine releasing a water molecule:\\
 \ce{2C6H12O11 -> C12H22O11 + H2O}\\
 
@@ -103,8 +104,8 @@ BMm's are \emph{polymers} which are chains of \emph{monomers} joined by covalent
 
 The monomers share electrons as they form covalent bonds. It is called ``dehydration synthesis'' because it literally means formation (of a polymer, in this case) while losing water.
 
-\paragraph{Hydrolysis}
-An almost opposite of Dehydration Synthesis is Hydrolysis which literally means separation (-lysis) with water (hydro-). Thus, the energy contained in bonds of polymers is released when they react with water (water is split into hydrogen and hydroxyl ions) and monomers are created.
+\paragraph{Hydrolysis} \label{sec: hydrolysis}
+An almost opposite of \hyperref[sec: dehydration synthesis]{Dehydration Synthesis} is Hydrolysis which literally means separation (-lysis) with water (hydro-). Thus, the energy contained in bonds of polymers is released when they react with water (water is split into hydrogen and hydroxyl ions) and monomers are created.
 
 \ctext{black}{lime}{
     Dehydration Synthesis \emph{requires} energy and releases water to form [polymer] bonds.
@@ -159,9 +160,78 @@ The \href{https://en.wikipedia.org/wiki/Carbohydrate}{Wikipedia page on Carbohyd
     \item Common names -- fructose (a monosaccharide): \emph{fruit sugar}, glucose (a monosaccharide): \emph{starch sugar}, sucrose (a disaccharide): \emph{cane} or \emph{beet sugar}, lactose (a disaccharide): \emph{milk sugar}.
     \item 
 \end{itemize}
+\paragraph{Monosaccharides}
+Monosaccharides are the simplest form of sugar. They cannot be further \hyperref[sec: hydrolysis]{\emph{hydrolyzed}} to simpler chemical compounds. They are classified according to number of carbon atoms. They are also classified according to the functional group they contain. Based on the number of carbon atoms they are classified as triose, tetrose, pentose, hexose and so on. Based on the functional group, they are classified as either aldose (aldehyde group: \ce{R-CHO}) or ketose (ketone group: \ce{R-C=O-R$^{'}$}).
 \subsubsection{Lipids}
 \subsubsection{Proteins}
 \subsubsection{Nucleic Acids}
+Nucleic acids (DNA and RNA) contain phosphorus in addition to C, H, O, and N. \textbf{Conserved through evolution in all organisms, nucleic acids store and transmit hereditary information}. A cell (nucleus) contains DNA spread across various chromosomes. In humans, each chromosome comes as a \emph{pair}, that is, if we numbered chromosomes 1, 2, $\dots$, then humans have a pair of each number. A chromosome is, in turn, a \href{https://biology.stackexchange.com/a/996/63085}{pair of distinct DNA molecules} connected by hydrogen bonds.
+
+
+\ctext{white}{purple}{
+    1 chromosome = 2 DNA molecules
+}
+
+All of the matter is made of atoms and molecules and bonds between them. Nucleic acids are polymers. One molecule of a nucleic acid is made of several other molecules. Think of this or any other polymer as a hierarchical structure that becomes progressively bigger and more complex.
+
+One molecule of a nucleic acid could be made of tens of thousands of the monomeric \emph{Nucleotide} molecules. Each nucleotide molecule in turn is made of 
+\begin{itemize}
+    \item one molecule of \emph{Nucleoside} which is made of
+        \begin{itemize}
+            \item one molecule of a nitrogenous base (Nucleobase) and
+            \item one molecule of a pentose sugar (ribose in RNA and deoxy-ribose in DNA)
+        \end{itemize}
+    \item one, two, or three molecules of a phosphate 
+\end{itemize}
+
+The nucleotide molecules are held together by phospho-diester bonds. A \emph{nucleoside} is either
+\begin{itemize}
+    \item Adenine,
+    \item Cytosine,
+    \item Guanine, or
+    \item Thymine (DNA) Uracil (RNA)
+\end{itemize}
+
+There are differences between RNA and DNA. There is only one form of DNA, whereas RNA has various forms: messenger RNA (mRNA), transfer RNA (tRNA), ribosomal RNA (rRNA), micro RNA (miRNA). In DNA, there is its signature \emph{double helical structure}. 
+
+
+\paragraph{The Central Dogma of Molecular Biology}
+\epigraph
+{
+    This states that once the `information' has passed into protein \textit{it cannot get out again}. In more detail, the transfer of information from nucleic acid to nucleic acid, or from nucleic acid to protein may be possible, but transfer from protein to protein, or from protein to nucleic acid is impossible. \textbf{Information means here the precise determination of sequence, either of bases in the nucleic acid or of amino acid residues in the protein}.
+}
+{
+    -- As stated by Francis Crick \cite{the-central-dogma}
+}
+
+\paragraph{DNA and RNA}
+Both DNA and RNA are, of course, examples of a \emph{nucleic acid}. This so called \emph{genetic material} has different functions. DNA, which stands for the \emph{Deoxyribose Nucleic Acid} has, on the 2' carbon atom, one oxygen \textbf{less than} (per repetitive nucleotide unit) RNA, which stands for \emph{RiboNucleic Acid}. To begin with, here are their structures:
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{dna-ribose-numbering-std-notation.png}
+    \caption{DNA}
+    \label{fig: dna}
+\end{figure}
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{rna-ribose-numbering-std-notation.png}
+    \caption{RNA}
+    \label{fig: rna}
+\end{figure}
+
+Looking at a few nucleiotide molecules that form a DNA or an RNA molecule more closely helps even more:
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{DNA_chemical_structure-madprime.png}
+    \caption{A DNA Strand}
+    \label{fig: dna-strand}
+\end{figure}
+
+
+The structures of nucleic acids reveal that they have nitrogenous bases and phosphate. You may wonder why it is called an acid if it has a nitrogenous \emph{base}. Looking at the so-called \emph{phospho-diester bonds} between the nucleotide molecules in a DNA or RNA molecule \href{https://biology.stackexchange.com/questions/3864/dna-as-an-acid}{should help decide}. See Figure \ref{fig: dna-strand}. The phosphate group is similar to the phosphoric acid \ce{H3PO4} which has 3 hydrogen atoms. In DNA or RNA nucleotide chain the two hydrogen atoms are replaced by carbon atoms (the 3' carbon) on the ribose sugar molecule. This leaves the remaining hydrogen
 
 \section{Unit 2: The Cell}
 \subsection{Cell Structure}
@@ -453,8 +523,13 @@ Sometimes an innocent person is erroneously convicted of a crime and sent to jai
 
 \begin{thebibliography}{00}
     \bibitem{mendel-fisher} Allan Franklin, A. W. F. Edwards, Daniel J. Fairbanks, Daniel L. Hartl. Ending the Fisher-Mendel Controversy. University of Pittsburgh Press, 2008. Page 2.
+
     \bibitem{yashiro-matsuura} Yashiro, Toshihisa and Matsuura, Kenji. (2014). Termite queens close the sperm gates of eggs to switch from sexual to asexual reproduction. Proceedings of the National Academy of Sciences. 111. 17212-17217. 10.1073/pnas.1412481111. 
+
     \bibitem{embryo-project} Maayan, Inbar. ``\href{http://embryo.asu.edu/handle/10776/2084}{Meiosis in Humans}''. Embryo Project Encyclopedia (2011-03-24). ISSN: 1940-5030. 
+
     \bibitem{meiosis-int-demo} \href{https://www.cellsalive.com/meiosis_js.htm}{Animal Cell Meiosis}.
+
+    \bibitem{the-central-dogma} Crick Francis. ``On Protein Synthesis". \href{https://libgallery.cshl.edu}{CSHL Archives Repository}.
 \end{thebibliography}
 \end{document}

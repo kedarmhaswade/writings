@@ -10,6 +10,7 @@
 \usepackage{color, colortbl}
 \usepackage{xcolor}
 \usepackage{lettrine}
+\usepackage{siunitx}
 \definecolor{rnmgreen}{rgb}{0.549, 0.929, 0}
 \definecolor{noblepink}{rgb}{0.898,0.741, 0.898}
 \definecolor{alkalibeige}{rgb}{0.867,0.682,0.027}
@@ -22,6 +23,8 @@
 \definecolor{unk}{rgb}{0.933,0.933,0.933}
 \usepackage{hyperref}
 \hypersetup{
+    backref=true,
+    citecolor=magenta,
     colorlinks=true,
     linkcolor=blue,
     filecolor=magenta,
@@ -345,8 +348,8 @@ Metals readily lose the electrons when, for example, they dissolve in an aqueous
 
 One can predict if an atom will create cation or anion by looking at its position in the periodic table.
 
-\textbf{Monatomic ions} are formed by a single atom (e.g. an atom of \ce{Na} loses an electron to form an \ce{Na+} ion, an atom of \ce{Al} loses three electrons to form an \ce{Al^3+} ion etc.) We also have \textbf{polyatomic ions} which act as discrete units and are a group of \emph{different} bonded atoms with an overall electrical charge. Common polyatomic anions (listed below) react with hydrogen cations (\ce{H+}) to form acidsr:
-\begin{itemize}
+\textbf{Monatomic ions} are formed by a single atom (e.g. an atom of \ce{Na} loses an electron to form an \ce{Na+} ion, an atom of \ce{Al} loses three electrons to form an \ce{Al^3+} ion etc.) We also have \textbf{polyatomic ions} which act as discrete units and are a group of \emph{different} bonded atoms with an overall electrical charge. Common polyatomic anions (listed below) react with hydrogen cations (\ce{H+}) to form acids:
+\begin{itemize}\label{polyatomic ions}
     \item acetate: \ce{CH3COO-}, forms: acetic acid (\ce{CH3COOH})
     \item cyanide: \ce{CN-}, forms: hydrocyanic acid (\ce{HCN})
     \item azide: \ce{N3-}, forms: hydrazoic acid (\ce{HN3})
@@ -363,6 +366,7 @@ One can predict if an atom will create cation or anion by looking at its positio
     \item chromate: \ce{CrO4^2-}, forms: chromic acid (\ce{H2CrO4})
     \item dichromate: \ce{Cr2O7^2-}, forms: dichromic acid (\ce{H2Cr2O7})
     \item permanganate: \ce{MnO4-}, forms: permanganic acid (\ce{HMnO4})
+    \item oxalate: \ce{C2O4^{2-}}, forms: oxalic acid (\ce{C2H2O4})
 \end{itemize}
 
 When electrons are \underline{transferred} and \underline{ions form}, ionic bonds result. \textbf{Ionic bonds are electrostatic forces of attraction between particles (ions) bearing opposite charges}.
@@ -372,7 +376,15 @@ When electrons are \underline{shared} and \underline{molecules form}, molecular 
 Ionic compounds form and are held together by the electrostatic attraction between -- cations and anions -- the oppositely charged ions. The electrostatic attraction is called the \emph{ionic bond}. Typically, a metallic atom loses an electron to form a cation and a nonmetallic atom gains an electron to form an anion. These ions then attract each other forming an ionic compound. This is usually, but not always, true: \ce{NaCl} and \ce{CaCl2} are ionic, but \ce{AlCl3} is not. An atom is electrically neutral (i.e. number of positively charged protons = number of negatively charged electrons). 
 
 Why would such an electrically neutral atom gain or lose electrons to be electrically charged (when the conditions are right)? One reason is due to quantum chemistry. By gaining or losing the electrons (and thus forming \emph{ions} -- the charged particles -- in the process) atoms tend to reach the electron configurations of the \emph{nearest noble gas atoms}. This happens because the electrons sort of make a truce and \emph{settle into their groove} by filling the orbitals. This reduces their ``excitement" giving them the so-called stability. One might think that a \emph{charged} particle such as an \ce{Na+} ion may be less stable as compared to a chargeless atom like an \ce{Na} atom. But enough experimental evidence exists to believe that once the orbitals are full, the electrons less easily tend to move from one atom to another. Also, the term ``stability" here refers more to the movement across atoms, than to a physical movement of particles. \emph{Electronically stable} ions (since they attain the nearest noble gas configuration) freely move around (for example, in aqueous solutions, where they are supposed to be in a ``dissociated" state). 
+
+The formula of an ionic compound must have a ratio of ions such that the numbers of positive and negative charges are equal.
+
+Many ionic compounds contain \hyperref[polyatomic ions]{\emph{polyatomic ions}} as a cation, anion, or both. Polyatomic ions must be treated as discrete charged units. Like simple ionic compounds, the overall charge on the ionic compounds formed by polyatomic ions is zero.
+
+We must pay attention to which ions an ionic compound is made from. This may result in foregoing the \emph{apparent} empirical formula of an ionic compound. An example is sodium oxalate: \ce{Na2C2O4} which is made of sodium (\ce{Na+}) ions and oxalate ({\ce{C2O4^2-}) ions. The formula for sodium oxalate is \ce{Na2C2O4} and \emph{not} (the apparently empirically correct) \ce{NaCO2}.
 \subsubsection{Molecular Compounds}
+Many compounds do not contain ions but instead consist solely of discrete, neutral molecules. These molecular compounds (covalent compounds) result when atoms share, rather than transfer (gain or lose), electrons. Covalent bonding is an important and extensive concept in chemistry. Typically a molecular compound results when nonmetals combine. Typically, they exist as gases, or low-boiling liquids, or low-melting solids. \textbf{Many exceptions exist and we should study molecular compounds thoroughly}.
+
 \section{Stoichiometry of Chemical Reactions}
 \renewcommand{\epigraphsize}{\small}
 \setlength{\epigraphwidth}{0.8\textwidth}
@@ -413,7 +425,7 @@ This chapter discusses the \emph{dual nature of light}, the so-called \emph{wave
 \subsection{Electromagnetic Energy}
 Newton, of course, was a towering figure in the development of physics and mathematics. He conducted experiments using a glass prism. Glass prism \emph{separates} the visible (white) light into bands of color. He went on to propose a corpuscular theory of light that asserts that light is made of tiny particles moving according to Newton's laws of motion.
 
-Imagine yourself in late 1700's or early 1800's. To ask questions, carry out careful experiments, and objectively conclude, in the spirit of science, some findings that contradict Newton's reasoning was considered heresy. Still, Francesco Grimaldi, Robert Hooke, Christiaan Huygens, Thomas Young, and Augustin-Jean Fresnel (along with François Arago) helped develop the \href{https://en.wikipedia.org/wiki/Light\#Wave_theory}{wave theory of light}. One limitation of wave theory of light was that it proposed the need of a medium for the light to travel. This was later superseded by Maxwell in 1860 when he showed how electromagnetic radiation traveled through space that is devoid of any medium. Later, several scientists developed a quantum theory of light which pictures light as comprised of both waves and particles. Wikipedia mentions the following about a progression from particle theory, to wave theory, to electromagnetic theory, and finally (as of 2020) to quantum theory:
+Imagine yourself in late 1700's or early 1800's. Although to ask questions, carry out careful experiments, and objectively conclude is the spirit of science, some findings that contradicted Newton's reasoning were considered heresy. Still, Francesco Grimaldi, Robert Hooke, Christiaan Huygens, Thomas Young, and Augustin-Jean Fresnel (along with François Arago) helped develop the \href{https://en.wikipedia.org/wiki/Light\#Wave_theory}{wave theory of light}. The wave theory satisfactorily explained the optical phenomena like [specular] reflection, refraction, interference, and diffraction. One limitation of wave theory of light was that it proposed the need of a medium for the light to travel. This was later superseded by Ampere, Faraday, and finally Maxwell. Maxwell, in 1860, showed how \emph{electromagnetic radiation} traveled through space that is devoid of any medium. Later, several scientists developed a quantum theory of light which pictures light as comprised of both waves and particles. Wikipedia mentions the following about a progression from particle theory, to wave theory, to electromagnetic theory, and finally (as of 2020) to quantum theory:
 
 \setlength{\epigraphwidth}{0.9\textwidth}
 \epigraph
@@ -429,10 +441,68 @@ Visible light and other forms of electromagnetic radiation play important roles 
 \todo[inline]{Add Appendix for \href{http://www.cavendishscience.org/phys/p_index2.htm}{Young's Experiment}}
 \todo[inline]{Take a look at \href{https://archive.org/details/wavetheoryofligh00crewrich/page/n11/mode/2up}{the Wave Theory of Light}}
 \todo[inline]{Add Appendixes}
+
 \paragraph{Waves}
+
+Waves are enigmatic phenomena of nature!  A wave is an oscillation or periodic movement that can transport \emph{energy} (and not matter) from one point in space to another. It can be described \cite{the-physics-class} as a \emph{disturbance} that travels through a medium from one location to another location. A \emph{medium} is a substance or material that carries the wave. To fully understand the nature of a wave, it is important to consider the medium as a collection of \emph{interacting particles}. In other words, the medium is composed of parts that are capable of interacting with each other. The interactions of one particle of the medium with the next adjacent particle allow the disturbance to travel through the medium. In the case of the slinky wave, the particles or interacting parts of the medium are the individual coils of the slinky. In the case of a sound wave in air, the particles or interacting parts of the medium are the individual molecules of air. And in the case of a stadium wave, the particles or interacting parts of the medium are the fans in the stadium \cite{the-physics-class-waves}. 
+
+The medium can thus be modeled as a series of particles connected by springs.
+
+This characteristic of a wave as an energy transport phenomenon distinguishes waves from other types of phenomenon. Consider a common phenomenon observed at a softball game - the collision of a bat with a ball. A batter is able to transport energy from her to the softball by means of a bat. The batter applies a force to the bat, thus imparting energy to the bat in the form of kinetic energy. The bat then carries this energy to the softball and transports the energy to the softball upon collision. In this example, a bat is used to transport energy from the player to the softball. However, unlike wave phenomena, this phenomenon involves the transport of matter. The bat must move from its starting location to the contact location in order to transport energy. In a wave phenomenon, \textbf{energy can move from one location to another, yet the particles of matter in the medium return to their fixed position}. A wave transports its energy without transporting matter.
+\todo[inline]{Complete this section later, refer to \cite{the-physics-class}}
+
+The product of a wave's wavelength ($\lambda$) and its frequency ($\nu$), $\lambda\cdot\nu$, is the speed of the wave. Thus, for electromagnetic radiation in a vacuum, speed is equal to the fundamental constant, $c$:
+
+$c=2.998\times 10^8$\si{\metre\per\second}=$\lambda\cdot\nu$
+
+Each of the various colors of visible light has specific frequencies and wavelengths associated with them, and you can see that visible light makes up only a small portion of the electromagnetic spectrum. Because the technologies developed to work in various parts of the electromagnetic spectrum are different, for reasons of convenience and historical legacies, different units are typically used for different parts of the spectrum. For example, \textbf{radio waves are usually specified as frequencies (typically in units of MHz)}, while the \textbf{visible region is usually specified in wavelengths (typically in units of nm or angstroms)}.
+
+\paragraph{Blackbody Radiation and the UV Catastrophe}
+Since it is now firmly established that light is made of electromagnetic waves which are more generally called the \emph{electromagnetic radiation}, we can think of whether the waves are of a specific wavelength. It turns out, as discussed above, that the electromagnetic radiation is made of waves of various different wavelengths. 
+
+\paragraph{The Photoelectric Effect}
+
+It was observed that when certain metal surfaces were bombarded with light at different intesities and frequencies, in certain cases electrons were emitted from the metal! Scientists tried to grapple with these strange experimental observations (at least they were surprising at the time):
+
+Light waves at a certain fixed frequency (or wavelength $\lambda_1$) were bombaded on a smooth zinc plate. The brightness, intensity, or the so-called \emph{spectral irradiance} was increased. Changes in intesity result in changing \emph{amount} of light falling on a fixed area of the zinc plate. No matter what the \emph{intesity} of the $\lambda_1$ light, the zinc plate seemed to \emph{absorb} all of it! Now, everything else remaining the same, the frequency of the light wave was increased (or a light of smaller wavelength $\lambda_2 < \lambda_1$ was used) and to scientists' surprise, some particles were emitted. These particles were electrons (or more specifically \emph{photoelectrons}). How do we know these are \emph{electrons}? Well, Robert Millikan simply connected the two ends of the plate to a battery with certain voltage that \emph{retarded} the movement of those particles by placing another plate to which a negative voltage was applied. So, in his experiments, he observed that by increasing this \emph{retarding voltage} the flow of these particles was stopped. This helped conclude that the particles are indeed electrons. It was observed that only by controlling the \emph{frequency} of the radiation alone the flow of electrons could be controlled (everything else remaining the same). In fact, there is a \emph{threshold frequency} below which no electrons were emitted. This was the experimental verification (in 1916) of the prediction that Einstein did in 1905. The explanation that Einstein did is called a \emph{phenomenological} explanation where predictions are made. Einstein used Planck's work on the blackbody radiation to posit that light is made of photons that are emitted in accordance with the frequency of the [electromagnetic] wave that produced them. This energy is then imparted in the form of packets of photons to the surface in their way which may, in turn, emit electrons. The \emph{radiant energy} is expressed in the form of a famous equation
+\begin{equation}
+    \label{eqn: planck's equation}
+    E = h\cdot \nu
+\end{equation}
+where, $h$ is Planck's constant and $\nu$ is the frequency of the wave that produced photons.
+
+A. J. French in his book on Quantum Physics (\cite{french-quantum-physics}) says the following about this equation (\ref{eqn: planck's equation}):
+
+\epigraph
+{
+    If any one quantity can be said to characterize quantum physics, it is Planck's constant. \\
+    ...\\
+    The equation (\ref{eqn: planck's equation}) $E=h\cdot \nu$ is really \emph{a very strange one}: it is a sort of experiment-based mongrel with \emph{parentage in both classical theory} (``wave of frequency $\nu$") and \emph{quantum theory} (``quantum of energy $E$"). The \emph{significance of this relationship} is something we shall reexamine more carefully later.
+}
+{
+    \textit{A. J. French \cite{french-quantum-physics}}
+}
+
+This led to a formulation of a new equation: Electrons that are situated near the surface of a metal [that is bombarded with light quanta (photons)] \emph{may} escape the metal when the bombarded photons have enough ``frequency". Most of the electrons thus ``excited" lose the energy as they plow through the metal. The high-energy electrons at the surface, however, may escape with some kinetic energy after paying the ``energy tax" (\cite{french-quantum-physics}, p. 20). The potential energy that such an escaping [photo]electron must overcome is called the \emph{work function $W$,} and it is characteristic of a metal. Typically, $W$ is a few electron-Volts. Clearly, the units of work function are that of energy. Work function is therefore the threshold energy that the most energetic electrons have to overcome. If the incident radiant energy is less than $W$, then no electrons will be emitted. $W$ can then be conveniently expressed by Planck's equation such that
+
+$$
+W = h\cdot \nu_0
+$$
+where $\nu_0$ is the \emph{threshold frequency}. The maximum kinetic energy, $K_{max}$ of the escaping photoelectron becomes:
+$$
+K_{max} = h\cdot \nu-W
+$$
 
 \subsection{The Bohr Model}
 \subsection{Development of Quantum Theory}
 \subsection{Electronic Structure of Atoms (Electron Configurations)}
 \subsection{Periodic Variations in Element Properties}
+\begin{thebibliography}{00}
+    \bibitem{the-physics-class} The Physics Classroom. On the WWW at https://www.physicsclassroom.com.
+
+    \bibitem{the-physics-class-waves} The Physics Classroom. Waves. On the WWW at https://www.physicsclassroom.com/class/waves/Lesson-1/What-is-a-Wave.
+
+    \bibitem {french-quantum-physics} French, Anthony Philip. An Introduction to Quantum physics. W. W. Norton \& Company, Inc. 1978.
+
+\end{thebibliography}
 \end{document}
