@@ -1,13 +1,16 @@
-\documentclass[12pt]{article}
+\documentclass[a6paper]{article}
+\usepackage[margin=5mm]{geometry}
 \usepackage[version=4]{mhchem}
 \usepackage{amsmath,amssymb,amsthm,amsfonts}   %% AMS mathematics macros
 \usepackage{siunitx}
+\usepackage{xcolor}
 \usepackage{hyperref}
 \hypersetup{
     colorlinks=true,
     linkcolor=blue,
     filecolor=magenta,
-    urlcolor=cyan,
+    citecolor=blue,
+    urlcolor=purple,
 }
 
 \begin{document}
@@ -16,7 +19,45 @@
 \date{December 2020}
 \maketitle
 \textbf{Practical Problem}: 
-It was decided to inflate a common latex balloon to 5~\si{\cm} radius by the hydrogen gas produced during a single-displacement reaction: \ce{2HCl(aq) + Zn(s) -> ZnCl2(s) + H2(g)} that uses an $N/10$ i.e. 0.1M HCl solution (available in many drugstores, typically in 200ml bottles). How much reactants are needed?
+How do you specify 1 atmospheric pressure in the USA?
 
 \textbf{Solution}:
+We won't go into why the USA keeps the FPS system of measurement, but instead, focus on the problem as it is faced by a young and hapless student of science.
+
+In the USA, pressure, which is force per unit area, is expressed in \textbf{pound-force/in\textsuperscript{2}}, \textbf{lbf/in\textsuperscript{2}}, or \textbf{psi} in short. Note that the `p' in psi stands for \emph{pound-force} and not pound, although informally it is taken that way (i.e. pound/in\textsuperscript{2}). If you ask a random person in America they might say that the unit of pressure there is ``\emph{pound} per square inch". Historical aspects of the resulting mess are described in \cite{esu}.
+
+As if this were not confusing enough, the definition of \textbf{1 pound-force} or \textbf{1 lbf} was defined as the \emph{weight} of 1 pound \emph{mass}\footnote{We feel sorry for those who were taught in a manner to treat mass and weight interchangeably.} on the surface of earth! This was really short-sighted. Anyway, the weight $W$ in \textbf{lbf} of \textbf{1 pound mass} (or 454 \si{\gram} or 0.454 \si{\kg}) on the surface of earth, is 
+\begin{align*}
+    W 
+    &= mg \dots \footnotemark\\
+    &= 1\times 9.8 \; \text{lb m/s\textsuperscript{2}} \\
+    &= 0.454\times 9.8\; \text{kg m/s\textsuperscript{2}}\\
+    &= 4.4492\; \text{N} \dots \footnotemark
+\end{align*}
+Thus, \textbf{1 lbf} force is equivalent to \textbf{4.448 \si{\newton}}.
+
+Then, 
+\begin{align*}
+    1 \; \text{psi} 
+    &= 1 \; \text{lbf/in\textsuperscript{2}} \\
+    &= 4.4492 \; \text{N/in\textsuperscript{2}} \\
+    &= 4.4492 \times 39.37 \times 39.37\; \text{N/m\textsuperscript{2}} \\
+    &= 6896.246 \; \si{\pascal}
+\end{align*}
+Pascal: \si{\pascal} is the SI unit of pressure. Since 1 atomospheric pressure is 101325 \si{\pascal}, from the above we get:
+\begin{align*}
+    1 \; \text{atm} 
+    &= \frac{101325}{6896.246} \;\text{psi} \\
+    &= 14.693 \; \text{psi}
+\end{align*}
+
+That's it. 1 atmospheric pressure is 14.693 psi.
+\addtocounter{footnote}{-1}
+\footnotetext{$g$ on eath is 9.8 m/s\textsuperscript{2} = 32.2 ft/s\textsuperscript{2}}
+\stepcounter{footnote}
+\footnotetext{SI unit of force is \si{\newton} (Newton) which is cleanly defined as the force required to accelerate 1 kg \emph{mass} at 1 m/s\textsuperscript{2}}
+
+\begin{thebibliography}{00}
+    \bibitem{esu} Fran{\c c}ois Cardarelli. Encyclopaedia of Scientific Units, Weights, and Measures: Their SI Equivalences and Origins. Springer. 2003.
+\end{thebibliography}
 \end{document}
