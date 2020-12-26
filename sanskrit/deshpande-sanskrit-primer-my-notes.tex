@@ -343,6 +343,7 @@ There are 33 consonants and 2 special consonant clusters. The arrangement is acc
 \end{center}
 \end{table}
 
+
 Table \ref{tab: phonetic} shows the \emph{phonetic analysis} of the Sanskrit Alphabet. In that table, `Voice' feature refers to \emph{sonorous vibration}, `Asp' (aspiration) feature refers to a \emph{rush of air}, and `Nasal' refers to sound generation with the passage of air through nose (and not mouth\footnote{Nearly all nasal consonants are nasal occlusives, in which air escapes through the nose but not through the mouth, as it is blocked (occluded) by the lips or tongue.}). If a feature is present, a `+' preceeds it (e.g. `+Voice' -- generation of a sonorous vibration) and if a `-' preceeds it, that feature is absent (e.g. `-Asp' -- no rush of air).
 
 \begin{table}[htbp!]
@@ -429,6 +430,8 @@ We have already seen the Sanskrit alphabet in Tables \ref{tab: vowels} and \ref{
 \end{figure}
 
 These are collectively called the ``add-on vowel signs" and they look like below (note that each of them has a Unicode codepoint which means that it is recognized as a distinct character in a writing system (in this case \sans{devanaagarii})). There is no add-on vowel sign for \sans{a}; when conjugated with \sans{a}, the consonant simply loses the \sans{viraama.h} -- \sans{\char"94D}. Any consonant should conjugate with these add-ons, the Table \ref{tab: add-on vowels} below uses `\sans{t}' as an example.
+
+Thus the representation of a single consonant like \sans{pa} is a combination of the base consonant \sans{p} and the vowel \sans{a}. This document treats \sans{pa} and \sans{p} interchangeably unless noted otherwise. The word \sans{kaara.h} in Samskritam grammar denotes the sound associated with a letter or (occassionally), a word. For example, when the vowel \sans{aa} combines with any consonant an \sans{aakaara.h} results, when the vowel \sans{u} combines with any consonant an \sans{ukaara.h} results, and so on.
 
 \begin{table} [h!]
 \begin{center}
@@ -539,11 +542,11 @@ The rules for making consonant clusters depend (mostly) on whether the first con
 \begin{enumerate}
     \item In a horizontal cluster, the final vertical lines of all but the last consonant are dropped and then the remaining parts are joined together: \sans{v $+$ ya = vya}, \sans{.s $+$ p $+$ ya $=$ .spya}, \sans{s $+$ t $+$ vaa $=$ stvaa}
     \item Characters suspended from a central stem have several forms: \sans{.t $+$ .ta $=$ .t.ta, d $+$ da $=$ dda, .d $+$ .da $=$ .d.da, l $+$ la $=$ lla}
-    \item Other combinations are handled in various ways: \sans{.t $+$ ya $=$ .tya, d $+$ ya $=$ dya, k $+$ ya $=$ kya, k $+$ ta $=$ kta}. When \sans{la} is the second consonant, it may be placed next to (\sans{g $+$ la $=$ gla}) or below (\sans{k $+$ la $=$ kla}) the first consonant.
+    \item Other combinations are handled in various ways: \sans{.t $+$ ya $=$ .tya, d $+$ ya $=$ dya, k $+$ ya $=$ kya, k $+$ ta $=$ kta}. When \sans{l} is the second consonant, it may be placed next to (\sans{g $+$ la $=$ gla}) or below (\sans{k $+$ la $=$ kla}) the first consonant.
     \item Special forms: \sans{"s} and \sans{r}
         \begin{enumerate}
             \item For \sans{"s}, alternate combining form may be used: \sans{"sca, "sna, "sra, "sva} etc. or \sans{"s} may be retained: \sans{"ska, "sta, "sma} etc. But with \sans{ra} it is always \sans{"sra}, never as \includegraphics[height=\fontcharht\font`\B]{wrong-shra.png}.
-            \item \sans{ra} has several combining forms.
+            \item \sans{r} has several combining forms.
                 \begin{enumerate}
                     \item When \sans{r} is the second consonant:
                         \begin{enumerate}
@@ -559,7 +562,12 @@ There are defined consonant clusters (different from the special consonant clust
 
 Generally speaking, a document (like this one) with \sans{devanaagarii} letters that has been typeset on a computer (or in a traditional printing press), the letters (especially the combined ones) are dictated by the \emph{font} used. Thus, all of the above letters that you see are defined by the artist(s) who created the font. The \sans{devanaagarii} letters in this document use a font named Shobhika(\sans{"sobhikaa}) which is developed by the \href{https://github.com/Sandhi-IITBombay/Shobhika}{Indian Institute of Technology Bombay, Mumbai, India}.
 
-Punctuation 
+There aren't very many punctuation marks in Samskritam. The few that are used consistently are:
+\begin{enumerate}
+    \item The \sans{viraama.h -- \char"94D} that denotes a bare consonant (without the terminal vowel \sans{a}).
+    \item The \sans{da.n.da.h -- |} marks the end of a sentence or the end of half a stanza: \sans{raama.h g.rha.m gacchati|}
+    \item The \sans{da.n.dau -- ||} marks the end of a stanza.
+\end{enumerate}
 
 
 
