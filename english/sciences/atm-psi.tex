@@ -26,15 +26,20 @@ We won't go into why the USA keeps the FPS system of measurement, but instead, f
 
 In the USA, pressure, which is force per unit area, is expressed in \textbf{pound-force/in\textsuperscript{2}}, \textbf{lbf/in\textsuperscript{2}}, or \textbf{psi} for short. Note that the `p' in psi stands for \emph{pound-force} and not pound, although informally it is taken that way (i.e. pound/in\textsuperscript{2}). If you ask a random American, they might say that the unit of pressure there is ``psi, \emph{pound} per square inch". Historical aspects of the mess resulting from such perceived equivalence are described in \cite{esu}.
 
-As if this were not confusing enough, the definition of \textbf{1 pound-force} or \textbf{1 lbf} was defined as the \emph{weight} of 1 pound \emph{mass}\footnote{We feel sorry for those who were taught in a manner to treat mass and weight interchangeably.} on the surface of earth! This was really short-sighted. Anyway, the weight $W$ in \textbf{lbf} of \textbf{1 pound mass} (or 454 \si{\gram} or 0.454 \si{\kg}) on the surface of earth, is 
+As if this were not confusing enough, the definition of \textbf{1 pound-force} or \textbf{1 lbf} was defined as the \emph{weight} of 1 pound \emph{mass}\footnote{We feel sorry for those who were taught in a manner to treat mass and weight interchangeably.} on the surface of earth! This was really short-sighted because it made 1 lbm (when talking of mass) equivalent to 1 lbf (when talking of weight) \emph{only} on the surface of earth and the lbm and lbf merged to create just lb. A unit \emph{slug} was hurriedly introduced to avoid further confusion, but the resulting damage has been irreparable. This made the communication of basic concepts in science hard (especially, but not only, for high school students of science) and the lbm-lbf equivalence fell apart when we landed on the moon and discovered that on its surface 1 pound mass is \emph{not} equivalent to 1 pound force\footnote{There a 1 pound mass \emph{weighs} only $\frac{1}{6}$ pound force!}.
+
+Anyway, if possible, we should just remember that since 1959 \cite{pound-mass-current} 1 pound mass is defined as exactly 0.45359237 \si{kg} ($\approx 0.454$ \si{kg}). Thus, in America, when we say that a certain skater \emph{weighs} 120 lb, we mean that she has a \emph{mass} of about $120\times 0.454$ \si{kg} or $54.48$ \si{kg}.
+
+Then, on the surface of earth, a \textbf{1 pound mass} exerts a force that is same as its weight due to gravity:
 \begin{align*}
     W 
-    &= mg \dots \footnotemark\\
-    &= 1\times 9.8 \; \text{lb m/s\textsuperscript{2}} \\
-    &= 0.454\times 9.8\; \text{kg m/s\textsuperscript{2}}\\
-    &= 4.4492\; \text{N} \dots \footnotemark
+    &= mg \\
+    &= 1\; \text{lb} \times 9.8\; \text{m/s\textsuperscript{2}} \\
+    &= 0.454\; \text{kg} \times 9.8\; \text{m/s\textsuperscript{2}}\\
+    &= 4.4492\; \text{N} 
 \end{align*}
-Thus, \textbf{1 lbf} force is equivalent to \textbf{4.448 \si{\newton}}.
+
+Thus, 1 pound mass weighs approximately \textbf{4.449 \si{\newton}}.
 
 Then, 
 \begin{align*}
@@ -44,20 +49,23 @@ Then,
     &= 4.4492 \times 39.37 \times 39.37\; \text{N/m\textsuperscript{2}} \\
     &= 6896.246 \; \si{\pascal}
 \end{align*}
-Pascal: \si{\pascal} is the SI unit of pressure. Since 1 atomospheric pressure is 101325 \si{\pascal}, from the above we get:
+Pascal: \si{\pascal} is the SI unit of pressure. Since 1 atmospheric pressure is 101325 \si{\pascal}, from the above we get:
 \begin{align*}
     1 \; \text{atm} 
     &= \frac{101325}{6896.246} \;\text{psi} \\
     &= 14.693 \; \text{psi}
 \end{align*}
 
-That's it. 1 atmospheric pressure is 14.693 psi. It is enormous pressure that we have evolved to bear easily.
-\addtocounter{footnote}{-1}
-\footnotetext{$g$ on eath is 9.8 m/s\textsuperscript{2} = 32.2 ft/s\textsuperscript{2}}
-\stepcounter{footnote}
-\footnotetext{SI unit of force is \si{\newton} (Newton) which is cleanly defined as the force required to accelerate 1 kg \emph{mass} at 1 m/s\textsuperscript{2}}
+That's it. 1 atmospheric pressure, 1 atm, is 14.693 psi. It is enormous pressure that we have evolved to easily bear.
+% not used anymore, only the last footnote shows up
+%\addtocounter{footnote}{-1}
+%\footnotetext{$g$ on earth is 9.8 m/s\textsuperscript{2} = 32.2 ft/s\textsuperscript{2}}
+%\stepcounter{footnote}
+%\footnotetext{SI unit of force is \si{\newton} (Newton) which is cleanly defined as the force required to accelerate 1 kg \emph{mass} at 1 m/s\textsuperscript{2}}
+% not used anymore, only the last footnote shows up
 
 \begin{thebibliography}{00}
-    \bibitem{esu} Fran{\c c}ois Cardarelli. Encyclopaedia of Scientific Units, Weights, and Measures: Their SI Equivalences and Origins. Springer. 2003.
+    \bibitem{esu} Fran{\c c}ois Cardarelli. Encyclopedia of Scientific Units, Weights, and Measures: Their SI Equivalences and Origins. Springer. 2003.
+    \bibitem{pound-mass-current} Wikipedia. \href{https://en.wikipedia.org/wiki/Pound\_(mass)\#Current\_use}{Pound (mass): current use}.
 \end{thebibliography}
 \end{document}

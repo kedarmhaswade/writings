@@ -29,6 +29,11 @@
 \newcommand\mystack[2]{\scaleleftright{.}{\Shortstack{#1}}{#2}}
 \setstackgap{S}{0pt}
 % stack characters vertically
+% for quotations
+\usepackage{epigraph, varwidth}
+\renewcommand{\epigraphsize}{\small}
+\setlength{\epigraphwidth}{1.0\textwidth}
+% for quotations
 \usepackage{hyperref}
 \hypersetup{
     colorlinks=true,
@@ -60,8 +65,9 @@
 \begin{document}
 \def\dev{\edef~{\string~}\textsanskrit}
 \tableofcontents
+\newpage
 \edef~{\string~}
-I picked up Professor Madhav Deshpande's book in November 2020. These are my notes from his book. While studying from his book, I also explored a variety of resources available on the WWW. These notes rely heavily on those wonderful resources.
+I picked up \href{https://www.amazon.in/Samskrta-Subodhini-Sanskrit-Michigan-Southeast-Studies/dp/089148079X}{Professor Madhav Deshpande's book} in November 2020. These are my notes from his book. While studying from his book, I explored a variety of relevant resources available on the WWW. These notes rely heavily on those wonderful resources. These notes are a unification of what I could find on various topics as seen from my perspective.
 
 \section{Introduction}
 
@@ -565,9 +571,20 @@ Generally speaking, a document (like this one) with \sans{devanaagarii} letters 
 There aren't very many punctuation marks in Samskritam. The few that are used consistently are:
 \begin{enumerate}
     \item The \sans{viraama.h -- \char"94D} that denotes a bare consonant (without the terminal vowel \sans{a}).
-    \item The \sans{da.n.da.h -- |} marks the end of a sentence or the end of half a stanza: \sans{raama.h g.rha.m gacchati|}
-    \item The \sans{da.n.dau -- ||} marks the end of a stanza.
+    \item The \sans{da.n.da.h -- |} that marks the end of a sentence or the end of half a stanza: \sans{raama.h g.rha.m gacchati|}
+    \item The \sans{da.n.dau -- ||} that marks the end of a stanza.
 \end{enumerate}
+
+According to Prof. Deshpande, in modern editions of Sanskrit texts, other English punctuation marks like `,', `!', and `?' are found.
+
+\subsection{On Transliteration}
+\epigraph
+{
+    Perhaps of all the creations of man language is the most astonishing.
+}
+{
+    --\textit{Giles Lytton Strachey \cite{wap}}
+}
 
 
 
@@ -623,7 +640,7 @@ Naming verb conjugations is typically challenging. We found a verb \href{https:/
     \sans{aagamaabhaavayuktalu"n (lakaara.h)} &
     Injunctive (Mood) \\
     \hline
-    \sans{aa"sirli"n (lakaara.h)} &
+    \sans{aa"sirli"n (lakaara.h)}\footnote{foo} &
     Benedictive\footnote{Benediction: Indicating prayer or invoking divine protection} (Mood) \\
     \hline
     \sans{k.rdanta.h (pratyaya.h)} &
@@ -662,7 +679,7 @@ Naming verb conjugations is typically challenging. We found a verb \href{https:/
     \sans{li.daade"sa (li.t $+$ aade"sa) aatma\footnote{\sans{aatmanepadii dhaatu.h}} (pratyaya.h)} &
     Future Passive (Participle)\\
     \hline
-    \sans{avyaya.h} &
+    \sans{avyaya.h}&
     Indeclinable\\
     \hline
     \sans{tumun (avyaya.h)} &
@@ -694,4 +711,9 @@ Naming verb conjugations is typically challenging. We found a verb \href{https:/
 \end{table}
 
 The classical language misses some conjugations present in the vedic language.
+
+
+\begin{thebibliography}{00}
+    \bibitem{wap} Giles Lytton Strachey and George Rylands. Words and Poetry. New York: Payson and Clarke. Introduction, Page xii.
+\end{thebibliography}
 \end{document}
