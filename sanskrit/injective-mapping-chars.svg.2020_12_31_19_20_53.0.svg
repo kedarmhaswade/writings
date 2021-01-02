@@ -1,0 +1,556 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="injective-mapping-chars.svg"
+   inkscape:export-filename="/home/pi/gh/writings/sanskrit/injective-mapping-chars.png"
+   inkscape:export-xdpi="75"
+   inkscape:export-ydpi="75">
+  <defs
+     id="defs2">
+    <marker
+       inkscape:stockid="Arrow2Send"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow2Send"
+       style="overflow:visible;"
+       inkscape:isstock="true">
+      <path
+         id="path1049"
+         style="fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round;stroke:#000000;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
+         transform="scale(0.3) rotate(180) translate(-2.3,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow2Mend"
+       style="overflow:visible;"
+       inkscape:isstock="true">
+      <path
+         id="path1043"
+         style="fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round;stroke:#000000;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
+         transform="scale(0.6) rotate(180) translate(0,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Send"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Send-4"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path1049-3"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="matrix(-0.3,0,0,-0.3,0.69,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Send"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Send-4-1"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path1049-3-1"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="matrix(-0.3,0,0,-0.3,0.69,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Send"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Send-4-0"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path1049-3-0"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="matrix(-0.3,0,0,-0.3,0.69,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Send"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Send-4-2"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path1049-3-5"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="matrix(-0.3,0,0,-0.3,0.69,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Send"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Send-4-6"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path1049-3-9"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="matrix(-0.3,0,0,-0.3,0.69,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Send"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Send-4-9"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path1049-3-8"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="matrix(-0.3,0,0,-0.3,0.69,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Send"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Send-4-5"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path1049-3-11"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="matrix(-0.3,0,0,-0.3,0.69,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Send"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Send-4-8"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path1049-3-57"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="matrix(-0.3,0,0,-0.3,0.69,0)" />
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.6303373"
+     inkscape:cx="396.85039"
+     inkscape:cy="552.85714"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1022"
+     inkscape:window-x="0"
+     inkscape:window-y="26"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g931">
+      <ellipse
+         ry="106.83727"
+         rx="41.220592"
+         cy="140.36667"
+         cx="60.854164"
+         id="path815"
+         style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:1.10880911;stroke-linejoin:round;stroke-miterlimit:3;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.35294118" />
+      <text
+         transform="scale(0.98056905,1.019816)"
+         id="text819"
+         y="63.952919"
+         x="53.789524"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:19.30281448px;line-height:1.25;font-family:'Sanskrit 2003';-inkscape-font-specification:'Sanskrit 2003, ';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.51703966"
+         xml:space="preserve"><tspan
+           id="tspan821"
+           style="stroke-width:0.51703966"
+           y="63.952919"
+           x="53.789524"
+           sodipodi:role="line">अ</tspan></text>
+      <text
+         transform="scale(0.98056904,1.019816)"
+         id="text819-5"
+         y="79.537025"
+         x="52.222218"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:19.30281448px;line-height:1.25;font-family:'Sanskrit 2003';-inkscape-font-specification:'Sanskrit 2003, ';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.51703966"
+         xml:space="preserve"><tspan
+           id="tspan821-2"
+           style="stroke-width:0.51703966"
+           y="79.537025"
+           x="52.222218"
+           sodipodi:role="line">ा</tspan></text>
+      <text
+         id="text845"
+         y="86.92083"
+         x="52.916664"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.8777771px;line-height:1.25;font-family:'Sanskrit 2003';-inkscape-font-specification:'Sanskrit 2003, ';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           id="tspan847"
+           style="stroke-width:0.26458332"
+           y="94.946526"
+           x="52.916664"
+           sodipodi:role="line" /></text>
+      <text
+         transform="scale(0.98056904,1.019816)"
+         id="text819-2"
+         y="96.66021"
+         x="52.761856"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:19.30281448px;line-height:1.25;font-family:'Sanskrit 2003';-inkscape-font-specification:'Sanskrit 2003, ';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.51703966"
+         xml:space="preserve"><tspan
+           id="tspan821-8"
+           style="stroke-width:0.51703966"
+           y="96.66021"
+           x="52.761856"
+           sodipodi:role="line">आ</tspan></text>
+      <text
+         transform="scale(0.98056904,1.019816)"
+         id="text819-6"
+         y="115.34006"
+         x="59.777336"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:19.30281448px;line-height:1.25;font-family:'Sanskrit 2003';-inkscape-font-specification:'Sanskrit 2003, ';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.51703966"
+         xml:space="preserve"><tspan
+           id="tspan821-6"
+           style="stroke-width:0.51703966"
+           y="115.34006"
+           x="59.777336"
+           sodipodi:role="line">र</tspan></text>
+      <text
+         transform="scale(0.98056904,1.019816)"
+         id="text819-0"
+         y="135.05766"
+         x="58.698032"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:19.30281448px;line-height:1.25;font-family:'Sanskrit 2003';-inkscape-font-specification:'Sanskrit 2003, ';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.51703966"
+         xml:space="preserve"><tspan
+           id="tspan821-0"
+           style="stroke-width:0.51703966"
+           y="135.05766"
+           x="58.698032"
+           sodipodi:role="line">ग</tspan></text>
+      <text
+         transform="scale(0.98056904,1.019816)"
+         id="text819-9"
+         y="151.66196"
+         x="58.158379"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:19.30281448px;line-height:1.25;font-family:'Sanskrit 2003';-inkscape-font-specification:'Sanskrit 2003, ';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.51703966"
+         xml:space="preserve"><tspan
+           id="tspan821-1"
+           style="stroke-width:0.51703966"
+           y="151.66196"
+           x="58.158379"
+           sodipodi:role="line">च</tspan></text>
+      <text
+         transform="scale(0.98056904,1.019816)"
+         id="text819-26"
+         y="166.19072"
+         x="58.158375"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:19.30281448px;line-height:1.25;font-family:'Sanskrit 2003';-inkscape-font-specification:'Sanskrit 2003, ';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.51703966"
+         xml:space="preserve"><tspan
+           id="tspan821-9"
+           style="stroke-width:0.51703966"
+           y="166.19072"
+           x="58.158375"
+           sodipodi:role="line">ः</tspan></text>
+      <text
+         transform="scale(0.98056904,1.019816)"
+         id="text819-4"
+         y="180.7195"
+         x="60.31699"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:19.30281448px;line-height:1.25;font-family:'Sanskrit 2003';-inkscape-font-specification:'Sanskrit 2003, ';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.51703966"
+         xml:space="preserve"><tspan
+           id="tspan821-82"
+           style="stroke-width:0.51703966"
+           y="180.7195"
+           x="60.31699"
+           sodipodi:role="line">्</tspan></text>
+      <text
+         transform="scale(0.98056904,1.019816)"
+         id="text819-8"
+         y="204.06929"
+         x="59.237682"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:19.30281448px;line-height:1.25;font-family:'Sanskrit 2003';-inkscape-font-specification:'Sanskrit 2003, ';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.51703966"
+         xml:space="preserve"><tspan
+           id="tspan821-27"
+           style="fill:#ff0000;fill-opacity:1;stroke-width:0.51703966"
+           y="219.75282"
+           x="59.237682"
+           sodipodi:role="line" /></text>
+      <rect
+         y="195.40001"
+         x="58.737499"
+         height="11.641666"
+         width="12.7"
+         id="rect907"
+         style="fill:#ff0000;fill-opacity:1;stroke:#ff0000;stroke-width:1;stroke-linejoin:round;stroke-miterlimit:3;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.35294118" />
+    </g>
+    <g
+       transform="translate(98.954172,2.6458424)"
+       id="g931-8">
+      <ellipse
+         ry="106.83727"
+         rx="41.220592"
+         cy="140.36667"
+         cx="60.854164"
+         id="path815-6"
+         style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:1.10880911;stroke-linejoin:round;stroke-miterlimit:3;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.35294118" />
+      <text
+         transform="scale(0.98056905,1.019816)"
+         id="text819-7"
+         y="63.952919"
+         x="53.789524"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:19.30281448px;line-height:1.25;font-family:'Sanskrit 2003';-inkscape-font-specification:'Sanskrit 2003, ';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.51703966"
+         xml:space="preserve"><tspan
+           id="tspan821-7"
+           style="stroke-width:0.51703966"
+           y="63.952919"
+           x="53.789524"
+           sodipodi:role="line">A</tspan></text>
+      <text
+         transform="scale(0.98056904,1.019816)"
+         id="text819-5-0"
+         y="79.537025"
+         x="52.222218"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:19.30281448px;line-height:1.25;font-family:'Sanskrit 2003';-inkscape-font-specification:'Sanskrit 2003, ';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.51703966"
+         xml:space="preserve"><tspan
+           id="tspan821-2-9"
+           style="stroke-width:0.51703966"
+           y="79.537025"
+           x="52.222218"
+           sodipodi:role="line">a</tspan></text>
+      <text
+         id="text845-4"
+         y="86.92083"
+         x="52.916664"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.8777771px;line-height:1.25;font-family:'Sanskrit 2003';-inkscape-font-specification:'Sanskrit 2003, ';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           id="tspan847-5"
+           style="stroke-width:0.26458332"
+           y="94.946526"
+           x="52.916664"
+           sodipodi:role="line" /></text>
+      <text
+         transform="scale(0.98056904,1.019816)"
+         id="text819-2-4"
+         y="96.66021"
+         x="52.761856"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:19.30281448px;line-height:1.25;font-family:'Sanskrit 2003';-inkscape-font-specification:'Sanskrit 2003, ';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.51703966"
+         xml:space="preserve"><tspan
+           id="tspan821-8-2"
+           style="stroke-width:0.51703966"
+           y="96.66021"
+           x="52.761856"
+           sodipodi:role="line">AA</tspan></text>
+      <text
+         transform="scale(0.98056904,1.019816)"
+         id="text819-6-2"
+         y="115.85894"
+         x="54.380798"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:19.30281448px;line-height:1.25;font-family:'Sanskrit 2003';-inkscape-font-specification:'Sanskrit 2003, ';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.51703966"
+         xml:space="preserve"><tspan
+           id="tspan821-6-3"
+           style="stroke-width:0.51703966"
+           y="115.85894"
+           x="54.380798"
+           sodipodi:role="line">R</tspan></text>
+      <text
+         transform="scale(0.98056904,1.019816)"
+         id="text819-0-9"
+         y="135.05766"
+         x="58.698032"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:19.30281448px;line-height:1.25;font-family:'Sanskrit 2003';-inkscape-font-specification:'Sanskrit 2003, ';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.51703966"
+         xml:space="preserve"><tspan
+           id="tspan821-0-6"
+           style="stroke-width:0.51703966"
+           y="135.05766"
+           x="58.698032"
+           sodipodi:role="line">G</tspan></text>
+      <text
+         transform="scale(0.98056904,1.019816)"
+         id="text819-9-5"
+         y="151.66196"
+         x="58.158379"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:19.30281448px;line-height:1.25;font-family:'Sanskrit 2003';-inkscape-font-specification:'Sanskrit 2003, ';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.51703966"
+         xml:space="preserve"><tspan
+           id="tspan821-1-7"
+           style="stroke-width:0.51703966"
+           y="151.66196"
+           x="58.158379"
+           sodipodi:role="line">C</tspan></text>
+      <text
+         transform="scale(0.98056904,1.019816)"
+         id="text819-26-4"
+         y="167.2285"
+         x="57.079067"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:19.30281448px;line-height:1.25;font-family:'Sanskrit 2003';-inkscape-font-specification:'Sanskrit 2003, ';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.51703966"
+         xml:space="preserve"><tspan
+           id="tspan821-9-3"
+           style="stroke-width:0.51703966"
+           y="167.2285"
+           x="57.079067"
+           sodipodi:role="line">H</tspan></text>
+      <text
+         transform="scale(0.98056904,1.019816)"
+         id="text819-4-9"
+         y="183.31395"
+         x="59.777336"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:19.30281448px;line-height:1.25;font-family:'Sanskrit 2003';-inkscape-font-specification:'Sanskrit 2003, ';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.51703966"
+         xml:space="preserve"><tspan
+           id="tspan821-82-4"
+           style="stroke-width:0.51703966"
+           y="183.31395"
+           x="59.777336"
+           sodipodi:role="line">\</tspan></text>
+      <text
+         transform="scale(0.98056904,1.019816)"
+         id="text819-8-4"
+         y="204.06929"
+         x="59.237682"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:19.30281448px;line-height:1.25;font-family:'Sanskrit 2003';-inkscape-font-specification:'Sanskrit 2003, ';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.51703966"
+         xml:space="preserve"><tspan
+           id="tspan821-27-0"
+           style="fill:#ff0000;fill-opacity:1;stroke-width:0.51703966"
+           y="219.75282"
+           x="59.237682"
+           sodipodi:role="line" /></text>
+      <rect
+         y="195.40001"
+         x="56.620831"
+         height="11.641666"
+         width="12.7"
+         id="rect907-6"
+         style="fill:#ff0000;fill-opacity:1;stroke:#ff0000;stroke-width:1;stroke-linejoin:round;stroke-miterlimit:3;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.35294118" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.8777771px;line-height:1.25;font-family:'Sanskrit 2003';-inkscape-font-specification:'Sanskrit 2003, ';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         x="1.0583267"
+         y="196.45847"
+         id="text3934"><tspan
+           sodipodi:role="line"
+           x="1.0583267"
+           y="196.45847"
+           style="font-size:4.93888903px;stroke-width:0.26458332;stroke:#e821b8;stroke-opacity:1"
+           id="tspan3936">SPACE</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.8777771px;line-height:1.25;font-family:'Sanskrit 2003';-inkscape-font-specification:'Sanskrit 2003, ';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         x="-16.93334"
+         y="53.583324"
+         id="text3940"><tspan
+           sodipodi:role="line"
+           id="tspan3938"
+           x="-16.93334"
+           y="53.583324"
+           style="font-size:4.93888903px;stroke-width:0.26458332;stroke:#e821b8;stroke-opacity:1;fill:none">DEVANAGARI LETTER A</tspan></text>
+    </g>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2.00000006;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:0;stroke-dasharray:none;marker-end:url(#Arrow2Send)"
+       d="m 69.320832,58.875001 c 79.374998,1.5875 79.374998,1.5875 79.374998,1.5875"
+       id="path1014"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.9493407;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Send-4)"
+       d="m 69.209413,75.894944 75.934017,4.233333"
+       id="path1014-1"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.9493407;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Send-4-1)"
+       d="m 72.835939,93.131395 75.934021,4.233333"
+       id="path1014-1-9"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.98841321;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Send-4-0)"
+       d="m 69.080983,111.16159 80.116857,4.17478"
+       id="path1014-1-0"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.90197384;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Send-4-2)"
+       d="m 71.65093,130.19319 80.5186,3.80064"
+       id="path1014-1-7"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.9493407;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Send-4-6)"
+       d="m 72.835938,147.63554 79.638172,0.52916"
+       id="path1014-1-1"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.9493407;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Send-4-9)"
+       d="m 77.069273,162.98139 75.934017,4.23334"
+       id="path1014-1-76"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.9493407;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Send-4-5)"
+       d="m 74.952606,179.38556 81.754844,2.11667"
+       id="path1014-1-4"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.96689177;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Send-4-8)"
+       d="m 74.360215,200.69169 75.230125,1.7044"
+       id="path1014-1-6"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+  </g>
+</svg>

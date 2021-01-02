@@ -14,7 +14,7 @@
 \usepackage{longtable}
 \setdefaultlanguage{english}
 \setotherlanguages{sanskrit}
-\setmainfont[Language=English]{Shobhika}
+\setmainfont[Language=English]{Gentium Book Basic}
 % Other font (for Sanskrit): Shobhika
 \newfontfamily\sanskritfont[Mapping=velthuis-sanskrit,Script=Devanagari,Language=Default]{Shobhika}
 \newcommand \sansletter[1]{
@@ -590,15 +590,15 @@ Associated with every human language are sounds and symbols. A distinguishable s
 
 A sequence of English characters (from `a' to `z' and from `A' to `Z') to represent a word (e.g. ``student") is called the spelling of that word. \emph{Spelling} or native spelling of a word tells us how to \emph{write the sounds} of any word in a language using the (native) script of that language so that the written communication can become possible. 
 
-\href{https://en.m.wikipedia.org/wiki/Transliteration}{Transliteration} refers to conversion of graphemes or characters or symbols from one script to another. Although the focus of transliteration is on symbols (and not on sounds), sounds are given due consideration and symbols that sound similar symbols are chosen for conversion. For example, the \sans{devanaagarii} symbol \sans{`ra'} is typically transliterated to the English symbol `r'. 
+\href{https://en.m.wikipedia.org/wiki/Transliteration}{Transliteration} refers to the conversion of graphemes or characters or symbols from one script to another. Although the focus of transliteration is on symbols (and not on sounds), sounds are given due consideration and symbols that sound similar are chosen for conversion. For example, the \sans{devanaagarii} symbol \sans{`ra'} is typically transliterated to the English symbol `r' or a pair of symbols ``ra". Such use of transliteration has been made more ubiquitous by smartphone apps (for instance in India) that provide a messaging interface that lets users \emph{quickly} key in English spellings of their native language (e.g. Marathi, Hindi, or Samskritam) words which are seamlessly renderred in a native script like \sans{devanaagarii}. 
 
-In general, as shown in Figure \ref{fig: transliterator}, transliteration refers to conversion of text from a \emph{source} script to a \emph{target} script. Thus, in transliteration, two different scripts or ``character sets" are involved: a source character set and a target character set. Typically, these sets are \emph{disjoint}, that is, there is no character (excluding trivial characters like a blank -- ` ') that is a member of both the character sets. It should be clear that we undertake transliteration so that you can (at least) recognize certain text that was written in an unfamiliar character set. By reading the transliterated text, you can reproduce the \emph{sounds} that the source text represents, \textbf{without knowing the symbols from the source character set}. 
+In general, as shown in Figure \ref{fig: transliterator}, transliteration refers to conversion of text from a \emph{source} script to a \emph{target} script. Thus, in transliteration, two different scripts or ``character sets" are involved: a source character set and a target character set. Typically, these sets are \emph{disjoint}, that is, there is no character (excluding trivial characters like a blank -- ` ') that is a member of both the character sets. It should be clear that we undertake transliteration so that you can (at least) recognize certain text that was written in an unfamiliar character set. By reading the transliterated text, you can reproduce sounds that are \emph{close} to the \emph{sounds} that the source text actually represents, \textbf{without knowing the symbols from the source character set}. 
 
-You may ask a question: ``Why should transliteration be attempted at all?" It is indeed possible to take an approach like ``The \emph{native script} of any text is inseparable from its language, therefore, learn the native script to understand how that text is written and read" and altogether remove the need for transliteration\footnote{A similar argument could also be made about the \emph{need for translating} texts from one language into another}, but such an approach is too restrictive; transliteration facility may provide people with additional means to analyze languages and their scripts. After all, transliteration between two scripts is expected to be simpler than translation between associated languages.
+You may ask: ``Why should transliteration be attempted at all?" It is indeed possible to take an approach like ``The \emph{native script} of any text is inseparable from its language. Therefore learn the native script to understand how that text is written and read." and altogether remove the need for transliteration\footnote{A similar argument could also be made about the \emph{need for translating} texts from one language into another}, but such an approach is too restrictive; transliteration facility may provide people with additional means to analyze languages and their scripts. After all, transliteration between two scripts is expected to be simpler than translation between associated languages.
 
-We can examine the \emph{process of transliteration} in more detail. Suppose you want to read the Samskritam sentence in \sans{devanaagarii} -- \sans{raama.h vanam agacchat|} -- but you have not learned the \sans{devanaagarii} script and you are only familiar with the English alphabet and a few more characters like period -- `.', blank or space -- ` ', colon -- `:' etc. How might you \emph{read} that sentence then? 
+We can examine the \emph{process of transliteration} in more detail. Suppose you want to read the Samskritam sentence in \sans{devanaagarii} -- \sans{raama.h vanam agacchat|} -- but you have not learned the \sans{devanaagarii} script and you are only familiar with the English alphabet\footnote{When the target script uses the English alphabet, transliteration is often referred to as \emph{romanization}.} and a few more characters like period -- `.', blank or space -- ` ', colon -- `:' etc. How might you \emph{read} that sentence then? 
 
-One way to do this may be to split the sentence -- let's call it the \emph{input sentence} -- into words at \emph{word boundaries}. Each word in the sequence of words is, in turn, a sequence of characters in the source character set. Once such ``character segregation" of the input sentence is done, we can create an unambiguous, \emph{one to one} mapping from each character to one or more target characters. Such a system, shown in Figure \ref{fig: transliterator}, is a simple, yet functional \emph{one-way interpreter} of symbols. A one to one mapping means that \emph{every symbol} from the source character set is associated with a unique sequence of symbols from the target character set. An illustration of such a mapping is shown in Figure \ref{fig: injective-mapping-chars}. Our system may maintain a table of symbol mappings and simply \emph{look up} the target symbol(s) for the source symbol that it encounters in the input sentence. Once the corresponding characters are \emph{emitted} by our interpreter, the resulting sentence -- let's call it the \emph{output sentence} -- will be automatically constructed. 
+One way to do this may be to split the sentence -- let's call it the \emph{input sentence} -- into words at \emph{word boundaries}. Each word is, in turn, a sequence of characters in the source character set. Once such ``character segregation" of the input sentence is done, we can create an unambiguous, \emph{one to one} mapping from each character to one or more target characters. Such a system, shown in Figure \ref{fig: transliterator}, is a simple and functional \emph{one-way interpreter} of symbols. A one to one mapping means that \emph{every symbol} from the source character set is associated with a unique sequence of symbols from the target character set. An illustration of such a mapping is shown in Figure \ref{fig: injective-mapping-chars}. Our system may maintain a table of symbol mappings and simply \emph{look up} the target symbol(s) for the source symbol that it encounters in the input sentence. Once the corresponding characters are \emph{emitted} by our interpreter, the resulting sentence -- let's call it the \emph{output sentence} -- will be automatically constructed. 
 
 
 \begin{figure}[htbp!]
@@ -677,19 +677,41 @@ Let us examine this process for our example sentence:
         \sans{|} &
         | \\
         \hline
+        other symbols ... &
+        omitted for brevity ... \\
+        \hline
     \end{longtable}
 \end{center}
 \end{table}
 
-Although our transliterator seems to work, it is rather simplistic since it just looks up characters. If the input characters were such that there is an inherent ambiguity, then our scheme based on a symbol look-up may not work reliably. Fortunately the \sans{devanaagarii} characters are free from such ambiguity and contextual knowledge is not needed to perform a reliable transliteration on \emph{any} \sans{devanaagarii} text provided to our transliterator.
+Although our transliterator seems to work, it is rather simplistic since it just looks up characters. If the input characters were such that there is an inherent ambiguity, then our scheme based on a symbol lookup may not work reliably. Fortunately the \sans{devanaagarii} characters are free from such ambiguity and contextual knowledge is not needed to perform a reliable transliteration on \emph{any} \sans{devanaagarii} text provided to our transliterator.
 
-However, consider a reverse transliteration problem.
+However, consider a reverse transliteration problem. It would be fair to expect the original \sans{devanaagarii} text -- \sans{raama.h vanam agacchat|} -- back with our transliterator when it is given the input -- raaamaH vanam{\textbackslash} Agacha{\textbackslash}chhat{\textbackslash}| -- as shown in Figure \ref{fig: transliterator2}.
 
-Another cl
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{transliterator2.png}
+    \caption{A Two-way Transliterator}
+    \label{fig: transliterator2}
+\end{figure}
+
+It is not immediately clear if our lookup table based approach would behave ``reversibly" as we expect. At the least, since we do \emph{not} have mapping for characters like `r', `m' etc. (but only for character pairs like ``ra"$\rightarrow$\sans{`ra'}, ``ma"$\rightarrow$\sans{`ma'}) that show up in the new \emph{input sentence}, our lookups are likely to fail. Thus, at times we need to read pairs of input characters (e.g. ``ra") and at other times we need to read single input characters like `A'. It seems mandatory that we introduce a notion of \emph{context} into our scheme in order to address the ambiguity and make our transliterator reversible, or symmetric.
+
+A computer program is well-suited to carry out a rather informal \emph{specification} we have laid out for transliteration. Clearly, we need to formalize our specification in order for the computer program to work reliably when it is presented with \emph{any} \sans{devanaagarii} text for transliteration that it can recreate in a two-way operation. In computer parlance, transliteration is akin to \emph{encoding} and \emph{decoding} which are, by definition, symmetric.
+
+There are many popular transliteration schemes for the romanization of the \sans{devanaagarii} text:
+\begin{enumerate}
+    \item International Alphabet of Sanskrit Translation (IAST) \cite{iast}
+    \item Velthuis Transliteration (VLTH) \cite{velthuis}
+\end{enumerate}
+
+Typeset in {\LaTeX} this document uses the Velthuis scheme for transliteration of \sans{devanaagarii} text using only English letters. In Velthuis scheme, for example, \sans{devanaagarii} is transliterated as ``devanaagarii".
+
 \newpage
+
 \appendix
 \section {Verb Conjugation Names}
-Naming verb conjugations is typically challenging. We found a verb \href{https://sanskrit.inria.fr/cgi-bin/SKT/sktconjug.cgi?q=bhuu;c=1;font=deva}{conjugation engine} that is indeed very useful in this regard. Table \ref{tab: verb conjugations} shows the \sans{devanaagarii} names of various verb forms (including conjugations) and their corresponding English names.
+Verb conjugations is \sans{sa.msk.Rta} are complex. Even naming them is challenging. We found a verb \href{https://sanskrit.inria.fr/cgi-bin/SKT/sktconjug.cgi?q=bhuu;c=1;font=deva}{conjugation engine} that is indeed very useful in this regard. Table \ref{tab: verb conjugations} shows the \sans{devanaagarii} names of various verb forms (including conjugations) and their corresponding English names.
 % table env preambles to preserve footnotes
 \makesavenoteenv{table}
 \makesavenoteenv{longtable}
@@ -813,5 +835,7 @@ The classical language misses some conjugations present in the vedic language.
 
 \begin{thebibliography}{00}
     \bibitem{wap} Giles Lytton Strachey and George Rylands. Words and Poetry. New York: Payson and Clarke. Introduction, Page xii.
+    \bibitem{iast} Wikipedia. \href{https://en.wikipedia.org/wiki/International_Alphabet_of_Sanskrit_Transliteration}{IAST}.
+    \bibitem{velthuis} Wikipedia. \href{https://en.wikipedia.org/wiki/Velthuis}{Velthuis}.
 \end{thebibliography}
 \end{document}
