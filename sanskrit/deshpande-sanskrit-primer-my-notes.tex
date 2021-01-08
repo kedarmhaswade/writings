@@ -22,7 +22,8 @@
     \sans{#1}
 }
 \usepackage{xcolor}
-\newcommand\TODO[1]{\colorbox{red}{#1}}
+\newcommand\TODO[1]{\colorbox{red}{TODO: #1}}
+\newcommand\ASK[1]{\colorbox{orange}{\underline{\tiny{ASK: #1}}}}
 \usepackage{footnote} % for footnotes in tables, tabulars
 % stack characters vertically
 \usepackage{stackengine,scalerel}
@@ -34,6 +35,20 @@
 \renewcommand{\epigraphsize}{\small}
 \setlength{\epigraphwidth}{1.0\textwidth}
 % for quotations
+% for captioning lists
+% https://tex.stackexchange.com/questions/180526/how-can-i-caption-an-enumerated-list
+\usepackage{newfloat}
+\usepackage{caption}
+\DeclareFloatingEnvironment[fileext=cmh,placement={b!},name=List]{myfloat}
+\captionsetup[myfloat]{labelfont=bf}
+\newenvironment{captionedlabeledlistenv}[1]
+    {\begin{myfloat}[tb]
+      \begin{enumerate}
+    \caption{#1}
+    }
+    {\end{enumerate}\end{myfloat}
+    }
+% for captioning lists
 \usepackage{hyperref}
 \hypersetup{
     colorlinks=true,
@@ -74,7 +89,7 @@ I picked up \href{https://www.amazon.in/Samskrta-Subodhini-Sanskrit-Michigan-Sou
 The book begins with an overview of Sanskrit that we shall cover below. It touches upon the language's history and evolution, writing system, sounds, grammar, and syntax.
     
 \subsection{Grammar}
-Sanskrit (\sans{sa.msk.rtam}), like Greek and Latin, is an \emph{inflected} language. This means it shows \emph{alteration in form especially by adding affixes}. The bulk of grammatical information is carried by morphology (i.e. the rules for forming admissible words).
+Sanskrit (\sans{sa.msk.rta}), like Greek and Latin, is an \emph{inflected} language. This means it shows \emph{alteration in form especially by adding affixes}. The bulk of grammatical information is carried by morphology (i.e. the rules for forming admissible words).
 
     A \emph{morpheme} which is the minimal meaningful language unit, is of one of these types:
     \begin{enumerate}
@@ -214,6 +229,7 @@ Sanskrit (\sans{sa.msk.rtam}), like Greek and Latin, is an \emph{inflected} lang
     The verbal form complexity was greatly reduced in the classical language.
     The so-called \sans{lakaaraa.h} show a glimpse of a plethora of forms that a verbal root leads to:
     \begin{center}
+        \label{verse: lakaaraa.h}
         \sans{
         la.t vartamaane le.t vede bhuute la"n lu"n li.tastathaa | \\
         vidhyaa"si.sostu li"nlo.tau lu.t l.r.t l.r"n ca bhavi.syati ||
@@ -707,11 +723,69 @@ There are many popular transliteration schemes for the romanization of the \sans
 
 Typeset in {\LaTeX} this document uses the Velthuis scheme for transliteration of \sans{devanaagarii} text using only English letters. In Velthuis scheme, for example, \sans{devanaagarii} is transliterated as ``devanaagarii".
 
+I believe that the book uses IAST transliteration scheme. Professor Deshpande asks us to transliterate between \sans{devanaagarii} and English. I am going to skip that exercise here.
+
+\newpage
+
+\section{First Conjugation (\sans{ga.na}) of Active Verbs in Present Tense}
+
+Since \sans{sa.msk.rta} is an \emph{inflected} language, verbs are inflected forms of their \emph{roots}. The root of a verb is called its \sans{dhaatu\footnote{\eng{The \emph{uninflected} state (before receiving case terminations) of a noun is called its \sans{praatipadika}. We will try to be consistent about the use of \sans{praatipadika} in this document.}}}. 
+
+\emph{Conjugation} means inflection (change in the form) of a word. It also means a group or class of verbs whose inflection formation follow the same rules. However, this document will use the word \sans{ga.na} (and its plural \sans{ga.naa.h}) to refer to a group or class (or groups) of verbs and conjugation to refer to inflection. We hope that avoiding the overloading of terms helps clarity. Thus, we will use \sans{ga.na - 1} to mean the first group of verbal roots.
+
+Another ingredient of the (final) inflected form of a \sans{dhaatu} is its \emph{termination} or \emph{ending}. There are two types of termination: active and middle. The term \emph{active} is also overloaded in that it may refer to either the ending of a verb or the \emph{voice} of a sentence. To aid clarity, we will use \sans{parasmaipada} to refer to active termination and \sans{aatmanepada} to refer to middle termination (we may use the word ``middle" when referring to an ending as it is not ambiguous). A \sans{dhaatu} using \sans{parasmaipada} ending is called \sans{parasmaipadii dhaatu} whereas a \sans{dhaatu} using \sans{aatmanepada} ending is called \sans{aatmanepadii dhaatu}. Some verbal roots can use either \sans{parasmaipada} endings or \sans{aatmanepada} endings. Such a \sans{dhaatu} is called \sans{ubhayapadii dhaatu}.
+
+A verbal root belongs to one of the 10 \sans{ga.naa.h}. Of these, the first, fourth, sixth, and tenth \sans{ga.naa.h} form a related group. In this section, we illustrate the first \sans{ga.na}.  We will generally annotate a \sans{dhaatu} as \sans{\{naama\} (\{1..10\}-pa|aa|u)}. For example, the \sans{bhuu dhaatu} is denoted as \sans{bhuu (1-pa)}. A complete conjugation of a verbal root is a complete specification of the six parameters from list \ref{list: conjugation parameters}. These could be thought of as \emph{dimensions}. Some or all of the first five are specified by name and a table or matrix of 3 rows and 3 columns is formed between the last two where the rows belong to the person and columns belong to the number of an inflection. Such a table can be prepared for each of the \sans{dhaatu}. In addition to this, there are affixes \sans{(pratyaya)} that behave like nominal forms but indicae action. This is what is \emph{grammatically} possible. Not every grammatical inflected form is used by authors in \sans{sa.msk.rta} literature, however.  But you can easily see the enormous expressive power and complexity this adds to the language. For a more complete conjugation specification, see Table \ref{tab: verb conjugations}.
+
+
+\begin{captionedlabeledlistenv}{Conjugation Parameters}\label{list: conjugation parameters}
+    \item \emph{group} or \emph{class} of the verbal root \sans{(dhaatuga.na)}. There are 10 \sans{ga.naa.h} represented by numbers 1 through 10.
+    \item \emph{termination} or \emph{ending} of the form. There are two: active \sans{(parasmaipada)} and middle \sans{(aatmanepada)}.
+    \item \emph{tense} or \emph{mood} of the action (\sans{lakaara}). In classical \sans{sa.msk.rta}, there are 10. See \ref{verse: lakaaraa.h}.
+    \item \emph{aspect} 
+    \item \emph{voice} of the sentence (\sans{prayoga}). There are two: active \sans{(kart.rprayoga)} and passive \sans{(karmanprayoga)} \ASK{is that the correct name?}. There is a variant of \sans{karmanprayoga} called \sans{bhaaveprayoga}.
+    \item \emph{number} of agents in action (\sans{vacana}). There are \emph{three} numbers of agents: Singular \sans{(ekavacana)}, Dual \sans{(dvivacana)}, and Plural \sans{(bahuvacana)}. The use of Dual is \emph{mandatory} when two objects are involved.
+    \item \emph{person} of the sentence (\sans{puru.sa}). There are three: first \sans{(uttama)}, second \sans{(madhyama)}, and third \sans{(prathama)}.
+\end{captionedlabeledlistenv}
+
+It is helpful to talk about the terminations alone and present them in the tabular format described above. They suggest patterns for \sans{parasmaipada} and \sans{aatmanepada} roots. Note that the terminations are related to whether the verb is active or middle and are independent of the \sans{ga.na} of the root. Expository and grammar texts in \sans{sa.msk.rta} vary in placements of rows, but the columns are always in the same order: first column -- singular, second column -- dual, and third column -- plural. Some references show the first person \sans{(uttamapuru.sa)} forms in the first row and the third person \sans{(prathamapuru.sa)} in the third row whereas other references do the opposite. The second person \sans{(madhyamapuru.sa)} forms are shown in the second row. We will adopt the \textbf{third person, second person, and first person order $\downarrow$} in this document.
+
+\begin{table} [h!]
+\begin{center}
+    \caption{Terminations of a \sans{parasmaipadiidhaatu, kartari prayoge, vartamaane kaale (la.tlakaare)}}
+    \label{tab: active endings}
+    \begin{longtable}{|c|c|c|c|}
+    \hline
+        \thead{Person$\downarrow$ \\ \sans{puru.sa}} &
+        \thead{Singular \\ \sans{ekavacana}} &
+        \thead{Dual \\ \sans{dvivacana}} &
+        \thead{Plural\\ \sans{bahuvacana}}\\
+        \hline
+        \sans{prathama}&
+        \sans{ti}&
+        \sans{ta.h}&
+        \sans{anti}\ASK{Should this be \sans{nti}?}\\
+        \hline
+        \sans{madhyama}&
+        \sans{si}&
+        \sans{tha.h}&
+        \sans{tha}\\
+        \hline
+        \sans{uttama}&
+        \sans{mi}&
+        \sans{va.h}&
+        \sans{ma.h}\\
+        \hline
+    \end{longtable}
+\end{center}
+\end{table}
+
 \newpage
 
 \appendix
 \section {Verb Conjugation Names}
-Verb conjugations is \sans{sa.msk.Rta} are complex. Even naming them is challenging. We found a verb \href{https://sanskrit.inria.fr/cgi-bin/SKT/sktconjug.cgi?q=bhuu;c=1;font=deva}{conjugation engine} that is indeed very useful in this regard. Table \ref{tab: verb conjugations} shows the \sans{devanaagarii} names of various verb forms (including conjugations) and their corresponding English names.
+Verb conjugations is \sans{sa.msk.rta} are complex. Even naming them is challenging. We found a verb \href{https://sanskrit.inria.fr/cgi-bin/SKT/sktconjug.cgi?q=bhuu;c=1;font=deva}{conjugation engine} that is indeed very useful in this regard. Table \ref{tab: verb conjugations} shows the \sans{devanaagarii} names of various verb forms (including conjugations) and their corresponding English names.
+
 % table env preambles to preserve footnotes
 \makesavenoteenv{table}
 \makesavenoteenv{longtable}

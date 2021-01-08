@@ -23,6 +23,12 @@
 \setotherlanguages{marathi}
 \newfontfamily\marathifont[Mapping=velthuis-sanskrit,Script=Devanagari,Language=Marathi]{Shobhika}
 \usepackage{soul}
+% table with newline in headings
+\usepackage{longtable}
+\usepackage{makecell}
+\renewcommand{\cellalign}{tl}
+\renewcommand{\theadalign}{tl}
+% table with newline in headings
 \usepackage{hyperref}
 \hypersetup{
     backref,
@@ -165,11 +171,11 @@ The \href{https://en.wikipedia.org/wiki/Carbohydrate}{Wikipedia page on Carbohyd
 Monosaccharides are the simplest form of sugar. They cannot be further \hyperref[sec: hydrolysis]{\emph{hydrolyzed}} to simpler chemical compounds. They are classified according to number of carbon atoms. They are also classified according to the functional group they contain. Based on the number of carbon atoms they are classified as triose, tetrose, pentose, hexose and so on. Based on the functional group, they are classified as either aldose (aldehyde group: \ce{R-CHO}) or ketose (ketone group: \ce{R-C=O-R$^{'}$}).
 \subsubsection{Lipids}
 \subsubsection{Proteins}
-Proteins are long chains of different sequences of the 20 amino acids that each contain an amino group (\ce{-NH2}), a carboxyl group (\ce{-COO}), and a variable group. Suppose that a certain protein is a sequence of \textbf{500} amino acid molecules, then since we have 20 choices to pick from for each amino acid molecule, there are $20^{500}$ (a huge number!) choices to make the protein. The following diagram shows a simple protein that is a sequence of just 8 amino acids: 
+Proteins are long chains (sequences) of amino acids. There are 20 common amino acids. An amino acid is a monomer; itcontains an amino group (\ce{-NH2}), a carboxyl group (\ce{-COOH}), and a variable group. Suppose that a certain protein is a sequence of \textbf{500} amino acids, then since we have 20 choices to pick from for each of the 500 amino acid molecules, there are $20^{500}$ (a huge number!) choices to make the protein. The following diagram shows a simple protein that is a sequence of just 8 amino acids: 
 \begin{table}[htbp!]
   \begin{center}
-    %\caption{Enzymes for Hydrolysis of BMm's}
-    %\label{tab: a simple protein}
+    \caption{An Example Protein: a Sequence of 8 Amino Acids}
+    \label{tab: simple protein}
     \begin{tabular}{|c|c|c|c|c|c|c|c|} 
       \hline
         AA-15 &
@@ -185,9 +191,94 @@ Proteins are long chains of different sequences of the 20 amino acids that each 
   \end{center}
 \end{table}
 This hypothetical case of all proteins being a sequence of just 8 amino acids would yield 
-$20^8=25,600,000,000$ different proteins. In nature, proteins are arbitrarily long sequences of amino acids.
+$20^8=25,600,000,000$ different proteins. Table \ref{tab: simple protein} just shows one possible arrangement. Although amino acids have names, we have simply referred to them as AA-1 to AA-20 in that example. In nature, proteins are arbitrarily long sequences of amino acids.
 
-In proteins, each amino acid molecule is linked to the next by a \emph{peptide bond} formed by dehydration synthesis (not unlike the formation of polysaccharides from monosaccharides). This makes protein a \emph{polypeptide}.
+In proteins, each amino acid molecule is linked to the next by a \emph{peptide bond} formed by dehydration synthesis (not unlike the formation of polysaccharides from monosaccharides). This makes protein a \emph{polypeptide}. Proteins are really the workhorses in organisms. They carry out the following functions:
+\begin{itemize}
+    \item Act as enzymes that catalyze chemical reactions
+    \item Provide structural support (along with cellulose which is available only in plants)
+    \item Regulate the passage of substances across the cell membrane (even viruses and other pathogens may \emph{attach} to proteins to enter cells)
+    \item Help protect against (infectious) diseases (by participating in antibody creation)
+    \item Communicate with other cells; receptors which are proteins receive and transduce \emph{signals}
+\end{itemize}
+
+Characteristic property of proteins is their \emph{folding} or three-dimensional structure. Predicting Protein Folding from its linear structure is very useful for research and it is also a major computational problem. Recently, AI techniques have been used for this purpose \cite{alphafold}. Protein Folding occurs at four levels:
+\begin{enumerate}
+    \item Primary: Decides the unique (linear) sequence of amino acids; a single amino acid change in a protein can alter its structure and function
+    \item Secondary: Consists of the local folding of the polypeptide by hydrogen bond formation leading to $\alpha$ helix and $\beta$ pleated sheet \emph{conformations}
+    \item Tertiary: Various interactions give rise to the three-dimensional structure
+    \item Quaternary: May be formed from several polypeptide interactions
+\end{enumerate}
+
+Proteins may stop functioning when they are \emph{denatured} which depends upon environmental conditions like temperature and pH.
+
+\paragraph{Types and Functions of Proteins}
+Each cell may contain thousands of proteins. Their structures, like their function, may vary greatly. 
+
+\begin{table}[htbp!]
+  \begin{center}
+    \caption{Types and Functions of Proteins}
+    \label{tab: protein-types-functions}
+    \begin{tabular}{|c|c|c|} 
+      \hline
+        \thead{\textbf{Type of Protein}} & 
+        \thead{\textbf{Examples}} & 
+        \thead{\textbf{Functions}}\\
+      \hline
+        Digestive Enzymes & 
+        \makecell{Amylase, lipase, \\pepsin, and trypsin} &
+        \makecell{
+        Help in digestion of\\ food by catabolizing \\
+        nutrients into monomeric units}\\
+      \hline
+        Transport & 
+        \makecell{Hemoglobin, albumin} &
+        \makecell{
+        Carry substances in blood\\ or lymph throughout\\
+        the body}\\
+      \hline
+        Structural & 
+        \makecell{Actin, tubulin, keratin} &
+        \makecell{
+            Construct different structues\\ like e.g. cytoskeleton}\\
+      \hline
+        Hormone & 
+        \makecell{Insulin, thyroxine} &
+        \makecell{
+            Coordinate activities in \\ different body systems by \\
+        participating in cell signaling}\\
+        \hline
+        Defense & 
+        \makecell{Immunoglobulins} &
+        \makecell{
+            Protect the body \\ from pathogens }\\
+        \hline
+        Contractile & 
+        \makecell{Actin, myosin} &
+        \makecell{
+            Effect muscle contraction}\\
+        \hline
+        Storage & 
+        \makecell{Legume storing proteins, albumin} &
+        \makecell{
+            Provide nourishment \\ in early development\\
+        of the embryo and the seedling}\\
+        \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+
+\paragraph{Amino Acids}
+Amino acids are the monomers that make up proteins. Each amino acid has the same fundamental structure, which consists of a central carbon atom, also known as the alpha ($\alpha$) carbon, bonded to an amino group (\ce{NH2}), a carboxyl group (\ce{COOH}), and to a hydrogen atom. Every amino acid also has another atom or group of atoms bonded to the central atom known as the R group.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{openstax-protein-general-structure.jpg}
+    \caption{The General Structure of a Protein (From OpenStax)}
+    \label{fig: protein}
+\end{figure}
+
+Amino acids can be looked upon as \ce{R-COOH}. Since the carboxyl group makes a molecule acidic (it tends to readily lose the hydrogen atom or proton in a phenomenon called deprotonation).
 
 \subsubsection{Nucleic Acids}
 Nucleic acids (DNA and RNA) contain phosphorus in addition to C, H, O, and N. \textbf{Conserved through evolution in all organisms, nucleic acids store and transmit hereditary information}. A cell (nucleus) contains DNA spread across various chromosomes. In humans, each chromosome comes as a \emph{pair}, that is, if we numbered chromosomes 1, 2, $\dots$, then humans have a pair of each number. A chromosome is, in turn, a \href{https://biology.stackexchange.com/a/996/63085}{pair of distinct DNA molecules} connected by hydrogen bonds.
@@ -197,7 +288,7 @@ Nucleic acids (DNA and RNA) contain phosphorus in addition to C, H, O, and N. \t
     1 chromosome = 2 DNA molecules
 }
 
-All of the matter is made of atoms and molecules and bonds between them. Nucleic acids are polymers. One molecule of a nucleic acid is made of several other molecules. Think of this or any other polymer as a hierarchical structure that becomes progressively bigger and more complex.
+All matter is made of atoms and molecules and bonds between them. Nucleic acids are polymers. One molecule of a nucleic acid is made of several other molecules. Think of this or any other polymer as a hierarchical structure that becomes progressively bigger and more complex.
 
 One molecule of a nucleic acid could be made of tens of thousands of the monomeric \emph{Nucleotide} molecules. Each nucleotide molecule in turn is made of 
 \begin{itemize}
@@ -225,7 +316,7 @@ There are differences between RNA and DNA. There is only one form of DNA, wherea
 \label{para: central-dogma}
 \epigraph
 {
-    This states that once the `information' has passed into protein \textit{it cannot get out again}. In more detail, the transfer of information from nucleic acid to nucleic acid, or from nucleic acid to protein may be possible, but transfer from protein to protein, or from protein to nucleic acid is impossible. \textbf{Information means here the precise determination of sequence, either of bases in the nucleic acid or of amino acid residues in the protein}.
+    \dots Once the `information' has passed into protein \textit{it cannot get out again}. In more detail, the transfer of information from nucleic acid to nucleic acid, or from nucleic acid to protein may be possible, but transfer from protein to protein, or from protein to nucleic acid is impossible. \textbf{Information means here the precise determination of sequence, either of bases in the nucleic acid or of amino acid residues in the protein}.
 }
 {
     -- As stated by Francis Crick \cite{the-central-dogma}
@@ -258,7 +349,7 @@ The \emph{strand} of several nucleotides in DNA looks like Figure \ref{fig: dna-
 \end{figure}
 
 
-The structures of nucleic acids reveal that they have nitrogenous base and phosphate. You may wonder why it is called an acid if it has a nitrogenous \emph{base}. Looking at the \emph{phosphodiester bonds} between the nucleotide molecules in a DNA or RNA molecule \href{https://biology.stackexchange.com/questions/3864/dna-as-an-acid}{should help decide}. See Figure \ref{fig: dna-strand}. The phosphate group (blurred yellow oval in Figure \ref{fig: dna-strand}) is similar to the phosphoric acid (\ce{H3PO4}) molecule which has 3 hydrogen atoms. In DNA or RNA nucleotide chain, the two hydrogen atoms (from the phosphoric acid) are replaced by (the 3') carbon atoms on the ribose sugar molecule. This makes the remaining hydrogen extremely reactive and it is lost rather easily under neutral conditions. As the Figure \ref{fig: dna-strand} shows, the oxygen on the phosphate group assumes a negative charge because the molecule literally gets \emph{deprotonated}. This makes the DNA or RNA molecule acidic in nature as a whole in spite of the fact that there are a lot of nitrogenous base molecules in it\footnote{DNA is \emph{double stranded} and there are separate hydrogen bonds between the nitrogenous bases (purines and pyrimidines) as well.}.
+The structures of nucleic acids reveal that they have nitrogenous base and phosphate. You may wonder why it is called an acid if it has a nitrogenous \emph{base}. Looking at the \emph{phosphodiester bonds} between the nucleotide molecules in a DNA or RNA molecule \href{https://biology.stackexchange.com/questions/3864/dna-as-an-acid}{should help decide}. See Figure \ref{fig: dna-strand}. The phosphate group (blurred yellow oval in Figure \ref{fig: dna-strand}) is similar to the phosphoric acid (\ce{H3PO4}) molecule which has 3 hydrogen atoms. In DNA or RNA nucleotide chain, the two hydrogen atoms (from the phosphoric acid) are replaced by (the 5' and the 3') carbon atoms on the ribose sugar molecule. This makes the remaining hydrogen extremely reactive and it is lost rather easily under neutral conditions. As the Figure \ref{fig: dna-strand} shows, the oxygen on the phosphate group assumes a negative charge because the molecule literally gets \emph{deprotonated}. This makes the DNA or RNA molecule acidic in nature as a whole in spite of the fact that there are a lot of nitrogenous base molecules in it\footnote{DNA is \emph{double stranded} and there are separate hydrogen bonds between the nitrogenous bases (purines and pyrimidines) as well.}.
 
 The nitrogenous bases, important components of nucleotides, are organic molecules and are so named because they contain carbon and nitrogen. They are bases because they contain an amino group that has the \textbf{potential of binding an extra hydrogen, thus decreasing the hydrogen ion concentration in its environment, making it more basic}. Each nucleotide in DNA contains one of four possible nitrogenous bases: adenine (A), guanine (G) cytosine (C), and thymine (T).
 
@@ -267,7 +358,7 @@ Adenine and guanine are classified as purines. The primary structure of a purine
 The pentose sugar in DNA is deoxyribose, and in RNA, the sugar is ribose. The difference between the sugars is the presence of the hydroxyl group on the second carbon of the ribose (Figure \ref{fig: rna}) and hydrogen on the second carbon of the deoxyribose (Figure \ref{fig: dna}). The carbon atoms of the sugar molecule are numbered as 1', 2', 3', 4', and 5' (1' is read ``one prime"). The phosphate residue is attached to the hydroxyl group of the 5' carbon of one sugar and the hydroxyl group of the 3' carbon of the sugar of the next nucleotide, which forms a 5'–3' phosphodiester linkage. The phosphodiester linkage is not formed by simple dehydration reaction like the other linkages connecting monomers in macromolecules: its formation involves the removal of two phosphate groups. A polynucleotide may have thousands of such phosphodiester linkages.
 
 \paragraph{DNA Double-Helix Structure}
-DNA has a double-helix structure. The sugar and phosphate lie on the outside of the helix, forming the backbone of the DNA. The nitrogenous bases are stacked in the interior, like the steps of a staircase, in pairs; the pairs are bound to each other by hydrogen bonds (See Figure \ref{fig: dna-strand}). Every base pair in the double helix is separated from the next base pair by 0.34 nm\footnote{Charles Mallery \cite{mallery} reports that one full turn of the helix is about 3.4 nanometers, or 10 base pairs long.}. The two strands of the helix run in opposite directions, meaning that the 5' carbon end of one strand will face the 3' carbon end of its matching strand. (This is referred to as \emph{antiparallel} orientation and is important to DNA replication and in many nucleic acid interactions.)
+DNA has a double-helix structure. The sugar and phosphate lie on the outside of the helix, forming the backbone of the DNA. The nitrogenous bases are stacked in the interior, like the steps of a staircase, in pairs; the pairs are bound to each other by hydrogen bonds (See Figure \ref{fig: dna-strand}). Every base pair in the double helix is separated from the next base pair by\footnote{Charles Mallery \cite{mallery} reports that one full turn of the helix is about 3.4 nanometers, or 10 base pairs long.} 0.34 nm. The two strands of the helix run in opposite directions, meaning that the 5' carbon end of one strand will face the 3' carbon end of its matching strand. (This is referred to as \emph{antiparallel} orientation and is important to DNA replication and in many nucleic acid interactions.)
 
 Erwin Chargaff studied many species for the \emph{amount} of purines and pyrimidines their cells have. 
 
@@ -313,9 +404,9 @@ There are four major \emph{functional} types of RNA:
     \item mircroRNA (miRNA): the smallest RNA that regulates the \emph{gene expression}.
 \end{enumerate}
 
-We stated the \hyperref[para: central-dogma]{\emph{central dogma}} above. It appears to be true of eucaryotes although there are exceptions. Not everyone agrees with the assertion that information cannot come out of proteins. In fact, Eugene Koonin states the following in a Springer Nature article (\cite{koonin}):
+We stated the \hyperref[para: central-dogma]{\emph{central dogma}} above. It appears to be true of eukaryotes although there are exceptions. Not everyone agrees with the assertion that information cannot come out of proteins. In fact, Eugene Koonin states the following in a Springer Nature article (\cite{koonin}):
 \epigraph{
-    Central Dogma of molecular biology is invalid as an 'absolute' principle: transfer of information from proteins (and specifically from protein sequences) to the genome does exist. This is not to deny that the Central Dogma does capture the principal route of information transfer in biology: the main flow information does follow the path in Figure 1 [DNA $\rightarrow$ RNA $\rightarrow$ protein], and elaborate mechanisms ensuring acceptable fidelity operate on each step. And, there is a major discontinuity between the levels of RNA and protein because during translation because the coupling of amino acids with the cognate tRNAs does not involve direct recognition but rather requires dedicated enzymes, aminoacyl-tRNA synthetases, that recognize and connect the partners. The opposite direction of information flow, from proteins to the genome, is asymmetrical (not a simple reversion), much more modest quantitatively and intrinsically stochastic but nevertheless appears to be important in evolution.
+    Central Dogma of molecular biology is invalid as an `absolute' principle: transfer of information from proteins (and specifically from protein sequences) to the genome does exist. This is not to deny that the Central Dogma does capture the principal route of information transfer in biology: the main flow information does follow the path in Figure 1 [DNA $\rightarrow$ RNA $\rightarrow$ protein], and elaborate mechanisms ensuring acceptable fidelity operate on each step. And, there is a major discontinuity between the levels of RNA and protein because during translation because the coupling of amino acids with the cognate tRNAs does not involve direct recognition but rather requires dedicated enzymes, aminoacyl-tRNA synthetases, that recognize and connect the partners. The opposite direction of information flow, from proteins to the genome, is asymmetrical (not a simple reversion), much more modest quantitatively and intrinsically stochastic but nevertheless appears to be important in evolution.
 }
 {
     -- \textit{Eugene Koonin} \cite{koonin}}
@@ -623,5 +714,7 @@ Sometimes an innocent person is erroneously convicted of a crime and sent to jai
     \bibitem{ih-mh} Istav{\'a}n Hargittai, Magdolna Hargittai. Candid Science VI: More Conversations With Famous Scientists. Imperial College Press. 2006. ISBN 1-86094-694-1.
 
     \bibitem{koonin} Eugene V. Koonin. ``Does the central dogma still stand?" \href{https://biologydirect.biomedcentral.com/articles/10.1186/1745-6150-7-27}{Biology Direct}. 23 August 2012. 
+        
+    \bibitem{alphafold} AlphaFold: Using AI for Scientific Discovery. \href{https://deepmind.com/blog/article/AlphaFold-Using-AI-for-scientific-discovery}{DeepMind}.
 \end{thebibliography}
 \end{document}
