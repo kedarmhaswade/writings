@@ -1,22 +1,24 @@
 %9 Thanks to: https://tex.stackexchange.com/q/565173/64425
 \documentclass[a4paper, 12pt]{article}
+\usepackage{polyglossia}
+\setdefaultlanguage{english}
+\setotherlanguages{sanskrit}
+%\setmainfont[Language=English]{Noto Serif}
+\setmainfont[Language=English]{Gentium Book Basic}
+\newfontfamily\sanskritfont[Mapping=velthuis-sanskrit,Script=Devanagari,Language=Sanskrit]{Noto Serif Devanagari}
+%\newfontfamily\sanskritfont[Mapping=velthuis-sanskrit,Script=Devanagari,Language=Sanskrit]{Shobhika}
+% make sure ~ as non-breaking space doesn't interfere with velthuis-sanskrit mapping
+\edef~{\string~}
 \usepackage{geometry}
 \geometry{
-    bottom=20mm,
+    bottom=15mm,
     left=20mm,
     right=20mm,
 }
 
-\usepackage{polyglossia}
-\usepackage{fontspec} % only for direct unicode codepoint interpretation
 \usepackage{makecell}
 \usepackage{graphicx}
 \usepackage{longtable}
-\setdefaultlanguage{english}
-\setotherlanguages{sanskrit}
-\setmainfont[Language=English]{Gentium Book Basic}
-% Other font (for Sanskrit): Shobhika
-\newfontfamily\sanskritfont[Mapping=velthuis-sanskrit,Script=Devanagari,Language=Default]{Shobhika}
 \newcommand \sansletter[1]{
     \fontsize{2cm}{2.4cm}\selectfont
     \sans{#1}
@@ -39,6 +41,7 @@
 % https://tex.stackexchange.com/questions/180526/how-can-i-caption-an-enumerated-list
 \usepackage{newfloat}
 \usepackage{caption}
+\setlength{\parindent}{0pt}% Remove paragraph indent
 \DeclareFloatingEnvironment[fileext=cmh,placement={b!},name=List]{myfloat}
 \captionsetup[myfloat]{labelfont=bf}
 \newenvironment{captionedlabeledlistenv}[1]
@@ -56,6 +59,11 @@
     anchorcolor=brown,
     citecolor=blue
 }
+% https://tex.stackexchange.com/questions/568299/bigskip-on-every-new-paragraph-with-latex
+%\addtolength\parskip{\bigskipamount}
+% \usepackage[skip=\bigskipamount,indent]{parskip}
+% https://tex.stackexchange.com/questions/568299/bigskip-on-every-new-paragraph-with-latex
+
 \newcommand \eng[1]{
     \textenglish{#1}
 }
@@ -125,7 +133,8 @@ Sanskrit (\sans{sa.msk.rta}), like Greek and Latin, is an \emph{inflected} langu
         \item feminine, and
         \item neuter
     \end{itemize}
-    Between masculine and feminine, the former is \emph{generic}, meaning it takes precedence. For pronouns, neuter is the most generic.
+    
+\hypertarget{generic-gender}{Between} masculine and feminine, the former is \emph{generic}, meaning it takes precedence. For pronouns, neuter is the most generic.
 
     Declension of nouns (as we shall later see, declension serves the same purpose that prepositions serve in English) is affected by several factors such as 
     their 
@@ -731,11 +740,11 @@ I believe that the book uses IAST transliteration scheme. Professor Deshpande as
 
 Since \sans{sa.msk.rta} is an \emph{inflected} language, verbs are inflected forms of their \emph{roots}. The root of a verb is called its \sans{dhaatu\footnote{\eng{The \emph{uninflected} state (before receiving case terminations) of a noun is called its \sans{praatipadika}. We will try to be consistent about the use of \sans{praatipadika} in this document.}}}. 
 
-\emph{Conjugation} means inflection (change in the form) of a word. It also means a group or class of verbs whose inflection formation follow the same rules. However, this document will use the word \sans{ga.na} (and its plural \sans{ga.naa.h}) to refer to a group or class (or groups) of verbs and conjugation to refer to inflection. We hope that avoiding the overloading of terms helps clarity. Thus, we will use \sans{ga.na - 1} to mean the first group of verbal roots.
+\emph{Conjugation} means inflection (change in the form) of a word. It also means a group or class of verbs whose inflection formation follow the same rules. However, this document will use the word \sans{ga.na} (and its plural \sans{ga.naa.h}) to refer to a group or class (or groups) of verbs and the word \emph{conjugation} to refer to inflection. We hope that avoiding the overloading of terms helps clarity. Thus, we will use \sans{ga.na - 1} to mean the first group of verbal roots.
 
-Another ingredient of the (final) inflected form of a \sans{dhaatu} is its \emph{termination} or \emph{ending}. There are two types of termination: active and middle. The term \emph{active} is also overloaded in that it may refer to either the ending of a verb or the \emph{voice} of a sentence. To aid clarity, we will use \sans{parasmaipada} to refer to active termination and \sans{aatmanepada} to refer to middle termination (we may use the word ``middle" when referring to an ending as it is not ambiguous). A \sans{dhaatu} using \sans{parasmaipada} ending is called \sans{parasmaipadii dhaatu} whereas a \sans{dhaatu} using \sans{aatmanepada} ending is called \sans{aatmanepadii dhaatu}. Some verbal roots can use either \sans{parasmaipada} endings or \sans{aatmanepada} endings. Such a \sans{dhaatu} is called \sans{ubhayapadii dhaatu}.
+Another ingredient of the (final) inflected form of a \sans{dhaatu} is its \emph{termination} or \emph{ending}. There are two types of termination: active and middle. The term \emph{active} is also overloaded in that it may refer to either the ending of a verb or the \emph{voice} of a sentence. To aid clarity, we will use \sans{parasmaipada} to refer to active termination and \sans{aatmanepada} to refer to middle termination (we may use the word ``middle" when referring to an ending as it is not ambiguous). A \sans{dhaatu} using \sans{parasmaipada} ending is called \sans{parasmaipadii dhaatu} whereas a \sans{dhaatu} using \sans{aatmanepada} ending is called \sans{aatmanepadii dhaatu}. Some verbal roots can use either \sans{parasmaipada} endings or \sans{aatmanepada} endings. Such a \sans{dhaatu} is called \sans{ubhayapadii dhaatu} (note, however, that there are no \sans{ubhayapadii} \emph{endings}).
 
-A verbal root belongs to one of the 10 \sans{ga.naa.h}. Of these, the first, fourth, sixth, and tenth \sans{ga.naa.h} form a related group. In this section, we illustrate the first \sans{ga.na}.  We will generally annotate a \sans{dhaatu} as \sans{\{naama\} (\{1..10\}-pa|aa|u)}. For example, the \sans{bhuu dhaatu} is denoted as \sans{bhuu (1-pa)}. A complete conjugation of a verbal root is a complete specification of the six parameters from list \ref{list: conjugation parameters}. These could be thought of as \emph{dimensions}. Some or all of the first five are specified by name and a table or matrix of 3 rows and 3 columns is formed between the last two where the rows belong to the person and columns belong to the number of an inflection. Such a table can be prepared for each of the \sans{dhaatu}. In addition to this, there are affixes \sans{(pratyaya)} that behave like nominal forms but indicae action. This is what is \emph{grammatically} possible. Not every grammatical inflected form is used by authors in \sans{sa.msk.rta} literature, however.  But you can easily see the enormous expressive power and complexity this adds to the language. For a more complete conjugation specification, see Table \ref{tab: verb conjugations}.
+A verbal root belongs to one of the 10 \sans{ga.naa.h}. Of these, the first, fourth, sixth, and tenth \sans{ga.naa.h} form a related group. In this section, we illustrate the first \sans{ga.na}.  We will generally annotate a \sans{dhaatu} as \sans{\{naama\} (\{1..10\}-pa|aa|u)}. For example, the \sans{bhuu dhaatu} is denoted as \sans{bhuu (1-pa)}. A complete conjugation of a verbal root is a complete specification of the seven parameters from list \ref{list: conjugation parameters}. These could be thought of as \emph{dimensions}. Some or all of the first five are specified by name and a table or matrix of 3 rows and 3 columns is formed between the remaining two where the rows belong to the person and columns belong to the number of an inflection. Such a table can be prepared for each of the \sans{dhaatu}. In addition to this, there are affixes \sans{(pratyaya)} that behave like nominal forms but indicate action. This is what is \emph{grammatically} possible. Not every grammatical inflected form is used by authors in \sans{sa.msk.rta} literature, however.  But you can easily see the enormous expressive power and complexity this adds to the language. For a more complete conjugation specification, see Table \ref{tab: verb conjugations}.
 
 
 \begin{captionedlabeledlistenv}{Conjugation Parameters}\label{list: conjugation parameters}
@@ -744,13 +753,13 @@ A verbal root belongs to one of the 10 \sans{ga.naa.h}. Of these, the first, fou
     \item \emph{tense} or \emph{mood} of the action (\sans{lakaara}). In classical \sans{sa.msk.rta}, there are 10. See \ref{verse: lakaaraa.h}.
     \item \emph{aspect} 
     \item \emph{voice} of the sentence (\sans{prayoga}). There are two: active \sans{(kart.rprayoga)} and passive \sans{(karmanprayoga)} \ASK{is that the correct name?}. There is a variant of \sans{karmanprayoga} called \sans{bhaaveprayoga}.
-    \item \emph{number} of agents in action (\sans{vacana}). There are \emph{three} numbers of agents: Singular \sans{(ekavacana)}, Dual \sans{(dvivacana)}, and Plural \sans{(bahuvacana)}. The use of Dual is \emph{mandatory} when two objects are involved.
+    \item \emph{number} of agents in action (\sans{vacana}). There are \emph{three} numbers of agents: Singular \sans{(ekavacana)}, Dual \sans{(dvivacana)}, and Plural \sans{(bahuvacana)}. The use of Dual is \emph{mandatory} when exactly two agents are involved.
     \item \emph{person} of the sentence (\sans{puru.sa}). There are three: first \sans{(uttama)}, second \sans{(madhyama)}, and third \sans{(prathama)}.
 \end{captionedlabeledlistenv}
 
-It is helpful to talk about the terminations alone and present them in the tabular format described above. They suggest patterns for \sans{parasmaipada} and \sans{aatmanepada} roots. Note that the terminations are related to whether the verb is active or middle and are independent of the \sans{ga.na} of the root. Expository and grammar texts in \sans{sa.msk.rta} vary in placements of rows, but the columns are always in the same order: first column -- singular, second column -- dual, and third column -- plural. Some references show the first person \sans{(uttamapuru.sa)} forms in the first row and the third person \sans{(prathamapuru.sa)} in the third row whereas other references do the opposite. The second person \sans{(madhyamapuru.sa)} forms are shown in the second row. We will adopt the \textbf{third person, second person, and first person order $\downarrow$} in this document.
+It is helpful to talk about the terminations alone and present them in the tabular format described above. They suggest patterns for \sans{parasmaipada} and \sans{aatmanepada} roots. Note that the terminations are related to whether the verb is active or middle and are independent of the \sans{ga.na} of the root. Expository and grammar texts in \sans{sa.msk.rta} vary in placement of rows, but the columns are always in the same order: first column -- singular, second column -- dual, and third column -- plural. Some references show the first person \sans{(uttamapuru.sa)} forms in the first row and the third person \sans{(prathamapuru.sa)} in the third row whereas other references do the opposite. The second person \sans{(madhyamapuru.sa)} forms are shown in the second row. We will adopt the \textbf{third person, second person, and first person order $\downarrow$} in this document.
 
-\begin{table} [h!]
+\begin{table} [htbp!]
 \begin{center}
     \caption{Terminations of a \sans{parasmaipadiidhaatu, kartari prayoge, vartamaane kaale (la.tlakaare)}}
     \label{tab: active endings}
@@ -780,7 +789,219 @@ It is helpful to talk about the terminations alone and present them in the tabul
 \end{center}
 \end{table}
 
-\newpage
+Table \ref{tab: active endings} shows the terminations of a \sans{parasmaipadii dhaatu} in the active voice and the present tense. We will list the same for \sans{aatmanepadii dhaatu} later \TODO{provide a link here}. We conventionally refer to a verb by its name followed by its present tense, active voice, third person, singular form. For example: \sans{gam - gacchati}, \sans{bhuu -- bhavati}, \sans{vand -- vandate}.
+
+The general specification of the table of final verb forms is as shown in Table \ref{tab: specifying verb forms}.
+
+\begin{table} [htbp!]
+\begin{center}
+    \caption{Specifying Verb Forms}
+    \sans{<dhaatunaama> -- (<ga.nasa"nkhyaa> <pa|aa|u>) \\ 
+          <>prayoge <>lakaare \eng{(<closest English tense>)}\\
+          <parasmai|aatmane>padadhaaturuupaa.ni (apratyayaantaani)}
+    \label{tab: specifying verb forms}
+    \begin{longtable}{|c|c|c|c|}
+    \hline
+        \thead{Person $\downarrow$ \\ \sans{puru.sa}} &
+        \thead{Singular \\ \sans{ekavacana}} &
+        \thead{Dual \\ \sans{dvivacana}} &
+        \thead{Plural\\ \sans{bahuvacana}}\\
+        \hline
+        \makecell{\sans{prathama}\\ Third}&
+        &
+        &
+        \\
+        \hline
+        \makecell{\sans{madhyama}\\ Second}&
+        &
+        &
+        \\
+        \hline
+        \makecell{\sans{uttama}\\ First}&
+        &
+        &
+        \\
+        \hline
+    \end{longtable}
+\end{center}
+\end{table}
+
+Table \ref{tab: bhuu dhaatu} shows an instance of verb form specification for the \sans{bhuu dhaatu}.
+\begin{table} [htbp!]
+\begin{center}
+    \caption{
+    \sans{bhuu -- (1 pa) \\ 
+          kartari prayoge la.tlakaare \eng{(Present)}\\
+          parasmaipadadhaaturuupaa.ni (apratyayaantaani)}
+      }
+    \label{tab: bhuu dhaatu}
+    \begin{longtable}{|c|c|c|c|}
+    \hline
+        \thead{Person $\downarrow$ \\ \sans{puru.sa}} &
+        \thead{Singular \\ \sans{ekavacana}} &
+        \thead{Dual \\ \sans{dvivacana}} &
+        \thead{Plural\\ \sans{bahuvacana}}\\
+        \hline
+        \makecell{\sans{prathama}\\ Third}&
+        \sans{bhavati}&
+        \sans{bhavata.h}&
+        \sans{bhavanti}\\
+        \hline
+        \makecell{\sans{madhyama}\\ Second}&
+        \sans{bhavasi}&
+        \sans{bhavatha.h}&
+        \sans{bhavatha}\\
+        \hline
+        \makecell{\sans{uttama}\\ First}&
+        \sans{bhavaami}&
+        \sans{bhavaava.h}&
+        \sans{bhavaama.h}\\
+        \hline
+    \end{longtable}
+\end{center}
+\end{table}
+
+
+Once the endings and the forms of a template \sans{dhaatu} are known, one can predict forms of other \sans{dhaatava.h} from the same \sans{ga.na}. 
+
+\subsection{Formation of Simple Sentences}
+Like verbs, nominal (noun, pronoun, and adjective) words have \emph{inflected forms} that are called \emph{cases} or \emph{declensions}. A case in \sans{sa.msk.rta} is \sans{vibhakti}. We shall see some details of cases in the next section (\TODO{link}). For now, just remember that there are 8 cases (numbered 1 through 8) each of which has a name and grammatical function. When an inflected form of a root nominal word (we have called the root word \sans{praatipadika}) corresponding to a case appears in a sentence, we often say that the root nominal word \emph{takes} that case (specified by name or number of the case) or it is \emph{in} that case.
+
+In \sans{kart.rprayoga}, the agent or subject of a sentence is in the first or the \emph{nominative} case.
+
+Nouns and pronouns, \emph{except the first and second person pronouns} have one of the three genders: masculine, feminine, and neuter. The gender is purely \emph{grammatical and unpredictable} (also see \hyperlink{generic-gender}{generic gender}). The (third person) pronouns \sans{sa.h, saa, tat} roughly translate to \emph{he, she, it} respectively. However, gender may apply to inanimate objects as well. Thus, gender is a characteristic of the word, not of what it represents.
+
+\begin{table}[!h]
+\begin{center}
+    \caption{Pronominal roots and their nominative forms}
+    \label{tab: promominal roots}
+\begin{tabular}{|c|l|l|l|l|l|}
+\hline
+    Person & \sans{praatipadika} & Gender &Singular&Dual&Plural\\
+    \hline
+    Third \sans{(prathama)} & \sans{tad} & masculine &\sans{sa.h} (he) &\sans{tau} (they two) &\sans{te} (they)\\
+    \hline
+    Third \sans{(prathama)}& \sans{tad} & feminine &\sans{saa} (she) &\sans{te} (they two feminine) &\sans{taa.h} (they all feminine)\\
+    \hline
+    Third \sans{(prathama)}& \sans{tad} & neuter &\sans{tat} (it) &\sans{te} (they two neuter) &\sans{taani} (they all neuter)\\
+    \hline
+    Second \sans{(madhyama)}& \sans{yu.smad} & -- &\sans{tvam} (you) &\sans{yuvaam} (you two) &\sans{yuuyam} (you all)\\
+    \hline
+    First \sans{(uttama)}& \sans{asmad} & -- &\sans{aham} (I) &\sans{aavaam} (we two) &\sans{vayam} (we all)\\
+    \hline
+\end{tabular}
+\end{center}
+\end{table}
+
+In an active voice sentence, the number and person of the agent agree with the verb. At this [preliminary] stage, the word order can be assumed to be grammatically unimportant. General order is, however, \textbf{agent (or subject) -- object -- verb}.
+
+Examples:
+\begin{itemize}
+    \item \sans{aha.m vadaami} or \sans{vadaami aham} -- I speak.
+    \item \sans{saa vadati} or \sans{vadati saa} -- She speaks.
+\end{itemize}
+
+\subsection{Vocabulary}
+
+\paragraph{Verbs of \sans{1--pa ga.na}}
+
+This \sans{ga.na} is known as the \sans{bhvaadiga.na} because the \emph{template} verbal root is the \sans{bhuu dhaatu}. We have said this before, but it is worth repeating: Inflected forms of a verb are based on whether the verb has active \sans{(parasmaipadii)} ending or middle \sans{(aatmanepadii)} ending; there is no \sans{(ubhayapadii)} \emph{ending}. A \sans{dhaatu}, on the other hand, may be \sans{ubhayapadii} which means that its inflected forms can take either an active ending or a middle ending.
+\begin{table}[!h]
+\begin{center}
+    \caption{A few \sans{1 pa} verbs}
+    \label{tab: 1pverbs}
+\begin{tabular}{|c|l|}
+\hline
+    \sans{bhuu bhavati} & To be, to become \\
+    \hline
+    \sans{khaad khaadati} & To eat \\
+    \hline
+    \sans{tyaj tyajati} & To abandon \\
+    \hline
+    \sans{ji jayati} & To conquer \\
+    \hline
+    \sans{dhaav dhaavati} & To run \\
+    \hline
+    \sans{gam gacchati} & To go \\
+    \hline
+    \sans{nii nayati} & To carry, to take \\
+    \hline
+    \sans{sad siidati} & To sit, to reside, to despair \\
+    \hline
+    \sans{paa pibati} & To drink\\
+    \hline
+    \sans{budh bodhati} & To know\\
+    \hline
+    \sans{sthaa ti.s.thati} & To stand, to wait\\
+    \hline
+    \sans{vad vadati} & To speak\\
+    \hline
+    \sans{d.r"s pa"syati} & To see\\
+    \hline
+    \sans{vas vasati} & To dwell\\
+    \hline
+    \sans{sm.r smarati} & To remember\\
+    \hline
+    \sans{pat patati} & To fall\\
+    \hline
+    \sans{cal calati} & To walk\\
+    \hline
+    \sans{dah dahati} & To burn\\
+    \hline
+    \sans{dh.r dharati} & To hold, to keep, to support\\
+    \hline
+    \sans{dhyai dhyaayati} or
+    \sans{dhyaa dhyaayati} & To meditate, to reflect\\
+    \hline
+    \sans{nad nadati} & To whisper, to rustle\\
+    \hline
+    \sans{nand nandati} & To rejoice, to be glad, to enjoy\\
+    \hline
+    \sans{nam namati} & To salute, to bow\\
+    \hline
+    \sans{nind nindati} & To blame, to criticize, to reproach\\
+    \hline
+    \sans{pac pacati} & To cook\\
+    \hline
+    \sans{pa.th pa.thati} & To read\\
+    \hline
+    \sans{bhaj bhajati} & To serve, to worship (also, to divide)\\
+    \hline
+    \sans{yaj yajati} & To sacrifice to a deity \sans{(yaj~na)}\\
+    \hline
+    \sans{yaac yaacati} & To beg, to pray\\
+    \hline
+    \sans{rak.s rak.sati} & To protect, to guard\\
+    \hline
+    \sans{ruh rohati} & To grow, to be born, to rise, to climb\\
+    \hline
+    \sans{rudh rodhati} & To grow\\
+    \hline
+    \sans{rak.s rak.sati} & To protect, to guard\\
+    \hline
+    \sans{vaa~nch vaa~nchati} & To expect, to desire, to wish\\
+    \hline
+    \sans{vap vapati} & To shave\\
+    \hline
+    \sans{v.r.s var.sati} & To rain\\
+    \hline
+    \sans{vraj vrajati} & To go, to walk, to advance\\
+    \hline
+    \sans{"s.ms "s.msati} & To praise\\
+    \hline
+    \sans{"sri "srayati} & To take refuge at\\
+    \hline
+    \sans{"sru "sru.noti} & To hear \\
+    \hline
+    \sans{"suc "socati} & To grieve, to suffer, to moan\\
+    \hline
+\end{tabular}
+\end{center}
+\end{table}
+
+There are precise rules governing the inflections that one studies when one takes up Pa.nini's Grammar \sans{(paa.niniiya vyaakara.nam)}. For now, memorization of these roots helps.
+
+\newpage\null\thispagestyle{empty}\newpage
 
 \appendix
 \section {Verb Conjugation Names}

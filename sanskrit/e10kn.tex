@@ -15,8 +15,10 @@
 \setdefaultlanguage{english}
 \setotherlanguages{sanskrit}
 % fonts
-\setmainfont[Language=Default]{IBM Plex Sans}
-\newfontfamily\sanskritfont[Mapping=velthuis-sanskrit,Script=Devanagari,Language=Default]{Sanskrit2003}
+\setmainfont[Language=English]{Gentium Book Basic}
+\newfontfamily\sanskritfont[Mapping=velthuis-sanskrit,Script=Devanagari,Language=Sanskrit]{Noto Serif Devanagari}
+%\setmainfont[Language=Default]{IBM Plex Sans}
+%\newfontfamily\sanskritfont[Mapping=velthuis-sanskrit,Script=Devanagari,Language=Default]{Sanskrit2003}
 
 \newcommand \eng[1]{
     \textenglish{#1}
@@ -76,11 +78,10 @@
 
 \begin{document}
 
-\def\dev{\edef~{\string~}\textsanskrit}
 \edef~{\string~}
 
 \title{\eng {10,000 Everyday Words}}
-\author{\sans{kedaara mhasava.de, novhembara 2020}} 
+\author{\sans{kedaara mhasava.de}} 
 \date{\vspace{-5ex}}
 \maketitle
 
@@ -213,6 +214,9 @@
 \hline
     \rownumber & \targetword{city} & \sansword{nagaram} & n & 
     \sansword{aha.m \hyperlink{town}{graamaat} nagara.m pratyaagacchaami (\eng{return})|}\\
+\hline
+    \rownumber & \targetword{chain} \faLink & \sansword{"s.r"nkhalaa} & f & 
+    \sansword{aa"saa naama aa"scarya"s.r"nkhalaa|}\\
 \hline
     \rownumber & cheek & \sansword{kapola.h} & m & 
     \sansword{mama kapoladvayam|}\\
@@ -381,6 +385,9 @@
     \rownumber & hand & \sansword{kara.h} & m & 
     \sansword{prabhaate karadar"sanam!}\\
 \hline
+    \rownumber & heaven & \sansword{svarga.h} & m & 
+    \sansword{jananii janmabhuumi"sca svargaadapi gariiyasii|}\\
+\hline
     \rownumber & horse & \sansword{a"sva.h} & m & 
     \sansword{e.sa.h a"sva.h sa.h gaja.h|}\\
 \hline
@@ -454,6 +461,9 @@
     \rownumber & \targetword{lion} & \sansword{si.mha.h} & m & 
     \sansword{si.mha.h eka.h bala"saalii (\eng{strong}) \hyperlink{animal}{pa"su.h}|}\\
 \hline
+    \rownumber & \targetword{loss} & \sansword{haani.h} & f & 
+    \sansword{satyabhaa.sa.ne kaa haani.h?}\\
+\hline
     \rownumber & \targetword{luck} & \sansword{bhaagyam} & n & 
     \sansword{mama bhaagyam aho (\eng{a word showing wonder or surprise}) bhaagyam|}\\
 }
@@ -466,6 +476,9 @@
 \hline
     \rownumber & \targetword{machine}  & \sansword{yantram} & n & 
     \sansword{yantrasya \hyperlink{mind}mana.h asti vaa?}\\
+\hline
+    \rownumber & \targetword{medicine}  & \sansword{au.sadham} & n & 
+    \sansword{aahaara.h eva au.sadham!}\\
 \hline
     \rownumber & \targetword{milk}  & \sansword{dugdham} & n & 
     \sansword{aha.m dinaante (dina\eng{+}ante = \eng{at the end of the day}) dugdha.m pibaami|}\\
@@ -546,6 +559,9 @@
     \rownumber & price & \sansword{muulyam} & n & 
     \sansword{etasya \hyperlink{toy}{krii.danakasya} muulya.m kim?}\\
 \hline
+    \rownumber & prisoner & \sansword{bandii} & m & 
+    \sansword{sa.h bandii \hyperlink{chain}{"s.r"nkhalayaa} baddhaa|}\\
+\hline
     \rownumber & prize & \sansword{paarito.sikam} & n & 
     \sansword{pradhaanaacaarya.h (pradhaana \eng{+} aacaarya.h \eng{= principal, head priest}) chaatrebhya.h paarito.sikaa.ni yacchati (\eng{gives})|}\\
 }
@@ -566,14 +582,18 @@
 \setcounter{recno}{0}
 \alphatable{r}{
 \hline
+    \rownumber & \targetword{rabbit} & \sansword{"sa"sa.h} & m & 
+    \sansword{vane bahava.h "sa"saa.h santi|}\\
+\hline
     \rownumber & river & \sansword{nadii} & f & 
     \sansword{tatra asti kaaverii naama (\eng{named, called}) nadii|}\\
 \hline
     \rownumber & \targetword{room} & \sansword{prako.s.tha.h} & m & 
     \sansword{tasmin g.rhe bahava.h prako.s.thaa.h santi|}\\
 \hline
-    \rownumber & \targetword{rabbit} & \sansword{"sa"sa.h} & m & 
-    \sansword{vane bahava.h "sa"saa.h santi|}\\
+    \rownumber & rope & \sansword{rajju.h} & f & 
+    \sansword{kaa.s.thada.n.daa.h rajjvaa bandhaa.h|}\\
+\hline
 }
 
 \section{
@@ -620,6 +640,9 @@
 \hline
     \rownumber & spoon & \sansword{camasa.h} & m & 
     \sansword{camasena aha.m vya~njana.m khaadaami|}\\
+\hline
+    \rownumber & stick & \sansword{ya.s.ti.h} & f & 
+    \sansword{sa.h ya.s.tyaa kanduka.m taa.dayati|}\\
 \hline
     \rownumber & \targetword{summer} & \sansword{grii.smakaala.h} & m & 
     \sansword{caitravai"saakhayo.h grii.smakaala.h|}\\

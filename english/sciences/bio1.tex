@@ -44,6 +44,9 @@
     \colorbox{#2}{\parbox{0.9\textwidth}{\textcolor{#1}{#3}}}
 }
 % new commands
+% other settings
+\setlength{\parindent}{0pt}% Remove paragraph indent
+% other settings
 \begin{document}
 \title{Self-study Notes on OpenStax AP Biology Books and Other Resources}
 \author{Kedar Mhaswade}
@@ -278,7 +281,11 @@ Amino acids are the monomers that make up proteins. Each amino acid has the same
     \label{fig: protein}
 \end{figure}
 
-Amino acids can be looked upon as \ce{R-COOH}. Since the carboxyl group makes a molecule acidic (it tends to readily lose the hydrogen atom or proton in a phenomenon called deprotonation).
+Amino acids can be looked upon as \ce{R-COOH}. Since the carboxyl group makes a molecule acidic (it tends to readily lose the hydrogen atom or proton and form the \ce{COO-} ion in a phenomenon called deprotonation).
+
+Twenty common amino acids are found in proteins. Nine of these are considered \emph{essential} since they cannot be synthesized in the body and have to be obtained from the diet. For each amino acid the R-group (the side chain) is different.
+
+Wikipedia reports that the proteinogenic amino acids are amino acids that are incorporated biosynthetically into proteins during translation. The word ``proteinogenic" means "protein creating". Throughout known life, there are 22 genetically encoded (proteinogenic) amino acids, 20 in the standard genetic code and an additional 2 that can be incorporated by special translation mechanisms.
 
 \subsubsection{Nucleic Acids}
 Nucleic acids (DNA and RNA) contain phosphorus in addition to C, H, O, and N. \textbf{Conserved through evolution in all organisms, nucleic acids store and transmit hereditary information}. A cell (nucleus) contains DNA spread across various chromosomes. In humans, each chromosome comes as a \emph{pair}, that is, if we numbered chromosomes 1, 2, $\dots$, then humans have a pair of each number. A chromosome is, in turn, a \href{https://biology.stackexchange.com/a/996/63085}{pair of distinct DNA molecules} connected by hydrogen bonds.
@@ -693,8 +700,38 @@ Sometimes an innocent person is erroneously convicted of a crime and sent to jai
 
 \section{Unit 4: Evolution}
 \subsection{Evolution and Origin of Species}
-\subsection{The Evolution of Populations}
-\subsection{Phylogenies and the History of Life}
+\paragraph{Introduction}
+Evolution is an all-pervasive idea in biology. Even so, teaching, in public schools, evolution as science is debated. 
+\epigraph{
+    Nothing in Biology Makes Sense \\
+    Except in the Light of Evolution.
+}{
+    \textit{Theodosius Dobzhansky \cite{light-of-evol}}
+}
+\par\bigskip
+There are not many topics in the history of thought on which humans are as divided as they are on the idea of evolution. To understand, in scientific and non-scientific contexts, topics as fundamental, diverse, fascinating, and complex as evolution and the origin of species, we need to first \emph{clearly} define the words we often use casually. Be warned, however, that defining terms clearly is quite challenging! Using a word or term to mean two different things is called ``overloading a term". Overloading happens a lot, especially across contexts. Therefore, we should not take sentences, quotations etc. out of context. The terms are defined here in a scientific context. I am deliberately leaving out of scope what ``scientific" means, but simply put, it means anything that is \emph{falsifiable}; everything in science, unlike religion, is open to be proved false by providing evidence that can be verified by various different means and people.
+\par\bigskip
+
+\emph{Sincere search and probable determination of truth} is what science promotes. Since the universe is extremely complex and the devil is in the detail, determination of truth of even an \emph{isolated system} remains illusive. As we progress, advances are made, we know more and either previous claims are strengthened or falsified (Wikipedia \cite{superseded} gives a detailed list of superceded theories.) Dobzhansky's paper \cite{light-of-evol} is a great \emph{position statement} on how to keep scientific endeavor and personal beliefs separate.
+\par\bigskip
+
+Let's try to define some common terms and use them consistently (or hope that they have been used consistently) in a scientific context (See \cite{teaching-evol}) throughout this text. This is not a comprehensive list of terms:
+\begin{itemize}
+    \item \textbf{Fact}: An observation that is \emph{repeatedly confirmed} by uniformly calibrated measuring tools and by different people. Objectivity of what one is experiencing is key here. You don't bring in your emotions to decide whether something is a \emph{fact}. We need to take into account human flaw named \emph{confirmation bias}, but when some observation is made or confirmed by many observers, we expect it to be free of any bias. It is futile to deny facts. Examples: Earth is round, rolling friction is smaller than sliding friction, oil is lighter than water, a ball of metal sinks in water while a much heavier ship floats, solar eclipse happens during the daytime and lunar eclipse happens at night, every celestial body appears to rise in the east and sets in the west, a ball rolls down the slope by itself while it needs to be pushed up the slope etc.
+    \item \textbf{Hypothesis}: A \emph{testable} statement that can be used to explain more complex aspect of or process in the natural world. It is usually a logical guess made while answering a question or explaining a behavior or observation. A hypothesis may provide a probable research direction.
+    \item \textbf{Law}: 
+\end{itemize}
+
+\subsubsection{Understanding Evolution}
+\subsubsection{Formation of New Species}
+\subsubsection{Reconnection and Rates of Speciation}
+
+
+\subsection{Evolution of Populations}
+\paragraph{Introduction}
+\subsubsection{Population Evolution}
+\subsubsection{Population Genetics}
+\subsubsection{Adaptive Evolution}
 
 \section{Unit 5: Viruses}
 
@@ -716,5 +753,11 @@ Sometimes an innocent person is erroneously convicted of a crime and sent to jai
     \bibitem{koonin} Eugene V. Koonin. ``Does the central dogma still stand?" \href{https://biologydirect.biomedcentral.com/articles/10.1186/1745-6150-7-27}{Biology Direct}. 23 August 2012. 
         
     \bibitem{alphafold} AlphaFold: Using AI for Scientific Discovery. \href{https://deepmind.com/blog/article/AlphaFold-Using-AI-for-scientific-discovery}{DeepMind}.
+
+    \bibitem{light-of-evol} Thodosius Dobzhansky. Nothing in Biology Makes Sense Except in the Light of Evolution. The American Biology Teacher, Vol. 35, No. 3 (March 1973), pp. 125-129.
+        
+    \bibitem{teaching-evol} Teaching About Evolution and the Nature of Science. Working Group on Teaching Evolution, National Academy of Science. \href{http://nap.edu/5787}{PDF}.
+
+    \bibitem{superseded} Wikipedia. \href{https://en.wikipedia.org/wiki/Superseded_theories_in_science}{Superseded Theories in Science}.
 \end{thebibliography}
 \end{document}
