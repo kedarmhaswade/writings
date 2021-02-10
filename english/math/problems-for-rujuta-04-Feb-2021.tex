@@ -1,0 +1,108 @@
+\documentclass[12pt]{exam}         %% What type of document you're writing.
+
+%%%%% Preamble
+
+%% Packages to use
+
+\usepackage{amsmath,amsfonts,amssymb}   %% AMS mathematics macros
+\usepackage{lettrine}
+\usepackage{graphicx}
+\usepackage{tikz}
+
+%% Title Information.
+
+\title{Problems for Fun}
+\author{Kedar Mhaswade}
+\date{\today}
+
+
+\begin{document}
+
+\maketitle
+
+\lettrine[lines=3]{T}{his} text consists of problems that should be attempted for fun. It is based on what we have learned
+so far, however, that is just to be used as a guidance. Have fun. Find out what \emph{kind} of problems
+are challenging and then perhaps work on the fundamentals.
+
+Some points to keep in mind:
+\begin{enumerate}
+\item It may be a good idea to print this out on both sides of a paper and attempt the answers with a pen or pencil on a separate paper.
+\item There are no points. A quiz may contain errors. If a question is unclear, be sure to get it clarified.
+\item It is a quiz of sorts. The time is not really limited, but you should plan on focusing for about an hour each time you take the quiz.
+\item Give each problem enough thought and time and then present your solutions.
+\item Have fun. Hopefully, you will struggle to get through the problems. Perhaps you will make silly mistakes. Don't worry, it is all part of the game. You will get better only if you have fun doing it. Note that some problems are quite difficult and you may be stuck. Being stuck is okay.
+
+\end{enumerate}
+\textbf{Good Luck}!
+
+\newcommand\Que[1]{%
+   \leavevmode\par
+   \stepcounter{question}
+   \noindent
+   Problem \thequestion --- #1\par}
+
+\newcommand\Ans[2][]{%
+    \leavevmode\par\noindent
+   {\leftskip37pt
+    A --- \textbf{#1}#2\par}}
+\Que{
+    If $\sqrt{15} + \sqrt{132} = \sqrt{N}$, what is the value of $N$? 
+}
+\Que{
+    Can you develop an algorithm to \emph{ascertain} if a given number $P$ is a prime? Demonstrate the use of your algorithm to test if 997 is a prime. \par\bigskip
+    An algorithm is a step-by-step, \emph{precise} recipe to solve a problem. The recipe must be precise because we typically give an algorithm to computers who simply \emph{carry it out}. Since a computer has no minds of its own (yet), if the recipe is not precise, it may get confused. Clearly, we do not want a computer to go wrong in ascertaining if \emph{any} number is prime.\par\bigskip
+    To help you get started, here is the algorithm to ``print true if a given number $N$ is even, false otherwise":
+    \par\bigskip
+    \textbf{Algorithm 1}:
+    \begin{enumerate}
+        \item Divide $N$ by $2$ to get a quotient, $q$, and a remainder, $r$.
+        \item If $r$ is $0$ print $true$, otherwise print $false$.
+    \end{enumerate}
+
+    Note that an algorithm needs to be \emph{precise}, but that does not mean it is \emph{correct}. A correct algorithm simply solves the given problem correctly.  A computer is expected to \emph{never} go wrong in carrying out \emph{precise instructions}. As we shall later see, this is a boon (and perhaps a curse). For now, we should get into the habit of writing correct algorithms.
+}
+\Que{
+    You know that we can denote numbers by letters like $x$, $y$ etc. Consider four such numbers: $D$, $d$, $q$, and $r$. \bigskip\par
+    Are you convinced that it is always true that with these four numbers the following equation always holds?
+    $$
+        D = d\times q + r
+    $$
+
+    What will be the value of $r$ if $D$ is \emph{less than} $d$?
+}
+\Que{
+    What are the different \emph{kind} of numbers do you know? Why do you think a kind of numbers you have identified is \emph{different} from any other kind that you have identified?
+}
+\Que{
+    Do you remember the way to solve an arithmetic \emph{expression} without having to use pairs of parentheses and a mnemonic like \emph{BODMAS} or \emph{PEDMAS}? If you do, can you describe it to solve the following expression:
+    $$
+        70-(3+4)\times 6
+    $$
+}
+\Que{
+    Evaluate: 
+    $$
+        10 - 3\div{\frac{1}{3}} + 1
+    $$
+    How does the method in the above problem help solve this problem?
+}
+\Que{
+    Explain, in your own words, why the method of \emph{Long Division} works.
+}
+
+\Que{
+    Evaluate:
+    $$
+    (a + b)^3
+    $$
+    What is an \emph{intuitive} explanation for the fact that $(a+b)^3$ \emph{not} the same as $a^3+b^3$?
+}
+
+\Que{
+    What is your idea of a negative exponent (power) of another number? Use your understanding to evaluate $3^{-2}$.
+}
+\Que{
+    What is your idea of a fractional exponent (power) of another number? Use your understanding to find out which of these two numbers is bigger: $2^{\frac{1}{2}}$ and $3^{\frac{1}{3}
+}$.
+}
+\end{document}
