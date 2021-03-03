@@ -1,0 +1,24 @@
+\documentclass[a4paper]{article}
+\usepackage{polyglossia}
+\usepackage[margin=5mm]{geometry}
+\setdefaultlanguage{sanskrit}
+\setotherlanguages{english, marathi}
+\setmainfont[Mapping=velthuis-sanskrit,Script=Devanagari,Language=Sanskrit]{Shobhika}
+\newfontfamily\englishfont{Noto Serif}
+%\newfontfamily\sanskritfont[Mapping=velthuis-sanskrit,Script=Devanagari,Language=Sanskrit]{Noto Serif Devanagari}
+% make sure ~ as non-breaking space doesn't interfere with velthuis-sanskrit mapping
+\edef~{\string~}
+\pagenumbering{gobble}
+\begin{document}
+\textenglish{
+\noindent \today{}
+}
+\begin{verse}
+\begin{center}
+    \Huge {
+    .o bhavati bhik.saa.m dehi |
+}
+\end{center}
+\end{verse}
+sandarbha.h -- upanayanavidhau eka.h mantra.h |
+\end{document}
