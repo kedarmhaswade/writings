@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="size-speed.svg"
+   inkscape:export-filename="/home/pi/gh/writings/english/sciences/french-newtonian-mechanics-self-study/size-speed.jpg.png"
+   inkscape:export-xdpi="75"
+   inkscape:export-ydpi="75">
+  <defs
+     id="defs2">
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible;"
+       id="marker1812"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow2Send">
+      <path
+         transform="scale(0.3) rotate(180) translate(-2.3,0)"
+         d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
+         style="fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round;stroke:#000000;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         id="path1810" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Send"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow2Send"
+       style="overflow:visible;"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         id="path873"
+         style="fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round;stroke:#000000;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
+         transform="scale(0.3) rotate(180) translate(-2.3,0)" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker1662"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow2Sstart">
+      <path
+         transform="scale(0.3) translate(-2.3,0)"
+         d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
+         style="fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round;stroke:#000000;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         id="path1660" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Sstart"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow2Sstart"
+       style="overflow:visible"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         id="path870"
+         style="fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round;stroke:#000000;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
+         transform="scale(0.3) translate(-2.3,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Mend"
+       style="overflow:visible;"
+       inkscape:isstock="true">
+      <path
+         id="path849"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         transform="scale(0.4) rotate(180) translate(10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mstart"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Mstart"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path846"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         transform="scale(0.4) translate(10,0)" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible;"
+       id="marker1208"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend">
+      <path
+         transform="scale(0.8) rotate(180) translate(12.5,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path1206" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker1162"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart">
+      <path
+         transform="scale(0.8) translate(12.5,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path1160" />
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.6328571"
+     inkscape:cx="387.97025"
+     inkscape:cy="251.69005"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     showguides="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="996"
+     inkscape:window-x="0"
+     inkscape:window-y="26"
+     inkscape:window-maximized="1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid815" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow2Sstart);marker-end:url(#marker1812);stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 21.166666,270.54167 c 164.041664,0 164.041664,0 164.041664,0"
+       id="path817"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.00000003;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:0;stroke-dasharray:none;marker-start:url(#marker1662);marker-end:url(#Arrow2Send)"
+       d="m 37.041666,175.29167 c 0,105.83333 0,105.83333 0,105.83333"
+       id="path819"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 58.208333,199.10417 c 0,79.375 0,79.375 0,79.375"
+       id="path1880"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 87.312511,199.10417 c 0,78.84592 0,78.84592 0,78.84592"
+       id="path1880-3"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 142.875,199.10417 c 0,78.84596 0,78.84596 0,78.84596"
+       id="path1880-6"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:4.34101868;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 34.395833,201.75 c 140.229167,0 140.229167,0 140.229167,0"
+       id="path1903"
+       inkscape:connector-curvature="0" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.58611107px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="93.942528"
+       y="289.07278"
+       id="text1907"><tspan
+         sodipodi:role="line"
+         id="tspan1905"
+         x="93.942528"
+         y="289.07278"
+         style="stroke-width:0.26458332">size (m)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.58611107px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="-243.13454"
+       y="13.082823"
+       id="text1911"
+       transform="rotate(-91.268179)"><tspan
+         sodipodi:role="line"
+         id="tspan1909"
+         x="-243.13454"
+         y="13.082823"
+         style="stroke-width:0.26458332">speed m/s</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:4.20317364;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 34.395833,238.79166 v 0 H 174.625"
+       id="path1913"
+       inkscape:connector-curvature="0" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.58611107px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="23.138174"
+       y="240.61775"
+       id="text1921"><tspan
+         sodipodi:role="line"
+         id="tspan1919"
+         x="23.138174"
+         y="240.61775"
+         style="stroke-width:0.26458332">c/10</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.58611107px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="10.241024"
+       y="196.12633"
+       id="text1925"><tspan
+         sodipodi:role="line"
+         id="tspan1923"
+         x="10.241024"
+         y="196.12633"
+         style="stroke-width:0.26458332">speed of </tspan><tspan
+         sodipodi:role="line"
+         x="10.241024"
+         y="201.85896"
+         style="stroke-width:0.26458332"
+         id="tspan1927">light, c</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.58611107px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="48.569317"
+       y="282.62936"
+       id="text1935"><tspan
+         sodipodi:role="line"
+         id="tspan1933"
+         x="48.569317"
+         y="282.62936"
+         style="stroke-width:0.26458332">Nucleus</tspan><tspan
+         sodipodi:role="line"
+         x="48.569317"
+         y="288.362"
+         style="stroke-width:0.26458332"
+         id="tspan1963">10<tspan
+   style="font-size:65%;baseline-shift:super"
+   id="tspan1973">-14</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.58611107px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="78.731819"
+       y="282.61908"
+       id="text1939"><tspan
+         sodipodi:role="line"
+         id="tspan1937"
+         x="78.731819"
+         y="282.61908"
+         style="stroke-width:0.26458332">Atom</tspan><tspan
+         sodipodi:role="line"
+         x="78.731819"
+         y="288.35172"
+         style="stroke-width:0.26458332"
+         id="tspan1965">10<tspan
+   style="font-size:64.99999762%;baseline-shift:super"
+   id="tspan1971">-10</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.58611107px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="136.64772"
+       y="283.1171"
+       id="text1939-7"><tspan
+         sodipodi:role="line"
+         id="tspan1937-5"
+         x="136.64772"
+         y="283.1171"
+         style="stroke-width:0.26458332">Galaxy</tspan><tspan
+         sodipodi:role="line"
+         x="136.64772"
+         y="288.84973"
+         style="stroke-width:0.26458332"
+         id="tspan1967">10<tspan
+   style="font-size:65%;baseline-shift:super"
+   id="tspan1969">26</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.58611107px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="103.1875"
+       y="289.0625"
+       id="text1961"><tspan
+         sodipodi:role="line"
+         id="tspan1959"
+         x="103.1875"
+         y="289.0625"
+         style="stroke-width:0.26458332"> </tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.58611107px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="67.059532"
+       y="194.47653"
+       id="text1977"><tspan
+         sodipodi:role="line"
+         id="tspan1975"
+         x="67.059532"
+         y="194.47653"
+         style="stroke-width:0.26458332;font-weight:bold;fill:#ff0000">unphysical domain? ?</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.58611107px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="44.979168"
+       y="254.66667"
+       id="text1981"><tspan
+         sodipodi:role="line"
+         id="tspan1979"
+         x="44.979168"
+         y="254.66667"
+         style="stroke-width:0.26458332;font-weight:bold;fill:#ff0000">??</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.58611107px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="44.979168"
+       y="222.91667"
+       id="text1985"><tspan
+         sodipodi:role="line"
+         id="tspan1983"
+         x="44.979168"
+         y="222.91667"
+         style="stroke-width:0.26458332;fill:#ff0000;font-weight:bold">??</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.58611107px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="60.854164"
+       y="213.92075"
+       id="text1989"><tspan
+         sodipodi:role="line"
+         id="tspan1987"
+         x="60.854164"
+         y="213.92075"
+         style="stroke-width:0.26458332">Relativistic</tspan><tspan
+         sodipodi:role="line"
+         x="60.854164"
+         y="219.65338"
+         style="stroke-width:0.26458332"
+         id="tspan1991">Quantum</tspan><tspan
+         sodipodi:role="line"
+         x="60.854164"
+         y="225.38602"
+         style="stroke-width:0.26458332"
+         id="tspan1993">Mechanics</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.58611107px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="61.383331"
+       y="248.84581"
+       id="text1997"><tspan
+         sodipodi:role="line"
+         id="tspan1995"
+         x="61.383331"
+         y="248.84581"
+         style="stroke-width:0.26458332">Quantum</tspan><tspan
+         sodipodi:role="line"
+         x="61.383331"
+         y="254.57845"
+         style="stroke-width:0.26458332"
+         id="tspan1999">Mechanics</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.58611107px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="102.76179"
+       y="250.33987"
+       id="text1997-3"><tspan
+         sodipodi:role="line"
+         id="tspan1995-5"
+         x="102.76179"
+         y="250.33987"
+         style="stroke-width:0.26458332">Classical</tspan><tspan
+         sodipodi:role="line"
+         x="102.76179"
+         y="256.07251"
+         style="stroke-width:0.26458332"
+         id="tspan1999-6">Mechanics</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.58611107px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="95.779167"
+       y="219.74164"
+       id="text1997-2"><tspan
+         sodipodi:role="line"
+         x="95.779167"
+         y="219.74164"
+         style="stroke-width:0.26458332"
+         id="tspan1999-1">Relativity</tspan><tspan
+         sodipodi:role="line"
+         x="95.779167"
+         y="225.47427"
+         style="stroke-width:0.26458332"
+         id="tspan2034">Physics</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.58611107px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="147.29494"
+       y="250.26729"
+       id="text1997-27"><tspan
+         sodipodi:role="line"
+         x="147.29494"
+         y="250.26729"
+         style="stroke-width:0.26458332"
+         id="tspan1999-9">Cosmological</tspan><tspan
+         sodipodi:role="line"
+         x="147.29494"
+         y="255.99992"
+         style="stroke-width:0.26458332"
+         id="tspan2048">Physics</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.58611107px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="148.43585"
+       y="219.90764"
+       id="text1997-27-3"><tspan
+         sodipodi:role="line"
+         x="148.43585"
+         y="219.90764"
+         style="stroke-width:0.26458332"
+         id="tspan1999-9-6">Relativistic</tspan><tspan
+         sodipodi:role="line"
+         x="148.43585"
+         y="225.64027"
+         style="stroke-width:0.26458332"
+         id="tspan2048-0">Cosmology</tspan></text>
+  </g>
+</svg>

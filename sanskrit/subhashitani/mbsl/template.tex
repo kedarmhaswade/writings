@@ -1,0 +1,33 @@
+\documentclass[a4paper]{article}
+\usepackage{polyglossia}
+\usepackage[margin=5mm]{geometry}
+\setdefaultlanguage{sanskrit}
+\setotherlanguages{english, marathi}
+\setmainfont[Mapping=velthuis-sanskrit,Script=Devanagari,Language=Sanskrit]{Shobhika}
+\newfontfamily\englishfont{Noto Serif}
+%\newfontfamily\sanskritfont[Mapping=velthuis-sanskrit,Script=Devanagari,Language=Sanskrit]{Noto Serif Devanagari}
+% make sure ~ as non-breaking space doesn't interfere with velthuis-sanskrit mapping
+\edef~{\string~}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}% Remove paragraph indent
+\usepackage[skip=\medskipamount]{parskip}
+\newcommand \eng[1]{
+    \textenglish{#1}
+}
+\begin{document}
+\eng{
+d2 m3 y4
+}
+
+
+\begin{verse}
+\begin{center}
+    \Huge {
+    .o bhavati bhik.saa.m dehi |
+}
+\end{center}
+\end{verse}
+sandarbha.h -- \dots |
+
+anyaani subhaa.sitaani -- \eng{.pdf} sa~ncikaanaam naamaani yathaa \eng{1}-.o-bhavati.\eng{pdf}
+\end{document}

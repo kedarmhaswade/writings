@@ -9,10 +9,17 @@
 % make sure ~ as non-breaking space doesn't interfere with velthuis-sanskrit mapping
 \edef~{\string~}
 \pagenumbering{gobble}
-\begin{document}
-\textenglish{
-\noindent \today{}
+\setlength{\parindent}{0pt}% Remove paragraph indent
+\usepackage[skip=\medskipamount]{parskip}
+\newcommand \eng[1]{
+    \textenglish{#1}
 }
+\begin{document}
+\eng{
+04 Mar 2021
+}
+
+
 \begin{verse}
 \begin{center}
     \Huge {
@@ -20,5 +27,7 @@
 }
 \end{center}
 \end{verse}
-sandarbha.h -- upanayanavidhau eka.h mantra.h |
+sandarbha.h -- upanayanavidhau eka.h ma.mtra.h|
+
+anyaani subhaa.sitaani -- 
 \end{document}

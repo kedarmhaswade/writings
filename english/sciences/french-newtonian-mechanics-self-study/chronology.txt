@@ -1,0 +1,11 @@
+This short doc records dated events for studying the Newtonian Mechanics from A. P. French's book. The events are arranged counter-chronologically.
+
+06 March 2021
+- Started doing hors douevres exercises.
+- Referred to <i>Physics for the Inquiring Mind</i> by Eric Rogers.
+
+05 March 2021
+- Went through physicsforums.com for the book recommendations.
+- Decided that I need to cover Newtonian Mechanics, Waves and vibrations, and Electromagnetism in roughtly three months.
+- Chose A. P. French's book.
+- Downloaded History of Physics by Max Von Laue. This sounds dry, although it appears to be a true account of the past events up to 1940.
