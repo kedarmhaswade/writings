@@ -1,0 +1,34 @@
+\documentclass[a4paper]{article}
+\usepackage{polyglossia}
+\usepackage[margin=5mm]{geometry}
+\setdefaultlanguage{sanskrit}
+\setotherlanguages{english, marathi}
+\setmainfont[Mapping=velthuis-sanskrit,Script=Devanagari,Language=Sanskrit]{Shobhika}
+\newfontfamily\englishfont{Noto Serif}
+%\newfontfamily\sanskritfont[Mapping=velthuis-sanskrit,Script=Devanagari,Language=Sanskrit]{Noto Serif Devanagari}
+% make sure ~ as non-breaking space doesn't interfere with velthuis-sanskrit mapping
+\edef~{\string~}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}% Remove paragraph indent
+\usepackage[skip=\medskipamount]{parskip}
+\newcommand \eng[1]{
+    \textenglish{#1}
+}
+\begin{document}
+\eng{
+13 March 2021
+}
+
+
+\begin{verse}
+\begin{center}
+    \Huge {
+        akrodhena jayetkrodha.m asaadhu.m saadhunaa jayet |
+        jayetkadarya.m daanena jayet satyena caan.rtam ||
+}
+\end{center}
+\end{verse}
+sandarbha.h -- mahaabhaarate udyogaparva.ni 39.58 |
+
+anyaani subhaa.sitaani -- 
+\end{document}

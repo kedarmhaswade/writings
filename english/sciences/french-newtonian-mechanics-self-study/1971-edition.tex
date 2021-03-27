@@ -1,4 +1,6 @@
-\documentclass[12pt,a4paper]{report}
+\documentclass[12pt,a4paper]{book}
+\usepackage{amsmath,amsfonts,amssymb}   %% AMS mathematics macros
+\usepackage{cancel} % cancel terms
 \usepackage{chemfig}
 \usepackage{graphicx}
 \usepackage{gensymb}
@@ -8,6 +10,12 @@
 \usepackage{titlesec}
 \usepackage{lettrine}
 \usepackage{xcolor}
+% table with newline in headings
+\usepackage{longtable}
+\usepackage{makecell}
+\renewcommand{\cellalign}{tl}
+\renewcommand{\theadalign}{tl}
+% table with newline in headings
 \usepackage{epigraph, varwidth}
 \usepackage{siunitx}
 \renewcommand{\epigraphsize}{\small}
@@ -25,6 +33,14 @@
 \setotherlanguages{marathi}
 \newfontfamily\marathifont[Mapping=velthuis-sanskrit,Script=Devanagari,Language=Marathi]{Shobhika}
 \usepackage{soul}
+% four packages brushingupscience
+\usepackage{mathpazo}
+\usepackage{helvet}
+\usepackage{microtype}
+\usepackage[margin=15pt,font=small,labelfont={bf,sf}]{caption}
+\usepackage{sectsty}
+\allsectionsfont{\sffamily}
+% four packages brushingupscience
 % table with newline in headings
 \usepackage{longtable}
 \usepackage{makecell}
@@ -33,7 +49,6 @@
 % table with newline in headings
 \usepackage{hyperref}
 \hypersetup{
-    backref,
     colorlinks=true,
     filecolor=magenta,
     linkcolor=blue,
@@ -45,11 +60,29 @@
 \newcommand{\ctext}[3]{
     \colorbox{#2}{\parbox{0.9\textwidth}{\textcolor{#1}{#3}}}
 }
+\newcommand\TODO[1]{\colorbox{orange}{\underline{\tiny{TODO: #1}}}}
+% \vect and \uvec for vector and unit vector respectively (bold)
+\newcommand{\vect}[1]{\pmb{\vec{#1}}}
+\newcommand{\uvec}[1]{\pmb{\hat{#1}}}
+% \vect and \uvec for vector and unit vector respectively (bold)
 % new commands
 % other settings
 \setlength{\parindent}{0pt}% Remove paragraph indent
 \usepackage[skip=\medskipamount]{parskip}
 % other settings
+\newcommand\Problem[1]{%
+   \leavevmode\par
+   \stepcounter{problem}
+   \noindent
+   Problem \textbf{\theproblem} -- #1 \par}
+\newcounter{problem}[chapter] % a new counter 'problem', resets for each ch
+\newcommand\Solution[1]{%
+   \stepcounter{solution}
+    \leavevmode\par\noindent
+   {\leftskip37pt
+    Solution \textbf{\thesolution} -- #1\par}}
+\newcounter{solution}[chapter] % a new counter 'solution', resets for each ch
+
 \begin{document}
 \tableofcontents
 \title{Self-study Notes, Problems, and Solutions from A. P. French's Newtonian Mechanics}
@@ -64,18 +97,16 @@ These notes are from my self-study session based on A. P. French's Newtonian Mec
 
 These notes are typeset in \LaTeX{} with the main font set to IBM Plex Serif.
 
-In keeping with 
+In keeping with Halmos's advice \cite{iaam}: 
 \epigraph{
     ``Audience, level, and treatment—a description of such matters is what prefaces are supposed to be about.''
 }  
 
-{
-    --\textit{Halmos's advice \cite{iaam}}
-}, I believe an interested high-school student with understanding of algebra, some geometry and calculus should be able to follow this material with some struggle. Since this is not a monograph written by me per se, but rather a collection of ideas and treatises gathered from elsewhere and written in my own words, I believe the treatment is more elementary than advanced. Finally, the focus is on solving the problems thoroughly. In solving problems, I have not referred to anything else, presumably of similar nature (e.g. ``Solutions to problems from \dots''). As an additional help, the book provides brief answers to problems. Thus, these notes are written for a personal benefit (in some abstract sense) and only incidentally for a probable benefit to someone else.
+, I believe an interested high-school student with understanding of algebra, some geometry and calculus should be able to follow this material with some struggle. This is not a monograph written by me per se, but rather a collection of ideas and treatises gathered from elsewhere and written in my own words. I believe the treatment is more elementary than advanced. Finally, the focus is on solving the problems thoroughly. In solving problems, I have not referred to anything else, presumably of similar nature (e.g. ``Solutions to problems from \dots''). As an additional help, the book provides brief answers to problems. Thus, these notes are written for a personal benefit (in some abstract sense) and only incidentally for a probable benefit to someone else.
 
 Regarding the format of \emph{notes}, I am trying something new. I am going to enumerate items in each section. This style is reminiscent of that of the books written in the $18$\textsuperscript{th} and $19$\textsuperscript{th} centuries. It may not always make the text more readable, but since the nature of this text is a review, it might be helpful. An attempt is made to solve problems serially and naturally; liberty is taken to skip some. Figures are used where appropriate.
 
-\chapter{Prologue}
+\chapter*{Prologue}
 
 \begin{enumerate}
     \item The book is divided into three main themes:
@@ -112,7 +143,7 @@ Regarding the format of \emph{notes}, I am trying something new. I am going to e
             \item The line joining a planet and the sun sweeps out \emph{equal areas in equal periods of time}.
             \item The ratio of the square of a planet's year (period of time it takes for it to come to the exact same position in the sky) to the cube of its mean distance from sun is the same for all the planets.
         \end{enumerate}
-        However, it still looked like \emph{description} and not \emph{theory\footnote{In science, we tend to use common English words precisely. We use `theory' to mean `a well-substantiated explanation of some aspect of the natural world that usually incorporates facts, laws, inferences, calculations, and hypotheses'.}}. Newton went on to formulate the \emph{inverse-square law of gravitation} and demonstrated that Kepler's Laws were an instance of his splendid theory gravitation.
+        However, it still looked like \emph{description} and not \emph{theory\footnote{In science, we tend to use common English words precisely. We use `theory' to mean `a well-substantiated explanation of some aspect of the natural world that usually incorporates facts, laws, inferences, calculations, and hypotheses'.}}. Newton went on to formulate the \emph{inverse-square law of gravitation} and demonstrated that Kepler's Laws were an instance of his splendid theory of gravitation.
     \item Newton \emph{quantitatively} explained the following:
         \begin{enumerate}
             \item The bulging of earth and Jupiter because of their rotation.
@@ -139,14 +170,861 @@ Regarding the format of \emph{notes}, I am trying something new. I am going to e
 
 Hors D'ouevre means ``outside work", a teaser, an appetizer. Although this section is named ``Exercises'' and not ``Problems'' (perhaps because the questions are based on what should be known beforehand and the answers could be found somewhat mechanically) there are interesting questions here.
 
-The ``art of guessing'' \cite{polya-guessing} is emphasized in exercises. I too believe that doing a \emph{good} approximation (within 2 or 3 percent of the correct answer) rather quickly is a helpful skill that shows one's resourcefulness and understanding. One trick I often employ is to have a calculator handy, but use it only to verify the answer you have attempted to find in your head. There are many anecdotes in this regard. This skill has generally come to be known as ``back of the envelop calculations'' made famous by Enrico Fermi.
+The ``art of guessing'' \cite{polya-guessing} is emphasized in exercises. I too believe that doing a \emph{good} approximation (within 2 or 3 percent of the correct answer) rather quickly is a helpful skill that shows one's resourcefulness and understanding. One trick I often employ is to have a calculator handy, but use it only to verify the answer I have reached in my head or on paper. There are many anecdotes in this regard. This skill has generally come to be known as the ``back of the envelop calculations'' made famous by Enrico Fermi.
+
+A recent collection of such \emph{common sense} problems in mathematics alone is available in \cite{cosm}.
+
+It is surprising how much one can do with the help of a relatively small stock of primary data. And such data is not only of academic interest. It helps us tremendously in matters of safety in particular and living life in general. For instance, knowing that $1$ atmospheric pressure ($1$ atm) is equivalent to a 10-meter column of water and our deepest oceans are about 10-km deep, we can rather easily conclude that a marine field biologist needs to bear a pressure of 500 atm\footnote{This is \emph{enormous} pressure.} only to reach half as deep as the deepest parts of the Pacific Ocean! I agree that when life is at stake and safety paramount, detailed calculations are a must, but a quickly done \emph{reasoned estimate} often comes in handy.
+
+\begin{longtable}{|r|l|}
+\caption{Useful Bits} \label{tab: useful-bits} \\
+\hline
+    What & How Much \\
+\hline
+\endfirsthead
+\endhead
+    Gravitational acceleration, g & 
+    $10$ \si{\metre\per\square\second} \\
+ \hline
+    Densities of solids and liquids & 
+    $10^{3}-10^{4}$ \si{\kilogram\per\cubic\metre} \\
+ \hline
+    Density of air at sea level & 
+    $\approx 1$ \si{\kilogram\per\cubic\metre} \\
+ \hline
+    Density of water at sea level & 
+    $1000$ \si{\kilogram\per\cubic\metre} or $1$ g cm\textsuperscript{--3} \\
+ \hline
+    \makecell{Number of drops in $1$ cc ($=1$ cm\textsuperscript{--3} $=1$ ml) \\of water} & 
+    $\approx25$ \\
+ \hline
+    Length of (Earth) day &
+    $\approx 10^5$ \\
+ \hline
+    Length of (Earth) year &
+    $\approx 31\times 10^6 \approx 10^{7.5}$ sec \\
+ \hline
+    Earth's radius &
+    $6400$ km ($= 4000$ miles) \\
+ \hline
+    \makecell {Angle subtended by a finger's thickness \\
+    at arm's length} &
+    $\approx 1\degree$ \\
+ \hline
+    Thickness of paper &
+    $\approx 0.1$ mm \\
+ \hline
+    Mass of a paperclip &
+    $\approx 0.5$ g \\
+ \hline
+    Highest mountains, deepest oceans on earth &
+    $\approx 10$ km \\
+ \hline
+    Earth-moon separation &
+    $3.84\times 10^5$ km ($= 2.4\times 10^5$ miles) \\
+ \hline
+    Earth-sun separation &
+    $1.5\times 10^8$ km ($= 93$ million miles) \\
+ \hline
+    Atmospheric pressure &
+    \makecell{
+        $\equiv$ to a 10-meter column of water \\
+        (Use dimensional analysis to get this) \\
+       $=14.7$ psi (\emph{Only in America!}) 
+    } \\  
+ \hline
+    Avogadro's Number&
+    $6.02\times10^{23}$\\
+ \hline
+    Atomic masses&
+    $1.6\times10^{-27} - 4\times10^{-25}$\si{kg}\\
+ \hline
+    Linear atomic dimension&
+    $\approx 10^{-10}$\si{m} $=1\si{\angstrom} $\\
+ \hline
+    Molecules per cc of a gas at STP &
+    $2.7\times10^{19}$ \\
+ \hline
+    Atoms per cc in a solid &
+    \makecell{$\approx 10^{23}$ (they are much more tightly packed \\
+    as compared to gas!)} \\
+ \hline
+    Elementary charge ($e$) &
+    $1.6\times 10^{-19}\si{\coulomb}$ \\
+ \hline
+    Electron mass &
+    $\approx 10^{-30}\si{\kilo\gram}$ \\
+ \hline
+    Speed of light &
+    $3\times 10^{8}\si{\metre\per\second}$ \\
+ \hline
+    Wavelengths of visible light &
+    $400\si{\nano\metre}$ (violet) -- $700\si{\nano\metre}$ (red) \\
+ \hline
+
+\end{longtable}
+
+Binomial theorem is a remarkable mathematical tool. Newton generalized it for any exponent that is a real number \cite{newton-bt} (or even a complex number):
+\begin{align}
+    (x+y)^{r} 
+        &= \sum_{k=0}^{\infty} \binom{r}{k}x^{r-k}y^{k} \\
+        &= x^r + rx^{r-1}y+\frac{r(r-1)}{2}x^{r-2}y^2+\dots \label{eqn: inf-bin-ser}
+\end{align}
+where $ r \in \mathbb{R}$, $k \in \mathbb{N}$, and 
+
+$$
+\binom{r}{k} 
+= \frac{r\cdot(r-1)\cdot(r-2)\cdot\dots\cdot(r-k+1)}{k!}
+= \frac{r^{\underline{k}}}{k!}
+$$
+.
+
+Note that 
+$$
+r^{\underline{n}} = \prod_{k=0}^{n-1}(r-k)
+$$
+is called the ``$n\textsuperscript{th}$ falling factorial of $r$''.
+
+
+
+
+We can use this with any \emph{real} exponent. This comes in handy in several \emph{approximations}.
+
+When the exponent is an integer $n$, we get a finite sequence (equation (\ref{eqn: bin-theorem})) instead of the infinite series of equation (\ref{eqn: inf-bin-ser}):
+\begin{equation}
+    \label{eqn: bin-theorem}
+(1 + x)^{n} = 1+n\cdot x + \frac{n(n-1)}{2}x^{2} +\dots + x^{n}
+\end{equation}
+where $n \in \mathbb{N}$. This happens because when the exponent is a positive integer, the product 
+$$r
+\cdot(r-1)\cdot(r-2)\dots(r-(k-1))\cdot\pmb{(r-k)}\cdot(r-(k+1))\cdot(r-(k+2))\dots
+$$ 
+$$
+=n\cdot(n-1)\cdot(n-2)\dots(n-(k-1))\cdot\pmb{(n-k)}\cdot(n-(k+1))\cdot(n-(k+2))\dots
+$$ 
+must be zero for all the terms where $k > n$ (the bold term $\pmb{(r-k) = (n-k)}$ which is a part of all binomial coefficients of the terms where $k > n$ is 0).
+
+On the other hand, when the exponent is not an integer, no binomial coefficient is zero and we get an infinite series. This \emph{dual} nature of binomial expansion is intriguing!
+
+This leads to the approximations
+\begin{equation}
+\label{eqn: approx1+nx}
+    (1+x)^{n} \approx 1 + nx 
+\end{equation}
+and
+\begin{equation}
+\label{eqn: approxroot1-x}
+    \sqrt{1-x} = (1-x)^{\frac{1}{2}} \approx{(1+x)^{-\frac{1}{2}}} \approx 1 - \frac{1}{2}x 
+\end{equation}
+when $\pmb{x \ll 1}$.
+
+For a right triangle with sides $a, b$, and hypotenuse $c$, we get
+$$
+    c = (a^2 + b^2)^{\frac{1}{2}} = a(1+\frac{b^2}{a^2})^{\frac{1}{2}}
+$$
+which leads to
+\begin{equation}
+\label{eqn: hypotenuse}
+    c \approx a(1+\frac{b^2}{2a^{2}})
+\end{equation}
+when $\pmb{\frac{b}{a} \ll 1}$.
+
+\begin{longtable}{|r|l|}
+\caption{Useful Mathematical Approximations} \label{tab: useful-math-approx} \\
+\hline
+    What & How Much \\
+\hline
+\endfirsthead
+\endhead
+    $\pi^{2}$ &
+    $\approx 10$ \\
+ \hline
+    $e$ &
+    $\approx 2.71$ \\
+ \hline
+    $log_{10}e$ &
+    \makecell {
+        $\approx 0.43$ \\
+        ($log_{e}10 \approx 2.3$)
+    }\\
+ \hline
+    $log_{10}\pi$ &
+    $\approx 0.5$ \\
+ \hline
+    $log_{10}2$& 
+    $\approx 0.301$\\
+ \hline
+    $log_{10}3$& 
+    $\approx 0.48$\\
+ \hline
+    $log_{10}5$& 
+    $\approx 0.7$\\
+ \hline
+    $log_{10}7$& 
+    $\approx 0.85$\\
+ \hline
+    $\pi$\si{\radian}& 
+    $180\deg$\\
+ \hline
+    $1$\si{\radian}& 
+    $\approx 57\deg$\\
+ \hline
+    \makecell{
+        $\sin \theta$ \\
+        where $\pmb{\theta \lll 1\si{\radian}}$
+    } &
+    $\approx \theta$\\
+ \hline 
+    \makecell{
+        $\cos \theta$ \\
+        where $\pmb{\theta \lll 1\si{\radian}}$
+    } &
+    $\approx 1$\\
+ \hline
+    $e^{x}$ & 
+    \makecell {
+        $=1 + x + \frac{x^2}{2!} + \frac{x^3}{3!}+\dots$\\
+        $\approx 1 + x$ $\forall x \lll 1$ \\
+        and then it follows that $log_e (1+x) = x $ $\forall x \lll 1$
+    }\\
+  \hline 
+\end{longtable}
+
+Estimation problems can be best solved with a pencil on paper\footnote{Of course, some geniuses like Von Neumann can do it in their heads.}. I have attempted to \emph{show my work} on paper whenever possible. The \emph{finished} solution, neatly typeset in \LaTeX{}, hardly shows the struggle that a paper shows. I have believed that the \emph{rough work} is more enjoyable than the \emph{fair, presentation material} although the latter might be more easily understood by others\footnote{In other words, although I like typesetting documents in \LaTeX{}, I believe that \emph{content} teaches more than the \emph{form}.}.
+
+\Problem {
+}
+\Solution {
+}
+\Problem {
+}
+\Solution {
+}
+\Problem {
+    Make reasoned estimates of
+    \begin{enumerate}
+        \item the total number of ancestors you would have (ignoring inbreeding) since the beginning of the human race, and
+        \item the number of hairs on your head.
+    \end{enumerate}
+}
+\Solution {
+    \begin{enumerate}
+        \item Population is a fascinating topic. I drew two pictures on paper that may explain my approach. Starting with ``me'' in the current generation, I drew an \emph{isolated} family tree of my family. If I now add a second isolated family (say, of my friend), then its family tree would be more-or-less identical to mine. This will proliferate the number of the \emph{First Gen} ancestors! We need to fix the number of the First Gen ancestors to some number\footnote{In Indian culture, some sages created families that cross-bred; who created those sages is left to speculation.} (I chose 2); the family trees have got to merge into each other. 
+        \begin{figure}[h!]
+            \centering
+            \includegraphics[width=4cm,height=5cm]{ancestry-1.jpg}
+            \caption{Estimate Ancestors: 1}
+            \label{fig: estimate-ancestors-1}
+        \end{figure}
+        \begin{figure}[h!]
+            \centering
+            \includegraphics[width=4cm,height=5cm]{ancestry-2.jpg}
+            \caption{Estimate Ancestors: 2}
+            \label{fig: estimate-ancestors-2}
+        \end{figure}
+
+            When I now think of these pictures, I believe they are wrong. But documenting this process is useful. Here are some simplifying assumptions that I am now making:
+            \begin{enumerate}
+                \item There were 2 First Gen ancestors.
+                \item On average, a generation is $25$ years. Given that human race started about $200000$ years ago, we have had about $8000$ human generations.
+                \item The population of the current ($8000\textsuperscript{th}$) generation is $7\times10^9$. Due to Thomas Robert Malthus \cite{malthus}, we assume that population grows in geometric progression.
+                \item \label{one-more-gen-assumption} After they give birth to their last offspring, parents live for $25$ years, i.e. one more generation.
+                \item Total population up to and including the $n\textsuperscript{th}$ generation are the ancestors of the entire population of the $(n+1)\textsuperscript{th}$ generation as a whole. Therefore, if we calculate the total number of humans who ever lived up to the previous generation and divide it by some number derived from the population of the current generation alone (we must exclude the population of the previous generation from that of the current generation (see \ref{one-more-gen-assumption})), we can get the average number of ancestors of each member of the current generation.
+            \end{enumerate}
+
+            Think of first four generations. \emph{Assume} that the populations in those generations are $2$, $8$, $30$, and $90$ respectively. Then, the $2$ people in the first generation have no human ancestors, $8-2=6$ people in the second generation together have $2$ ancestors, $30-8=22$ people in the third generation together have $2+8=10$ ancestors, and $90-30=60$ people in the fourth generation together have $2+8+30=40$ ancestors.
+
+            I hope that this simplified model appears reasonable. Let's do some calculations:
+            
+            Let 
+
+            $P_n$ be the population of the $n\textsuperscript{th}$ generation; we assume $P_{8001} = 7\times 10^9$, 
+            
+            $r$ be the effective rate of per-generation increase of the population in a geometric progression, 
+            
+            $C_n$ be the cumulative population up to and including (i.e. the total number of humans who ever lived on earth) the $n\textsuperscript{th}$ generation, 
+            
+            $A_n$ be the number of immediate ancestors (parents) of the $n\textsuperscript{th}$ generation who are still alive. $A_{n} = P_{n-1}$,
+            
+            $M$ be the cumulative number of \emph{my} ancetors (I live in the $8001\textsuperscript{st}$ generation),
+
+            $n = 8000$.
+
+            We want to find $M$. Based on the above, for a geometric series,
+            $$
+                a = 2, P_{8001} = 7\times 10^{9}
+            $$ 
+            $$
+                7\times 10^{9} = 2\cdot r^{8000}
+            $$
+            \begin{equation}
+                \label{eqn: value-of-r}
+                \therefore r = 1.0027525 
+            \end{equation}
+            \begin{align*}
+                M 
+                &= \frac{C_{8000}}{P_{8001}-A_{8001}} \\
+                &= \frac{C_{8000}}{P_{8001}-P_{8000}} \\
+                &= \frac{\frac{\cancel{a}\cdot(r^{7999})}{r-1}}{\cancel{a}\cdot (r^{8001}-r^{8000})} \\
+                &= \frac{1}{r\cdot(r-1)^{2}} \\
+                &\approx 131630 
+            \end{align*}
+        \item We assume that a human head has a surface area, $S$, of $100\si{\square\cm}$, only about $60\%$ of which has hair and the average radius, $r$, of a human hair is about $40\si{\micro\metre}$ giving a cross-sectional area of $\pi r^2\approx 5000\si{\square\micro\metre}$. We also assume that two hairs are about 9 hair diameters apart. The number of hairs on a human head, then, is about $120,000$:
+            $$
+                H = \frac{1}{10}\cdot\frac{60}{5000\times 10^{-8}}\frac{\si{\square\cm}}{\si{\square\cm}}
+                  = 12\times 10^{4} 
+                  = 120000
+            $$
+    \end{enumerate}
+}
+\Problem {
+}
+\Solution {
+}
+\Problem {
+}
+\Solution {
+}
+\Problem {
+}
+\Solution {
+}
+\Problem {
+}
+\Solution {
+}
+\Problem {
+}
+\Solution {
+}
+\Problem {
+}
+\Solution {
+}
+\Problem {
+}
+\Solution {
+}
+\Problem {
+}
+\Solution {
+}
+\Problem {
+}
+\Solution {
+}
+\Problem {
+}
+\Solution {
+}
+\Problem {
+}
+\Solution {
+}
+\Problem {
+}
+\Solution {
+}
+\Problem {
+}
+\Solution {
+}
+\Problem {
+}
+\Solution {
+}
+\Problem {
+}
+\Solution {
+}
+\Problem {
+}
+\Solution {
+}
+\Problem {
+}
+\Solution {
+}
+\Problem {
+    How many inches per mile does a terrestrial (i.e. related to earth, land) great circle (e.g. a meridian or longitude) deviate from a straight line? 
+}
+\Solution {
+   A sphere and its great circle share their centers and a diameter.
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=0.5\linewidth]{sphere-great-small-circles.png}
+        \caption{The terrestrial sphere. See \cite{davidson}. N-a-A-S-N, N-b-B-S-N, W-A-B-E-W are all great circles and w-a-b-e-w is a small circle. The great circles with diameter $NS$ make \emph{meridians (longitudes)} whereas the circles with diameter parallel to $WE$ make \emph{parallels (lattitudes)}. }
+        \label{fig: great-small-circles}
+    \end{figure}
+
+    In the Figure \ref{fig: meridian}, as we start walking at B, if earth were flat, we would reach C after walking a mile. But since earth isn't flat, we would reach D. Thus, the deviation from the straight line $= CD$. From equation \ref{eqn: hypotenuse} we have:
+
+    $$
+    c = r(1+\frac{1}{2r^2})^{\frac{1}{2}}
+    $$
+    $$
+    CD = c - r = r(1 + \frac{1^2}{2r^2})-r = \frac{1}{2r} = \frac{1}{8000}\text{{}mile}
+    $$
+    $$
+    CD \approx 0.66\text{feet}
+    $$
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=0.4\linewidth]{meridian.png}
+        \caption{Walking on the Meridian.}
+        \label{fig: meridian}
+    \end{figure}
+
+}
+\Problem {
+}
+\Solution {
+}
+\Problem {
+}
+\Solution {
+}
+\Problem {
+}
+\Solution {
+}
+\Problem {
+}
+\Solution {
+}
+\Problem {
+}
+\Solution {
+}
+\Problem {
+}
+\Solution {
+}
+\Problem {
+}
+\Solution {
+}
+\Problem {
+}
+\Solution {
+}
+\Problem {
+    The table \ref{tab: solar-system-distances} lists the mean orbit radii of successive planets expressed in terms of the earth's orbit radius. 
+\begin{longtable}{|r|l|l|l|}
+\caption{Solar System Distances} \label{tab: solar-system-distances} \\
+\hline
+    n & Planet & $\frac{r}{r_E}$ & $log_{10}\frac{r}{r_E}$\\
+\hline
+\endfirsthead
+\endhead
+    $1$ & 
+    Mercury &
+    $0.39$ &
+    $\approx 0.6015-1 \approx -0.4$ \\
+ \hline
+    $2$ & 
+    Venus &
+    $0.72$ &
+    \makecell {
+        $
+        \approx log_{10}72 - 2 \approx 3*log_{10}2 + 2*log_{10}3 - 2
+        $\\
+        $
+        \approx 3*0.3010 + 2*0.48 - 2
+        $\\
+        $
+        \approx -0.13
+        $
+    }
+    \\
+ \hline
+    $3$ & 
+    Earth &
+    $1$ &
+    $0$ 
+    \\
+ \hline
+    $4$ & 
+    Mars &
+    $1.52$ &
+    \makecell {
+    $
+    \approx log_{10}19 + log_{10} 8 - 2
+    $\\
+    $
+    \approx 1.28 + 0.903 - 2
+    $\\
+    $
+    \approx 0.183
+    $
+    }
+    \\
+ \hline
+    $5$ & 
+    Jupiter &
+    $5.2$ &
+    $0.72$ 
+    \\
+ \hline
+    $6$ & 
+    Saturn &
+    $9.54$ &
+    $0.98$ 
+    \\
+ \hline
+    $7$ & 
+    Uranus &
+    $19.2$ &
+    $1.28$ 
+    \\
+ \hline
+\end{longtable}
+}
+\Solution {
+    \begin{enumerate}
+        \item Make a graph in which $log\frac{r}{r_E}$ is ordinate (Y-coordinate) and the number $n$ abscissa (X-coordinate). On the same graph, replot the points for Jupiter, Saturn, and Uranus at values of $n$ increased by unity each. A straight line can be fitted reasonably well through the new set of points.
+            \textbf{Solution}: I made this \href{https://www.desmos.com/calculator/zhewyutbx2}{plot} (Figure \ref{fig: solar-system}) using the amazing tool, Desmos \cite{desmos}.
+        \begin{figure}[h!]
+            \centering
+            \includegraphics[width=0.6\linewidth]{solar-system.png}
+            \caption{Semi-logarithmic Plot of Planet Numbers Versus Their Distances from the Sun}
+            \label{fig: solar-system}
+        \end{figure}
+        
+    \item \label{item: b} If $n=5$ in the revised plot is taken to represent the asteroid belt between the orbits of Mars and Jupiter, what value of $log \frac{r}{r_E}$ would your new graph imply for this? Compare with the actual mean radius of the asteroid belt.
+        
+        \textbf{Solution}: The point on the revised semi-log scale plot is $(5, 0.511)$ for the later discovered asteroid belt. This gives $\frac{r}{r_E} = 10^{0.51}=3.2$. \emph{Universe Today} \cite{universe-today} reports this to be a little less ($2.2-3.2$ AU). It appears that the mass distributed in the asteroid belt was necessary to reason about the planetary motions.
+
+    \item \label{item: c} If $n=9$ is taken to suggest an orbit for the next planet beyond Uranus, what value would your graph imply? Compare it with observed value.
+
+        \textbf{Solution}: The point is $(9, 1.454)$ which gives $10^{1.454}=28.44$ AU for Neptune. Britannica \cite{Neptune-data} suggests a value of $30.05$ AU. Our estimation is within an acceptable $5.66\%$ of theirs.
+
+    \item Consider whether, in the light of (\ref{item: b}) and (\ref{item: c}), your graph can be regarded as the expression of a physical law with predictive value. (As a matter of history, it \emph{was} so used. See the account of the discovery of Neptune near the end of Chapter 8.) 
+
+        \textbf{Solution}: The graph gives a glimpse of how the mass \emph{might have} gotten distributed into various planets, if we believe the Big Bang. The distribution then gives rise to forces of attraction due to gravity and affects the periods of planets' revolutions around the sun. The line $log \frac{r}{r_E} = 0.255\times n - 0.764$ (we found the slope and y-intercept of the line) shows some character of a physical law because it is a descriptive generalization of the planetary motion. If a planet is known to exist, then it can predict where it might be placed in the solar system.
+    \end{enumerate}
+}
+
+
+\pagebreak
+
+    \part{ The Approach to Newtonian Dynamics }
+
+\epigraph
+{
+    It seems probable to me, that God in the beginning form'd \\
+    Matter in solid, massy, hard, impenetrable, movable \\
+    Particles \dots
+}
+{
+    -- Newton, Opticks(1730)
+}
+
+
+\pagebreak
+
+\chapter{A Universe of Particles} \label{ch: 2-particles}
+\begin{enumerate}
+    \item The \emph{essence} of the Newtonian mechanics is that the motion of a given object is analyzed in terms of the \emph{forces} to which it is subjected by its environment. 
+    \item ``Particles" are difficult to define. For the purpose of Newtonian Mechanics, however, we define a particle as an object that can be treated as a \emph{point mass}.
+    \item A non-exhaustive list of \emph{properties} of such particles consists of things like mass, size, shape, structure, magnetism, electric charge, and interaction with (similar or dissimilar) other particles.
+    \item We ask a question: ``What is the smallest number of properties that suffices to characterize a particle?" The answer to it depends on whether the particle is \emph{elementary}. 
+        \begin{enumerate}
+            \item For an elementary particle, like an electron or proton, it appears that it is enough to specify its \emph{charge} and \emph{mass}. 
+            \item Since larger objects which are made of many atoms are usually electrically neutral, it is enough to know their masses. Forces occur in larger objects as a result of \emph{interactions} among them and therefore, we need to know the rules of these interactions as well. Size of an object is also useful mainly because it is the magnitude of its size that helps us determine if an object can be treated as a point mass.
+        \end{enumerate} 
+    \item We survey particles of interest starting with smallest and go up to some of the largest known.
+    \item We use SI units in this book.
+    \item \textbf{In keeping with the spirit of science, things change all the time. The book has a certain (the then current) view of \emph{particles}. Particles, especially elementary particles, are researched aggressively. The 2006-view (35 years after this book was published) that is accessible to general public is captured in \cite{oerter}, and, of course, in Wikipedia's page on ``The Standard Model'' \cite{the-standard-model}.} 
+    \item Electrons and Nucleons: 
+        \begin{enumerate}
+            \item The concept of size is not unambiguously defined for \emph{any} object.
+            \item Electrons with a mass of about $9.1\times 10^{-31}\si{\kg}$ are not yet analyzed as a collection of smaller particles and hence they are fundamental particles.
+            \item If we regard electron as a \emph{sphere of electric charge}, its radius is estimated to be $10^{-15}\si{m}$.
+            \item Nucleons, the inhabitants of the nucleus, have a mass of about $10^{-27}\si{\kg}$. The two principle nucleons are protons (charged) and neutrons (neutral). A free proton is stable whereas a free neutron decays, in less than 15 minutes, into a proton, an electron, and an antineutrino. 
+            \item Nucleons have a more complicated internal structure as compared to electrons.
+        \end{enumerate}
+    \item Atomic Nuclei:
+        \begin{enumerate}
+            \item The smallest and lightest nucleus is of course one proton (which is the same as a hydrogen \emph{ion} (\ce{H+})). 
+            \item The heaviest naturally occurring nucleus (that of \ce{U^{238}_{92}}) contains 238 nucleons. (\textbf{Before introducing a uranium nucleus, perhaps we should mention that there are 92 different, naturally occurring nuclei (along with electrons), each of which has a characteristic number of nucleons. This is a miracle in itself. Each such nucleus is that of an \emph{element}.})
+            \item If we assume that nucleons are equally densely packed in each element's nucleus, we get (denoting the nuclear mass by $m$ and spherical nuclear volume by $v$):
+                $$
+                    \frac{m_1}{v_1} = \frac{m_2}{v_2}
+                $$
+                $$
+                    \frac{m_n\times A_1}{\frac{4}{3}\pi r_1^{3}}
+                    =
+                    \frac{m_n\times A_2}{\frac{4}{3}\pi r_2^{3}}
+                $$
+                where $m_n$ denotes the mass of \emph{a} nucleon (which is the same for each element), $A$ the atomic mass number (that is a fancy name for the number of nucleons) of an element.
+
+                Upon simplification, we can see ($\frac{r_1^3}{r_2^3}=\frac{A_1}{A_2}$) that the diameter of a nucleus is roughly proportional to the cube root of its atomic mass number, $A$.
+            \item \label{item: density-of-nucleus} The unit of distance, \emph{Fermi, F} (named after the Italian physicist Enrico Fermi), is used to denote the extremely small nuclear distances: $1 F = 10^{-15}\si{\m}$. This can give us some sense of how dense nuclear material is, although it is difficult to comprehend such a dense matter:
+                $$
+                    d_U = \frac{4\times 10^{-25}}{\frac{4}{3}\pi (10\times 10^{-15})^3} \approx 10^{17}\si{\kg\per\cubic\metre} 
+                $$
+                That makes the uranium nucleus $100$ trillion times as dense as water.
+        \end{enumerate}
+    \item Atoms:
+        \begin{enumerate}
+            \item Chemists had established for elements a \emph{relative mass scale} giving hydrogen a mass of $1$. The idea of \emph{mole} was introduced as \textbf{that amount of a pure substance whose mass in grams is numerically equal to its relative mass on this scale.}
+            \item Avogadro's brilliant idea (of course, others contributed to it as well) of a \emph{mole} (\si{\mol}) said that equal moles of a pure substance (an element or compound) must contain equal numbers of their fundamental particles (atoms or molecules). Thus, $1\si{\mol}$ of hydrogen contains as many \ce{H} atoms as the number of \ce{H2O} molecules in $1\si{\mol}$ of water or sucrose molecules in $1\si{\mol}$ of sucrose. Although it was known that $2\si{\mol}$ of hydrogen combine with $1\si{\mol}$ of oxygen to produce $1\si{\mol}$ water, the number of molecules or atoms in a mole (the so-called Avogadro's constant) itself was unknown.
+            \item Existence of the \emph{characteristic mass transfers} in electrolysis of ionic compounds (e.g. \ce{NaCl, ZnCl2, AgCl}) suggested a strong link between charge and atomic mass. Based on the amount of an ionic substance collected under a known electric potential at the electrodes, a correlation could be established. After precise measurement of electric charge by Millikan's experiments, atomic masses were established.
+            \item The mass-to-charge ratio is measured by mass spectroscopy today.
+            \item An \emph{atomic mass unit, amu,} is defined as $\frac{1}{12}$ of the mass of the isotope \ce{^{12}C} (carbon $12$).
+
+                $1 \text{amu} = 1.67\times 10^{-27}\si{\kg}$
+            \item Mass of an atom is roughly the same as the mass of its nucleus, but its diameter is about $10^4$ times of that of the nucleus.
+            \item The diameter of an atom is expressed in \si{\angstrom}:
+                $1\si{\angstrom} = 10^{-10}\si{\m} = 10^5 F$.
+            \item The heaviest atoms are \emph{not} markedly bigger than the lightest ones. The general trend in the periodic table is that the atomic radius increases down a group and decreases across a period to the right. Alkali metals have the highest atomic radii in a given period.        
+            \item The atoms or molecules of a gas at normal atmospheric pressure are separated from one another, on average, by about 10 times their diameter. 
+        \end{enumerate}
+    \item Molecules and Living Cells:
+        \begin{enumerate}
+            \item A convenient unit to represent sizes of things that are of interest to biologists is \emph{micron}. $1 \text{ micron}=10^{-6}\si{\m}$. 
+            \item On average, a human cell is about $10\text{ micron}$ in diameter. Then, the estimated number of cells (assuming we have as many cells as there is non cellular matter) in a human body of volume $0.1\si{\cubic\metre}$ is 
+                $$
+                    n_c = \frac{0.1}{2\times\frac{4}{3}\pi\times125\times10^{-18}}
+                    \approx 10^{14}
+                $$
+                
+                A $70\si{\kg}$ human who has about $10^{14}$ cells has, on average, a cell mass, 
+                $$
+                    m_c = \frac{70}{10^{14}}\si{\kg} = 7\times10^{-13}\si{\kg}
+                $$
+
+                Human body comprises $65\% \ce{O}$, $18.5\% \ce{C}$, $9\% \ce{H}$, $3.2\% \ce{N}$, and $1\% \ce{P}$ \emph{by mass}. Then, on average, an atom of the human body has a mass of:
+                $$
+                    m_a = 0.65\times 8 + 0.185\times 12 + 0.09 + 0.032\times 7 + 0.01\times 15 \text{ amu}
+                $$
+                $$
+                    m_a \approx 7.9 \text{ amu} \approx 13.19\times10^{-27}\si{\kg}
+                $$
+
+                Thus the number of atoms in a human cell on average = $\frac{m_c}{m_a} = 0.5\times10^{14}$.
+        \end{enumerate}
+    \item Sand and Dust:
+        \begin{enumerate}
+            \item These particles, predominantly of quartz (crystalline \ce{SiO2}) are chemically inert. 
+            \item The earth's surface is loaded with such particles (humans build houses that need sand as well). 
+            \item Windblown particles have a diameter of about $0.01\si{\mm}-1\si{\mm}$. Below that size the material is airborne. Smallest dust particles are about $0.1 \text{ micron}$ in diameter. 
+        \end{enumerate}
+    \item Other Terrestrial (Belonging to Earth) Objects: These include objects in the range of masses $10\si{\mg}-1000\si{\kg}$.
+    \item Planets and Satellites:
+        \begin{enumerate}
+            \item It does not occur to us to treat Earth as a particle while we are on it, but once we are able to leave it to go into the Space, we can think of it as a tiny speck.
+            \item Planets in the solar system can be regarded as point masses because of the vastness of the empty space. Of course, we need to take into account little distances and masses if the problem (e.g. tides on Earth) requires us to do so.
+            \item Mercury is the smallest planet and Jupiter is the largest. Earth is the densest. Together the planets \textbf{represent almost all of the mass around the sun in our solar system; Jupiter alone represents almost $\frac{2}{3}$}.
+            \item Planets have natural (and to a very small extent artificial) satellites. Examples of interesting artificial satellites (space probes) are the Hubble telescope, the International Space Station, Cassini that, while orbiting Saturn, crashed into Saturn (by design) after its mission was complete. In addition to these satellites, we have a belt of tens of thousands of tiny asteroids\footnote{For professional astronomers, these, along with some wealthy humans' artificial satellites being planned to be sent into the Space 2020-30, are the \emph{vermin of the skies}.}  between Mars and Jupiter that orbit the Sun.
+        \end{enumerate}
+    \item Stars:
+        \begin{enumerate}
+            \item Stars are the most gigantic chemical plants we know. There is just so much going on on a star! And yet, when, with a naked eye, we look at it in the night sky and all it does is illuminate brightly or twinkle making us disbelieve any and all of the facts like, ``Our Sun has space for \textbf{$1$ million} Earths and that it is losing $4$ million metric tonnes a second."
+            \item Astronomical distances are so large that a convenient unit of distance is 1 light-year which is the distance light travels in vacuum in a year = $9.46\times10^{15}\si{\m}$. The nearest star the sun is about 4 light-years which is roughly $25$ trillion = $25000000000000$ miles away. Even when stars are massive, the interstellar separation is even more astounding. The ratio of diameters of large stars to the separation distance is of the order of $10^{-7}$ or $10^{-8}$.  It is very difficult to achieve the kind of vacuum that exists in the Space in a laboratory. 
+            \item Even though stars are huge, the interstellar distances allow us to use them as particles.
+        \end{enumerate}
+    \item Galaxies:
+        \begin{enumerate}
+            \item By 1924, Edwin Hubble produced a conclusive proof that our own Galaxy (which was mistaken, before 1920's, for the universe) was only one of innumerable systems of the same general kind. 
+            \item Galaxies are clusters of stars.
+                \epigraph
+                {
+                    Galaxies are the largest single aggregates of stars in the universe. They are to astronomy what atoms are to physics. 
+                }
+                {
+                    --\textit{Adam Sandage}
+                }
+            \item A galaxy can contain anywhere between $10^{6}-10^{11}$ stars!
+            \item And yet, the intergalactic distances make galaxies themselves as particles!
+            \item Since galaxies are receding from each other at a speed proportional to the intergalactic distances\footnote{Another of Hubble's astounding findings.}, it may so happen that -- because of ``galactic red shift'', the energy from them falls short of reaching us -- a limit is put on the knowable universe.
+            \item If we assume the density of matter throughout the Space as $10^{-26}\si{\kg\per\cubic\m}$ and volume of the order of $(10^{26})^3$, then the total mass is about $10^{52}\si{\kg}$ which will correspond to about $10^{11}$ galaxies.
+            \item These masses and distances, that is, a \emph{particulate} view of the matter is a strong candidate for the application of Newtonian mechanics.
+        \end{enumerate}
+\end{enumerate}
+\Problem {
+}
+\Solution {
+}
+\Problem {
+}
+\Solution {
+}
+\Problem {
+    Calculate the approximate mass, in tons, of a teaspoonful of nuclear matter.
+}
+\Solution {
+
+    $1$ tsp = $4.92\si{\ml}$.
+
+    We have already established (see \ref{item: density-of-nucleus}) that nuclear matter is about $10^{14}$ times as dense as water. Therefore the mass of nuclear matter that only occupies 1 teaspoon, 
+
+    $$
+      m = 4.92\times10^{14}\si{\g}
+    $$
+    $$
+      m = 4.92\times10^{14}\si{\g} = 4.92\times10^{8}\si{\tonne}
+    $$
+    $$
+        m\approx 500\text{ million tonne}
+    $$
+    (The book says it is $10^9\si{\tonne}$ which is off by a factor of 2.)
+}
+
+\Problem {
+    Sir James Jeans once suggested that each time any one of us draws a breath, there is a good chance that this lungful of air contains at least one molecule from the last breath of Julius Caesar. Make your own calculation to test this hypothesis.
+}
+\Solution {
+    The volume of air in a breath, the so-called tidal volume, is estimated to be about $500\si{\ml} = 500\si{\cubic\cm}$. Assuming an air of density $1.2\si{\kg\per\cubic\metre}$, the \emph{amount} of air in a human breath = $1.2\times 500\times 10^{-6}\si{\kg} = 6\times10^{-4}\si{\kg} = 0.6\si{\g}$. Assuming the molar mass of air to be $29\si{\g}$, 
+    $$
+        n_b = \frac{0.6\times6.022\times10^{23}}{29}\approx 1.23\times10^{22}
+    $$
+    where, $n_b$ is the number of \emph{molecules} in a human breath. When Julius Caesar breathed his last, he exhaled $n_b$ molecules into the atmosphere.
+
+    Atmosphere of Earth is extremely complex. Its mass is estimated to be about $5.1\times10^{18}\si{\kg} = 5.1\times10^{21}\si{\g}$.
+    $$
+        n_a = \frac{5.1\times10^{21}\times6.022\times10^{23}}{29}\approx10^{44}
+    $$
+    where $n_a$ is the approximate number of molecules in the atmosphere.
+    We can now see that \emph{the fraction} of atmosphere that was Caesar's last breath was: 
+    $$
+    \frac{n_b}{n_a} = \frac{1.23\times10^{22}}{10^{44}}
+    \approx 1.23\times10^{-22}
+    $$
+    which is slightly higher than $\frac{1}{n_b}=0.8\times10^{-22}$ the fraction of my breath that $1$ molecule represents.
+
+    It appears that Sir James Jeans knew very well what he was talking about.
+}
+
+\chapter{Space, Time, and Motion} \label{ch: 3-space-time-motion}
+\epigraph
+{
+    Hitherto I have laid down the definitions of such words as are less known, and explained the sense in which I would have them to be understood in the following discourse. I do not define time, space, place, and motion, since they are well known to all. Only I must observe, that the vulgar (i.e. the common people) conceive those quantities under no other notions but from the relation they bear to sensible objects. And from there arise certain prejudices, for the removing of which, it will be convenient to distinguish them into absolute and relative, true and apparent, mathematical and common.
+}
+{
+    --\textit{NEWTON, Principia (1686) \cite{principia}}
+}
+\begin{enumerate}
+    \item What is Motion?
+        \begin{enumerate}
+            \item Our ability to give any precise account of motion depends upon the use of two separate concepts: \emph{space} and \emph{time}. \textbf{We say that an object is moving if it occupies different positions at different instants}.
+            \item Our ideas of motion align with those of Newton himself. Again, in keeping with the changing and falsifiable nature of science, these notions that Newton himself had are inadequate in the light of what we have learned since Newton's time. Here (in a pair of square brackets) are some of Newton's assertions which appear plausible, but should be \emph{taken with a dose of healthy skepticism}:
+                \begin{enumerate}
+                    \item {[Space is absolute.]}
+                    \item {[Absolute Space, in its own nature, without relation to anything external, remains always similar and immoveable.]}
+                    \item {[Each object in the universe exists at a particular point in space and time.]}
+                    \item {[Our physical measurements agree with the theorems of Euclidean geometry and Space is assumed to be Euclidean.]}
+                    \item {[Time is also absolute and flows on without regard to any physical object or event. Principia \cite{principia} says, ``Absolute, true, and mathematical time, of itself, and from its own nature, flows equably without relation to anything external, and by another name is called \emph{duration}: relative, apparent, and common time is some sensible and external (whether accurate or equable\footnote{i.e. not varying}) measure of duration by means of motion, which is commonly used instead of \emph{true time} \dots'']}
+                    \item {[One can neither speed up nor slow down the \emph{rate of the flow of time} and it exists uniformly throughout the universe. Identical and synchronized clocks placed anywhere in the universe can correctly mark off the flow of absolute time and remain synchronized forever.]}
+                    \item {[Space and Time are, although independent, in a sense interrelated.]}
+                \end{enumerate}
+                It was later found that although they sound plausible, many of the above ideas have consequences that are inconsistent with experience. This first became clearer with motions at very high ($\approx c$, the speed of light) speeds. This is not to say that Newton was not aware of relativistic ideas, but that it appears that he believed in an absolute space and time. It is true that we are unable to experience absolute motion: Right now, although the tree or the table that you are looking at is moving in an absolute sense, you are not able to experience that movement; you believe that it is stationary. A. I. A. Adewole carefully went through what Newton wrote in his Principia \cite{principia} at \cite{adewole} and here is the summary of his commentary on Newton's views on \emph{Absolute Space}:
+                \begin{enumerate}
+                    \item Our freedom to relate motion to any designated body of our choice is \emph{not} hindered by the existence of \emph{absolute space}. In other words, some body does \emph{not} need to be at \emph{absolute rest} for us to relate motion of some other body to it. If the body we chose happens to be at absolute rest, then any motion \emph{with respect to it} will also be absolute, otherwise, it will not be absolute.
+                    \item As long as we are only interested in \emph{relative motions} of bodies, we can choose any body whatsoever and only consider those motions \emph{with respect to it}.
+                    \item The fact that relative motion can be with respect to any body does not disprove the existence of an absolute space.
+                    \item We are unable to distinguish the ``state of rest'' from the ``state of uniform motion'' in both relative space and absolute space. 
+                \end{enumerate}
+        \end{enumerate}
+    \item Frames of Reference:
+        \begin{enumerate}
+            \item ``A car is moving'' implies that ``There is a relative motion between a car and earth (and all the things like trees, buildings etc. that are firmly attached to the earth)''.
+            \item We accept the \emph{local surroundings} -- a collection of objects firmly attached to earth and therefore at rest relative to each other -- as defining a \emph{frame of reference} with respect to which the changes in position of other objects can be observed and measured.
+            \item The choice of a frame of reference is arbitrary, of course. However, it is convenient to choose a frame of reference in which \emph{the description of motion is simplest}. Thus, while describing the motion of a car on earth or the movement of a roller-coaster, it is convenient to use a frame of reference that is attached to the earth rather than to the sun (which has a motion relative to earth and vice versa).
+        \end{enumerate}
+        For an excellent video introduction to frames of reference see \cite{pssc-for}. There are theoretical reasons to choose some reference frames to others that we shall see later \TODO{ref here}.
+    \item Coordinate Systems:
+        \begin{enumerate}
+            \item A frame of reference is defined by some array of physical objects \emph{that remain at rest relative to each other}.
+            \item \emph{The Space of our experience} has three dimensions, we need to specify three independent quantities in order to uniquely fix the position of a point in Space.
+            \item Problems we consider are mainly two- and three-dimensional.
+            \item In a 2-D plane, we have the so-called Cartesian $(x, y)$ and Polar coordinates$(r, \theta)$ of a point P that are equivalent:
+                \begin{equation}
+                    \label{eqn: 2-d-coordinates}
+                    \mbox{In 2-D}
+                    \begin{cases}
+                        r^2 = x^2 + y^2 \\
+                        \tan{\theta} = \frac{y}{x} \\
+                        x = r\cdot \cos{\theta} \hspace{1cm} y = r\cdot \sin{\theta}
+                    \end{cases}
+                \end{equation}
+            \item In Cartesian coordinate system, if we denote $\uvec{i}$ and $\uvec{j}$ as \emph{unit vector}s in the $x-$ and $y-$ directions respectively, we get
+                \begin{equation}
+                    \label{eqn: vector-addition-cartesian}
+                    \mbox{(In 2-D)}\hspace{1cm} \vect{r} = x\uvec{i} + y\uvec{j}
+                \end{equation}
+                where $\vect{r}$ is the \emph{position vector} of $P(x, y)$.
+            \item In Polar coordinate system, if $\uvec{e_r}$ is the unit vector in the direction of the radius vector $\vect{r}$ and $\uvec{e_\theta}$ the unit vector in the direction perpendicular to the radius vector, then we get $\vect{r} = r\uvec{e_r}$. Note that $\uvec{e_\theta}$ is not used in this expression, but it will be used often.
+            \item For the 3-D space, the most generally useful coordinate systems are the 3-D Cartesian coordinates $(x, y, z)$ and Spherical Polar coordinates $(r, \theta, \varphi)$. 
+                \begin{equation}
+                    \label{eqn: 3d-vector-cartesian}
+                    \vect{r} = x\uvec{i} + y\uvec{j} + z\uvec{k}
+                \end{equation}
+                where, like $\uvec{i}$ and $\uvec{j}$, $\uvec{k}$ is the \emph{unit vector} in the $+z$-axis.
+                For a more detailed description of the Spherical Coordinate System, see \cite{polar}.
+            \item We use the right-handed Cartesian system. This means that if a \emph{right-handed screw} is rotated from $+x$-axis toward $+y$-axis, it will move in the direction of $+z$-axis. Authors adopt different conventions, but we'll adopt the convention that is shown in Figure \ref{fig: spherical-polar}. According to this convention,
+                \begin{enumerate}
+                    \item The coordinates are $(r, \theta, \varphi)$.
+                    \item The $+z$-axis is called the \emph{zenith}.
+                    \item The angle $\theta$ that the position vector of $P(x, y, z)$ makes with the $z+$-axis is called the \emph{polar angle}. $0\leq\theta\leq\pi$. The complementary angle $\lambda = \frac{\pi}{2}-\theta$ is called the \emph{latitude} of $P$.
+                    \item The angle $\varphi$ that the \emph{orthographic projection} of $P$ in the $XY$-plane (the so-called plane of the meridian) makes with the $+x$-axis is called the \emph{azimuthal angle}. $-\pi\leq\varphi\leq\pi$. $\varphi$ is also called the \emph{longitude} of $P$.
+                \end{enumerate}
+                    \begin{figure}[h!]
+                        \centering
+                        \includegraphics[width=0.5\linewidth]{Kugelkoord-lokale-Basis-s-modified.png}
+                        \caption{The Spherical Polar Coordinate System}
+                        \label{fig: spherical-polar}
+                    \end{figure}
+            \item Cartesian coordinates in terms of Spherical Polar coordinates:
+                \begin{equation}
+                    \label{eqn: from-polar-to-cartesian}
+                    \mbox{In 3-D}
+                    \begin{cases}
+                        x = r\sin\theta\cos\varphi \\
+                        y = r\sin\theta\sin\varphi \\
+                        z = r\cos\theta
+                    \end{cases}
+                \end{equation}
+            \item Spherical Polar coordinates in terms of Cartesian coordinates:
+                \begin{equation*}
+                    \label{eqn: from-cartesian-to-polar}
+                    \mbox{In 3-D}
+                    \begin{cases}
+                        r = \sqrt{x^2+y^2+z^2} \\
+                        \theta = \arccos{\frac{z}{r}} = \arccos{\frac{z}{\sqrt{x^2+y^2+z^2}}}\\
+                        \varphi = \text{atan2}{\frac{y}{x}}
+                    \end{cases}
+                \end{equation*}
+                where the function $atan2$ returns the angle in Euclidean plane, in radians, from the $+x$-axis to the ray joining $P(x,y)$ and the origin $O(0,0)$; $-\pi\leq\text{atan2}\frac{y}{x}\leq\pi$.
+            \item In the vector notation for Spherical Polar coordinates, we have three unit vectors (you can imagine standing on the surface of the sphere):
+                \begin{enumerate}
+                    \item $\uvec{e_r}$ -- the unit vector along $OP$; this points vertically upward. As in the case of two dimensions, $\vect{r} = r\uvec{e_r}$.
+                    \item $\uvec{e_\theta}$ -- the unit vector perpendicular to $OP$; this points due south.
+                    \item $\uvec{e_\varphi}$ -- the unit vector also perpendicular to $OP$; this points due east.
+                \end{enumerate}
+        \end{enumerate}
+\end{enumerate}
+
+\chapter{Accelerated Motion} \label{ch: 3-accelerated-motion}
+\chapter{Force and Equilibrium} \label{ch: 4-force-equilibrium}
+\chapter{Various Forces of Nature} \label{ch: 5-forces-of-nature}
+\chapter{Force, Inertia, and Motion} \label{ch: 6-force-inertia-motion}
+\part{Classical Mechanics at Work}
+\chapter{Using Newton's Law} \label{ch: 7-newtons-law}
+\chapter{Universal Gravitation}\label{ch: 8-universal-gravitation}
+\chapter{Collisions and Conservation Laws} \label{ch: 9-collisions}
+\chapter[Energy Conservation in Dynamics]{Energy Conservation in Dynamics; Vibrational Motions}\label{ch: 10-energy-conservation}
+\chaptermark{Energy Conservation}
+
+
+
 
 
 
 
 
 \appendix
-
 \chapter{History of Zeno's Paradoxes on Motion}
 \label{zeno}
 \begin{enumerate}
@@ -169,5 +1047,18 @@ The ``art of guessing'' \cite{polya-guessing} is emphasized in exercises. I too 
     \bibitem{copernicus} Nicolaus Copernicus. \textit{De Revolutionibus orbium colelestium}. 1543. The \href{https://en.wikipedia.org/wiki/Nicolaus_Copernicus#The_book}{Wikipedia page}.
     \bibitem{neptune} Siddarth Bhatnagar and Jayant Murthy. Game of Orbits: A Gaming Approach to Neptune's Discovery. July 31, 2018. On \href{https://arxiv.org/pdf/1807.11280.pdf}{Arxiv}.
     \bibitem{polya-guessing} George P{\'o}lya. Let's Teach Guessing. The Mathematical Association of America Video. \href{https://www.youtube.com/watch?v=h0gbw-Ur_do}{YouTube video}.
+    \bibitem{newton-bt} Isaac Newton's \href{https://en.wikipedia.org/wiki/Binomial_theorem#Newton's_generalized_binomial_theorem}{Generalization} of the Binomial Theorem (also known as the Binomial Series). 
+    \bibitem{cosm} Ethan D. Bolker and Maura B. Mast. Common Sense Mathematics: Second Edition. MAA Press. \href{https://bookstore.ams.org/text-63}{Volume 63; 2021}.
+    \bibitem{malthus} Thomas Robert Malthus. \href{https://en.wikipedia.org/wiki/An_Essay_on_the_Principle_of_Population}{An Essay on the Principle of Population}. 1798.
+    \bibitem{davidson} Martin Davidson (and Cameron Dinwoodie). Elements of Mathematical Astronomy (Third Edition). Hutchinson Scientific and Technical. 1962.
+    \bibitem{universe-today} Matt Williams. What is Asteroid Belt?. \href{https://www.universetoday.com/32856/asteroid-belt/}{Universe Today}. 23 August 2015.
+    \bibitem{desmos} \href{https://www.desmos.com}{Desmos}. 
+    \bibitem{Neptune-data} Miner, E. D.. "\href{https://www.britannica.com/place/Neptune-planet}{Neptune}". Encyclopedia Britannica, March 2, 2021. 
+    \bibitem{oerter} Robert Oerter. The Theory of Almost Everything -- The Standard Model, the Unsung Triumph of Modern Physics. Penguin USA. September 2006.
+    \bibitem{the-standard-model} \href{https://en.wikipedia.org/wiki/Standard_Model}{The Standard Model}.
+    \bibitem{principia} Issac Newton. English translation by Andrew Mott. Newton's Principia: the Mathematical Principles of Natural Philosophy. University of California Libraries. 1846. \href{https://archive.org/details/newtonspmathema00newtrich/page/n27/mode/2up}{On Archive.org}.
+    \bibitem{adewole} Adewole, A I A. Newton On Absolute Space: A Commentary. October 2001. \href{https://cds.cern.ch/record/523046}{CERN Document Server}.
+    \bibitem{pssc-for} Frames of Reference. Physical Science Study Committee. 1960. \href{https://archive.org/details/FramesOfReference_201407}{Black-and-white video}.
+    \bibitem{polar} \href{https://en.wikipedia.org/wiki/Spherical_coordinate_system}{The Spherical Coordinate System}.
 \end{thebibliography}
 \end{document}
