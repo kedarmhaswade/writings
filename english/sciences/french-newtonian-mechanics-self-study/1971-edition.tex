@@ -955,7 +955,8 @@ Estimation problems can be best solved with a pencil on paper\footnote{Of course
                     \mbox{(In 2-D)}\hspace{1cm} \vect{r} = x\uvec{i} + y\uvec{j}
                 \end{equation}
                 where $\vect{r}$ is the \emph{position vector} of $P(x, y)$.
-            \item In Polar coordinate system, if $\uvec{e_r}$ is the unit vector in the direction of the radius vector $\vect{r}$ and $\uvec{e_\theta}$ the unit vector in the direction perpendicular to the radius vector, then we get $\vect{r} = r\uvec{e_r}$. Note that $\uvec{e_\theta}$ is not used in this expression, but it will be used often.
+            \item \label{item: 2-d-polar-vector} 
+                In Polar coordinate system, if $\uvec{e_r}$ is the unit vector in the direction of the radius vector $\vect{r}$ and $\uvec{e_\theta}$ the unit vector in the direction perpendicular to the radius vector, then we get $\vect{r} = r\uvec{e_r}$. Note that $\uvec{e_\theta}$ is not used in this expression, but it will be used often.
             \item For the 3-D space, the most generally useful coordinate systems are the 3-D Cartesian coordinates $(x, y, z)$ and Spherical Polar coordinates $(r, \theta, \varphi)$. 
                 \begin{equation}
                     \label{eqn: 3d-vector-cartesian}
@@ -997,12 +998,120 @@ Estimation problems can be best solved with a pencil on paper\footnote{Of course
                     \end{cases}
                 \end{equation*}
                 where the function $atan2$ returns the angle in Euclidean plane, in radians, from the $+x$-axis to the ray joining $P(x,y)$ and the origin $O(0,0)$; $-\pi\leq\text{atan2}\frac{y}{x}\leq\pi$.
-            \item In the vector notation for Spherical Polar coordinates, we have three unit vectors (you can imagine standing on the surface of the sphere):
+            \item In the vector notation for Spherical Polar coordinates, we have three unit vectors (you can imagine standing on the surface of the sphere at $P$):
                 \begin{enumerate}
-                    \item $\uvec{e_r}$ -- the unit vector along $OP$; this points vertically upward. As in the case of two dimensions, $\vect{r} = r\uvec{e_r}$.
+                    \item $\uvec{e_r}$ -- the unit vector along $OP$; this points vertically upward. As in the case of two dimensions (see: \ref{item: 2-d-polar-vector}), $\vect{r} = r\uvec{e_r}$.
                     \item $\uvec{e_\theta}$ -- the unit vector perpendicular to $OP$; this points due south.
                     \item $\uvec{e_\varphi}$ -- the unit vector also perpendicular to $OP$; this points due east.
                 \end{enumerate}
+        \end{enumerate}
+    \item Combination of Vector Displacements: This item is really a very short sampler on vectors.
+        \begin{enumerate}
+            \item Vectors are directed entities with magnitude. This is not a thorough definition as not everything with a direction and magnitude is called a vector. On the other hand, certain vectors may not have both direction and magnitude.
+            \item In this context, an entity that has magnitude but no direction is called a \emph{scalar}. When the term ``vector'' is \emph{not} in context, scalar just means number.
+            \item Historically, vectors were defined before the formal definition of \emph{vector spaces} and vector fields (see \cite{vector-wikipedia}). Therefore, in physics, we sometimes talk of vectors without referring to vector spaces to which they belong.
+            \item If an entity is defined in mathematics, interesting (and perhaps useful) things start to occur when an instance of such entity combines with another. Interesting things also happen when an instance of one entity combines with an instance of another entity. In other words, \emph{operations on entities} are perhaps more interesting than the entities in isolation. In essence, defining axioms of vector calculus is what vector spaces do. Few operations on vectors are more frequent than others (although all are useful):
+                \begin{enumerate}
+                    \item \emph{Adding} two vectors
+                    \item \emph{Scaling} a vector, that is, growing or shrinking its magnitude by a number (or \emph{scalar})
+                    \item \emph{Multiplying} two vectors
+                \end{enumerate}
+            \item Since the topic of vectors is developed by various mathematicians, physicists, and other scientists, there are various assumptions and interpretations. In general, in physics, the location of a vector does \emph{not} matter. As long as two vectors have the same magnitude and direction, they are equivalent, wherever in the space they are located.
+        \end{enumerate}
+    \item Resolution of Vectors:
+        \begin{enumerate}
+            \item The choice of the \emph{coordinate system} is arbitrary. Once we have decided a convenient coordinate system (it does \emph{not} matter whether the axes are orthogonal), however, we can resolve a vector into components along those axes. The \emph{vector sum} of components of a vector along the axes of all possible coordinate systems always yields the same vector.
+            \item The $n-$dimensional vector space and a not-necessarily-orthogonal coordinate system are of interest from a generalization standpoint (See \cite{resolution-q-phy-fo}), but we will stick to an orthogonal coordinate system \textbf{unless stated otherwise} and illustrate it using two dimensions.
+            \item The following is then given:
+                \begin{figure}[h!]
+                    \centering
+                    \includegraphics[width=0.7\linewidth]{basic-2d-orthogonal-axes.png}
+                    \caption{Basic 2-D Orthogonal Axes}
+                    \label{fig: basic-orthogonal-2d}
+                \end{figure}
+                \begin{enumerate}
+                    \item The unit vectors (sometimes called the \emph{Basis}) are denoted $\uvec{i}, \uvec{j}, \uvec{k}$. A vector is denoted by a bold capital letter with an arrow on top: $\vect{A}, \vect{P}$. The magitudes (which are numbers, or scalars) of vectors are denoted simply by a capital letter: $A$, $B$. 
+                    \item The \emph{scaling} of a vector $\vect{A}$ by a number $n, n\in\mathbb{R}$ is denoted as a vector $n\vect{A}$, which is simply a vector whose magnitude is $\lvert n\rvert$ times $A$, the magnitude of $\vect{A}$. If $n$ is negative, the scaled vector points in the exact opposite direction as $\vect{A}$, otherwise it points in the same direction as $\vect{A}$.
+                    \item A vector $\vect{A}$ (in two dimensions) can be resolved as:
+                        $$
+                            \vect{A} = A_{x}\uvec{i}+A_{y}\uvec{j}
+                                     = (A\cos\alpha)\uvec{i} + (A\cos\beta)\uvec{j}
+                        $$
+                    \item The \emph{scalar product} (also called the \emph{dot product}) of two vectors $\vect{A}$ and $\vect{B}$ that are at an angle $\theta$ is defined as a number:
+                        $$
+                        \vect{A}\cdot\vect{B} = A\cdot B\cdot\cos\theta
+                        $$
+                        Therefore, since $\lvert\uvec{i}\rvert = \lvert\uvec{j}\rvert = 1$, we get:
+                        $$
+                            A_x = \vect{A}\cdot\uvec{i}
+                        $$
+                        $$
+                            A_y = \vect{A}\cdot\uvec{j}
+                        $$
+                        and
+                        $$
+                            \vect{A} = (\vect{A}\cdot\uvec{i})\uvec{i}+(\vect{A}\cdot\uvec{j})\uvec{j}
+                        $$
+                    \item The above, although rather straightforward, may feel complicated. But it is useful in \emph{relating} the components of a given vector in \emph{different coordinate systems}. Consider, for instance, a coordinate system $x^\prime y^\prime$ obtained by rotating the $xy$ coordinate system by an angle $\theta$ (See Figure \ref{fig: basic-orthogonal-2d-rotated}). Let the unit vectors in the new system be $\uvec{i^\prime}, \uvec{j^\prime}$ respectively.
+                \begin{figure}[h!]
+                    \centering
+                    \includegraphics[width=0.8\linewidth]{basic-2d-orthogonal-axes-rotated.png}
+                    \caption{Basic 2-D Orthogonal Axes (rotated from Figure \ref{fig: basic-orthogonal-2d})}
+                    \label{fig: basic-orthogonal-2d-rotated}
+                \end{figure}
+                        $$
+                            \vect{A} = A_x\uvec{i} + A_y\uvec{j} = A_{x^\prime}\uvec{i^\prime} + A_{y^\prime}\uvec{j^\prime}                        
+                        $$
+                        \textbf{We are interested in finding $A_{x^\prime}$, $A_{y^\prime}$ in terms of $A_x, A_y$}.
+                        Taking the scalar product (which distributes over vector addition) of the above equation once with $\uvec{i^\prime}$ and once with $\uvec{j^\prime}$, we get:
+                        $$
+                            A_{x^\prime} = A_x(\uvec{i}\cdot\uvec{i^\prime}) + A_y(\uvec{j}\cdot\uvec{i^\prime})
+                        $$
+                        and
+                        $$
+                            A_{y^\prime} = A_x(\uvec{i}\cdot\uvec{j^\prime}) + A_y(\uvec{j}\cdot\uvec{j^\prime})
+                        $$
+                        because $\uvec{i}\cdot\uvec{i} = \uvec{j}\cdot\uvec{j} = \uvec{i^\prime}\cdot\uvec{i^\prime} = \uvec{j^\prime}\cdot\uvec{j^\prime} = 1$ and $\uvec{i}\cdot\uvec{j} = \uvec{i^\prime}\cdot\uvec{j^\prime} = 0$. And,
+                        $$
+                            A_{x^\prime} = A_x\cos\theta + A_y\sin\theta
+                        $$
+                        $$
+                            A_{y^\prime} = -A_x\sin\theta + A_y\cos\theta
+                        $$
+                        because $\uvec{i}\cdot\uvec{i^\prime} = \cos\theta$, $\uvec{j}\cdot\uvec{i} = \cos(\frac{\pi}{2} + \theta) = -\sin\theta$, $\uvec{j}\cdot\uvec{i^\prime} = \cos(\frac{\pi}{2}-\theta) = \sin\theta$, and $\uvec{j}\cdot\uvec{j^\prime} = \cos\theta$.
+
+                        The ease of algebraic manipulation (which can be generalized to more dimensions) is perhaps clear. In the Figure (\ref{fig: basic-orthogonal-2d-rotated}) one can see the geometric interpretation of the same result.
+
+                        This can be generalized to a non-orthogonal or oblique coordinate system as well.
+                        \begin{figure}[h!]
+                            \centering
+                            \includegraphics[width=0.8\linewidth]{oblique-2d-system.png}
+                            \caption{Finding Vector Components Along Non-orthogonal Axes}
+                            \label{fig: oblique-2d-system}
+                        \end{figure}
+
+                        $$
+                            \vect{A} = A_x\uvec{i} + A_y\uvec{j} = s_1{\uvec{e_1}} + s_2{\uvec{e_2}}
+                        $$
+                        Taking the scalar product (which distributes over vector addition) of the above equation once with $\uvec{e_1}$ and once with $\uvec{e_2}$, we get:
+                        $$
+                            A_x(\uvec{i}\cdot\uvec{e_1}) + A_y(\uvec{j}\cdot\uvec{e_1}) 
+                            =
+                            s_1 + s_2(\uvec{e_2}\cdot\uvec{e_1})
+                        $$
+                        $$
+                            A_x(\uvec{i}\cdot\uvec{e_2}) + A_y(\uvec{j}\cdot\uvec{e_2}) 
+                            =
+                            s_1(\uvec{e_1}\cdot\uvec{e_2}) + s_2
+                        $$
+                        Since the axes are not orthogonal anymore, the scalar product $\uvec{e_1}\cdot\uvec{e_2}$ does \emph{not} vanish. Nevertheless, the two above equations are linear in $s_1$, $s_2$ which can be solved since we know $A_x$, $A_y$ and can find the scalar products $\uvec{i}\cdot\uvec{e_1}$, $\uvec{i}\cdot\uvec{e_2}$, $\uvec{j}\cdot\uvec{e_1}$, $\uvec{j}\cdot\uvec{e_2}$, and $\uvec{e_1}\cdot\uvec{e_2}$ knowing the various angles like $\alpha$, $\beta$, and $\theta$ (for example, $\uvec{i}\cdot\uvec{e_1} = \cos\theta$ if the angle between the $x-$ and $S_1-$ axes is $\theta$).
+
+                        \textbf{However, the use of oblique coordinate system like this is rather special}.
+                \end{enumerate}
+        \end{enumerate}
+    \item Vector Addition and the Properties of Space:
+        \begin{enumerate}
+            \item 
         \end{enumerate}
 \end{enumerate}
 
@@ -1060,5 +1169,7 @@ Estimation problems can be best solved with a pencil on paper\footnote{Of course
     \bibitem{adewole} Adewole, A I A. Newton On Absolute Space: A Commentary. October 2001. \href{https://cds.cern.ch/record/523046}{CERN Document Server}.
     \bibitem{pssc-for} Frames of Reference. Physical Science Study Committee. 1960. \href{https://archive.org/details/FramesOfReference_201407}{Black-and-white video}.
     \bibitem{polar} \href{https://en.wikipedia.org/wiki/Spherical_coordinate_system}{The Spherical Coordinate System}.
+    \bibitem{vector-wikipedia} \href{https://en.wikipedia.org/wiki/Vector_(mathematics_and_physics)}{Vector (Mathematics and Physics}.
+    \bibitem{resolution-q-phy-fo}  \href{https://www.physicsforums.com/threads/axes-of-the-2-d-coordinate-system-used-in-vector-resolution.1001481/}{Axes of the 2-d coordinate system used in vector resolution}.
 \end{thebibliography}
 \end{document}
