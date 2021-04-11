@@ -1,0 +1,105 @@
+% Thanks to: https://tex.stackexchange.com/q/565173/64425
+\documentclass[a4paper, 12pt]{article}
+\usepackage{geometry}
+\geometry{
+    bottom=20mm,
+    left=20mm,
+    right=20mm,
+}
+
+\usepackage{polyglossia}
+\usepackage{xcolor}
+\usepackage{longtable}
+\usepackage{fontawesome}
+% languages
+\setdefaultlanguage{sanskrit}
+\setotherlanguages{english}
+% fonts
+\setmainfont[Scale=1.2,Mapping=velthuis-sanskrit,Script=Devanagari,Language=Sanskrit]{Shobhika}
+%\setmainfont[Language=Default]{IBM Plex Sans}
+%\newfontfamily\sanskritfont[Mapping=velthuis-sanskrit,Script=Devanagari,Language=Default]{Sanskrit2003}
+
+\newcommand \titlesansletter[1]{
+    \textcolor{red}{
+        \fontsize{15mm}{18mm}\selectfont
+        #1
+    }
+}
+\newcommand\alphatable[2]{
+    % with section
+    \centering \section*{
+        \titlesansletter{#1}
+    }
+    % with section
+    \begin{center}
+        \begin{longtable}{|c|c|}
+    %\caption{#1}\\
+    \hline
+            \textbf{anukrama} & \textbf{vacana} \\
+    \hline
+    \endfirsthead
+    \multicolumn{2}{c}%
+    {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
+    \hline
+            \textbf{anukrama} & \textbf{vacana} \\
+    \hline
+    \endhead
+    \hline \multicolumn{2}{r}{\textit{Continued on next page}} \\
+    \endfoot
+    \hline
+    \endlastfoot
+            #2 
+    \hline
+    \end{longtable}
+    \end{center}
+}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    anchorcolor=brown
+}
+
+\begin{document}
+
+\edef~{\string~}
+
+\newcounter{recno}
+\newcommand\rownumber{\stepcounter{recno}\arabic{recno}}
+\setcounter{recno}{0}
+% alphabet table begin
+\alphatable{a} {
+        \rownumber & 
+        .o bhavati \\
+        \hline
+        \rownumber & 
+        akara.naanmandakara.na.m "sreya.h \\
+        \hline
+}
+% alphabet table end
+% alphabet table begin
+\alphatable{aa} {
+        \rownumber & 
+        aacaaraprabhaavo dharma.h\\
+        \hline
+        \rownumber & 
+        aatmana.h pratikuulaani pare.saa.m na samaacaret \\
+        \hline
+}
+% alphabet table end
+% alphabet table begin
+\alphatable{i} {
+        \rownumber & 
+        ito bhra.s.tastato bhra.s.ta.h\\
+        \hline
+        \rownumber & 
+        ito vyaaghra itasta.tii\\
+        \hline
+        \rownumber & 
+        ida.m ca naasti para.m na labhyate\\
+        \hline
+}
+% alphabet table end
+
+\end{document}
