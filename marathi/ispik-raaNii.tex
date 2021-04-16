@@ -1,0 +1,46 @@
+\documentclass[a6paper]{article}
+\usepackage{polyglossia}
+\usepackage[margin=10mm]{geometry}
+\setdefaultlanguage{sanskrit}
+\setotherlanguages{english, marathi}
+\setmainfont[Mapping=velthuis-sanskrit,Script=Devanagari,Language=Sanskrit]{Shobhika}
+\newfontfamily\englishfont{Gentium Book Basic}
+%\newfontfamily\sanskritfont[Mapping=velthuis-sanskrit,Script=Devanagari,Language=Sanskrit]{Noto Serif Devanagari}
+% make sure ~ as non-breaking space doesn't interfere with velthuis-sanskrit mapping
+\edef~{\string~}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}% Remove paragraph indent
+\usepackage[skip=\medskipamount]{parskip}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    citecolor=blue,
+    urlcolor=purple,
+}
+\newcommand \eng[1]{
+    \textenglish{#1}
+}
+\begin{document}
+
+\begin{center}
+    {\Large $\spadesuit$ raa.nii}
+\end{center}
+
+%TC:ignore
+yaa manora.mjaka pattyaa.mcyaa kheLaace niyama (240 "sabda) khaalii dile aaheta. he niyama tumhaalaa patte saadhaara.na kheLataa yetaata ase g.rhiita dharuuna lihile aaheta. 
+%TC:endignore
+\begin{enumerate}
+    \item \label{start} nidaana 4 kheLaa.duu haveta, jara jaasta asatiila tara yogya teva.dhe kaahii patte na baghataa kaa.dhuuna .thevaaveta: udaa. 6 ja.na asatiila tara \textbf{kilvar aa.ni cauka.t ce} 52-6$\times$8=52-48=4 patte kaa.dhuuna .theuuna pratyekaalaa 8 patte vaa.taaveta.
+    \item ispik raa.nii aa.ni badaamace patte gu.naa.mcyaa d.r.s.tiine mahattvaace. ispik raa.niilaa 13, tara badaamacyaa pratyeka pattyaalaa 1 gu.na. gu.na pratyeka .daavaace haata jhaalyaana.mtara tyaa pattyaa.mmadhuuna mojaayace. udaa. tumacyaa jhaalelyaa haataa.mmadhye 4 badaama asatiila, tara tumace 4$\times$1=4 gu.na, 2 badaama aa.ni ispik raa.nii asela tar 2$\times$1$+$1$\times$13=15 gu.na, jara ekahii badaama aa.ni ispik raa.nii nasela tara 0 gu.na! pa.na samajaa tumacyaaka.de sagaLe ``gu.naace'' patte (ispik raa.nii \textbf{aa.ni} 13 badaama) jamaa jhaale tara maatra tumace gu.na 0 aa.ni \textbf{itaraa.mce gu.na pratyekii 26}! kheLaacaa udde"sa: \textbf{aapalyaaka.de kamitakamii gu.na jamaa karaayace}. caa.naak.sa lokaa.mcyaa lak.saata aala.mca asela kii ``eka tara gu.naacaa ekahii pattaa nako, naahiitara sagaLe have'' asaa parasparavirodhii udde"sa aahe!
+    \item nehemiipramaa.ne patte vaa.taayace. aapale patte baghuuna jhaalyaavara pratyekaane pu.dhalyaa vyaktiilaa 3 patte ku.naalaahii na daakhavataa \eng{pass} karaayace: pratyeka ja.na ku.naalaatarii 3 patte deto ni pratyekaalaa 3 patte ku.naaka.duunatarii miLataata.
+    \item jyaacyaaka.de kilvar durrii aahe tyaane tii utaaruuna .daava suruu karaayacaa aa.ni jyaacaa haata hoiila tyaane to ghyaayacaa. varaca.dhapa.naace niyama nehemiisaarakheca: ``maarato raajaasa ekkaa, nahilyaasa dahilaa maarato''. hukuuma naahii.
+    \item .daava jhaalyaavara pratyekaace haataa.mmadhale gu.na mojuuna pratyekaacyaa naavaakhaalii lihaaveta. punhaa pu.dhalaa .daava \ref{start} paasuuna suruu. pratyekaacyaa .daavaaga.nika gu.naa.mcii beriija karaayacii. jyaacii sarvaprathama gu.naa.mcii "sa.mbharii bharela to haralaa; tyaaveLii jyaace sarvaata kamii gu.na, to ji.mkalaa.
+\end{enumerate}
+
+%TC:ignore
+-- diipaa-kedaara, 16 epril 2021
+%TC:endignore
+\end{document}
