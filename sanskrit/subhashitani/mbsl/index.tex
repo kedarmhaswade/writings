@@ -11,19 +11,23 @@
 \usepackage{xcolor}
 \usepackage{longtable}
 \usepackage{fontawesome}
+\usepackage{makecell}
 % languages
 \setdefaultlanguage{sanskrit}
 \setotherlanguages{english}
 % fonts
-\setmainfont[Scale=1.2,Mapping=velthuis-sanskrit,Script=Devanagari,Language=Sanskrit]{Shobhika}
+\setmainfont[Scale=1,Mapping=velthuis-sanskrit,Script=Devanagari,Language=Sanskrit]{Shobhika}
 %\setmainfont[Language=Default]{IBM Plex Sans}
 %\newfontfamily\sanskritfont[Mapping=velthuis-sanskrit,Script=Devanagari,Language=Default]{Sanskrit2003}
 
-\newcommand \titlesansletter[1]{
+\newcommand\titlesansletter[1]{
     \textcolor{red}{
         \fontsize{15mm}{18mm}\selectfont
         #1
     }
+}
+\newcommand\eng[1]{
+    \textenglish{#1}
 }
 \newcommand\alphatable[2]{
     % with section
@@ -32,19 +36,23 @@
     }
     % with section
     \begin{center}
-        \begin{longtable}{|c|c|}
+        \begin{longtable}{|l|l|}
     %\caption{#1}\\
     \hline
             \textbf{anukrama} & \textbf{vacana} \\
     \hline
     \endfirsthead
     \multicolumn{2}{c}%
-    {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
+            %{\tablename\ \thetable\ -- \textit{\eng{Continued from previous page}}} \\
+            {}\\
     \hline
             \textbf{anukrama} & \textbf{vacana} \\
     \hline
     \endhead
-    \hline \multicolumn{2}{r}{\textit{Continued on next page}} \\
+            %\hline 
+            %\multicolumn{2}{r}{\textit{\eng{Continued on next page}}} \\
+            \hline
+            \multicolumn{2}{r}{} \\ 
     \endfoot
     \hline
     \endlastfoot
@@ -76,6 +84,129 @@
         \rownumber & 
         akara.naanmandakara.na.m "sreya.h \\
         \hline
+        \rownumber & 
+        akrodhena jayet krodham \\
+        \hline
+        \rownumber & 
+        agnaye svaahaa\\
+        \hline
+        \rownumber & 
+        a"nga.m galita.m palita.m mu.n.dam\\
+        \hline
+        \rownumber & 
+        ajaagalastanasyeva \\
+        \hline
+        \rownumber & 
+        ajaaputra.m bali.m dadyaat \\
+        \hline
+        \rownumber & 
+        ajiir.ne bhojana.m vi.sam \\
+        \hline
+        \rownumber & 
+        atiparicayaadavaj~naa \\
+        \hline
+        \rownumber & 
+        atilobho na kartavya.h \\
+        \hline
+        \rownumber & 
+        ati sarvatra varjayet \\
+        \hline
+        \rownumber & 
+        atisneha.h paapa"sa"nkii \\
+        \hline
+        \rownumber & 
+        at.r.ne patito vahina.h \\
+        \hline
+        \rownumber & 
+        atyaadara.h "sa"nkaniiya.h \\
+        \hline
+        \rownumber & 
+        athaato brahmajij~naasaa \\
+        \hline
+        \rownumber & 
+        adhikasyaadhika.m phalam \\
+        \hline
+        \rownumber & 
+        anantapaara.m kila "sabda"saastram \\
+        \hline
+        \rownumber & 
+        anaaghraata.m pu.spam \\
+        \hline
+        \rownumber & 
+        anaamikaa saarthavatii babhuuva \\
+        \hline
+        \rownumber & 
+        anirveda.h "sriyo muulam \\
+        \hline
+        \rownumber & 
+        ante mati.h saa gati.h \\
+        \hline
+        \rownumber & 
+        andhenaiva niiyamaanaa yathaandhaa.h \\
+        \hline
+        \rownumber & 
+        annadaataa sukhii bhava \\
+        \hline
+        \rownumber & 
+        anna brahma \\
+        \hline
+        \rownumber & 
+        apakaari.su ya.h saadhu.h \\
+        \hline
+        \rownumber & 
+        apanthaana.m tu gacchantam \\
+        \hline
+        \rownumber & 
+        \makecell[l]{apriyasya ca pathyasya vaktaa \\"srotaa ca durlabha.h} \\
+        \hline
+        \rownumber & 
+        abalaa yatra prabalaa \\
+        \hline
+        \rownumber & 
+        abrahma.nyam| abrahma.nyam \\
+        \hline
+        \rownumber & 
+        am.rtatvasya naa"saasti vittena \\
+        \hline
+        \rownumber & 
+        ayamaparo ga.n.dasyopari spho.ta.h \\
+        \hline
+        \rownumber & 
+        ara.nyarudana \\
+        \hline
+        \rownumber & 
+        arasike.su kavitvanivedanam \\
+        \hline
+        \rownumber & 
+        arak.sita.m ti.s.thati daivarak.sitam \\
+        \hline
+        \rownumber & 
+        arke cenmadhu vindeta \\
+        \hline
+        \rownumber & 
+        arthamanartha.m bhaavaya nityam \\
+        \hline
+        \rownumber & 
+        artha.m vaa saadhayet deha.m vaa paatayet \\
+        \hline
+        \rownumber & 
+        arthasya puru.so daasa.h \\
+        \hline
+        \rownumber & 
+        artho hi kanyaa parakiiya eva \\
+        \hline
+        \rownumber & 
+        ardha.m tyajati pa.n.dita.h \\
+        \hline
+        \rownumber & 
+        alasasya kuto vidyaa \\
+        \hline
+        \rownumber & 
+        alpasya heto.arbahuhaatumicchan \\
+        \hline
+        \rownumber & 
+        aviditagatayaamaa raatrireva vyara.msiit \\
+        \hline
 }
 % alphabet table end
 % alphabet table begin
@@ -98,6 +229,61 @@
         \hline
         \rownumber & 
         ida.m ca naasti para.m na labhyate\\
+        \hline
+}
+% alphabet table end
+% alphabet table begin
+\alphatable{ii} {
+        \rownumber & 
+        ii"svara.h sarvabhuutaanaa.m h.rdde"se.arjuna ti.s.thati \\
+        \hline
+        \rownumber & 
+        ii"svarecchaa baliiyasii\\
+        \hline
+}
+% alphabet table end
+% alphabet table begin
+\alphatable{u} {
+        \rownumber & 
+        uttamaa.atmanaa khyaataa.h \\
+        \hline
+        \rownumber & 
+        utti.s.thata jaagrata praapyavaraanibodhata \\
+        \hline
+        \rownumber & 
+        utpatatyaarya.h patannapi \\
+        \hline
+        \rownumber & 
+        utpadyante viliiyante daridraa.naa.m manorathaa.h \\
+        \hline
+        \rownumber & 
+        utsavapriyaa.h khalu manu.syaa.h \\
+        \hline
+}
+% alphabet table end
+% alphabet table begin
+\alphatable{uu} {
+        \rownumber & 
+        uurdhvabaahurviraumye.sa \\
+        \hline
+}
+% alphabet table end
+% alphabet table begin
+\alphatable{ka} {
+        \rownumber & 
+        ka.n.takenaiva ka.n.takam \\
+        \hline
+        \rownumber & 
+        karatalaamalakavat \\
+        \hline
+        \rownumber & 
+        kari.sye vacana.m tava \\
+        \hline
+        \rownumber & 
+        kartavyo dharmasa"ngraha.h \\
+        \hline
+        \rownumber & 
+        kartumakartumanyathaakartum \\
         \hline
 }
 % alphabet table end
