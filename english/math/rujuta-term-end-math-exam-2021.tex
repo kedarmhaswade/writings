@@ -31,8 +31,12 @@
 \setotherlanguages{marathi}
 \newfontfamily\marathifont[Mapping=velthuis-sanskrit,Script=Devanagari,Language=Default]{Shobhika}
 
+% prevent the footnote from breaking across pages
+\interfootnotelinepenalty=10000
+
 % math font sizes
-\DeclareMathSizes{12}{16}{14}{12}
+\DeclareMathSizes{11}{16}{14}{12}
+
 % see https://tex.stackexchange.com/questions/75284/how-do-i-write-a-recurring-decimal-in-latex
 \ExplSyntaxOn
 %% Dots on the first and last digit
@@ -178,9 +182,9 @@ See Figure \ref{fig: num-col}.
 \Prob{
     \emph{Unit fractions} are, as you might have guessed, fractions with the numerator 1 and the denominator a positive integer. Thus, $\dfrac{1}{7}$, $\dfrac{1}{12}$ are unit fractions, whereas $\dfrac{3}{4}$ and $\dfrac{2}{7}$ are not.
 
-    It is said that we can express \emph{any} non unit fraction as a \textbf{sum of unit fractions} whose denominators are different. For example, 
+    It is said that we can express \emph{any} non unit fraction as a \textbf{sum of unit fractions} whose denominators are different. For example\footnote{Rujuta found a typo here. An earlier version of this exam paper that was carefully proofread said $\dfrac{5}{8}=\dfrac{1}{4}+\dfrac{1}{8}$.}, 
 
-    $\dfrac{5}{8} = \dfrac{1}{4} + \dfrac{1}{8}$,
+    $\dfrac{5}{8} = \dfrac{1}{2} + \dfrac{1}{8}$
 
     or
 
@@ -211,6 +215,8 @@ Which number is represented by R?
 
 }{5}
 
+\newpage
+
 \Prob{
     Here is a curious fact about numbers $3$ and $2$. If I add them, I get $5$, but I also get $5$ if I subtract their squares:
     $$
@@ -240,6 +246,8 @@ Which number is represented by R?
 \Prob{
     Express the decimal fraction $0.461538461538\dots$ -- which can be denoted as $0.\periodfl{461538}$ -- as a common fraction.
 }{2}
+
+\newpage
 
 \Prob{
     The ratio of \textbf{men:women:children} at a cricket match is $15$:$7$:$3$. There were $2016$ more men than women at the match. 
