@@ -1,0 +1,74 @@
+\documentclass[a6paper]{article}
+\usepackage{polyglossia}
+\usepackage[margin=10mm]{geometry}
+\setdefaultlanguage{sanskrit}
+\setotherlanguages{english, marathi}
+\setmainfont[Mapping=velthuis-sanskrit,Script=Devanagari,Language=Sanskrit]{Shobhika}
+\newfontfamily\englishfont{Gentium Book Basic}
+%\newfontfamily\sanskritfont[Mapping=velthuis-sanskrit,Script=Devanagari,Language=Sanskrit]{Noto Serif Devanagari}
+% make sure ~ as non-breaking space doesn't interfere with velthuis-sanskrit mapping
+\edef~{\string~}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}% Remove paragraph indent
+\usepackage[skip=\medskipamount]{parskip}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    citecolor=blue,
+    urlcolor=purple,
+}
+\newcommand \eng[1]{
+    \textenglish{#1}
+}
+\begin{document}
+
+\begin{center}
+    {\Large daar"sanika}
+\end{center}
+
+%TC:ignore
+%TC:endignore
+
+{\small
+
+maarato raajaasa ekkaa nahalyaasa dahalaa maarato\\
+kalpanece kheLa saare ko.nii ku.naa na maarato\\
+paahataa ko.naasa kaahii naahii ku.thehii vegaLe\\
+saareca tuka.de kaagadaace chaapa nusate vegaLe
+
+aataa jaraasaa ra.mga kaahii kheLaasa yeuu laagalaa\\
+pattyaatalaa raajaa svata.hlaa raajaaca maanuu laagalaa ||1||
+
+raa.niisahii jaa.niiva kaahii aura houu laagalii\\
+laajalii navhatii kadhii tii aaja laajuu laagalii ||2||
+
+diinatecaa kheda aataa durriisa houu laagalaa\\
+pa.mjaa mha.ne cauryaasa aataa "sriima.mta vaa.tuu laagalaa ||3||
+
+visaruni nijaruupa nusatyaa naamaruupii gu.mtale\\
+bhalatyaaca kaahii avadasecyaa paa"saata aataa gu.mtale ||4||
+
+nusataa upaadhii bheda ko.nii raajaa navhe raa.nii navhe\\
+aa.nakhii saa.mguu pu.dhe haa kheLahii amucaa navhe ||5||
+
+kheLato dusaraaca tyaalaa paahile naahii ku.nii\\
+mha.natii tayaalaa ii"sa, mha.natii allaa ku.nii, ye"su ku.nii ||6||
+
+tyaacaa mha.ne haa kheLa nusate patte amhii pattyaatale\\
+ekaa parii pattyaasa kaLale marma he pattyaatale ||7||
+
+aahe ithe ra.mgela ko.nii pattaa ase pattyaatalaa\\
+aahe jasaa pattyaatalaa to naahii tasaa pattyaatalaa ||8||
+
+naamaruupaacaa svata.hcyaa pattaaca naa tyaalaa kadhii\\
+naahii ka"saacii kha.mta hoto raajaa kadhii durrii kadhii ||9||
+
+haasato nusataaca aahe sarvaahunii haa vegaLaa\\
+saa.mgaala kaa yaahuuna ko.nii vedaa.mta kaahii vegaLaa ||10||
+}
+%TC:ignore
+%TC:endignore
+\end{document}
