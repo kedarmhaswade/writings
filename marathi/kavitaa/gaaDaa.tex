@@ -1,0 +1,63 @@
+\documentclass[a6paper]{article}
+\usepackage{polyglossia}
+\usepackage[margin=10mm]{geometry}
+\setdefaultlanguage{sanskrit}
+\setotherlanguages{english, marathi}
+\setmainfont[Mapping=velthuis-sanskrit,Script=Devanagari,Language=Sanskrit]{Shobhika}
+\newfontfamily\englishfont{Gentium Book Basic}
+%\newfontfamily\sanskritfont[Mapping=velthuis-sanskrit,Script=Devanagari,Language=Sanskrit]{Noto Serif Devanagari}
+% make sure ~ as non-breaking space doesn't interfere with velthuis-sanskrit mapping
+\edef~{\string~}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}% Remove paragraph indent
+\usepackage[skip=\medskipamount]{parskip}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    citecolor=blue,
+    urlcolor=purple,
+}
+\newcommand \eng[1]{
+    \textenglish{#1}
+}
+\begin{document}
+
+{\Large gaa.daa}
+
+%TC:ignore
+%TC:endignore
+
+{\small
+
+ku.naasaa.thii, ku.naasaa.thii, ka"saasaa.thii, ku.thavara\\
+re.taayacaa aisaa gaa.daa imaanaane janmabhara?
+
+gaa.ne.m suruu jhaale.m tevhaa ca.mdra hotaa .doiivara,\\
+gaa.ne.m madhyaavara aale.m -- ca.mdra jhaalaa raanabhara,\\
+gaa.ne.m sa.mpale.m aa.nika pak.sii pha.daa.dalaa tamii.m\\
+aa.ni tasaaca mi.talaa ghara.tyaa.mta\dots \space a.mtaryaamii.m.
+
+vaa.ta raanaa.mtalii kirra, huurahuura sarvaduura,\\
+cakre.m phiratii phiratii, karakare caraacara,\\
+kaLyaa phulataata yethe, paane.m garda vaajataata,\\
+phule.m ghaLataata yethe tarii paane.m vaajataata,\\
+paane.m jha.dataata yethe tarii vaare vaajataata,\\
+vaaraa pa.dalaa tariihii duura gha.m.taa vaajataata.
+
+ku.naasaa.thii bharuu.m paahe .doLaa.m aise.m u.s.na paa.nii?\\
+ku.naasaa.thii jharataahe jharaa gappa ai"saa raanii.m?\\
+ku.naasaa.thii jharataahe aayu.sya he.m k.sa.nok.sa.nii.m?\\
+ku.naasaa.thii rasa bhare saalosaala phaLaa.mtunii?\\
+pra"sna navhe pata.mga an khecuu.m naye tyaacii dorii\\
+aa.ni khecalii tariihii mi.tela kaa ci.mtaa saarii?\\
+ku.naasaa.thii, ka"saasaa.thii, ku.the aa.ni ku.thavara\\
+aise.m ghokiita ghokiita vhaavayaace.m diga.mbara.
+}
+
+{\tiny -- aaratii prabhu (nak.satraa.mce.m de.ne.m)}
+%TC:ignore
+%TC:endignore
+\end{document}
