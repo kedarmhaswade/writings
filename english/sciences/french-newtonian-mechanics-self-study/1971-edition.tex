@@ -1154,18 +1154,56 @@ Estimation problems can be best solved with a pencil on paper\footnote{Of course
         Time:
         \begin{enumerate}
             \item Although comparing the measurement of a physical property of any object with that of a \emph{standard object} is fraught with issues, the nature of time poses additional challenge: one cannot \emph{store} the length of any time interval for a later use.
-            \item Refer to Wikipedia's definition of $1\si{\second}$
+            \item Refer to Wikipedia's definition of $1\si{\second}$.
         \end{enumerate}
 
         It is believed that physical constants might change. For instance, the great physicist P. A. M. Dirac suggested that the \emph{constant} of universal gravitation might be changing, albeit very slowly.
 
         \epigraph
         {
-            \dots This matter of units and standards is one that most of us do not bother our heads with. We \emph{think} we know what is meant by a meter or a second; and a ruler or a watch is usually near at hand. But perhaps the above discussion may help to suggest that w
+            \dots This matter of units and standards is one that most of us do not bother our heads with. We \emph{think} we know what is meant by a meter or a second; and a ruler or a watch is usually near at hand. But perhaps the above discussion may help to suggest that the detailed story of how these basic measures are defined, refined, and made more and more precise is a quite fascinating business -- especially, perhaps, for time, to which astronomical observations over the centuries have contributed data of a refinement that almost passes belief (something ``passes belief'' means it is extremely difficult to believe).
         }
         {
             --\textit{A. P. French, Newtonian Mechanics, pp. 65}
         }
+    \item For the current (2019) refinement and redefinition of the SI units, NIST has a series of fascinating articles. See \cite{nist-revised-si}. Every interested reader should read these articles carefully.
+    \item Here is a list of recommended readings in ``measurement'':
+        \begin{enumerate}
+            \item PSSC Physics \cite{pssc-physics}.
+            \item Physics for the Inquiring Mind \cite{pim} and Teaching Physics for the Inquiring Mind \cite{tpim}.
+            \item An Introduction to the Physics of Mass, Length, and Time \cite{intro-to-phy-mass-length-time}.
+            \item The Voices of Time \cite{voices-of-time}: A cooperative survey of man's views of time as expressed by the sciences and by the humanities.
+            \item The Standards of Time and Frequency \cite{stf} and The Standards of Time and Frequency at the Outset of the 21st Century \cite{stf21}.
+            \item The Nature of Time \cite{nature-of-time}.
+            \item Time and Physical World \cite{time-and-physical-world}.
+        \end{enumerate}
+    \item Velocity
+        \begin{enumerate}
+            \item Velocity is a measure of how fast something has moved and in what direction. Since we pay attention to the direction, velocity becomes a \emph{vector}. The ideas of time, space (``displacement'' is a more frequently used term in this context), and velocity are intimately related. 
+            \item Average Velocity: To measure the movement of a particle, we can measure its displacement from one point in space to another and how long it took for the particle to traverse the distance between those points in one dimension. Dividing the displacement by the time taken gives the \emph{speed} of the particle. Speed gives us only an overall idea about how fast the particle moved without any regards to the direction of movement. Velocity is directed speed. Speed is the magnitude (a scalar) of velocity.
+                
+                It is perhaps easier to always think of velocity \emph{not as one thing}, but as a combination of two things -- the distance covered and the time taken. Thus, to the question, ``How fast did you drive the car to the city?'', ``Reasonably fast, 100 kilometres in 2 hours'', is a more straightforward answer than ``Reasonably fast, at 50 kilometres per hour.'' (even though we routinely say it this way). Dividing the \emph{total displacement} by the \emph{total time} is akin to calculating the average value of some property of discrete items: For example, calculating the average height of a group of people by dividing the sum of their heights (which is equivalent to the total displacement) by the number of people (which is equivalent to the total time taken). A subtle difference in these two examples (speed and average height of a group of people) is in the units used to express them. Height is measured in units of length (for example, centimetres) and average height is also calculated in the same units (that is, we do \emph{not} say that the average height is $159.5$ cm per person, but that the average height \emph{of the group} is $159.5$ cm). Displacement is measured in units of length (e.g. kilometres) but the average speed is calculated in the units of length divided by units of time (e.g. kilometres \emph{per hour}). 
+                This subtlety happens with the value (or magnitude) of every quantity, like speed, that is \emph{derived} from other quantities.
+
+                There is no \emph{specific} name (like, for example, \emph{Newton} which is the name for the unit of force) for any unit of speed\footnote{There is the ``knot'' which is one nautical mile per hour.}. Typically, such name is given in the honor of the scientist who contributed a lot to our understanding of the entity that the unit \emph{specifies}. The fact that speed or velocity units don't bear such names may be surprising at first, but it only goes to show that velocity and speed have intrigued humanity for ages!
+
+                One can rather naturally visualize such a characterization of the (average) speed by \emph{plotting} the distance covered \emph{against} the time taken. On a ``Cartesian Plane'', for example, we can plot the time taken in hours to reach somewhere on the X-axis and the distance to it in kilometres from the start on the Y-axis. Then, we will end up with two points $(0, 0)$ (specifying the start) and $(2, 100)$ (specifying the finish). That's it, we get exactly two points A and B and nothing else as in Figure \ref{fig: a-first-s-t-plot}.
+                        \begin{figure}[h!]
+                            \centering
+                            \includegraphics[width=0.5\linewidth]{a-first-s-t-plot.png}
+                            \caption{A First Plot of Time Taken and Distance Covered}
+                            \label{fig: a-first-s-t-plot}
+                        \end{figure}
+
+                Such a ``discrete'' plot clearly does not tell the ``whole story'' of the journey from point A to point B. Since we are plotting the distance from A on Y-axis and time taken on X-axis, we know that both the values are monotonically increasing (that is we never go ``back in time'' or ``back \emph{toward} the starting point A''). But exactly how the distance from A increases as time passes is not clear from the plot. To get that idea, imagine that we measured the distances covered at regular time intervals as we went along from point A to point B. This might give us a plot as in Figure \ref{fig: a-second-s-t-plot}.
+                        \begin{figure}[h!]
+                            \centering
+                            \includegraphics[width=0.5\linewidth]{a-second-s-t-plot.png}
+                            \caption{A Second Plot of Time Taken and Distance Covered}
+                            \label{fig: a-second-s-t-plot}
+                        \end{figure}
+
+        \end{enumerate}
 
 \end{enumerate}
 
@@ -1227,5 +1265,15 @@ Estimation problems can be best solved with a pencil on paper\footnote{Of course
     \bibitem{resolution-q-phy-fo}  \href{https://www.physicsforums.com/threads/axes-of-the-2-d-coordinate-system-used-in-vector-resolution.1001481/}{Axes of the 2-d coordinate system used in vector resolution}.
     \bibitem{nbs-time-freq} Time and Frequency: Theory and Fundamentals. Byron E. Blair, Editor. National Bureau of Standards Monograph 140. May 1974.
     \bibitem{sundials-atomic} From Sundials to Atomic Clocks: Understanding Time and Frequency. James Jespersen and Jane Fitz-Randolph. NBS Monograph 155. March 1999.
+    \bibitem{nist-revised-si} Redefining the World's Measurement System. On the WWW at \href{https://www.nist.gov/si-redefinition/turning-point-humanity-redefining-worlds-measurement-system}{the NIST website}.
+    \bibitem{voices-of-time} J. T. Fraser (ed.). The Voices of Time. George Braziller, New York. 1966.
+    \bibitem{pssc-physics} Uri Haber-Schaim, Judson B. Cross, John H. Dodge, James A. Walter. PSSC Physics Third Edition 1971. D. C. Heath and Company Lexington, Massachusetts.
+    \bibitem{pim} Eric M. Rogers. Physics for the Inquiring Mind -- the Methods, Nature, and Philosophy of Physical Science. Princeton University Press. Fourth Printing 1962.
+    \bibitem{tpim} Eric M. Rogers. Teaching Physics for the Inquiring Mind -- an informal commentary on physics teaching in general and the teaching of science to non-scientists in particular. Princeton University Press. 1962. 
+    \bibitem{intro-to-phy-mass-length-time} Norman Feather. An Introduction to the Physics of Mass, Length, and Time. Edinburgh University Press. 1959.
+    \bibitem{stf} G. M. Clemence. Standards of Time and Frequency. Science, Vol. 123 Issue 3197 (April 06, 1956).
+    \bibitem{stf21} S. A. Diddams, J. C. Bergquist, S. R. Jefferts, C. W. Oates. Standards of Time and Frequency at the Outset of the 21st Century. Science, Vol. 306 Issue 5700 (19 Nov 2004).
+    \bibitem{nature-of-time} Thomas Gold and D. L. Schumacher. The Nature of Time. Cornell University Press. Ithaca, N. Y. 1967.
+    \bibitem{time-and-physical-world} Richard Schlegel. Time and Physical World. Dover, New York. 1968.
 \end{thebibliography}
 \end{document}
