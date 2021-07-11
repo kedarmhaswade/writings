@@ -1195,14 +1195,49 @@ Estimation problems can be best solved with a pencil on paper\footnote{Of course
                             \label{fig: a-first-s-t-plot}
                         \end{figure}
 
-                Such a ``discrete'' plot clearly does not tell the ``whole story'' of the journey from point A to point B. Since we are plotting the distance from A on Y-axis and time taken on X-axis, we know that both the values are monotonically increasing (that is we never go ``back in time'' or ``back \emph{toward} the starting point A''). But exactly how the distance from A increases as time passes is not clear from the plot. To get that idea, imagine that we measured the distances covered at regular time intervals as we went along from point A to point B. This might give us a plot as in Figure \ref{fig: a-second-s-t-plot}.
+                Such a ``discrete'' plot clearly does not tell the ``whole story'' of the journey from point A to point B. Since we are plotting the distance from A on Y-axis and time taken on X-axis, we know that both the values are monotonically increasing (that is we never go ``back in time'' or ``back \emph{toward} the starting point A''). But exactly how the distance from A increases as time passes is not clear from the plot. To get an idea, imagine that we measured the distances covered at regular time intervals as we went along from point A to point B. This might give us a plot as in Figure \ref{fig: a-second-s-t-plot}.
                         \begin{figure}[h!]
                             \centering
                             \includegraphics[width=0.5\linewidth]{a-second-s-t-plot.png}
                             \caption{A Second Plot of Time Taken and Distance Covered}
                             \label{fig: a-second-s-t-plot}
                         \end{figure}
+                This helps us visualize where you were, for example, $36$ minutes or $1$ hour into the journey. If we only do more of what we just did, we can plot even more points. And, if we assume that the motion of the car was not extraordinarily erratic or jerky, we can conceive a line that shows the trend of how displacement changes with time. As far as the plot is concerned, this is our transition from the discrete to the continuous. The plot becomes a curve as shown in Figure \ref{fig: displacement-as-a-function-of-time}, and, as such, we can think of the displacement as a \emph{mathematical function} of time which assumes the role of an \emph{independent variable}. Knowing the value of time we can find the displacement of the car from its starting point.
+                        \begin{figure}[h!]
+                            \centering
+                            \includegraphics[width=0.5\linewidth]{displacement-as-a-function-of-time.png}
+                            \caption{Displacement as a Function of Time}
+                            \label{fig: displacement-as-a-function-of-time}
+                        \end{figure}
+                Even though we have transitioned into the ``continuous", the \emph{average speed} does not change because its definition is still the same -- a ratio of the total displacement to the total time. No matter what happens between the two points to the line representing the journey, the average velocity and average speed are the same as long as the points representing the start and finish are the same. Thus, if a particle moves from a point $(\vect{s_1}, t_1)$ on this 2-D plane to another point $(\vect{s_2}, t_2)$, then the average speed
+                $$
+                    v_{av} = \frac{|\vect{s_2}-\vect{s_1}|}{t_2-t_1}
+                $$
+                
+                And, since velocity is a vector, the \emph{average velocity}
+                $$
+                    \vect{v_{av}} = \frac{\vect{s_2}-\vect{s_1}}{t_2-t_1}
+                $$
 
+                This is shown in Figure \ref{fig: average-speed-depends-only-on-end-points}. 
+                        \begin{figure}[h!]
+                            \centering
+                            \includegraphics[width=0.6\linewidth]{average-velocity-only-depends-on-end-points.png}
+                            \caption{Average Speed Depends Only on End-points}
+                            \label{fig: average-speed-depends-only-on-end-points}
+                        \end{figure}
+                
+                Note that the direction of the average velocity vector, $\vect{v_{av}}$, is the same as the direction of the vector that represents the difference of two vectors, $\vect{s_1}$ and $\vect{s_2}$, and the average speed, $v_{av}$, represents the \emph{magnitude} of the velocity vector.
+
+                Since the average velocity only depends on end points, it does not give us any idea about how fast the particle is moving at an arbitrary point between the start and the finish. It is clear, looking at a lines in Figure \ref{fig: displacement-as-a-function-of-time} and Figure \ref{fig: average-speed-depends-only-on-end-points}, that at some \emph{points in time} the particle appears to be moving much faster than at some other points in time. This very idea of velocity at precise \emph{points in time} or \emph{instants} is interesting and it is called the \emph{instantaneous velocity}.
+        \end{enumerate}
+    \item Instantaneous Velocity
+        \begin{enumerate}
+            \item The physicist Richard P. Feynman used to tell a story:
+
+                A lady is caught for speeding \emph{at} 60 miles per hour. She says to the police officer, ``That's impossible, sir, \emph{I have been traveling for only seven minutes}.''
+
+            \item 
         \end{enumerate}
 
 \end{enumerate}
