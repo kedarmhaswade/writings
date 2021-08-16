@@ -1,0 +1,54 @@
+%\documentclass[a4paper]{article}
+\documentclass[17pt]{extarticle}
+\usepackage{polyglossia}
+\usepackage{epigraph, varwidth}
+\usepackage{color, colortbl}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{tabularx} % in the preamble
+\usepackage[margin=15mm]{geometry}
+\usepackage{hyperref}
+\hypersetup{
+    backref=true,
+    citecolor=magenta,
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    urlcolor=cyan,
+}
+\urlstyle{same}
+\setmainfont[Scale=1.0]{Hypatia Sans Pro}
+\setotherlanguages{marathi}
+\newfontfamily\marathifont[Mapping=velthuis-sanskrit,Script=Devanagari,Language=Marathi]{Noto Serif Devanagari}
+
+\begin{document}
+% ....
+\begin{center}
+\begin{minipage}{.4\textwidth}
+%\centering
+\includegraphics[height=2cm]{fls-school-logo.png}
+\end{minipage}
+\end{center}
+\centering
+{\Large \underline{Report Card}}
+\begin{tabularx}{\textwidth}{lX}
+Name: &  \\
+Grade: &  \\
+Academic Year: &  \\
+\end{tabularx}
+\vspace{10mm}
+\begin{tabularx}{\textwidth}{|X|l|l|}
+\hline
+  \textbf{Subject} & \textbf{Instructor} & \textbf{Grade} \\
+\hline
+Card tricks &
+John Doe &
+\textcolor{magenta}{\textbf{Z}}
+\\
+\hline
+\end{tabularx}
+\underline{Comments (Brief Constructive Feedback)}
+\begin{enumerate}
+\item ...
+\end{enumerate}
+\end{document}

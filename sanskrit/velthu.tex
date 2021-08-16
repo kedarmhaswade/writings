@@ -1,0 +1,81 @@
+\documentclass[a4paper]{article}
+\usepackage{polyglossia}
+\usepackage{hyperref}
+\hypersetup{
+    backref=true,
+    citecolor=magenta,
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    urlcolor=cyan,
+}
+\urlstyle{same}
+\usepackage{geometry}
+\geometry {
+    bottom=15mm,
+    left=10mm,
+    right=10mm,
+}
+\setlength{\parindent}{0pt}% Remove paragraph indent
+\setdefaultlanguage{english}
+\setotherlanguages{sanskrit, marathi}
+\setmainfont[Language=English,Scale=0.95]{Noto Serif}
+\newfontfamily\sanskritfont[Mapping=velthuis-sanskrit,Script=Devanagari,Language=Sanskrit]{Sanskrit2003}
+\newfontfamily\marathifont[Mapping=velthuis-sanskrit,Script=Devanagari]{Noto Serif Devanagari}
+%\newfontfamily\sanskritfont[Mapping=velthuis-sanskrit,Script=Devanagari,Language=Sanskrit]{Noto Serif Devanagari}
+% make sure ~ as non-breaking space doesn't interfere with velthuis-sanskrit mapping
+\edef~{\string~}
+%\pagenumbering{gobble}
+\newcommand \sans[1]{
+    \textsanskrit{#1}
+}
+\newcommand \pair[1]{
+    \fontsize{1cm}{1.2cm}\selectfont
+    #1 -- \sans{#1}
+}
+\setlength\parindent{0pt}
+
+\begin{document}
+
+{\Large Velthuis Encoding}
+
+\pair{a}
+
+\pair{aa}
+
+\pair{i}
+
+\pair{ii}
+
+\pair{u}
+
+\pair{uu}
+
+\pair{.a}
+
+\pair{.r}
+
+\pair{.R}
+
+\pair{.l}
+
+\pair{.L} {\small (apparently, in \sans{sa.msk.rta} there is no \sans{.L} vowel.}
+
+\pair{e}
+
+\pair{ai}
+
+\pair{o}
+
+\pair{au}
+
+\pair{.m}
+
+\pair{.h}
+
+\pair{gururbrahmaa}
+
+\pair{gurave}
+
+\end{document}
+
