@@ -1,0 +1,34 @@
+\documentclass[a4paper]{article}
+\usepackage{polyglossia}
+\usepackage[margin=5mm]{geometry}
+\setdefaultlanguage{sanskrit}
+\setotherlanguages{english, marathi}
+\setmainfont[Mapping=velthuis-sanskrit,Script=Devanagari,Language=Sanskrit]{Noto Serif Devanagari}
+%\setmainfont[Mapping=velthuis-sanskrit,Script=Devanagari,Language=Sanskrit]{Shobhika}
+\newfontfamily\englishfont{Noto Serif}
+%\newfontfamily\sanskritfont[Mapping=velthuis-sanskrit,Script=Devanagari,Language=Sanskrit]{Noto Serif Devanagari}
+% make sure ~ as non-breaking space doesn't interfere with velthuis-sanskrit mapping
+\edef~{\string~}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}% Remove paragraph indent
+\usepackage[skip=\medskipamount]{parskip}
+\newcommand \eng[1]{
+    \textenglish{#1}
+}
+\begin{document}
+\eng{
+02 October 2021
+}
+
+
+\begin{verse}
+\begin{center}
+    {\Large 
+        sadaavakra.h sadaa krura.h sadaa puujaamapek.sate |\\
+        kanyaaraa"sisthito nitya.m jaamaataa da"samo graha.h ||
+    }
+\end{center}
+\end{verse}
+sandarbha.h -- subhaa.sitaratnabhaa.n.daagaaram, ``haasyarasanirde"sa.h'' 15 |
+
+\end{document}
