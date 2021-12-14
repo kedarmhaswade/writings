@@ -1,0 +1,35 @@
+\documentclass[a4paper]{article}
+\usepackage{polyglossia}
+\usepackage[margin=5mm]{geometry}
+\setdefaultlanguage{sanskrit}
+\setotherlanguages{english, marathi}
+\setmainfont[Mapping=velthuis-sanskrit,Script=Devanagari,Language=Sanskrit]{Noto Serif Devanagari}
+%\setmainfont[Mapping=velthuis-sanskrit,Script=Devanagari,Language=Sanskrit]{Shobhika}
+\newfontfamily\englishfont{Noto Serif}
+%\newfontfamily\sanskritfont[Mapping=velthuis-sanskrit,Script=Devanagari,Language=Sanskrit]{Noto Serif Devanagari}
+% make sure ~ as non-breaking space doesn't interfere with velthuis-sanskrit mapping
+\edef~{\string~}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}% Remove paragraph indent
+\usepackage[skip=\medskipamount]{parskip}
+\newcommand \eng[1]{
+    \textenglish{#1}
+}
+\begin{document}
+\eng{
+14 Dec 2021
+}
+
+
+\begin{verse}
+\begin{center}
+    \Huge {
+        sulabhaa.h puru.saa raajan satata.m priyavaadina.h | 
+
+        apriyasya ca pathyasya vaktaa "srotaa ca durlabha.h ||
+}
+\end{center}
+\end{verse}
+sandarbha.h -- vaalmiiki raamaaya.nam 3.37.2 (maariic.h raava.nam uddi"sya), pa~ncatantram 2.170|
+
+\end{document}
