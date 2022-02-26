@@ -1,0 +1,49 @@
+\documentclass[fontsize=5pt]{scrartcl}
+\usepackage[screen,paperheight=6cm,
+paperwidth=14cm, left=3mm,right=1mm,
+top=1mm,bottom=2mm]{geometry}
+\usepackage[]{blindtext}
+\usepackage{eso-pic}
+
+ 
+\usepackage[]{microtype}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage[scaled=0.9]{helvet}
+ 
+\setlength{\parindent}{0pt}
+\pagestyle{empty}
+ 
+\title{Blindtext}
+\author{Max Mustermann}
+ 
+\AddToShipoutPicture{
+  \put(1,2){%
+    \thepage
+		}
+	  \put(1.5,10){%
+			\Acrobatmenu{PrevPage}{\huge\textless}
+		}	
+	  \put(1.5,20){%
+			\Acrobatmenu{NextPage}{\huge\textgreater}
+		}	
+ 
+}
+ 
+ 
+\usepackage[]{hyperref}
+ 
+\hypersetup{%
+  colorlinks=true,   % aktiviert farbige Referenzen
+  linkcolor = blue,  % Linkfarbe blau
+  citecolor = blue,  % cite-Farbe blau
+  urlcolor = blue,  % cite-Farbe blau
+  pdfpagemode=UseNone,  % PDF-Viewer startet ohne Inhaltsverzeichnis et.al.
+  pdfstartview=FitH} % PDF-Viewer benutzt beim Start bestimmte Seitenbreite
+ 
+ \begin{document}
+ \maketitle
+ \section*{Section 1}
+ \blindtext
+ \section*{Section 2}
+ \blindtext
+ \end{document}
