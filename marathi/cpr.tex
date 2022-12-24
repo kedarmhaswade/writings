@@ -1,0 +1,50 @@
+\documentclass[a6paper]{article}
+\usepackage{polyglossia}
+\usepackage[margin=10mm]{geometry}
+\usepackage{graphicx}
+\setdefaultlanguage{marathi}
+\setotherlanguages{english, sanskrit}
+%\setmainfont[Mapping=velthuis-sanskrit,Script=Devanagari,Language=Sanskrit]{Shobhika}
+\newfontfamily\englishfont{Arial}
+\newfontfamily\devanagarifont{Sanskrit Text}
+\newfontfamily\marathifont[Mapping=velthuis-sanskrit,Script=Devanagari,Language=Marathi]{Sanskrit Text}
+\newfontfamily\sanskritfont[Mapping=velthuis-sanskrit,Script=Devanagari,Language=Sanskrit]{Sanskrit Text}
+% make sure ~ as non-breaking space doesn't interfere with velthuis-sanskrit mapping
+\edef~{\string~}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}% Remove paragraph indent
+\usepackage[skip=\medskipamount]{parskip}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\renewcommand\UrlFont{\ttfamilylatin}
+\newcommand \eng[1]{
+    \textenglish{#1}
+}
+\usepackage[normalem]{ulem} % strikeout
+
+% hyphenation https://tex.stackexchange.com/a/177179/64425
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    citecolor=blue,
+    urlcolor=purple,
+}
+
+\begin{document}
+
+\begin{center}
+    {\Large \eng{CPR:}hradaya-phupphusa punarujjiivana}
+\end{center}
+
+rasikaho, namaskaara.
+
+aaja mii tumhaalaa \eng{CPR} naavaacyaa `sa.mjiivanii' baddala saa.mga.naara aahe. tyaacabarobara tumhii pu.nyaata raahata asaala tara hii vidyaa tumhaalaa ka"sii praapta karataa yeiila yaavi.sayii pa.na aapa.na boluu.
+
+
+\end{document}
