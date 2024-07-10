@@ -1,0 +1,74 @@
+\documentclass[17pt]{extarticle}  % print quality
+\usepackage{polyglossia}
+\usepackage[margin=20mm]{geometry}
+\setdefaultlanguage{marathi}
+\setotherlanguages{english}
+\usepackage{fourier}
+%\textbf with "Sanskrit Text" produces the shape warning because the default Sanskrit Text font on Windows does not have a bold equivalent; try Yashomudra or Shobhika; now I like Tiro better
+\newfontfamily\devanagarifont[Script=Devanagari]{Sanskrit Text}
+%\newfontfamily\devanagarifont[Script=Devanagari]{Tiro Devanagari Marathi}
+
+%\pagenumbering{gobble}
+\setlength{\parindent}{0pt}% Remove paragraph indent
+\usepackage[skip=\medskipamount]{parskip}
+\usepackage{fontawesome}
+\usepackage[style=english]{csquotes}
+\usepackage{verse}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    citecolor=blue,
+    urlcolor=purple,
+}
+
+% control hyphenation: https://tex.stackexchange.com/a/177179/64425
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+% control hyphenation: https://tex.stackexchange.com/a/177179/64425
+
+\begin{document}
+
+\title{अजब देश, गजब तऱ्हा}
+\author{विंदा करंदीकर}
+\date{}
+\maketitle
+\hrule
+\vspace{5mm}
+
+%\textenglish {
+
+%This document is a sample document to test font families and font typefaces.
+%}
+
+अलाण्याच्या ब्रशावरती, फलाण्याचं दंतमंजन\\
+अलबत्याचं अंडरवेअर, गलबत्याचं थोबाडरंजन 
+
+लिलीसारख्या त्वचेसाठी, लिलीब्रॅंड साबणजेली\\
+चरबी हटवा, वजन घटवा, हजारोंनी खात्री केली
+
+केंटुकीच्या कोंबडीवरती, फेंटुकीचं मोहरीचाटण\\
+डबलडेकर सँडविचमध्ये, बबलछाप मटणघाटण
+
+पिझ्झाहट चा पिझ्झा खा, मेपलज्यूस, अॅप्पलपाय\\
+अमुक डोनट, तमुक पीनट, अजून खाल्ले नाहीत काय?
+
+अ ब क ड इ फ ग  . . .  तयार घरे, सात टाइप्स\\
+रेडिमेड खिडक्या-दारे, भिंती-छपरे, गटरपाइप्स 
+
+हॉटेल, मोटेल, खेटर, मोटर, देशभर करा प्रवास\\
+एकच रूप, एकच रंग, एकच रुचि, एकच वास 
+
+आकाशवाणी घटवत असते, दूरदर्शन पटवत असते\\
+जहांबाज जाहिरातबाजी गिऱ्हाइकांना गटवत असते 
+
+अजब देश! गजब तऱ्हा! व्यक्तीवरती सक्ती नाही\\
+सहस्रशीर्ष मनुजा, तुझी गणवेशातून मुक्ती नाही!
+
+\vspace{5mm}
+\hrule
+\end{document}
