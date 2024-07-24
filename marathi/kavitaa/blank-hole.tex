@@ -1,0 +1,68 @@
+\documentclass[17pt]{extarticle}  % print quality
+\usepackage{polyglossia}
+\usepackage[margin=20mm]{geometry}
+\setdefaultlanguage{marathi}
+\setotherlanguages{english}
+\usepackage{fourier}
+%\textbf with "Sanskrit Text" produces the shape warning because the default Sanskrit Text font on Windows does not have a bold equivalent; try Yashomudra or Shobhika; now I like Tiro better
+\newfontfamily\devanagarifont[Script=Devanagari]{Sanskrit Text}
+%\newfontfamily\devanagarifont[Script=Devanagari]{Tiro Devanagari Marathi}
+
+%\pagenumbering{gobble}
+\setlength{\parindent}{0pt}% Remove paragraph indent
+\usepackage[skip=\medskipamount]{parskip}
+\usepackage{fontawesome}
+\usepackage[style=english]{csquotes}
+\usepackage{verse}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    citecolor=blue,
+    urlcolor=purple,
+}
+
+% control hyphenation: https://tex.stackexchange.com/a/177179/64425
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+% control hyphenation: https://tex.stackexchange.com/a/177179/64425
+
+\begin{document}
+
+\title{ब्लॅंक होल}
+\author{निरंजन पेडणेकर}
+\date{}
+\maketitle
+\hrule
+\vspace{5mm}
+
+%\textenglish {
+
+%This document is a sample document to test font families and font typefaces.
+%}
+
+कुट्ट पडद्याआड कोणी थाटला संसार आहे\\
+का अनंताच्या तळाशी साचला अंधार आहे?
+
+काळजाच्या कोपऱ्याची ही छबी विस्तारली का\\
+काळ ज्याच्या उंबऱ्याशी थांबला ते दार आहे?
+
+का प्रकाशाच्या अघोरी कृष्णकृत्यांच्या भयाने\\
+स्वाभिमानी तारकांनी मांडला जोहार आहे?
+
+का अकर्त्याच्या अभागी आंधळ्या डोळ्यात गोळा\\
+आर्त काळ्या आसवांनी छेडला मल्हार आहे?
+
+षड्ज-पंचम विलय-उत्पत्तीतले झंकारता का\\
+बंद ओठांशी स्वयंभू दाटला गंधार आहे? 
+
+गुंतणारे ह्यात सारे आपुले हरवून जाती\\
+हा तुझ्या बेबंद केसांचा खुला संभार आहे!
+
+\vspace{5mm}
+\hrule
+\end{document}

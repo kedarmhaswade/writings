@@ -1,0 +1,71 @@
+\documentclass[17pt]{extarticle}  % print quality
+\usepackage{polyglossia}
+\usepackage[margin=20mm]{geometry}
+\setdefaultlanguage{marathi}
+\setotherlanguages{english}
+\usepackage{fourier}
+%\textbf with "Sanskrit Text" produces the shape warning because the default Sanskrit Text font on Windows does not have a bold equivalent; try Yashomudra or Shobhika; now I like Tiro better
+\newfontfamily\devanagarifont[Script=Devanagari]{Sanskrit Text}
+%\newfontfamily\devanagarifont[Script=Devanagari]{Tiro Devanagari Marathi}
+
+%\pagenumbering{gobble}
+\setlength{\parindent}{0pt}% Remove paragraph indent
+\usepackage[skip=\medskipamount]{parskip}
+\usepackage{fontawesome}
+\usepackage[style=english]{csquotes}
+\usepackage{verse}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    citecolor=blue,
+    urlcolor=purple,
+}
+
+% control hyphenation: https://tex.stackexchange.com/a/177179/64425
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+% control hyphenation: https://tex.stackexchange.com/a/177179/64425
+
+\begin{document}
+
+\title{जाईन दूर गावा}
+\author{आरती प्रभू, नक्षत्रांचे देणे}
+\date{}
+\maketitle
+\hrule
+\vspace{5mm}
+
+%\textenglish {
+
+%This document is a sample document to test font families and font typefaces.
+%}
+
+तेव्हा मलाच माझा, वाटेल फक्त हेवा,\\
+घरदार टाकुनी मी, जाईन दूर गावा.  
+
+पाण्यांत ओंजळीच्या, आला चुकून मीन, \\
+चमकून हो तसाच, गाण्यांत अर्थ जावा. 
+
+शिंपीत पावसाळी, सर्वत्र या लकेरी,\\
+यावा अनाम पक्षी, स्पर्शू मलाच यावा. 
+
+देतां कुणी दुरून, नक्षत्रसे इशारे\\
+साराच आसमंत, घननीळ होत जावा. 
+
+पेरून जात वाळा, अंगावरी कुणी जो\\
+शेल्यापरी कुसुंबी, वाऱ्यावरी वहावा. 
+
+तारांवरी पडावा, केव्हा चुकून हात :\\
+विस्तीर्ण पोकळीचा, गंधार सापडावा.  
+
+तेव्हा मलाच माझा, वाटेल फक्त हेवा,\\
+घरदार टाकुनी मी, जाईन दूर गावा.  
+
+\vspace{5mm}
+\hrule
+\end{document}
