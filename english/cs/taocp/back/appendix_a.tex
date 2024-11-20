@@ -1,0 +1,34 @@
+\chapter{Some Technical Details}
+
+\section{Floating Point Long Multiplication by Babylonians}
+\label{app:baby-long-mult}
+
+Babylonians had a form of floating point representation of numbers. Consider the fraction $\frac{1}{6561}$ which is the square of $\frac{1}{81}$. They carried out the conventional long multiplication to yield a representation for $\frac{1}{6561}$ from that for $\frac{1}{81}: (44\;\;26\;\;40)_{60}$.
+
+\begin{table}[h!]
+%\caption{Square of the reciprocal of 81}
+\label{tab:square-of-6561}
+\centering
+\setlength{\tabcolsep}{4pt} % separator between columns (standard = 6pt)
+\renewcommand{\arraystretch}{1.25} % vertical stretch factor (standard = 1.0)
+\begin{tabular}{@{}llllll@{}}
+  &&& 44 & 26 & 40 \\
+  &$\times$ && 44 & 26 & 40 \\\hline
+  &&& 44$\times$40 & 26$\times$40 & 40$\times$40 \\  
+  && 44$\times$26 & 26$\times$26 & 40$\times$26 & \\ 
+  &44$\times$44 & 26$\times$40 & 40$\times$44 && \\\hline
+  &&&&&=1600={\color{red}26}$\times$60+\textbf{40}\\
+  &&&&{\color{red}26}&\textbf{40}\\
+  &&&&=2106={\color{red}35}$\times$60+\textbf{6}&\textbf{40}\\
+  &&&{\color{red}35}&\textbf{6}&\textbf{40}\\
+  &&&=4231={\color{red}70}$\times$60+\textbf{31}&\textbf{6}&\textbf{40}\\
+  &&{\color{red}70}&\textbf{31}&\textbf{6}&\textbf{40}\\
+  &&=2358={\color{red}39}$\times$60+\textbf{18}&\textbf{31}&\textbf{6}&\textbf{40}\\
+  &{\color{red}39}&\textbf{18}&\textbf{31}&\textbf{6}&\textbf{40}\\
+  &=1975={\color{red}32}$\times$60+\textbf{55}&\textbf{18}&\textbf{31}&\textbf{6}&\textbf{40}\\
+  {\color{red}32}&\textbf{55}&\textbf{18}&\textbf{31}&\textbf{6}&\textbf{40}\\\hline
+  \textbf{32}&\textbf{55}&\textbf{18}&\textbf{31}&\textbf{6}&\textbf{40}\\\hline
+\end{tabular}
+\end{table}
+
+Carries are shown in red and \textit{sexagesimal digits} in their final form in bold face. The procedure is mechanical and can be accurately described as a computer algorithm. You don't need to know the absolute location of the point. But one deduces that $\frac{1}{6561}$ is smaller than $\frac{1}{3600}=\frac{1}{60^2}$. Therefore Babylonians would have written the number with two leading zeros as $0.(0)(0)(32)(55)(18)(31)(6)(40)$ which is a sexagesimal equivalent of the modern decimal notation.

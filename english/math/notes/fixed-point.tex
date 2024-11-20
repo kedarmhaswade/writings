@@ -1,0 +1,175 @@
+\documentclass[10pt]{article}         %% What type of document you're writing.
+
+%%%%% Preamble
+
+%% Packages to use
+
+\usepackage{amsmath,amsfonts,amssymb}   %% AMS mathematics macros
+
+%% Title Information.
+
+\title{The Fixed-Point Arithmetic and Its Limitations}
+\author{Kedar Mhaswade}
+%% \date{2 July 2004}           %% By default, LaTeX uses the current date
+\date{04 November 2024}
+
+%%%%% The Document
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This paper discusses personal exploration of the so-called Fixed-Point Arithmetic performed by a computer. The intended audience is an interested high school student.
+\end{abstract}
+
+\section{Introduction}
+Computers have limited resources. We can always find a number that exceeds a computer's ``memory capacity.'' By ``computer'', we do not always mean a computer based on binary digits, or bits, $0$ and $1$, although such computers are ubiquitous now. In a binary computer, everything must be represented in \text{0s} and \text{1s}. With some flight of imagination, however, a ``decimal computer'' in which everything needs to be represented using the ten decimal symbols (digits) can be conceived. The computational part of the human mind can be said to be such a decimal computer.
+
+For this article, we can assume the existence of a ``decimal computer.'' It does not matter in the context of this article if the computer is decimal, binary, or something else. These computers differ only in the number of \textit{distinct pieces of information} a digit represents. For the binary computer it's two, for a decimal computer it's ten. The issues discussed here apply to every such computer.
+
+The finiteness of a computer comes from the fact that data must be represented using a finite number of digits. We have learned in mathematics that starting with a number $0$ and a \textit{successor} function: $succ(n) = n + 1$, we can imagine infinitely many integers. In other words, there is no largest integer in mathematics. However, for even the most powerful computer, there \textit{is} a largest integer.
+
+The number of digits available to represent integers (using the familiar place-value system) on a computer decides the largest integer it represents. Thus, a decimal computer with 20 digits for integer representation can represent all the integers in the interval $[0,{10}^{20}-1]=[0,99999999999999999999]$. That is a wide range, however, ``wide'' is a relative term. In this sense, a computer is better than a desk calculator only in terms of ranges of numbers represented.
+
+It appears that this is an acceptable practical limit for calculations involving only integers. Once we enter the realm of decimals, however, the complexity increases. It turns out that we had to go through a long struggle before we could reliably\footnote{Such reliability implies `portability' of a computer program across computers.} represent on \textit{every} computer a decimal like $0.1$ as easily as writing it by hand.
+
+{\small (How will you represent negative integers in our decimal computer?)}
+
+\section{Representing Decimals}
+\label{sec: decimals}
+A fraction, or rational number, can be represented as a ratio of two integers. Therefore, we can consider representing any fraction as a ratio of two integers: numerator and denominator. Why do we need ``decimals\footnote{In mathematics, we often use the same name to express disparate ideas. A `decimal' is another name for a fraction. A `decimal representation' uses ten symbols ($\{0,1,2,\dots,9\}$) to represent a number.}'' on computers? 
+
+We need computers to have the ability to specify decimals because we are used to them since grade school. It feels like a severe limitation if the computer were to take away the convenience of expressing \textit{one-half} simply as $0.5$ by forcing us to specify it as numbers $1$ and $2$.
+
+It is certainly conceivable that the computer lets us specify a fraction as a decimal but \textit{transparently} treats it as an ordered pair of integers that best represents that fraction. Thus, it could treat $4.6$ as $(46,10)$ and $0.217$ as $(217,1000)$. It would then add the fractions using the familiar algorithm: 
+
+$$\frac{46}{10} + \frac{217}{1000} = \frac{100\times 46 + 1\times 217}{1000} = \frac{4817}{1000} \text{\, represented as \,} (4817,1000) $$
+
+and display the result as $4.817$.
+
+\begin{equation}
+\label{eqn: distance}
+	d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}
+\end{equation}
+to determine the distance between any two points $(x_1, y_1)$ and $(x_2, y_2)$
+in $\mathbb{R}^2$.  For our example, $(x_1, y_1) = (-1, 16)$ and $(x_2, y_2) =
+(3, 1)$, so plugging these values into the distance formula~\eqref{eqn:
+distance} tell us the distance between the two points is
+$$
+	d 
+	= \sqrt{(3 - (-1))^2 + (1 - 16)^2}
+	= \sqrt{4^2 + (-15)^2}
+	= \sqrt{241}
+	.
+$$
+
+\section{Linear Fit}
+\label{sec: linear fit}
+Consider a linear equation $y = m x + b$ through the two points.  We will
+first determine the slope $m$ of the line in Section~\ref{sec: slope}, and we
+will then determine the $y$-intercept $b$ of the line in Section~\ref{sec:
+intercept}.
+
+\subsection{Slope}
+\label{sec: slope}
+
+The slope of the line passing through the two points is given by the forumula
+$$
+	m 
+	= \frac{\Delta y}{\Delta x} 
+	= \frac{y_2 - y_1}{x_2 - x_1}
+	.
+$$
+Plugging in our two points, we find the slope of the line between them is
+\begin{equation}
+\label{eqn: slope}
+	m 
+	= \frac{1 - 16}{3 - (-1)}
+	= - \frac{15}{4}
+	.
+\end{equation}
+
+\subsection{Intercept}
+\label{sec: intercept}
+
+To find the $y$-intercept of the line, we start with the point-slope form of
+the line of slope $m$ through the point $(x_0, y_0)$:
+$$
+	y - y_0 = m (x - x_0)
+	.
+$$
+We plug in the point $(x_0, y_0) = (-1, 16)$ and the slope we found
+previously~\eqref{eqn: slope} to obtain the equation
+$$
+	y - 16 = - \frac{15}{4} (x + 1)
+	.
+$$
+Solving for $y$, we find the slope-intercept form of the line:
+\begin{align*}
+	y 
+	&= - \frac{15}{4} x - \frac{15}{4} + 16 \\
+	&= - \frac{15}{4} x + \frac{49}{4}
+	.
+\end{align*}
+Therefore, the $y$-intercept is $b = 49/4$, and the equation 
+$y = - \frac{15}{4} x + \frac{49}{4}$ describes the line through the two
+points.
+
+\section{Exponential Fit}
+\label{sec: exponential fit}
+
+Let us consider the exponential function $y = A e^{k x}$.  For this function
+to pass through both points, we must find constants $A$ and $k$ that satisfy
+both equations $16 = A e^{-k}$ and $1 = A e^{3 k}$.  To solve these two
+simultaneous equations, we first take the ratio of the two equations, which
+gives us a single equation involving only $k$:
+$$
+	16
+	= \frac{A e^{-k}}{A e^{3 k}}
+	= e^{-4 k}
+	.
+$$
+We can take the natural logarithm of this equation to solve for $k$:
+$$
+	-4k = \ln(16) = 4 \ln (2)
+	,
+$$
+which means $k = - \ln(2)$.
+
+We can then use this value of $k$, along with either of the two points to
+solve for $A$.  Let us consider the point $(-1, 16)$:
+$$
+	16 = A e^{(-\ln(2))(-1)} = A e^{\ln{2}} = 2 A
+	.
+$$
+Solving for $A$, we find $A = 8$, and the exponential equation through both
+points is
+$$
+	y
+	= 8 e^{-\ln(2) x}
+	= 8 2^{-x}
+	= 8 \left( \frac{1}{2} \right)^x
+	.
+$$
+
+Here are examples of piecewise functions:
+
+\begin{equation}
+\chi_{\mathbb{Q}}(x)=
+    \begin{cases}
+        1 & \text{if } x \in \mathbb{Q}\\
+        0 & \text{if } x \in \mathbb{R}\setminus\mathbb{Q}
+    \end{cases}
+\end{equation}
+
+\begin{equation}
+    C_{k} =
+    \begin{cases}
+        1 & \text{if } k = 1\\
+        1 & \text{if } k = 2\\
+        C_{k-1} + C_{k-2} & \text{otherwise}
+    \end{cases}
+\end{equation}
+\end{document}
+
