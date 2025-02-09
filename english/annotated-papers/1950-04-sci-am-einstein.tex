@@ -1,0 +1,55 @@
+\documentclass[a4]{article}   % smartphone
+%\documentclass[17pt]{extarticle}  % print quality
+\usepackage{polyglossia}
+\usepackage[margin=20mm]{geometry}
+\setdefaultlanguage{english}
+\setotherlanguages{marathi}
+%\textbf with "Sanskrit Text" produces the shape warning because the default Sanskrit Text font on Windows does not have a bold equivalent;
+% try Yashomudra or Shobhika; now I like Tiro better
+%\newfontfamily\devanagarifont[Script=Devanagari]{Tiro Devanagari Marathi}
+\newfontfamily\devanagarifont[Script=Devanagari]{Sanskrit Text}
+\usepackage{libertine,libertinust1math}
+
+%\pagenumbering{gobble}
+\setlength{\parindent}{0pt}% Remove paragraph indent
+\usepackage[skip=\medskipamount]{parskip}
+\usepackage{fontawesome5}
+\usepackage[style=english]{csquotes}
+\usepackage{verse}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    citecolor=blue,
+    urlcolor=purple,
+}
+
+% control hyphenation: https://tex.stackexchange.com/a/177179/64425
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+% control hyphenation: https://tex.stackexchange.com/a/177179/64425
+
+\newcommand \mar[1]{
+    \textmarathi{#1}
+}
+\begin{document}
+
+\title{On the Generalized Theory of Gravitation (Annotated)\\
+\large An account of the newly published extension
+of the general theory of relativity against
+its historical and philosophical background}
+\author{Albert Einstein \thanks{%
+    Annotator: Kedar Mhaswade}}
+\date{}
+%\date{}
+\maketitle
+\hrule
+\vspace{5mm}
+\textbf{Abstract.} This article appeared in the April 1950 issue of the \textit{Scientific American} magazine (Volume 182, No. 4). Reading it has been an indescribable joy. I decided to annotate it for my own benefit. Annotating is a form of note-taking for better understanding.
+\vspace{5mm}
+\hrule
+\end{document}

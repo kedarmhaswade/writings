@@ -28,7 +28,7 @@ In the beginning, there were only positive integers. Then came the rational numb
 %\end{multlined}
 \end{equation}
 
-In equation (\ref{eqn:positional}), if $b \in \mathbb{N}, b > 1$, then there are $b$ ``digits'': $0\le a_k < b$ that express a non negative rational number \textit{positionally}. The `.' in the notation is variously called the `point', `decimal point', `radix point', `binary point', etc.
+In equation (\ref{eqn:positional}), if $b \in \mathbb{N}, b > 1$, then there are $b$ ``digits'': $0\le a_k < b$ that express a non negative rational number \textit{positionally}. The `.' in the notation is variously called the `point', `decimal point', `radix point', `binary point', etc. The number to its left is the \emph{integer part} and that to its right is the \emph{fractional part}. The value (magnitude) of the fractional part is less than 1.
 
 Babylonians used the base- or radix-60 (Sexagesimal) system as early as 1750 {\tiny B.C.} In fact, they had a form of floating point representation! The exponent of the radix (60) was to be \textit{understood from context}. The numbers $2,120,7200,\frac{1}{30}$ can all be written as $2$ because $2=2\cdot 60^0$, $120=2\cdot 60^1$, $7200=2\cdot 60^2$, and $\frac{1}{30}=2\cdot 60^{-1}$ respectively. Here are some interesting features of positional number systems:
 \begin{itemize}
@@ -128,12 +128,36 @@ We are only considering consistent notations for numbers. How numbers are actual
 \hrule
 \vspace{5pt}
 
-Knuth urges his readers to study the \textit{machine} seriously. He designed his \colorbox{lightgray}{MIX} (these Roman literals represent the number $1009$) computer in the Volume 1 of his books, specified its complete instruction set, implemented most algorithms (that he discussed in his books) in MIX's instruction set, and then upgraded it in 2009 to \colorbox{lightgray}{MMIX} (which is pronounced \textit{Em-micks} and which represents the number $2009$) that uses the RISC (Reduced Instruction Set Computer) instruction format. He described \colorbox{lightgray}{MMIX} in what he called the Volume 1 - Fascicle 1. If you read his \textit{The Art of Computer Programming Volume 1: Fundamental Algorithms}, you should skip \S 1.3 MIX and read \S 1.3$'$ MMIX in Fascicle 1 instead. Martin Ruckert ported all the MIX programs to \colorbox{lightgray}{MMIX} in the MMIX Supplement to Knuth's books (see also \cite{mmix}). We study \colorbox{lightgray}{MMIX} in \ref{cha:mmix}. 
+Knuth urges his readers to study the \textit{machine} seriously. He designed his \colorbox{lightgray}{MIX} (these Roman literals represent the number $1009$) computer in the Volume 1 of his books, specified its complete instruction set, implemented most algorithms (that he discussed in his books) in MIX's instruction set, and then upgraded it in 2009 to \colorbox{lightgray}{MMIX} (which is pronounced \textit{Em-micks} and which represents the number $2009$) that uses the RISC (diminished Instruction Set Computer) instruction format. He described \colorbox{lightgray}{MMIX} in what he called the Volume 1 - Fascicle 1. If you read his \textit{The Art of Computer Programming Volume 1: Fundamental Algorithms}, you should skip \S 1.3 MIX and read \S 1.3$'$ MMIX in Fascicle 1 instead. Martin Ruckert ported all the MIX programs to \colorbox{lightgray}{MMIX} in the MMIX Supplement to Knuth's books (see also \cite{mmix}). We study \colorbox{lightgray}{MMIX} in \ref{cha:mmix}. 
 
 \vspace{5pt}
 \hrule
 \vspace{5pt}
 
-There are several different ways to represent negative numbers in a computer.
+\noindent There are several ways to represent negative numbers in a computer. We consider a decimal computer (\cite{DecComp}) in this section. A digit can represent $10$ distinct values. The `sign' applies to the integer part of the positional notation (\ref{eqn:positional}).
+
+\begin{itemize}
+\item Signed magnitude representation. We reserve one \textit{position} for the minus sign. If we have ten positions for the digits, then we need another position to hold just the $-$ sign:
+$$
+-1234567890
+$$
+One disadvantage is $0000000000$ and $-0000000000$ are distinct representations for the same number, zero. This may seem like a minor limitation, but an interesting challenge is to represent negative numbers without the provision of a special ``sign'' position (also called the ``sign digit.''
+
+\item Radix complement representation. This eliminates the need for a sign digit. We first introduce the idea of the ``complement'' of a number and then employ it to represent negative integers. The Wikipedia page on the Method of Complements \cite{Complements} gives an excellent overview of how mechanical calculators handled negative numbers using this method in the decimal notation and its generalization, including the arithmetic involved. The generalizations are called radix complement and diminished radix complement. When the radix is $10$, the two complements are called \textit{ten's} complement and \textit{nines'} complement, respectively (Knuth prefers the placement of apostrophes as shown).
+\end{itemize}
+
+\begin{definition}\label{def:complements}
+The ten's complement of an $n$-digit number $y$ is defined as $y_c=10^n-y$ and the nines' complement is defined as $y_{dc}=(10^n-1)-y$.
+\end{definition}
+
+\begin{equation} \label{eqn:complements}
+y_c=y_{dc}+1
+\end{equation}
+
+follows from Definition(\ref{def:complements}).
+
+In the decimal\footnote{The arithmetic applies to all integral bases greater than 1; there is nothing special about $10$} arithmetic system with $n$ integral digits, the number $10^n$ is called the \emph{modulus}. It is the smallest positive integer that cannot be represented in the system. Calculations are said to be done \emph{modulo $10^n$}. This entails modular arithmetic when manipulating integers. An \textit{overflow} occurs when arithmetic operations result in numbers greater than or equal to the modulus. You can ignore an overflow, but acknowledging it is usually helpful. A general-purpose computer is a finite-resource-machine. Since we are not used to such a limitation (when we need, we can always use another digit in our paper-and-pencil calculations), we cannot always appreciate the issues (e.g. overflow) that it has to address. 
+
+Consider two $n$-digit integers, $x$ and $y$. Let's first see how we might calculate $x+y$. Why, just add like in grade school. And that is the way to do it if no overflow occurs. For instance, if $n=1$, $x=5$, and $x=6$, then, if the overflow is ignored, a computer will report $x+y$ as $11\mod 10^1=11\mod 10=1$.
 
 

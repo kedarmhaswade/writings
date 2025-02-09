@@ -1,0 +1,187 @@
+%% A simple template for a scientific article using the Hagenberg setup
+%% based on the standard LaTeX 'article' class
+%%% äöüÄÖÜß  <-- no German umlauts here? Use a UTF-8 compatible editor!
+
+%%% Magic comments for setting the correct parameters in compatible IDEs
+% !TeX encoding = utf8
+% !TeX program = pdflatex 
+% !TeX spellcheck = en_US
+% !BIB program = biber
+
+\RequirePackage[utf8]{inputenc} % Remove when using lualatex or xelatex!
+\RequirePackage{hgbpdfa}        % Creates a PDF/A-2b compliant document
+
+\documentclass[english,smartquotes]{hgbarticle}
+%\documentclass[english,twocolumn, smartquotes]{hgbarticle}
+% Valid options in [..]: 
+%    Main language: 'german' (default), 'english'
+%    Turn on smart quote handling: 'smartquotes'
+%    APA bibliography style: 'apa'
+%    Typeset the text in two columns: 'twocolumn'
+%%%-----------------------------------------------------------------------------
+
+\usepackage{lipsum}       % Create lorem ipsum dummy text (can be removed)
+\usepackage{hyperref} % clickable www links
+\hypersetup{
+colorlinks=true,
+linkcolor=blue,
+urlcolor=magenta,
+}
+\flushbottom              % Add vertical space where necessary to fill the page
+\graphicspath{{images/}}  % Location of images and graphics
+\bibliography{references} % Biblatex bibliography file (references.bib)
+
+% for unside down text
+\usepackage[framemethod=tikz]{mdframed}
+\newtheorem{question}{}
+\mdfdefinestyle{que}{
+  linecolor=cyan,
+  backgroundcolor=cyan!20,
+}
+\surroundwithmdframed[style=que]{question}
+\newtheorem{answer}{}
+\mdfdefinestyle{ans}{
+  linecolor=cyan,
+  backgroundcolor=yellow!20
+}
+\surroundwithmdframed[style=ans]{answer}
+\usepackage{environ}
+\NewEnviron{rotanswer}{%
+  \begin{tikzpicture}
+  \node[rotate=180,inner sep=0pt] {\parbox{\linewidth}{%
+  \begin{answer}
+  \BODY
+  \end{answer}}};
+\end{tikzpicture}%
+}
+% for unside down text
+%%%-----------------------------------------------------------------------------
+\begin{document}
+%%%-----------------------------------------------------------------------------
+
+\author{
+	Kedar Mhaswade\\ 
+	\email{kedar.mhaswade@gmail.com}
+}
+\title{A Social Media Combinatorial Problem}
+\date{}
+
+%%%-----------------------------------------------------------------------------
+\maketitle
+%%%-----------------------------------------------------------------------------
+
+\begin{abstract}\noindent
+This article discusses an algorithmic approach and a computer program based on it
+to solve an elementary combinatorial problem popular on social media.
+\end{abstract}
+
+%%%-----------------------------------------------------------------------------
+
+\section{Introduction}
+
+Consider the following puzzle\footnote{I first heard it from \href{https://sunilsingh-42118.medium.com/}{Sunil Singh}, a mathematics educator}:
+
+\begin{question}
+Can you make $24$ using the numbers $1, 3, 4,$ and $6$ exactly once each, and the four arithmetic operations ($+, -, \times, \div$) any number of times\footnote{Using a number formed by concatenating two or more numbers (e.g. $13$) is disallowed}?
+\end{question}
+
+A ready-made answer is probably just an Internet search away. Just for fun, however, one should find such an arithmetic expression. It took the author quite some time to find it.
+
+\subsection{Initial Impressions}
+This puzzle is surprisingly challenging, especially if one is not well-versed with solving such puzzles. We take arithmetic for granted, but the four basic operations combine with four small numbers to render this puzzle tantalizingly difficult. This is so even if you could somehow solve it.
+
+We start with some heuristics: If we can make 4 using 1, 3, and 4, we can definitely make 24 by additionally using 6. 
+
+\section{An Algorithmic Approach to Searching}
+\subsection{The Algorithm}
+\subsection{An Implementation}
+\section{Summary and Conclusion}
+
+\section{Answer to the Puzzle}
+\begin{rotanswer}
+$6\div(1-(3\div 4))$
+\end{rotanswer}
+
+%
+\begin{equation}
+\bar{\mathbf{M}} =  
+\begin{pmatrix}
+	A \ast H^{G}_{\sigma}   & C \ast H^{G}_{\sigma} \\
+	C \ast H^{G}_{\sigma}   & B \ast H^{G}_{\sigma} 
+\end{pmatrix}
+=
+\begin{pmatrix}
+	\bar{A}   & \bar{C} \\
+	\bar{C}   & \bar{B} 
+\end{pmatrix}
+\end{equation}
+%
+may fit without any modification, larger structures like the one shown in
+Equation \ref{wideEquation} need special treatment.
+%
+\begin{figure*}[t]
+	\begin{equation}
+		\begin{split}
+			\lambda_{1,2}
+			&= \frac{\mathrm{tr}(\bar{\mathbf{M}})}{2} \pm \sqrt{\Bigl
+			(\frac{\mathrm{tr}(\bar{\mathbf{M}})}{2}\Bigr)^2
+			- \mathrm{det}(\bar{\mathbf{M}})}  \\
+			&= \frac{1}{2} \cdot \left( \bar{A} + \bar{B} \pm \sqrt{\bar{A}^2 -
+			2 \cdot \bar{A} \cdot \bar{B} + \bar{B}^2 + 4 \cdot \bar{C}^2}
+			\right)
+			,
+		\end{split}
+		\label{wideEquation}
+	\end{equation}
+\end{figure*}
+%
+In this case, the equation was wrapped into a \verb!\begin{figure*}! \ldots
+\verb!\end{figure*}! environment, which produces an unnumbered float object
+that extends across the full page width. Additional details can be found in
+the source text.
+
+\subsection{Graphics and Images}
+
+Similarly, the horizontal space available for graphical elements is the width
+of a single column. Thus elements inserted with \verb!\includegraphics{..}! 
+should use the length \verb!\columnwidth! for scaling. An example is shown in
+Fig.~\ref{fig:CocaCola} (see the source text for details).
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1.0\columnwidth]{cola-public-domain-photo-p}
+	\caption{Coca-Cola advertisement photographed in 1940 \cite{CocaCola1940}.}
+	\label{fig:CocaCola}
+\end{figure}
+
+And by the way, the \texttt{lipsum} package was used to create the following
+dummy texts. 
+
+\subsection{Bibliography}
+
+The use of citations and the compilation of the bibliography work much the
+same as in the thesis template. The only difference is that
+\verb!\printbibliography! is used directly at the end of the document.
+
+%%%-----------------------------------------------------------------------------
+
+\section{Existing Techniques}
+
+\lipsum[2-4]
+
+%%%-----------------------------------------------------------------------------
+
+\section{Our Radically New Approach}
+
+\lipsum[5-7]
+
+%%%-----------------------------------------------------------------------------
+
+
+%%%-----------------------------------------------------------------------------
+\printbibliography % alternatively: \MakeBibliography[nosplit]
+%%%-----------------------------------------------------------------------------
+
+%%%-----------------------------------------------------------------------------
+\end{document}
+%%%-----------------------------------------------------------------------------
