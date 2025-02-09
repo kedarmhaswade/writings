@@ -33,7 +33,7 @@ urlcolor=magenta,
 
 % for unside down text
 \usepackage[framemethod=tikz]{mdframed}
-\newtheorem{question}{}
+\newtheorem{question}{Puzzle}
 \mdfdefinestyle{que}{
   linecolor=cyan,
   backgroundcolor=cyan!20,
@@ -54,7 +54,7 @@ urlcolor=magenta,
   \end{answer}}};
 \end{tikzpicture}%
 }
-% for unside down text
+% for unside down text https://tex.stackexchange.com/a/161886/64425
 %%%-----------------------------------------------------------------------------
 \begin{document}
 %%%-----------------------------------------------------------------------------
@@ -82,17 +82,31 @@ to solve an elementary combinatorial problem popular on social media.
 Consider the following puzzle\footnote{I first heard it from \href{https://sunilsingh-42118.medium.com/}{Sunil Singh}, a mathematics educator}:
 
 \begin{question}
-Can you make $24$ using the numbers $1, 3, 4,$ and $6$ exactly once each, and the four arithmetic operations ($+, -, \times, \div$) any number of times\footnote{Using a number formed by concatenating two or more numbers (e.g. $13$) is disallowed}?
+How can you make $24$ using the numbers $1, 3, 4,$ and $6$ exactly once each, and the four arithmetic operations ($+, -, \times, \div$) any number of times\footnote{Using a number formed by concatenating two or more numbers (e.g. $13$) is disallowed}?
 \end{question}
 
-A ready-made answer is probably just an Internet search away. Just for fun, however, one should find such an arithmetic expression. It took the author quite some time to find it.
+A ready-made answer is probably just an Internet search away. Just for fun, however, one should find such an arithmetic expression without searching it on the Web. The author took quite some time to find it.
 
 \subsection{Initial Impressions}
 This puzzle is surprisingly challenging, especially if one is not well-versed with solving such puzzles. We take arithmetic for granted, but the four basic operations combine with four small numbers to render this puzzle tantalizingly difficult. This is so even if you could somehow solve it.
 
-We start with some heuristics: If we can make 4 using 1, 3, and 4, we can definitely make 24 by additionally using 6. 
+In our attempts, we may start with some heuristics: If we can make an expression using 1, 3, and 4 that evaluates to 4, then we can make 24 by multiplying it by 6. We have a different puzzle now, which is just as tricky.
 
+We may try parenthesizing parts of shorter expressions (e.g. $((6+4)-1)\times3 = 27$). After toiling for a while we might \textit{luckily} find the magic expression.
+
+But we may not. What if no such expression exists? Can we tell if one exists at all? If more than one solution exist, can we find them all? Can we even tell if we have examined \textit{all} expressions possible?
+
+We keep \textit{feeling} inadequate as we continue searching \dots
 \section{An Algorithmic Approach to Searching}
+As you keep searching, you may feel frustrated. After all, what we are do is form expressions of four numbers and four familiar arithmetic signs and evaluate it on the fly. It gets quite mechanical and hence boring after a short while. But we tend not to give up for a perceived shame grips us. After all, we have been seeing $+, -, \times, \div$ since first grade!
+
+Even after eventually finding the expression, we keep wondering if we weren't lucky. In case we are about to abandon the search, we seem to lack the confidence that we have indeed examined every expression. 
+
+Maybe we have picked up some prejudices in our childhood and carried them along unknowingly. Perhaps we should develop a different perspective. But, most of all, we feel the need of an assistance from a machine that carries out the calculations, well, mechanically. It's a solace that just such an accomplice exists: A computer! 
+
+A computer is astoundingly fast at performing known calculations precisely and, at the same time, thankfully dumb at showing any originality (even when there is a tremendous pressure of Artificial Intelligence techniques of the modern times) in devising \textit{abstractions}, the indomitable spirit of computing.
+
+\subsection{An Insight}
 \subsection{The Algorithm}
 \subsection{An Implementation}
 \section{Summary and Conclusion}
