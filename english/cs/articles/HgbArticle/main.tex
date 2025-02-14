@@ -94,27 +94,26 @@ urlcolor=magenta,
 \begin{abstract}\noindent
 This article discusses an algorithmic approach and a computer program based on it
 to solve an elementary combinatorial problem popular on social media. Its intended
-audience are high school students with some aptitude for abstract thinking and
-an interest in problem-solving.
+audience are high school students (and laypeople) with aptitude for abstract thinking and an interest in problem-solving.
 \end{abstract}
 
 %%%-----------------------------------------------------------------------------
 
 \section{Introduction}
 
-Consider the following puzzle\footnote{I first heard it from \href{https://sunilsingh-42118.medium.com/}{Sunil Singh}, a mathematics educator}:
+Consider a puzzle popular on social media\footnote{I first heard it from \href{https://sunilsingh-42118.medium.com/}{Sunil Singh}, a mathematics educator}:
 
 \begin{question}
-\label{puzzle}
+\label{puzzle1}
 How can you make $24$ using the numbers $1, 3, 4,$ and $6$ exactly once each, and the four arithmetic operations ($+, -, \times, \div$) any number of times\footnote{Using a number formed by concatenating two or more numbers (e.g. $13$) is disallowed}?
 \end{question}
 
-A ready-made answer is probably just an Internet search away. Just for fun, however, one should find such an arithmetic expression without searching it on the Web. Give it a try before you read further. Don't worry, the author took quite some time to find it.
+A ready-made answer is probably just an Internet search away. Just for fun, however, one should find such an arithmetic expression without searching it on the Web. Give it a try before you read further. Don't worry, the author took quite some time to find it. If you don't have an answer and are restless, skip to the end.
 
 \subsection{Initial Impressions}
-This puzzle is surprisingly challenging, especially if one is not well-versed with solving such puzzles. We take arithmetic for granted, but the four basic operations combine with four small numbers to render it tantalizingly difficult. This is so even if you could somehow solve it.
+This puzzle is surprisingly challenging, especially if one is not well-versed with solving such puzzles. We take arithmetic for granted, but the four basic operations combine with four small numbers to render it tantalizingly difficult. This is so even if you could solve it.
 
-In our attempts, we may start with some heuristics: If we can make an expression using 1, 3, and 4 that evaluates to 4, then we can make 24 by multiplying it by 6. But now we have a different puzzle that is just as tricky.
+In our attempts, we may start with heuristics: If we can make an \textit{expression} using 1, 3, and 4 that evaluates to 4, then we can make 24 by multiplying it by 6. But now we have a different puzzle that is just as tricky.
 
 We may try parenthesizing parts of shorter expressions and combining their results (e.g. $((6+4)-1)\times3 = 27$). After toiling for a while we might \textit{luckily} find the magic expression.
 
@@ -122,22 +121,23 @@ But we may not. What if no such expression exists? Can we tell if one exists at 
 
 We keep \textit{feeling} inadequate as we continue searching \dots
 \section{An Algorithmic Approach to Searching}
-As you keep searching, you may feel frustrated. After all, what we do is form expressions of four small numbers and four familiar arithmetic signs and evaluate them on the fly. It gets quite mechanical and hence boring after a short while. But we tend not to give up for a perceived shame grips us. After all, we have been seeing such numbers and $+, -, \times, \div$ since first grade!
+As we keep searching, we may feel frustrated. After all, what we repetitively do is make expressions of four small numbers and four familiar arithmetic signs and evaluate them. It gets quite mechanical and hence boring after a short while. But we tend not to give up for a perceived shame grips us. After all, we have been seeing such numbers and signs since first grade!
 
-Even after eventually finding the expression, we keep wondering if we weren't lucky. In case we are about to abandon the search, we seem to lack the confidence that we have indeed examined every expression. 
+Even if we solve the puzzle, we keep wondering if we weren't lucky. If we are about to abandon the search and declare that no solution exists, we seem to lack the confidence that we have indeed examined every expression. 
 
-Maybe we have picked up some unhelpful compliance in our childhood and carried them along unknowingly. Perhaps we should develop a different perspective. But, most of all, we feel the need of an assistance from a machine that carries out calculations correctly and, well, mechanically. It's a solace that just such an accomplice exists: A computer! 
+Most of all, we feel the need of an assistance from a machine that accepts expressions and evaluates them correctly and, well, mechanically. It's a solace that just such an accomplice exists: A computer! 
 
-A computer is astoundingly fast at performing known calculations precisely and, at the same time, naturally incapable of possessing intelligence or originality (even when there is a tremendous pressure on us from modern Artificial Intelligence techniques on proving otherwise) in devising \textit{abstractions}, the basis of computing. Alan Perlis once said \cite{Perlis1984} that, like a few other things, a computer, by definition, is \textit{explicitly programmed}. 
+A computer is astoundingly fast at performing known calculations precisely and, at the same time, naturally incapable of possessing intelligence\footnote{AI techniques seem to seriously rectify that limitation} or originality in devising \textit{abstractions}, the basis of computing. Alan Perlis once said \cite{Perlis1984} that, like a few other things, a computer, by definition, is \textit{explicitly programmed}. 
 
-Typically, a computer depends on us to tell it something (worthwhile) to do. And it needs precise, formal instructions. Or, more factually, we have got to believe that it follows our instructions to the letter. If the outcome of those instructions is different from what we expect, then we must doubt our instructions and it is up to us to modify them. We must not doubt if the computer followed them dutifully and precisely. To our dismay or to our pleasant surprise, ``AI-powered'' computers have started showing signs of a startling but \textit{disembodied} intelligence, but we will save that topic for later.  
+Typically, a computer depends on us to tell it something (worthwhile) to do. And it needs precise, formal instructions. Or, more factually, we have got to believe that it follows our instructions to the letter. If the outcome of those instructions is different from what we expect, then we must doubt our instructions and it is up to us to modify them. We must not doubt if the computer followed them dutifully and precisely. 
+% To our dismay or to our pleasant surprise, ``AI-powered'' computers have started showing signs of a startling but \textit{disembodied} intelligence, but we will save that topic for later.  
 
-Clearly, we need an \textit{algorithm} to solve every problem we delegate to the computer. Perhaps surprisingly, however, the idea of an algorithm does not require a computer. According to Donald Knuth \cite{Knuth1997}, Euclid described the first ``computer algorithm'', known as Euclid's GCD algorithm, 2300 years ago!
+Clear instructions are called an \emph{algorithm}. Clearly, we need an algorithm to solve every problem we delegate to the computer. Perhaps surprisingly, however, the idea of an algorithm is independent of a physical computer. According to Donald Knuth \cite{Knuth1997}, Euclid described the first ``computer algorithm'', known as Euclid's GCD algorithm, more than 2200 years before the advent of a digital computer!
 
-So, how do we fit this puzzle within the confines of the strict formalism that a computer demands? If only we could get rid of those pesky parentheses and mnemonic-laden\footnote{Remember ``BODMAS''?} ways of remembering the so-called \textit{operator precedence} \dots
+So, how do we fit this puzzle within the confines of the strict formalism that a computer demands? If only we could examine every expression \dots
 
 \subsection{Some Formal Background}
-To develop a perspective, we need to precisely define \textit{expression}, \textit{operator}, and \textit{operand}. An operator has a symbol and describes an operation on a number of operands which are just numbers in our case. Every operation \textit{takes} a number of operands and \textit{produces} a result (or results) that is, in many ways, like its operands--again, numbers in our case. Depending upon how many operands the operation takes, an operator can be \textit{unary} (takes one operand), \textit{binary} (takes two operands), etc. This property of an operator is called its \textit{arity}. 
+To develop a perspective, we need to precisely define \textit{expression}, \textit{operator}, and \textit{operand}. An operator has a symbol and describes an operation on a number of operands which are just numbers in our case. Every operation \textit{takes} a number of operands and \textit{produces} a result (or results) that is, in many ways, like its operands--again, numbers in our case. Depending upon how many operands the operation takes, an operator can be classified \textit{unary} (takes one operand), \textit{binary} (takes two operands), etc. This property of an operator is called its \textit{arity}. 
 
 We learn in grade school that unary operator symbols are written either before the numbers (e.g. $\sqrt 8$ to denote the square root of 8) or after the numbers (e.g. $3!$ to denote the factorial of 3), whereas the binary operator symbols are written between them ($2 + 3 = 5$). For binary operators, such an expression is called an \emph{infix} expression.
 
@@ -169,34 +169,34 @@ We start with a postfix expression. For the sake of our algorithm we read it a \
 \caption{Evaluate any postfix expression with binary operators}
 \label{alg1}
 \begin{algorithmic}[1]
-  \State $S \gets Stack.New$
-  \State $T \gets [t_1\, t_2\, \dots]$
+  \State $S \gets \Call{Stack.New}{}$
+  \State $T \gets [t_1, t_2, \dots,t_n]$
 	\While{T has tokens} \Comment{Start scanning the expression from left}
-	  \State $t \gets T.next$
+	  \State $t \gets$\Call{T.next}{}
 		\If{$t$ is an operand}
-			\State S.push(t)
-		\ElsIf{$t$ is an operator} \Comment{defensive programming}
-			\State $o2 \gets S.pop()$ \Comment{Pop \textit{two} operands}
-			\State $o1 \gets S.pop()$ \Comment{Order matters; pop second operand first}
+			\State \Call {S.push}{t} \Comment{\textcolor{red}{Returns Error if the stack is full}}
+		\ElsIf{$t$ is an operator} \Comment{Defensive programming}
+			\State $o2 \gets$ \Call {S.pop}{} \Comment{Pop \textit{two} operands}
+			\State $o1 \gets$ \Call {S.pop}{} \Comment{Order matters; pop second operand first}
 			\\
-			\Comment{It's an error if S doesn't have enough operands to pop}
-			\State $r \gets operator(od1, od2)$ \Comment{e.g. 2 + 3 and $r \gets 5$}
-			\State $S.push(r)$
+			\Comment{\textcolor{red}{Returns Error if the stack doesn't have enough operands to pop}}
+			\State $r \gets$ \Call {op}{od1, od2} \Comment{e.g. 2 + 3 and $r \gets 5$}
+			\State \Call {S.push}{r}
 		\Else 
 		  \State \textcolor{red}{return Error} \Comment{Invalid postfix expression?}
 		\EndIf
 	\EndWhile
-	\If{$S.empty()?$}
+	\If{\Call{S.empty}{}?}
 	  \State \textcolor{red}{return Error} \Comment{S must have the result}
 	\Else 
-	  \State return $S.pop()$
+	  \State return \Call{S.pop}{} \Comment{A valid expression evaluates to this value}
 	\EndIf
 \end{algorithmic}
 \end{algorithm}
 
 \subsection{A Helpful Insight?}
 Infix and postfix (or prefix), after all they are just notations. And it so happens that one can deterministically translate a valid infix expression into postfix and vice versa. 
-However, removing the need for parentheses and providing a mechanical way of evaluating are strengths of the postfix expression which the author used to address our puzzle \ref{puzzle}. Let's list the helpful facts that we know so far. They may be disparate at the moment, but they may align themselves in a sort of coherent whole later:
+However, removing the need for parentheses and providing a mechanical way of evaluating are strengths of the postfix expression which the author used to address our puzzle \ref{puzzle1}. Let's list the helpful facts that we know so far. They may sound disparate at the moment, but they might align themselves in a coherent whole later:
 \begin{tcolorbox}
 [
 colback=yellow!20,
@@ -204,9 +204,9 @@ colframe=cyan,
 sharp corners,
 boxrule=0.5pt,
 ]
-We want to employ a reliable method to carry out the \emph{exhaustive} search for all expressions involving given numbers ($1, 3, 4, 6$) and (binary) arithmetic operators ($+, -, \times, \div$). Can postfix notation help? \\
+We want to employ a reliable method to \emph{exhaustively} examine all expressions involving four numbers ($1, 3, 4, 6$) and (binary) arithmetic operators ($+, -, \times, \div$). Can postfix notation help? \\
 
-Since there are four operands and each binary operator takes two operands and produces a result (which may then pair up with next operand), we must have exactly three binary operators in an expression with seven tokens.
+Since there are four operands and each \emph{binary} operator takes two operands and produces a result (which may then pair up with next operand), we must have exactly three binary operators in an expression with seven tokens.
 \end{tcolorbox}
 
 We have four operands that can appear in any order in a postfix expression. Since we must have exactly three binary operators to operate on them, there are seven places each of which is occupied either by an operator or an operand. 
@@ -245,12 +245,12 @@ Here is another possible arrangement:
 \label{badperm1}
 \end{arrangement}
 
-We are unlucky in this case because this arrangement is not a valid postfix expression; it does not evaluate to anything. Expectedly, our algorithm [\ref{alg1}] returns an error in this case. But a computer doesn't care and perhaps neither should we, because we can ignore this arrangement as a ``non expression'' and move on to examining the next one. It would be nice to know a priori that such an expression is invalid (without actually evaluating it with our algorithm [\ref{alg1}]), but that is not necessary. Human mind may \emph{immediately} discard all the expressions like [\ref{badperm1}] that begin with an operator (because there is nothing to operate it on). But a computer algorithm can sometimes beat that ingenuity with shear speed of (possibly needless) calculation. This does not mean we write sloppy algorithms. In fact, we should always look for opportunities to optimize algorithms once their correctness is established.
+We are unlucky in this case because this arrangement is not a valid postfix expression; it does not evaluate to anything. Expectedly, our algorithm [\ref{alg1}] returns an error in this case. But a computer doesn't care and perhaps neither should we, because we can ignore this arrangement as a ``non expression'' and examine the next one. It would be nice to know a priori that such an expression is invalid (without actually evaluating it with our algorithm [\ref{alg1}]), but that is not necessary. Human mind may \emph{immediately} discard all the expressions like [\ref{badperm1}] that begin with an operator (because there is nothing to operate it on). But a computer algorithm can sometimes beat that ingenuity with shear speed of (possibly needless) calculation. This does not mean we write sloppy algorithms. In fact, we should always look for opportunities to optimize algorithms once their correctness is established.
 
 \subsection{The Algorithm}
-Perhaps we now feel closer to describing a foolproof\footnote{Being foolproof is required because a computer is going to carry it out} method of solving our puzzle to the computer. Our search has got to be exhaustive; we must not miss any (valid) arrangement of four operands and three binary operators. We evaluate each expression. If an expression evaluates to our target number (24), we have succeeded. If there is no such expression, the puzzle is unsolvable. An algorithm seems to emerge. We just need to describe the process precisely \dots
+Perhaps we now feel closer to describing a foolproof\footnote{Being foolproof is required because a computer is going to carry it out} method of solving our puzzle to the computer. Our search has got to be exhaustive; \textbf{we must not miss any (valid) arrangement of four operands and three binary operators} but it is acceptable if some arrangement leads to an invalid expression. We evaluate each expression. If an expression evaluates to our target number (24), we have succeeded. If there is no such expression, the puzzle is unsolvable. An algorithm seems to emerge. We just need to describe the process precisely \dots
 
-We are given a set of operands, but where they appear in the seven locations (their \emph{order}) matters. This is a archetypal situation leading us to a fascinating area of mathematics called Combinatorics. Specifically, we can arrange $k$ objects in $n$ locations\footnote{Each such arrangement is called a \emph{Permutation}} in ${}_{n}P_{k} = \frac{n!}{(n-k)!}$ ways. In our case, the number of such \emph{ordered arrangements} of four operands in seven locations $=\frac{7!}{3!}=7\times 6\times 5\times 4 = 840$. Here are some of the arrangements:
+We are given a set of operands, but where they appear in the seven locations (their \emph{order}) matters. This is a archetypal situation leading us to a fascinating area of mathematics called Combinatorics. Specifically, we can arrange $k$ objects in $n$ locations\footnote{Each such arrangement is called a \emph{Permutation}} in ${}_{n}P_{k} = \frac{n!}{(n-k)!}$ ways. In our case, the number of such \emph{ordered arrangements} of four operands in seven locations is $\frac{7!}{3!}=7\times 6\times 5\times 4 = 840$. Here are some of the arrangements:
 
 \begin{arrangement}
 \vspace{2mm}
@@ -420,6 +420,17 @@ Let's demonstrate the placement of all operator 3-tuples with one arrangement of
     \coordinate (s) at ($(s) + (1.5,0)$);
     \node[fill=yellow!20, minimum width=18mm, draw=cyan, rectangle] at (s) {$=0.13\overline{888}$};
   \end{tikzpicture}
+  \\
+  \begin{tikzpicture}
+    \coordinate (s) at (0,0);
+    \foreach \token in {\,,\,,1,3,\,,6, 4}{
+      \node[fill=red!10, minimum size=8mm, draw=cyan, rectangle] at (s) {$\token$};
+      \coordinate (s) at ($(s) + (0.65,0)$);
+    }
+    \coordinate (s) at ($(s) + (1.5,0)$);
+    \node[fill=red!10, minimum width=18mm, draw=cyan, rectangle] at (s) {$=Error$};
+	\end{tikzpicture}
+	\\
 
   \captionof{mytype}{All Postfix Expressions for the Operand Permutation $[1,4,3,6]$}
   \label{all-ops-with-one-operand-arr}
@@ -427,27 +438,52 @@ Let's demonstrate the placement of all operator 3-tuples with one arrangement of
 
 An upper bound on all 7-token postfix expressions thus formed is: $64\times 840 = 53760$. We examine every expression and, if it is valid, check the result it produces. Some \emph{optimizations} can reduce the number of expressions we need to evaluate. Here is our algorithm [\ref{alg2}]:
 \begin{algorithm}
-\caption{Examine All Postfix Expressions with Given Operands and Binary Operators}
+\caption{An Algorithm to Solve Puzzle [\ref{puzzle1}]}
 \label{alg2}
 \begin{algorithmic}[2]
-  \State $g \gets 24$ \Comment{Target result}
+  \State $g \gets 24$ \Comment{Target result: 24}
+  \State $f = false$  \Comment{Did we find an expression?}
   \State $P \gets \Call{perms}$ \Comment {$P\gets [P_1, P_2, \dots, P_{840}]$} 
   \State $T \gets \Call{tuples}$ \Comment {$[t_1, t_2, \dots, t_{64}]$} 
   \ForAll{$p \in P$}
     \ForAll{$t \in T$}
-      \State $e \gets \Call {expr}{p, t}$ \Comment{expression from given permutation and tuple}
-      \State $r \gets \Call {eval}{e}$ \Comment{evaluate using algorithm [\ref{alg1}]}
+      \State $e \gets \Call {expr}{p, t}$ \Comment{Expression from given permutation and tuple}
+      \State $r \gets \Call {eval}{e}$ \Comment{Evaluate using algorithm [\ref{alg1}]}
       \If{$r = g$}
-        \State \Output {$e$}
+        \State \Output {Bingo! Found a way to make g: $e$}
       \EndIf
     \EndFor
   \EndFor
+  \If {$f = false$}
+        \State \Output {There's no way to make g!}
+  \EndIf
 \end{algorithmic}
 \end{algorithm}
+
+Many optimizations are possible. The technique is also extensible to unary operators like factorial. However, algorithm [\ref{alg2}] is of a generic nature and therefore useful in practice.
 \subsection{An Implementation}
+A Java implementation of algorithm [\ref{alg2}] is available at \cite{Fazlur}. It correctly produces the expressions that solves this and similar problems.
 \section{Summary and Conclusion}
 
-\section{Answer to the Puzzle}
+The author describes a surprising application of a technique he learned in grad school to solve a combinatorial puzzle he encountered on social media years later. Of course there may be other techniques to solve the puzzle. 
+
+The puzzle is simple enough for any curious layperson familiar with basic arithmetic to attempt and enjoy, but it begets some serious computational questions. Every possible expression must be evaluated to find a match. Once a claim for a match is made, one can easily verify if the claim is valid. For four operands, we have to analyze more than $50000$ expressions in the worst case. How many expressions might we have to analyze if the number of operands is 10? Or 20? If there is no expression that evaluates to a given target, is there a trick that lets us \emph{quickly} conclude that without having to analyze every expression? In other words, do we have a more efficient algorithm to solve this puzzle? 
+
+Here is another similar puzzle.
+\begin{question}
+\label{puzzle2}
+How can you make $74$ using the numbers $1, 3, 4,$ and $6$ exactly once each, and the four arithmetic operations ($+, -, \times, \div$) any number of times\footnote{Using a number formed by concatenating two or more numbers (e.g. $13$) is disallowed}?
+
+({\small Hint: The expression $[3, 1, 4, 6, \times, +, \times]$ evaluates to 75.})
+
+\end{question}
+
+The puzzle represents one class of problems in combinatorics. Combinatorics is full of such problems where we devise algorithms to solve simply stated problems of immense complexity. And perhaps that is all we can do with such problems.
+
+\section{Answer to the Original Puzzle}
+
+Time for a handstand, maybe?
+
 \begin{rotanswer}
 $6\div(1-(3\div 4))$
 \end{rotanswer}
