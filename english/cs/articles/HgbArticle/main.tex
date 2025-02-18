@@ -92,9 +92,7 @@ urlcolor=magenta,
 %\listofmytypes % captioning
 
 \begin{abstract}\noindent
-This article discusses an algorithmic approach and a computer program based on it
-to solve an elementary combinatorial problem popular on social media. Its intended
-audience are high school students (and laypeople) with aptitude for abstract thinking and an interest in problem-solving.
+This article discusses an algorithmic approach and a computer program based on it to solve an elementary combinatorial problem popular on social media. Its intended audience are high school students (and laypeople) with aptitude for abstract thinking and an interest in problem-solving. Although the correct algorithm presented here is inefficient, the solution sheds light on a well-known problem in theoretical computer science.
 \end{abstract}
 
 %%%-----------------------------------------------------------------------------
@@ -123,21 +121,21 @@ We keep \textit{feeling} inadequate as we continue searching \dots
 \section{An Algorithmic Approach to Searching}
 As we keep searching, we may feel frustrated. After all, what we repetitively do is make expressions of four small numbers and four familiar arithmetic signs and evaluate them. It gets quite mechanical and hence boring after a short while. But we tend not to give up for a perceived shame grips us. After all, we have been seeing such numbers and signs since first grade!
 
-Even if we solve the puzzle, we keep wondering if we weren't lucky. If we are about to abandon the search and declare that no solution exists, we seem to lack the confidence that we have indeed examined every expression. 
+Even if we solve the puzzle, we keep wondering if we weren't lucky. If we are about to abandon\footnote{Indeed, a friend asked the author, ``Do you know if a solution exists?''} the search and declare that no solution exists, we seem to lack the confidence that we have indeed examined every expression. 
 
-Most of all, we feel the need of an assistance from a machine that accepts expressions and evaluates them correctly and, well, mechanically. It's a solace that just such an accomplice exists: A computer! 
+Most of all, we feel the need of an assistance from a machine that accepts (or, better yet, constructs) expressions and evaluates them correctly and, well, mechanically. It's a solace that just such an accomplice exists: A computer! 
 
 A computer is astoundingly fast at performing known calculations precisely and, at the same time, naturally incapable of possessing intelligence\footnote{AI techniques seem to seriously rectify that limitation} or originality in devising \textit{abstractions}, the basis of computing. Alan Perlis once said \cite{Perlis1984} that, like a few other things, a computer, by definition, is \textit{explicitly programmed}. 
 
-Typically, a computer depends on us to tell it something (worthwhile) to do. And it needs precise, formal instructions. Or, more factually, we have got to believe that it follows our instructions to the letter. If the outcome of those instructions is different from what we expect, then we must doubt our instructions and it is up to us to modify them. We must not doubt if the computer followed them dutifully and precisely. 
+Typically, a computer depends on us to tell it something (worthwhile) to do. And it needs precise, formal instructions. Or, more factually, we have got to believe that it follows our instructions precisely. If the outcome of those instructions is different from what we expect, then we must doubt our instructions and it is up to us to modify them. We must not doubt if the computer followed them dutifully and precisely. 
 % To our dismay or to our pleasant surprise, ``AI-powered'' computers have started showing signs of a startling but \textit{disembodied} intelligence, but we will save that topic for later.  
 
 Clear instructions are called an \emph{algorithm}. Clearly, we need an algorithm to solve every problem we delegate to the computer. Perhaps surprisingly, however, the idea of an algorithm is independent of a physical computer. According to Donald Knuth \cite{Knuth1997}, Euclid described the first ``computer algorithm'', known as Euclid's GCD algorithm, more than 2200 years before the advent of a digital computer!
 
-So, how do we fit this puzzle within the confines of the strict formalism that a computer demands? If only we could examine every expression \dots
+So, how do we fit this puzzle within the confines of the strict formalism that a computer demands? If only we could construct every expression \dots
 
 \subsection{Some Formal Background}
-To develop a perspective, we need to precisely define \textit{expression}, \textit{operator}, and \textit{operand}. An operator has a symbol and describes an operation on a number of operands which are just numbers in our case. Every operation \textit{takes} a number of operands and \textit{produces} a result (or results) that is, in many ways, like its operands--again, numbers in our case. Depending upon how many operands the operation takes, an operator can be classified \textit{unary} (takes one operand), \textit{binary} (takes two operands), etc. This property of an operator is called its \textit{arity}. 
+To develop a perspective, we need to precisely define \textit{expression}, \textit{operator}, and \textit{operand}. An operator has a symbol and describes an operation on a number of operands which are just numbers in our case. Every operation \textit{takes} a number of operands and \textit{produces} a result (or results) that is, in many ways, like its operands--again, numbers in our case. Depending upon how many operands the operation takes, an operator can be classified \textit{unary} (takes one operand), \textit{binary} (takes two operands), etc. This property of an operator is called its \textit{arity}. Operators can also be \emph{commutative} or \emph{non-commutative}. Results of commutative binary operators do not depend on the \emph{order} of their operands: $a+b=b+a$, whereas those of non-commutative binary operators do: $a\div b \ne b\div a$ 
 
 We learn in grade school that unary operator symbols are written either before the numbers (e.g. $\sqrt 8$ to denote the square root of 8) or after the numbers (e.g. $3!$ to denote the factorial of 3), whereas the binary operator symbols are written between them ($2 + 3 = 5$). For binary operators, such an expression is called an \emph{infix} expression.
 
@@ -174,16 +172,16 @@ We start with a postfix expression. For the sake of our algorithm we read it a \
 	\While{T has tokens} \Comment{Start scanning the expression from left}
 	  \State $t \gets$\Call{T.next}{}
 		\If{$t$ is an operand}
-			\State \Call {S.push}{t} \Comment{\textcolor{red}{Returns Error if the stack is full}}
-		\ElsIf{$t$ is an operator} \Comment{Defensive programming}
+			\State \Call {S.push}{t} \Comment{\textcolor{red}{Return Error if the stack is full}}
+		\ElsIf{$t$ is an operator} \Comment{Write defensive program}
 			\State $o2 \gets$ \Call {S.pop}{} \Comment{Pop \textit{two} operands}
 			\State $o1 \gets$ \Call {S.pop}{} \Comment{Order matters; pop second operand first}
 			\\
-			\Comment{\textcolor{red}{Returns Error if the stack doesn't have enough operands to pop}}
+			\Comment{\textcolor{red}{Return Error if the stack doesn't have enough operands to pop}}
 			\State $r \gets$ \Call {op}{od1, od2} \Comment{e.g. 2 + 3 and $r \gets 5$}
-			\State \Call {S.push}{r}
+			\State \Call {S.push}{r}\Comment{\textcolor{red}{Return Error if the stack is full}}
 		\Else 
-		  \State \textcolor{red}{return Error} \Comment{Invalid postfix expression?}
+		  \State \textcolor{red}{return Error} \Comment{Impossible? An invalid token}
 		\EndIf
 	\EndWhile
 	\If{\Call{S.empty}{}?}
@@ -204,7 +202,9 @@ colframe=cyan,
 sharp corners,
 boxrule=0.5pt,
 ]
-We want to employ a reliable method to \emph{exhaustively} examine all expressions involving four numbers ($1, 3, 4, 6$) and (binary) arithmetic operators ($+, -, \times, \div$). Can postfix notation help? \\
+We want to employ a (preferably systematic) method to \emph{assuredly} examine all expressions made of exactly four numbers ($1, 3, 4, 6$) and required (binary) arithmetic operators ($+, -, \times, \div$). The emphasis is on not missing any valid expression. \\
+
+Can postfix notation help? \\
 
 Since there are four operands and each \emph{binary} operator takes two operands and produces a result (which may then pair up with next operand), we must have exactly three binary operators in an expression with seven tokens.
 \end{tcolorbox}
@@ -245,10 +245,12 @@ Here is another possible arrangement:
 \label{badperm1}
 \end{arrangement}
 
-We are unlucky in this case because this arrangement is not a valid postfix expression; it does not evaluate to anything. Expectedly, our algorithm [\ref{alg1}] returns an error in this case. But a computer doesn't care and perhaps neither should we, because we can ignore this arrangement as a ``non expression'' and examine the next one. It would be nice to know a priori that such an expression is invalid (without actually evaluating it with our algorithm [\ref{alg1}]), but that is not necessary. Human mind may \emph{immediately} discard all the expressions like [\ref{badperm1}] that begin with an operator (because there is nothing to operate it on). But a computer algorithm can sometimes beat that ingenuity with shear speed of (possibly needless) calculation. This does not mean we write sloppy algorithms. In fact, we should always look for opportunities to optimize algorithms once their correctness is established.
+We are unlucky in this case because this arrangement is not a valid postfix expression; it does not evaluate to anything. Expectedly, our algorithm [\ref{alg1}] returns an error in this case. But a computer doesn't care and perhaps neither should we, because we can ignore this arrangement as a ``non expression'' and examine the next one. It would be nice to know a priori that such an expression is invalid (without actually evaluating it with our algorithm [\ref{alg1}]), but that is not necessary. Human mind may \emph{immediately} discard all the expressions like [\ref{badperm1}] that begin with an operator (because there is nothing to operate it on). But even an inefficient computer algorithm can sometimes beat that ingenuity with shear speed of (possibly needless) calculation. 
+
+This does not mean we write sloppy algorithms. In fact, we should always look for opportunities to optimize algorithms once their correctness is established. However, the nature of some problems makes it (very) difficult for us to devise efficient algorithms to solve them. Our problem shows symptoms of such a problem \dots
 
 \subsection{The Algorithm}
-Perhaps we now feel closer to describing a foolproof\footnote{Being foolproof is required because a computer is going to carry it out} method of solving our puzzle to the computer. Our search has got to be exhaustive; \textbf{we must not miss any (valid) arrangement of four operands and three binary operators} but it is acceptable if some arrangement leads to an invalid expression. We evaluate each expression. If an expression evaluates to our target number (24), we have succeeded. If there is no such expression, the puzzle is unsolvable. An algorithm seems to emerge. We just need to describe the process precisely \dots
+Perhaps we now feel closer to describing a foolproof\footnote{Being foolproof is required because a computer is going to carry it out}, if inefficient, method of solving our puzzle to the computer. Our search has got to be exhaustive; \textbf{we must not miss any (valid) arrangement of four operands and three binary operators} but it is acceptable if some arrangement leads to an invalid expression. We evaluate each expression. If an expression evaluates to our target number (24), we have succeeded. If there is no such expression, the puzzle is unsolvable. An algorithm seems to emerge. We just need to describe the process precisely \dots
 
 We are given a set of operands, but where they appear in the seven locations (their \emph{order}) matters. This is a archetypal situation leading us to a fascinating area of mathematics called Combinatorics. Specifically, we can arrange $k$ objects in $n$ locations\footnote{Each such arrangement is called a \emph{Permutation}} in ${}_{n}P_{k} = \frac{n!}{(n-k)!}$ ways. In our case, the number of such \emph{ordered arrangements} of four operands in seven locations is $\frac{7!}{3!}=7\times 6\times 5\times 4 = 840$. Here are some of the arrangements:
 
@@ -324,7 +326,7 @@ We are given a set of operands, but where they appear in the seven locations (th
 
 These are \emph{all} the possible ways in which we can arrange members of the set of operands $\{1,3, 4, 6\}$ in seven places and there are exactly 840 such arrangements. Some arrangements will invariably lead to invalid postfix expressions (e.g. the permutations in red in Fig [\ref{allperms}]) after we place the operator symbols in remaining places. 
 
-How do we place operator symbols? Well, we have three places and we want to place three operators in them. However, this time repetition is allowed because we can choose the same operator more than once. Such arrangements where members of an $n$-set are placed in $k$ places (where selecting the same set member is allowed) is called $k$-tuples \cite{ktuples} of the $n$-set. The number of $k$-tuples is $n^{k}$. In our case $k=3, n=4, n^k=64$. We have 64 3-tuples of 4 operators to consider.
+How do we place operator symbols? Well, we have three places and we want to place three operators in them. However, this time repetition is allowed because we can choose the same operator more than once. Such arrangements where members of an $n$-set are placed in $k$ places (where choosing a set member more than once is allowed) is called $k$-tuples \cite{ktuples} of the $n$-set. The number of $k$-tuples is $n^{k}$. In our case $k=3, n=4, n^k=64$. We have 64 3-tuples of 4 operators to consider.
 
 Let's demonstrate the placement of all operator 3-tuples with one arrangement of operands, $[$1,4,\textvisiblespace,3,\textvisiblespace,6,\textvisiblespace$]$, (shown in green) from Figure \ref{allperms}.
 
@@ -436,7 +438,9 @@ Let's demonstrate the placement of all operator 3-tuples with one arrangement of
   \label{all-ops-with-one-operand-arr}
   \end{arrangement}
 
-An upper bound on all 7-token postfix expressions thus formed is: $64\times 840 = 53760$. We examine every expression and, if it is valid, check the result it produces. Some \emph{optimizations} can reduce the number of expressions we need to evaluate. Here is our algorithm [\ref{alg2}]:
+An upper bound on all 7-token postfix expressions thus formed is: $64\times 840 = 53760$. We examine every expression and, if it is valid, check the result it produces. Some \emph{optimizations} can reduce the number of expressions we need to evaluate. We assume the availability of procedures \texttt{\textcolor{teal}{perms, tuples, expr}}.  
+
+Here is our algorithm [\ref{alg2}]:
 \begin{algorithm}
 \caption{An Algorithm to Solve Puzzle [\ref{puzzle1}]}
 \label{alg2}
@@ -448,9 +452,10 @@ An upper bound on all 7-token postfix expressions thus formed is: $64\times 840 
   \ForAll{$p \in P$}
     \ForAll{$t \in T$}
       \State $e \gets \Call {expr}{p, t}$ \Comment{Expression from given permutation and tuple}
-      \State $r \gets \Call {eval}{e}$ \Comment{Evaluate using algorithm [\ref{alg1}]}
+      \State $r \gets \Call {evalPostFix}{e}$ \Comment{Evaluate using algorithm [\ref{alg1}]}
       \If{$r = g$}
-        \State \Output {Bingo! Found a way to make g: $e$}
+        \Output {Bingo! Found a way to make g: $e$}
+	\State $f = true$
       \EndIf
     \EndFor
   \EndFor
@@ -467,7 +472,16 @@ A Java implementation of algorithm [\ref{alg2}] is available at \cite{Fazlur}. I
 
 The author describes a surprising application of a technique he learned in grad school to solve a combinatorial puzzle he encountered on social media years later. Of course there may be other techniques to solve the puzzle. 
 
-The puzzle is simple enough for any curious layperson familiar with basic arithmetic to attempt and enjoy, but it begets some serious computational questions. Every possible expression must be evaluated to find a match. Once a claim for a match is made, one can easily verify if the claim is valid. For four operands, we have to analyze more than $50000$ expressions in the worst case. How many expressions might we have to analyze if the number of operands is 10? Or 20? If there is no expression that evaluates to a given target, is there a trick that lets us \emph{quickly} conclude that without having to analyze every expression? In other words, do we have a more efficient algorithm to solve this puzzle? 
+The puzzle is simple enough for any curious layperson familiar with basic arithmetic to attempt and enjoy, but it begets some serious computational questions. 
+\begin{enumerate}
+\item Every possible expression must be examined. There is no ``shortcut'' to find the expression that evaluates to a target number. Must we examine every expression? Can we do \emph{better} than the mundane ``make and evaluate every expression'' method?
+
+\item If someone claims to find an expression however, we can efficiently verify if the claim is valid. 
+
+\item For four operands, we have to analyze more than $50000$ expressions in the worst case. How many expressions might we have to analyze if the number of operands is 10? Or 20? 
+
+\item If there is no expression that evaluates to a given target, is there a trick that lets us \emph{quickly} conclude that without having to analyze every expression? In other words, do we have a more efficient algorithm to solve this puzzle in the negative case? 
+\end{enumerate}
 
 Here is another similar puzzle.
 \begin{question}
@@ -478,7 +492,7 @@ How can you make $74$ using the numbers $1, 3, 4,$ and $6$ exactly once each, an
 
 \end{question}
 
-The puzzle represents one class of problems in combinatorics. Combinatorics is full of such problems where we devise algorithms to solve simply stated problems of immense complexity. And perhaps that is all we can do with such problems.
+The puzzle represents one class of problems that pose challenges even to the fastest computers because an ``efficient'' algorithm may not exist. Increasing the number of operands by an additive constant increases the number of cases to examine by a multiplicative constant. Who knows, if you can find an efficient algorithm for such problems or \emph{prove} that none exists, you may win a million dollars\footnote{See the \href{https://en.wikipedia.org/wiki/P_versus_NP_problem}{P versus NP Problem}}!
 
 \section{Answer to the Original Puzzle}
 
