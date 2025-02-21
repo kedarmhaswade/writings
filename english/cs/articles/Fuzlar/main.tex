@@ -104,10 +104,10 @@ Consider a puzzle popular on social media\footnote{I first heard it from \href{h
 
 \begin{question}
 \label{puzzle1}
-How can you make $24$ using the numbers $1, 3, 4,$ and $6$ exactly once each, and the four arithmetic operations ($+, -, \times, \div$) any number of times\footnote{Using a number by concatenating two or more numbers (e.g., $13$) is disallowed}?
+How can you make $24$ using the numbers $1, 3, 4,$ and $6$ exactly once each, and the four arithmetic operations ($+, -, \times, \div$) any number of times\footnote{Using a number by concatenating two or more numbers (e.g., $13$) is not allowed}?
 \end{question}
 
-A ready-made answer is probably just an Internet search away. Just for fun, however, one should find such an arithmetic expression without searching it on the Web. Try it before you read further. Don't worry, the author took quite some time to find it. If you don't find an answer and are restless, skip to the end.
+A ready-made answer is probably just an Internet search\footnote{Or a chat with your favorite Large Language or Reasoning Model or agentic AI} away. Just for fun, however, one should find such an arithmetic expression without searching it on the Web. Try it before you read further. Don't worry, the author took quite some time to find it. If you don't find an answer and are restless, skip to the end.
 
 \subsection{Initial Impressions}
 This puzzle is surprisingly challenging, especially if one is not well-versed in solving such puzzles. We take arithmetic for granted, but the four basic operations combine with four small numbers to render it tantalizingly difficult. This is so even if you could solve it.
@@ -126,7 +126,7 @@ Even if we solve the puzzle, we wonder if we weren't lucky. If we are about to a
 
 Most of all, we feel the need for assistance from a machine that accepts (or, better yet, constructs) expressions and evaluates them correctly and, well, mechanically. It's a solace that just such an accomplice exists: A computer! 
 
-A computer is astoundingly fast at performing known calculations precisely and, at the same time, naturally incapable of possessing intelligence\footnote{AI techniques seem to seriously rectify that limitation} or originality in devising \textit{abstractions}, the basis of computing. Alan Perlis once said \cite{Perlis1984} that, like a few other things, a computer, by definition, is \textit{explicitly programmed}. 
+A computer is astoundingly fast at performing known calculations precisely and, at the same time, naturally incapable of possessing intelligence\footnote{AI techniques claim to rectify that limitation} or originality in devising \textit{abstractions}, the basis of computing. Alan Perlis once said \cite{Perlis1984} that, like a few other things, a computer, by definition, is \textit{explicitly programmed}. 
 
 Typically, a computer depends on us to tell it something (worthwhile) to do. And it needs precise, formal instructions. Or, more factually, we have got to believe that it follows our instructions precisely. If the outcome of those instructions is different from what we expect, then we must doubt our instructions and it is up to us to modify them. We must not doubt if the computer followed them dutifully and precisely. 
 % To our dismay or our pleasant surprise, ``AI-powered'' computers have started showing signs of a startling but \textit{disembodied} intelligence, but we will save that topic for later.  
@@ -142,7 +142,7 @@ We learn in grade school that unary operator symbols are written either before t
 
 The four basic arithmetic operations--addition, subtraction, multiplication, and division-- are all binary. They take two numbers and produce a number. That helps us combine them sequentially to form expressions. Each expression can be \textit{evaluated} to produce a value which is a number in our case.
 
-Expressions such as $2+3+8+7$ achieve brevity\footnote{Imagine the plight of reading $2+3; 5+8; 13+7$ instead} which aids comprehension. However, ambiguity arises when different operators appear in the same expression: $1+2\times 3$ because we don't know whether to add first and then multiply (producing 9) or vice versa (producing 7). To address the ambiguity, we could have made a rule: \textit{Do the operations in the order of their appearance}.  
+Combining operations in expressions such as $2+3+8+7$ achieve brevity\footnote{Imagine the plight of reading $2+3; 5+8; 13+7$ instead} which aids comprehension. However, ambiguity arises when different operators appear in the same expression: $1+2\times 3$ because we don't know whether to add first and then multiply (producing 9) or vice versa (producing 7). To address the ambiguity, we could have made a rule: \textit{Do the operations in the order of their appearance}.  
 
 Instead, we use parentheses to disambiguate: $(1+2)\times 3$ evaluates to 9 and $1+(2\times 3)$ to 7. If we do not want to introduce parentheses, however, we need to define \textit{precedence} of operators. This is where the mnemonics like ``BODMAS'' originate.  Infix notation is a rules-heavy way to denote and evaluate expressions. But is that the only way?
 
@@ -242,7 +242,7 @@ Here is another possible arrangement:
     \coordinate (s) at ($(s) + (0.65,0)$);
   }
 \end{tikzpicture}
-\captionof{mytype}{An Invalid Arrangement}
+\captionof{mytype}{A Valid Arrangement, but Invalid Postfix Expression}
 \label{badperm1}
 \end{arrangement}
 
@@ -496,13 +496,13 @@ The puzzle is simple enough for any curious layperson familiar with basic arithm
 Here is another similar puzzle:
 \begin{question}
 \label{puzzle2}
-How can you make $74$ using the numbers $1, 3, 4,$ and $6$ exactly once each, and the four arithmetic operations ($+, -, \times, \div$) any number of times\footnote{Using a number formed by concatenating two or more numbers (e.g. $13$) is disallowed}?
+How can you make $74$ using the numbers $1, 3, 4,$ and $6$ exactly once each, and the four arithmetic operations ($+, -, \times, \div$) any number of times\footnote{Using a number formed by concatenating two or more numbers (e.g. $13$) is not allowed}?
 
-({\small Hint: The expression $[3, 1, 4, 6, \times, +, \times]$ evaluates to 75.})
+({\small Hint: The expression $((4\times6)+1)\times 3$ evaluates to 75.})
 
 \end{question}
 
-The puzzle represents one class of problems that pose challenges even to the fastest computers because an ``efficient'' algorithm may not exist. Increasing the number of operands by an additive constant increases the number of cases to examine by a multiplicative constant. Who knows, if you can find an efficient algorithm for such problems or \emph{prove} that none exists, you may win a million dollars\footnote{See the \href{https://en.wikipedia.org/wiki/P_versus_NP_problem}{P versus NP Problem}}!
+The puzzle represents one class of problems that pose challenges even to the fastest computers because an ``efficient'' algorithm may not exist\footnote{Try asking puzzle [\ref{puzzle2}] to an LLM like ChatGPT; you may not conclude that it is \emph{intelligent}}. Increasing the number of operands by an additive constant increases the number of cases to examine by a multiplicative constant. Who knows, if you can find an efficient algorithm for such problems or \emph{prove} that none exists, you may win a million dollars\footnote{See the \href{https://en.wikipedia.org/wiki/P_versus_NP_problem}{P versus NP Problem}}!
 
 \section{Answer to the Original Puzzle}
 
