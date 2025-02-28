@@ -191,10 +191,10 @@ We start with a postfix expression. For the sake of our algorithm, we read it a 
 		  \State \textcolor{red}{return Error} \Comment{Impossible? An invalid token}
 		\EndIf
 	\EndWhile
-	\If{\Call{S.empty}{}?}
+	\If{\Call{S.empty}{ }}
 	  \State \textcolor{red}{return Error} \Comment{S must have the result}
 	\Else 
-	  \State return \Call{S.pop}{} \Comment{A valid expression evaluates to this value}
+	  \State return $\Call{S.pop}{ }$ \Comment{A valid expression evaluates to this value}
 	\EndIf
 \end{algorithmic}
 \end{algorithm}

@@ -175,8 +175,8 @@ We start with a postfix expression. For the sake of our algorithm, we read it a 
 		\If{$t$ is an operand}
 			\State \Call {S.push}{t} \Comment{\textcolor{red}{Return Error if the stack is full}}
 		\ElsIf{$t$ is an operator} \Comment{Write defensive program}
-			\State $od2 \gets$ \Call {S.pop}{} \Comment{Pop \textit{two} operands}
-			\State $od1 \gets$ \Call {S.pop}{} \Comment{Order matters; pop second operand first}
+			\State $od2 \gets$ \Call {S.pop}{ } \Comment{Pop \textit{two} operands}
+			\State $od1 \gets$ \Call {S.pop}{ } \Comment{Order matters; pop second operand first}
 			\\
 			\Comment{\textcolor{red}{Return Error if the stack doesn't have enough operands to pop}}
 			\State $r \gets$ \Call {op}{od1, od2} \Comment{e.g. 2 + 3 and $r \gets 5$}
@@ -185,10 +185,10 @@ We start with a postfix expression. For the sake of our algorithm, we read it a 
 		  \State \textcolor{red}{return Error} \Comment{Impossible? An invalid token}
 		\EndIf
 	\EndWhile
-	\If{\Call{S.empty}{}?}
+	\If{\Call{S.empty}{ }}
 	  \State \textcolor{red}{return Error} \Comment{S must have the result}
 	\Else 
-	  \State return \Call{S.pop}{} \Comment{A valid expression evaluates to this value}
+	  \State \State return $\Call{S.pop}{ }$ \Comment{A valid expression evaluates to this value}
 	\EndIf
 \end{algorithmic}
 \end{algorithm}
