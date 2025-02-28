@@ -85,7 +85,7 @@ urlcolor=magenta,
 %%the intro text box is drawn automatically
 %%place \authorIntro  just before abstract
 \authorIntro{\includegraphics[width=2cm]{kedar-pic}\\
-Kedar Mhaswade is a computer programmer and an independent researcher. He studied mechanical engineering at the Government College of Engineering in Pune, India and computer science at IIT Chennai (1997). He has worked as a programmer at several companies since then. He is interested in logic and foundations of computer science, computer algorithms, functional programming, and mathematics and science education. His \href{https://orcid.org/0009-0004-0436-5661}{ORCID ID} is $0009-0004-0436-5661$.}
+Kedar Mhaswade is a computer programmer and an independent researcher. He studied mechanical engineering at the Government College of Engineering in Pune, India and computer science at IIT Chennai (1997). He has worked as a computer programmer at several companies since then. He is interested in logic and foundations of computer science, computer algorithms, functional programming, and mathematics and science education. His \href{https://orcid.org/0009-0004-0436-5661}{ORCID ID} is $0009-0004-0436-5661$.}
 %%abstract
 \begin{abstract}
 \noindent This article discusses an algorithmic approach and a computer program based on it to solve an elementary combinatorial problem that is popular on social media. Its intended audience is high school students (and laypeople) with an aptitude for abstract thinking and an interest in problem-solving. The algorithm presented here is correct but inefficient. However, it sheds light on a well-known problem in theoretical computer science.
@@ -146,7 +146,7 @@ Combining operations in expressions such as $2+3+8+7$ achieve brevity\footnote{I
 
 Instead, we use parentheses to disambiguate: $(1+2)\times 3$ evaluates to 9 and $1+(2\times 3)$ to 7. If we do not want to introduce parentheses, however, we need to define \emph{precedence} of operators. This is where the mnemonics like ``BODMAS'' originate.  Infix notation is a rules-heavy way to denote and evaluate expressions. But is that the only way?
 
-\keywords{algorithms, arithmetic, recreational mathematics, permutations, tuples, reverse polish notation} 
+\keywords{algorithms, arithmetic, recreational mathematics, combinatorics, reverse polish notation} 
 
 \subsection{Postfix Expressions and the Stack}
 As students, we should develop the habit of \emph{meaningfully challenging the status quo}. History of mathematics and other sciences teaches us about people who dared to explore and we learn a great deal about trailblazing from them.
@@ -181,8 +181,8 @@ We start with a postfix expression. For the sake of our algorithm, we read it a 
 		\If{$t$ is an operand}
 			\State \Call {S.push}{t} \Comment{\textcolor{red}{Return Error if the stack is full}}
 		\ElsIf{$t$ is an operator} \Comment{Write defensive program}
-			\State $o2 \gets$ \Call {S.pop}{ } \Comment{Pop \emph{two} operands}
-			\State $o1 \gets$ \Call {S.pop}{ } \Comment{Order matters!}
+			\State $od2 \gets$ \Call {S.pop}{ } \Comment{Pop \emph{two} operands}
+			\State $od1 \gets$ \Call {S.pop}{ } \Comment{Order matters!}
 			\\
 			\Comment{\textcolor{red}{Return Error: not enough operands on the stack}}
 			\State $r \gets$ \Call {op}{od1, od2} \Comment{Do it: e.g. 2 + 3 and $r \gets 5$}
