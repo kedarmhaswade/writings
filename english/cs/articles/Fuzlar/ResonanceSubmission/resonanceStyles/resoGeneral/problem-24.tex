@@ -467,10 +467,10 @@ Here is our algorithm [\ref{alg2}]:
   \State $T \gets \Call{tuples}$ \Comment {$T\gets [t_1, t_2, \dots, t_{64}]$} 
   \ForAll{$p \in P$}
     \ForAll{$t \in T$}
-      \State $e \gets \Call {expr}{p, t}$ \Comment{$e\gets$ expression from given permutation and tuple}
-      \State $r \gets \Call {evalPostFix}{e}$ \Comment{$r\gets$ the value using algorithm [\ref{alg1}]}
+      \State $e \gets \Call {expr}{p, t}$ \Comment{$e\gets$ from given permutation, tuple}
+      \State $r \gets \Call {evalPostFix}{e}$ \Comment{$r\gets$ use algorithm [\ref{alg1}]}
       \If{$r = g$}
-        \Output {Bingo! Found a way to make g: $e$}
+        \Output {Found g: $e$}
 	\State $f = true$
       \EndIf
     \EndFor
@@ -521,6 +521,7 @@ $6\div(1-(3\div 4))$
 
 %%Use section* for unnumbered sections and \footnote for a normal footnote
 \section*{Acknowledgements}
+The author wishes to thank Deepa Joshi and two anonymous reviewers, who read the entire manuscript and verified the correctness of given algorithms.   
 
 
 %%References section
