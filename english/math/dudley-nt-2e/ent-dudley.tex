@@ -1,0 +1,263 @@
+%% A simple template for a term report using the Hagenberg setu can be difficult because inspiration is sometimes necessary to find a solution, and inspiration cannot be had to orderp
+%% based on the standard LaTeX 'report' class
+
+%%% Magic comments for setting the correct parameters in compatible IDEs
+% !TeX encoding = utf8
+% !TeX program = pdflatex 
+% !TeX spellcheck = en_US
+% !BIB program = biber
+
+\RequirePackage[utf8]{inputenc} % Remove when using lualatex or xelatex!
+\RequirePackage{hgbpdfa}        % Creates a PDF/A-2b compliant document
+
+\documentclass[english,notitlepage,smartquotes]{hgbreport}
+% Supported options in [..]:
+%    Main language: 'german' (default), 'english'
+%    Conversion to typographic quotation marks: 'smartquotes'
+%    Use APA citation style: 'apa'
+%    Do not create a separate title page: 'notitlepage'
+%    Page layout: 'oneside' (single-sided, default), 'twoside' (double-sided)
+%%%-----------------------------------------------------------------------------
+
+\graphicspath{{images/}}  % Location of images and graphics
+\bibliography{references} % Biblatex bibliography file (references.bib)
+\usepackage{csquotes}
+% theorems, definitions, remarks etc.
+\usepackage{amsthm}
+
+\theoremstyle{definition}
+\newtheorem*{definition}{Definition}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}{Lemma}[chapter]
+\renewcommand\qedsymbol{$\blacksquare$}
+% theorems, definitions, remarks etc.
+
+% long table
+\usepackage{longtable}
+% long table
+
+%%%-----------------------------------------------------------------------------
+\begin{document}
+%%%-----------------------------------------------------------------------------
+\author{Kedar Mhaswade}                    % Your name
+\title{Elementary Number Theory by Underwood Dudley:\\ % Name of the course or project
+			Notes and Problem Solutions}	                 % or "Project Report"
+\date{\today}
+
+%%%-----------------------------------------------------------------------------
+\maketitle
+%%%-----------------------------------------------------------------------------
+
+\begin{abstract}\noindent
+\if(0)
+This document is a simple template for a typical term or semester paper
+(lab/course report, "Übungsbericht", \etc) based on the \textsf{HagenbergThesis}
+\latex package.%
+\footnote{See \url{https://github.com/Digital-Media/HagenbergThesis} for the
+	most current version and additional examples. This repository also provides
+	a good introduction and useful hints for authoring academic texts with
+	LaTeX.}
+The structure and chapter titles have been formulated to provide a good
+starting point for a typical \emph{project report}. This document uses the
+custom class \textsf{hgbreport} which is based on \latex's standard
+\textsf{report} document class with \texttt{chapter} as the top structuring
+element. If you wish to write this report in German you should substitute the
+line
+%
+\begin{quote}
+	\verb!\documentclass[english]{hgbreport}! 
+\end{quote}
+%
+at the top of this document by
+%
+\begin{quote}
+	\verb!\documentclass[german]{hgbreport}!.
+\end{quote}
+%
+In addition, the \texttt{smartquotes} document option is used in this document
+for simplified insertion of quotes. To omit the default \emph{title page}
+(as in this document) use the \texttt{notitlepage} option, \eg,
+%
+\begin{quote}
+	\verb!\documentclass[notitlepage,english]{hgbreport}!.
+\end{quote}
+%
+Also, you may want to place the text of the individual chapters in separate
+files and include them using \verb!\include{..}!.
+\fi
+
+\bigskip
+\noindent
+% Use the abstract to provide a short summary of the document's contents.
+This document contains the author's notes and solutions to problems from Underwood Dudley's [\cite{Dudley2008}] accessible introduction to Number Theory.
+
+In the \emph{Preface}, Dudley writes,
+\enquote{Number Theory problems can be difficult because inspiration is sometimes necessary to find a solution, and inspiration cannot be had to order. A student should not expect to be able to conquer all of the problems and should not feel discouraged if some are baffling. There is benefit in trying to solve problems whether a solution is found or not.}
+
+We have all experienced the frustration and exaltation of solving problems. And, in arithmetic--the queen of mathematics--there is no dearth of beautiful and difficult problems. We should keep trying as long as doing so calmly feels worth the effort. Destructive perfectionism is not needed. The author undertook this project almost purely as a labor of love\footnote{He also wanted to become a better programmer, but before he could solve the amazing \href{https://projecteuler.net/about}{\emph{Project Euler}} problems a bit more efficiently, he wanted to feel more comfortable with arithmetic!}.
+
+Every theorem in the book and its proof are provided. A table of theorems (proved or researched) is compiled here [\ref{tab:theorems}]. 
+\end{abstract}
+
+%%%-----------------------------------------------------------------------------
+\tableofcontents
+%%%-----------------------------------------------------------------------------
+
+%%%-----------------------------------------------------------------------------
+\chapter{Integers}
+%%%-----------------------------------------------------------------------------
+
+% Describe the initial goals and situation that lead to this project, requirements, as well as references to related work (\eg, \cite{Higham2020}).
+
+Note: \textbf{A roman letter in italics, like, for example, $p$, denotes an integer, unless specified otherwise.}
+\begin{definition}[Least-Integer Principle]
+A nonempty finite set of integers contains a \emph{smallest element}.
+\end{definition}
+\begin{definition}[Divides]
+\label{def:divides}
+We say ``$a$ divides $b$'' and write $a\mid b$ if and only if there is an integer $d$ such that $ad=b$.
+
+Thus, $a\mid b \iff \exists d\in \mathbb{Z} \text{\;such that\;} ad=b,  a, b\in \mathbb{N}$
+\end{definition}
+
+A few lemmas follow:
+\begin{lemma}
+\label{lemma:divides-sum}
+If $d\mid a$ and $d\mid b$, then $d\mid(a+b)$.
+\end{lemma}
+\begin{lemma}
+\label{lemma:divides-lin-comb}
+If $d\mid a_1,d\mid a_2,\cdots, d\mid a_n$, then $d\mid(c_1a_1+c_2a_2+\cdots+c_na_n)$.
+\end{lemma}
+\begin{definition}[GCD]
+\label{def:gcd}
+We say $d$ is the ``greatest common divisor'' of $a$ and $b$ (not both zero) and write ``$d=\gcd(a, b)$'' if and only if
+\begin{enumerate}
+\item $d\mid a$ and $d\mid b$, and
+\item $(c\mid a$ and $c\mid b)\implies c\leq d$
+\end{enumerate}
+\end{definition}
+
+It follows that $\gcd(a, b)\geq 1$.
+
+\begin{theorem}
+\label{thm:gcd-multiple}
+If $\gcd(a,b)=d$, then $\gcd(a/d, b/d)=1$.
+\end{theorem}
+
+\begin{proof}
+We use proof by contradiction.
+
+If $\gcd(a,b)=d$, then $\exists p,q\in\mathbb{Z}$ such that
+
+\begin{equation}
+\label{eq:a}
+a=pd\implies a/d=p
+\end{equation}
+\begin{equation}
+\label{eq:b}
+b=qd\implies b/d=q
+\end{equation}
+
+From definition[\ref{def:gcd}], it follows that the GCD of any two natural numbers is greater than or equal to 1. 
+
+Let us assume that $\gcd(p, q)=m>1$.
+
+It then follows that $p=mx,q=my$ for some integers $x, y$.
+
+From equations (\ref{eq:a}) and (\ref{eq:b}), we get:
+$$
+a=mxd
+$$
+and
+$$
+b=myd
+$$
+
+Then, $\gcd(a, b)=md$. Since $m>1$, $\gcd(a, b) > d$.
+
+This is a contradiction because we had $\gcd(a,b)=d$. Therefore, our assumption $\gcd(p,q)=m>1$ is incorrect and we must have $\gcd(p,q)=\gcd(a/d,b/d)=1$.
+\end{proof}
+\begin{definition}[Relatively Prime]
+We say that $a$ and $b$ are \emph{relatively prime} if and only if $\gcd(a,b)=1$.
+\end{definition}
+
+\begin{theorem}
+\label{thm:div-algo}
+Given positive integers $a$ and $b$, there exist two unique integers $q$ and $r, 0\leq r<b$ such that  
+$$
+a=bq+r
+$$
+\end{theorem}
+%%%-----------------------------------------------------------------------------
+\chapter{Project Details}
+%%%-----------------------------------------------------------------------------
+
+Describe important project steps, \eg, the rationale of the chosen architecture
+or technology stack, design decisions, algorithms used, interesting challenges
+faced on the way, lessons learned \etc
+
+%%%-----------------------------------------------------------------------------
+\chapter{System Documentation}
+%%%-----------------------------------------------------------------------------
+
+Give a well-structured description of the architecture and the technical design
+of your implementation with sufficient granularity to enable an external person
+to continue working on the project.
+
+%%%-----------------------------------------------------------------------------
+\chapter{Summary}
+%%%-----------------------------------------------------------------------------
+
+Give a concise (and honest) summary of what has been accomplished and what not. 
+Point out issues that may warrant further investigation.
+
+%%%-----------------------------------------------------------------------------
+\appendix                                                   % Switch to appendix
+%%%-----------------------------------------------------------------------------
+
+%%%-----------------------------------------------------------------------------
+\chapter{Table of Theorems}
+\label{tab:theorems}
+\begin{longtable}[c]{| c | c | c |}
+ \caption{Theorems in the Book.}\\
+
+ \hline
+ \multicolumn{3}{| c |}{Begin List of Theorems}\\
+ \hline
+ Theorem & Chapter/Theorem & Notes\\
+ \hline
+ \endfirsthead
+
+ \hline
+ \multicolumn{3}{| c |}{Continuation of Theorems \ref{long}}\\
+ \hline
+ Theorem & Chapter/Theorem & Notes\\
+ \hline
+ \endhead
+
+ \hline
+ \endfoot
+
+ \hline
+ \multicolumn{3}{| c |}{End List of Theorems}\\
+ \hline\hline
+ \endlastfoot
+
+ Theorem [\ref{thm:gcd-multiple}] & Chapter 1 Theorem 1 & Regarding $\gcd(a/d, b/d)$.\\
+ \end{longtable}
+%%%-----------------------------------------------------------------------------
+
+%%%-----------------------------------------------------------------------------
+\MakeBibliography[nosplit]
+%%%-----------------------------------------------------------------------------
+
+%%%-----------------------------------------------------------------------------
+\end{document}
+%%%-----------------------------------------------------------------------------
