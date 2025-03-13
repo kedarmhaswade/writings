@@ -1,4 +1,4 @@
-%% A simple template for a term report using the Hagenberg setu can be difficult because inspiration is sometimes necessary to find a solution, and inspiration cannot be had to orderp
+%% A simple template for a term report using the Hagenberg setup 
 %% based on the standard LaTeX 'report' class
 
 %%% Magic comments for setting the correct parameters in compatible IDEs
@@ -37,10 +37,24 @@
 \newtheorem{lemma}{Lemma}[chapter]
 \renewcommand\qedsymbol{$\blacksquare$}
 % theorems, definitions, remarks etc.
+% the "reflection" box
+\usepackage[framemethod=tikz]{mdframed}
+\newtheorem{reflection}{Reflection}
+\mdfdefinestyle{reflectionbox}{
+  linecolor=cyan,
+  backgroundcolor=cyan!20,
+}
+\surroundwithmdframed[style=reflectionbox]{reflection}
+% the "reflection" box
 
 % long table
 \usepackage{longtable}
 % long table
+
+% for algorithm description
+\usepackage{algorithm}
+\usepackage{algpseudocodex}
+% for algorithm description
 
 %%%-----------------------------------------------------------------------------
 \begin{document}
@@ -100,9 +114,11 @@ This document contains the author's notes and solutions to problems from Underwo
 In the \emph{Preface}, Dudley writes,
 \enquote{Number Theory problems can be difficult because inspiration is sometimes necessary to find a solution, and inspiration cannot be had to order. A student should not expect to be able to conquer all of the problems and should not feel discouraged if some are baffling. There is benefit in trying to solve problems whether a solution is found or not.}
 
-We have all experienced the frustration and exaltation of solving problems. And, in arithmetic--the queen of mathematics--there is no dearth of beautiful and difficult problems. We should keep trying as long as doing so calmly feels worth the effort. Destructive perfectionism is not needed. The author undertook this project almost purely as a labor of love\footnote{He also wanted to become a better programmer, but before he could solve the amazing \href{https://projecteuler.net/about}{\emph{Project Euler}} problems a bit more efficiently, he wanted to feel more comfortable with arithmetic!}.
+We have all experienced the frustration and exaltation of solving problems. And, in arithmetic--the queen of mathematics--there is no dearth of beautiful and difficult problems. We should keep trying as long as doing so calmly feels worth the effort and brings joy. Destructive perfectionism is not needed. The author undertook this project almost purely as a labor of love\footnote{He also wanted to become a better programmer, but before he could solve the amazing \href{https://projecteuler.net/about}{\emph{Project Euler}} problems a bit more efficiently, he wanted to feel more comfortable with arithmetic!}.
 
-Every theorem in the book and its proof are provided. A table of theorems (proved or researched) is compiled here [\ref{tab:theorems}]. 
+Many a theorem (and lemma) in the book and its proof are provided. Attempt has been made to provide original (author's own) proofs (not verified by others). We mention it if a proof is reproduced verbatim from the book. Author's own proofs attempt to demonstrate an audacious, yet humble, renaissance attitude in the spirit of excellent collections like [\cite{Pnftb2014}] and [\cite{Pftb2018}]. Occasionally the author complements the beautifully austere nature of mathematics with modest emotional narratives.  
+
+A table of theorems (proved or researched) is compiled here [\ref{tab:theorems}]. We hope that the compilation proves valuable to readers. 
 \end{abstract}
 
 %%%-----------------------------------------------------------------------------
@@ -195,7 +211,107 @@ $$
 a=bq+r
 $$
 \end{theorem}
-%%%-----------------------------------------------------------------------------
+\begin{proof}
+We first prove the existence of integers, $q,r$ by cases. For positive integers $a$ and $b$ there are three possibilities:
+\begin{enumerate}
+\item $a < b$
+
+Since $a=b\cdot 0+a$, we get $q=0$ and $r=a$ as the two integers. 
+\item $a=b$
+
+Since $a=b=b\cdot 1+0$, we get $q=1$ and $r=0$ as the two integers. 
+\item $a > b$
+
+This means that $b$ can be subtracted $q\geq 1$ times from $a$ for the result of the subtraction ($a-q\cdot b$) to remain non negative. The result would be negative if we subtracted $b$ once more (that is, $q+1$ times in all) from $a$. The result of the subtraction, $a-q\cdot b$, which we denote as $r$, must then be a positive integer less than $b$, because otherwise we could subtract $b$ at least once more.
+\end{enumerate}
+
+We have proved the existence of the two integers $q$ and $r$ and demonstrated how to find them in all the cases. 
+
+The above proof of existence describes a precise, deterministic procedure to find non negative integers $q$ and $r$ for any positive integers $a$ and $b$. However, we need to prove that the pair is unique. We prove uniqueness by contradiction.
+
+Let $q_1\ne q$ and $r_1\ne r$ be \emph{another pair of non negative integers} produced by the procedure above. We have
+\begin{equation}
+\label{eq:qr}
+a=bq+r
+\end{equation}
+and
+\begin{equation}
+\label{eq:q1r1}
+a=bq_1+r_1
+\end{equation}
+
+From the existence proof above, $r<b$ and $r_1<b$.
+
+It follows from equations (\ref{eq:q1r1}) and (\ref{eq:qr}) that
+$$
+b\cdot(q-q_1)=r_1-r
+$$
+
+From the definition (\ref{def:divides}) it then follows that $b\mid(r_1-r)$. However, $r_1<b\implies r_1-r<b-r\implies r_1-r<b$. This is a contradiction unless $r_1-r=0$, or $r_1=r$. If $r_1=r$, $q_1=q$ proving uniqueness.
+\end{proof}
+
+We call $q$ the \emph{quotient} and $r$ the \emph{remainder}. Theorem [\ref{thm:div-algo}] is called an ``algorithm'' because it entails a precise procedure to calculate non negative integers $q$ and $r$ for integers $a$ and $b$ (not both zero). The book correctly mentions that the theorem also holds when either $a$ or $b$ (or both) are negative. However, when negative numbers are involved, additional care must be exercised.
+
+Consider, for example, $a=5$ and $b=-2$. Then, $a=b\cdot (-3)+(-1)$ giving $q=-3$ and $r=-1$. Moreover, $a=b\cdot (-2)+1$ giving $q=-2$ and $r=1$. Doesn't the uniqueness of division algorithm hold? For $0\leq r$ we must reject $r=-1$, whereas for $r<b$ we must reject both $r=1$ and $r=-1$. If we change the constraint on $r$ to $0\leq r<-b$ however, we allow the second case and achieve uniqueness. 
+
+The division algorithm is most commonly applied to non negative integers.
+\begin{lemma}
+\label{lemma:gcd-pre}
+If $a=bq+r$ where $0\leq r<b$, then $\gcd(a,b)=\gcd(b,r)$
+\end{lemma}
+\begin{proof}
+We give a straightforward deductive proof.
+
+Consider a common divisor (not necessarily the greatest) $c$ of $a$ and $b$. Then, by definition,
+
+$$
+a=c\cdot m_1
+$$
+$$
+b=c\cdot m_2
+$$
+
+Then, $a=b\cdot q+r\implies c\cdot m_1=c\cdot m_2\cdot q+r$.
+
+$\therefore r=c\cdot(m_1-q\cdot m_2)\implies c\mid r$
+
+This means $c$ is a divisor of $r$. The reasoning applies to all common divisors of $a$ and $b$, and, therefore, it also applies to the greatest of them all--the $\gcd(a,b)=g_{ab}$. 
+
+We proved that $g_{ab}$ is a divisor of $r$. We still need to prove that $g_{ab}$ equals $\gcd(b,r)=g_{br}$. 
+
+Let us use contradiction to prove that. Let us \emph{assume} $g_{br}>g_{ab}$. This implies that $g_{br}$ divides $b$ and $r$ but does \emph{not} divide $a$. 
+
+However, $a=bq+r\implies \exists x,y\in\mathbb{N}\mid a=(g_{br}\cdot x)q+g_{br}\cdot y$
+
+$\therefore a=g_{br}(qx+y)\implies g_{br}\mid a$---a contradiction owing to our faulty assumption that $g_{br}>g_{ab}$ does not divide $a$.
+
+There is no such $g_{br}>g_{ab}$. Therefore, $\gcd(a,b)=\gcd(b,r)$.
+\end{proof}
+
+\begin{reflection}
+This--a divisor of $a$ and $b$ must be a divisor of $r$-- is one of Euclid's remarkable observations. The author never solemnly paused in its admiration in grade school. Perhaps that was because loving numbers for the sake of it did not cross his mind then.
+
+The author's obsession for numbers is still rudimentary, but the above proof that he wrote down using a paper and a pen on an airplane gave him ineffable joy; he understood Euclid's argument better and, in that moment, like Piaget \cite{Piaget1974} observed, he \emph{momentarily became Euclid}! 
+\end{reflection}
+
+Greeks showed signs of computational excellence when finding $\gcd(a,b)$. They used the above lemma [\ref{lemma:gcd-pre}] to confidently reduce the size of the problem: to find the $\gcd$ of two numbers($a\geq b$ and $b$), find the remainder $r$ by applying the division algorithm to $a,b$ and then the $\gcd$ of two smaller numbers($b>r$ and $r$)\footnote{$\gcd(a,b)$ also equals $\gcd(a,r)$, but their choice--$\gcd(b,r)$--was computationally more efficient}! They, unlike we did in grade school, never listed all the divisors of both the numbers and chose the largest of the common ones.
+
+We define the `remainder operation' on two integers $a$ and $b$ (denoted `$a\mod b$') to return the remainder by applying the division algorithm [\ref{thm:div-algo}] to $a$ and $b$.
+
+Dudley gives an \emph{iterative} procedure for Euclid's $\gcd$ algorithm next. However, we give an arguably more expressive recursive algorithm that uses a corollary that the $\gcd$ of a non negative number $a$ and $0$ is $a$. 
+
+\begin{algorithm}
+\label{alg:euclid}
+\begin{algorithmic}
+\caption{Euclid's $\gcd(a,b)$ Algorithm}
+  \If{$b=0$}
+    \State return a
+  \Else
+    \State return $\gcd(b,a\mod b)$
+  \EndIf
+\end{algorithmic}
+\end{algorithm}
+%%-----------------------------------------------------------------------------
 \chapter{Project Details}
 %%%-----------------------------------------------------------------------------
 
@@ -251,6 +367,7 @@ Point out issues that may warrant further investigation.
  \endlastfoot
 
  Theorem [\ref{thm:gcd-multiple}] & Chapter 1 Theorem 1 & Regarding $\gcd(a/d, b/d)$.\\
+ Theorem [\ref{thm:div-algo}] & Chapter 1 Theorem 2 & The Division Algorithm.\\
  \end{longtable}
 %%%-----------------------------------------------------------------------------
 
