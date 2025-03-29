@@ -40,6 +40,8 @@
 \usepackage[framemethod=tikz]{mdframed}
 \newtheorem{reflection}{Reflection}
 \mdfdefinestyle{reflectionbox}{
+  innertopmargin=\topskip,
+  roundcorner=5pt,
   linecolor=cyan,
   backgroundcolor=cyan!20,
 }
@@ -70,6 +72,24 @@
 % cancel terms
 \usepackage{cancel}
 % cancel terms
+
+% sidebar environment https://tex.stackexchange.com/a/735167/64425
+\usepackage[most]{tcolorbox}
+
+\newtcolorbox{sidebar}{
+  breakable,
+  enhanced,
+  frame hidden,
+  interior hidden,
+  size=minimal,
+  left skip=8pt,
+  borderline west={1pt}{-5pt}{gray}
+}
+% sidebar environment https://tex.stackexchange.com/a/735167/64425
+
+% 
+\usepackage{parskip}% http://ctan.org/pkg/parskip
+%
 % get rid of ugly borders
 \hypersetup{
     colorlinks,
@@ -100,8 +120,9 @@
 There is one issue with almost all books of rigorous mathematics (of the definition-theorem-lemma-proof style): they present mathematics in the \emph{finished} form\footnote{We assume that such a book is free from any egregious errors, typos etc.}. Proofs, however clear and lucid, are presented as if they are spoken by an omniscient Oracle. It's hard to imagine real humans doing mathematics this way from scratch. Countless hours need be spent on arriving at the presentable form. The author knew that and realized it again as he was writing his proofs\footnote{Almost all the proofs were first attempted with a pen on a lot of paper and then typeset. We live in an affluent society; the great mathematician Srinivasa Ramanujan didn't even have access to enough paper.}. He has attempted to point that out where possible. Running into dead ends and admitting it may disrupt the flow of normal reading (for reading mathematics is also like reading a careful disposition), but it may be reassuring especially to a beginning (but interested and, for the lack of a better word, intelligent) reader who is assumed author's companion. Delving too much into detours may ruin an otherwise readable travelogue. The author strives to seek a balance. \emph{Failed} proofs appear in this text with {\textcolor{red}{\Huge\bf ?}} instead of the QED symbol $\blacksquare$.
 
 In the \emph{Preface} of his book Dudley writes,
-
-``Number Theory problems can be difficult because inspiration is sometimes necessary to find a solution, and inspiration cannot be had to order. A student should not expect to be able to conquer all of the problems and should not feel discouraged if some are baffling. There is benefit in trying to solve problems whether a solution is found or not.''
+\begin{sidebar}
+Number Theory problems can be difficult because inspiration is sometimes necessary to find a solution, and inspiration cannot be had to order. A student should not expect to be able to conquer all of the problems and should not feel discouraged if some are baffling. There is benefit in trying to solve problems whether a solution is found or not.
+\end{sidebar}
 
 We have all experienced the frustration and exaltation of solving problems. And, in arithmetic--the queen of mathematics--there is no dearth of beautiful and difficult problems. We should keep trying as long as doing so calmly feels worth the effort and brings joy. Destructive perfectionism is not needed. The author undertook this project almost purely as a labor of love\footnote{He also wanted to become a better programmer, but before he could solve the amazing \href{https://projecteuler.net/about}{\emph{Project Euler}} problems a bit more efficiently, he wanted to feel more comfortable with arithmetic!}. Doing mathematics (even established, not involving ``active mathematical research'') for the sake of it is sufficient because Professor Dudley has compellingly argued elsewhere (cf. \cite{DudCMJ1997}) that mathematics may not be necessary to find jobs, but it \emph{is} sufficient (to live a contented life).
 
