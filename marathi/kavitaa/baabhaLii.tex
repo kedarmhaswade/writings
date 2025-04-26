@@ -1,0 +1,48 @@
+\documentclass[a6paper]{article}
+\usepackage{polyglossia}
+\usepackage[margin=10mm]{geometry}
+\setdefaultlanguage{sanskrit}
+\setotherlanguages{english, marathi}
+\newfontfamily\devanagarifont[Script=Devanagari]{Sanskrit Text}
+\newfontfamily\englishfont{Gentium Book Basic}
+\setmainfont{Sanskrit Text}
+%\newfontfamily\sanskritfont[Mapping=velthuis-sanskrit,Script=Devanagari,Language=Sanskrit]{Noto Serif Devanagari}
+% make sure ~ as non-breaking space doesn't interfere with velthuis-sanskrit mapping
+\edef~{\string~}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}% Remove paragraph indent
+\usepackage[skip=\medskipamount]{parskip}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    citecolor=blue,
+    urlcolor=purple,
+}
+\newcommand \eng[1]{
+    \textenglish{#1}
+}
+\begin{document}
+
+{\Large बाभळी}
+
+%TC:ignore
+%TC:endignore
+
+...
+
+कुसर कलाकृती अशी बाभळी तिला न ठावी नागररिती\\
+दूर कुठेतरी बांधावरती झुकून जराशी उभी एकटी\\
+अंगावरती खेळवी राघू लाघट शेळ्या पायाजवळी\\ 
+बाळगुराखी होउनिया मन रमते तेेेथे सांजसकाळी\\
+येते परतून नवेच होऊन लेवून हिरवे नाजुक लेणे\\
+अंगावरती माखुन अवघ्या धुंद सुवासिक पिवळे उटणे!\\
+...
+
+
+{\small -- इंदिरा संत}
+%TC:ignore
+%TC:endignore
+\end{document}

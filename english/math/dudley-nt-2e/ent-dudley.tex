@@ -25,7 +25,7 @@
 \usepackage{amsthm}
 
 \theoremstyle{definition}
-\newtheorem*{definition}{Definition}
+\newtheorem{definition}{Definition}
 
 \theoremstyle{remark}
 \newtheorem*{remark}{Remark}
@@ -149,8 +149,10 @@ Readable and flawless mathematical typesetting is hard. It's ironic that the epi
 % Describe the initial goals and situation that lead to this project, requirements, as well as references to related work (\eg, \cite{Higham2020}).
 
 \begin{definition}[Least-Integer Principle]
+\label{def:leastinp}
 A nonempty finite set of integers contains a \emph{smallest element}.
 \end{definition}
+An equivalent definition concerns the greatest element of a nonempty finite set.
 \begin{definition}[Divides]
 \label{def:divides}
 We say ``$a$ divides $b$'' and write $a\mid b$ if and only if there is an integer $d$ such that $ad=b$.
@@ -312,7 +314,10 @@ The author's obsession for numbers is still rudimentary, but the above proof tha
 
 Greeks showed signs of computational excellence when finding $\gcd(a,b)$. They used the above lemma [\ref{lemma:gcd-pre}] to confidently reduce the size of the problem: to find the $\gcd$ of two numbers($a\geq b$ and $b$), find the remainder $r$ by applying the division algorithm to $a,b$ and find the $\gcd$ of two smaller numbers ($b>r$ and $r$)\footnote{$\gcd(a,b)$ also equals $\gcd(a,r)$, but their choice--$\gcd(b,r)$--was perhaps computationally more efficient}! They, unlike we did in grade school, never listed all the divisors of both the numbers and chose the largest of the common ones.
 
-We define the `remainder operation' on two integers $a$ and $b$ (denoted `$a\mod b$') to return the remainder by applying the division algorithm [\ref{thm:div-algo}] to $a$ and $b$.
+\begin{definition}[The Remainder Operation]
+\label{def:modop}
+We define the ``remainder operation'' on two integers $a$ and $b$ (denoted ``$a\mod b$'') to return the remainder by applying the division algorithm [\ref{thm:div-algo}] to $a$ and $b$.
+\end{definition}
 
 Dudley gives an \emph{iterative} procedure for Euclid's $\gcd$ algorithm next. However, we give an arguably more expressive recursive algorithm that uses a corollary that the $\gcd$ of a non negative number $a$ and $0$ is $a$. 
 
@@ -337,7 +342,7 @@ a& \text{if $b=0$}, \\
 \end{cases}
 \]
 
-We provide proofs of \emph{correctness} of algorithms. For Algorithm [\ref{alg:euclid}], if $b=0$, the algorithm immediately terminates producing the correct result ($a$). If $b\ne 0$, then division algorithm applies and we find the $\gcd$ of $b$ and a number less than $b$ (because the remainder, $r$, is such that $0\leq r<b$). The process continues till the second argument becomes $0$. Since $b$ is finite and the second argument is guaranteed to reduce by at least $1$ every time the division algorithm applies. Such reduction must stop when the remainder becomes $0$ and the algorithm terminates and returns the first argument, $a$, the $\gcd$ of the original numbers. 
+We provide proofs of \emph{correctness} of algorithms. For Algorithm [\ref{alg:euclid}], if $b=0$, the algorithm immediately terminates, producing the correct result ($a$). If $b\ne 0$, then division algorithm applies and we find the $\gcd$ of $b$ and a number less than $b$ (because the remainder, $r$, is such that $0\leq r<b$). The process continues till the second argument becomes $0$. Since $b$ is finite and the second argument is guaranteed to reduce by at least $1$ every time the division algorithm applies. Such reduction must stop when the remainder becomes $0$ and the algorithm terminates and returns the first argument, $a$, the $\gcd$ of the original numbers. 
 
 \begin{reflection}
 A few thoughts occurred to the author:
@@ -380,7 +385,7 @@ $$
 \begin{reflection}
 The author intended to achieve a proof through a simple algebraic manipulation that was not to be! His intention was to determine a deterministic procedure to express $gcd(a, b)$ as a linear combination $ax+by$ of the integers $a$ and $b$. But he realized that such a manipulation was not as straightforward as he initially imangined. 
 
-He also realized that the theorem holds only for the $\gcd$ and not for any other common divisor. For example, for $42$ and $18$, whose $\gcd$ is 6, the theorem states that $\exists x, y$, $42x+18y=6$; this couldn't be extended to another common divisor of $42$ and $18$ like $1$ or $3$ because we immediately run into a contradiction like $42x+18y=1$ or $42x+18y=3$ (the left hand side is an even number and the right hand side is an odd number).
+He also realized that the theorem holds only for the $\gcd$ and not for any other common divisor. For example, for $42$ and $18$, whose $\gcd$ is 6, the theorem states that $\exists x, y\mid 42x+18y=6$; this couldn't be extended to another common divisor of $42$ and $18$ like $1$ or $3$ because we immediately run into a contradiction like $42x+18y=1$ or $42x+18y=3$ (the left hand side is an even number and the right hand side is an odd number).
 
 Therefore, $\gcd(a,b)$ represents something more about $a$ and $b$ than what their other common divisors do.
 \end{reflection}
@@ -642,7 +647,7 @@ Are other corollaries or lemmas likely to help us?
 
 Does another solution exist? How many solutions are there?
 
-These are all hard questions. They express the difficulty of doing mathematics and of developing an \underline{inductive} thinking, however limited in influence. For example, if we are unfamiliar with the ``theory of linear Diophantine equations'' what makes us take a \underline{leap of faith}\footnote{The author borrows this term from a lucid book, \emph{Thinking Recursively}, by Eric Roberts \cite{Roberts1986}, which introduces a `recursive leap of faith'.} that another solution exists?
+These are all hard questions. They express the difficulty of doing mathematics and of developing an \underline{inductive} thinking, however limited in influence. For example, if we are unfamiliar with the ``theory of linear Diophantine equations'' what makes us take a \underline{leap of faith}\footnote{The author borrows this term from a lucid book, \emph{Thinking Recursively}, by Eric Roberts \cite{Roberts1986}, which introduces a ``recursive leap of faith''.} that another solution exists?
 
 We believe that try sensibly we must. We may be in dark. However, unless we, guided by established knowledge and fueled by imagination, explore the mysterious, how might we uncover new knowledge(even at a personal level)? A ``solved problem'' is unsolved for us until we solve it (first somehow, then by application of an established theory or technique).
 \end{reflection}
@@ -661,7 +666,7 @@ It's easier to try with smaller numbers. Any generalization starts with some con
 \centering
 \begin{tabular}{|c|c|c|c|}
  \hline
- $x$ & $y$ & $23x+19y$ &Multiples of $(23-19)$ that yields $1$ from $23x+19y$\\ [0.5ex]
+ $x$ & $y$ & $23x+19y$ &Multiples of $(23-19)$ that yield $1$ from $23x+19y$\\ [0.5ex]
  \hline
  1 & $-1$ & 4 &--\\\hline
  1 & $-2$ & \fillcircled{-15}{cyan!20} &$4,\fillcircled{-15}{cyan!20}+(23-19)\times 4=1$\\\hline
@@ -945,6 +950,136 @@ To be honest, however, ``keeping calm'' is only possible in the long shot or on 
 \chapter{Unique Factorization}
 %%%-----------------------------------------------------------------------------
 
+Prime numbers have always fascinated us. See The Prime Pages \cite{PrimePages} for everything about them.
+
+\begin{definition}[Prime Number\footnote{We often use the word `prime' as a noun; e.g., $2,5,7$ are the first three primes.}]
+A prime number is an integer greater than 1 that has no positive divisors other than 1 and itself. 
+\end{definition}
+\begin{definition}[Composite Number\footnote{We use `composite' as a noun less frequently than we use `prime' as a noun.}]
+A composite number is an integer greater than 1 that is not prime. 
+\end{definition}
+
+It is convenient to define 1 as neither prime or composite; we call 1 \emph{unit}. Thus, every positive integer is either prime, composite, or unit. 
+
+The author verified (using online tools) that $170141183460469231731687303715884105727$ is prime. 
+
+The aim of this chapter is to show that each positive integer can be represented uniquely as a product of primes. If two representations can be expressed as $p_1^{n_1}\times p_2^{n_2}\times\dots\times p_k^{n_k}: p_i\text{ is prime and } n_i\in\mathbb{N}$, then they are \emph{not} unique. Prime numbers can be used to build by multiplication the entire system of positive integers.
+
+\begin{lemma}
+\label{lemma:int-div-prime}
+Every integer $n>1$ is divisible by a prime.
+\end{lemma}
+\begin{proof}
+This proof is by Dudley.
+
+Consider $D$, the set of divisors of $n$: $D=\{d: d\mid n, 1<d<n\}$. Then, $D$ is either empty or nonempty. If it is empty, then $n$ is prime, by definition, and thus has a prime divisor, namely itself.  
+
+If it is nonempty, then the Least-Integer Principle (\ref{def:leastinp}) says $D$ has a smallest element. Let's call it $d$. If $d$ is composite, it has a divisor $dd: 1<dd<d$. Then, from (\ref{lemma:divides-lin-comb}), $dd\mid n$. But that is impossible because $d$ was the smallest divisor of $n$. Thus, $d$ must be prime and $n$ has a prime divisor, namely $d$.
+
+In any case, $n$ is divisible by a prime.
+\end{proof}
+
+\begin{lemma}
+Every integer $n>1$ can be written as a product of primes.
+\end{lemma}
+Dudley gives a proof based on the above lemma [\ref{lemma:int-div-prime}].
+\begin{reflection}
+Inductive proofs (which, according to some, are deductive proofs) can be tricky, but if we are careful, they are usually straightforward.
+\end{reflection}
+
+\begin{proof}
+We will give an inductive proof also based on that lemma.
+\begin{description}
+\item [Base Case] Trivially, $2=2$. That is, 2 can nominally be written as a product of primes.
+\item [Inductive Hypothesis] We assume that every integer $\{2,3,4,\dots,k\}$ can be expressed as a product of primes. We call this proposition $P(k)$ and assume that it is \texttt{true}.
+\item [Inductive Step] Here, we prove that if $P(k)$ is true, then $P(k+1)$ is also true.
+
+Consider the number $k+1$. It is either prime or composite.
+
+If it is prime, we are done. Nominally, $k+1=k+1$, that is, $k+1$ can be expressed as a product of primes.
+
+If, on the other hand, $k+1$ is composite, then, by definition, $\exists d\in\mathbb{N}:d\mid(k+1)$ where $d<k$ and the inductive hypothesis holds for $d$. 
+
+Let $d$ be a product of $r$ primes: $d=p_1\times p_2\times\dots\times p_r$ and $\exists m\in\mathbb{N}:(k+1)=m\times d\implies (k+1)=m\times(p_1\times p_2\times\dots\times p_r)$.
+
+Similarly, $m<k$ is either prime, or, because of the inductive hypothesis, can be expressed as a product of primes. Since $k+1=m\times d$, $k+1$ can be expressed as a product of primes. This makes the proposition $P(k+1)$ true. 
+
+We \emph{assumed} that every integer up to $k$ can be expressed as a product of primes and \emph{showed} that $k+1$ can be so too. The domino effect thus applies to every integer without exception. 
+\end{description}
+
+\end{proof}
+
+We now have a fundamental theorem and its elegant proof by Euclid.
+
+\begin{theorem}
+\label{thm:prime-infinitude}
+There are infinitely many primes.
+\end{theorem}
+
+\begin{proof}
+We will prove the theorem by contradiction.
+
+Let there be a finite number of primes represented by a finite set $P=\{p_1,p_2,p_3,\dots,p_r\}$. Since this is a nonempty finite set, it has a greatest element (See definition [\ref{def:leastinp}]). Let the greatest element of $P$ be $p_r$.
+
+Consider the integer $N=p_1\times p_2\times p_3\times\dots\times p_r+1$. $N$ is, by definition, greater than all of the primes contained in $P$. Also, none of the prime numbers $p_i\in P$ divides $N$ because $\forall p_i\in P, N\mod p_i=1$ (See definition [\ref{def:modop}]).
+
+If $N$ is prime, then we have reached a contradiction because we found a prime not in $P$.
+
+If $N$ is composite, then there are two possibilities:
+\begin{enumerate}
+\item By lemma [\ref{lemma:int-div-prime}], every integer > 2 is divisible by a prime number and if $P$ is the set of all the primes, such a prime must be a member of $P$. However, we just saw that $N$ is not divisible by any of them: A contradiction!
+\item By the same lemma [\ref{lemma:int-div-prime}], if there is a prime that divides $N$, then it must be a prime number not in $P$ (or, in other words, a prime number $>p_r$): A contradiction again!
+\end{enumerate}
+
+The source of all the contradictions above can be traced back to the faulty assumption that the set of prime numbers is finite.
+
+Therefore, there are infinitely many prime numbers.
+\end{proof}
+\begin{reflection}
+Thinking of a number $N=p_1\times p_2\times p_3\times\dots\times p_r+1$---what a stroke of genius that is!
+
+Nowadays, with the help of computers (and perhaps AI), we keep finding bigger prime numbers. We are obsessed with them for a good reason.
+\end{reflection}
+
+\begin{lemma}
+\label{lemma:factor-lertn}
+If $n$ is composite, then it has a divisor $d$ such that $1<d\leq\sqrt n$.
+\end{lemma}
+\begin{proof}
+We provide a direct proof.
+
+Since $n$ is composite, by definition [\ref{def:divides}], it has a divisor $d$ such that $1<d<n$:
+$$
+d\mid n\implies \exists q\in\mathbb{Z}: d\times q=n
+$$
+
+This also makes $q$ a divisor of $n$.
+
+Since $\sqrt{n}\leq n\forall n\in\mathbb{N}$, we can compare $d$ with $\sqrt{n}$.
+
+If $1<d\leq\sqrt{n}$, we are done: we found a divisor we were seeking.
+
+If, on the other hand, $d>\sqrt{n}$, then
+
+\begin{align*}
+d&>\sqrt{n}\\
+d\times q&>\sqrt{n}\times q\\
+n&>\sqrt{n}\times q\\
+\sqrt{n}&>q\implies q<\sqrt{n}
+\end{align*}
+
+And we found $q$, a divisor of $n$ between $1$ and $\sqrt{n}$.
+
+In either case, for a composite $n$, $\exists d: d\mid n, 1<d\leq\sqrt{n}$.
+
+\end{proof}
+
+\begin{lemma}
+\label{lemma:prime-factor-lertn}
+If $n$ is composite, then it has a \underline{prime} divisor $d:1<d\leq\sqrt n$.
+\end{lemma}
+\begin{proof}
+\end{proof}
 %%%-----------------------------------------------------------------------------
 \chapter{Linear Diophantine Equations}
 %%%-----------------------------------------------------------------------------
@@ -989,6 +1124,7 @@ To be honest, however, ``keeping calm'' is only possible in the long shot or on 
  Theorem [\ref{thm:div-algo}] & Chapter 1 Theorem 2 & The Division Algorithm.\\
  Theorem [\ref{alg:euclid}] & Chapter 1 Theorem 3 & Euclid's $\gcd$ Algorithm.\\
  Theorem [\ref{thm:bezout-idty}] & Chapter 1 Theorem 4 & Bézout Identity.\\
+ Theorem [\ref{thm:prime-infinitude}] & Chapter 2 Theorem 1 & Infinitude of Primes.\\
  \end{longtable}
 %%%-----------------------------------------------------------------------------
 
