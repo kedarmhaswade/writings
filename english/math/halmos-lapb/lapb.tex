@@ -102,6 +102,8 @@
 }
 % get rid of ugly borders
 
+% some commands, mainly for local use
+% some commands, mainly for local use
 %%%-----------------------------------------------------------------------------
 \begin{document}
 %%%-----------------------------------------------------------------------------
@@ -183,7 +185,7 @@ Feel free to skip them. As Halmos urges us in his preface to this book, I have r
 Readable and flawless mathematical typesetting is hard. It's ironic that the epitome of exact sciences breeds a degree of inexactness in notation. Like in literature, meaning sometimes depends on context not captured in notation. And yet, an encyclopedic treatment of notation at the beginning of a work like this tends to bore readers\footnote{What disappointments them even more are typos and errors.}. Here too, a balance needs to be sought. A few conventions are therefore in order:
 
 \begin{itemize}
-\item A roman letter in italics, like, for example, $p$, denotes an integer, unless specified otherwise.
+\item A roman letter in italics, like, for example, $p$, denotes an integer, unless specified otherwise (sometimes a real number).
 \item The so-called \verb|\cdot|: $\cdot$ to denote multiplication is sometimes omitted. Thus, $ab$ is equivalent (and often even preferred and ubiquitous, thanks to Euler!) to $a\cdot b$.
 
 \end{itemize}
@@ -218,7 +220,7 @@ $$
 $$
 
 
-$\blacksquare$
+\qedsymbol
 
 \begin{problem}
 \label{pr:a2b}
@@ -236,6 +238,7 @@ No. We can easily demonstrate
 $$
 \alpha\boxplus(\beta\boxplus\gamma)\ne(\alpha\boxplus\beta)\boxplus\gamma
 $$
+\qedsymbol
 
 \begin{problem}
 \label{pr:atob}
@@ -249,6 +252,8 @@ $$
 \textbf{Solution}.
 
 Although $\alpha^\beta=\beta^\alpha$ when $\alpha=\beta$, in general, $\alpha^{\beta}$ doesn't seem to equal $\beta^\alpha$. A simple counterexample is $\alpha=1,\beta=2$. Therefore, $*$ is not a commutative operation on two positive integers.
+\qedsymbol
+
 \begin{reflection}
 
 I asked myself, ``For which real numbers $\alpha,\beta$ (although in Problem [\ref{pr:atob}] they are positive integers) are $\alpha^\beta$ and $\beta^\alpha$ equal?''
@@ -318,7 +323,7 @@ is commutative and associative because the addition of real numbers is so. The r
 
 \begin{problem}
 \label{pr:complexmult}
-If an operation for the ordered pair of real numbers, denoted by the temporary symbol $\boxdot$, is defined by
+If an operation for the ordered pairs of real numbers, denoted by the temporary symbol $\boxdot$, is defined by
 $$
 \langle\alpha,\beta\rangle\boxdot\langle\gamma,\delta\rangle=\langle\alpha\gamma-\beta\delta,\alpha\delta+\beta\gamma\rangle
 $$
@@ -338,16 +343,158 @@ The $\boxdot$ operation is indeed commutative because the addition and multiplic
 Still, we are lucky! It wouldn't be commutative had it been defined just a little differently as:
 $\langle\alpha,\beta\rangle\boxdot\langle\gamma,\delta\rangle=\langle\alpha\gamma+\beta\delta,\alpha\delta-\beta\gamma\rangle$
 
-Associativity:
+Associativity: (We'll use $a$ for $\alpha$, $b$ for $\beta$, and so on for easier typesetting.)
 \begin{align*}
 (\langle a, b\rangle\boxdot\langle c, d\rangle)\boxdot\langle m, n\rangle
 &=
 \langle a c- b d, a d+ b c\rangle\boxdot\langle m, n\rangle\\
-&=\langle(ac-bd)m-(ad+bc)n,(ac-bd)n+(ad+bc)n\rangle
+&=\langle(ac-bd)m-(ad+bc)n,(ac-bd)n+(ad+bc)m\rangle \\
+&=\langle a(cm-dn)-b(cn+dm),a(cn+dm)+b(cm-dn)\rangle \\
+&=\langle a,b\rangle\boxdot(\langle c,d\rangle\boxdot\langle m,n\rangle)
 \end{align*}
 
+$\therefore \boxdot \text{ is associative and commutative}$. 
+\qedsymbol
+\begin{reflection}
+The discussion of complex numbers (and their representation as just a pair of real numbers) so far is algebraic. There is also a geometric equivalent. Addition of two complex numbers (that generates a new complex number whose real and imaginary parts are the sums of those of the addends) is perhaps straightforward. Why is multiplication defined this way ($\langle a,b\rangle\boxdot\langle c,d\rangle=\langle ac-bd,ad+bc\rangle$)? A geometric interpretation is:
+\begin{sidebar}
+To multiply (a complex number represented by) a vector $\vec{v_1}$ by $\vec{v_2}$ we \textit{scale} $\vec{v_1}$ by $\mid \vec{v_2}\mid$ i.e. the length of $\vec{v_2}$ and then rotate the scaled vector by an angle that is same as the argument of $\vec{v_2}$ (which is the angle it makes with the positive $X-$axis).
 
+See Figure [\ref{fig:complexmult}].
+\end{sidebar} 
+Given the algebraic definition of multiplication of two complex numbers ($\langle a,b\rangle\boxdot\langle c,d\rangle=    \langle ac-bd,ad+bc\rangle$), one should be able to devise the geometric construction (and vice versa).
+
+However, the question remains. The multiplication of positive integers can be thought of as repeated addition. But the multiplication of complex numbers ($\langle a,b\rangle\boxdot\langle c,d\rangle=    \langle ac-bd,ad+bc\rangle$) seems much different from their addition($\langle a,b\rangle\boxplus\langle c,d\rangle=\langle a+b,c+d\rangle$). Why is it defined this way?
+
+If we resort to a `proper' definition of a complex number: $z=a+bi, i=\sqrt{-1}$, then everything evaluates correctly. The product $(a+bi)\cdot(c+di)$ does evaluate to a complex number $ac-bd+(ad+bc)i$.
+\end{reflection}
+\begin{figure}[h]
+\begin{center}
+\caption{Geometric Interpretation of Complex Number Multiplication (Reproduced from \cite{AleksanovaMarkushevich1982})}
+\label{fig:complexmult}
+\includegraphics[width=.3\textwidth]{c1xc2} 
+\end{center}
+\end{figure}
 %%%-----------------------------------------------------------------------------
+Here is the multiplication of two vectors: $\langle 3,4\rangle$ and $\langle 5,12\rangle$ to produce the vector $\langle -33,56\rangle$. Note: $\langle 33,56,65\rangle$ is a Pythagorian triple.
+\begin{figure}[h]
+\begin{center}
+\caption{Another Geometric Interpretation of Complex Number Multiplication (Drawn to Scale using Geogebra)}
+\label{fig:complexmult2}
+\includegraphics[width=.5\textwidth]{c1xc2-2} 
+\end{center}
+\end{figure}
+
+\begin{problem}
+\label{pr:affine}
+If an operation for the ordered pairs of real numbers, denoted by $\boxdot$ again, is defined by
+$$
+\langle a,b\rangle\boxdot\langle c,d\rangle=\langle ac,ad+b\rangle
+$$
+, is it commutative? Is it associative?
+
+Note: Looking strange is not necessarily a sign of being artificial or useless.
+\end{problem}
+
+\textbf{Solution}.
+
+\begin{align*}
+\langle a,b\rangle\boxdot\langle c,d\rangle=\langle ac,ad+b\rangle
+\end{align*}
+\begin{align*}
+\langle c,d\rangle\boxdot\langle a,b\rangle=\langle ca,cb+d\rangle
+\end{align*}
+
+$\therefore \boxdot$ is not commutative in general; only commutative if $\frac{a-1}{b}=\frac{c-1}{d}$.
+\begin{align*}
+(\langle a,b\rangle\boxdot\langle c,d\rangle)\boxdot\langle m, n\rangle
+&=\langle ac, ad+b\rangle\boxdot\langle m,n\rangle\\
+&=\langle acm,acm+ad+b\rangle\\
+\end{align*}
+and
+\begin{align*}
+\langle a,b\rangle\boxdot(\langle c,d\rangle\boxdot\langle m, n\rangle)
+&=\langle a,b\rangle\boxdot\langle cm,cn+d\rangle\\
+&=\langle acm,acn+ad+b\rangle\\
+\end{align*}
+
+$\therefore \boxdot$ is associative.
+
+\qedsymbol
+
+\begin{problem}
+\label{pr:mmult}
+If an operation for the ordered quadruples of real numbers, denoted by $\boxdot$, is defined by
+$$
+\langle a,b,c,d\rangle\boxdot\langle a',b',c',d'\rangle=\langle aa'+bc',ab'+bd',ca'+dc',cb'+dd'\rangle
+$$
+, is it commutative? Is it associative?
+\end{problem}
+
+\textbf{Solution}.
+Since the multiplication of real numbers is commutative ($aa'+bc'=a'a+c'b$, and so on), the \textit{matrix multiplication} defined here is commutative.
+
+The visual symmetry in this operation feels useful in proving its associativity, although one should carry out the operation rigorously to believe that it is associative. That is left out here (we wouldn't say ``as an exercise to the reader!'').
+
+It's easier to visualize this as a matrix:
+
+\[
+  \begin{pmatrix}
+    a & b\\
+    c & d\\
+  \end{pmatrix}
+  \begin{pmatrix}
+    a' & b'\\
+    c' & d'\\
+  \end{pmatrix}
+  =
+  \begin{pmatrix}
+    aa'+bc' & ab'+bd'\\
+    ca'+dc' & cb'+dd'\\
+  \end{pmatrix}
+\]
+
+\qedsymbol
+
+How is Problem [\ref{pr:affine}] a ``special case'' of Problem [\ref{pr:mmult}]?
+
+Consider
+\[
+  \begin{pmatrix}
+    a & b\\
+    0 & 1\\
+  \end{pmatrix}
+  \begin{pmatrix}
+    a' & b'\\
+    0 & 1\\
+  \end{pmatrix}
+  =
+  \begin{pmatrix}
+    aa' & ab'+b\\
+    0 & 1\\
+  \end{pmatrix}
+\]
+
+The first row of the result is the affine tranform of the first rows of the two matrices on the left-hand side. Halmos, being an algebraist, does not describe it so, however. 
+
+Also, is Problem [\ref{pr:affine}] a ``special case'' of Problem [\ref{pr:complexmult}]?
+Consider
+\[
+  \begin{pmatrix}
+    a & b\\
+    -b & a\\
+  \end{pmatrix}
+  \begin{pmatrix}
+    c & d\\
+    -d & c\\
+  \end{pmatrix}
+  =
+  \begin{pmatrix}
+    ac-bd & ad+bc\\
+    -bc-ad &-bd+ac\\
+  \end{pmatrix}
+\]
+I still don't understand how matrix multiplication is a "more general" case of vector multiplication or affine transform; it might become clear later.
 %%%-----------------------------------------------------------------------------
 \MakeBibliography[nosplit]
 %%%-----------------------------------------------------------------------------
