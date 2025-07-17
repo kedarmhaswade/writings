@@ -1,0 +1,61 @@
+\documentclass[17pt]{extarticle}  % print quality
+\usepackage{polyglossia}
+\usepackage[margin=20mm]{geometry}
+\setdefaultlanguage{marathi}
+\setotherlanguages{english}
+\usepackage{fourier}
+%\textbf with "Sanskrit Text" produces the shape warning because the default Sanskrit Text font on Windows does not have a bold equivalent; try Yashomudra or Shobhika; now I like Tiro better
+\newfontfamily\devanagarifont[Script=Devanagari]{Sanskrit Text}
+%\newfontfamily\devanagarifont[Script=Devanagari]{Tiro Devanagari Marathi}
+
+%\pagenumbering{gobble}
+\setlength{\parindent}{0pt}% Remove paragraph indent
+\usepackage[skip=\medskipamount]{parskip}
+\usepackage[style=english]{csquotes}
+\usepackage{verse}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    citecolor=blue,
+    urlcolor=purple,
+}
+
+% control hyphenation: https://tex.stackexchange.com/a/177179/64425
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+% control hyphenation: https://tex.stackexchange.com/a/177179/64425
+
+\begin{document}
+
+\title{दोन वाटा}
+\author{कवी अनिल}
+%\textenglish {
+
+%This document is a sample document to test font families and font typefaces.
+%}
+
+\date{}
+\maketitle
+\hrule
+\vspace{5mm}
+
+वाटचुकार वासराशिवाय फिरकलेले कोणी नसते\\
+अशा जागी गेली वाट सरत सरत आली असते\\
+तिथे पुन्हा दोन वाटा फुटलेल्याच्या खुणा दिसतात\\
+एक जरा सरावलेली दुसरीवरती ठसे नसतात\\
+तिने चाहूल नाही म्हणून पाऊल पाऊल ओढून नेले\\
+सोडून दिल्या वाटेकडे फिरून फिरून पाहू दिले\\
+किती वेळ दिसत होती धरली नाही तीच वाट\\
+तिची वळणे हेलकावे तिचे उतार तिचे घाट\\
+तिनेच गेलो असतो तर ही कदाचित मिटली असती\\
+तसे व्हावयाचे नव्हते - हीच माझी वाट होती!\\
+                       
+\vspace{5mm}
+\hrule
+
+\end{document}
