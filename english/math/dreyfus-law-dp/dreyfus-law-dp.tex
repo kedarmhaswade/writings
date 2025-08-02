@@ -120,6 +120,10 @@
 % label list items
 \usepackage{enumitem}
 % label list items
+% Place figures exactly where you mean to
+%https://tex.stackexchange.com/a/8633/64425
+\usepackage{float}
+% Place figures exactly where you mean to
 % failed proof
 \newcommand{\bogusproof}{\textcolor{red}{\Huge\bf ?}}
 % failed proof
@@ -212,17 +216,17 @@ The reader must learn how to identify the appropriate state and stage variables,
 
 I hope I can painstakingly (and gleefully at the same time) solve a number of problems from this book, and understand at least some of DP. Solutions in this text are mine. I have also felt free to think aloud, write willfully about questions that came to my mind as I solved the stated problems. That part of writing appears like ``personal reflections'':
 \begin{reflection}
-Problems come in various levels of difficulty. And, unless you are George Dantzig (who solved an open problem written on a blackboard assuming his instructor had given a homework assignment) or the like, you have to toil through them. Some you are able to solve quickly, perhaps because you are experiencing ``flow''\footnote{A highly focused mental state, defined and popularized by the psychologist Mihaly Csikszentmihalyi, conducive to productivity}, but many are challenging and you suffer (albeit purposefully) through them. They are distinct from exercises, which are also essential for fluency and emotional well-being, but expected to be aimed at `practice' and easier to answer.
+Problems come in various levels of difficulty. And, unless you are George Dantzig (who solved an open problem written on a blackboard assuming his instructor had given a homework assignment) or the like, you have to toil through them. Some you are able to solve quickly, perhaps because you are experiencing ``flow''\footnote{A highly focused mental state, defined and popularized by the psychologist Mihaly Csikszentmihalyi, conducive to productivity}, but many are challenging and you suffer (albeit purposefully) through them. They are distinct from exercises, which are also essential for fluency and emotional well-being, but are expected to be aimed at `practice' and easier to answer.
 
 DP has been a particularly enigmatic optimization procedure for me. I have struggled to formulate an optimization problem as a DP problem. I am in awe of how DP magically provides an $O(n)$ solution to a problem for which conventional (brute force) approach can only provide an $O(n^3)$ or an $O(n^2)$ solution!
 
-Is knowing DP technique \emph{thoroughly} in the age of AI needed? That's like asking, ``Is thinking for yourself necessary now that AI seems to take that over for us?'' Since I enjoy learning DP just for the sake of it (gone are the days when I used to learn it superficially for clearing \emph{the Tech} interviews!), I don't care if AI will make my understanding irrelevant (it won't, because we want to make AI better and that can't happen just like that).
+Is knowing DP technique \emph{thoroughly} in the age of AI needed? That's like asking, ``Is thinking for yourself necessary now that AI seems to take that over from us, for us?'' Since I enjoy learning DP just for the sake of it (gone are the days when I used to learn it superficially for clearing \emph{the Tech} interviews!), I don't care if AI will make my understanding irrelevant (it won't, because we want to make AI better and that can't happen just like that).
 
 \end{reflection}
 
 Feel free to skip them. 
 
-As Dreyfus and Law urge us in his preface to this book, I have read their solutions too (readily for the problems I was able to finally solve--doing so is quite important, and begrudgingly for the problems I was not able to solve in quite some time). Solutions are an integral part of exposition. The $\blacksquare$ (QED symbol) appears after every solution. Wherever desired, I have also reinterpreted their solutions; understanding them will be certainly helpful. 
+As Dreyfus and Law urge us in his preface to this book, I have read their solutions too (readily for the problems I was able to finally solve--doing so is quite important--and begrudgingly for the problems I was not able to solve in quite some time). Solutions are an integral part of exposition. The $\blacksquare$ (QED symbol) appears wherever appropriate. Wherever desired, I have also reinterpreted their solutions (they appear under the heading \textbf{DL Solution}); understanding them will be certainly helpful. 
 
 I am also embarking on a related extension of this personal project. This extension is mainly for my benefit, but it could be beneficial to others: \textbf{For at least some of the problems, I shall provide readable (beautiful?), correct, and efficient implementations in a programming language}\footnote{TODO: Provide some details}.
 \end{abstract}
@@ -239,7 +243,7 @@ Dynamic programming is an \emph{optimization procedure} that is \emph{particular
 
 The value of a sequence of decisions is generally equal to the sum of the values of the individual decisions and situations in the sequence.
 
-Here is a simple motivating example (problem).
+Here is an elementary, but instructive, motivating example (problem).
 
 
 Consider a small and orderly, if somewhat unrealistic, city road network shown in Figure [\ref{fig:cityroads}]. The streets are all one-way and the numbers shown on the map's streets represent the \emph{effort} (that represents the idea of a `resource' in Economics) required to traverse the associated streets. 
@@ -260,7 +264,7 @@ But first, everyone should attempt to correctly solve a problem somehow, verify 
 \end{reflection}
 
 
-This is a small network displaying regularity and a visual inspection tells us that at every point (except of course B) or vertex starting from A one can only make one of two choices for an arc (or block) to take: northeast or southeast. If it were a large network, we had to know a priori that it follows some structure (without resorting to inspection, which would be too time-consuming). 
+This is a small network displaying regularity and a visual inspection tells us that at every point (except of course B) or vertex starting from A, one can only make one of two choices for an arc (or block) to take: northeast or southeast. If it were a large network, we had to know a priori that it follows some structure (without resorting to inspection, which would be too time-consuming). 
 
 A path between any two vertices (the latter, called the \emph{target}, being to the east of the former, called the \emph{source}) is a sequence of arcs. For example, one path from D to M is DF-FJ-JM. The length of a path is the number of arcs in it regardless of the effort required to take an arc. Thus, the length of the path DF-FJ-JM is 3.
 
@@ -270,7 +274,7 @@ How many paths are there from a given source to a given target, assuming the tar
 
 That tricky question concerns `counting' and we resort to combinatorial techniques to answer it in general. 
 
-We soon realize that the lengths of all the paths from a given source to a given target must be equal\footnote{TODO: Need a rigorous proof of this}. If a southeast arc of a path is denoted by SE and northeast arc by NE, we have an `n-string' like SE-NE-NE-SE-\dots each segment of which is either `SE' or `NE'. Thus, if a path between any two nodes comprises $s$ southeast arcs and $n$ northeast arcs, all paths between those nodes do. Therefore, the total number of paths then is the number of ways you reach the target is the same as the total number of ways you can choose either $s$ southeast arcs or $n$ northeast arcs while taking a total of $s+n$ arcs\footnote{Alternatively, one can say that the number of paths from A to J equals the number of paths from A to F plus the number of paths from A to G because each of those paths (and no other) can reach J}. This number is ${s+n\choose s}={s+n\choose n}$.
+We soon realize that the lengths of all the paths from a given source to a given target must be equal\footnote{TODO: Need a rigorous proof of this}. If a southeast arc of a path is denoted by SE and northeast arc by NE, we have an `n-string' like SE-NE-NE-SE-\dots each segment of which is either `SE' or `NE'. Thus, if a path between any two vertices comprises $s$ southeast arcs and $n$ northeast arcs, all paths between those vertices do. Therefore, the total number of paths then is the number of ways you reach the target is the same as the total number of ways you can choose either $s$ southeast arcs or $n$ northeast arcs while taking a total of $s+n$ arcs\footnote{Alternatively, one can say that the number of paths from A to J equals the number of paths from A to F plus the number of paths from A to G because each of those paths (and no other) can reach J}. This number is ${s+n\choose s}={s+n\choose n}$.
 
 The total number of paths from A to B are the total number of ways to choose three southeast or three southwest arcs in a path length of 6 arcs that is ${6 \choose 3}=\frac{6\cdot 5\cdot 4}{3\cdot 2\cdot 1}=20$. 
 
@@ -282,7 +286,7 @@ Can we do better?
 \begin{reflection}
 This question often baffles me. What makes us suspect a `better' solution to a computational problem? 
 
-I guess an experience in dealing with problem statements helps. Many computational problems are like word problems in algebra. If we are aware of theoretical limits of certain operations (for example, the ``information theoretic limit'' on sorting a random list of integers is $O(n\log n)$--it's futile to try to find a better general solution for sorting), then we can look for any information (usually hidden) in the specification of the problem.
+I guess an experience in dealing with problem statements helps. Many computational problems are like word problems in elementary school algebra. If we are aware of theoretical limits of certain operations (for example, the ``information theoretic limit'' on sorting a random list of integers is $O(n\log n)$--it's futile to try to find a better general solution for sorting), then we can look for any information (usually hidden) in the specification of the problem.
 
 I have often wondered if there is an algorithm mechanically following which one can improve a solution (to a computational problem). I am not sure. That's why programming is sometimes called art (even in the age of AI, albeit by a diminishing number of people).
 
@@ -297,6 +301,10 @@ Some may argue, ``Computers are becoming faster and faster, why do you need to o
 Optimization is key. For \emph{small} problems suboptimal solutions are perhaps acceptable. But for large problems, suboptimal (and slow) solutions may even be worse than wrong (but quick) solutions. Is such obsessive approach to efficiency, productivity, optimization necessary in the age where human attention span is ever becoming shorter, computer hardware (apparently) cheaper and abundant, and computer programming as a human skill obsolete? 
 
 That's a matter of perspective. In our view, learning the theory and techniques of optimal algorithms is an essential, if advanced, part of computer programming. Fortunately, dynamic programming is a well-established technique whose accurate application to a problem can bring you joy even if you are not solving a ``production issue'' or appearing for a technical interview. The actual `in-silico' performance of a solution to a computational problem is a complicated business, but, in keeping with Occam's Razor, we'll get the biggest bang for the performance buck with accurate modeling, sound theory, and clutter-free implementation.
+
+``Beauty is the first test: there is no permanent place in the world for ugly mathematics.'', thus wrote the famous mathematician G. H. Hardy in \cite{Hardy1940}. We contend that a certain beauty, an elegance oozes through an optimal solution. 
+
+Of course, DP is a \emph{technique} to eliminate inefficiencies in brute-force solutions. It does not change the ``intractability characteristics'' of computational problems. Intractability is a property of truly difficult problems of which there is no dearth. DP is not a panacea for solving such hard problems. Rather it is an effective way to implement practical solutions to difficult problems. These solutions are often realized through computer programs. As a result of this, the ``formulation of a DP solution'' to some problem is often called its ``DP algorithm''.
 
 The DP solution to this problem described in the book is highly readable. We are going to skip that here because reading it from the book (rather than these notes) is the best one can do. We will only reproduce a gist of the discussion here:
 \begin{sidebar}
@@ -327,7 +335,8 @@ Optimal Value Function & $S$ & \multicolumn{1}{p{6cm}}{The \emph{rule} that assi
 Optimal Policy Function & $P$ & \multicolumn{1}{p{6cm}}{The \emph{rule} that associates the best first decision with each subproblem. For example, the optimal path (as a sequence of vertices) is A--X--Y--Z--B.}\\
 Argument(s) (to $S,P$) & $x,y,\dots$ & \multicolumn{1}{p{6cm}}{Similar to classical function's arguments; giving actual values to arguments captures specific subproblems.}\\
 \multicolumn{1}{p{4cm}|}{\raggedright Recurrence Relations (or Recurrences)}& \multicolumn{1}{|p{3cm}|}{\raggedright E.g. $S(x)=min(2+S(y),3+S(z))$} & \multicolumn{1}{p{6cm}}{The set of formulas (equations) involving values of $S$ \textit{recurrently}. Some of the recurrences are associated with the ``whole problem''. Our goal is to formulate and solve the whole-problem recurrence relations according to [\ref{def:poopt}].}\\
-Boundary Conditions on $S$ & $S(a),S(b),\dots$ & \multicolumn{1}{p{6cm}}{Certain values of $S$ that are assumed obvious from the problem statement and which require no computation (requiring $O(1)$ computational cost) . We typically work backward from them.}\\
+Boundary Conditions on $S$ & $S(a),S(b),\dots$ & \multicolumn{1}{p{6cm}}{Certain values of $S$ that are assumed obvious from the problem statement and which require no computation (requiring $O(1)$ computational cost). We typically work backward from them.}\\
+Stage&--&\multicolumn{1}{p{6cm}}{Typically, but not necessarily, a path vertex where a decision needs to be made, multiple choices may exist, and making any choice incurs computational cost in terms of elementary operations like adding or comparing numbers. Total computational cost is the sum of costs incurred at stages. Sometimes stage may refer to arcs in a network path.}\\
 \hline
 \end{tabular}
 \caption{Our Terminology}
@@ -358,7 +367,7 @@ And, lest we forget, here is the stark reminder again:
 (As a personal policy, we'll readily see solutions to the problems that we have solved confidently, and rather \emph{begrudgingly} of those that we couldn't solve even after working hard.)
 
 
-\begin{problem}[Problem 1.1]
+\begin{problem}[A Line Target]
 \begin{figure}[!h]
 \centering
 \includegraphics[width=.345\textwidth]{p11-pt-to-line}
@@ -390,11 +399,18 @@ If an addition and a comparison is assumed equally expensive, this is about twic
 We have considered the Principle of Optimality and it seems like a DP formulation of the problem.
 \end{reflection}
 
-Consider an Optimal Value Function:
+Consider Optimal Value Function and associated Optimal Policy Function:
 \begin{equation}
-S(x,y)=\text{Value of the best path from the vertex $(x,y)$ to the line $x=4$}
+\begin{aligned}
+S(x,y)&=\text{ Value of the best path from the vertex $(x,y)$ to the line $x=4$}\\
+P(x,y)&=[(x_1,y_1),(x_2,y_2),\dots,(x_n,y_n)] \\
 \label{eq:p11ovf}
+\end{aligned}
 \end{equation}
+
+(where $(x_i,y_i)$ are the vertices and $n$ is the length of the best path from $(x,y)$ to the line $x=4$)
+
+We denote by $p(x,y)$ the parent vertex of the vertex $(x,y)$. In a path, if $(x_1,y_1)$ \emph{precedes} $(x_2,y_2)$, then $p(x_2,y_2)=(x_1,y_1)$. The source vertex of a path does not have a parent. It is possible that a vertex has multiple parents (because a vertex can appear on multiple paths).
 
 Working through the network from vertex A to line B, we get the following recurrences:
 \begingroup
@@ -472,19 +488,177 @@ S(4,-4) &= 0\\
 Solving equations [\ref{eq:p11rr}] using the boundary conditions from equations [\ref{eq:p11bc}], we get:
 \begin{equation}
 \begin{aligned}
-S(3,-3) &= 5\\
-S(3,-1) &= 3\\
-S(3,1) &= 2\\
-S(3,3) &= 1\\
-S(2,-2) &= \min(4+3,2+5)=7\\
-S(2,0) &= \min(3+2,2+3)=5\\
-S(2,2) &= \min(6+1,2+2)=4\\
-S(1,-1) &= \min(5+5,4+7)=10\\
-S(1,1) &= \min(2+4,3+5)=6\\
-\text{And, finally, } S(0,0) &=\min(1+6,0+10)=7
+S(3,-3) &= 5\;\therefore p(4,-4)=(3,-3)\\
+S(3,-1) &= 3\;\therefore p(4,-2)=(3,-1)\\
+S(3,1) &= 2\;\therefore p(4,2)=(3,1)\\
+S(3,3) &= 1\;\therefore p(4,2)=(3,3)\\
+S(2,-2) &= \min(4+3,2+5)=7 \therefore p(3,-1)=(2,-2), p(3,-3)=(2,-2)\\
+S(2,0) &= \min(3+2,2+3)=5\therefore p(3,-1)=(2,0), p(3,1)=(2,0)\\
+S(2,2) &= \min(6+1,2+2)=4\therefore p(3,1)=(2,2)\\
+S(1,-1) &= \min(5+5,4+7)=10\therefore p(2,0)=(1,-1)\\
+S(1,1) &= \min(2+4,3+5)=6\therefore p(2,2)=(1,1)\\
+\text{And, finally, } S(0,0) &=\min(1+6,0+10)=7\therefore p(1,1)=(0,0)
 \end{aligned}
 \label{eq:p11sol}
 \end{equation}
+
+Traversing the $p$'s in the other direction, we get the optimal path:
+\[
+P(0,0)=[(0,0),(1,1),(2,2),(3,1),(4,2)]
+\]
+\textbf{DL Solution}. The straightforward solution appears on Pg. 217 of the book. Our solution agrees with it. The textbook solution gives the best path $P(0,0)$ but does not give the \emph{value} $S(0,0)=7$ (of course, finding $S(0,0)$ is straightforward).
+
+\begin{reflection}[Need to Implement DP Solutions as Computer Programs]
+Once you know the technique, finding the correct answer is perhaps straightforward. It could even be boring. Indeed, like the great mathematician Gauss once said, ``It is not knowledge, but the act of learning, not the possession of but the act of getting there, which grants the greatest enjoyment''.
+
+Solving the recurrences was fun, but we keep feeling that we may make some human error. We keep feeling that a computer should be taught to do this! Also, this network was small. Toiling through bigger networks by hand is even more error-prone. 
+
+Therefore, I must write computer programs to solve these problems\dots
+\label{ref:needtoprog}
+\end{reflection}
+
+\begin{reflection}
+
+\textbf{Accurate modeling of the problem is crucial! And we know that all models are wrong, but some are useful.}
+
+This problem could also be modeled as a mere extension of our motivating example (Figure [\ref{fig:cityroads}]). Since from that example we know how to go from a source vertex to a target vertex, we could calculate the best path from $(0,0)$ to $(4,4)$, and the best path from $(0,0)$ to $(4,2)$, and so on. That would yield us five different paths and five values for $S(0,0)$, the smallest of which is also the best path from $(0,0)$ to the line $x=4$! 
+
+However, modeling it that way and calculating each path using DP would be like being penny wise and pound foolish.
+
+I must admit that the thought of solving it this way did cross my mind\footnote{And, in fact, this is the brute-force solution}.
+\end{reflection}
+
+\begin{problem}[A Network with a Target Rebate]
+Solve the above problem (Figure [\ref{fig:p1.1}]) using dynamic programming, with the additional specification that there is a rebate associated with each terminal point; ending at the point (4, 4) has a cost of $-2$ (i.e., 2 is subtracted from the path cost), (4, 2) $-1$, (4, 0) $-3$, $(4, -2)$ $-4$, and $(4, -4)$ $-3$.
+\end{problem}
+\begin{reflection}
+Oh, this is the same problem with different boundary condition values; I need a computer program!
+
+I believe I can create a framework for solving such two-dimensional network problems, but I'll wait to read further so that I can accommodate a good number of problems.
+
+I will skip this problem for now \dots
+\end{reflection}
+
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=.345\textwidth]{p14-n-stage-nenw-network}
+\caption{A General N-stage NE-SE Network}
+\label{fig:general-network}
+\end{center}
+\end{figure}
+
+
+We now compare the brute-force solution with the DP solution in terms of computational efficiency: Can we quantify how much better the DP solution is than the brute-force solution in general for the network in Figure [\ref{fig:general-network}]?
+
+Our endeavor is to make a fairly accurate approximation to the exact number of calculations. The exact number is not that important.
+
+This is an N-stage network. Every path (optimal or not) has N arcs along which we need to make decisions. 
+
+At $\frac{N}{2}$ vertices along the edge CB and at $\frac{N}{2}$ vertices along the edge DB we need only to add one number to a running total because there is a forced choice there. At B, there is no choice by default; once we reach B, we are done.
+
+\begin{equation}
+\begin{aligned}
+\text{Number of Edge Additions}=\frac{N}{2}+\frac{N}{2}=N
+\end{aligned}
+\label{eq:numcaledge}
+\end{equation}
+
+All the vertices on and inside the square AGFE are equally expensive; we need to do two additions and one comparison at each vertex. There are $\frac{N}{2}\cdot\frac{N}{2}=\frac{N^2}{4}$ such vertices.
+
+\begin{equation}
+\begin{aligned}
+\text{Number of Core Additions}&=2\times\frac{N}{2}\times\frac{N}{2}=\frac{N^2}{2}\\
+\text{Number of Core Comparisons}&=\frac{N}{2}\times\frac{N}{2}=\frac{N^2}{4}
+\end{aligned}
+\label{eq:numcalcore}
+\end{equation}
+
+From equations [\ref{eq:numcaledge}] and [\ref{eq:numcalcore}], we have 
+\begin{equation}
+\begin{aligned}
+\text{Total Number of Additions}&=\frac{N^2}{2}+N\\
+\text{Total Number of Comparisons}&=\frac{N^2}{4}\\
+\therefore \text{Total Cost (Additions+Comparisons)}&=O(N^2)
+\end{aligned}
+\label{eq:numcaltotal}
+\end{equation}
+
+Big-Oh notation is used to mathematically compare growth of functions. Equation [\ref{eq:numcaltotal}] implies that the cost of the optimal path in our network is a polynomial (quadratic) in the number of arcs in it. This is a helpful indicator.
+
+Let's analyze the performance of the brute-force solution. In the network that has $N$ arcs, we must take $\frac{N}{2}$ north-easterly or north-westerly arcs. The total number of paths is then ${N \choose \frac{N}{2}}$ which is exponential in $N$. Each path must entail $N-1$ additions and the total cost is $O(N\cdot 2^{\frac{N}{2}})$. This solution is unacceptably slow for large values of $N$.
+
+\hrulefill
+
+\begin{problem}[Analyze the Line Target Network]
+How many additions and how many comparisons are required in the DP solution and in the brute-force enumeration for an N-stage problem involving a network of the type shown in Figure [\ref{fig:p1.1}]? Evaluate your formulas for N = 20.
+\end{problem}
+
+\textbf{Solution}.
+
+The DP solution revolves around the number of vertices in the network. Every line of $n$ vertices starting from the source vertex connects to a subsequent line that has $n$ vertices and one more. In an $N$-stage network, the target line has $N+1$ vertices at which no computation is needed. Thus, all the computations of the DP solution occur at all of the $1+2+3+\dots+N$ (`inner') vertices. At each vertex, we perform two additions and one comparison. Therefore, the DP solution needs $2\times(1+2+3+\dots+N)=N^2+N$ additions and $\frac{N(N+1)}{2}$ comparisons. For $N=20$, these are 420 and 210 respectively.
+
+The brute-force solution is enumerative. The number of paths reaching every vertex in the network form the famous ``Pascal's Triangle''\footnote{We may use mathematical induction to prove it formally} along the vertical lines. Specifically, the number of `terminal' vertices in such $N$-stage network equals the sum of \emph{coefficients of the binomial}: $(a+b)^N$. This sum is $2^N$, because $\displaystyle\sum_{i=0}^{N}{N\choose i}=(1+1)^N=2^N$. Since the brute-force solution enumerates every path, requires $N-1$ additions for each, and finally $2^N-1$ comparisons, it needs $(N-1)\times2^{N}$ additions and $2^{N}-1$ comparisons in all. For $N=20$, these are 19,922,944 and 1,048,575 respectively!
+
+\textbf{DL Solution}. Our solution agrees with theirs!
+
+\hrulefill
+
+In path-problems such as these, one can always look at the best path differently. Earlier, following the Definition [\ref{def:poopt}], we considered the implication that the best path A--X--Y--Z--B from A to B implies the best path X--Y--Z--B from X to B. That begs a question: If A--X--Y--Z--B is the best path from A to B, then isn't A--X--Y--Z the best path from A to Z?
+\begin{definition}[Forward Variant of Principle of Optimality]
+\label{def:pooptforward}
+The best path from A to any vertex B has the property that whatever the vertex before B, call it C, the path must be the best path from A to C.
+\end{definition}
+Indeed, considering the contrapositive, if A--X--Y--Z is \emph{not} the best path from A to Z, then A--X--Y--Z--B is \emph{not} the best path from A to B, even if Z--B is the best path from Z to B.
+
+With this definition, we can reformulate another variant of DP problems. In this formulation that we call the Forward Dynamic Programming, unlike the previous formulation which is called the Backward Dynamic Programming, $(x,y)$ is the target vertex and the source vertex is usually $(0,0)$:
+
+\begin{equation}
+\begin{aligned}
+\text{Optimum Value Function}\\ 
+S(x,y)&=\text{ Best-path Value Source to Target $(x,y)$}\\
+\text{Optimum Policy Function}\\
+P(x,y)&=[(x_1,y_1),(x_2,y_2),\dots,(x,y)] \\
+\text{Recurrence Relations}\\
+S(x,y)&=
+\min\begin{pmatrix}
+f(x-1,y-1)+S(x-1,y-1)\\
+g(x-1,y-1)+S(x-1,y-1)\\
+\dots
+\end{pmatrix}\\
+\text{Boundary Conditions (at Source)}\\
+S(0,0)&=0
+\label{eq:fwddp1}
+\end{aligned}
+\end{equation}
+
+\begin{problem}[Forward DP Solution to a Previous Problem]
+Solve the problem in Figure [\ref{fig:cityroads}] (reproduced here) 
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=.5\textwidth]{elem-path-problem-1}
+\caption{A City Road Network (Reproduced)}
+\label{fig:cityroadsrep}
+\end{figure}
+
+by using Equations[\ref{eq:fwddp1}] (Forward DP). How many additions and how many comparisons does the solution entail? How does this compare to the numbers for the original dynamic-programming solution in the text?
+\end{problem}
+
+\textbf{Solution}.
+\begin{reflection}[Urge to Solve Elementary Path DP Problems with a Computer]
+In a previous reflection blurb (Reflection [\ref{ref:needtoprog}]), I felt the need to create a programming framework to solve using a computer such path problems that we call ``NE--SE path problems''. 
+
+Now the urge is stronger. We can and should solve these problems on a computer; by modeling the problem accurately, using simple data structures, and implementing algorithms correctly, these recurrences can be solved efficiently. After all, what I cannot program, I don't understand well. 
+
+This is not going against the spirit of this book, we should solve as many problems by hand as we can, but we should not prohibit ourselves from adding a layer of personal creativity.
+
+Another reason to implement a computer program is its indispensability when it comes to large networks. What if we are presented with a large--say, a 100-stage--network? Solving that many recurrences by hand is unthinkable. We need computer programs.
+
+However, writing a general purpose framework for NE-SE path networks is challenging. A glance at network variants later in this book tells me that there are many `configurations' in which such a network may come. Taking care of all such tweaks is certainly not straightforward. 
+
+Among other things, textual and programmable specifications (e.g., a complete `diamond' or a part thereof, boundary conditions, constraints) of such networks is complicated. Another need is an ability to detect, preferably quickly, an ``impossible path'', for example, there is no path from C to G or from E to N or from H to I in the network shown in Figure [\ref{fig:cityroadsrep}]. Does our DP solution do that, and if it does, does it say that the cost of an impossible path is $\infty$? I believe solving the recurrences does not detect impossible paths; the DP formulation assumes that a path exists. We can codify certain invariants that can detect impossible paths in constant time\footnote{The so-called $O(1)$ time}.
+\end{reflection}
 %%%-----------------------------------------------------------------------------
 \MakeBibliography[nosplit]
 %%%-----------------------------------------------------------------------------

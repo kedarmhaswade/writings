@@ -398,7 +398,7 @@ If we resort to a `proper' definition of a complex number: $z=a+bi, i=\sqrt{-1}$
 \end{center}
 \end{figure}
 %%%-----------------------------------------------------------------------------
-Here is the multiplication of two vectors: $\langle 3,4\rangle$ and $\langle 5,12\rangle$ to produce the vector $\langle -33,56\rangle$. Note: $\langle 33,56,65\rangle$ is a Pythagorian triple.
+Here is the multiplication of two vectors: $\langle 3,4\rangle$ (magnitude: 5) and $\langle 5,12\rangle$ (magnitude: 13) to produce the vector $\langle -33,56\rangle$ (magnitude: $5\times13=65$). Note: $\langle 33,56,65\rangle$ is a Pythagorian triple.
 \begin{figure}[h]
 \begin{center}
 \caption{Another Geometric Interpretation of Complex Number Multiplication (Drawn to Scale using Geogebra)}
@@ -757,7 +757,26 @@ $$
 \therefore 2a=0\implies a=0
 $$
 Therefore, $0$ is the identity element of the half double addition. 
+\begin{reflection}[Mistake Found on a Review]
+I was on a plane. I wanted to review my LAPB work so far and I realized the mistake in the above argument.
+
+Commutativity is a prerequisite for identity.
+
+Therefore, if $i$ is the identity element of the half double addition, $a\openbox i=i\openbox a$. Also, $a\openbox i=2a+i=a$ gives us $i=-a$, whereas $i\openbox a=2i+a=a$ gives $i=0$. This is a contradiction.
+
+So, I checked the answer. Halmos reasons how we do. He says:
+\begin{sidebar}[Right-Left Identity]
+Half double addition has no \textbf{right identity element} but it does have a \textbf{left identity element}.
+\end{sidebar}
+More terminology!
+\end{reflection}
+
 \item For exponentiation, $b^a=b=b^1\implies a=1$. Therefore, $1$ is the identity element of exponentiation (like multiplication).
+
+\begin{reflection}[Another Oddity]
+Commutativity is a prerequisite for identity element: $a^i=i^a=a$. $a^i=a\implies i=1$, whereas $i^a=a$ does not result in a constant value for $i$. This is the opposite (or backward as Halmos calls it) case. 
+\end{reflection}
+
 \item Complex multiplication is a bit more complicated. We are seeking a \emph{complex number} $c_1$, which is a pair of real numbers, $(a,b)$, such that $c_1\times c_2$ equals $c_2$, where $c_2$ is a pair of real numbers, $(c,d)$.
 
 By definition,
@@ -1009,13 +1028,12 @@ Since, by definition, the operation $*$ chooses the greater of its operands \emp
 
 Curiously, 1 is the element of $S$ such that $x*1=x\forall x\in S$. Therefore, $1$ is the zero of this operation.
 
-However, only 1 has a negative, namely, itself, but none of $2,3,4$, and 5 have a negative. Therefore $(S,*)$ is not a group (and not an abelian group).
+However, only 1 has a negative, namely, itself, but none of $2,3,4$, and 5 has a negative. Therefore $(S,*)$ is not a group (and not an abelian group).
 
 \item\label{item:xyyx0s} No! It does not.
 
 \begin{remark}
-Halmos: It (this item) is easy, but it's here because it is useful and, incidentally, because it shows how the defining axioms of groups can be useful. What was proved in Problem [\ref{pr:idelem}] is that if an element acts the way 0 does for every element, then it must be 0; this part here asks about elements that act the way 0 does for only
-one element.
+Halmos: It (this item) is easy, but it's here because it is useful and, incidentally, because it shows how the defining axioms of groups can be useful. What was proved in Problem [\ref{pr:idelem}] is that if an element acts the way 0 does for every element, then it must be 0; this part here asks about elements that act the way 0 does for only one element.
 \end{remark}
 (I read Halmos's remark above to clarify that the problem states that there is one specific number $y\in\mathbb{G}: x+y=y$ and asks if $x$ qualifies as the zero of $+$).
 
