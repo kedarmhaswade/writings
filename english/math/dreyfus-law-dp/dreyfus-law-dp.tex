@@ -632,6 +632,19 @@ S(0,0)&=0
 \end{aligned}
 \end{equation}
 
+Let's compare the Optimal Value Functions of the two \textbf{flavors} of the DP formulations (forward and backward) of these path problems:
+\begin{equation}
+\label{eq:comparesbf}
+\begin{aligned}
+\text{Backward}\\
+S(x,y)&=\text{The best-path value from some vertex $(x,y)$ to the terminal vertex $(6,0)$}\\
+\text{Forward}\\
+S(x,y)&=\text{The best-path value from the initial vertex $(0,0)$ to some vertex $(x,y)$}
+\end{aligned}
+\end{equation}
+
+Thus, in the backward formulation we begin with the end in the mind (we immediately know the value of S at the target) and calculate optimally backward, whereas in the forward formulation we start at the very beginning (we immediately know the value of S at the source) and calculate optimally forward through the network.
+
 \begin{problem}[Forward DP Solution to a Previous Problem]
 Solve the problem in Figure [\ref{fig:cityroads}] (reproduced here) 
 
@@ -646,6 +659,7 @@ by using Equations[\ref{eq:fwddp1}] (Forward DP). How many additions and how man
 \end{problem}
 
 \textbf{Solution}.
+
 \begin{reflection}[Urge to Solve Elementary Path DP Problems with a Computer]
 In a previous reflection blurb (Reflection [\ref{ref:needtoprog}]), I felt the need to create a programming framework to solve using a computer such path problems that we call ``NE--SE path problems''. 
 
@@ -657,8 +671,26 @@ Another reason to implement a computer program is its indispensability when it c
 
 However, writing a general purpose framework for NE-SE path networks is challenging. A glance at network variants later in this book tells me that there are many `configurations' in which such a network may come. Taking care of all such tweaks is certainly not straightforward. 
 
-Among other things, textual and programmable specifications (e.g., a complete `diamond' or a part thereof, boundary conditions, constraints) of such networks is complicated. Another need is an ability to detect, preferably quickly, an ``impossible path'', for example, there is no path from C to G or from E to N or from H to I in the network shown in Figure [\ref{fig:cityroadsrep}]. Does our DP solution do that, and if it does, does it say that the cost of an impossible path is $\infty$? I believe solving the recurrences does not detect impossible paths; the DP formulation assumes that a path exists. We can codify certain invariants that can detect impossible paths in constant time\footnote{The so-called $O(1)$ time}.
+Among other things, textual and programmable specifications (e.g., a complete `diamond' or a part thereof, boundary conditions, constraints) of such networks is complicated. Another need is an ability to detect, preferably quickly, an ``impossible path''. For example, there is no path from C to G or from E to N or from H to I in the network shown in Figure [\ref{fig:cityroadsrep}]. Does our DP solution detect this case, and if it does, does it say that the cost of an impossible path is $\infty$? I believe not; the DP formulation assumes that a path exists. We can and should codify certain invariants that lead to detecting impossible paths in constant time\footnote{The so-called $O(1)$ time}.
+
 \end{reflection}
+
+I bit the bullet and solved the problem on paper.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=.5\textwidth]{forward-dp-sol}
+\caption{The Forward DP Formulation of Figure [\ref{fig:cityroadsrep}]}
+\label{fig:forwarddpsol1}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=.5\textwidth,angle=-90]{forward-dp-p1.6}
+\caption{The Forward DP Formulation of Figure [\ref{fig:tbd}]}
+\label{fig:forwarddpsol1}
+\end{figure}
+
 %%%-----------------------------------------------------------------------------
 \MakeBibliography[nosplit]
 %%%-----------------------------------------------------------------------------
