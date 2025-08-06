@@ -1,15 +1,24 @@
 % use lualatex
-\documentclass[a6paper]{article}   % smartphone
-%\documentclass[17pt]{extarticle}  % print quality
+\documentclass[a4paper]{article}   % print quality
+%\documentclass[17pt]{extarticle}  % smartphone
 \usepackage{polyglossia}
 \usepackage[margin=20mm]{geometry}
 \setdefaultlanguage{marathi}
 \setotherlanguages{english}
 %\textbf with "Sanskrit Text" produces the shape warning because the default Sanskrit Text font on Windows does not have a bold equivalent; try Yashomudra or Shobhika; now I like Tiro better
 \newfontfamily\devanagarifont[Script=Devanagari]{SanskritText}
+%\newfontfamily\devanagarifont[Script=Devanagari]{Gargi}
+%\newfontfamily\devanagarifont[Script=Devanagari]{Kalimati}
+%\setmainfont{ClearSans}
+%\setmainfont{Atkinson Hyperlegible}
+%\setmainfont{Chomsky}
+%\setmainfont{Baskervald ADF Std}
+%\setmainfont{E B Garamond}
+\setmainfont{Engadget}
 
 
-%\pagenumbering{gobble}
+
+%\pagenumbering{gobble} % uncomment to suppress page numbers
 \setlength{\parindent}{0pt}% Remove paragraph indent
 \usepackage[skip=\medskipamount]{parskip}
 \usepackage{fontawesome}
@@ -35,13 +44,18 @@
 \begin{document}
 
 \title{...नाव ...}
-\author{}
+\author{केपी}
 \date{पुणे, २० सप्टेंबर २०२३}
 %\date{}
 \maketitle
 \vspace{5mm}
 \hrule
 
+\begin{english}
+This is plain English.
+\end{english}
+
+हे मराठी.
 \vspace{5mm}
 \hrule
 \end{document}
