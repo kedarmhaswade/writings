@@ -684,12 +684,58 @@ I bit the bullet and solved the problem on paper.
 \label{fig:forwarddpsol1}
 \end{figure}
 
+I checked it with the solution in the textbook. They used backward DP formulation, whereas I used forward. The answers are of course the same (13).
+
+\begin{problem}[Another SE-NE Network Path Problem]
+Find the minimum-cost path starting from line A and going to line B in the network shown in Figure [\ref{fig:line-to-line}]. The numbers shown along lines A and B are additional costs associated with various initial and terminal points.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=.5\textwidth]{another-network}
+\caption{Yet Another Network}
+\label{fig:line-to-line}
+\end{figure}
+
+\end{problem}
+
+\textbf{Solution}.
+I used forward formulation; the book used backward. The answers are the same (16). The best path is: $(0,2)\rightarrow(1,1)\rightarrow(2,2)\rightarrow(3,1)\rightarrow(4,0)\rightarrow(5,1)\rightarrow(6,1)$
+
 \begin{figure}[H]
 \centering
 \includegraphics[width=.5\textwidth,angle=-90]{forward-dp-p1.6}
-\caption{The Forward DP Formulation of Figure [\ref{fig:tbd}]}
-\label{fig:forwarddpsol1}
+\caption{The Forward DP Formulation of Figure [\ref{fig:line-to-line}]}
+\label{fig:forwarddpsol2}
 \end{figure}
+
+\begin{reflection}[Exercises and Problems]
+The problems so far in the book are intended to help us solve the ``NE-SE Network Problems'' fluently. They should have been called `Exercises'. 
+
+While on a bus, I thought of a known DP problem:
+\begin{sidebar}
+Given an array of numbers, find its subarray with greatest sum.
+
+Note: Subarray is contiguous. Sum of a subarray is the sum of its elements.
+
+For example, in the case of $[10,-3,4,2,-1]$, the subarray $[10,-3,4,2]$ has the greatest sum (13). 
+\end{sidebar}
+
+A brute-force solution is to examine all the subarrays and compare their sums. This is at least an $O(N^2)$ (where $N$ is the number of elements in the array) solution, which can be expensive.
+
+I then asked myself a question:
+\begin{sidebar}
+Can I \emph{model this problem as a ``Path Problem''} of the kind we have seen so far? Doing so may result in a more efficient solution.
+\end{sidebar}
+
+
+After trying for several hours, however, I was not able to model it accurately and a DP formulation of this problem as a path problem remained elusive.
+
+\end{reflection}
+
+We now complicate the situation to show that for some problems the argument of the optimal value function may have to contain more information than just the current vertex. 
+
+\textbf{
+A major part of the art of dynamic programming is the appropriate choice of the subproblems that must be solved in order eventually to solve the given problem.} 
 
 %%%-----------------------------------------------------------------------------
 \MakeBibliography[nosplit]
