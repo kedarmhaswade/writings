@@ -1,0 +1,332 @@
+% $Header$
+
+\documentclass{beamer}
+
+% This file is a solution template for:
+
+% - Giving a talk on some subject.
+% - The talk is between 15min and 45min long.
+% - Style is ornate.
+
+
+
+% Copyright 2004 by Till Tantau <tantau@users.sourceforge.net>.
+%
+% In principle, this file can be redistributed and/or modified under
+% the terms of the GNU Public License, version 2.
+%
+% However, this file is supposed to be a template to be modified
+% for your own needs. For this reason, if you use this file as a
+% template and not specifically distribute it as part of a another
+% package/program, I grant the extra permission to freely copy and
+% modify this file as you see fit and even to delete this copyright
+% notice. 
+
+
+\mode<presentation>
+{
+  %\usetheme{Warsaw}
+  %\usetheme{Berlin}
+  %\usetheme{metropolis}
+  \usetheme{PaloAlto}
+  %\usetheme{CambridgeUS}
+  %\usetheme{Berkeley}
+  
+  % font themes
+  \usefonttheme{serif}
+  %\usefonttheme{structurebold}
+
+  % color themes
+  %\usecolortheme{albatross}
+  %\usecolortheme{beetle}
+  %\usecolortheme{crane}
+  %\usecolortheme{dove}
+  %\usecolortheme{fly}
+  %\usecolortheme{monarca}
+  %\usecolortheme{seagull}
+  %\usecolortheme{beaver}
+  % color themes
+  % or ...
+
+  %\setbeamercovered{transparent}
+  \setbeamercovered{transparent=5}
+  % or whatever (possibly just delete it)
+}
+
+
+\usepackage[english]{babel}
+% Place figures exactly where you mean to
+%https://tex.stackexchange.com/a/8633/64425
+\usepackage{float}
+% Place figures exactly where you mean to
+% or whatever
+
+\usepackage[utf8]{inputenc}
+% or whatever
+
+\usepackage[T1]{fontenc}
+% Or whatever. Note that the encoding and the font should match. If T1
+% does not look nice, try deleting the line with the fontenc.
+
+% math
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+% math
+
+% tikz
+\usepackage{tikz}
+% tikz
+\usepackage{caption}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    linkcolor={magenta!50!black},
+    citecolor={blue!50!black},
+    urlcolor={blue!80!black}
+}
+% large commented sections
+\usepackage{comment}
+% large commented sections
+
+
+
+\title[Calculus Made Easy] % (optional, use only with long paper titles)
+{Calculus Made Easy}
+
+\subtitle
+{Beautiful Ideas Presented Simply} % (optional)
+
+\author[SPT, MG, KM] % (optional, use only with lots of authors)
+{Silvanus P. Thompson\inst{1} \and Martin Gardner\inst{2}}
+% - Use the \inst{?} command only if the authors have different
+%   affiliation.
+
+\institute[Royal Society] % (optional, but mostly needed)
+{
+  \inst{1}%
+  Original Author
+  \and
+  \inst{2}%
+  Annotator
+  }
+% - Use the \inst command only if there are several affiliations.
+% - Keep it simple, no one is interested in your street address.
+
+\date[August 2025] % (optional)
+{Aug 2025 / Free Learner's School Conversations}
+
+\subject{Fun Conversations at Home School}
+% This is only inserted into the PDF information catalog. Can be left
+% out. 
+
+
+
+% If you have a file called "university-logo-filename.xxx", where xxx
+% is a graphic format that can be processed by latex or pdflatex,
+% resp., then you can add a logo as follows:
+
+% \pgfdeclareimage[height=0.5cm]{university-logo}{university-logo-filename}
+% \logo{\pgfuseimage{university-logo}}
+
+
+
+% Delete this, if you do not want the table of contents to pop up at
+% the beginning of each subsection:
+\AtBeginSubsection[]
+{
+  \begin{frame}<beamer>{Outline}
+    \tableofcontents[currentsection,currentsubsection]
+  \end{frame}
+}
+
+
+% If you wish to uncover everything in a step-wise fashion, uncomment
+% the following command: 
+
+%\beamerdefaultoverlayspecification{<+->}
+
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Outline}
+  \tableofcontents
+  % You might wish to add the option [pausesections]
+\end{frame}
+
+
+% Since this a solution template for a generic talk, very little can
+% be said about how it should be structured. However, the talk length
+% of between 15min and 45min and the theme suggest that you stick to
+% the following rules:  
+
+% - Exactly two or three sections (other than the summary).
+% - At *most* three subsections per section.
+% - Talk about 30s to 2min per frame. So there should be between about
+%   15 and 30 frames, all told.
+
+% [Kedar] I am keeping this structure, but abusing it to serve my purpose.
+% [Kedar] I expect this `presentation' to have many hundred slides, if I end up doing it right.
+% [Kedar] There are three sections per presentation, no subsections, but each section may have many, many slides. Let's see. I am just getting started with LaTeX and Beamer.
+% [Kedar] I may roughly make a chapter in his book a section in this presentation.
+\section{Introduction}
+\begin{frame}
+\frametitle{Function}
+\framesubtitle{The Most Used Everyday Word in Higher Math}
+\label{slide:function1}
+\end{frame}
+% ------ copypasta next 5 ------
+\begin{frame}
+\frametitle{Frame Title}
+\framesubtitle{Frame Subtitle}
+\label{slide:slidelabel}
+\end{frame}
+% ------ copypasta prev 5 ------
+\section{Summary}
+\begin{frame}
+\frametitle{What We Learned}
+\framesubtitle{A Summary of Sorts}
+\label{slide:summary}
+\end{frame}
+
+
+\begin{comment}
+\begin{frame}
+\frametitle{There Is No Largest Prime Number}
+\framesubtitle{The proof uses \textit{reductio ad absurdum}.}
+\begin{theorem}
+There is no largest prime number.
+\end{theorem}
+\begin{proof}
+\begin{enumerate}
+\item<1-> Suppose $p$ were the largest prime number.
+\item<2-> Let $q$ be the product of the first $p$ numbers.
+\item<3-> Then $q + 1$ is not divisible by any of them.
+\item<1-> But $q + 1$ is greater than $1$, thus divisible by some prime
+number not in the first $p$ numbers.\qedhere
+\end{enumerate}
+\end{proof}
+\uncover<4->{The proof used \textit{reductio ad absurdum}.}
+\end{frame}
+
+\begin{frame}
+\frametitle{What’s Still To Do?}
+\begin{columns}[t]
+\column{.5\textwidth}
+\begin{block}{Answered Questions}
+How many primes are there?
+\end{block}
+\pause
+\column{.5\textwidth}
+\begin{block}{Open Questions}
+Is every even number the sum of two primes?
+\cite{Goldbach1742}
+\end{block}
+\end{columns}
+\end{frame}
+
+\begin{thebibliography}{10}
+\bibitem{Goldbach1742}[Goldbach, 1742]
+Christian Goldbach.
+\newblock A problem we should try to solve before the ISPN ’43 deadline,
+\newblock \emph{Letter to Leonhard Euler}, 1742.
+\end{thebibliography}
+
+\end{comment}
+
+%\begin{frame}{Learn from Masters} %{Subtitles are optional.}
+%  % - A title should summarize the slide in an understandable fashion
+%  %   for anyone how does not follow everything on the slide itself.
+%
+%  \begin{itemize}
+%  \item
+%    Use \texttt{itemize} a lot.
+%  \item
+%    Use very short sentences or short phrases.
+%  \end{itemize}
+%\end{frame}
+%
+%\begin{frame}{Make Titles Informative.}
+%
+%  You can create overlays\dots
+%  \begin{itemize}
+%  \item using the \texttt{pause} command:
+%    \begin{itemize}
+%    \item
+%      First item.
+%      \pause
+%    \item    
+%      Second item.
+%    \end{itemize}
+%  \item
+%    using overlay specifications:
+%    \begin{itemize}
+%    \item<3->
+%      First item.
+%    \item<4->
+%      Second item.
+%    \end{itemize}
+%  \item
+%    using the general \texttt{uncover} command:
+%    \begin{itemize}
+%      \uncover<5->{\item
+%        First item.}
+%      \uncover<6->{\item
+%        Second item.}
+%    \end{itemize}
+%  \end{itemize}
+%\end{frame}
+%
+%
+%\subsection{Second Subsection}
+%
+%\begin{frame}{Make Titles Informative.}
+%\end{frame}
+%
+%\begin{frame}{Make Titles Informative.}
+%\end{frame}
+%
+%
+% [Kedar] Only one section in this presentation.
+% [Kedar] No subsections, sections have slides.
+
+
+\begin{comment}
+
+\section*{Summary}
+
+\begin{frame}{Summary}
+
+  % Keep the summary *very short*.
+  \begin{itemize}
+  \item
+    The \alert{first main message} of your talk in one or two lines.
+  \item
+    The \alert{second main message} of your talk in one or two lines.
+  \item
+    Perhaps a \alert{third message}, but not more than that.
+  \end{itemize}
+  
+  % The following outlook is optional.
+  \vskip0pt plus.5fill
+  \begin{itemize}
+  \item
+    Outlook
+    \begin{itemize}
+    \item
+      Something you haven't solved.
+    \item
+      Something else you haven't solved.
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\end{comment}
+
+\end{document}
+
+
