@@ -1,0 +1,46 @@
+\documentclass[a6paper]{article}
+\usepackage{polyglossia}
+\usepackage[margin=10mm]{geometry}
+\setdefaultlanguage{sanskrit}
+\setotherlanguages{english, marathi}
+\newfontfamily\devanagarifont[Script=Devanagari]{Sanskrit Text}
+\newfontfamily\englishfont{Gentium Book Basic}
+\setmainfont{Sanskrit Text}
+%\newfontfamily\sanskritfont[Mapping=velthuis-sanskrit,Script=Devanagari,Language=Sanskrit]{Noto Serif Devanagari}
+% make sure ~ as non-breaking space doesn't interfere with velthuis-sanskrit mapping
+\edef~{\string~}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}% Remove paragraph indent
+\usepackage[skip=\medskipamount]{parskip}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    citecolor=blue,
+    urlcolor=purple,
+}
+\newcommand \eng[1]{
+    \textenglish{#1}
+}
+\begin{document}
+
+{\Large भिरभिर भवऱ्या }
+
+%TC:ignore
+%TC:endignore
+
+भिरभिर भवऱ्या भीरभीर\\
+एका पायावर  फीरफीर\\
+गुंगुन गुंगुन गाणे म्हण\\
+हलू नकोस एक कण\\
+सात दिवस फिरत रहा\\
+सात देश इथून पहा\\
+भिरभिर भवऱ्या भीरभीर\\
+भोवळ आली तर पाजीन खीर!
+
+{\small -- अज्ञात}
+%TC:ignore
+%TC:endignore
+\end{document}
