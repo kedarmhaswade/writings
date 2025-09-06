@@ -77,6 +77,7 @@
 % tikz
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta}
+\usetikzlibrary{calc}
 % tikz
 \usepackage{caption}
 \usepackage{hyperref}
@@ -90,26 +91,32 @@
 \usepackage{comment}
 % large commented sections
 
+% some beautiful fonts
+\usepackage{yfonts}
+% some beautiful fonts
 
+% canceling in equations
+\usepackage{cancel}
+% canceling in equations
 
-\title[Calculus Made Easy] % (optional, use only with long paper titles)
-{Calculus Made Easy - 02}
+\title[Nonstandard Analysis] % (optional, use only with long paper titles)
+{Nonstandard Analysis, The 1972-SciAm Article}
 
 \subtitle
-{Beautiful Ideas Presented Simply} % (optional)
+{Ideas That Common People Brand Nonstandard} % (optional)
 
-\author[SPT, MG, KM] % (optional, use only with lots of authors)
-{Silvanus P. Thompson\inst{1} \and Martin Gardner\inst{2}}
+\author[MD,RH,KM] % (optional, use only with lots of authors)
+{Martin Davis\inst{1} \and Reuben Hersh\inst{2}}
 % - Use the \inst{?} command only if the authors have different
 %   affiliation.
 
-\institute[Royal Society] % (optional, but mostly needed)
+\institute[Unknown] % (optional, but mostly needed)
 {
   \inst{1}%
   Original Author
   \and
   \inst{2}%
-  Annotator
+  Original Author
   }
 % - Use the \inst command only if there are several affiliations.
 % - Keep it simple, no one is interested in your street address.
@@ -174,153 +181,36 @@
 % [Kedar] I expect this `presentation' to have many hundred slides, if I end up doing it right.
 % [Kedar] There are three sections per presentation, no subsections, but each section may have many, many slides. Let's see. I am just getting started with LaTeX and Beamer.
 % [Kedar] I may roughly make a chapter in his book a section in this presentation.
-\section{Functions}
-\include{about}
-\include{function-versatile}
-\include{what-is-a-function-discrete}
-\include{discrete-function-le1-arrow-out}
-\include{discrete-view-challenges}
-\include{functions-02-vocab}
+\section{Introduction}
+\include{exploration-nonstandard-analysis/about}
+\include{exploration-nonstandard-analysis/history}
+\include{exploration-nonstandard-analysis/history2}
+\include{exploration-nonstandard-analysis/uncomfortable}
+\include{exploration-nonstandard-analysis/infinitesimals-in-geometry}
+\include{exploration-nonstandard-analysis/rejected-by-euclid}
+\include{exploration-nonstandard-analysis/objections-to-nic}
+\include{exploration-nonstandard-analysis/archimedes-method}
+\include{exploration-nonstandard-analysis/arg-2-archimedes-1}
+\include{exploration-nonstandard-analysis/arg-2-archimedes-2}
+\include{exploration-nonstandard-analysis/arg-2-archimedes-3}
+\include{exploration-nonstandard-analysis/arg-2-archimedes-4}
+\include{exploration-nonstandard-analysis/arg-2-archimedes-5}
+\include{exploration-nonstandard-analysis/comparison-of-proofs}
+\include{exploration-nonstandard-analysis/infinitesimals-in-dynamics}
+\include{exploration-nonstandard-analysis/analysis-of-falling-body-1}
+\include{exploration-nonstandard-analysis/analysis-of-falling-body-2}
+\include{exploration-nonstandard-analysis/analysis-of-falling-body-3}
+\include{exploration-nonstandard-analysis/analysis-of-falling-body-4}
+\include{exploration-nonstandard-analysis/analysis-of-falling-body-5}
+\include{exploration-nonstandard-analysis/analysis-of-falling-body-6}
+\include{exploration-nonstandard-analysis/analysis-of-falling-body-7}
+\include{exploration-nonstandard-analysis/analysis-of-falling-body-8}
+\include{exploration-nonstandard-analysis/analysis-of-falling-body-9}
+\include{exploration-nonstandard-analysis/analysis-of-falling-body-10}
+\include{exploration-nonstandard-analysis/analysis-of-falling-body-11}
 \section{Summary}
-\begin{frame}
-\frametitle{What We Learned}
-\framesubtitle{A Summary of Sorts}
-\label{slide:summary}
-\end{frame}
-
-
-\begin{comment}
-\begin{frame}
-\frametitle{There Is No Largest Prime Number}
-\framesubtitle{The proof uses \textit{reductio ad absurdum}.}
-\begin{theorem}
-There is no largest prime number.
-\end{theorem}
-\begin{proof}
-\begin{enumerate}
-\item<1-> Suppose $p$ were the largest prime number.
-\item<2-> Let $q$ be the product of the first $p$ numbers.
-\item<3-> Then $q + 1$ is not divisible by any of them.
-\item<1-> But $q + 1$ is greater than $1$, thus divisible by some prime
-number not in the first $p$ numbers.\qedhere
-\end{enumerate}
-\end{proof}
-\uncover<4->{The proof used \textit{reductio ad absurdum}.}
-\end{frame}
-
-\begin{frame}
-\frametitle{What’s Still To Do?}
-\begin{columns}[t]
-\column{.5\textwidth}
-\begin{block}{Answered Questions}
-How many primes are there?
-\end{block}
-\pause
-\column{.5\textwidth}
-\begin{block}{Open Questions}
-Is every even number the sum of two primes?
-\cite{Goldbach1742}
-\end{block}
-\end{columns}
-\end{frame}
-
-\begin{thebibliography}{10}
-\bibitem{Goldbach1742}[Goldbach, 1742]
-Christian Goldbach.
-\newblock A problem we should try to solve before the ISPN ’43 deadline,
-\newblock \emph{Letter to Leonhard Euler}, 1742.
-\end{thebibliography}
-
-\end{comment}
-
-%\begin{frame}{Learn from Masters} %{Subtitles are optional.}
-%  % - A title should summarize the slide in an understandable fashion
-%  %   for anyone how does not follow everything on the slide itself.
-%
-%  \begin{itemize}
-%  \item
-%    Use \texttt{itemize} a lot.
-%  \item
-%    Use very short sentences or short phrases.
-%  \end{itemize}
-%\end{frame}
-%
-%\begin{frame}{Make Titles Informative.}
-%
-%  You can create overlays\dots
-%  \begin{itemize}
-%  \item using the \texttt{pause} command:
-%    \begin{itemize}
-%    \item
-%      First item.
-%      \pause
-%    \item    
-%      Second item.
-%    \end{itemize}
-%  \item
-%    using overlay specifications:
-%    \begin{itemize}
-%    \item<3->
-%      First item.
-%    \item<4->
-%      Second item.
-%    \end{itemize}
-%  \item
-%    using the general \texttt{uncover} command:
-%    \begin{itemize}
-%      \uncover<5->{\item
-%        First item.}
-%      \uncover<6->{\item
-%        Second item.}
-%    \end{itemize}
-%  \end{itemize}
-%\end{frame}
-%
-%
-%\subsection{Second Subsection}
-%
-%\begin{frame}{Make Titles Informative.}
-%\end{frame}
-%
-%\begin{frame}{Make Titles Informative.}
-%\end{frame}
-%
-%
-% [Kedar] Only one section in this presentation.
-% [Kedar] No subsections, sections have slides.
-
-
-\begin{comment}
-
-\section*{Summary}
-
-\begin{frame}{Summary}
-
-  % Keep the summary *very short*.
-  \begin{itemize}
-  \item
-    The \alert{first main message} of your talk in one or two lines.
-  \item
-    The \alert{second main message} of your talk in one or two lines.
-  \item
-    Perhaps a \alert{third message}, but not more than that.
-  \end{itemize}
-  
-  % The following outlook is optional.
-  \vskip0pt plus.5fill
-  \begin{itemize}
-  \item
-    Outlook
-    \begin{itemize}
-    \item
-      Something you haven't solved.
-    \item
-      Something else you haven't solved.
-    \end{itemize}
-  \end{itemize}
-\end{frame}
-
-\end{comment}
+\include{exploration-nonstandard-analysis/summary}
+\include{exploration-nonstandard-analysis/references}
 
 \end{document}
 

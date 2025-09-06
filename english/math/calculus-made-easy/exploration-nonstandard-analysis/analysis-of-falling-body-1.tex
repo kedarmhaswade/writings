@@ -1,0 +1,44 @@
+\begin{frame}
+\frametitle{Analysis of The Motion of \alert{A Falling Body}}
+\framesubtitle{1: The Basic Setup}
+\label{slide:analysis-of-falling-body-1}
+
+\begin{columns}[c]
+\column{.7\textwidth}
+\alert{Consider a Falling Stone.} 
+
+Its Motion Is Described by Giving Its Position (Displacement from A Reference) as A \textit{Function} of Time. \alert{As It Falls, Its Velocity Increases}, So That The \alert{Velocity at Each Instant Is Also A Variable \textit{Function} of Time}.  Newton Called \alert{The \textit{Instantaneous Position} Function The `Fluent'} And \alert{The \textit{Instantaneous Velocity} Function the `Fluxion'}. 
+
+If One Is Given, The Other Can Be Determined; \alert{This Connection Is The Heart of The Infinitesimal Calculus Fashioned by Newton and Leibniz}.
+\column{.3\textwidth}
+\def\scale{0.4}
+\def\xtime{0}
+\def\xdisp{2.2}
+\def\xvel{4.8}
+\begin{tikzpicture}[scale=\scale]
+\draw (\xtime,-17cm) node[red] {\tiny{$t$(s)}};
+\draw (\xdisp,-17cm) node[red] {\tiny{$d$(m)}};
+\draw (\xdisp,-17.5cm) node[red] {\tiny{$gt^2$}};
+\draw (\xvel,-17cm) node[red] {\tiny{$v$(m/s)}};
+\draw (\xvel,-17.5cm) node[red] {\tiny{$2gt$}};
+\draw[thin] (\xtime,0) -- (\xtime,-16.5);
+\draw[thin] (\xdisp,0) -- (\xdisp,-16.5);
+\draw[thin] (\xvel,0) -- (\xvel,-16.5);
+\foreach \y in {1,2,3,4} {
+  \def\sq{\y*\y}
+  \pgfmathparse{4.9*\y*\y}
+  \pgfmathroundto{\pgfmathresult}
+  \let\d=\pgfmathresult
+  \pgfmathparse{9.8*\y}
+  \pgfmathroundto{\pgfmathresult}
+  \let\v=\pgfmathresult
+  \draw (-2pt,-\y) -- (2pt,-\y) node[anchor=east] {\tiny \y};
+  \draw (\xdisp,-\sq) -- (\xdisp,-\sq) node[anchor=east] {\tiny{\d}};
+  \draw [-{Stealth[red, length=1mm]}] [very thin,dashed,red] (\xtime, -\y) -- (\xdisp, -\sq);
+  \filldraw[gray] (\xdisp+0.3,-\sq) ellipse [x radius=6pt, y radius=4pt];
+  \draw[thick,red] (\xvel,-\sq) -- (\xvel,-\sq) circle [radius=1pt];
+  \draw[thick,red] (\xvel,-\sq) -- (\xvel,-\sq) node[anchor=west] {\tiny{\v}};
+}
+\end{tikzpicture}
+\end{columns}
+\end{frame}

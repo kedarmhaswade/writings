@@ -1,0 +1,32 @@
+% ------ copypasta next 5 ------
+\begin{frame}
+\frametitle{The Area And Circumference of The Unit Circle}
+\framesubtitle{Argument 1: A \textit{Logically Unacceptable} Argument Based on Infinitesimals}
+\label{slide:rejected-by-euclid}
+\begin{columns}[c]
+\begin{column}{.7\textwidth}
+\begin{proof}[Area of Unit Circle = $\frac{1}{2}$ Its Circumference ({\tiny Would Euclid Accept It?})]
+Any circle can be thought of as composed of \alert{infinitely many straight-line segments, all equal to each other and infinitely short}.  It is then the sum of \alert{infinitesimal triangles}, all of which have altitude 1. Area of a triangle = half the base times the altitude. Therefore, the sum of the areas of the triangles is half the sum of the bases. But the sum of the areas of the triangles is the area of the circle, and the sum of the bases of the triangles is its circumference. \alert{Therefore, the area of the unit circle = half its circumference}.
+\end{proof}
+\end{column}
+\begin{column}{0.3\textwidth}
+\begin{tikzpicture}
+\def\r{1}
+\def\N{10}
+\foreach \N / \Y in {6/0,30/60,45/120} {
+  \def\ang{360/\N}
+  \def\ys{-\Y}
+  \draw [yshift=\ys] let \n1 = {360/\N}, \n2 = {2*\n1}, \n{N-1} = {360 - \n1} in
+  (0:\r) foreach \a in {\n1,\n2,...,\n{N-1}} {-- (\a:\r)} -- cycle;
+  
+  \foreach \x in {0,1,2,...,\N}
+    \draw [yshift=\ys] (0:0) -- (\x*\ang:\r);
+  
+  \node [yshift=\ys-10,color=red] {N = \N};
+  \draw [{Stealth[length=2pt,red]}-{Stealth[length=2pt,red]}][yshift=\ys] (0:\r) -- node[xshift=4,red] {{\tiny $b$}} (\ang:\r);
+}
+\end{tikzpicture}
+\end{column}
+\end{columns}
+\end{frame}
+% ------ copypasta prev 5 ------
