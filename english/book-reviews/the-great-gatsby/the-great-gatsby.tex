@@ -1,0 +1,194 @@
+% $Header$
+
+\documentclass{beamer}
+
+% This file is a solution template for:
+
+% - Giving a talk on some subject.
+% - The talk is between 15min and 45min long.
+% - Style is ornate.
+
+
+
+% Copyright 2004 by Till Tantau <tantau@users.sourceforge.net>.
+%
+% In principle, this file can be redistributed and/or modified under
+% the terms of the GNU Public License, version 2.
+%
+% However, this file is supposed to be a template to be modified
+% for your own needs. For this reason, if you use this file as a
+% template and not specifically distribute it as part of a another
+% package/program, I grant the extra permission to freely copy and
+% modify this file as you see fit and even to delete this copyright
+% notice. 
+
+
+\mode<presentation>
+{
+  %\usetheme{Warsaw}
+  %\usetheme{Berlin}
+  %\usetheme{metropolis}
+  \usetheme{PaloAlto}
+  %\usetheme{CambridgeUS}
+  %\usetheme{Berkeley}
+  
+  % font themes
+  \usefonttheme{serif}
+  %\usefonttheme{structurebold}
+
+  % color themes
+  %\usecolortheme{albatross}
+  %\usecolortheme{beetle}
+  %\usecolortheme{crane}
+  %\usecolortheme{dove}
+  %\usecolortheme{fly}
+  %\usecolortheme{monarca}
+  %\usecolortheme{seagull}
+  %\usecolortheme{beaver}
+  % color themes
+  % or ...
+
+  %\setbeamercovered{transparent}
+  \setbeamercovered{transparent=5}
+  % or whatever (possibly just delete it)
+}
+
+
+\usepackage[english]{babel}
+% Place figures exactly where you mean to
+%https://tex.stackexchange.com/a/8633/64425
+\usepackage{float}
+% Place figures exactly where you mean to
+% or whatever
+
+\usepackage[utf8]{inputenc}
+% or whatever
+
+\usepackage[T1]{fontenc}
+% Or whatever. Note that the encoding and the font should match. If T1
+% does not look nice, try deleting the line with the fontenc.
+
+% math
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+% math
+
+% tikz
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{calc}
+% tikz
+\usepackage{caption}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    linkcolor={magenta!50!black},
+    citecolor={blue!50!black},
+    urlcolor={blue!80!black}
+}
+% large commented sections
+\usepackage{comment}
+% large commented sections
+
+% some beautiful fonts
+\usepackage{yfonts}
+% some beautiful fonts
+
+% canceling in equations
+\usepackage{cancel}
+% canceling in equations
+
+\title[The Great Gatsby] % (optional, use only with long paper titles)
+{The Great Gatsby}
+
+\subtitle
+{On a Famous American Novel from the Jazz Age} % (optional)
+
+\author[FSF,KM] % (optional, use only with lots of authors)
+{F. Scott Fitzgerald\inst{1}}
+% - Use the \inst{?} command only if the authors have different
+%   affiliation.
+
+\institute[Unknown] % (optional, but mostly needed)
+{
+  \inst{1}%
+  Original Author
+}
+% - Use the \inst command only if there are several affiliations.
+% - Keep it simple, no one is interested in your street address.
+
+\date[September 2025] % (optional)
+{September 2025 / Free Learner's School Conversations}
+
+\subject{Fun Conversations at Home School}
+% This is only inserted into the PDF information catalog. Can be left
+% out. 
+
+
+
+% If you have a file called "university-logo-filename.xxx", where xxx
+% is a graphic format that can be processed by latex or pdflatex,
+% resp., then you can add a logo as follows:
+
+% \pgfdeclareimage[height=0.5cm]{university-logo}{university-logo-filename}
+% \logo{\pgfuseimage{university-logo}}
+
+
+
+% Delete this, if you do not want the table of contents to pop up at
+% the beginning of each subsection:
+\AtBeginSubsection[]
+{
+  \begin{frame}<beamer>{Outline}
+    \tableofcontents[currentsection,currentsubsection]
+  \end{frame}
+}
+
+
+% If you wish to uncover everything in a step-wise fashion, uncomment
+% the following command: 
+
+%\beamerdefaultoverlayspecification{<+->}
+
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Outline}
+  \tableofcontents
+  % You might wish to add the option [pausesections]
+\end{frame}
+
+
+% Since this a solution template for a generic talk, very little can
+% be said about how it should be structured. However, the talk length
+% of between 15min and 45min and the theme suggest that you stick to
+% the following rules:  
+
+% - Exactly two or three sections (other than the summary).
+% - At *most* three subsections per section.
+% - Talk about 30s to 2min per frame. So there should be between about
+%   15 and 30 frames, all told.
+
+% [Kedar] I am keeping this structure, but abusing it to serve my purpose.
+% [Kedar] I expect this `presentation' to have many hundred slides, if I end up doing it right.
+% [Kedar] There are three sections per presentation, no subsections, but each section may have many, many slides. Let's see. I am just getting started with LaTeX and Beamer.
+% [Kedar] I may roughly make a chapter in his book a section in this presentation.
+\section{Introduction}
+\include{intro-01.tex}
+\section{Chapter 1}
+\include{ch01-01.tex}
+\include{ch01-02.tex}
+\include{ch01-03.tex}
+\include{ch01-04.tex}
+\include{ch01-05.tex}
+\include{ch01-06.tex}
+\section{Summary}
+
+\end{document}
+
+
