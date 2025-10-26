@@ -1,0 +1,56 @@
+% use lualatex
+%\documentclass[a4paper]{article}   % print quality
+\documentclass[17pt]{extarticle}  % smartphone
+\usepackage{polyglossia}
+\usepackage[margin=20mm]{geometry}
+\setdefaultlanguage{marathi}
+\setotherlanguages{english}
+%\textbf with "Sanskrit Text" produces the shape warning because the default Sanskrit Text font on Windows does not have a bold equivalent; try Yashomudra or Shobhika; now I like Tiro better
+\newfontfamily\devanagarifont[Script=Devanagari]{SanskritText}
+\newfontfamily\englishfont{Atkinson Hyperlegible}
+%\newfontfamily\devanagarifont[Script=Devanagari]{SanskritText,Gargi,Kalamati,YashoMudra,Shobhika}
+%\newfontfamily\englishfont{Baskervald ADF Std,ClearSans,Atkinson Hyperlegible,Chomsky,E B Garamond,Engadget}
+
+
+
+%\pagenumbering{gobble} % uncomment to suppress page numbers
+\setlength{\parindent}{0pt}% Remove paragraph indent
+\usepackage[skip=\medskipamount]{parskip}
+\usepackage{fontawesome}
+\usepackage[style=english]{csquotes}
+\usepackage{verse}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    citecolor=blue,
+    urlcolor=purple,
+}
+
+% control hyphenation: https://tex.stackexchange.com/a/177179/64425
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+% control hyphenation: https://tex.stackexchange.com/a/177179/64425
+
+\newcommand{\eng}[1]{\begin{english}#1\end{english}}
+\begin{document}
+
+\title{मराठी शिकवू या गोडीने-वेगाने\\ \large{(२५ तासांत मराठी)}}
+\author{लेखिका: कै.\footnote{शिंत्रेकाकूंचे ०२-१०-२०२५ रोजी दुःखद निधन झाले.} सौ. शारदा शिंत्रे\\ \tiny{(टंकलेखक: केदार म्हसवडे)}}
+\date{रोहिणी बालक-पालक विशेषांक, सप्टेंबर १९९२}
+%\date{}
+\maketitle
+\vspace{5mm}
+\hrule
+प्रत्येक व्यक्तीच्या जडणघडणीमध्ये \enquote*{भाषा} हा फार महत्त्वाचा घटक असतो. डॉ. पु. ग. सहस्रबुद्धे तर भाषाशिक्षणाला फार महत्त्वाचे स्थान देत! \enquote{एखादा विषय शिकतो तेव्हा आपण तोच एक विषय शिकतो. तेव्हा एक जीवन पद्धती आत्मसात करत असतो.} असा ते आवर्जून उल्लेख करीत. एरवी हे सारे आपल्या कळत नकळत घडत असते. परंतु माझ्या मुलाचे शिक्षण इंग्रजी माध्यमातून जेव्हा सुरू झाले, तेव्हा अनेक गोष्टी पालक म्हणून मला मला शिकताना त्यालाही त्रासदायक ठरू लागल्या. तेव्हा विचारचक्राला गती मिळत गेली. या आधी मुलीचे शिक्षण मराठी माध्यमातून झाले होते. तेव्हाही अनेक बाबी मला तितक्याशा पसंत नव्हत्या. विचार करू लागल्यावर त्या नापसंत चालीही पुन्हा आठवल्या. एक पालक म्हणून अस्वस्थ होण्यापलीकडे मी काहीच करू शकत नव्हते. १९७९ साली बालवाडी शिक्षिका होण्याचा योग आला होता. तेव्हा डोक्यातले अनेक प्रयोग ...तावून सुलाखून घेण्याची संधी मिळाली. त्या प्रयोगामधून १९८१ पासून \enquote{मराठी शिकवू या गोडीने-वेगाने} हा प्रकल्प अमलात आणता आला.
+\section*{मराठी शिकणाऱ्या कोणालाही उपयोगी}
+मराठी बोलू व समजू शकणाऱ्या आपल्या महाराष्ट्रीय लहान मुलाप्रमाणे प्रौढांनाही ही पद्धत उपयोगी पडू शकते. मराठीचा गंधही नसणाऱ्या एका छोट्या ७-८  वर्षांच्या मुलीने, आलेशाने, ७-८ दिवसांत एकूण ३-४ तासांच्या शिक्षणात १५-२० वाक्ये लिहिण्या-वाचण्याइतकी प्रगती केली होती. रोहिणीच्या या शिक्षण विशेषांकात या थोड्या वेगळ्या, धाडसी प्रयोगाची थोडक्यात सूत्ररूपाने माहिती देत आहे. अलिकडे शैक्षणिक प्रयोग अनेक जाणकार मंडळी यशस्वीपणे करत आहेत. अर्थात, प्रत्येकाच्या पद्धतीत थोडाफार फरक आहे. मला व्यक्तिशः सर्व पद्धतींची समग्र माहिती नाही. तरीही एक पालक म्हणून मला या कल्पना सुचल्या व मुलांना त्या आवडल्या, त्यांच्या पालकांना उपयोगी वाटल्या. त्यांची ही तोंडओळख. यावरच्या सर्व प्रकारच्या प्रतिक्रियांचे मनापासून स्वागत!	
+\section*{चित्र व अक्षर यांची फारकत}
+
+\vspace{5mm}
+\hrule
+\end{document}
