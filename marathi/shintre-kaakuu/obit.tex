@@ -1,0 +1,73 @@
+% use xelatex 
+%\documentclass[a4]{article}   % print quality 
+\documentclass[17pt]{extarticle}  % smartphone 
+\usepackage{polyglossia} 
+\usepackage{enumitem}
+\usepackage[margin=20mm]{geometry} 
+\setdefaultlanguage{marathi} 
+\setotherlanguages{english} 
+\newfontfamily\devanagarifont[Script=Devanagari, Mapping=devanagarinumerals, StylisticSet=1]{Tiro Devanagari Marathi}
+%\newfontfamily\devanagarifont[Script=Devanagari, Mapping=devanagarinumerals, StylisticSet=1]{Shobhika}
+\newfontfamily\englishfont{Baskervald ADF Std} 
+ 
+ 	
+\pagenumbering{gobble} % uncomment to suppress page numbers 
+\setlength{\parindent}{0pt}% Remove paragraph indent 
+\usepackage[skip=\medskipamount]{parskip} 
+
+\usepackage{lettrine} 
+\usepackage{xcolor} 
+\usepackage[normalem]{ulem} % strikethrough 
+
+\usepackage[style=english]{csquotes} % quotes
+
+% verses
+\usepackage{verse}
+% verses
+
+\usepackage{xcolor}
+
+\usepackage{float} % table placement [H]
+
+% tikz 
+\usepackage{tikz} 
+\usetikzlibrary{arrows.meta} 
+\usetikzlibrary{calc} 
+% tikz 
+
+\usepackage{graphicx}
+
+\usepackage{caption}
+\captionsetup[figure]{
+    position=below,
+}
+
+\usepackage{lettrine} % multiline letter to begin the article
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    citecolor=blue,
+    urlcolor=purple,
+}
+
+% control hyphenation: https://tex.stackexchange.com/a/177179/64425
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+% control hyphenation: https://tex.stackexchange.com/a/177179/64425
+
+\newcommand{\eng}[1]{\begin{english}#1\end{english}}
+
+\begin{document}
+\title{शारदा शिंत्रे: एक चिंतन}
+\author{केदार म्हसवडे}
+\maketitle
+\lettrine[lines=2]{दो}{न} ऑक्टोबरला मयूरचा व्हॉट्सॅप् वर अचानक फोन आला. मी कामात होतो; फोन न घेता, \enquote{फोन करतो ५ मिनिटांत} असा मेसेज् त्याला लिहून, मग फोन केला. तो म्हणाला, \enquote{अरे, सुयशची आई\textemdash शिंत्रे काकू\textemdash गेली. दुपारी काकांशी बोलून त्या जरा पडल्या होत्या आणि झोपेतच गेल्या; साधारण ५-५.३० ला. मी आत्ता जाऊन पाहतो, मग कळवतो.}
+
+सुन्न झालो. फोन यंत्रवत ठेवला. बातमीवर विश्वास बसतच नव्हता. त्यांचं वय काही फार नव्हतं. मला त्यांच्या व्यक्तिमत्वाचा होत असलेला परिचय अल्पकाळ टिकेल असं वाटलं नव्हतं. पण कोणीतरी म्हटलेलं \eng{\enquote{All good things come to an end!}} आठवलं आणि आलेला दुर्धर प्रसंग मूकपणे स्वीकारायचा हे मला  
+
+मला त्यांच्या घरी नुकताच घडलेला प्रसंग आठवला. पुण्यात असेन तेव्हा त्यांच्या \enquote{१०१ वेणूनाद} मधल्या घरी जाऊन यायचे हा माझा शिरस्ता असे. परवा मी त्यांच्याकडे बरेच भोवरे घेऊन गेलो होतो. 
+\end{document}
