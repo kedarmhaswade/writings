@@ -1,0 +1,141 @@
+% use lualatex to compile, for some reason xelatex fails for the {Libertinus Serif} font.
+\documentclass[11pt]{article}
+%\documentclass[11pt]{amsart} % fails on title, date, etc.
+
+% ---------- Fonts (LuaLaTeX / XeLaTeX) ----------
+\usepackage{fontspec}
+\setmainfont{Libertinus Serif}
+%\setmainfont{TeX Gyre Pagella}
+\setsansfont{TeX Gyre Heros}
+\setmonofont{Inconsolata}
+
+% ---------- Page layout ----------
+\usepackage[a4paper,margin=1.1in]{geometry}
+
+% ---------- Math & theorem setup ----------
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\theoremstyle{plain}
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{lemma}[definition]{Lemma}
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{corollary}[definition]{Corollary}
+
+\usepackage{xcolor}
+\newtheoremstyle{problemstyle} % name
+  {3pt} % Space above
+  {3pt} % Space below
+  {\normalfont} % Body font
+  {} % Indent
+  {\bfseries\color{blue}} % Theorem head font
+  {.} % Punctuation
+  { } % Space after head
+  {} % Head spec
+\theoremstyle{problemstyle}
+\newtheorem{problem}[definition]{Problem}
+
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\renewcommand\qedsymbol{$\blacksquare$}
+% the reflection box
+\usepackage[framemethod=tikz]{mdframed}
+\theoremstyle{definition}
+\newtheorem{reflection}{Reflection}
+\mdfdefinestyle{reflectionbox}{
+  innertopmargin=\topskip,
+  roundcorner=5pt,
+  linecolor=cyan,
+  backgroundcolor=cyan!20,
+}
+\surroundwithmdframed[style=reflectionbox]{reflection}
+% the reflection box
+% quotes
+\usepackage[autostyle]{csquotes}
+\MakeOuterQuote{"}
+% quotes
+
+% ---------- Typography ----------
+\usepackage{microtype}
+
+% ---------- Hyperlinks ----------
+\usepackage[hidelinks]{hyperref}
+
+% ---------- Metadata ----------
+\title{Notes and Problems from \\ \emph{Principles of Mathematical Analysis, III edition}
+\\ \emph{by Walter Rudin}}
+\author{Kedar Mhaswade}
+\date{06 February 2026}
+
+\begin{document}
+\maketitle
+\begin{reflection}
+    These are the author's highly personal notes based on this great book. They may occasionally sound like author's conversation with the reader (or even himself). Even if they are personal and appear in the public domain, they may help the reader, although the author isn't exactly sure how. He wrote them for 0) the love of Mathematics and writing 1) \LaTeX{} practice (of writing hopefully readable mathematics, albeit longer than appearing in standard texts), and 2) reliable archival (paper, on which most math is created, tends to get lost) that incurs minimal overhead.
+
+    These notes are interspersed with ``reflection boxes'' like this one. They are meant to express author's `rough' thinking process, of which frustration is often an inseparable part. The author writes mostly in first person for an authentic conversational tone.
+\end{reflection}
+
+\section{The Real and Complex Number Systems}
+\subsection{Introduction}
+Rudin presents an elegant proof of the irrationality of $\sqrt{2}$. We shall skip that here, but solve the following problem in our own way (he solves it himself) instead.
+\begin{problem}
+    Let $\mathbb{A}=\{ p \in \mathbb{Q}^+ \mid p^2 < 2 \}$. Show that $\mathbb{A}$ contains no largest number.
+\end{problem}
+\begin{proof}
+    Let $p=\frac{m}{n}$, where $m, n \in\mathbb{N}, n\ne0, m^2 < 2n^2$. 
+
+    We want to show that there is a rational number greater than $p$ that is less than $\sqrt{2}$. We can achieve this by adding some positive number to $p$ and showing that the sum is less than $\sqrt{2}$. 
+    \begin{reflection}
+        Rudin readily considers a rational, $q=\frac{2p+2}{p+2}$ and shows that if $p<\sqrt{2}$, i.e., $p\in\mathbb{A}$, 1) $q>p$, and 2) $q<\sqrt{2}$, i.e., $q\in\mathbb{A}$. But, how did he think of this new fraction? Where did that insight come from? 
+
+        Math books do not write about that. They are not a place for writing the long-winding, often frustrating, nature of mathematical discovery. However, these are my notes. I have no restriction like Rudin. 
+
+    \end{reflection}
+\end{proof}
+
+
+
+
+\end{document}
+
+
+
+
+\iffalse
+\begin{definition}
+A set $E \subset \mathbb{R}$ is \emph{bounded} if there exists $M > 0$ such that
+\[
+|x| \le M \quad \text{for all } x \in E.
+\]
+\end{definition}
+
+\begin{lemma}
+Every finite subset of\/ $\mathbb{R}$ is bounded.
+\end{lemma}
+
+\begin{proof}
+Let $E = \{x_1, \dots, x_n\}$. Define
+\[
+M = \max\{|x_1|, \dots, |x_n|\}.
+\]
+Then $|x| \le M$ for all $x \in E$.
+\end{proof}
+
+\begin{theorem}
+Every convergent sequence of real numbers is bounded.
+\end{theorem}
+
+\begin{proof}
+Suppose $x_n \to L$. Then there exists $N$ such that $|x_n - L| < 1$ for all $n \ge N$.
+Hence $|x_n| \le |L| + 1$ for $n \ge N$, and the finitely many remaining terms are bounded.
+\end{proof}
+
+\begin{remark}
+This is the first nontrivial place where the $\varepsilon$--$N$ definition of convergence
+actually does work for you, not against you.
+\end{remark}
+\fi
+
