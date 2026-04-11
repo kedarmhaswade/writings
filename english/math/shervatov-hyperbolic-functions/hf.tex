@@ -62,11 +62,33 @@
 %images
 \usepackage{graphicx}
 \usepackage{float}
-\usetikzlibrary{calc}
+\usetikzlibrary{intersections,calc,patterns}
 %images
 % ---------- Typography ----------
 \usepackage{microtype}
 
+%plots
+\usepackage{pgfplots}
+%plots
+
+% multiple columns
+\usepackage{multicol}
+\setlength{\columnseprule}{1pt}
+\def\columnseprulecolor{\color{blue}}
+% multiple columns
+
+% bib
+\usepackage[
+  backend=biber,
+  style=numeric
+]{biblatex}
+
+\addbibresource{refs.bib}
+% bib
+
+% https://github.com/plk/biber/issues/373
+\DeclareBibliographyAlias{movie}{misc}
+% https://github.com/plk/biber/issues/373
 % ---------- Hyperlinks ----------
 \usepackage[hidelinks]{hyperref}
 
@@ -81,9 +103,9 @@
 \begin{document}
 \maketitle
 \begin{reflection}[Introduction]
-    These are the author's highly personal notes based on this great book. They may occasionally sound like author's conversation with the reader (or even himself). Even if they are personal and appear in the public domain, they may help the reader, although the author isn't exactly sure how. He wrote them for 0) the love of mathematics and writing 1) \LaTeX{} practice (of writing hopefully readable mathematics, albeit longer than appearing in standard texts), and 2) reliable archival (paper, on which most math is created, tends to get lost) that incurs minimal overhead.
+    These are the author's highly personal notes based on this great book \cite{shervatov}]. They may occasionally sound like author's conversation with the reader (or even himself). Even if they are personal and appear in the public domain, they may help the reader, although the author isn't exactly sure how. He wrote them for 0) the love of mathematics and writing 1) \LaTeX{} practice (of writing hopefully readable mathematics, albeit longer than appearing in standard texts), and 2) reliable archival (paper, on which most math is created, tends to get lost) that incurs minimal overhead.
 
-    These notes are interspersed with ``reflection boxes'' like this one. They are meant to express author's `rough' thinking process, of which frustration is often an inseparable part. The author writes mostly in first person for an authentic conversational tone.
+    These notes are interspersed with ``reflection boxes'' like this one. They are meant to express author's `rough' thinking process (mental catharsis of sorts), of which frustration is often an inseparable part. The author writes mostly in first person for an authentic conversational tone.
 
     I was lucky to find this book at the time I was discussing the hyperbolic sine and cosine functions with my daughter (who was a high school student then). 
 \end{reflection}
@@ -103,7 +125,7 @@
 
 \begin{figure}[H]
   \centering
-  \includegraphics{images/def-homothetic}
+    \includegraphics[scale=0.4]{images/def-homothetic}
   \caption{Homothetic Transformation of $A$}
   \label{fig:homothetic-tr}
 \end{figure}
@@ -122,10 +144,10 @@ Since $l(OA)=l(OA')\cdot k$, if $k<1$, $l(OA)<l(OA')$ and if $k>1$, $l(OA)>l(OA'
     It appears so, but let's prove that it is so.
 \end{reflection}
 
-\begin{problem}\label{prb:straight-line-homothetic-tr}
+\begin{problem}[Homothetic Transformation of a Straight Line]\label{prb:straight-line-homothetic-tr}
     Prove that the homothetic transformation of a straight line is a straight line.
 \end{problem}
-\begin{proof}
+\begin{proof}\label{proof:straight-line-homothetic-tr}
     We use step-by-step geometric constructions based on what we are given. First we pick $O$, $k$, and two points $P_1, Q_1$ on a given line $\ell_1$. Let $k>1$. Then, using the definition (\ref{def:homothetic-tr}), we transform $P_1$ to $P_2$, $Q_1$ to $Q_2$.
 
 \begin{figure}[H]
@@ -309,45 +331,1121 @@ Similarly, $\triangle OP_1R_1\sim\triangle OP_2R_2, \triangle OQ_1R_1\sim\triang
 Therefore, $\ell_1\parallel P_2R_2\parallel R_2Q_2$. This is possible only if $R_2$ is on $\ell_2$.
 \end{proof}
 
+That proved straight line $\ell_1$ is transformed to a straight line $\ell_2\parallel\ell_1$.
+
+We can use proof [\ref{proof:straight-line-homothetic-tr}] to prove that the homothetic transformation of a circle is a circle, or the transformation of a square is a square. In general, any curve is transformed to a smaller or bigger similar curve by the homothetic transformation.
+
+What is the area of a figure you get by the homothetic transformation of a figure of arbitrary shape?
+
+Let's consider a square $ABCD$ first. By the similarity argument, it is not hard to see that after we homothetically transform $\square ABCD$ to $\square A'B'C'D'$, each of its side is multiplied by $k$. Therefore, the $A(\square A'B'C'D')=k^2\cdot A(ABCD)$.
+
+We can approximate any figure by a collection of (tiny) squares. Transforming that figure transforms those squares. Thus, the area of the transformed figure becomes $k^2$ times the area of the original figure.
+
+\begin{reflection}[Homothetic Transformation of Circle, Parabola, Ellipse, \dots]
+    Is the homothetic transformation of a circle a circle?
+
+    It seems so. Do we need a rigorous proof? To prove, would we need to make an argument similar to that in the case of a straight line?
+\end{reflection}
+
+\begin{problem}[Inscribe a Rectangle in a Right Triangle]\label{pr:inscribe-rect-in-right-tr}
+    Inscribe in a given right triangle $ABC$ a rectangle $BDEF$ so that the lengths of its sides are in a given ratio.
+\end{problem}
+
+\textbf{\emph{Solution}.} Note that we are asked to inscribe a rectangle whose sides are in a specified ratio, not a specified rectangle; the rectangle $BDEF$ is given only as a reference.
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+
+% --- Right Triangle ABC ---
+\coordinate (A1) at (0,3);
+\coordinate (B1) at (0,0);
+\coordinate (C1) at (4,0);
+
+\draw (A1) -- (B1) -- (C1) -- cycle;
+
+\node[left]  at (A1) {$A$};
+\node[left]  at (B1) {$B$};
+\node[below] at (C1) {$C$};
+
+% --- Rectangle ABCD (ratio 1:2) ---
+% Start rectangle 0.5 inch to the right of triangle
+\begin{scope}[xshift=2.5in]
+
+\coordinate (A2) at (0,4);
+\coordinate (B2) at (0,0);
+\coordinate (C2) at (2,0);
+\coordinate (D2) at (2,4);
+
+\draw (A2) -- (B2) -- (C2) -- (D2) -- cycle;
+
+\node[left]  at (A2) {$F$};
+\node[left]  at (B2) {$B$};
+\node[right] at (C2) {$D$};
+\node[right] at (D2) {$E$};
+
+\end{scope}
+
+\end{tikzpicture}
+    \caption{Inscribe a \emph{Similar} Rectangle in a Given Right Triangle}
+    \label{fig:triangle-rectangle}
+\end{figure}
+
+\begin{reflection}
+    We can always superimpose the given rectangle on the given triangle, such that the vertices $B$ match, but $E$ is \emph{not} on $AC$. What we need is to grow or shrink $BD$ and $BF$ proportionately such that $E$ is on $AC$. See Figure [\ref{fig:simple-superimposition}].
+
+    Since we only want a \emph{similar} rectangle with $E$ on $AC$, the construction is apparent.
+\end{reflection}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+
+% --- Right Triangle ABC ---
+\coordinate (A1) at (0,3);
+\coordinate (B1) at (0,0);
+\coordinate (C1) at (4,0);
+
+\draw (A1) -- (B1) -- (C1) -- cycle;
+
+\node[left]  at (A1) {$A$};
+\node[left]  at (B1) {$B$};
+\node[below] at (C1) {$C$};
+
+% --- Rectangle ABCD (ratio 1:2) ---
+% Start rectangle 0.5 inch to the right of triangle
+
+\coordinate (A2) at (0,4);
+\coordinate (C2) at (2,0);
+\coordinate (D2) at (2,4);
+
+\draw (A2) -- (B1) -- (C2) -- (D2) -- cycle;
+
+\node[left]  at (A2) {$F$};
+\node[right,above] at (C2) {$D$};
+\node[right] at (D2) {$E$};
 
 
-\end{document}
+\end{tikzpicture}
+    \caption{Figure \ref{fig:triangle-rectangle} Continued. Superimposition.}
+    \label{fig:simple-superimposition}
+\end{figure}
+
+We do the construction as in Figure [\ref{fig:scale-the-rectangle}].
+
+Draw an arbitrary rectangle with its base along $BC$ and height along $BA$. We only want $\frac{BD}{BF}=k$, the given ratio. Draw $BE$. Let $BE$ intersect (after extending, if needed) $AC$ at $E'$. Drop the perpendiculars $E'F'$ and $E'D'$ onto $AB$ and $BC$ respectively.
+
+By construction, $\triangle BE'D'\sim\triangle BED$. 
+
+\begin{equation}
+\begin{aligned}
+    \frac{BE}{BE'}&=\frac{BD}{BD'} \\
+    \frac{BE}{BE'}&=\frac{BF}{BF'}
+\end{aligned}\label{eq:sim-tr}
+\end{equation}
+
+It follows from equation(\ref{eq:sim-tr}) that 
+
+\begin{equation*}
+\begin{aligned}
+    \frac{BD}{BD'}&=\frac{BF}{BF'}\\
+    \therefore \frac{BD}{BF}&=\frac{BD'}{BF'}=k
+\end{aligned}
+\end{equation*}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+
+% --- Right Triangle ABC ---
+\coordinate (A) at (0,3);
+\coordinate (B) at (0,0);
+\coordinate (C) at (4,0);
+
+\draw (A) -- (B) -- (C) -- cycle;
+
+\node[left]  at (A) {$A$};
+\node[left]  at (B) {$B$};
+\node[below] at (C) {$C$};
+
+% --- Rectangle ---
+\coordinate (F) at (0,4);   % F
+\coordinate (D) at (2,0);   % D
+\coordinate (E) at (2,4);   % E
+
+\draw (B) -- (D) -- (E) -- (F) -- cycle;
+
+\node[left]  at (F) {$F$};
+\node[right,below] at (D) {$D$};
+\node[right] at (E) {$E$};
+
+% ==============================
+% 1) Draw BE
+% ==============================
+
+\draw (B) -- (D);
+
+% ==============================
+% 2) E' = intersection of BE and AC
+% ==============================
+
+\draw (B) -- (E);
+\path[name path=BE] (B) -- (E);
+\path[name path=AC] (A) -- (C);
+
+\path[name intersections={of=BE and AC, by=Eprime}];
+
+\fill (Eprime) circle (2pt);
+\node[left] at (Eprime) {$E'$};
+
+% ==============================
+% 3) Through E', parallel to BC
+% ==============================
+\path[name path=BC] (B) -- (C);
+
+% Horizontal line through Eprime
+\path[name path=parallel]
+  ($(Eprime)+(-5,0)$) -- ($(Eprime)+(5,0)$);
+
+\path[name path=AB] (A) -- (B);
+\path[name intersections={of=parallel and AB, by=Fprime}];
+
+    \draw [red,thick] (Eprime) -- (Fprime);
+
+\fill (Fprime) circle (2pt);
+\node[left] at (Fprime) {$F'$};
+
+% ==============================
+% 4) Perpendicular from E' to BC
+% ==============================
+
+\coordinate (Dprime) at ($(B)!(Eprime)!(C)$);
+
+\draw[red,thick] (Eprime) -- (Dprime);
+
+\fill (Dprime) circle (2pt);
+\node[below] at (Dprime) {$D'$};
+
+\end{tikzpicture}
+    \caption{The \emph{Scaled} rectangle.}
+    \label{fig:scale-the-rectangle}
+\end{figure}
+
+Therefore, $BD'E'F'$ is a rectangle, \emph{with the desired ratio of side lengths}, that is inscribed in the given right triangle $ABC$.
+
+\noindent\rule{\linewidth}{0.4pt}
+
+
+The book challenges readers to solve the next problem. 
+
+\begin{problem}[Inscribe a Rectangle in Any Triangle]\label{pr:inscribe-rect-in-any-tr}
+    \emph{Inscribe} in a given triangle $ABC$ a rectangle $BDEF$ so that the lengths of its sides are in a given ratio.
+\end{problem}
+\begin{reflection}
+    Although the book says that the solution to this problem is analogous to that to the previous problem (Problem [\ref{pr:inscribe-rect-in-right-tr}]), it was not immediately apparent to me.
+
+    I had to refer to Wikipedia \cite{wiki:inscribed-fig} for the definition of ``inscribed figure.'' For a polygon A to be inscribed in another polygon B, the vertices of A must be on the sides of B. 
+
+    I concentrated on this problem for a while, but it has been elusive. 
+\end{reflection}
+
+\textbf{\emph{Solution}}. \textcolor{red}{\textbf{TBD}} 
 
 
 
+\subsection{Strains}
+\begin{definition}[Strain]\label{def:strain}
+    Pick a straight line $\ell$, a point $A$ in the same plane as $\ell$, and $k\in\mathbb{R^+}$.
 
-\iffalse
-\begin{definition}
-A set $E \subset \mathbb{R}$ is \emph{bounded} if there exists $M > 0$ such that
-\[
-|x| \le M \quad \text{for all } x \in E.
-\]
+    Strain of a point $A$ is defined as the homothetic transformation (cf. Definition [\ref{def:homothetic-tr}]) of $A$ to $A'$ with a point $P$ on $\ell$ as the homothetic center and $k$ as the homothetic ratio such that $PA\perp\ell$ (also, $PA'\perp\ell$).
+
+    In this case, $\ell$ is called \emph{\textbf{the axis of the strain}} and $k$ is called \emph{\textbf {the coefficient of the strain}}. From the Definition [\ref{def:homothetic-tr}], we know that $\frac{PA'}{PA}=k$.
 \end{definition}
 
-\begin{lemma}
-Every finite subset of\/ $\mathbb{R}$ is bounded.
-\end{lemma}
+Every point on $\ell$ is left fixed (non transformed) by strain.
 
-\begin{proof}
-Let $E = \{x_1, \dots, x_n\}$. Define
-\[
-M = \max\{|x_1|, \dots, |x_n|\}.
-\]
-Then $|x| \le M$ for all $x \in E$.
-\end{proof}
+If $k>1$, the strain is sometimes called \emph{elongation}, whereas if $k<1$, it's called \emph{compression}.
+\begin{figure}[H]
+  \centering
 
-\begin{theorem}
-Every convergent sequence of real numbers is bounded.
-\end{theorem}
+% ================= LEFT: ratio 0.6 =================
+\begin{tikzpicture}[scale=1]
 
-\begin{proof}
-Suppose $x_n \to L$. Then there exists $N$ such that $|x_n - L| < 1$ for all $n \ge N$.
-Hence $|x_n| \le |L| + 1$ for $n \ge N$, and the finitely many remaining terms are bounded.
-\end{proof}
+% Line l
+\draw (-3,0) -- (3,0);
+\node[left] at (-2.8,0) {$l$};
 
-\begin{remark}
-This is the first nontrivial place where the $\varepsilon$--$N$ definition of convergence
-actually does work for you, not against you.
+% Points
+\coordinate (P1) at (0,0);
+\coordinate (A1) at (0,4);
+\coordinate (Aprime1) at ($(P1)!0.6!(A1)$);
+
+% Draw
+\draw (P1) -- (A1);
+
+% Marks
+\fill (P1) circle (2pt) node[below] {$P$};
+\fill (A1) circle (2pt) node[right] {$A$};
+\fill (Aprime1) circle (2pt) node[right] {$A'$};
+
+\node at (0,-1) {$\dfrac{PA'}{PA}=0.6$};
+
+\end{tikzpicture}
+\hspace{2cm}
+% ================= RIGHT: ratio 1.4 =================
+\begin{tikzpicture}[scale=1]
+
+% Line l
+\draw (-3,0) -- (3,0);
+\node[left] at (-2.8,0) {$l$};
+
+% Points
+\coordinate (P2) at (0,0);
+\coordinate (A2) at (0,4);
+\coordinate (Aprime2) at ($(P2)!1.4!(A2)$);
+
+% Draw
+\draw (P2) -- (Aprime2);
+
+% Marks
+\fill (P2) circle (2pt) node[below] {$P$};
+\fill (A2) circle (2pt) node[right] {$A$};
+\fill (Aprime2) circle (2pt) node[right] {$A'$};
+
+\node at (0,-1) {$\dfrac{PA'}{PA}=1.4$};
+
+\end{tikzpicture}
+
+    \caption{The \emph{Compression} and \emph{Elongation}.}
+    \label{fig:strains}
+\end{figure}
+
+Strain transforms a figure $F$ into a new figure, $F'$, which is usually \emph{not similar} to $F$.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.4]{images/strain-of-a-figure}
+    \caption{Strain (\emph{Compression}) applied to a Figure $F$. The axis of strain in the line $\ell$ and the coefficient $\frac{1}{3}$.}
+    \label{fig:strain-to-any-figure}
+\end{figure}
+
+We state the properties of strain without proofs. However, the proofs are elementary:
+
+\begin{itemize}\label{prop:strains}
+    \item\label{prop:strain-line} Strain transforms a straight line into a straight line.
+    \item\label{prop:strain-para-lines} Strain transforms parallel lines into parallel lines. If $\varphi$ is the angle made by the lines with the axis of strain, then the transformed lines make an angle $\varphi^\prime$ with the axis such that $\tan\varphi^\prime=k\tan\varphi$.
+    \item\label{prop:ratio-line} Strain does not change the ratios of line segments on the same straight line.
+    \item\label{prop:area-change} Strain changes the areas of all figures by $k$, the coefficient of strain.
+\end{itemize}
+
+\begin{problem}[Inscribe a Rectangle of Given Area in a Given Right Triangle]\label{pr:inscribe-rect-given-area-in-given-right-tr}
+    Inscribe in a given right triangle $ABC$ a rectangle $BDEF$ of a given area $T$.
+\end{problem}
+
+\textbf{\emph{Solution}}. 
+
+\begin{reflection}
+    The book has posed this problem to ``illustrate the use of strains.''
+
+    That tells me that I should somehow employ this transformation, strain, that we just learned. Problem-solving needn't be constrained like this, but it's fair for now. I will keep in mind to employ strain.
+
+    Is it possible to inscribe a rectangle of \emph{any} area $T$ in a given right triangle? That is impossible, any rectangle inscribed in a right triangle leaves two or three right triangles of nonzero area unoccupied. Therefore, there must be an upper limit to $T$. Indeed, using derivatives, I worked out the area of the biggest rectangle that can be inscribed in a right triangle of sides $a, b$, and found it to be $\frac{ab}{4}$.
+
+    So, the problem asks us to inscribe a rectangle of area $T\leq\frac{ab}{4}$ in a given right triangle of sides $a,b$.
+\end{reflection}
+
+\begin{reflection}
+    I was going in circles. I tried homothetic transformation. I tried to introduce strain. To my dismay, however, I couldn't breach the fortress of this problem. I was losing the willpower to solve the problem on my own. I recalled the mathematician R. L. Moore's words and his struggles as a young problem-solver solving problems he couldn't easily crack \cite{MooreMovie}.
+
+    This phase was painful. I admit that I was miserable at times. I am getting caught up in ratios and, although on one hand I feel I am close to solving it, the problem beats me.
+
+    But I decided to push myself. 
+
+    A rectangle of area $T$ has sides $a$ and $T/a$.
+
+    \textcolor{red}{Sadly, however, I gave up and looked at the solution.}
+
+\end{reflection}
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[scale=0.5]{images/use-of-strain}
+  \caption{Inscribing a Rectangle of a Given Area in a Given Right Triangle}
+  \label{fig:inscribe-rect-area-in-rt}
+\end{figure}
+
+See Figure [\ref{fig:inscribe-rect-area-in-rt}]. We first apply the strain to the triangle $ABC$! $BC$ is the \emph{axis} and $k=\frac{BC}{BA}$ the \emph{coefficient of strain}. This makes $\triangle A'BC$ isosceles because $k=\frac{BC}{AB}=\frac{A'B}{AB}$.
+\begin{reflection}
+    It turns out that I missed this key step of \emph{straining the given right triangle to create an isosceles right triangle}!
+    Still, in keeping with Moore \cite{MooreMovie}, I tried to work out the rest on my own (sort of backward).
+
+    Thus, if we are able to inscribe a rectangle of area $k\cdot T$ in $\triangle A'BC$, we could utilize the strain to transform it to the rectangle $BDEF$ of desired area $T$ [\ref{prop:area-change}]. But how to inscribe that rectangle in $\triangle A'BC$?
+\end{reflection}
+
+Let $A(\triangle ABC)=S$. Therefore, 
+
+
+\begin{equation}
+\begin{aligned}
+    A(\triangle A'BC)&=\frac{1}{2}\cdot A'B\cdot BC\\
+(\triangle A'BC)&=kS
+\end{aligned}
+\label{eq:areas-ks}
+\end{equation}
+
+\begin{equation}
+\begin{aligned}
+    A(BDE'F')=kA(BDEF)&=k T\\
+    A(BDE'F')&=A(A'BC)-(A(E'DC)+A(A'F'E'))\\
+    A(E'DC)+A(A'F'E')&=A(A'BC)-A(BDE'F')\\
+    A(E'DC)+A(A'F'E')&=kS-kT
+\end{aligned}\label{eq:areas-of-tr}
+\end{equation}
+
+$\triangle A'F'E'$ and $\triangle E'DC$ are isosceles ($A'F'=F'E', E'D=DC$) because they are similar to the isosceles triangle $A'BC$.
+
+\begin{equation}
+\begin{aligned}
+    \frac{1}{2}(F'E')^2+\frac{1}{2}(E'D)^2&=kS-kT\\
+    \frac{1}{2}((F'E')^2+(E'D')^2)&=kS-kT\\
+    \frac{1}{2}(B'E')^2&=kS-kT
+\end{aligned}\label{eq:eprime-found}
+\end{equation}
+
+Equation [\ref{eq:eprime-found}] helps us locate the required point $E'$ on the hypotenuse $A'C$ of the isosceles $\triangle A'BC$. Once $E'$ is located, the rectangle $BDE'F'$, whose area is $kT$, can be completed. The rectangle $BDEF$, which can be constructed by straining $BDE'F'$, has the desired area $T$.
+
+\begin{reflection}
+    This problem comprehensively beat me.
+\end{reflection}
+
+From the book, verbatim:
+
+\noindent\rule{\linewidth}{0.4pt}
+
+Depending on the value of $T$, the problem may have two, one, or no solutions. When the given triangle $ABC$ is not a right triangle, the problem can be solved in an analogous way, but we shall not consider this here. \textbf{A geometric solution of this problem without using strains is unknown.} 
+
+\begin{figure}[H]
+  \centering
+\begin{tikzpicture}
+    \draw (1.4cm,3cm) circle [radius=1cm];
+    \draw (1.4cm,1cm) ellipse [x radius=1cm, y radius=0.5cm];
+    \draw[thick] (0cm,0cm) -- (2.8cm,0cm);
+    \draw (2.8cm,0cm) node{$\ell$};
+    \draw[very thin] (0.4cm,0cm) -- (0.4cm,3cm);
+    \draw[very thin] (2.4cm,0cm) -- (2.4cm,3cm);
+\end{tikzpicture}
+  \caption{Strain Transforms Circles to Ellipses}
+  \label{fig:strain-circle-ellipse}
+\end{figure}
+As contrasted with homothetic transformations, strains do not transform circles into circles. A circle is transformed by a strain into a curve called an ellipse (Fig. \ref{fig:strain-circle-ellipse}). We could use strains (See properties [\ref{prop:strains}]) to study a number of geometric properties of the ellipse, but such a study would be beyond the scope of this booklet.
+
+\noindent\rule{\linewidth}{0.4pt}
+
+\begin{reflection}
+    I want to study the ellipse (and several other curves) more. Ellipses have been extensively studied as conic sections, but studying them as \emph{Strained Circles} could be interesting\dots
+\end{reflection}
+
+\subsection{The Hyperbola}
+
+In the following sections an important part will be played by the graph of the curve whose equation is
+
+\begin{equation}
+\label{eq:hyperbola}
+    y=ax\text{ or } xy = a (a\ne 0)
+\end{equation}
+
+This curve is called a \emph{hyperbola} (Fig. \ref{fig:the-hyperbola}).
+
+
+\begin{figure}[H]
+  \centering
+  \caption{The Hyperbola}
+  \label{fig:the-hyperbola}
+\begin{tikzpicture}
+    \begin{axis}[
+            scale=1,
+            samples=200,
+            domain=-4:4,
+            xlabel=$x$,ylabel=$y$,
+            axis x line=middle,
+            axis y line=middle,
+            xtick=\empty,
+            ytick=\empty,
+            xmax=4,
+            xmin=-4,
+            ymax=4,
+            ymin=-4,
+        ]
+        \addplot[very thick,restrict y to domain=-10:10] (x,2/x);
+        \addplot[domain=-1:1,thick] (x,2*x);
+        \addplot[very thin,mark=o,patch type=rectangle,pattern=north west lines,font=\tiny] 
+            coordinates { (0,0) (1,0) (1,2) (0,2) };
+            \node[font=\tiny] at (axis cs:-0.2,0.2) {$O$};
+            \node[font=\tiny] at (axis cs:1.2,0.1) {$P$};
+            \node[font=\tiny] at (axis cs:1.2,2.1) {$M$};
+            \node[font=\tiny] at (axis cs:-0.2,2.1) {$Q$};
+        \addplot[very thin,mark=o,patch type=rectangle,pattern=north west lines,font=\tiny] 
+            coordinates { (0,0) (-1,0) (-1,-2) (0,-2) };
+            \node[font=\tiny] at (axis cs:-1.2,0.15) {$P'$};
+            \node[font=\tiny] at (axis cs:-1.2,-2.2) {$M'$};
+            \node[font=\tiny] at (axis cs:0.2,-2.1) {$Q'$};
+    \end{axis}
+\end{tikzpicture}
+\end{figure}
+
+We study hyperbola in more detail in this subsection. Most of what the author of this book has said in this regard has been reproduced verbatim here.
+
+It is obvious that the greater the absolute value of $x$, the smaller will be the absolute value of $y$, and vice versa. Symbolically, if $x\to\pm\infty$, then $y\to0$, and if $y\to\pm\infty$, then $x\to0$. Geometrically, this means that the hyperbola comes arbitrarily close to the coordinate axes but does not actually intersect them, for it follows from the equation $xy=a$ that neither $x$ nor $y$ can be zero.
+
+A straight line which a curve approaches without ever touching it is called an \emph{asymptote} of that curve. Thus, the coordinate axes are asymptotes of the hyperbola.
+
+The hyperbola is composed of two branches, which, for $a>0$, lie in the first quadrant of the coordinate system ($x$ and $y$ both positive) and in the third quadrant ($x$ and $y$ both negative).
+
+The algebraic equation $xy=a$ has a simple geometric interpretation with reference to the hyperbola. If $M$ is an arbitrary point of the hyperbola, then the area of the rectangle $MQOP$, which is bounded by the coordinate axes and the two straight lines through $M$ and parallel to the axes (Fig. \ref{fig:the-hyperbola}), is equal to $a$. In other words, \textbf{the area of such a rectangle is independent of our choice of the point $M$}. That is, since $OP=x$ and $PM=y$, we have
+
+\begin{equation}
+\label{eq:area-of-coordinate-rect}
+    S_{MQOP}=OP\cdot PM=x\cdot y=a
+\end{equation}
+
+Calling the rectangle $MQOP$ the \emph{coordinate rectangle of the point $M$}, we can say that \emph{the hyperbola is the locus of those points lying in the first and third quadrants of the coordinate system whose coordinate rectangles have a given area} (i.e., $a$).
+
+The hyperbola has a center of symmetry: the two branches of the hyperbola are symmetric with respect to the origin $O$ of the coordinate system. (The coordinate rectangles $MQOP$ and $M'Q'OP'$ are symmetric with respect to $O$ (Fig. \ref{fig:the-hyperbola}) have equal areas.) The hyperbola also has two axes of symmetry, the lines $aa$ and $bb$ which bisect angles between the coordinate axes (Fig. \ref{fig:hyperbola-axes-sym}). 
+
+\begin{figure}[H]
+  \caption{Axes of Symmetry and Vertices of the Hyperbola}
+  \label{fig:hyperbola-axes-sym}
+  \centering
+    \includegraphics[scale=0.5]{images/hyperbola-axes-sym}
+\end{figure}
+
+\begin{definition}[Center, Axes, and Vertices of a Hyperbola]
+    \label{def:center-axes-vertices-hyperbola}
+In fact, the coordinate rectangles $MQOP$ and $M_1Q_1OP_1$ (symmetric with respect to $aa$) have equal areas; similarly $MQOP$ and $M_2Q_2OP_2$ (symmetric with respect to $bb$) have equal areas. The center of symmetry $O$ and the axes of symmetry $aa$ and $bb$ are usually simply called \textbf{the center and the axes of the hyperbola}; the points $A$ and $B$ in which the hyperbola intersects the axis $aa$ are called \textbf{the vertices of the hyperbola}.
+\end{definition}
+
+\begin{reflection}
+    These results should be proved. However, I found the equation of hyperbola in a new coordinate system ($XY$) whose axes are the standard Cartesian axes rotated by an angle $\alpha$. See Figure \ref{fig:hyperbola-rotated-cs}.
+\begin{figure}[H]
+  \caption{The Hyperbola in a Rotated Coordinate System}
+  \label{fig:hyperbola-rotated-cs}
+  \centering
+    \includegraphics[scale=0.3]{images/hyperbola-rotated-cs-1}
+\end{figure}
+
+    From $AP=y=AE+PE$ and $CP=X=CF+FP$, we get: 
+\begin{equation}
+\label{eq:rotated-hyperbola-1}
+    \begin{aligned}
+        Y&=y\cos\alpha-x\sin\alpha\\
+        X&=y\sin\alpha+x\cos\alpha
+    \end{aligned}
+\end{equation}
+    Equations (\ref{eq:rotated-hyperbola-1}) can be solved for $x, y$:
+\begin{equation}
+\label{eq:rotated-hyperbola-2}
+    \begin{aligned}
+        y&=Y\cos\alpha+X\sin\alpha\\
+        x&=X\cos\alpha-Y\sin\alpha
+    \end{aligned}
+\end{equation}
+
+    Using the equation (\ref{eq:hyperbola}) of the hyperbola and setting $\alpha=\frac{\pi}{4}$ (such that $\cos\alpha=\sin\alpha=\frac{1}{\sqrt{2}}$), we get: 
+\begin{equation}
+\label{eq:rotated-hyperbola-3}
+    \begin{aligned}
+        xy=\frac{X+Y}{\sqrt{2}}\cdot\frac{X-Y}{\sqrt{2}}&=a\\
+        \therefore X^2-Y^2&=2a
+    \end{aligned}
+\end{equation}
+
+    It is now clear (unless I have made some mistake) that the equation of the hyperbola $xy=a$ in the standard Cartesian coordinate system is $X^2-Y^2=2a$ in the rotated (by an angle of $45^\circ$) coordinate system.
+
+    Therefore, the equation of such a hyperbola (Figure \ref{fig:rotated-hyperbola-in-standard-cs}), in the standard Cartesian Coordinate equation will become 
+    \begin{equation}
+        y^2=x^2-2a
+    \label{eq:rotated-hyperbola-final}
+    \end{equation}
+\begin{figure}[H]
+  \caption{Rotated Hyperbola, but in the Standard Cartesian (xy) Coordinate System}
+  \label{fig:rotated-hyperbola-in-standard-cs}
+  \centering
+  \includegraphics[scale=0.2]{images/rotated-hyperbola-in-standard-cs}
+\end{figure}
+
+    Equation (\ref{eq:rotated-hyperbola-final}) is an implicit equation (technically speaking, this is not a `mathematical function').
+
+    Isn't it cool?
+
+\end{reflection}
+
+\subsection{The Hyperbolic Rotation}
+\label{subsec:hyperbolic-rotation}
+Consider the hyperbola $xy=a$, and apply a strain with axis the $x$-axis and with coefficient $k$ Under this transformation the hyperbola $xy=a$ is transformed into the hyperbola $xy=ka$: the abscissa $x$ of every point remains unchanged, while the ordinate $y$ is changed to $ky$ (Fig. \ref{fig:hyperbolic-rotation}). Now let us apply another strain--this time with axis the $y$-axis and with coefficient $\frac{1}{k}$: Under this transformation the hyperbola $xy=ka$ is transformed (back) into the hyperbola $xy=\frac{ka}{k}$, that is, $xy = a$; for, this strain leaves the ordinate $y$ of each point unchanged, while it changes the abscissa x to $\frac{x}{k}$. 
+
+In this way we see that \emph{two successive strains of the plane with respective axes the $x$-axis and the $y$-axis and with respective coefficients $k$ and $\frac{1}{k}$ transform the hyperbola $xy=a$ into itself}. 
+
+\begin{definition}[Hyperbolic Rotation]\label{def:hyperbolic-tr}
+    The successive application of two strains with coefficients of strain $k, \frac{1}{k}$ and axes of strain that are perpendicular to each other results is a transformation called the \emph{Hyperbolic Rotation}.
+\end{definition}
+
+\begin{figure}[H]
+  \caption{The Hyperbolic Rotation}
+  \label{fig:hyperbolic-rotation}
+  \centering
+    \includegraphics[scale=0.2]{images/hyperbolic-rotation}
+\end{figure}
+
+The term ``hyperbolic rotation'' is related to the fact that under such a transformation all the points of the hyperbola `slide' along the curve; thus, in Fig. \ref{fig:hyperbolic-rotation} the point $M$ is first transformed into the point $M_1$ (the $x$-axis is the axis of strain and $\frac{PM_1}{PM}=k$ is the coefficient) and then $M_1$ is transformed into $M'$ (the $y$-axis is the axis of strain and $\frac{QM'}{QM_1}=\frac{1}{k}$ is the coefficient): that is, \textbf{the effect of the hyperbolic rotation is to transform the point $M$ of the hyperbola into the point $M'$ of the same hyperbola}. Such a transformation is analogous to a rotation--we might say that the hyperbola `rotates.'
+
+\begin{reflection}
+    This is a remarkable property of the hyperbola! I wondered if there's any other curve for which this is true. I thought (when looking at polynomial functions) that when the degrees of the polynomials in $y$ and $x$ are the same, the curve has a chance to demonstrate such transformation. What about the line $y=ax+b\,(a<0,b>0)$, for instance, $y=-2x+10$? 
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.2]{images/succ-strain-str-line}
+  \caption{Successive Strain by $k, \frac{1}{k}$ in Perpendicular Axes Applied to a Straight Line}
+  \label{fig:succ-strain-str-line}
+\end{figure}
+
+    One can see that it is \emph{not true in general} as Figure [\ref{fig:succ-strain-str-line}] demonstrates for a specific case (the point $M$ and its doubly transformed destination $M_2$ are not on the same line, in general).
+
+\end{reflection}
+
+It is easy to see that applying the first strain alone ($x$-axis is the axis of strain and $k$ is its coefficient) to any hyperbola results in another hyperbola (i.e., if points $M$ lie on the (red) hyperbola $xy=a$, then points $M_1$ in Figure [\ref{fig:hyperbolic-rotation}] lie on the (blue) hyperbola $xy=ka$)!
+
+\subsubsection{Properties of Hyperbolic Rotation}
+\label{subsubsec:props-hyperbolic-rotation}
+Most of these properties follow from properties of strain (See \ref{prop:strains}).
+
+\textbf{\textcolor{red} Proofs TBD.} 
+
+\begin{enumerate}
+    \item A hyperbolic rotation transforms a straight line into a straight line.
+    \item A hyperbolic rotation transforms the coordinate axes (the asymptotes of the hyperbola) into themselves (since each of the two strains which constitute the hyperbolic rotation transforms each coordinate axis into itself).
+    \item A hyperbolic rotation transforms parallel lines into parallel lines.
+    \item A hyperbolic rotation does not change the ratio of the lengths of line segments lying on the same straight line.
+    \item A hyperbolic rotation does not change the areas of figures in its plane.
+\end{enumerate}
+
+\begin{remark}[Hyperbolic Rotation of a Point on a Hyperbola]
+    It follows that by means of a \emph{suitable} hyperbolic rotation of a point $P(x,y)$ on a hyperbola $xy=a$, one can transform it to any other point (e.g., $P(x_1,y_1)$) on the same branch of the hyperbola: Choose the coefficient of strain $k=\frac{x}{x_1}$.
 \end{remark}
-\fi
 
+\subsection{Properties of the Hyperbola}
+
+By using hyperbolic rotations it is possible to establish a number of interesting geometric properties of the hyperbola. To begin with, we shall discuss \emph{chords} and \emph{tangents} of the hyperbola.
+
+A straight line which intersects a hyperbola at two points is called a \emph{secant} of that hyperbola. That segment of a secant whose end points lie on the hyperbola is called a \emph{chord} of the hyperbola. 
+ 
+The secants (and hence chords) of a hyperbola are of two types: those that intersect only one branch of the hyperbola and those that intersect both branches (see $UV$ and $U_1V_1$ in Figure [\ref{fig:hyperbola-two-types-of-secant}]).
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[scale=0.5]{images/hyperbola-two-types-of-secant}
+  \caption{Two Types of Secant (Chord) of a Hyperbola}
+  \label{fig:hyperbola-two-types-of-secant}
+\end{figure}
+
+Now consider the secants of the first type (See Figure [\ref{fig:type-1-secant-hyperbola}]). 
+
+\begin{figure}[H]
+    \caption{A Type 1 Secant (Chord) of a Hyperbola}
+    \label{fig:type-1-secant-hyperbola}
+    \centering
+    \includegraphics[scale=0.3]{images/type-1-secant-hyperbola}
+\end{figure}
+
+And straight lines parallel to it (Fig. [\ref{fig:lines-parallel-to-type-1-secants}]).
+
+\begin{figure}[H]
+    \caption{Lines Parallel to the Type 1 Secants of a Hyperbola}
+    \label{fig:lines-parallel-to-type-1-secants}
+    \centering
+    \includegraphics[scale=0.2]{images/lines-parallel-to-type-1-secants}
+\end{figure}
+
+Among these will be some which intersect the hyperbola at two points, some which do not intersect the hyperbola at all, and one which intersect it in exactly one point. That last line is called the \emph{tangent} of the hyperbola. Specifically, any straight line that has one point in common with a curve is called the tangent of the latter\footnote{An asymptote--informally the tangent at infinity--is not considered a tangent.}.
+
+Under hyperbolic rotation, a point $M_1$ on a hyperbola is transformed to another point $M_2$ on the same parabola.
+
+Is a tangent to the hyperbola at $M_1$ also transformed to a tangent at $M_2$ under hyperbolic rotation (as in Figure [\ref{fig:tangent-to-tangent-hyperbolic-rotation}])?
+
+\begin{figure}[H]
+    \caption{Hyperbolic Rotation of a Tangent to a Hyperbola}
+    \label{fig:tangent-to-tangent-hyperbolic-rotation}
+    \centering
+    \includegraphics[scale=0.2]{images/tangent-to-tangent-hyperbolic-rotation}
+\end{figure}
+
+With respect to Figure [\ref{fig:tangent-to-tangent-hyperbolic-rotation}], let us apply the hyperbolic rotation to $M_1$ on a hyperbola. We saw above that this would result in a point $M_2$ on the same hyperbola. Let $L_1,L_2$ be tangents to the hyperbola at $M_1,M_2$ respectively. Would applying hyperbolic transformation to $L_1$ result in $L_2$?
+
+This can be proved using calculus: The slopes of the tangents to the hyperbola $xy=a$ at $M_1,M_2$ are $-\frac{y_1}{x_1},-\frac{y_2}{x_2}$ respectively. We take a point $M_3(x_3, y_3)$ on $L_1$, apply the same hyperbolic rotation (that we applied to $M_1$) to it, and show that the transformed point (say $M_4$) lies on $L_2$.
+
+\subsubsection{Properties of Hyperbola}
+
+\textbf{Proofs of these properties in the book use properties of strain and hyperbolic rotation}. Such use of strains is remarkable!
+
+\begin{enumerate}
+\item If a line is tangent to a hyperbola, then the point of tangency bisects that segment of the tangent line having its endpoints on the asymptotes of the hyperbola.
+
+    It's quite evident from Figure [\ref{fig:bisect-tangent-segment-hyperbola}] that $\ell(MA)=\ell(MB)$.
+
+\begin{figure}[H]
+    \caption{Point of Tangency $M$ Bisects the Tangent Segment $AB$ of a Hyperbola}
+    \label{fig:bisect-tangent-segment-hyperbola}
+    \centering
+    \includegraphics[scale=0.2]{images/bisect-tangent-segment-hyperbola}
+\end{figure}
+
+\item The area of the right triangle formed by a tangent to the hyperbola $xy=a$ and the coordinate axes is the same for all tangents.
+
+    From Figure [\ref{fig:bisect-tangent-segment-hyperbola}], $A(\triangle OAB)=\frac{1}{2}{2k}\cdot\frac{2a}{k}=2a$. Thus, it only depends on $a$ for any point on the hyperbola!
+
+
+        From properties (1), (2) it follows that a hyperbola can be defined as \emph{the locus of the midpoints of the line segments, which, together with coordinate axes form right triangles of a given area}. See Figure [\ref{fig:locus-of-tangent-midpoints}].
+
+\begin{figure}[H]
+    \caption{Hyperbola as a Locus of Midpoints of Certain Line Segments}
+    \label{fig:locus-of-tangent-midpoints}
+    \centering
+    \includegraphics[scale=0.2]{images/locus-of-tangent-midpoints}
+\end{figure}
+
+\item The midpoints of a series of parallel chords of a hyperbola lie on a single straight line which passes through the center of the hyperbola.
+\begin{figure}[H]
+    \caption{Midpoints of the Parallel Chords of a Hyperbola and $O$ Are Collinear}
+    \label{fig:midpoints-of-the-parallel-chords-of-a-hyperbola}
+    \centering
+    \includegraphics[scale=0.4]{images/midpoints-of-the-parallel-chords-of-a-hyperbola}
+\end{figure}
+    \textbf{\emph{Note}}. \textcolor{red}{\textbf{Proof TBD}} 
+
+\begin{definition}[Diameter, Conjugate Diameter, Conjugate Chords of a Hyperbola]
+    \label{def:diameter-etc-hyperbola}
+    A straight line that passes through the center (Definition [\ref{def:center-axes-vertices-hyperbola}]) of a hyperbola is called its \emph{diameter}. The entire straight line, not a segment unlike the circle, is a diameter.
+
+    The parallel chords bisected by a given diameter are called its \emph{conjugate chords} of which the diameter is the \emph{conjugate diameter}.    
+\end{definition}
+
+For instance, in Figure [\ref{fig:midpoints-of-the-parallel-chords-of-a-hyperbola}], $aa$ is a diameter of the hyperbola (it is a conjugate diameter of chords parallel to $U_0V_0$) and so is OS (it is a conjugate diameter of chords parallel to $UV$).
+
+\item The straight lines passing through the endpoints of a given chord of a hyperbola and parallel to the asymptotes (coordinate axes) intersect on the diameter conjugate of that chord (See Figure [\ref{fig:endpoints-of-chords-and-conjugate-diameter}]: $R_0$ is on the conjugate diameter $aa$ of the corresponding chord $U_0V_0$ and so is $R$).
+
+\begin{figure}[H]
+    \caption{Lines Parallel to Axes through Endpoints of a Chord Meet at its Conjugate Diameter}
+    \label{fig:endpoints-of-chords-and-conjugate-diameter}
+    \centering
+    \includegraphics[scale=0.4]{images/endpoints-of-chords-and-conjugate-diameter}
+\end{figure}
+
+    \textbf{\emph{Note}}. \textcolor{red}{\textbf{Proof TBD}} 
+
+\item Tangents to a hyperbola at the ends of a given chord intersect on its conjugate diameter. (See Figure [\ref{fig:tangents-at-endpoints-of-a-chord-conjugate-diameter}]).
+\begin{figure}[H]
+    \caption{A Property of Tangents to a Hyperbola's Chord's Endpoints}
+    \label{fig:tangents-at-endpoints-of-a-chord-conjugate-diameter}
+    \centering
+    \includegraphics[scale=0.5]{images/tangents-at-endpoints-of-a-chord-conjugate-diameter}
+\end{figure}
+
+    \textbf{\emph{Note}}. \textcolor{red}{\textbf{Proof TBD}} 
+
+    (Circles too possess this property.)
+\end{enumerate}
+
+\section{Hyperbolic Functions}
+
+\begin{reflection}
+    We are at the heart of this little gem. I haven't proved important results using strains, but I will revisit the proofs on a second reading.
+\end{reflection}
+
+\subsection{The Unit Hyperbola and Its Equation}
+
+\begin{reflection}
+    I am glad that I read between the lines and derived the equation (Equation [\ref{eq:rotated-hyperbola-final}]) of the \emph{rotated hyperbola} when I was reading the previous section!
+
+    The book derives that equation here. I read their derivation, but will reproduce it here later.
+\end{reflection}
+
+The equation of the \emph{unit hyperbola} is when we choose $a=\frac{1}{2}$ in Equation [\ref{eq:rotated-hyperbola-final}]:
+
+    \begin{equation}
+        x^2-y^2=1  
+    \label{eq:unit-hyperbola}
+    \end{equation}
+
+    Compare this with the equation of a unit circle:
+    \begin{equation}
+        x^2+y^2=1  
+    \label{eq:unit-circle}
+    \end{equation}
+
+Let us now proceed to develop the theory of hyperbolic functions--a theory which in many respects is analogous to the theory of the trigonometric (circular) functions. In order to emphasize the analogy between trigonometric and hyperbolic functions, we shall conduct almost the entire exposition in two parallel columns: On the left we shall list well-known results from the theory of trigonometric functions, while on the right we shall give the analogous results from the theory of hyperbolic functions.
+
+\begin{reflection}
+    Things are becoming clearer now! The usual trigonometric functions are associated with the circle. Similarly, the hyperbolic trigonometric functions are associated with the hyperbola. This may be because of a strange similarity between the two curves.
+
+    This section uses $X,Y$ to denote the Cartesian axes.
+\end{reflection}
+
+\begin{figure}[H]
+    \caption{Unit Circle (L) and Unit Hyperbola (R) Contrasted}
+    \label{fig:unit-circle-and-unit-hyperbola}
+    \centering
+    \includegraphics[scale=0.3]{images/unit-circle-and-unit-hyperbola}
+\end{figure}
+
+\begin{multicols}{2}
+    If $M$ is a point of the \emph{unit circle}, then the measure of angle $\alpha$ (radians) between the radii $OA$ and $OM$ is defined to be the length of the arc $AM$ or, alternatively, twice the area of the sector $OAM$ determined by the arc AM and the radii $OA$ and $OM$. 
+
+    From the point $M$ on the unit circle drop the perpendicular $MP$ to the diameter $OA$. At the point $A$ draw a line tangent to the unit circle; let $N$ be the point of intersection of this tangent with the diameter $OM$.
+
+    The lengths of the segments $PM$, $OP$, and $AN$ are equal to
+    the \emph{sine}, \emph{cosine}, and \emph{tangent} of the angle $\alpha$, respectively:\\
+    $PM=\sin\alpha, OP=\cos\alpha, AN=\tan\alpha$.
+
+    \columnbreak
+
+    \begin{definition}[Hyperbolic Angle]
+        \label{def:hyperbolic-angle}
+    If $M$ is a point of the \emph{unit hyperbola}, then the measure of hyperbolic angle $t$ between the radii $OA$ and $OM$ is defined to be \textbf{twice the area of the sector $AOM$ determined by the arc $AM$ of the hyperbola and the radii $OA$ and $OM$}.
+
+        \textbf{Note: Hyperbolic angle is not an ordinary angle.}
+    \end{definition}
+From the point $M$ on the unit hyperbola drop the perpendicular $MP$ to the diameter $OA$. The diameter $OA$ is an axis of symmetry of the hyperbola, and the point $A$ is a vertex of the hyperbola. At the point $A$ draw a line tangent to the hyperbola; let $N$ be the point of intersection of this tangent with the diameter $OM$.
+
+    The lengths of the segments $PM$, $OP$, and $AN$ are called, respectively, the hyperbolic sine, the hyperbolic cosine, and the hyperbolic tangent of the hyperbolic angle $t$; we write\footnote{We pronounce these as \emph{hyperbolic sine}, \emph{hyperbolic cosine}, and \emph{hyperbolic tangent} respectively. The respective reciprocals are sometimes called the \emph{hyperbolic cosecant} $\text{csch } t$, the \emph{hyperbolic secant} $\text{sech } t$, and the \emph{hyperbolic cotangent} $\text{coth } t$ of the hyperbolic angle $t$.}:\\
+$PM = \sinh t, OP = \cosh t, AN = \tanh t$.
+
+\end{multicols}
+    \begin{reflection}[Rigid Rotation of a Circle's Sector about the Origin]
+Here, a footnote occurs in the book that I don't fully understand:
+        \enquote{A fundamental property of the angle a of the circle is that $\alpha$ is \emph{not changed} by a \textbf{rigid rotation} of the sector $AOM$ about the origin $O$. The analogous property of the hyperbolic angle $t$ is also true; that is, $t$ is \emph{not changed by a hyperbolic rotation} of the sector $AOM$ (see property (5), section [\ref{subsubsec:props-hyperbolic-rotation}]).}
+
+        What is a \emph{rigid} rotation of a sector of a circle? Perhaps its rotation about a point (the origin) such that the length of the arc is the same?
+
+    \end{reflection}
+
+We know that the trigonometric functions vary in a periodic fashion: the sine and cosine functions each have period $2\pi$, and the tangent function has period $\pi$. \textbf{The hyperbolic functions, however, are not periodic}.
+
+The `hyperbolic angle' $t$ (cf definition [\ref{def:hyperbolic-angle}]) may assume any value from 0 to $\infty$. In view of the definition of hyperbolic angles, this amounts to saying that for each positive real number there is some hyperbolic sector $AOM$ whose area is equal to that number. In order to prove this, let us consider an arbitrary hyperbolic angle $AOM_1$, of magnitude $t_1$, say.  Let us apply the hyperbolic rotation that transforms the point $A$ into the point $M_1$. Under this transformation (Note: the same transformation, that is, we employ the same strains in succession) the point $M_1$ is itself transformed into some point $M_2$, $M_2$ into $M_3$, $M_3$ into $M_4$, and so on (Figure [\ref{fig:a-hyperbolic-angle-for-every-r}]). 
+
+\begin{figure}[H]
+    \caption{A Hyperbolic Angle for Every $r\in\mathbb{R}$}
+    \label{fig:a-hyperbolic-angle-for-every-r}
+    \centering
+    \includegraphics[scale=0.3]{images/a-hyperbolic-angle-for-every-r}
+\end{figure}
+
+It follows from property (5), section [\ref{subsubsec:props-hyperbolic-rotation}], that the areas of the hyperbolic sectors $AOM$,$M_1OM_2$, $M_2OM_3$, $M_3OM_4$, ... are equal; consequently, the hyperbolic angles $AOM_1$, $AOM_2$, $AOM_3$, $AOM_4$, ... are equal to $t_1$, $2t_1$, $3t_1$, $4t_1$, ... respectively. Hence, there exist arbitrarily large hyperbolic angles. As the point $M$ on the hyperbola varies from $A$ to $M$, $M$ to $M_1$, $M_1$ to $M_2$, and so on, the hyperbolic angle $t$ varies from $0$ to $t_1$, $t_1$ to $2t_1$, and so on; hence, there are hyperbolic angles of any positive magnitude. {\textbf{Remember that a `hyperbolic angle' is not an ordinary angle (See definition [\ref{def:hyperbolic-angle}].})}
+
+\begin{reflection}
+    Still, it would be nice to \emph{plot} $\sinh r,\cosh r,\tanh r$ given a number $r\in\mathbb{R}$. I am not yet sure of a geometrical construction for it.
+
+    For trigonometric ratios, here's a way to geometrically construct lengths of magnitude $\sinh r, \cosh r, \tanh r$ for any $r\in\mathbb{R}$:
+    \begin{itemize}
+        \item Draw a unit circle (See the left side of Figure [\ref{fig:unit-circle-and-unit-hyperbola}]).
+        \item Given a $r\in\mathbb{R^+}$, find a real number $r_p=r \mod 2\pi (\mathrm{rad})$.
+        \item Measure this angle at $O$. That could be a separate construction, but for now, we'll use the protractor. This locates the point $M$.
+        \item $OM, OP, AN$ are $\sin r, \cos r, \tan r$ respectively.
+    \end{itemize}
+
+    We must stress that unlike the \emph{ordinary angle $\alpha$, or $r$} above, the hyperbolic angle $t$ is not to be measured at the origin. This is only defined in terms of the area of the hyperbolic sector (as of now) -- See Definition [\ref{def:hyperbolic-angle}]. This is still somewhat enigmatic to me because visualizing an angle (hyperbolic) as the area of a sector still feels unfamiliar.
+\end{reflection}
+
+\begin{reflection}
+    On 19 March 2026 I checked the Wikipedia page on hyperbolic angle \cite{hyperbolic-angle}. The figure there (Figure [\ref{fig:wikimedia-hyperbolic-angle}]) makes the above description clearer. This may be why they say that a picture is worth a thousand words. The red portion represents the \emph{area} $\frac{a}{2}$ of the hyperbolic sector, whose magnitude is half the \emph{hyperbolic angle $a$}, not to be confused with any \emph{ordinary angle}.
+
+\begin{figure}[H]
+    \caption{Wikipedia Figure of Hyperbolic Angle of Measure $a$ Reproduced (Modified)}
+    \label{fig:wikimedia-hyperbolic-angle}
+    \centering
+    \includegraphics[scale=0.3]{images/wikimedia-hyperbolic-angle-mod}
+\end{figure}
+
+    What I find remarkable here is the relationship between magnitudes of some \emph{area} (area of a hyperbolic sector) and some \emph{angle} (the hyperbolic angle).
+
+    If $a$ is the hyperbolic angle and the area of the (red) hyperbolic sector is $\frac{a}{2}$, what are the coordinates of $M (x, \sqrt{x^2-1})$ in terms of $a$? I am pretty sure the theory of integration will help here.
+
+\end{reflection}
+
+From the definition of hyperbolic functions (Figure [\ref{fig:unit-circle-and-unit-hyperbola}]), it is easy to see that as the hyperbolic angle $t$ varies from $0$ to $\infty$, 
+\begin{itemize}
+    \item $\sinh t$ varies from $0$ to $\infty$, 
+    \item $\cosh t$ varies from $1$ to $\infty$, and 
+    \item $\tanh t$ varies from $0$ to $1$. 
+\end{itemize}
+
+Analogously to the trigonometric functions, we consider hyperbolic functions of negative hyperbolic angles ($AOM_1$, Figure [\ref{fig:unit-circle-and-unit-hyperbola}]); the angle $AOM_1$ \emph {is defined to be equal to} $-t_1$, where $t_1$ is twice the area of the hyperbolic sector $AOM_1$. Then we have
+
+\begin{equation}
+\label{eq:hyperbolic-ratios-minus}
+\begin{aligned}
+    \sinh -t_1 = M_1P_1 &= -\sinh t_1\\
+    \cosh -t_1 = OP_1 &= \cosh t_1\\
+    \tanh -t_1 = N_1A &= -\tanh t_1
+\end{aligned}
+\end{equation}
+
+Graphs of the hyperbolic functions are shown in Figure [\ref{fig:hyperbolic-function-graphs}].
+
+\begin{figure}[H]
+    \caption{Graphs of the Hyperbolic Functions}
+    \label{fig:hyperbolic-function-graphs}
+    \centering
+    \includegraphics[scale=0.1]{images/hyperbolic-function-graphs}
+\end{figure}
+
+We note that
+\begin{equation*}
+\label{eq:common-ratios}
+\begin{aligned}
+    \sinh 0 = \tanh 0 &= 0\\
+    \cosh 0 &= 1\\
+    \text{analogous to} \\
+    \sin 0 = \tan 0 &= 0\\
+    \cos 0 &= 1\\
+\end{aligned}
+\end{equation*}
+
+\section{Identities Between Hyperbolic Functions}
+Let us now derive some fundamental trigonometric identities, together with the corresponding identities between hyperbolic functions.
+
+\begin{reflection}
+    The identities for trigonometric functions are proved in several standard texts, but I am reproducing them here for the sake of completeness.
+\end{reflection}
+
+\newpage
+
+\begin{figure}[H]
+    \caption{Unit Circle (L) and Unit Hyperbola (R) Contrasted (Reproduced)}
+    \label{fig:unit-circle-and-unit-hyperbola-reproduced}
+    \centering
+    \includegraphics[scale=0.2]{images/unit-circle-and-unit-hyperbola}
+\end{figure}
+
+\begin{multicols}{2}
+    \raggedcolumns
+    From the similarity of the triangles $OPM$ and $OAN$ (Figure [\ref{fig:unit-circle-and-unit-hyperbola-reproduced}] reproduced) (left side) it follows that
+
+    \[
+        \frac{AN}{OA} = \frac{PM}{OP}
+    \]
+    But $\frac{AN}{OA}=\tan\alpha$, while
+    \[
+        \frac{PM}{OP} = \frac{\sin\alpha}{\cos\alpha}
+    \]
+
+In this way we obtain
+\begin{equation}
+\label{eq:tan-alpha}
+    \tan\alpha=\frac{\sin\alpha}{\cos\alpha}
+\end{equation}
+
+    Furthermore, the coordinates of a point $M$ of the \emph{circle} are $OP=X$ and $PM=Y$. Since the equation of the unit circle has the form $X^2+Y^2=1$, it follows that
+
+\begin{equation}
+\label{eq:sinsq+cossq}
+    \cos^2\alpha+\sin^2\alpha=1
+\end{equation}
+
+    Dividing both sides of identity [\ref{eq:sinsq+cossq}], first by $\cos^2\alpha$, then by $\sin^2\alpha$, we obtain two more formulas:
+
+\begin{equation}
+\label{eq:two-more-trig-formulas}
+\begin{aligned}
+    1+\tan^2\alpha&=\frac{1}{\cos^2\alpha}\\
+    \cot^2\alpha+1&=\frac{1}{\sin^2\alpha}
+\end{aligned}
+\end{equation}
+
+\columnbreak
+
+    From the similarity of the triangles $OPM$ and $OAN$ (Figure [\ref{fig:unit-circle-and-unit-hyperbola-reproduced}] reproduced) (right side) it follows that
+
+    \[
+        \frac{AN}{OA} = \frac{PM}{OP}
+    \]
+    But $\frac{AN}{OA}=\tanh\alpha$, while
+    \[
+        \frac{PM}{OP} = \frac{\sinh\alpha}{\cosh\alpha}
+    \]
+
+In this way we obtain
+\begin{equation}
+\label{eq:tanh-alpha}
+    \tanh\alpha=\frac{\sinh\alpha}{\cosh\alpha}
+\end{equation}
+
+    Furthermore, the coordinates of a point $M$ of the \emph{hyperbola} are $OP=X$ and $PM=Y$. Since the equation of the unit circle has the form $X^2-Y^2=1$, it follows that
+
+\begin{equation}
+\label{eq:coshsq-sinhsq}
+    \cosh^2\alpha-\sinh^2\alpha=1
+\end{equation}
+
+    Dividing both sides of identity [\ref{eq:coshsq-sinhsq}], first by $\cosh^2\alpha$, then by $\sinh^2\alpha$, we obtain two more formulas:
+
+\begin{equation}
+\label{eq:two-more-hyperbolic-trig-formulas}
+\begin{aligned}
+    1-\tanh^2\alpha&=\frac{1}{\cosh^2\alpha}\\
+    \coth^2\alpha-1&=\frac{1}{\sinh^2\alpha}
+\end{aligned}
+\end{equation}
+
+\end{multicols}
+
+The book then derives from first principles the familiar trigonometric identity $\sin(\alpha+\beta)=\sin\alpha\cos\beta+\cos\alpha\sin\beta)$ and the equivalent $\sinh(\alpha+\beta)=\sinh\alpha\cosh\beta+\cosh\alpha\sinh\beta)$. I will skip that for now. 
+
+\textcolor{red}{\textbf{TBD}} 
+
+
+\section{Natural Logarithms}
+\subsection{Logarithms and Hyperbola}
+
+\begin{reflection}[That Feeling When \dots]
+    Is this the section where several strands are going to be brought together?
+\end{reflection}
+
+Consider the (unit) hyperbola $xy=1$ (Figure [\ref{fig:ln-and-hyperbola-1}]). On this hyperbola take two arbitrary points $M$ and $N$ and from them drop perpendiculars $MP$ and $NQ$ on to the $X$-axis. Consider the \emph{curvilinear} trapezoid $PQNM$.
+
+\begin{figure}[H]
+    \caption{Area Under the Unit Hyperbola Between Two Abscissas}
+    \label{fig:ln-and-hyperbola-1}
+    \centering
+    \includegraphics[scale=0.2]{images/ln-and-hyperbola-1.png}
+\end{figure}
+
+The area $S_{PQNM}$ of this trapezoid depends on the abscissas $OP=x_1$ and $OQ=x_2$ of the points $M$ and $N$. Let $x_2>x_1$.
+
+We shall now determine just how $S{PQNM}$ depends on $x_1$ and $x_2$, that is, how to calculate $S_{PQNM}$ given $x_1$ and $x_2$.
+
+To begin with, we prove that the area $S_{PQNM}$ depends only on the ratio $\frac{x_2}{x_1}$. 
+
+In other words, we prove that if two curvilinear trapezoids $PQNM$ ($OP=x_1,OQ=x_2$) and $P'Q'N'M'$ are such that are such that $\frac{x_2}{x_1}=\frac{x_2'}{x_1'}$, then the areas of these trapezoids are equal (Figure [\ref{fig:ln-and-hyperbola-1}]).
+
+\begin{reflection}[Use of the Calculus]
+    We can always use the integral calculus to show that that is the case. However, it's remarkable that the text does not use calculus at all.
+\end{reflection}
+
+Let us apply the hyperbolic rotation which transforms $MP$ into $M'P'$. It follows from property (4), section [\ref{subsubsec:props-hyperbolic-rotation}], that the point $Q$ is transformed into a point $\overline{Q}$ such that $\frac{\overline{OQ}}{OP'}=\frac{OQ}{OP}$, that is, into the point $Q'$ (because $\frac{x_2'}{x_1'}=\frac{x_2}{x_1}$). This means that $NQ$ is transformed into $N'Q'$ and the curvilinear trapezoid $PQNM$ into the curvilinear trapezoid $P'Q'N'M'$; therefore, by property (5), section [\ref{subsubsec:props-hyperbolic-rotation}], $S_{PQNM}=S_{P'Q'N'M'}$. Hence, we see that \textbf{the area $S_{PQNM}$ depends only on the ratio $\frac{x_2}{x_1}$}. 
+
+Let $\frac{x_2}{x_1}=z$.
+
+Then, $S_{PQNM}$ is a function of $z$, and we write:
+\[
+    S_{PQNM}=S(\frac{x_2}{x_1})=S(z)
+\]
+
+\begin{reflection}[$S$ as a Function: $\mathbb{R}\rightarrow\mathbb{R}$]
+    What the author achieves here is making the area of the curvilinear trapezoid $S_{PQNM}$ a \emph{function} of a real number $z$. The function is \emph{defined $\forall z>1$}. As long as $z>1$, the function maps it to another real number which represents the area of the curvilinear trapezoid enclosed by 1) the vertical line $x=1$, 2) the vertical line $x=z$ (which, by definition, lies on the right side of the line $x=1$), 3) the $X$-axis, and of course, 4) the hyperbola $xy=1$.
+
+    Since there is exactly one curvilinear trapezoid $PQNM$ for a given $z$, this is a mathematical function.
+
+    As it usually happens in mathematics, we allow the function to have value $0$ for $z=1$. This happens when the area $PQNM$ becomes zero, or when $QN$ coincides with $PM$. Thus, the function $S(z)$ is now defined $\forall z\geq 1$.
+
+    Does it make sense to let $z$ assume values less than $1$ (that is to let $QN$ lie to the left of $PM$)? Well, it seems reasonable to do so as long as $z$ remains greater than $0$. When $z$ becomes negative, the curvilinear trapezoid between $x=1$ and $x=z$ assumes an inexplicable shape (the hyperbola turns upside down when $z=0$), and it becomes unthinkable, perhaps like taking the square root of $-1$.
+
+    Therefore, we say that this function is defined for all positive values of $0$.
+
+    Still, there is something different about $S(z)$ when $0<z<1$. $z=\frac{x_2}{x_1} < 1 \implies x_2 < x_1$.
+\end{reflection}
+
+The function $S(z)$ is defined for any value of $z$ greater than 1.  From our geometric interpretation it follows that $S(z)$ is an increasing function (that is, if $z_1>z_2$, then $S(z_1) > S(z_2)$) and continuous (values of $S(z)$ near $S(z_0)$ correspond to values of $z$ near $z_0$). It is natural to define $S(1)$ to be $0$, for if $z=1$, the trapezoid is simply a line segment. 
+
+For sufficiently large values of $z$ the values of the function $S(z)$ may be as large as we please. The proof of this fact is completely analogous to the proof of the fact that a hyperbolic angle exists which is as large as we please. 
+
+Thus, there must exist a number $z > 1$ such that $S(z)=1$. 
+
+\textbf{We shall call value of $z$ simply $e$}:
+
+\[
+S(e) = 1.
+\]
+
+We shall compute the value of $e$ later (see Fig. TBD).
+
+Let us now find the formula for the function $S(z)$. We shall prove first of all that for any two real numbers $z_1, z_2>1$, 
+
+\begin{equation}
+\label{eq:sz1z2}
+    S(z_1)+S(z_2)=S(z_1\cdot z_2)
+\end{equation}
+
+\begin{reflection}[$S(z_1)+S(z_2)\overset{?}{=}S(z_1z_2)$]
+    This was intriguing. However, the hyperbolic rotation's properties are axioms. I thought that we should use the idea that hyperbolic rotation does not change the areas of figures. I drew the following figure (Figure [\ref{fig:ln-and-hyperbola-2}]) in Desmos.
+
+\begin{figure}[H]
+    \caption{$S(z_1)+S(z_2)\overset{?}{=}S(z_1z_2)$}
+    \label{fig:ln-and-hyperbola-2}
+    \centering
+    \includegraphics[scale=0.2]{images/ln-and-hyperbola-2.png}
+\end{figure}
+
+    We choose the ratios $\frac{1}{z_2},z_2$ to apply (the same) hyperbolic rotation to points of interest, $T,U$, which transform to $V,W$ respectively. As a result, $A(PQUT)=A(RSWV)$. (This was a key observation; I am glad I made it.) 
+
+    If $A(PQUT)=a_1, A(QRVU)=a_2$, then $A(RSWV)=a_1$. It then follows that $A(PSWT)=a_1+a_2+a_1=a_1+(a_1+a_2)=A(PQUT)+A(PRVT)$, which was to be demonstrated.
+\end{reflection}
+
+(I skipped the proof appearing in the book; it is similar to the above.)
+
+We may use the equation [\ref{eq:sz1z2}] to prove that for any $\alpha>1$, 
+
+\begin{equation}
+\label{eq:sztoalpha}
+    S(z^\alpha)=\alpha S(z)\;\text{ where $\alpha>1$}
+\end{equation}
+
+\begin{proof}
+    We prove by cases.
+    \begin{enumerate}
+        \item $\alpha=n\in\mathbb{N}$.
+        \item $\alpha=\frac{n}{m}$, $n,m\in\mathbb{N}$, $m\ne0$.
+        \item $\alpha$ is irrational.
+    \end{enumerate}
+
+\textcolor{red}{\textbf{TBD}} 
+\end{proof}
+
+Now, the properties
+
+\begin{equation}
+\label{eq:sz-like-ln}
+\begin{aligned}
+    S(e)&=1\\
+    S(z_1z_2)&=S(z_1)+S(z_2)\\
+    S(z^\alpha)&=\alpha S(z)
+\end{aligned}
+\end{equation}
+
+are just the properties of logarithms of real numbers to the base $e$.
+
+For $z>1$, we have 
+\[
+    z=e^{\ln{z}}
+\]
+
+Therefore,
+\begin{equation}
+\label{eq:sz-is-ln}
+    S(z)=S(e^{\ln{z}})=\ln{z}\cdot S(e)=\ln{z}\cdot 1=\ln{z}
+\end{equation}
+
+From this formula follows the fact that the area of the curvilinear trapezoid $PQNM$ bounded by the hyperbola $xy=1$, the $X$-axis, and the straight lines $x = x_1$, and $x = x_2$, where $x_2>x_1$, is given by
+
+\[
+    \log_e\frac{x_2}{x_1}
+\]
+
+Thus, in connection with certain geometric considerations concerning areas, we have unexpectedly encountered logarithms. Here the system of logarithms is based on the number $e$, and not on an arbitrary number or on the number $10$, as is the case with common logarithms. These remarks shed light on the fact that the two men who first dealt with the theory of logarithms, Napier and Bürgi, arrived independently at logarithms to the base $e$ (and not logarithms to the base $10$, which might appear to be the simplest).
+
+This same ``geometric'' definition of logarithms is related to the fact that logarithms to the base $e$ often occur in problems of mathematics and physics which, at first glance, seem to have no relationship whatsoever to the logarithmic function. See \cite{markushevich} for further information on the \emph{geometric definition of the logarithms}.
+
+\subsection{The Base $e$ of Natural Logarithms}
+
+
+\printbibliography
+
+\end{document}
