@@ -59,6 +59,11 @@
 \MakeOuterQuote{"}
 % quotes
 
+% epigraphs
+% I chose epigraph-keys for its simplicity
+\usepackage{epigraph-keys}
+% epigraphs
+
 %images
 \usepackage{graphicx}
 \usepackage{float}
@@ -103,7 +108,7 @@
 \begin{document}
 \maketitle
 \begin{reflection}[Introduction]
-    These are the author's highly personal notes based on this great book \cite{shervatov}]. They may occasionally sound like author's conversation with the reader (or even himself). Even if they are personal and appear in the public domain, they may help the reader, although the author isn't exactly sure how. He wrote them for 0) the love of mathematics and writing 1) \LaTeX{} practice (of writing hopefully readable mathematics, albeit longer than appearing in standard texts), and 2) reliable archival (paper, on which most math is created, tends to get lost) that incurs minimal overhead.
+    These are the author's highly personal notes based on this great book \cite{shervatov}. They may occasionally sound like author's conversation with the reader (or even himself). Even if they are personal and appear in the public domain, they may help the reader, although the author isn't exactly sure how. He wrote them for 0) the love of mathematics and writing 1) \LaTeX{} practice (of writing hopefully readable mathematics, albeit longer than appearing in standard texts), and 2) reliable archival (paper, on which most math is created, tends to get lost) that incurs minimal overhead.
 
     These notes are interspersed with ``reflection boxes'' like this one. They are meant to express author's `rough' thinking process (mental catharsis of sorts), of which frustration is often an inseparable part. The author writes mostly in first person for an authentic conversational tone.
 
@@ -824,8 +829,9 @@ The hyperbola has a center of symmetry: the two branches of the hyperbola are sy
 In fact, the coordinate rectangles $MQOP$ and $M_1Q_1OP_1$ (symmetric with respect to $aa$) have equal areas; similarly $MQOP$ and $M_2Q_2OP_2$ (symmetric with respect to $bb$) have equal areas. The center of symmetry $O$ and the axes of symmetry $aa$ and $bb$ are usually simply called \textbf{the center and the axes of the hyperbola}; the points $A$ and $B$ in which the hyperbola intersects the axis $aa$ are called \textbf{the vertices of the hyperbola}.
 \end{definition}
 
-\begin{reflection}
-    These results should be proved. However, I found the equation of hyperbola in a new coordinate system ($XY$) whose axes are the standard Cartesian axes rotated by an angle $\alpha$. See Figure \ref{fig:hyperbola-rotated-cs}.
+\begin{reflection}[Hyperbola in the Rotated Cooardinate System]
+    \label{reflection:hyperbola-rotated-cs}
+    These results should be proved. However, I found the equation of hyperbola in a new coordinate system ($X,Y$) whose axes are the standard Cartesian axes rotated by an angle $\alpha$. See Figure \ref{fig:hyperbola-rotated-cs}.
 \begin{figure}[H]
   \caption{The Hyperbola in a Rotated Coordinate System}
   \label{fig:hyperbola-rotated-cs}
@@ -1320,7 +1326,7 @@ Consider the (unit) hyperbola $xy=1$ (Figure [\ref{fig:ln-and-hyperbola-1}]). On
 
 The area $S_{PQNM}$ of this trapezoid depends on the abscissas $OP=x_1$ and $OQ=x_2$ of the points $M$ and $N$. Let $x_2>x_1$.
 
-We shall now determine just how $S{PQNM}$ depends on $x_1$ and $x_2$, that is, how to calculate $S_{PQNM}$ given $x_1$ and $x_2$.
+We shall now determine just how $S_{PQNM}$ depends on $x_1$ and $x_2$, that is, how to calculate $S_{PQNM}$ given $x_1$ and $x_2$.
 
 To begin with, we prove that the area $S_{PQNM}$ depends only on the ratio $\frac{x_2}{x_1}$. 
 
@@ -1340,6 +1346,7 @@ Then, $S_{PQNM}$ is a function of $z$, and we write:
 \]
 
 \begin{reflection}[$S$ as a Function: $\mathbb{R}\rightarrow\mathbb{R}$]
+    \label{reflection:s-as-a-function-of-z}
     What the author achieves here is making the area of the curvilinear trapezoid $S_{PQNM}$ a \emph{function} of a real number $z$. The function is \emph{defined $\forall z>1$}. As long as $z>1$, the function maps it to another real number which represents the area of the curvilinear trapezoid enclosed by 1) the vertical line $x=1$, 2) the vertical line $x=z$ (which, by definition, lies on the right side of the line $x=1$), 3) the $X$-axis, and of course, 4) the hyperbola $xy=1$.
 
     Since there is exactly one curvilinear trapezoid $PQNM$ for a given $z$, this is a mathematical function.
@@ -1359,13 +1366,13 @@ For sufficiently large values of $z$ the values of the function $S(z)$ may be as
 
 Thus, there must exist a number $z > 1$ such that $S(z)=1$. 
 
-\textbf{We shall call value of $z$ simply $e$}:
+\textbf{We shall call that value of $z$ simply $e$}:
 
 \[
 S(e) = 1.
 \]
 
-We shall compute the value of $e$ later (see Fig. TBD).
+We shall compute the value of $e$ later (see Figure [\ref{fig:estimate-value-of-e}]).
 
 Let us now find the formula for the function $S(z)$. We shall prove first of all that for any two real numbers $z_1, z_2>1$, 
 
@@ -1445,6 +1452,418 @@ This same ``geometric'' definition of logarithms is related to the fact that log
 
 \subsection{The Base $e$ of Natural Logarithms}
 
+We shall now calculate the value of $e$ to a few decimal places.
+
+See Figure [\ref{fig:estimate-value-of-e}].
+
+\begin{figure}[H]
+    \caption{Estimating the value of $e$}
+    \label{fig:estimate-value-of-e}
+    \centering
+    \includegraphics[scale=0.2]{images/estimate-value-of-e.png}
+\end{figure}
+
+With the usual notation it follows that
+\[
+    S(2)<1<S(3) 
+\]
+
+However, $S(e)=1$, and since $S$ (that is, the area of the curvilinear trapezoid) is an increasing function, $S(2)<S(e)<S(3)\implies 2<e<3$.
+
+\begin{figure}[H]
+    \caption{Estimating the value of $e$ with $\ln(1+\frac{1}{n})$}
+    \label{fig:estimate-value-of-e-2}
+    \centering
+    \includegraphics[scale=0.4]{images/estimate-value-of-e-2.png}
+\end{figure}
+
+
+Consider the curvilinear trapezoid $KPMA$ (Figure [\ref{fig:estimate-value-of-e-2}]), where $OK=1,OP=1+\frac{1}{n}\;n\in\mathbb{N}$.
+
+The area of the curvilinear trapezoid $KPMA$ is between $A(KP\overline{M}A)$ and $A(KPM\overline{A})$.
+
+\[
+    A(KP\overline{M}A)=\ell(KA)\cdot \ell(KP)=1\cdot\frac{1}{n}=\frac{1}{n}
+\]
+and
+\[
+    A(KPM\overline{A})=\ell(MP)\cdot \ell(KP)=\frac{1}{1+\frac{1}{n}}\cdot\frac{1}{n}=\frac{1}{n+1}
+\]
+
+That leads to the following:
+
+\begin{equation}
+\label{eq:estimate-e}
+\begin{aligned}
+    \frac{1}{n}&>\ln(1+\frac{1}{n})>\frac{1}{n+1}\\
+    \therefore\ln(1+\frac{1}{n})^n&<1<\ln(1+\frac{1}{n})^{n+1}\\
+    \therefore(1+\frac{1}{n})^n&<e<(1+\frac{1}{n})^{n+1}
+\end{aligned}
+\end{equation}
+
+The last inequality in [\ref{eq:estimate-e}] is beautiful. It lets us estimate $e$ to any desired degree of accuracy. For $n=100$, we get:
+\[
+    2.70481382942<e<2.73186196772
+\]
+
+From the same inequality and the Squeeze Theorem\footnote{If $f(x)\leq g(x)\leq h(x)$ and if $\lim_{x\to c}f(x)=\lim_{x\to c}h(x)=L$, then $\lim_{x\to c}g(x)=L$.}, it follows that
+
+\begin{equation}
+\label{eq:exact-e}
+\begin{aligned}
+    e&=\lim_{x\to\infty}(1+\frac{1}{n})
+\end{aligned}
+\end{equation}
+
+\begin{problem}[Generalization of $e$ as a Limit]
+
+Prove that 
+
+    $$\lim_{n\to\infty}(1+\frac{a}{n})^n=e^a\;\forall a>0$$
+\end{problem}
+\begin{proof}
+
+    In Figure [\ref{fig:estimate-value-of-e-2}], we let $OP=1+\frac{a}{n}$ (instead of $1+\frac{1}{n}$), and follow the above to reach the value $e^a$.
+\end{proof}
+
+\begin{reflection}[A Beautiful Generalization, $e^a$]
+    I knew this definition of $e$:
+
+\[
+    \lim_{n\to\infty}(1+\frac{1}{n})=e
+\]
+, but proving 
+\[
+    \lim_{n\to\infty}(1+\frac{a}{n})=e^a
+\]
+was challenging. I didn't know where to begin. Now I know. Does that make me happy? Yes.
+\end{reflection}
+
+The book progresses along the same lines to prove that $a$ can be less than $0$! 
+
+What are the curvilinear areas (i.e., $S(z)$) when $0<z<1$ (hitherto, we have been thinking only of areas for which $z>1$)?
+
+See Figure [\ref{fig:sz-z-between-0-and-1}].
+
+\begin{figure}[H]
+    \caption{$S(z)$ for $0<z<1$}
+    \label{fig:sz-z-between-0-and-1}
+    \centering
+    \includegraphics[scale=0.4]{images/sz-z-between-0-and-1}
+\end{figure}
+
+Applying strains, we can show that $A(QCDR)=A(KABP)$. Then, it follows that $A(KABP)+A(KACQ)=A(KADR)$, or, in other words, $S(\frac{1}{z_1})+S(\frac{1}{z_2})=S(\frac{1}{z_1z_2})$, that is, 
+\[
+    \ln(\frac{1}{z_1})+\ln(\frac{1}{z_2})=\ln(\frac{1}{z_1z_2})
+\]
+. This is analogous to the Equation [\ref{eq:sz-like-ln}]. 
+
+\begin{reflection}[\textcolor{red}{What Happens with $S(z_1)+S(\frac{1}{z_1})$?}]
+
+    What happens with $S(z_1)+S(\frac{1}{z_1})$ when $z_1>1$? See Figure [\ref{fig:s-z-plus-s-1-by-z}]. 
+
+\begin{figure}[H]
+    \caption{$S(z_1)+S(\frac{1}{z_1})$ for $z_1>1$}
+    \label{fig:s-z-plus-s-1-by-z}
+    \centering
+    \includegraphics[scale=0.4]{images/s-z-plus-s-1-by-z}
+\end{figure}
+
+    Here, $S(z_1)=A(QLMK)$ and $S(\frac{1}{z_1})=A(KMNP)$. Visually, the sum $S(z_1)+S(\frac{1}{z_1})$ of the areas of the curvilinear trapezoids is clearly nonzero.
+
+    However, applying properties in Equation [\ref{eq:sz-like-ln}] we get,
+\[
+    S(z_1)+S(\frac{1}{z_1})=S(z_1\cdot\frac{1}{z_1})=S(1)=0
+\]
+
+    I can explain that $\ln(z_1)+\ln(\frac{1}{z_1})=\ln(1)=0$ by using the properties of calculus, but I am missing something when using strains to explain it.
+\end{reflection}
+
+The book then proves (using homothetic transformation) that the area under the curve $xy=a$ between two abscissas $x_1,x_2$ equals $a\ln(\frac{x_2}{x_1})$.
+
+(I will reproduce it here later).
+
+\begin{reflection}[Thoughts of Being `Slow' Linger \dots]
+    I have become a little too restless now. I have been working on this book for more than a couple of months (while doing other things). That feels a little too slow. 
+
+    I don't know why I feel that way. Perhaps I get distracted by other interesting things and that derails my plans. Thoughts of doing something else (linear algebra, topics in calculus, statistics and probability, etc.) beckon me. 
+
+    Am I spending too much time in drawing graphs in Desmos, typesetting this document, etc.? I guess so. But that's okay. Like Paul Halmos says, one should plan to read a mathematical book more than once. This is my first reading of this book. So, this level of thoroughness and this `speed' is acceptable. I must take things to completion, however challenging going is.
+
+    Should I choose ``problem books''? What if the problems are too hard? I don't know. I now think the standard definition-theorems-problems(exercises) course seems appropriate for my self-study. ``Miles to go before I sleep \dots''.
+\end{reflection}
+
+\subsection{Analytic Expressions for the Hyperbolic Functions}
+
+An analytic expression is a closed-form formula\footnote{An expression whose definition is rather involved, but which involves constants, variables, and a set of functions considered as basic and connected by arithmetic operations ($+,-,\times,/$, and integer powers) and function composition. See \cite{analytic-expr} for details.}.
+
+\begin{reflection}[Finally \dots]
+    A book I referred to defined $\sinh x,\cosh x$ in terms of some other well-known functions. And I was intrigued. Finally (after cutting a few corners, which I will redo), I reach a point where that mystery is about to resolve \dots
+
+    What I wanted to know was why the \emph{analytic expression} (stated in that book without any references) $\frac{e^x-e^{-x}}{2}$ is called the \emph{hyperbolic} sine ratio. I hitherto understand that a certain length related to the unit hyperbola is defined to be the hyperbolic sine; now perhaps is the time to realize such expressions (which the author calls \emph{analytic expressions} for hyperbolic trigonometric ratios). 
+
+    I took great pains to draw many of the figures in Desmos. It helped me understand the material better. See \cite{desmos-hyperbolic-distances} and \cite{desmos-hyperbolic-regions}.
+\end{reflection}
+
+\begin{reflection}[On Certain Distances Concerning the Hyperbola \cite{desmos-hyperbolic-distances}]
+    $x,y$ are the standard (System 1) Cartesian coordinate axes. We get the System 2 by rotating the $x,y$ axes by $\frac{\pi}{4}$. $X,Y$ are the System 2 coordinate axes.
+
+    Rewriting the relationship between $x,y$ and $X,Y$ that we previously established (See Reflection [\ref{reflection:hyperbola-rotated-cs}]) for $0\leq\alpha\leq\frac{\pi}{2}$: 
+\begin{equation}
+\label{eq:rotated-hyperbola-1-again}
+    \begin{aligned}
+        Y&=y\cos\alpha-x\sin\alpha\\
+        X&=y\sin\alpha+x\cos\alpha
+    \end{aligned}
+\end{equation}
+    We solve for $x,y$: 
+\begin{equation}
+\label{eq:xy-in-terms-of-XY}
+    \begin{aligned}
+        y&=X\sin\alpha+Y\cos\alpha\\
+        x&=X\cos\alpha-Y\sin\alpha
+    \end{aligned}
+\end{equation}
+
+    Setting $\alpha=\frac{\pi}{4}$, we get: 
+\begin{equation}
+\label{eq:xy-in-terms-of-XY-45}
+    \begin{aligned}
+        y&=\frac{X}{\sqrt{2}}+\frac{Y}{\sqrt{2}}\\
+        x&=\frac{X}{\sqrt{2}}-\frac{Y}{\sqrt{2}}
+    \end{aligned}
+\end{equation}
+
+    These equations (Equation [\ref{eq:rotated-hyperbola-1-again}], [\ref{eq:xy-in-terms-of-XY}], and [\ref{eq:xy-in-terms-of-XY-45}]) let us find the System-2 coordinates of any point whose System-1 coordinates we know (and vice versa).
+
+    \textbf{Lengths and Areas are independent of the coordinate systems, but in the Figure [\ref{fig:certain-distances-hyperbola}] we show coordinates in the System 1}. 
+
+    However, the purple region (the curvilinear $\triangle OAM$) has an area $\frac{t}{2}$, where $t$ is the \emph{hyperbolic angle} of any point $M$ on the hyperbola $xy=\frac{1}{2}$ in the System 2.
+
+
+\begin{figure}[H]
+    \caption{Certain Coordinates Concerning the Hyperbola $xy=\frac{1}{2}$ in the Two Systems}
+    \label{fig:certain-distances-hyperbola}
+    \centering
+    \includegraphics[scale=0.25]{images/certain-distances-hyperbola}
+\end{figure}
+
+    We bear in mind the following:
+    \begin{itemize}
+        \item Equation of the hyperbola. System-1: $xy=\frac{1}{2}$. System-2: $X^2-Y^2=1$.
+        \item Coordinates of any point $M$. System-1: $(\frac{\cosh{t}-\sinh{t}}{\sqrt{2}},\frac{\cosh{t}+\sinh{t}}{\sqrt{2}})$. System-2: $(\cosh{t},\sinh{t})$.
+        \item By definition, the area of the hyperbolic sector $AOM$ is $\frac{t}{2}$, where $t$ is the hyperbolic angle (not the \emph{ordinary angle}) of $M$.
+    \end{itemize}
+
+    All the `distances' follow from the above:
+    \begin{itemize}
+        \item $OQ=\frac{\cosh{t}-\sinh{t}}{\sqrt{2}}$
+        \item $OR=\frac{\cosh{t}+\sinh{t}}{\sqrt{2}}$
+        \item $OK=\frac{1}{\sqrt{2}}$
+        \item $OL=\frac{1}{\sqrt{2}}$
+    \end{itemize}
+\end{reflection}
+
+\begin{reflection}[On Certain Regions Concerning the Hyperbola \cite{desmos-hyperbolic-regions}]
+
+    Seeing equal areas in our setup is somewhat challenging. We must keep the bigger picture in mind, however: \textbf{Find the analytic expressions for $\sinh{t},\cosh{t}$}. The geometry of the hyperbola is our guide. We want to express the lengths $\sinh{t},\cosh{t}$ in terms of other lengths that represent other functions.
+
+    First, areas of the coordinate rectangles $OKAL$ and $OQMR$ are the same: 
+\begin{equation}
+\label{eq:equal-coordinate-rectangles}
+        S_{OQMR}=S_{OKAL}
+\end{equation}
+
+    See Figure [\ref{fig:equal-coordinate-rectangles}] and Definition [\ref{def:center-axes-vertices-hyperbola}].
+\begin{figure}[H]
+    \caption{Coordinate Rectangles Have the Same Area}
+    \label{fig:equal-coordinate-rectangles}
+    \centering
+    \includegraphics[scale=0.2]{images/equal-coordinate-rectangles}
+\end{figure}
+
+    Now, we want to relate this to the point $M$, a general point on the hyperbola. From the above Figure ([\ref{fig:equal-coordinate-rectangles}]) and Equation ([\ref{eq:equal-coordinate-rectangles}]), it follows that the areas of the curvilinear trapezoids, $QKAM$ and $RLAM$, are the same: 
+\begin{equation}
+\label{eq:equal-curvilinear-trapezoids}
+    \begin{aligned}
+        S_{QKAM}&=S_{QKAM}-S_{OKAL}+S_{OQMR}\\
+        \therefore S_{QKAM}&=S_{RLAM}
+    \end{aligned}
+\end{equation}
+
+See Figure [\ref{fig:equal-curvilinear-trapezoids}].
+
+\begin{figure}[H]
+    \caption{Curvilinear Rectangles Have the Same Area}
+    \label{fig:equal-curvilinear-trapezoids}
+    \centering
+    \includegraphics[scale=0.2]{images/equal-curvilinear-trapezoids}
+\end{figure}
+
+Since the coordinate rectangles $OKAL$ and $OQMR$ have equal areas, the triangles $OKA$ (half of $OKAL$) and $OQM$ (half of $OQMR$) have equal areas. See Figure [\ref{fig:equal-triangles}].
+\begin{figure}[H]
+    \caption{Triangles Have the Same Area}
+    \label{fig:equal-triangles}
+    \centering
+    \includegraphics[scale=0.2]{images/equal-triangles}
+\end{figure}
+
+It then follows that the area of the curvilinear trapezoid $QKAM$ is the same as that of the curvilinear triangle $OAM$:
+\begin{equation}
+\label{eq:equal-curvilinear-trapezoid-and-triangle}
+    \begin{aligned}
+        S_{QKAM}&=S_{QKAM}-S_{\triangle OKA}+S_{\triangle OQM}\\
+        \therefore S_{QKAM}&=S_{OAM}\\
+        \therefore S_{QKAM}=S_{RLAM}&=S_{OAM}
+    \end{aligned}
+\end{equation}
+
+See Figure [\ref{fig:equal-curvilinear-trapezoid-and-triangle}].
+\begin{figure}[H]
+    \caption{Areas of $QKAM$, $RLAM$, and $OAM$ are the Same}
+    \label{fig:equal-curvilinear-trapezoid-and-triangle}
+    \centering
+    \includegraphics[scale=0.2]{images/equal-curvilinear-trapezoid-and-triangle}
+\end{figure}
+
+This equality of areas of curvilinear trapezoids $QKAM,RLAM$ and the curvilinear triangle $OAM$ provides a breakthrough in finding those elusive analytic expressions for hyperbolic functions!
+
+We complete the derivation below.
+\end{reflection}
+
+From the definition of the hyperbolic angle $t$ and the equality of curvilinear areas:
+\begin{equation}
+\label{eq:equality-of-curvilinear-areas}
+    \begin{aligned}
+        S_{OAM}&=\frac{1}{2}t\\
+        \therefore S_{QKAM}=S_{RLAM}&=\frac{1}{2}t
+    \end{aligned}
+\end{equation}
+
+From the above (See Reflection [\ref{reflection:s-as-a-function-of-z}]), we also know that 
+\begin{itemize}
+    \item The area between the X-axis, the hyperbola $xy=a$, and two abscissas, $x_1, x_2$, is $a\ln\frac{x_1}{x_2}$, and
+    \item The area between the Y-axis, the hyperbola $xy=a$, and two ordinates, $y_1, y_2$, is $a\ln\frac{y_1}{y_2}$
+\end{itemize}
+
+It follows then that
+\begin{equation}
+\label{eq:equality-of-qkam-qam}
+    \begin{aligned}
+        S_{QKAM}&=\frac{1}{2}\ln(\frac{OK}{OQ})\\
+                &=\frac{1}{2}\ln\frac{\frac{1}{\sqrt{2}}}{\frac{\cosh{t}-\sinh{t}}{\sqrt{2}}}\\
+                &=-\frac{1}{2}(\cosh{t}-\sinh{t})\\
+                \text{and consequently}\\
+             -t &=\ln({\cosh{t}-\sinh{t}})\\
+                \text{or}\\
+                e^{-t}=\cosh{t}-\sinh{t}
+    \end{aligned}
+\end{equation}
+and
+\begin{equation}
+\label{eq:equality-of-rlam-qam}
+    \begin{aligned}
+        S_{QKAM}&=\frac{1}{2}\ln(\frac{OR}{OL})\\
+                &=\frac{1}{2}\ln\frac{\frac{\cosh{t}+\sinh{t}}{\sqrt{2}}}{\frac{1}{\sqrt{2}}}\\
+                &=\frac{1}{2}(\cosh{t}+\sinh{t})\\
+                \text{and consequently}\\
+             t  &=\ln({\cosh{t}+\sinh{t}})\\
+                \text{or}\\
+                e^t=\cosh{t}+\sinh{t}
+    \end{aligned}
+\end{equation}
+
+Solving the two equations (Equations [\ref{eq:equality-of-qkam-qam}], [\ref{eq:equality-of-rlam-qam}]), we finally find the analytic expressions for hyperbolic trigonometric functions:
+
+\begin{equation}
+\label{eq:the-analytic-expressions}
+    \begin{aligned}
+        \cosh{t}&=\frac{e^t+e^{-t}}{2}\\
+        \sinh{t}&=\frac{e^t-e^{-t}}{2}\\
+        \text{and, from Equation [\ref{eq:tanh-alpha}],}\\
+        \tanh{t}&=\frac{e^t-e^{-t}}{e^{t}+e^{-t}}
+    \end{aligned}
+\end{equation}
+
+Following hyperbolic trigonometric identities now follow; it's only a matter of time and algebraic dexterity:
+
+\begin{equation}
+\label{eq:other-hyperbolic-identities}
+    \begin{aligned}
+        \cosh^2{t}-\sinh^2{t} &= 1\\
+                    \sinh{2t} &= 2\sinh{t}\cosh{t}\\
+                    \cosh{2t} &= \cosh^2{t}+\sinh^2{t}\\
+                    \tanh{t}  &= \frac{2\tanh{\frac{t}{2}}}{1-\tanh^2{\frac{t}{2}}}
+    \end{aligned}
+\end{equation}
+
+
+\begin{reflection}[Does Understanding the Analytic Expressions Feel Like an Achievement?]
+    Certainly! It has been almost three months since I started this `project': A first reading of Shervatov's amazing book!
+\end{reflection}
+
+\subsection{Infinite Series Expansion for $e^a,\sinh{t},\cosh{t}$}
+
+\begin{reflection}
+    The book favors the binomial theorem (followed by an error calculation) to prove an identity for $e^a \forall a\in\mathbb{R}$. We can use Maclaurin Series expansion for $e^t$, which is infinitely differentiable at $t=0$: 
+
+    \begin{equation}
+    \label{eq:maclaurin-series-for-e^t}
+        \begin{aligned}
+            e^t&=\sum_0^\infty (\frac{d^n}{dt^n} e^t)_{\scriptscriptstyle t=0}\frac{t^n}{n!}\\
+            \therefore e^t&=1+t+\frac{t^2}{2!}+\frac{t^3}{3!}+\frac{t^4}{4!}+\dots\\
+               \text{Similarly,}\\
+                      e^{-t}&=1-t+\frac{t^2}{2!}-\frac{t^3}{3!}+\frac{t^4}{4!}+\dots\\
+        \end{aligned}
+    \end{equation}
+
+From Equation [\ref{eq:the-analytic-expressions}] and Equation [\ref{eq:maclaurin-series-for-e^t}], we get the series for the hyperbolic trigonometric functions:
+
+    \begin{equation}
+    \label{eq:infinite-series-for-hyperbolic-trig-functions}
+        \begin{aligned}
+            \cosh{t}&=1+\frac{t^2}{2!}+\frac{t^4}{4!}+\dots\\
+            \sinh{t}&=t+\frac{t^3}{3!}+\frac{t^5}{5!}+\dots
+        \end{aligned}
+    \end{equation}
+
+    Identities [\ref{eq:infinite-series-for-hyperbolic-trig-functions}] are eye-pleasing.
+
+\end{reflection}
+
+
+
+
+\textcolor{red}{\textbf{TBD: Revisit the $e^x$ Series Based on the Binomial Theorem}} 
+
+
+\subsection{Euler's Formulas}
+
+\begin{reflection}[Epilogue]
+    This subsection is about the famous Euler formula that captures the five fundamental mathematical constants $e,i,\pi,1,0$ in one equation. That identity is often described as one of the most beautiful identities in mathematics: $e^{i\pi}+1=0$.
+
+    It's quite remarkable, but I am postponing the enlightenment from its understanding to the future (hopefully, near future). I need to understand complex numbers more thoroughly to fully appreciate Euler's gem.
+\end{reflection}
+\textcolor{red}{\textbf{TBD: Revisit this After Studying Complex Numbers, Complex Analysis \dots}} 
+
+\section{Conclusion}
+
+Today is 23 May 2026. I started reading this book on 8 February 2026. This arduous first reading has taken three and a half months. Was it worth my time? Well, that question is moot because I don't know my time's worth. I pacify myself by asserting that everything that I enjoy doing \emph{is} worth my time and most everything that left memories (hopefully enjoyable) \emph{was} worth my time. 
+
+I thoroughly enjoyed Shervatov's book: the struggle, the occasional insights, and the error-free introduction to the hyperbolic trigonometry. My biggest takeaways were the idea of a hyperbolic angle and analytic expressions for the hyperbolic trigonometric functions: $\cosh,\sinh$.
+
+I have tried to reproduce parts of the book in a personal style. I have not thoroughly proofread my reproduction, but believe it to be correct. However, errors of writing or drawing may have remained, and I apologize for that. If you find any errors, typographical, conceptual, or expository, please let me know.
+
+Paul Halmos and other editors wrote the following as an introduction to a series of books on mathematics \cite{nml}: 
+
+\epigraph[author={Paul Halmos et.al.}, source={Preface to the NML Books by the MAA \cite{nml}}, width={0.7\textwidth}]
+{
+    If the reader has so far encountered mathematics only in classroom work, he should keep in mind that a book on mathematics cannot be read quickly. \textbf{Nor must he expect to understand all parts of the book on first reading. He should feel free to skip complicated parts and return to them later; often an argument will be clarified by a subsequent remark}. On the other hand, sections containing thoroughly familiar material may be read very quickly. \\
+
+The best way to learn mathematics is to do mathematics, and each book includes problems, some of which may require considerable thought. The reader is urged to acquire the habit of reading with paper and pencil in hand; in this way mathematics will become increasingly meaningful to him.
+}
+
+I will continue my journey.
 
 \printbibliography
 

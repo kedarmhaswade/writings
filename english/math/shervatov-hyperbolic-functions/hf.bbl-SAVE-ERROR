@@ -63,6 +63,74 @@
       \verb https://archive.org/details/AreasAndLogarithmslittleMathematicsLibrary/mode/2up
       \endverb
     \endentry
+    \entry{desmos-hyperbolic-distances}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=2d7832a04de6f94eef09c6d6d3a3d42c}{%
+           family={Mhaswade},
+           familyi={M\bibinitperiod},
+           given={Kedar},
+           giveni={K\bibinitperiod}}}%
+      }
+      \strng{namehash}{2d7832a04de6f94eef09c6d6d3a3d42c}
+      \strng{fullhash}{2d7832a04de6f94eef09c6d6d3a3d42c}
+      \strng{fullhashraw}{2d7832a04de6f94eef09c6d6d3a3d42c}
+      \strng{bibnamehash}{2d7832a04de6f94eef09c6d6d3a3d42c}
+      \strng{authorbibnamehash}{2d7832a04de6f94eef09c6d6d3a3d42c}
+      \strng{authornamehash}{2d7832a04de6f94eef09c6d6d3a3d42c}
+      \strng{authorfullhash}{2d7832a04de6f94eef09c6d6d3a3d42c}
+      \strng{authorfullhashraw}{2d7832a04de6f94eef09c6d6d3a3d42c}
+      \field{extraname}{1}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Coordinate Distances Concerning a Hyperbola}
+      \field{urlday}{12}
+      \field{urlmonth}{5}
+      \field{urlyear}{2026}
+      \field{year}{2026}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.desmos.com/calculator/swdjyk2d4x
+      \endverb
+      \verb{url}
+      \verb https://www.desmos.com/calculator/swdjyk2d4x
+      \endverb
+    \endentry
+    \entry{desmos-hyperbolic-regions}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=2d7832a04de6f94eef09c6d6d3a3d42c}{%
+           family={Mhaswade},
+           familyi={M\bibinitperiod},
+           given={Kedar},
+           giveni={K\bibinitperiod}}}%
+      }
+      \strng{namehash}{2d7832a04de6f94eef09c6d6d3a3d42c}
+      \strng{fullhash}{2d7832a04de6f94eef09c6d6d3a3d42c}
+      \strng{fullhashraw}{2d7832a04de6f94eef09c6d6d3a3d42c}
+      \strng{bibnamehash}{2d7832a04de6f94eef09c6d6d3a3d42c}
+      \strng{authorbibnamehash}{2d7832a04de6f94eef09c6d6d3a3d42c}
+      \strng{authornamehash}{2d7832a04de6f94eef09c6d6d3a3d42c}
+      \strng{authorfullhash}{2d7832a04de6f94eef09c6d6d3a3d42c}
+      \strng{authorfullhashraw}{2d7832a04de6f94eef09c6d6d3a3d42c}
+      \field{extraname}{2}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Regions of a Hyperbola}
+      \field{urlday}{12}
+      \field{urlmonth}{5}
+      \field{urlyear}{2026}
+      \field{year}{2026}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.desmos.com/calculator/yawy4br0ww
+      \endverb
+      \verb{url}
+      \verb https://www.desmos.com/calculator/yawy4br0ww
+      \endverb
+    \endentry
     \entry{MooreMovie}{movie}{}{}
       \list{publisher}{1}{%
         {Mathematical Association of America}%
@@ -122,7 +190,7 @@
       \verb https://archive.org/details/hyperbolicfuncti0000sher/page/n3/mode/2up
       \endverb
     \endentry
-    \entry{hyperbolic-angle}{online}{}{}
+    \entry{analytic-expr}{online}{}{}
       \name{author}{1}{}{%
         {{hash=b6aea1a416c89509a7df1cbb69249cb6}{%
            family={{Wikipedia contributors}},
@@ -137,6 +205,38 @@
       \strng{authorfullhash}{b6aea1a416c89509a7df1cbb69249cb6}
       \strng{authorfullhashraw}{b6aea1a416c89509a7df1cbb69249cb6}
       \field{extraname}{1}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Closed-form expression}
+      \field{urlday}{24}
+      \field{urlmonth}{4}
+      \field{urlyear}{2026}
+      \field{year}{2026}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://en.wikipedia.org/wiki/Closed-form_expression#Analytic_expression
+      \endverb
+      \verb{url}
+      \verb https://en.wikipedia.org/wiki/Closed-form_expression#Analytic_expression
+      \endverb
+    \endentry
+    \entry{hyperbolic-angle}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=b6aea1a416c89509a7df1cbb69249cb6}{%
+           family={{Wikipedia contributors}},
+           familyi={W\bibinitperiod}}}%
+      }
+      \strng{namehash}{b6aea1a416c89509a7df1cbb69249cb6}
+      \strng{fullhash}{b6aea1a416c89509a7df1cbb69249cb6}
+      \strng{fullhashraw}{b6aea1a416c89509a7df1cbb69249cb6}
+      \strng{bibnamehash}{b6aea1a416c89509a7df1cbb69249cb6}
+      \strng{authorbibnamehash}{b6aea1a416c89509a7df1cbb69249cb6}
+      \strng{authornamehash}{b6aea1a416c89509a7df1cbb69249cb6}
+      \strng{authorfullhash}{b6aea1a416c89509a7df1cbb69249cb6}
+      \strng{authorfullhashraw}{b6aea1a416c89509a7df1cbb69249cb6}
+      \field{extraname}{2}
       \field{sortinit}{W}
       \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
       \field{labelnamesource}{author}
@@ -168,7 +268,7 @@
       \strng{authornamehash}{b6aea1a416c89509a7df1cbb69249cb6}
       \strng{authorfullhash}{b6aea1a416c89509a7df1cbb69249cb6}
       \strng{authorfullhashraw}{b6aea1a416c89509a7df1cbb69249cb6}
-      \field{extraname}{2}
+      \field{extraname}{3}
       \field{sortinit}{W}
       \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
       \field{labelnamesource}{author}
