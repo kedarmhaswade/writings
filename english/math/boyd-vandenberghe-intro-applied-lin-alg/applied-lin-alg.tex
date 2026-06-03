@@ -1,0 +1,486 @@
+% use lualatex to compile, for some reason xelatex fails for the {Libertinus Serif} font.
+\documentclass[11pt]{book}
+%\documentclass[11pt]{amsart} % fails on title, date, etc.
+
+% ---------- Fonts (LuaLaTeX / XeLaTeX) ----------
+\usepackage{fontspec}
+\setmainfont{Libertinus Serif}
+%\setmainfont{TeX Gyre Pagella}
+%\setsansfont{TeX Gyre Heros}
+\setmonofont{Inconsolata}
+
+% ---------- Page layout ----------
+\usepackage[a4paper,margin=1.1in]{geometry}
+
+% ---------- Math & theorem setup ----------
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{plain}
+%\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+
+\usepackage{xcolor}
+\newtheoremstyle{problemstyle} % name
+  {3pt} % Space above
+  {3pt} % Space below
+  {\normalfont} % Body font
+  {} % Indent
+  {\bfseries\color{blue}} % Theorem head font
+  {.} % Punctuation
+  { } % Space after head
+  {} % Head spec
+\theoremstyle{problemstyle}
+\newtheorem{problem}{Problem}
+
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\renewcommand\qedsymbol{$\blacksquare$}
+% the reflection box
+\usepackage[framemethod=tikz]{mdframed}
+\theoremstyle{definition}
+\newtheorem{reflection}{Reflection}
+\mdfdefinestyle{reflectionbox}{
+  innertopmargin=\topskip,
+  roundcorner=5pt,
+  linecolor=cyan,
+  backgroundcolor=cyan!20,
+}
+\surroundwithmdframed[style=reflectionbox]{reflection}
+% the reflection box
+% quotes
+\usepackage[autostyle]{csquotes}
+\MakeOuterQuote{"}
+% quotes
+
+% epigraphs
+% I chose epigraph-keys for its simplicity
+\usepackage{epigraph-keys}
+% epigraphs
+
+%images
+\usepackage{graphicx}
+\usepackage{float}
+\usetikzlibrary{intersections,calc,patterns}
+%images
+% ---------- Typography ----------
+\usepackage{microtype}
+
+%plots
+\usepackage{pgfplots}
+%plots
+
+% multiple columns
+\usepackage{multicol}
+\setlength{\columnseprule}{1pt}
+\def\columnseprulecolor{\color{blue}}
+% multiple columns
+
+% bib
+\usepackage[
+  backend=biber,
+  style=numeric
+]{biblatex}
+
+\addbibresource{refs.bib}
+% bib
+
+%macros
+\DeclareMathOperator{\size}{size}
+\newcommand{\sizex}{\size(\boldsymbol{x})}
+\newcommand{\sizea}{\size(\boldsymbol{a})}
+\newcommand{\sizeb}{\size(\boldsymbol{b})}
+\newcommand{\sizec}{\size(\boldsymbol{c})}
+\newcommand{\sized}{\size(\boldsymbol{d})}
+\DeclareMathOperator{\nnz}{nnz} % number of nonzero elements in a (sparse) vector
+\newcommand{\nnzx}{\nnz(\boldsymbol{x})}
+%macros
+% https://github.com/plk/biber/issues/373
+\DeclareBibliographyAlias{movie}{misc}
+% https://github.com/plk/biber/issues/373
+% ---------- Hyperlinks ----------
+\usepackage[hidelinks]{hyperref}
+
+% ---------- Metadata ----------
+\title{Notes on \\ \emph{Applied Linear Algebra}
+\\ \emph{by Stephen Boyd and Lieven Vandenberghe}
+\\ \emph{(Vectors, Matrices, and Least Squares)}}
+\author{Kedar Mhaswade}
+\date{29 May 2026}
+
+\begin{document}
+\maketitle
+\begin{reflection}[Introduction]
+    These are the author's highly personal notes based on this book \cite{bv-app-lin-alg}. They may occasionally sound like author's conversation with the reader (or even himself). Even if they are personal and appear in the public domain, they may help the reader, although the author isn't exactly sure how. He wrote them for 0) the love of mathematics and writing 1) \LaTeX{} practice (of writing hopefully readable mathematics, albeit longer than appearing in standard texts), and 2) reliable archival (paper, on which most math is created, tends to get lost) that incurs minimal overhead.
+
+    These notes are interspersed with ``reflection boxes'' like this one. They are meant to express author's `rough' thinking process (mental catharsis of sorts), of which frustration is often an inseparable part. The author writes mostly in first person for an authentic conversational tone.
+
+\end{reflection}
+
+\section{Preface}
+
+\epigraph[author={Paul Halmos}, source={I Want to be a Mathematician \cite{halmos-iwtbam}}, width={0.7\textwidth}]
+{
+    Audience, level, and treatment--a description of such matters is what prefaces are supposed to be about.
+}
+
+This book says the following (emphasis mine):
+\epigraph[author={Boyd and Vandenberghe}, source={Applied Linear Algebra \cite{bv-app-lin-alg}}, width={0.7\textwidth}]
+{
+    Our goal is to give the beginning student, with little or no prior exposure to linear algebra, \textbf{a good grounding in the basic ideas, as well as an appreciation for how they are used in many applications, including data fitting, machine learning and artificial intelligence}, tomography ((medicine) obtaining pictures of the interior of the body), navigation, image processing, finance, and automatic control systems.
+}
+
+The book is an introductory linear algebra text for undergrad students, with an emphasis on applications. A cursory glance suggests that the book takes a more algebraic approach (and uses geometric intuition sparingly).
+
+I believe that is the right level for my first reading. It further says:
+
+\epigraph[author={Boyd and Vandenberghe}, source={Applied Linear Algebra \cite{bv-app-lin-alg}}, width={0.7\textwidth}]
+{
+    If you read the whole book, \textbf{work some of the exercises}, and carry out computer exercises to implement or use the ideas and methods, you will learn a lot.
+}
+
+This document contains my notes on the material in this book and my answers to exercises. Sections replace chapters.
+
+
+\chapter{Vectors}
+
+\section{Vectors}
+\begin{reflection}
+    This section has several definitions, some of them are subtle. Since I believe that this book prefers an algebraic formalism more than geometric intuition, definitions are key to its treatment and to my understanding, however formal. Formalism doesn't imply a lack of creativity, but it aligns well with the abstract nature of mathematics: You make up certain (abstract) objects and operations on them (define them), let them interact with each other (again, no concrete operations are intended), and see if a structure emerges.
+
+    Is this abstract, algebraic ``definitions, theorems, proofs, synthetic exercises and problems, and practical examples'' approach more `dry' than a more visual, geometric, or physical approach where vectors start out their lives as directed line segments in space? Perhaps it is. There's always a tension between these two fundamental (algebraic, geometric) approaches. One has got to figure out what one comes to like.
+
+    One `strength' of the algebraic approach may be in avoiding a head-on collision with the ``curse of dimesionality'' (a term that, I think, was first introduced by the mathematician Richard Bellman \cite{curse-of-dimensionality}) which concerns the puzzling properties of a higher dimensional Euclidean space. Since the visualization of an $n$-dimensional space is hard for us when $n\ge 4$, abandoning the geometric interpretation may aid understanding. This is because in this approach, we do \emph{not} treat a $2-$ or $3-$dimensional space as something special or different.
+
+    I have tried another book that appeals to properties of a `physical' space, Banesh Hoffmann's \emph{About Vectors} \cite{hoffmann-av}, and I have found it useful, but to complement that approach, I will follow a more abstract treatment here\footnote{These approaches refer to the philosophy of mathematics; perhaps I should schedule a reading of Imre Lakatos's celebrated work, Proofs and Refutations \cite{lakatos-par}, before it's too long \dots}.
+\end{reflection}
+
+\begin{definition}[Vector]
+    \label{def:vector}
+    A \emph{vector} is an ordered, finite list of numbers. 
+
+    Vectors are usually written as vertical arrays, surrounded by square or curved brackets, as in
+    \begin{equation}
+        \label{eq:example-vector}
+    \begin{bmatrix}
+        -1.1\\
+        \phantom{-}0.0\\
+        \phantom{-}3.6\\
+        -7.2
+    \end{bmatrix}
+    \end{equation}
+    We'll denote vectors by bold Roman letters, e.g., $\boldsymbol{a}$.
+
+    They can also be written as numbers separated by commas and surrounded by parentheses: $\boldsymbol{a}=(-1.1,0.0,3.6,-7.2)$.
+\end{definition}
+
+\begin{reflection}[A New Mathematical Object is Born]
+    And, just like that, a new class of mathematical objects is born: a mere finite list or array of numbers. The numbers in the list are real numbers. 
+
+    How interesting (useful?) are these new objects without specifying their properties or operations on them? Perhaps not much to amuse the human mind. Operations are the essence of algebra. This book doesn't tell the fascinating struggle the early linear algebraists might have had with defining such operations.
+
+    Is the notion of `adding things' just natural? Are the notions of the well-known arithmetic operations denoted by $+,-,\times,\div$ in some sense natural regardless of the objects on which they operate? Are these four the only \emph{natural} operators, or are there more? Is the idea of `division of two natural numbers' specified by the division algorithm immediately applicable to real numbers without any modification, or do we extend it?
+
+    These questions are, even if not baffling, amusing. An attempt is made to address such questions in the philosophy of mathematics. 
+\end{reflection}
+\begin{definition}[Elements of a Vector]
+    \label{def:elements-of-a-vector}
+    Each value (number) listed in a vector is its element, entry, coefficient, or component.
+
+    The example vector [\ref{eq:example-vector}] has four elements. 
+\end{definition}
+\begin{definition}[Size of a Vector]
+    \label{def:size-of-a-vector}
+    The number of values (numbers) listed in a vector is its size, dimension, or length.
+
+    The size of the example vector [\ref{eq:example-vector}] is 4. Sometimes we can treat `size' as a function: $\sizea=4$.
+\end{definition}
+
+It is customary to call a vector with $n$ elements an $n$-vector. Thus, [\ref{eq:example-vector}] is a $4$-vector.
+
+If $\boldsymbol{a}$ is an $n$-vector and $i$ stands for an integer such that $1\le i\le n$, then $\boldsymbol{a}_i$ is the $i^{th}$ element (a number) of $\boldsymbol{a}$.
+
+
+\begin{definition}[Equal Vectors]
+    \label{def:equal-vectors}
+    Two $n$-vectors $\boldsymbol{a},\boldsymbol{b}$ are equal if and only if $\size(a)=\size(b)=n$ and $a_i=b_i\forall i\;1\leq i\leq n$.
+
+\end{definition}
+
+The numbers or values of the elements in a vector are \emph{scalars}. (Question: Can elements of a vector be vectors? I doubt \dots).
+
+\begin{definition}[Real Vector]
+    \label{def:real-vector}
+    A vector whose elements are real numbers is called a real vector. We say that $\boldsymbol{a}$ is a real $n$-vector if each of $a_i\in\mathbb{R}$. We use the set notation $\boldsymbol{a}\in\mathbf{R}^n$, that is, $\boldsymbol{a}$ is an element of the set $\mathbf{R}^n$.
+\end{definition}
+
+
+\begin{definition}[Block or Stacked Vector]
+    \label{def:stacked-vector}
+    It is sometimes useful to define vectors by concatenating or stacking two or more vectors, as in
+
+    \begin{equation}
+        \label{eq:stacked-vector}
+        \boldsymbol{a}=
+    \begin{bmatrix}
+        \boldsymbol{b}\\
+        \boldsymbol{c}\\
+        \boldsymbol{d}\\
+    \end{bmatrix}
+    \end{equation}
+    
+        , where $\boldsymbol{b}, \boldsymbol{c}, \boldsymbol{d}$ are \textbf{vectors}.
+
+        In Example [\ref{eq:stacked-vector}], $\sizea=m+n+p$, if $\sizeb=m,\sizec=n,\sized=p$.
+
+        Stacked vectors can include scalars (numbers). For example, if $\boldsymbol{a}$ is a $3$-vector, $(1, \boldsymbol{a})$ is the $4$-vector $(1,a_1,a_2,a_3)$.
+        \begin{reflection}
+            I believe this is only a notational convenience.
+        \end{reflection}
+\end{definition}
+
+
+\begin{definition}[Subvector]
+    \label{def:subvector}
+    Informally, this analogy holds: \texttt{Set:Subset::Vector:Subvector}.
+    In the example [\ref{eq:stacked-vector}] above, we say that $\boldsymbol{b},\boldsymbol{c},\boldsymbol{d}$ are subvectors or slices of $\boldsymbol{a}$, with sizes $m,n,p$ respectively.
+
+    Colon notation is used to denote subvectors. If $\boldsymbol{a}$ is a vector, then $\boldsymbol{a}_{r:s}$ is the vector of size $s−r+1$, with entries $\boldsymbol{a}_{r:s}=(\boldsymbol{a}_r,\dots,\boldsymbol{a}_s)$.
+\end{definition}
+
+\begin{definition}[Zero Vector]
+    \label{def:zero-vector}
+    A zero vector is a vector with all elements equal to zero. Zero vectors of all sizes are equivalent. The Zero vector is denoted by $\boldsymbol{0}$ (If needed, the size can be determined from context).
+\end{definition}
+
+\begin{definition}[Unit Vectors]
+    \label{def:unit-vectors}
+    Two definitions:
+
+    \begin{itemize}
+        \item A \emph{standard} unit vector is a vector with all elements but one equal to zero, the nonzero element equal to $1$.
+        \item The $i^{th}$ unit vector of size $n$ is the unit vector with $i^{th}$ element $1$. There is a notational ambiguity here. $\boldsymbol{e}_i$ denotes such a \textbf{vector}, not the $i^{th}$ element of that vector unlike the general notation $\boldsymbol{a}_i$ does. Just remember that the symbol $\boldsymbol{e}$ is reserved for unit vector; thus, $e_2$ is the unit vector where its second element, $(e_1)_2$, is 1. For any other vector $\boldsymbol{a}$, $\boldsymbol{a}_2$ is its second element and is a scalar. Note that the size of a unit vector is derived from context. Clearly, a 4-element $\boldsymbol{e}_1$ is different from a 3-element $\boldsymbol{e}_1$.
+    \end{itemize}
+\end{definition}
+
+\begin{definition}[Ones vector]
+    A ones vector (like the zero vector [\ref{def:zero-vector}]), $\boldsymbol{1}_n$, is the $n$-vector with all its elements equal to 1.
+\end{definition}
+
+
+\begin{definition}[Sparsity]
+    A vector is said to be sparse if many of its entries are zero; its \emph{sparsity pattern} is the set of indices of nonzero entries. The number of the nonzero entries of an $n$-vector $\boldsymbol{x}$ is denoted $\nnzx$. Unit vectors are sparse, since they have only one nonzero entry. The zero vector is the sparsest possible vector, since it has no nonzero entries. \textbf{Sparse vectors arise in many applications}.
+\end{definition}
+
+\subsection*{Examples}
+\begin{reflection}
+    Copious examples applying the introduced theory are the heart of this book. Pay attention.
+\end{reflection}
+
+\subsubsection*{Location and Displacement.}
+(Applies immediately to Physics.)
+An $n$-vector can represent a position or location (of a point) in the $n$-dimensional space. It can also represent the displacement, velocity, and acceleration in space; individual \emph{components} represent quantities in respective \emph{axes}.
+
+
+\subsubsection*{Color}
+A $3$-vector can represent a color, with its entries giving the Red, Green, and Blue (RGB) intensity values (often between $0$ and $1$). The vector $(0,0,0)$ represents black, the vector $(1,1,1)$ white, the vector $(0,1,0)$ a bright pure green color, and the vector $(1,0.5,0.5)$ a shade of pink.
+
+\subsubsection*{Quantities}
+An $n$-vector $\boldsymbol{q}$ can represent the amounts or quantities of $n$ resources or products held (or produced, or required) by an entity such as a company. Negative entries mean an amount of the resource \emph{owed to} another party (or consumed, or to be disposed of). For example, a \emph{bill of materials} is a vector that gives the amounts of $n$ resources required to create a product or carry out a task.
+
+\subsubsection*{Portfolio, e.g., Stock Portfolio}
+\label{sssec:portfolio}
+This assumes we have access to a master list $M$ of $n$ companies (ticker symbols); $M$ is not a vector, just an array of symbols. Then, a portfolio $n$-vector $s$ is a vector with entries $s_i$ representing the number of stocks of $M_i$. 
+
+Perhaps we can develop a vector-builder notation (like the set-builder notation): Portfolio $n$-vector $s=(s_i\mid s_i=\text{ number of stocks of } M_i\text { in the portfolio } \forall i\; 1\leq i\leq n)$.
+
+\subsubsection*{Quantity Values across a Population}
+An $n$-vector can give the values of some quantity (e.g., height, weight, blood pressure) across a population of individuals or entities.
+
+\subsubsection*{Proportions}
+A vector $\boldsymbol{w}$ can be used to give fractions or proportions out of $n$ choices, outcomes, or options, with $\boldsymbol{w}_i$ the fraction with choice or outcome $i$. In this case, the entries are non negative and add up to one. Examples: proportions of each of the $n$ ingredients of a recipe, probability values in a probability space with $n$ outcomes, etc.
+
+\subsubsection*{Time Series}
+An $n$-vector can represent a time series or signal, that is, the value of some quantity at different times. (The entries in a vector that represents a time series are sometimes called \textbf{samples}, especially when the quantity is something measured.) 
+
+An audio (sound) signal can be represented as a vector whose entries give the value of acoustic pressure at equally spaced times (typically 48000 or 44100 per second). 
+
+A vector might give the hourly rainfall (or temperature, or barometric pressure) at some location, over some time period. 
+
+When a vector represents a time series, it is natural to plot $\boldsymbol{x}_i$ versus $i$ with lines connecting consecutive time series values. (These lines carry no information; they are added only to make the plot easier to understand visually.) 
+
+\begin{reflection}
+    Time Series feels like a vector with one more requirement than other vectors: entries are usually taken at equal intervals of time. Clearly, that does not affect treating it like a vector.
+\end{reflection}
+
+
+\subsubsection*{Images and Video}
+A monochrome (black and white) image is an array of $M\times N$ pixels (square patches with uniform gray scale level) with $M$ rows and $N$ columns. Each of the $MN$ pixels has a gray scale or intensity value, with $0$ corresponding to black and $1$ corresponding to bright white. (Other ranges are also used.) 
+
+An image can be represented by a vector of length $MN$, with the elements giving gray scale levels at the pixel locations, typically ordered column-wise or row-wise.
+
+\begin{reflection}[Gestalt Features]
+    Here's how the dictionary defines \emph{gestalt}: (noun) a configuration or pattern of elements so unified as a whole that it cannot be described merely as some sort of sum or aggregate of its parts; the whole is just different from the sum of its parts.
+
+    Could humans ever perceive gray scale images as vectors, as a (mere) list of 0s and 1s? Perhaps not. However, computational aspects need a more analytical approach (computationally aligned). 
+
+    Could we say that a computer or an A.I. model \emph{understands} or \emph{perceives} images like humans do? Jury is out on that one. 
+
+    However, as of now (2026), treating an image as a vector of numbers representing color is the best computers can do. Perhaps Deep Learning models have better capabilities (what they are, I wish to understand \dots). 
+
+\end{reflection}
+
+Resolution of an image is determined by how many pixels it has. The more the pixels, the better is our ability to resolve finer details of the image.
+
+A color $M\times N$ pixel image is described by a vector of length $3MN$, with the entries giving the R, G, and B values for each pixel (i.e., three real numbers describe one pixel), in some agreed-upon order.
+
+By extension, a monochrome video, i.e., a sequence of $K$ images each of which has $M\times N$ pixels, can be represented by a vector of length $KMN$ (again, in some particular order).
+
+\subsubsection*{Word Count and Histogram of Word Frequencies (in a Document)}
+\begin{reflection}[Gestalt Features, Revisited]
+    This time we consider a simple English\footnote{Language of the essay doesn't matter, of course.} document. It could be a short essay, about 1500 words (roughly 200 sentences) long. We read this document and if someone asks us what it is about, we can \emph{usually summarize} it in a sentence or two. Exactly how we (our human mind) come to such a conclusion\footnote{We'll only briefly defer the judgment of whether our summary is \emph{correct}.} or summary is a matter of interest. Does the human mind `compute` to reach this summary? If it does compute, are there some number comparisons involved?
+
+    Computers, and now at least a part of the A.I. models, demonstrate one way of gaining this \emph{understanding}: Attempt to break a mammoth (the document) into smaller, more easily or obviously understood (atomic?) parts, process or refine those parts further, and consider the document an assembly of those parts. We then hope that the meaning of the document will emerge as a function of some algorithm based on the processed parts.
+
+    Although we aren't completely sure, we have solid reasons to believe that this is something the human mind does when it confronts a task, at least a computational task. Whether this is all that human mind does (details are important here) or there's more to it is a matter of research. 
+
+    This is the analytical (non Gestalt) way of gaining knowledge: Break it down into small but conceivable parts, thoroughly analyze each part and its relationship to the whole, and try to assemble the whole as a sum of the parts. 
+\end{reflection}
+
+A vector of length $n$ can represent the number of times each word in a dictionary of $n$ words appears in a document. For example, we can define a \emph{word count vector} $\boldsymbol{c}=(25,2,0)$ to mean that the first\footnote{Like in the case of stock portfolio [\ref{sssec:portfolio}], we assume an \emph{array} of dictionary words.} dictionary word appears 25 times, the second one twice, and the third one not at all. (\textbf{Typical dictionaries used for document word counts have many more than 3 elements.})
+
+Since all the words in a document appear in the dictionary, for the vector $\boldsymbol{c}=(\boldsymbol{c}_1,\boldsymbol{c}_2,\dots,\boldsymbol{c}_n),\sum_1^{n}\boldsymbol{c}_i=N$, where $N$ is the total number of words in the document.
+
+An extension of the vector $\boldsymbol{c}$ is the vector 
+\[
+\boldsymbol{h}=(\boldsymbol{h}_i\mid\boldsymbol{h}_i=\frac{\boldsymbol{c}_i}{N}\forall i\;1\leq i\leq N)
+\]
+
+We call the vector $\boldsymbol{h}$ \emph{histogram of word frequencies}.
+
+A lot more goes into such analysis of a document. The point here is that a document's word count or histogram of word frequencies could be modeled as a vector.
+
+\subsubsection*{Customer Purchases}
+An $n$-vector $p$ can be used to record a particular customer's purchases from some business over some period of time, with $\boldsymbol{p}_i$ the quantity of item $i$ the customer has purchased, for $i=1,2,\dots,n$.
+
+\subsubsection*{Occurrence or Subsets}
+An $n$-vector $\boldsymbol{o}$ can be used to record whether or not each of $n$ different events has occurred, $\boldsymbol{o}_i=0$ meaning the event $i$ did not occur, and $o_i=1$ meaning it occurred. Such a vector encodes a subset of a set of $n$ objects, with $o_i=1$ meaning that object $i$ is contained in the subset, and $o_i=0$ meaning that object $i$ is not in the subset. 
+
+If each entry of a vector $\boldsymbol{a}$ is either $0$ or $1$, it is called a Boolean vector, after the mathematician George Boole, a pioneer in the study of logic.
+
+\subsubsection*{Features or attributes}
+
+The quantities can be measurements, or quantities that can be measured or derived from the object. Such a vector is sometimes called a \emph{feature vector}, and its entries are called the features or attributes. 
+
+For example, a $6$-vector $\boldsymbol{f}$ could give the age, height, weight, blood pressure, temperature, and gender of a patient admitted to a hospital. (The last entry of the vector could be encoded as $\boldsymbol{f}_6=0$ or male, $\boldsymbol{f}_6=1$ or female.) In this example, the quantities represented by the entries of the vector are quite different, with different physical units.
+
+
+\begin{reflection}[What `Examples' Can I Think of?]
+    Thanks to these examples, by now I understand that many sequences of numbers can be modeled by vectors. Is there an example that I can think of? 
+
+    How about human DNA? DNA is a molecule in many human cells that has two identical strands and is made of four types of nucleotide molecule whose names are abbreviated A, T, G, and C. These are not really numbers. We can of course devise certain scheme: A is 1, T is 2, and so on. It does not seem that interesting, however. 
+
+    How about runs scored by a batter in cricket or RBI's in baseball throughout their careers? For example, a batter who batted in $100$ innings of cricket can be a $100$-vector $\boldsymbol{r}$ of small non negative integers: $\boldsymbol{r}=14,2,55,102,\dots,76$.
+
+    How about the losses or gains of a compulsive gambler? Is modeling that over a few hundred gambling sessions as a vector useful?
+
+    Right now, I am thinking of a vector as a mere sequence of numbers (without much intuition). \textbf{Mathematical objects become beautiful, easier to understand, and perhaps useful only in the context of operations one can perform on them.}
+\end{reflection}
+
+
+\section{Vector Addition}
+
+\begin{reflection}[A decision: Focus on problem-solving. Use a notebook for studying.]
+    Today, 03 June 2026, I decided to defer the efforts of taking detailed notes. I might return to doing that, but for now, I will cover the material separately using a pencil/pen and paper and only solve a few problems in this document. 
+
+    Is that decision impulsive? Perhaps.
+
+    Am I doing this in the interest of time? I think so.
+
+    Does the progress feel \emph{too slow}? Yes. I don't know why. I am a slow-and-deep learner, but even so, the typesetting (or even typing) efforts seem like an investment that I am a little (only a little) hesitant to make. I get a feeling as if I am giving the topic an encyclopedic treatment that may not be the best use of my time (this is a conundrum!) I want to return to it. Perhaps my adherence to thoroughness, completeness results in distraction. So, let me go back to paper and pencil for covering the material. \textbf{Till I revisit this decision, I shall only note down the outline of the material I study.}
+\end{reflection}
+
+If two vectors $\boldsymbol{a, b}$ have the same size, then we get a third vector $\boldsymbol{c}$ by adding or subtracting their respective elements:
+\begin{equation}
+        \label{eq:vector-addition}
+    \begin{aligned}
+    \begin{bmatrix}
+        a_1\\
+        a_2\\
+        \vdots\\
+        a_n
+    \end{bmatrix}
+    \pm
+    \begin{bmatrix}
+        b_1\\
+        b_2\\
+        \vdots\\
+        b_n
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        c_1\\
+        c_2\\
+        \vdots\\
+        c_n
+    \end{bmatrix}\\
+        \text{ where } \boldsymbol{a}_i\pm\boldsymbol{b}_i=\boldsymbol{c}_i \forall i\; 1\leq i\leq n
+    \end{aligned}
+\end{equation}
+
+    $\boldsymbol{c}$ is called the \emph{sum} (in the case of $+$) or the \emph{difference} of $\boldsymbol{a,b}$ (in the case of $-$).
+
+
+\subsection*{Properties}
+\begin{enumerate}
+    \item $\boldsymbol{a+b=b+a}$
+    \item $\boldsymbol{a+(b+c)=(a+b)+c}$
+    \item $\boldsymbol{a+0=0+a=a}$
+    \item $\boldsymbol{a-a=0}$
+\end{enumerate}
+\subsection*{Examples}
+\begin{itemize}
+    \item Displacements.
+    \item Displacement between two points.
+    \item Word counts.
+    \item Bill of materials.
+    \item Market clearing: $n$ resources are \emph{exchanged} among $m$ agents.
+    \item Audio (signal) addition.
+    \item Feature differences.
+    \item Time series.
+    \item Portfolio trading: The stock-assets vector is `added' to a stock-order vector.
+\end{itemize}
+
+\section{Scalar-vector Multiplication}
+
+We multiply every element of the vector by a scalar. This is like the scaling operation in geometry.
+
+
+\subsection*{Properties}
+
+\begin{itemize}
+    \item Commutative, by definition, that is, for a vector $\boldsymbol{a}$ and a scalar $\alpha$, $\boldsymbol{a}\alpha=\alpha\boldsymbol{a}$.
+    \item Associative. That is, for a vector $\boldsymbol{a}$ and scalars $\beta,\gamma$, $(\beta\gamma)\boldsymbol{a}=\beta(\gamma\boldsymbol{a})=\beta\gamma\boldsymbol{a}$.
+    \item Left-distributive. That is, $(\beta+\gamma)\boldsymbol{a}=\beta\boldsymbol{a}+\gamma\boldsymbol{a}$.
+    \item Right-distributive. That is, $\boldsymbol{a}(\beta+\gamma)=\boldsymbol{a}\beta+\boldsymbol{a}\gamma$.
+    \item Right-distributive-2. That is, $\beta(\boldsymbol{a}+\boldsymbol{b})=\beta\boldsymbol{a}+\beta\boldsymbol{b}$.
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+\printbibliography
+\end{document}
