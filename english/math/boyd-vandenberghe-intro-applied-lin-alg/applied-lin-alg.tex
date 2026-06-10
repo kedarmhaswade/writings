@@ -24,6 +24,9 @@
 \newtheorem{lemma}{Lemma}
 \newtheorem{proposition}{Proposition}
 \newtheorem{corollary}{Corollary}
+\newtheorem{exercise}{Exercise}[chapter]
+
+
 
 \usepackage{xcolor}
 \newtheoremstyle{problemstyle} % name
@@ -81,6 +84,18 @@
 \setlength{\columnseprule}{1pt}
 \def\columnseprulecolor{\color{blue}}
 % multiple columns
+%multirow (tables) using makecell
+\usepackage{makecell}
+\renewcommand\theadfont{\bfseries}
+%multirow (tables) using makecell
+
+%canceling terms
+\usepackage{cancel}
+%canceling terms
+
+%customize lists
+\usepackage{enumitem}
+%customize lists
 
 % bib
 \usepackage[
@@ -145,7 +160,7 @@ I believe that is the right level for my first reading. It further says:
     If you read the whole book, \textbf{work some of the exercises}, and carry out computer exercises to implement or use the ideas and methods, you will learn a lot.
 }
 
-This document contains my notes on the material in this book and my answers to exercises. Sections replace chapters.
+This document contains my notes on the material in this book and my answers to exercises. These notes follow the book's structure.
 
 
 \chapter{Vectors}
@@ -154,7 +169,11 @@ This document contains my notes on the material in this book and my answers to e
 \begin{reflection}
     This section has several definitions, some of them are subtle. Since I believe that this book prefers an algebraic formalism more than geometric intuition, definitions are key to its treatment and to my understanding, however formal. Formalism doesn't imply a lack of creativity, but it aligns well with the abstract nature of mathematics: You make up certain (abstract) objects and operations on them (define them), let them interact with each other (again, no concrete operations are intended), and see if a structure emerges.
 
-    Is this abstract, algebraic ``definitions, theorems, proofs, synthetic exercises and problems, and practical examples'' approach more `dry' than a more visual, geometric, or physical approach where vectors start out their lives as directed line segments in space? Perhaps it is. There's always a tension between these two fundamental (algebraic, geometric) approaches. One has got to figure out what one comes to like.
+    Is this abstract, algebraic ``definitions, theorems, proofs, synthetic exercises and problems, and practical examples'' approach more `dry' than a more visual, geometric, or physical approach where vectors start out their lives as directed line segments in space? Perhaps it is. There's always a tension between these two fundamental (algebraic, geometric) approaches. One has got to figure out what one comes to like. 
+
+    \epigraph[author=Jürgen Jost, source=Mathematical Concepts \cite{jost-mc}]{
+        Mathematics translates concepts into formalisms and applies those formalisms to derive insights that are usually not amenable to a less formal analysis.
+    }
 
     One `strength' of the algebraic approach may be in avoiding a head-on collision with the ``curse of dimesionality'' (a term that, I think, was first introduced by the mathematician Richard Bellman \cite{curse-of-dimensionality}) which concerns the puzzling properties of a higher dimensional Euclidean space. Since the visualization of an $n$-dimensional space is hard for us when $n\ge 4$, abandoning the geometric interpretation may aid understanding. This is because in this approach, we do \emph{not} treat a $2-$ or $3-$dimensional space as something special or different.
 
@@ -253,6 +272,9 @@ The numbers or values of the elements in a vector are \emph{scalars}. (Question:
 
     Colon notation is used to denote subvectors. If $\boldsymbol{a}$ is a vector, then $\boldsymbol{a}_{r:s}$ is the vector of size $s−r+1$, with entries $\boldsymbol{a}_{r:s}=(\boldsymbol{a}_r,\dots,\boldsymbol{a}_s)$.
 \end{definition}
+
+\subsection*{Notational Precaution}
+The notation $\boldsymbol{a}_i$ is overloaded. It can denote a scalar that is the $i^{th}$ element of vector $\boldsymbol{a}$ or $i^{th}$ vector in a collection of vectors. The distinction should be clear from the context.
 
 \begin{definition}[Zero Vector]
     \label{def:zero-vector}
@@ -381,7 +403,8 @@ The quantities can be measurements, or quantities that can be measured or derive
 For example, a $6$-vector $\boldsymbol{f}$ could give the age, height, weight, blood pressure, temperature, and gender of a patient admitted to a hospital. (The last entry of the vector could be encoded as $\boldsymbol{f}_6=0$ or male, $\boldsymbol{f}_6=1$ or female.) In this example, the quantities represented by the entries of the vector are quite different, with different physical units.
 
 
-\begin{reflection}[What `Examples' Can I Think of?]
+\begin{reflection}[A First View of Vectors, or What `Examples' Can I Think of?]
+    \label{reflection:first-view-of-vectors}
     Thanks to these examples, by now I understand that many sequences of numbers can be modeled by vectors. Is there an example that I can think of? 
 
     How about human DNA? DNA is a molecule in many human cells that has two identical strands and is made of four types of nucleotide molecule whose names are abbreviated A, T, G, and C. These are not really numbers. We can of course devise certain scheme: A is 1, T is 2, and so on. It does not seem that interesting, however. 
@@ -395,6 +418,7 @@ For example, a $6$-vector $\boldsymbol{f}$ could give the age, height, weight, b
 
 
 \section{Vector Addition}
+\label{s:vector-addition}
 
 \begin{reflection}[A decision: Focus on problem-solving. Use a notebook for studying.]
     Today, 03 June 2026, I decided to defer the efforts of taking detailed notes. I might return to doing that, but for now, I will cover the material separately using a pencil/pen and paper and only solve a few problems in this document. 
@@ -438,6 +462,7 @@ If two vectors $\boldsymbol{a, b}$ have the same size, then we get a third vecto
 
 
 \subsection*{Properties}
+\label{ss:vector-addition-properties}
 \begin{enumerate}
     \item $\boldsymbol{a+b=b+a}$
     \item $\boldsymbol{a+(b+c)=(a+b)+c}$
@@ -457,28 +482,323 @@ If two vectors $\boldsymbol{a, b}$ have the same size, then we get a third vecto
     \item Portfolio trading: The stock-assets vector is `added' to a stock-order vector.
 \end{itemize}
 
-\section{Scalar-vector Multiplication}
 
-We multiply every element of the vector by a scalar. This is like the scaling operation in geometry.
+\begin{reflection}[Updated View of Vectors]
+    I now know an operation (addition) we could do on two $n$-vectors. That changes my perception of the mathematical object that is vector! 
+
+    The English dictionary defines \emph{aspect} as \emph{a distinct feature or element (a characteristic) in a problem}. We assume the existence of a backbone of $n$ `aspects'. These aspects are ordered. We then assign objects (which do not need to be physical things) numerical values for each aspect. Modeling such objects as vectors then seems \emph{interesting}. Modeling a mere sequence of numbers (without such a backbone) as vectors may not be.
+
+    Therefore, an example considered in a previous reflection [\ref{reflection:first-view-of-vectors}], runs scored by a batter in 100 innings, does not seem to be amenable to be modeled as a vector: all aspects (runs scored in innings) are indistinct.
+
+    Contrast this with modeling a baseball batter as a vector when the fixed aspects are taken from the baseball batting statistics such as plate appearances (at-bats), batting average, on-base percentage, runs batted in, runs scored, home-runs hit, etc., each of which is a distinct (separate, independent) measure of a batter's effectiveness. A batter is then a $6$-vector like $\boldsymbol{p}=(240,0.356,0.34,123,70,39)$.
+
+    It's not immediately clear that this model makes sense. For example, we can add two $6$-vectors, but in what way is such a sum (of two batters' statistics) interesting? 
+
+    However, modeling any baseball batter as a $6$-vector \emph{feels} interesting. If such a model (and subsequent analysis) helps with correctly predicting something, we call it a ``useful model.''
+\end{reflection}
+
+\section{Scalar-vector Multiplication}
+\label{s:scalar-vector-multiplication}
+
+We multiply every element of the vector by a scalar. The result of this operation is a vector. This is like the scaling operation in geometry.
 
 
 \subsection*{Properties}
-
-\begin{itemize}
+\label{ss:scalar-vector-multiplication-properties}
+\begin{enumerate}
     \item Commutative, by definition, that is, for a vector $\boldsymbol{a}$ and a scalar $\alpha$, $\boldsymbol{a}\alpha=\alpha\boldsymbol{a}$.
     \item Associative. That is, for a vector $\boldsymbol{a}$ and scalars $\beta,\gamma$, $(\beta\gamma)\boldsymbol{a}=\beta(\gamma\boldsymbol{a})=\beta\gamma\boldsymbol{a}$.
     \item Left-distributive. That is, $(\beta+\gamma)\boldsymbol{a}=\beta\boldsymbol{a}+\gamma\boldsymbol{a}$.
     \item Right-distributive. That is, $\boldsymbol{a}(\beta+\gamma)=\boldsymbol{a}\beta+\boldsymbol{a}\gamma$.
     \item Right-distributive-2. That is, $\beta(\boldsymbol{a}+\boldsymbol{b})=\beta\boldsymbol{a}+\beta\boldsymbol{b}$.
+\end{enumerate}
+
+\subsection*{Examples}
+\begin{itemize}
+    \item Displacements.
+    \item Raw materials to procure to produce $\alpha$ units of a product whose bill of materials is known.
+    \item Audio scaling.
 \end{itemize}
 
 
+\begin{definition}[Linear Combinations]
+    \label{def:linear-combination}
+    If $\boldsymbol{a}_1,\boldsymbol{a}_2,\dots,\boldsymbol{a}_m$ are $m$ $n$-vectors and $\beta_1,\beta_2,\dots,\beta_n$ are $m$ scalars, then the $n$-vector:
+    \[
+        \boldsymbol{a}_1\beta_1+\boldsymbol{a}_2\beta_2+\dots+\boldsymbol{a}_m\beta_m
+    \]
+    is called a linear combination of the given vectors; the scalars are called the coefficients of the linear combination.
+\end{definition}
+
+\begin{definition}[Linear Combination of Unit Vectors]
+    Any $n$-vector $\boldsymbol{b}$ can be expressed as a linear combination [\ref{def:linear-combination}] of $n$ unit vectors:
+
+    \begin{equation}
+        \label{eq:linear-combination-of-unit-vectors}
+    \begin{aligned}
+        \boldsymbol{b}&=(\boldsymbol{b}_1,\boldsymbol{b}_2,\dots,\boldsymbol{b}_n)\\
+        \boldsymbol{b}&=\boldsymbol{b}_1\boldsymbol{e}_1+\boldsymbol{b}_2\boldsymbol{e}_2+\dots+\boldsymbol{b}_n\boldsymbol{e}_n\\
+        \text{where $\boldsymbol{e}_i$ is the $i^{th}$ unit $n$-vector}
+    \end{aligned}
+    \end{equation}
+\end{definition}
 
 
+\subsection*{Special Linear Combinations}
+In some sense, linear combinations of vectors is the heart of linear algebra. The simple addition of $m$ \emph{scaled} $n$-vectors is ubiquitous in what we study here. Linear combinations are named based on the values of the scalars $\beta_1,\beta_2,\dots,\beta_m$:
+\begin{table}[H]
+\caption{Special Linear Combinations}
+\label{tab:spl-lin-comb}
+\centering
+\setlength{\tabcolsep}{10pt} % separator between columns (standard = 6pt)
+\renewcommand{\arraystretch}{1.25} % vertical stretch factor (standard = 1.0)
+\begin{tabular}{@{}|l|l|l|@{}}
+\hline
+    \thead{Condition Satisfied \\by Coefficients}
+    & \thead{Name\\ (of the $n$-vector)}
+\\
+\hline
+$\beta_1=\beta_2=\dots=\beta_m=1;
+ \boldsymbol{r}=\boldsymbol{b}_1+\boldsymbol{b}_2+\dots+\boldsymbol{b}_m$
+& Sum\\
+\hline
+    $\beta_1=\beta_2=\dots=\beta_m=\frac{1}{m};
+    \boldsymbol{r}=\frac{1}{m}(\boldsymbol{b}_1+\boldsymbol{b}_2+\dots+\boldsymbol{b}_m)$
+    & \makecell{Average (Special Case of \\Affine Combination)}\\
+\hline
+    $\beta_1+\beta_2+\dots+\beta_m=1$
+& Affine Combination\\
+\hline
+    $\beta_1+\beta_2+\dots+\beta_m=1; \beta_i\geq=0$
+    & \makecell{Convex Combination, Mixture,\\ or Weighted Average}\\
+\hline
+\hline
+\end{tabular}
+\end{table}
+
+\subsection*{Examples}
+\begin{enumerate}
+\item\emph{Displacements.} 
+\item\emph{Audio Mixing.} When $\boldsymbol{a}_1,\boldsymbol{a}_2,\dots,\boldsymbol{a}_m$ are vectors representing audio signals (over the same period of time, for example, simultaneously recorded), they are called \emph{tracks}. The linear combination $\beta_1\boldsymbol{a}_1+\beta_2\boldsymbol{a}_2+\dots+\beta_m\boldsymbol{a}_m$ is perceived as a \emph{mixture} (also called a \emph{mix}) of the audio tracks, with relative loudness given by $\lvert\beta_1\rvert,\lvert\beta_2\rvert,\lvert\beta_3\rvert,\dots,\lvert\beta_m\rvert$. 
+
+    A producer in a studio, or a sound engineer at a live show, chooses values of $\lvert\beta_1\rvert,\lvert\beta_2\rvert,\lvert\beta_3\rvert,\dots,\lvert\beta_m\rvert$ to give a good balance between the different
+instruments, vocals, and drums.
+
+\item\emph{Cash-flow Replication.} This example is not very fitting, at least at a first glance.
+\item\emph{Line and Segment.} This is a great example. When $\boldsymbol{a,b}$ are $n$-vectors, then their affine combination $(1-\theta)\boldsymbol{a}+\theta\boldsymbol{b}$ is a vector that ends on the line connecting them.
+\end{enumerate}
+
+    \begin{reflection}[Doing Mathematics]
+
+        \emph{Doing} mathematics takes time. (Doing Mathematics usually means discovering or creating new mathematics; I am not doing that, I am just learning well-known mathematics.)
+
+        Right now, I am learning Linear Algebra in a self-paced manner. That is, of course, fun. However, it is also daunting. In such a setting, I tend to understand things deeply. When I encounter posed problems, I try to solve them like a man possessed. I skip some of them, but I do try many of them. In addition, I create problems for myself! Rather, they get created when I ask obvious questions. It often turns out that their answers are surprisingly tricky. The whole endeavor takes time. Most of the time, I am comfortable with it. Sometimes I am overwhelmed, but then I skip the nagging problem (having made a note--\textcolor{red}{\textbf{TBD}}--of it).
+
+        In this case, I was intrigued by the last statement regarding the outcome of the affine combination of two vectors. First, I wanted to know exactly what \emph{affine} means. An Internet search led me to a great explanation \cite{affine-origin}, which defines it as follows: 
+\epigraph[author={Stack Overflow User} \cite{affine-origin}, width={0.7\textwidth}]
+{
+  The word `affine' comes from the Latin `affinis' meaning connected to or related to, and the transformed space is related to the original in a special way: by collinearity and the preservation of distance ratios.
+}
+
+        (`Affinity' which means ``a natural attraction or feeling of kinship'' also has the same root.)
+First, I challenged myself to prove the above: The affine combination of two $n$-vectors gives a vector that ends on the line connecting them.
+
+Is that obvious? Definitely not at first sight. I attempted it on paper. I believe it is a valid proof.
+
+Before I write the proof here, I am wondering whether reduction in dimensions aids human minds. Does it always help to establish a result in the familiar two dimensions? Generalizing a proof for two dimensions to $n$ dimensions--does that always hold? I guess we must make cogent arguments.
+
+        I also noticed the inherently geometric nature of affine combination, or this theorem concerning it. It raised some questions: What is a line in higher dimensional space like? Does dimensionality affect the properties of a straight line? I will defer spending time on these.
+
+        \begin{theorem}[The Affine Combination of Two $n$-vectors, $\boldsymbol{a,b}$, is a Vector Ending on a Line Joining Them.]
+        \end{theorem}
+        \begin{proof}
+            We use properties of vectors.
+\begin{figure}[H]
+    \caption{Affine Combination of Two $2$-vectors ($\theta=0.6$)}
+    \label{fig:affine-combination-2-vecs-2d}
+    \centering
+    \includegraphics[scale=0.2]{images/affine-combination-2-vecs-2d}
+\end{figure}
+
+            We first consider vectors $\boldsymbol{a}=(\boldsymbol{a}_1,\boldsymbol{a}_2),\boldsymbol{b}=(\boldsymbol{b}_1,\boldsymbol{b}_2)$ of size 2.
+            By definition, their affine combination, $\boldsymbol{c}$ is a vector: 
+            \begin{equation}
+            \begin{aligned}
+                \boldsymbol{c}&=(1-\theta)\boldsymbol{a}+\theta\boldsymbol{b}\\
+                \therefore\boldsymbol{c}&=(1-\theta)(\boldsymbol{a}_1+\boldsymbol{a}_2)+\theta(\boldsymbol{b}_1+\boldsymbol{b}_2)\\
+            \end{aligned}
+            \end{equation}
+                which, after applying properties of vector addition [\ref{ss:vector-addition-properties}] and vector-scalar multiplication [\ref{ss:scalar-vector-multiplication-properties}] (note: symbols like $+,-,\cdot$ (even implicit multiplication which usually carries no symbols) are overloaded: $(1-\theta)$ is the difference of two scalars and is therefore a scalar, whereas $\boldsymbol{b}_1+\boldsymbol{b}_2$ is the sum of two vectors and is therefore a vector), becomes
+            \begin{equation}
+                \label{eq:aff-comb-c-a-b}
+            \begin{aligned}
+                \boldsymbol{c}=\boldsymbol{a}_1+\theta(\boldsymbol{b}_1-\boldsymbol{a}_1)+\boldsymbol{a}_2+\theta(\boldsymbol{b}_2-\boldsymbol{a}_2)
+            \end{aligned}
+            \end{equation}
+
+        Equation [\ref{eq:aff-comb-c-a-b}] implies that the point representing the vector $\boldsymbol{c}$ has two elements (or components) whose magnitudes are $a_1+\theta(b_1-a_1)$ (the `horizontal' component) and $a_2+\theta(b_2-a_2)$ (the `vertical' component) respectively\footnote{We do not use bold symbols to denote magnitudes which are always scalar; the scalar $a_1$ is a much simpler notation for the magnitude or length of the vector $\boldsymbol{a}_1$ than $\lvert\boldsymbol{a}_1\rvert$.}.
+
+        We shall now show that this point lies on the straight line joining $\boldsymbol{ab}$.
+
+        Consider the point $P$ which, for $0\leq\theta\leq 1$, lies between $(a_1,0)$ and $(b_1,0)$. A vertical at $P$ intersects the line $\boldsymbol{ab}$ at $c$. What is the distance $cP$? 
+
+        The slopes of segments $\boldsymbol{ab}$ and $\boldsymbol{ac}$ are the same. Therefore, we can write
+            \begin{equation}
+                \label{eq:compare-slopes-ab-ac}
+            \begin{aligned}
+                \frac{y_{\scriptscriptstyle ?}-a_2}{\cancel{a_1}+\theta\bcancel{(b_1-a_1)}-\cancel{a_1}}&=\frac{b_2-a_2}{\bcancel{b_1-a_1}}\\
+                \therefore y_{\scriptscriptstyle ?}&=a_2+\theta(b_2-a_2)
+            \end{aligned}
+            \end{equation}
+        From Equations [\ref{eq:aff-comb-c-a-b}] and [\ref{eq:compare-slopes-ab-ac}] we see that $y_{\scriptscriptstyle ?}$ is the same as the vertical component of the affine combination $\boldsymbol{c}$ of the given vectors $\boldsymbol{a,b}$.
+
+        Therefore, $\boldsymbol{c}$ must end at a point on the line joining the given vectors.
+        \end{proof}
+        \textcolor{red}{\textbf{TBD}}: Extend this to $n$ dimensions\footnote{In higher dimensions, \emph{slope}s are replaced by \emph{direction vector}s or \emph{direction cosine}s (See \cite{slope-higher-dimensions}). The affine combination would then end on the direction vector.}.
+\end{reflection}
+
+\section{Inner Product}
+\begin{definition}[Inner Product of Two Vectors]
+    The standard Inner Product or Dot Product of two $n$-vectors $\boldsymbol{a}=(a_1,a_2,\dots,a_n),\boldsymbol{b}=(b_1,b_2,\dots_,b_n)$ is the scalar $\sum_{i=1}^{n}a_ib_i=a_1a_2+b_1b_2+\dots+a_nb_n$.
+
+    The Inner Product is denoted as $\boldsymbol{a}^T\boldsymbol{b}$ in this book. The superscript $T$ of the first vector stands for `transpose.' We'll define it later.
+\end{definition}
+
+    \begin{equation*}
+        \label{eq:inner-product-ex}
+    \begin{bmatrix}
+        -1\\
+        \phantom{-}2\\
+        \phantom{-}2
+    \end{bmatrix}^T
+    \begin{bmatrix}
+        \phantom{-}1\\
+        \phantom{-}0\\
+        -3
+    \end{bmatrix}
+        =(-1)(1)+(2)(0)+(2)(-3)=-7
+    \end{equation*}
+
+\begin{reflection}[What to Make of the Inner Product?]
+    How might the inner product have come along? In what way is such `reduction' of two vectors to a scalar interesting? The operations vector addition [\ref{s:vector-addition}] and scalar-vector multiplication [\ref{s:scalar-vector-multiplication}] yield a vector, but the inner product yields a scalar. This means chaining of the inner product is not possible (which precludes \emph{associativity} of this operation on three vectors).
+
+    In a way, this feels like a natural extension of the concept of `multiplication' of two real numbers to vectors. But then why `Inner'? Is there `Outer' too?
+
+    A related thought came to my mind: Should I study Hermann Grassmann's \emph{Creation of Linear Algebra}? 
+\end{reflection}
+
+\subsection*{Properties}
+\label{ss:properties-inner-product}
+\begin{enumerate}
+    \item Commutativity. $\boldsymbol{a}^T\boldsymbol{b}=\boldsymbol{b}^T\boldsymbol{a}$.
+    \item Associativity with Scalar Multiplication. $(\gamma\boldsymbol{a})^T\boldsymbol{b}=\gamma(\boldsymbol{a}^T\boldsymbol{b})$.
+    \item Distributivity with Vector Addition. $\boldsymbol{a}^T(\boldsymbol{b}+\boldsymbol{c})=\boldsymbol{a}^T\boldsymbol{b}+\boldsymbol{a}^T\boldsymbol{c}$.
+\end{enumerate}
+
+We can also derive the following from the above:
+\begin{itemize}
+    \item $\boldsymbol{a}^T(\gamma\boldsymbol{b})=\gamma(\boldsymbol{a}^T\boldsymbol{b})$
+    \item $\boldsymbol{a}^T(\boldsymbol{b}+\gamma\boldsymbol{c})=\boldsymbol{a}^T\boldsymbol{b}+\gamma(\boldsymbol{a}^T\boldsymbol{c})$
+    \item $(\boldsymbol{a}+\boldsymbol{b})^T(\boldsymbol{c}+\boldsymbol{d})=\boldsymbol{a}^T\boldsymbol{c}+\boldsymbol{a}^T\boldsymbol{d}+\boldsymbol{b}^T\boldsymbol{c}+\boldsymbol{b}^T\boldsymbol{d}$ (In this formula $+$ overloaded: on the LHS it denotes vector addition and on the RHS, scalar addition.)
+\end{itemize}
+
+\subsection*{General Examples}
+Inner Product has some neat properties.
+\label{ss:inner-product-ex}
+\begin{itemize}
+    \item Unit vector. ${\boldsymbol{e}_i}^T\boldsymbol{a}=\boldsymbol{a}_i$.
+    \item Sum. $\boldsymbol{1}^T\boldsymbol{a}=\sum_{i=1}^{n}\boldsymbol{a}_i$
+    \item Average. $({\boldsymbol{1}/n})^T\boldsymbol{a}=\sum_{i=1}^{n}\boldsymbol{a}_i/n$
+    \item Sum of squares. ${\boldsymbol{a}}^T\boldsymbol{a}=\sum_{i=1}^{n}(\boldsymbol{a}_i)^2$
+    \item Selective sum. Let $\boldsymbol{b}=(\boldsymbol{b}_i\mid b_i=0\text{ or }1)$. Then $\boldsymbol{a}^T\boldsymbol{b}=\sum_{i=1}^n\boldsymbol{a}_i\quad\forall i\mid\boldsymbol{b}_i=1$.
+\end{itemize}
+
+\subsection*{Applications}
+\begin{itemize}
+    \item Co-occurrence.(This is pretty slick!) 
+
+        We think of each dimension as merely a number. Then, we can think of a subset of those numbers as a Boolean vector!
+
+        If our five numbers or five dimensions are the set\footnote{One issue is that sets have no `order', whereas vectors are essentially ordered. Also, no two dimensions can represent the same number.} $S=\{1,3.4,-3,2.3,20\}$, then its $3$-subset, $T=\{1,-3,2.3\}$, is represented by the vector $\boldsymbol{a}=(1,0,1,1,0)$. Another $3$-subset $U=\{3.4,20\}$ is represented by the vector $\boldsymbol{b}=\{0,1,0,0,1\}$. \textbf{The \emph{size}\footnote{To emphasize, it's the size of the set, not the set itself.} of their intersection}, $\mid T\cup U\mid$, is represented by the Inner Product $\boldsymbol{a}^T\boldsymbol{b}$. In this case, $\boldsymbol{a}^T\boldsymbol{b}=0$; those two sets are disjoint. 
+
+        The size of the intersection is the same as the total number of co-occurrences (common members) of the two sets.
+
+        \begin{reflection}[Creativity is a Harsh Mistress.]
+            Isn't that (modeling an $n$-set as an $n$-vector) interesting?
+
+            I appreciate this, I can \emph{see} an $n$-set as an $n$-vector now, but, given sufficient time, would I \emph{think of} such a Boolean-vector model of a mathematical set?
+        \end{reflection}
+        
+    \item Weights, features, and score.
+    \item Price-quantity.
+    \item Speed-time (total distance).
+    \item Probability and expected values.
+    \item Polynomial evaluation (polynomial coefficients and integer powers of a value as two $n$-vectors).
+    \item Discounted total or net present value (for a given rate of interest).
+    \item Portfolio return (vector of fractional returns and vector of portfolio investments).
+    \item Document sentiment analysis (crude; categorize every dictionary word using a few sentiment categories and evaluate the sentiment score of documents modeled as histograms of word frequencies).
+\end{itemize}
+
+\section{Complexity of vector computations}
+\subsection*{Computer representation of numbers (scalars) and vectors}
+\subsection*{Floating point operations}
+Floating point round-off errors, and methods to mitigate their ill-effect on accuracy of results are studied in \emph{Numerical Analysis}.
+\subsection*{Flops and complexity}
+\subsection*{Complexity of vector operations}
+\subsection*{Complexity of sparse vector operations}
+
+\subsection*{Exercises}
+\begin{exercise}
+    Word count and word count histogram vectors. Suppose an $n$-vector $\boldsymbol{w}$ is the word count vector associated with a document and a dictionary of $n$ words. For simplicity, we will assume that all words in the document appear in the dictionary.
+    \begin{enumerate}[label=(\alph*)]
+\item What is $\boldsymbol{1}^T\boldsymbol{w}$?
+\item What does $\boldsymbol{w}_{\scriptscriptstyle 282}$ mean?
+\item Let $\boldsymbol{h}$ be an $n$-vector that gives the histogram of the word counts, i.e., $\boldsymbol{h}_i$ is the fraction of the words in the document that are word $i$. Use vector notation to express $\boldsymbol{h}$ in terms of $\boldsymbol{w}$. (You can assume that the document contains at least one word.)
+    \end{enumerate}
+\end{exercise}
+\textbf{Solution.}
+Our dictionary can be thought of as a sequence of $n$ words. It need not be lexically ordered, only indexed by integer. Documents are modeled as $n$-vectors based on how many times each dictionary word appears in them.
+\begin{enumerate}[label=(\alph*)]
+    \item To construct $\boldsymbol{w}$, the $n$-vector representing the document, we first set all $n$ elements of it to $0$ and start reading the document word-by-word. Upon reading a word, we find its index $i$ in the dictionary (note: we are given that the document does not contain a word not in the dictionary). For example, the first word in the document may be the eighteenth ($i=18$) word in the dictionary. Then, we increment $\boldsymbol{w}_{\scriptscriptstyle i}$ (that is, $\boldsymbol{w}_{\scriptscriptstyle 18}$). Each word increments \emph{some} $\boldsymbol{w}_i$. After we finish reading the document, each $\boldsymbol{w}_i$ equals the number of times $i^{th}$ dictionary word has appeared in the document.
+        The Inner Product
+        \[
+            \boldsymbol{1}^T\boldsymbol{w}=1\cdot\boldsymbol{w}_1+1\cdot\boldsymbol{w}_2+\dots+1\cdot\boldsymbol{w}_n=\boldsymbol{w}_1+\boldsymbol{w}_2+\dots+\boldsymbol{w}_n
+        \]
+        This is the word length of the document.
+
+    \item $\boldsymbol{w}_{\scriptscriptstyle 282}$ denotes how many times the $282^{nd}$ dictionary word appears in the document (note: our dictionary is \emph{indexed}).
+    \item It follows from the above that $\boldsymbol{h}=(\boldsymbol{h}_i\mid\boldsymbol{h}_i=\frac{\boldsymbol{w}_i}{\boldsymbol{1}^T\boldsymbol{w}}\forall i\;1\leq i\leq n)$
+\end{enumerate}
 
 
-
-
+\begin{exercise}
+    Symptoms vector. A $20$-vector $\boldsymbol{s}$ records whether each of $20$ different symptoms is present in a medical patient, with $\boldsymbol{s}_i=1$ meaning the patient has the symptom and $\boldsymbol{s}_i=0$
+meaning she does not. Express the following using vector notation.
+\begin{enumerate}[label=(\alph*)]
+  \item The total number of symptoms the patient has.
+  \item The patient exhibits five out of the first ten symptoms.
+\end{enumerate}
+\end{exercise}
+\textbf{Solution.}
+\begin{enumerate}[label=(\alph*)]
+        \item Each $1$ in $\boldsymbol{s}$ increments the number of symptoms, each $0$ leaves it unchanged. Therefore, the total number of a patient's symptoms is the sum of $\boldsymbol{s}$ using the ones vector of size $20$: $\boldsymbol{1}^T\boldsymbol{s}$.
+    \item The sum of the first $10$ symptoms is of essence. We devise a $20$-vector $\boldsymbol{f}$: 
+            \[
+                \boldsymbol{f}_i=
+               \begin{cases}
+                   1,&\text{if $1\leq i\leq 10$}\\
+                   0,&\text{otherwise}
+               \end{cases}
+            \]
+         Now, $\boldsymbol{f}^T\boldsymbol{s}$ will count the number of $1$s in the first 10 elements of $\boldsymbol{s}$. It will mask any symptoms numbered $11$ through $20$.
+            \[
+                \text{Does $\boldsymbol{s}$ exhibit 5 out of the first ten symptoms?}
+                \begin{cases}
+                    \text{Yes},&\text{if $\boldsymbol{f}^T\boldsymbol{s}\geq 5$}\\
+                    \text{No},&\text{otherwise}
+                \end{cases}
+            \]
+    \end{enumerate}
 
 
 
