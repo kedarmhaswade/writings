@@ -326,7 +326,7 @@ Perhaps we can develop a vector-builder notation (like the set-builder notation)
 An $n$-vector can give the values of some quantity (e.g., height, weight, blood pressure) across a population of individuals or entities.
 
 \subsubsection*{Proportions}
-A vector $\boldsymbol{w}$ can be used to give fractions or proportions out of $n$ choices, outcomes, or options, with $\boldsymbol{w}_i$ the fraction with choice or outcome $i$. In this case, the entries are non negative and add up to one. Examples: proportions of each of the $n$ ingredients of a recipe, probability values in a probability space with $n$ outcomes, etc.
+A vector $\boldsymbol{w}$ can be used to give fractions or proportions out of $n$ choices, outcomes, or options, with $\boldsymbol{w}_i$ the fraction with choice or outcome $i$. In this case, the entries are nonnegative and add up to one. Examples: proportions of each of the $n$ ingredients of a recipe, probability values in a probability space with $n$ outcomes, etc.
 
 \subsubsection*{Time Series}
 An $n$-vector can represent a time series or signal, that is, the value of some quantity at different times. (The entries in a vector that represents a time series are sometimes called \textbf{samples}, especially when the quantity is something measured.) 
@@ -409,7 +409,7 @@ For example, a $6$-vector $\boldsymbol{f}$ could give the age, height, weight, b
 
     How about human DNA? DNA is a molecule in many human cells that has two identical strands and is made of four types of nucleotide molecule whose names are abbreviated A, T, G, and C. These are not really numbers. We can of course devise certain scheme: A is 1, T is 2, and so on. It does not seem that interesting, however. 
 
-    How about runs scored by a batter in cricket or RBI's in baseball throughout their careers? For example, a batter who batted in $100$ innings of cricket can be a $100$-vector $\boldsymbol{r}$ of small non negative integers: $\boldsymbol{r}=14,2,55,102,\dots,76$.
+    How about runs scored by a batter in cricket or RBI's in baseball throughout their careers? For example, a batter who batted in $100$ innings of cricket can be a $100$-vector $\boldsymbol{r}$ of small nonnegative integers: $\boldsymbol{r}=14,2,55,102,\dots,76$.
 
     How about the losses or gains of a compulsive gambler? Is modeling that over a few hundred gambling sessions as a vector useful?
 
@@ -749,30 +749,7 @@ Floating point round-off errors, and methods to mitigate their ill-effect on acc
 
 \subsection*{Exercises}
 \begin{exercise}
-    Word count and word count histogram vectors. Suppose an $n$-vector $\boldsymbol{w}$ is the word count vector associated with a document and a dictionary of $n$ words. For simplicity, we will assume that all words in the document appear in the dictionary.
-    \begin{enumerate}[label=(\alph*)]
-\item What is $\boldsymbol{1}^T\boldsymbol{w}$?
-\item What does $\boldsymbol{w}_{\scriptscriptstyle 282}$ mean?
-\item Let $\boldsymbol{h}$ be an $n$-vector that gives the histogram of the word counts, i.e., $\boldsymbol{h}_i$ is the fraction of the words in the document that are word $i$. Use vector notation to express $\boldsymbol{h}$ in terms of $\boldsymbol{w}$. (You can assume that the document contains at least one word.)
-    \end{enumerate}
-\end{exercise}
-\textbf{Solution.}
-Our dictionary can be thought of as a sequence of $n$ words. It need not be lexically ordered, only indexed by integer. Documents are modeled as $n$-vectors based on how many times each dictionary word appears in them.
-\begin{enumerate}[label=(\alph*)]
-    \item To construct $\boldsymbol{w}$, the $n$-vector representing the document, we first set all $n$ elements of it to $0$ and start reading the document word-by-word. Upon reading a word, we find its index $i$ in the dictionary (note: we are given that the document does not contain a word not in the dictionary). For example, the first word in the document may be the eighteenth ($i=18$) word in the dictionary. Then, we increment $\boldsymbol{w}_{\scriptscriptstyle i}$ (that is, $\boldsymbol{w}_{\scriptscriptstyle 18}$). Each word increments \emph{some} $\boldsymbol{w}_i$. After we finish reading the document, each $\boldsymbol{w}_i$ equals the number of times $i^{th}$ dictionary word has appeared in the document.
-        The Inner Product
-        \[
-            \boldsymbol{1}^T\boldsymbol{w}=1\cdot\boldsymbol{w}_1+1\cdot\boldsymbol{w}_2+\dots+1\cdot\boldsymbol{w}_n=\boldsymbol{w}_1+\boldsymbol{w}_2+\dots+\boldsymbol{w}_n
-        \]
-        This is the word length of the document.
-
-    \item $\boldsymbol{w}_{\scriptscriptstyle 282}$ denotes how many times the $282^{nd}$ dictionary word appears in the document (note: our dictionary is \emph{indexed}).
-    \item It follows from the above that $\boldsymbol{h}=(\boldsymbol{h}_i\mid\boldsymbol{h}_i=\frac{\boldsymbol{w}_i}{\boldsymbol{1}^T\boldsymbol{w}}\forall i\;1\leq i\leq n)$
-\end{enumerate}
-
-
-\begin{exercise}
-    Symptoms vector. A $20$-vector $\boldsymbol{s}$ records whether each of $20$ different symptoms is present in a medical patient, with $\boldsymbol{s}_i=1$ meaning the patient has the symptom and $\boldsymbol{s}_i=0$
+    (1.9) Symptoms vector. A $20$-vector $\boldsymbol{s}$ records whether each of $20$ different symptoms is present in a medical patient, with $\boldsymbol{s}_i=1$ meaning the patient has the symptom and $\boldsymbol{s}_i=0$
 meaning she does not. Express the following using vector notation.
 \begin{enumerate}[label=(\alph*)]
   \item The total number of symptoms the patient has.
@@ -799,6 +776,89 @@ meaning she does not. Express the following using vector notation.
                 \end{cases}
             \]
     \end{enumerate}
+\begin{exercise}
+    (1.11) Word count and word count histogram vectors. Suppose an $n$-vector $\boldsymbol{w}$ is the word count vector associated with a document and a dictionary of $n$ words. For simplicity, we will assume that all words in the document appear in the dictionary.
+    \begin{enumerate}[label=(\alph*)]
+\item What is $\boldsymbol{1}^T\boldsymbol{w}$?
+\item What does $\boldsymbol{w}_{\scriptscriptstyle 282}$ mean?
+\item Let $\boldsymbol{h}$ be an $n$-vector that gives the histogram of the word counts, i.e., $\boldsymbol{h}_i$ is the fraction of the words in the document that are word $i$. Use vector notation to express $\boldsymbol{h}$ in terms of $\boldsymbol{w}$. (You can assume that the document contains at least one word.)
+    \end{enumerate}
+\end{exercise}
+\textbf{Solution.}
+Our dictionary can be thought of as a sequence of $n$ words. It need not be lexically ordered, only indexed by integer. Documents are modeled as $n$-vectors based on how many times each dictionary word appears in them.
+\begin{enumerate}[label=(\alph*)]
+    \item To construct $\boldsymbol{w}$, the $n$-vector representing the document, we first set all $n$ elements of it to $0$ and start reading the document word-by-word. Upon reading a word, we find its index $i$ in the dictionary (note: we are given that the document does not contain a word not in the dictionary). For example, the first word in the document may be the eighteenth ($i=18$) word in the dictionary. Then, we increment $\boldsymbol{w}_{\scriptscriptstyle i}$ (that is, $\boldsymbol{w}_{\scriptscriptstyle 18}$). Each word increments \emph{some} $\boldsymbol{w}_i$. After we finish reading the document, each $\boldsymbol{w}_i$ equals the number of times $i^{th}$ dictionary word has appeared in the document.
+        The Inner Product
+        \[
+            \boldsymbol{1}^T\boldsymbol{w}=1\cdot\boldsymbol{w}_1+1\cdot\boldsymbol{w}_2+\dots+1\cdot\boldsymbol{w}_n=\boldsymbol{w}_1+\boldsymbol{w}_2+\dots+\boldsymbol{w}_n
+        \]
+        This is the word length of the document.
+
+    \item $\boldsymbol{w}_{\scriptscriptstyle 282}$ denotes how many times the $282^{nd}$ dictionary word appears in the document (note: our dictionary is \emph{indexed}).
+    \item It follows from the above that $\boldsymbol{h}=(\boldsymbol{h}_i\mid\boldsymbol{h}_i=\frac{\boldsymbol{w}_i}{\boldsymbol{1}^T\boldsymbol{w}}\forall i\;1\leq i\leq n)$
+\end{enumerate}
+
+
+\begin{exercise}
+    (1.14) Industry or sector exposure. Consider a set of $n$ assets or stocks that we invest in. Let $\boldsymbol{f}$ be an $n$-vector that encodes whether each asset is in some specific industry or sector, e.g., pharmaceuticals or consumer electronics. Specifically, we take $\boldsymbol{f}_i=1$ if asset $i$ is in the sector, and $\boldsymbol{f}_i=0$ if it is not. 
+
+    Let the $n$-vector $\boldsymbol{h}$ denote a portfolio, with $\boldsymbol{h}_i$ the dollar value held in asset $i$ (with negative meaning a short position\footnote{A financial stance where you \emph{borrow} stock assets and sell them off in the open market almost immediately. You then buy them again so that you can return what you borrowed. In this case, you make a profit only if \emph{the stock price falls before you return}.}). The inner product $\boldsymbol{f}^T\boldsymbol{h}$ is called the (dollar value) exposure of our portfolio to the sector. It gives the net dollar value of the portfolio that is invested in assets from the sector. 
+
+    A portfolio $\boldsymbol{h}$ is called neutral (to a sector or industry) if $\boldsymbol{f}^T\boldsymbol{h}=0$.  A portfolio $\boldsymbol{h}$ is called long-only if each entry is nonnegative, i.e., $\boldsymbol{h}_i\geq 0\;\forall\;i$. This means the portfolio does not include any short positions.
+
+What does it mean if a long-only portfolio is neutral to a sector, say, pharmaceuticals?  Your answer should be in simple English, but you should back up your conclusion with an argument.
+\end{exercise}
+\textbf{Solution.}
+
+Consider a set of assets: $S=\{t_1, t_2,\dots,t_n\}$, where each $t_i$ represents a stock.
+Elements of the $n$-vector $\boldsymbol{f}=(\boldsymbol{f}_1,\boldsymbol{f}_2,\dots,\boldsymbol{f}_n)$ (let's call this vector \emph{sector}) is defined thus:
+
+            \[
+                \boldsymbol{f}_i=
+               \begin{cases}
+                   1,&\text{if $t_i$ is in the sector represented by $\boldsymbol{f}$}\\
+                   0,&\text{otherwise}
+               \end{cases}
+            \]
+
+The $n$-vector that is our \emph{portfolio}, i.e., $\boldsymbol{h}=(\boldsymbol{h}_1,\boldsymbol{h}_2,\dots,\boldsymbol{h}_n)$.
+
+Since our $\boldsymbol{h}$ is \emph{long-only}, $\boldsymbol{h}_i\geq 0\;\forall i$. The trivial case where we have a $\boldsymbol{0}$ portfolio vector is literally ungainly. We therefore assume that there is some $\boldsymbol{h}_i>0$.
+
+For $\boldsymbol{h}$ to be neutral to the sector represented by $\boldsymbol{f}$, 
+\begin{equation}
+    \label{eq:portfolio-sector-inner-product}
+    \begin{aligned}
+        \boldsymbol{f}^T\boldsymbol{h}&=0\\
+        \therefore\boldsymbol{f}_1\boldsymbol{h}_1+\boldsymbol{f}_2\boldsymbol{h}_2+\dots+\boldsymbol{f}_n\boldsymbol{h}_n&=0
+    \end{aligned}
+\end{equation}
+
+Since each $\boldsymbol{f}_i$ and $\boldsymbol{h}_i$ are nonnegative and $\sum_{i=1}^{n}\boldsymbol{f}_i\boldsymbol{h}_i$ equals $0$ (i.e., Equation [\ref{eq:portfolio-sector-inner-product}] holds), each $\boldsymbol{f}_i\boldsymbol{h}_i$ must be zero. This will happen when $\boldsymbol{h}_i$ is $0$ when $\boldsymbol{f}_i$ is nonzero. Thus, our long-only portfolio is neutral to a sector when we have not invested in any stocks that belong to that sector.
+
+\textbf{Example.} 
+
+Let $S=\{\text{NVDA,APPL,JNJ,TSLA,META}\}$.
+
+Let's consider the Information Technology (IT) sector in which NVDA and APPL fall (JNJ: Health Care, TSLA: Consumer Discretionary, META: Communication Services). Therefore, $\boldsymbol{f}=(1,1,0,0,0)$.
+
+Therefore, for our long-only portfolio to be neutral to the IT sector (i.e., for $\boldsymbol{f}^T\boldsymbol{h}$ to be $0$), we must have $\boldsymbol{h}_1=\boldsymbol{h}_2=0$.
+
+\begin{reflection}[A Fallacy!]
+This is how wrote it at first. Upon thinking more, the fallacy was clear. What was I smoking? Gosh!
+
+{\color{red} {
+        For Equation [\ref{eq:portfolio-sector-inner-product}] to hold, with a non-$\boldsymbol{0}$ $\boldsymbol{h}$, either 1) some $\boldsymbol{h}_i$ must be negative, or 2) $\boldsymbol{f}$ must be $\boldsymbol{0}$.
+
+    However, since our portfolio is long-only, no $\boldsymbol{h}_i$ is negative. Therefore, for our portfolio to be neutral with respect to a sector, our sector vector, $\boldsymbol{f}$, must be $\boldsymbol{0}$. We hold no assets of that sector if our portfolio is long-only.
+    (That last sentence is even more wrong!)}
+}
+
+\end{reflection}
+
+
+
+
 
 
 
