@@ -58,7 +58,7 @@
 \surroundwithmdframed[style=reflectionbox]{reflection}
 % the reflection box
 % quotes
-\usepackage[autostyle]{csquotes}
+\usepackage[style=english]{csquotes}
 \MakeOuterQuote{"}
 % quotes
 
@@ -70,7 +70,8 @@
 %images
 \usepackage{graphicx}
 \usepackage{float}
-\usetikzlibrary{intersections,calc,patterns}
+\usetikzlibrary{graphs,graphdrawing,intersections,calc,patterns}
+\usegdlibrary{trees}
 %images
 % ---------- Typography ----------
 \usepackage{microtype}
@@ -96,6 +97,10 @@
 %customize lists
 \usepackage{enumitem}
 %customize lists
+
+% comment out large portions, but document them in source 
+\usepackage{comment}
+% comment out large portions, but document them in source 
 
 % bib
 \usepackage[
@@ -545,6 +550,7 @@ We multiply every element of the vector by a scalar. The result of this operatio
 
 
 \subsection*{Special Linear Combinations}
+\label{ss:special-linear-combinations}
 In some sense, linear combinations of vectors is the heart of linear algebra. The simple addition of $m$ \emph{scaled} $n$-vectors is ubiquitous in what we study here. Linear combinations are named based on the values of the scalars $\beta_1,\beta_2,\dots,\beta_m$:
 \begin{table}[H]
 \caption{Special Linear Combinations}
@@ -657,11 +663,11 @@ Before I write the proof here, I am wondering whether reduction in dimensions ai
         \textcolor{red}{\textbf{TBD}}: Extend this to $n$ dimensions\footnote{In higher dimensions, \emph{slope}s are replaced by \emph{direction vector}s or \emph{direction cosine}s (See \cite{slope-higher-dimensions}). The affine combination would then end on the direction vector.}.
 \end{reflection}
 
-\section{Inner Product}
-\begin{definition}[Inner Product of Two Vectors]
+\section{Inner product}
+\begin{definition}[Inner Product of two vectors]
     The standard Inner Product or Dot Product of two $n$-vectors $\boldsymbol{a}=(a_1,a_2,\dots,a_n),\boldsymbol{b}=(b_1,b_2,\dots_,b_n)$ is the scalar $\sum_{i=1}^{n}a_ib_i=a_1a_2+b_1b_2+\dots+a_nb_n$.
 
-    The Inner Product is denoted as $\boldsymbol{a}^T\boldsymbol{b}$ in this book. The superscript $T$ of the first vector stands for `transpose.' We'll define it later.
+    The inner product is denoted as $\boldsymbol{a}^T\boldsymbol{b}$ in this book. The superscript $T$ of the first vector stands for `transpose.' We'll define it later.
 \end{definition}
 
     \begin{equation*}
@@ -679,7 +685,7 @@ Before I write the proof here, I am wondering whether reduction in dimensions ai
         =(-1)(1)+(2)(0)+(2)(-3)=-7
     \end{equation*}
 
-\begin{reflection}[What to Make of the Inner Product?]
+\begin{reflection}[What to make of the inner product?]
     How might the inner product have come along? In what way is such `reduction' of two vectors to a scalar interesting? The operations vector addition [\ref{s:vector-addition}] and scalar-vector multiplication [\ref{s:scalar-vector-multiplication}] yield a vector, but the inner product yields a scalar. This means chaining of the inner product is not possible (which precludes \emph{associativity} of this operation on three vectors).
 
     In a way, this feels like a natural extension of the concept of `multiplication' of two real numbers to vectors. But then why `Inner'? Is there `Outer' too?
@@ -703,7 +709,7 @@ We can also derive the following from the above:
 \end{itemize}
 
 \subsection*{General Examples}
-Inner Product has some neat properties.
+The inner product has some neat properties.
 \label{ss:inner-product-ex}
 \begin{itemize}
     \item Unit vector. ${\boldsymbol{e}_i}^T\boldsymbol{a}=\boldsymbol{a}_i$.
@@ -719,7 +725,7 @@ Inner Product has some neat properties.
 
         We think of each dimension as merely a number. Then, we can think of a subset of those numbers as a Boolean vector!
 
-        If our five numbers or five dimensions are the set\footnote{One issue is that sets have no `order', whereas vectors are essentially ordered. Also, no two dimensions can represent the same number.} $S=\{1,3.4,-3,2.3,20\}$, then its $3$-subset, $T=\{1,-3,2.3\}$, is represented by the vector $\boldsymbol{a}=(1,0,1,1,0)$. Another $3$-subset $U=\{3.4,20\}$ is represented by the vector $\boldsymbol{b}=\{0,1,0,0,1\}$. \textbf{The \emph{size}\footnote{To emphasize, it's the size of the set, not the set itself.} of their intersection}, $\mid T\cup U\mid$, is represented by the Inner Product $\boldsymbol{a}^T\boldsymbol{b}$. In this case, $\boldsymbol{a}^T\boldsymbol{b}=0$; those two sets are disjoint. 
+        If our five numbers or five dimensions are the set\footnote{One issue is that sets have no `order', whereas vectors are essentially ordered. Also, no two dimensions can represent the same number.} $S=\{1,3.4,-3,2.3,20\}$, then its $3$-subset, $T=\{1,-3,2.3\}$, is represented by the vector $\boldsymbol{a}=(1,0,1,1,0)$. A $2$-subset $U=\{3.4,20\}$ is represented by the vector $\boldsymbol{b}=\{0,1,0,0,1\}$. \textbf{The \emph{size}\footnote{To emphasize, it's the size of the set, not the set itself.} of their intersection}, $\mid T\cup U\mid$, is represented by the inner product $\boldsymbol{a}^T\boldsymbol{b}$. In this case, $\boldsymbol{a}^T\boldsymbol{b}=0$; those two sets are disjoint. 
 
         The size of the intersection is the same as the total number of co-occurrences (common members) of the two sets.
 
@@ -788,7 +794,7 @@ meaning she does not. Express the following using vector notation.
 Our dictionary can be thought of as a sequence of $n$ words. It need not be lexically ordered, only indexed by integer. Documents are modeled as $n$-vectors based on how many times each dictionary word appears in them.
 \begin{enumerate}[label=(\alph*)]
     \item To construct $\boldsymbol{w}$, the $n$-vector representing the document, we first set all $n$ elements of it to $0$ and start reading the document word-by-word. Upon reading a word, we find its index $i$ in the dictionary (note: we are given that the document does not contain a word not in the dictionary). For example, the first word in the document may be the eighteenth ($i=18$) word in the dictionary. Then, we increment $\boldsymbol{w}_{\scriptscriptstyle i}$ (that is, $\boldsymbol{w}_{\scriptscriptstyle 18}$). Each word increments \emph{some} $\boldsymbol{w}_i$. After we finish reading the document, each $\boldsymbol{w}_i$ equals the number of times $i^{th}$ dictionary word has appeared in the document.
-        The Inner Product
+        The inner product
         \[
             \boldsymbol{1}^T\boldsymbol{w}=1\cdot\boldsymbol{w}_1+1\cdot\boldsymbol{w}_2+\dots+1\cdot\boldsymbol{w}_n=\boldsymbol{w}_1+\boldsymbol{w}_2+\dots+\boldsymbol{w}_n
         \]
@@ -855,6 +861,499 @@ This is how wrote it at first. Upon thinking more, the fallacy was clear. What w
 }
 
 \end{reflection}
+
+\begin{exercise} (1.15) Cheapest supplier. You must buy $n$ raw materials in quantities given by the $n$-vector $\boldsymbol{q}$, where $\boldsymbol{q}_i$ is the amount of raw material $i$ that you must buy. $K$ potential suppliers offer the raw materials at prices given by the $n$-vectors $p_1,p_2,\dots,p_K$. (Note that $p_k\;1\leq k\leq K$ is an $n$-vector; ${(p_k)}_i$ is the price that supplier $k$ charges per unit of raw material $i$.) We will assume that all quantities and prices are positive.
+
+If you must choose just one supplier, how would you do it? Your answer should use vector notation.
+
+    A (highly paid) consultant tells you that you might do better (i.e., get a better total cost) by splitting your order into two, by choosing two suppliers and ordering $(1/2)\boldsymbol{q}$ (i.e., half the quantities) from each of the two. He argues that having a diversity of suppliers is better. Is he right? 
+
+    If so, explain how to find the two suppliers you would use to fill half the order.
+\end{exercise}
+\textbf{Solution.}
+\[
+    \text{Total Cost $T_i$ for the supplier $i$}=\boldsymbol{q}^T\boldsymbol{p}_i=\boldsymbol{q}_1(\boldsymbol{p}_i)_1+\boldsymbol{q}_2(\boldsymbol{p}_i)_2+\dots+\boldsymbol{q}_n(\boldsymbol{p}_i)_n
+\]
+Thus, the inner product $\boldsymbol{q}^T\boldsymbol{p}_i$ (note: $\boldsymbol{p}_i$ and $\boldsymbol{q}$ are both $n$-vectors) gives the total cost incurred in procuring the raw materials from the supplier $i$.
+
+Calculating the inner product for every vendor gives us total cost of procuring the raw materials for a full order from them. This constructs a (sorted) permutation $\left\langle T_1,T_2,T_3,\dots,T_K\right\rangle\mid T_i\leq T_{i+1}$ of the $K$ numbers. Since `better' means ``incurring least total cost,'' the supplier with total cost $T_1$ should be picked.
+
+The consultant's premise, ``The more diverse the better,'' is alright for diversity, but not necessarily so for the total cost.
+
+Consider two suppliers $i,j$ whose price vectors are $\boldsymbol{p}_i,\boldsymbol{p}_j$ and total costs for the full order $\boldsymbol{q}$ are $T_i=\boldsymbol{q}^T\boldsymbol{p}_i,T_j=\boldsymbol{q}^T\boldsymbol{p}_j$ respectively. Let $T_i\leq T_j$. Let's say that we split our order equally between these two suppliers. Then, the total cost would be $\frac{1}{2}\boldsymbol{q}^T\boldsymbol{p}_i+\frac{1}{2}\boldsymbol{q}^T\boldsymbol{p}_j=\frac{1}{2}(T_i+T_j)\geq\frac{1}{\cancel{2}}(\cancel{2}T_i)$, i.e., total cost $\geq T_i$ (the equality holds only when $T_i=T_j$, that is, when the two suppliers cost us the same.)
+
+If suppliers quoted per-unit prices assuming a full order, would they accept only half an order?
+
+I wonder why the consultant is highly paid!
+
+\begin{exercise}
+    (1.16) Inner product of nonnegative vectors. A vector is called nonnegative if all its entries are nonnegative.
+\begin{enumerate}[label=(\alph*)]
+    \item Explain why the inner product of two nonnegative vectors is nonnegative.
+    \item Suppose the inner product of two nonnegative vectors is zero. What can you say about them? Your answer should be in terms of their respective sparsity patterns, i.e., which entries are zero and nonzero.
+\end{enumerate}
+\end{exercise}
+\textbf{Solution.}
+Consider two nonnegative $n$-vectors, $\boldsymbol{a,b}$. By definition, $\boldsymbol{a}_i\geq 0,\boldsymbol{b}_i\geq 0\;\forall i\; 1\leq i\leq n$.
+\begin{enumerate}[label=(\alph*)]
+    \item $\boldsymbol{a}^T\boldsymbol{b}=\sum_{i=1}^{n}\boldsymbol{a}_i\boldsymbol{b}_i$. From the above definition, $0\leq\boldsymbol{a}_i\boldsymbol{b}_i\;\forall i$. It then follows that $0\leq\sum_{i=1}^{n}\boldsymbol{a}_i\boldsymbol{b}_i$, that is, $0\leq\boldsymbol{a}^T\boldsymbol{b}$.
+    \item If $\boldsymbol{a}^T\boldsymbol{b}=0$, and $\boldsymbol{a}_i\boldsymbol{b}_i\geq 0\;\forall i$, then $\boldsymbol{a}_i\boldsymbol{b}_i=0\;\forall i$. Thus, $\exists i\mid\boldsymbol{a}_i\ne 0\implies \boldsymbol{b}_i=0$ and vice versa. Thus, if $\nnz{\boldsymbol{a}}=n_1$, then $\nnz{\boldsymbol{b}}$ must be less than or equal to $n-n_1$.
+\end{enumerate}
+
+\begin{exercise}
+    (1.18) Linear combinations of linear combinations. Suppose that each of the vectors $\boldsymbol{b}_1,\boldsymbol{b}_2,\dots,\boldsymbol{b}_k$ is a linear combination of the vectors $\boldsymbol{a}_1,\boldsymbol{a}_2,\dots,\boldsymbol{a}_m$, and $\boldsymbol{c}$ is a linear combination of $\boldsymbol{b}_1,\boldsymbol{b}_2,\dots,\boldsymbol{b}_k$.  Then $\boldsymbol{c}$ is a linear combination of $\boldsymbol{a}_1,\boldsymbol{a}_2,\dots,\boldsymbol{a}_m$. Show this for the case with $m=k=2$.  (Showing it in general is not much more difficult, but the notation gets more complicated.)
+
+\end{exercise}
+\textbf{Solution.}
+We define the following for $k=m=2$.
+\begin{equation}
+    \label{eq:abc-definitions}
+    \begin{aligned}
+        \boldsymbol{b}_1&=\alpha_{11}\boldsymbol{a}_1+\alpha_{12}\boldsymbol{a}_2\\
+        \boldsymbol{b}_2&=\alpha_{21}\boldsymbol{a}_1+\alpha_{22}\boldsymbol{a}_2\\
+        \boldsymbol{c}&=\beta_1\boldsymbol{b}_1+\beta_2\boldsymbol{b}_2
+    \end{aligned}
+\end{equation}
+
+Then, it follows that $\boldsymbol{c}=(\beta_1\alpha_{11}+\beta_2\alpha_{21})\boldsymbol{a}_1+(\beta_1\alpha_{12}+\beta_2\alpha_{22})\boldsymbol{a}_2\implies\boldsymbol{c}=\gamma_1\boldsymbol{a}_1+\gamma_2\boldsymbol{a}_2$ (since parenthesized terms are scalars). Therefore, linear combination of a linear combination is a linear combination.
+
+\begin{exercise}
+    (1.19) Auto-regressive model. Suppose that $z_1,z_2,\dots$ is a time series, with the number $z_t$ giving the value in period or time $t$. For example, $z_t$ could be the gross sales at a particular store on day $t$. An auto-regressive (AR) model is used to predict $z_{t+1}$ from the previous $M$ values, $z_{\scriptscriptstyle t},z_{\scriptscriptstyle t-1},\dots,z_{\scriptscriptstyle t-M+1}$:
+    \begin{equation}
+        \label{eq:ar-model}
+        \hat{z}_{\scriptscriptstyle t+1} = (z_{\scriptscriptstyle t},z_{\scriptscriptstyle t-1},\dots,z_{\scriptscriptstyle t-M+1})^T\boldsymbol{\beta},\quad t=M,M+1,\dots
+    \end{equation}
+    Here, $\hat{z}_{\scriptscriptstyle t+1}$ is the model's \underline{prediction} of $z_{\scriptscriptstyle t+1}$, $M$ is the \underline{memory length} of the AR model, and the $M$-vector $\boldsymbol{\beta}$ is the AR model's \underline{coefficient vector}.
+
+    For this problem, we will assume that the time period is daily, and $M=10$. Thus, this AR model predicts tomorrow's value, given the values for the last 10 days.
+
+    For each of the following cases, give a short interpretation or description of the AR model in English, without referring to mathematical concepts like vectors, inner product, and so on. You can use words like `yesterday' or `today'.
+
+\begin{enumerate}[label=(\alph*)]
+    \item $\boldsymbol\beta=\boldsymbol{e}_1$ (i.e., the unit $M$-vector with first element $1$ and all other zero.) (I don't understand why the book uses `$\approx$' (i.e., \verb|\approx| here instead of `$=$').
+    \item $\boldsymbol\beta=2\boldsymbol{e}_1-\boldsymbol{e}_2$.
+    \item $\boldsymbol\beta=\boldsymbol{e}_6$.
+    \item $\boldsymbol\beta=0.5\boldsymbol{e}_1+0.5\boldsymbol{e}_2$.
+\end{enumerate}
+\end{exercise}
+\textbf{Solution.}
+The essence of the AR model is in the coefficient vector, $\boldsymbol\beta$, for the given $M$.
+
+\begin{enumerate}[label=(\alph*)]
+    \item From Equation [\ref{eq:ar-model}], if $\boldsymbol\beta=(1,0,0,\dots,0)$, then 
+        \begin{equation*}
+            \begin{aligned}
+                \hat{z}_{\scriptscriptstyle t+1}&=\boldsymbol{z}^T\boldsymbol\beta\\
+                                                &=\boldsymbol{z}_{\scriptscriptstyle t}\cdot 1+\boldsymbol{z}_{\scriptscriptstyle t-1}\cdot 0+\dots+\boldsymbol{z}_{\scriptscriptstyle t-M+1}\cdot 0\\
+                                                &=\boldsymbol{z}_t
+            \end{aligned}
+        \end{equation*}
+
+        In this case, the AR model predicts that the amount of gross sales tomorrow will be the same as the amount today\footnote{This reminds me of a weather forecast joke: The meteorological department always predicts rainy tomorrow if it rained today; that way, they have a $50\%$ chance of being accurate, but more people believe the department's forecasts.}.
+    \item From Equation [\ref{eq:ar-model}], if $\boldsymbol\beta=2\boldsymbol{e}_1-\boldsymbol{e}_2=(2,-1  ,0,\dots,0)$, then 
+        \begin{equation*}
+            \begin{aligned}
+                \hat{z}_{\scriptscriptstyle t+1}&=\boldsymbol{z}^T\boldsymbol\beta\\
+                                                &=\boldsymbol{z}_{\scriptscriptstyle t}\cdot 2-\boldsymbol{z}_{\scriptscriptstyle t-1}\cdot 1+0+0+\dots+\boldsymbol{z}_{\scriptscriptstyle t-M+1}\cdot 0\\
+                                                &=2\boldsymbol{z}_t-\boldsymbol{z}_{\scriptscriptstyle t-1}
+            \end{aligned}
+        \end{equation*}
+        The sales tomorrow are expected to be double that of today less that of yesterday.
+    \item Along the similar lines, the sales tomorrow are expected to be the same as that of 6 days ago.
+    \item Along the similar lines, the sales tomorrow are expected to be half of today plus half of yesterday.
+\end{enumerate}
+\begin{exercise}
+    (1.20) How many bytes does it take to store $100$ vectors of length $10^5$? How many flops does it take to form a linear combination of them (with $100$ nonzero coefficients)? About how long would this take on a computer capable of carrying out $1$ Gflop/s?
+\end{exercise}
+\textbf{Solution.}
+\begin{enumerate}[label=(\alph*)]
+    \item The vector with $10^5$ real numbers takes up $800,000$ bytes, $100$ such vectors $80,000,000$ bytes, or $80$ Megabytes.
+    \item There are $10^5$ multiplications (flops) per vector, so $10^7$ flops for 100 vectors, producing 100 numbers which we sum. That is $99$ flops more. All told, that is $10,000,099$ flops.
+    \item A $1$ Gflop/s computer may take a little more than $\frac{1.0000099\times 10^7}{10^9}$ s, that is, a little over $10$ milliseconds.
+\end{enumerate}
+
+\chapter{Linear Functions}
+
+In this chapter  we introduce linear and affine functions, and describe some common settings where they arise, including \emph{regression models}.
+
+\section{Linear functions}
+
+\subsection*{Function notation.}
+The notation $f:\mathbb{R}^n\rightarrow\mathbb{R}$ means that $f$ is a function that maps real $n$-vectors to real numbers, i.e., it is a scalar-valued function of $n$-vectors.
+
+If $\boldsymbol{x}$ is an $n$-vector, then $f(\boldsymbol{x})$, which is a scalar, denotes the value of the function $f$ at $\boldsymbol{x}$. (In the notation $f(x)$, $x$ is referred to as the \emph{argument} of the function.)
+
+We can also interpret $f$ as a function of $n$ scalar arguments, the entries of the vector argument, in which case we write $f(\boldsymbol{x})$ as $f(\boldsymbol{x}) = f(\boldsymbol{x}_1, \boldsymbol{x}_2,\dots,\boldsymbol{x}_n)$.
+
+Here we refer to $x_1,x_2,\dots,x_n$ as the \emph{argument\underline{s}} of $f$. 
+
+We sometimes say that $f$ is real-valued, or scalar-valued, to emphasize that $f(\boldsymbol{x})$ is a real number or scalar (although clearly its argument isn't a real number).
+
+\textbf{Example.} $f:\mathbb{R}^4\rightarrow\mathbb{R}\;f(\boldsymbol{x})=\boldsymbol{x}_1+\boldsymbol{x}_2-\boldsymbol{x}_4^2$.
+
+\subsection*{Inner product function.}
+Suppose $\boldsymbol{a}$ is an $n$-vector. We can define a real-valued function $f:\mathbb{R}^n\rightarrow\mathbb{R}$ given by: 
+\begin{equation}
+    \label{eq:inner-product-function}
+    f(\boldsymbol{x})=\boldsymbol{a}^T\boldsymbol{x}=\boldsymbol{a}_1\boldsymbol{x}_1+\boldsymbol{a}_2\boldsymbol{x}_2+\dots+\boldsymbol{a}_n\boldsymbol{x}_n
+\end{equation}
+We can also think of $f$ as forming a weighted sum of the elements of $\boldsymbol{x}$; the elements of $\boldsymbol{a}$ give the weights used in forming it.
+\subsection*{Superposition and linearity.}
+The inner product function (Equation [\ref{eq:inner-product-function}]) satisfies a rather peculiar property:
+\begin{equation}
+    \label{eq:superposition}
+    \begin{aligned}
+        f(\alpha\boldsymbol{x}+\beta\boldsymbol{y})&=\boldsymbol{a}^T(\alpha\boldsymbol{x}+\beta\boldsymbol{y})\\
+                                                   &=\alpha\boldsymbol{a}^T\boldsymbol{x}+\beta\boldsymbol{a}^T\boldsymbol{y}\\
+                                                   &=\alpha f(\boldsymbol{x})+\beta f(\boldsymbol{y})\\
+                                                   \text{$\forall\;n$-vectors $\boldsymbol{x,y}$, and scalars $\alpha,\beta$}
+    \end{aligned}
+\end{equation}
+This property is called \emph{superposition}. 
+
+\begin{definition}[Linear Function]
+    \label{def:linear-function}
+A function $f:\mathbb{R}^n\rightarrow\mathbb{R}$ that satisfies the superposition property is called a \emph{linear function}.
+\end{definition}
+
+\begin{reflection}[Alternate form of Equation [\ref{eq:superposition}]
+    I slightly rearranged Equation [\ref{eq:superposition}]. This rearrangement makes its form a little more consistent with its name (of course, in my opinion).
+\begin{equation}
+    \label{eq:superposition-alternate-form}
+    \begin{aligned}
+        f(\alpha\boldsymbol{x}+\beta\boldsymbol{y})&=\boldsymbol{a}^T(\alpha\boldsymbol{x}+\beta\boldsymbol{y})\\
+                                                   &=\boldsymbol{a}^T(\alpha\boldsymbol{x})+\boldsymbol{a}^T(\beta\boldsymbol{y})\\
+        \therefore f(\alpha\boldsymbol{x}+\beta\boldsymbol{y})&=f(\alpha\boldsymbol{x})+f(\beta\boldsymbol{y})\\
+                                                   \text{$\forall\;n$-vectors $\boldsymbol{x,y}$, and scalars $\alpha,\beta$}
+    \end{aligned}
+\end{equation}
+    Equation [\ref{eq:superposition-alternate-form}] tells us that a function $f:\mathbb{R}^n\rightarrow\mathbb{R}$ is linear if applying it to a linear combination of $n$-vectors is equivalent to combining (by addition or subtraction) the results of applying it to the elements of the linear combination (hence \emph{superposition} or \emph{superimposition}, that is, overlaying, placing on top of).
+\end{reflection}
+
+If a function $f$ is linear, superposition extends to linear combinations of any finite number of vectors.
+
+We can break the superposition property (Equation [\ref{eq:superposition}]) into two properties as applicable to $f:\mathbb{R}^n\rightarrow\mathbb{R}$:
+\begin{enumerate}
+    \item Homogeneity: $f(\alpha\boldsymbol{x})=\alpha f(\boldsymbol{x})$. Applying $f$ to a scaled vector is equivalent to scaling the result of applying $f$ to it. 
+    \item Additivity: $f(\boldsymbol{x}+\boldsymbol{y})=f(\boldsymbol{x})+f(\boldsymbol{y})$. Applying $f$ to the sum of two vectors is equivalent to the sum of the results of its application to the individual vectors.
+\end{enumerate}
+
+\subsection*{Inner product representation of a linear function.}
+We saw that the inner product function is linear. 
+
+The converse is also true.
+
+A linear function can be expressed as an inner product of its argument ($n$-vector) with some fixed $n$-vector.
+
+The observation is remarkable and its proof elegant!
+
+\begin{theorem}[Linearity $\implies$ Existence of inner product]
+    \label{th:linearity->inner-product}
+    If $f:\mathbb{R}^n\rightarrow\mathbb{R}$ is linear (when applied to an $n$-vector $\boldsymbol{x}$), then there exists a vector $\boldsymbol{a}$, such that $f(\boldsymbol{x})=\boldsymbol{a}^T\boldsymbol{x}$.
+\end{theorem}
+\begin{proof}
+    Let $\boldsymbol{x}=(\boldsymbol{x}_1,\boldsymbol{x}_2,\dots,\boldsymbol{x}_n)$.
+    Then,
+    \begin{align*}
+        \label{eq:Th 2.1}
+            \boldsymbol{x}&=\boldsymbol{x}_1\boldsymbol{e}_1+\boldsymbol{x}_2\boldsymbol{e}_2+\dots+\boldsymbol{x}_n\boldsymbol{e}_n\\
+            &\text{where each $\boldsymbol{x}_i$ is a scalar, and $\boldsymbol{e}_i$ is the $i^{\scriptscriptstyle th}$ unit $n$-vector}\\
+            \therefore f(\boldsymbol{x})&=f(\boldsymbol{x}_1\boldsymbol{e}_1+\boldsymbol{x}_2\boldsymbol{e}_2+\dots+\boldsymbol{x}_n\boldsymbol{e}_n)\\
+            &\text{$f$ \emph{is} linear, therefore, it satisfies the superposition property for $n$ vectors:}\\
+            f(\boldsymbol{x})&=\boldsymbol{x}_1f(\boldsymbol{e}_1)+\boldsymbol{x}_2f(\boldsymbol{e}_2)+\dots+\boldsymbol{x}_nf(\boldsymbol{e}_n)\\
+                &=(f(\boldsymbol{e}_1),f(\boldsymbol{e}_2),\dots,f(\boldsymbol{e}_n))^T(\boldsymbol{x}_1,\boldsymbol{x}_2,\dots,\boldsymbol{x}_n) \tag{Th 2.1}\\
+                &=\boldsymbol{a}^T\boldsymbol{x}\\
+                &\text{where $\boldsymbol{a}=(f(\boldsymbol{e}_1),f(\boldsymbol{e}_2),\dots,f(\boldsymbol{e}_n))$} 
+    \end{align*}
+\end{proof}
+
+\begin{reflection}[A Remarkable Observation]
+    This is neat! If a real-valued function ($f:\mathbb{R}^n\rightarrow\mathbb{R}$) applied to a vector argument $\boldsymbol{x}$ is linear, then $f(x)=(f(\boldsymbol{e}_1),f(\boldsymbol{e}_2),\dots,f(\boldsymbol{e}_n))^T\boldsymbol{x}$.
+\end{reflection}
+
+
+The formula [\ref{eq:Th 2.1}] has interesting implications:
+\begin{itemize}
+    \item Consider a \emph{linear} $f:\mathbb{R}^n\rightarrow\mathbb{R}$. To predict or calculate $f(\boldsymbol{x})$ (an arbitrary vector) whose elements $\boldsymbol{x}_1,\boldsymbol{x}_2,\dots,\boldsymbol{x}_n$ we know, we compute or observe $f$'s value (response) on $n$ vectors, $\boldsymbol{e}_1,\boldsymbol{e}_2,\dots,\boldsymbol{e}_n$ (note: these are $n$ unit $n$-vectors) and then take the inner product of those $n$ values with $n$ elements of $\boldsymbol{x}$.  
+    \item The vector $\boldsymbol{a}=(f(\boldsymbol{e}_1),f(\boldsymbol{e}_2),\dots,f(\boldsymbol{e}_n))$ is \emph{unique}.
+\end{itemize}
+
+\subsection*{Examples}
+\label{ss:linear-function-examples}
+\begin{itemize}
+    \item The \emph{Average} function. $\text{avg}({\boldsymbol{x}})=\bar{\boldsymbol{x}}=\frac{1}{n}\sum_{i=1}^{n}\boldsymbol{x}_i$. Linear.
+    \item The \emph{Maximum} (or \emph{Minimum}) function. $\max(\boldsymbol{x})=\max(\boldsymbol{x}_i\mid 1\leq i\leq n)$. Not linear. See problem [\ref{pr:max-func-not-affine}] later.
+\end{itemize}
+
+\begin{reflection}[Is discovering mathematics inexplicable?]
+    I am quite excited about this link between linearity of $f$ and existence of an inner product vector, $\boldsymbol{a}=(f(\boldsymbol{e}_1),f(\boldsymbol{e}_2),\dots,f(\boldsymbol{e}_n))$. It feels like a magical discovery. 
+
+    Can I think of another linear function? What examples, other than the sort of obvious $\text{avg}(\boldsymbol{x})$ and $\max(\boldsymbol{x})$, are there?
+
+    Yes, I know the definition: If $f(\alpha\boldsymbol{x}+\beta\boldsymbol{y})=\alpha f(\boldsymbol{x})+\beta f(\boldsymbol{y})$, then $f$ is linear. However, is there a deeper insight that lets me find such functions more easily?
+
+    I rummage through the standard single-variable functions (polynomial, rational, trigonometric, exponential, logarithmic). That doesn't help. Should the statistical functions (that operate on several numbers) like \texttt{avg} be considered?
+\end{reflection}
+
+
+\subsection*{Affine functions.}
+(See also: Affine combination, subsection [\ref{ss:special-linear-combinations}])
+\begin{definition}[Affine Function]
+    \label{def:affine-function}
+    A linear function $f:\mathbb{R}^n\rightarrow\mathbb{R}$ (See definition [\ref{def:linear-function}]) is affine \emph{if and only if} it can be expressed as $f(\boldsymbol{x})=\boldsymbol{a}^T\boldsymbol{x}+b$ for some $n$-vector $\boldsymbol{a}$ and scalar $b$ (sometimes called \emph{offset}).
+\end{definition}
+
+For example, the function on $3$-vectors defined by $f(\boldsymbol{x})=2.3−2\boldsymbol{x}_1+1.3\boldsymbol{x}_2−\boldsymbol{x}_3$, is affine, with $b=2.3,\boldsymbol{a}=(−2, 1.3, −1)$.
+
+\begin{reflection}[Doubts on the above definition (\ref{def:affine-function})]
+    Some doubts:
+    \begin{itemize}
+        \item Is $f$ an affine function if $b=0$? I guess not. It seems that given $f(\boldsymbol{x})=\boldsymbol{a}^T+b$, if $b=0$, it's linear, otherwise affine (of course, the superposition property must hold).
+    \end{itemize}
+\end{reflection}
+
+\begin{theorem}[The Restricted Superposition Property]
+    \label{th:affine-function-superposition}
+    Any affine function (See definition [\ref{def:affine-function}]) satisfies the superposition property (See equation [\ref{eq:superposition}]) so that $\alpha+\beta=1$.
+\end{theorem}
+\begin{proof}
+    \begin{reflection}
+        I proved it on paper. Typesetting it here now.
+    \end{reflection}
+
+    $f:\mathbb{R}^n\rightarrow\mathbb{R}$ is an affine function. 
+    \begin{equation}
+        \label{eq:affine-function-superposition-1}
+        f(\boldsymbol{x})=\boldsymbol{a}^T\boldsymbol{x}+b
+    \end{equation}
+
+    This means it is linear and satisfies the superposition property (equation [\ref{eq:superposition}]):
+    \begin{equation}
+        \label{eq:affine-function-superposition-2}
+        \begin{aligned}
+            f(\alpha\boldsymbol{x}+\beta\boldsymbol{y})&=\alpha f(\boldsymbol{x})+\beta f(\boldsymbol{y})\\
+            \therefore\boldsymbol{a}^T(\alpha\boldsymbol{x}+\beta\boldsymbol{y})+b&=\alpha(\boldsymbol{a}^T\boldsymbol{x}+b)+\beta(\boldsymbol{a}^T\boldsymbol{y}+b)\\
+            \text{simplifying after }&\text{canceling the vectors on both sides},\\
+            \cancel{b}&=\cancel{b}(\alpha+\beta)\quad\quad(\text{We assume that } b\ne 0)\\
+            \therefore\alpha+\beta&=1
+        \end{aligned}
+    \end{equation}
+\end{proof}
+
+\begin{reflection}[Logical foundations of mathematics]
+    The book argues that the above theorem ([\ref{th:affine-function-superposition}]) can be used to show that a given function is \emph{\underline{not}} affine. And I am not convinced. It all boils down to good definitions and logic, in particular, to material implication ($\mathcal{S}\implies\mathcal{N}$) and material equivalence ($\mathcal{P}\iff\mathcal{Q}$).
+
+    \textbf{I am assuming that for a linear function to be affine, the offset, $b$ must be nonzero}. I wish the book had stated that. From my proof above (Theorem [\ref{th:affine-function-superposition}]), it is clear that for $\alpha+\beta$ to equal $1$, $b$ may not be $0$. 
+
+    It then follows that if some $f:\mathbb{R}^n\rightarrow\mathbb{R}$ (applied to an argument $\boldsymbol{x}$) can only be expressed as $\boldsymbol{a}^T\boldsymbol{x}$, then it is linear, but not affine (because $b$ equals $0$).
+
+    My recipe to show that some $f:\mathbb{R}^n\rightarrow\mathbb{R}$ is affine is simple:
+    \begin{enumerate}
+        \item Show that $f$ is linear (that is, it satisfies the superposition property), \emph{and}
+        \item Show that $\exists\boldsymbol{a}\mid f(\boldsymbol{x})=\boldsymbol{a}^T\boldsymbol{x}+b\;(b\boldsymbol{\ne 0})$.
+    \end{enumerate}
+
+    If either of the above is false, $f$ is \emph{not affine}.
+
+    I quote the following (which I like) from the book:
+
+    \epigraph[source=VMLS \cite{bv-app-lin-alg} pp. 31-32]{
+        For linear functions, superposition holds for any coefficients $\alpha,\beta,\dots,\omega$; for affine functions, it holds when
+    the coefficients sum to $1$ (i.e., when the argument vector, $\boldsymbol{x}$, is an affine combination (See Table [\ref{tab:spl-lin-comb}])).
+    }
+
+    That dictates their recipe to show that $f$ is \emph{not affine}: Find a counterexample where $\alpha+\beta=1$ (illustrating with two $n$-vectors) and show that the superposition does not hold (i.e., $f$ is \emph{not linear}) in that case.
+
+    They show that the $\max$ function (See subsection [\ref{ss:linear-function-examples}]) is not affine thus:
+
+    We verified above that superposition does not hold for the $\max$ function (with $n>1$); the coefficients in our counterexample are $\alpha=\beta=\frac{1}{2}$, which sum to one, which allows us to conclude that the $\max$ function is \emph{not affine}.
+
+    How would I show that $\max$ is not affine? I would resort to showing that $\max$ is not linear in general:
+    \begin{problem}[The function $\max(\boldsymbol{x})$]
+        \label{pr:max-func-not-affine}
+        Show that $\max(\boldsymbol{x})$, which results in choosing the value of the biggest element of its argument is not affine.
+    \end{problem}
+    \begin{proof}
+        Let $\boldsymbol{x}=(\boldsymbol{x}_1,\boldsymbol{x}_2,\dots,\boldsymbol{x}_i,\dots,\boldsymbol{x}_n)$.
+
+        Let $\max(\boldsymbol{x})=\boldsymbol{x}_i$. Therefore, $\max(\alpha\boldsymbol{x})=\alpha\boldsymbol{x}_i$.
+
+        Let $\boldsymbol{y}=(\boldsymbol{y}_1,\boldsymbol{y}_2,\dots,\boldsymbol{y}_j,\dots,\boldsymbol{y}_n)$.
+
+        Let $\max(\boldsymbol{y})=\boldsymbol{y}_j$. Therefore, $\max(\beta\boldsymbol{y})=\beta\boldsymbol{y}_j$.
+
+        Then,
+        \begin{equation}
+            \label{eq:max-func-not-affine-1}
+            \max(\alpha\boldsymbol{x})+\max(\beta\boldsymbol{y})=\alpha\boldsymbol{x}_i+\beta\boldsymbol{y}_j
+        \end{equation}
+
+        The vector: 
+
+        \begin{equation}
+            \label{eq:max-func-not-affine-2}
+            \begin{aligned}
+                \alpha\boldsymbol{x}+\beta\boldsymbol{y}\\
+                &=(\alpha\boldsymbol{x}_1+\beta\boldsymbol{y}_1,\alpha\boldsymbol{x}_2+\beta\boldsymbol{y}_2,\dots,\alpha\boldsymbol{x}_i+\beta\boldsymbol{y}_i,\dots,\alpha\boldsymbol{x}_j+\beta\boldsymbol{y}_j,\dots,\alpha\boldsymbol{x}_n+\beta\boldsymbol{y}_n)
+            \end{aligned}
+        \end{equation}
+
+        Therefore, $\max(\alpha\boldsymbol{x}+\beta\boldsymbol{y})$ must be one of $\alpha\boldsymbol{x}_i+\beta\boldsymbol{y}_i\;\forall i\;1\leq i\leq n$
+
+        In the general case, then, $\max(\alpha\boldsymbol{x}+\beta\boldsymbol{y})\ne\alpha\boldsymbol{x}_i+\beta\boldsymbol{y}_j$.
+
+        Therefore, $\max$ is not linear and not affine.
+
+    \end{proof}
+
+
+\end{reflection}
+
+
+\begin{reflection}[One more on material implication]
+    This section has become longer than we need. I, respectfully but rather audaciously, suggest that the authors rewrite it. Although doing so is not standard, they want to differentiate between linear functions (real-valued functions applied to vectors that satisfy superposition, $f=\boldsymbol{a}^T\boldsymbol{x}$) from affine functions (linear functions, $f=\boldsymbol{a}^T\boldsymbol{x}+b, b\ne 0$). They should have more succinctly expressed this intent.
+
+        Linearity (satisfying the superposition property) is a must for any linear and hence affine function. It is \emph{not} that any function that can be expressed as $f=\boldsymbol{a}^T\boldsymbol{x}+b, b\ne 0$ is affine. 
+
+\begin{comment}
+
+    I am commenting this out because it is incorrect. However, I wanted to also document the blind alleys that I run into while studying mathematics \dots
+
+        Here is a \textbf{bogus proof that shows $\max$ is affine}. It commits the \emph{logical fallacy of affirming the consequent of a material implication}: 
+        \begin{equation*}
+            \begin{split}
+                &\mathcal{S}\implies\mathcal{N}\\
+                &\mathcal{N}\\
+                \hline
+                \therefore\;&\mathcal{S}
+            \end{split}
+        \end{equation*}
+        \begin{proof}
+            \renewcommand{\qedsymbol}{$\color{red}{\blacksquare}$}
+            Consider the function $\max:\mathcal{R}^n\rightarrow\mathcal{R}$ which returns the maximum element of its (vector) argument.
+
+            We'll illustrate with a $4$-vector, but the argument can be generalized to $n$-vectors.
+
+            Let $\boldsymbol{x}=(1,-3,2,-2)$.
+
+            Let $\boldsymbol{a}=(1,1,1,1)$ and $b=4$.
+            
+            By definition, $\max(\boldsymbol{x})$ is $2$. 
+
+            $\boldsymbol{a}^T\boldsymbol{x}+b=1\cdot 1+1\cdot -3+1\cdot 2+1\cdot -2+4=1-3+2-2+4=2$.
+
+            Since $\boldsymbol{a}^T\boldsymbol{x}+b=\max(\boldsymbol{x})$, $\max$ is affine.
+
+    \end{proof}
+\end{comment}
+\end{reflection}
+
+
+\begin{reflection}[That feeling of apprehension ...]
+
+    Linear functions and affine functions were still unclear. I felt uncomfortable. Then, beginning with definitions, I first wrote down implications (I was still unsure about them) and proved them. Then I typeset them below. 
+    
+    Let's start with definitions. The functions we consider are of type $f:\mathcal{R}^n\rightarrow\mathcal{R}$. The arguments (which are $n$-vectors) to these functions are always written in bold symbols: $\boldsymbol{x},\boldsymbol{y},\boldsymbol{a},\dots$. Scalars are always written with normal emphasis: $b,\alpha,\beta,\dots$. Symbols such as $+$ are context-sensitive: $\boldsymbol{x}+\boldsymbol{y}$, where the arguments are $n$-vectors, is a vector addition that results in an $n$-vector, $a+b$, where the arguments are scalars, is a scalar addition that results in a scalar.
+    \begin{definition}[Superposition property (again)]
+        \label{def:superposition-property-again}
+        $f(\alpha\boldsymbol{x}+\beta\boldsymbol{y})=\alpha f(\boldsymbol{x})+\beta f(\boldsymbol{y})$
+    \end{definition}
+    \begin{definition}[Restricted superposition property (again)]
+        \label{def:restricted-superposition-property-again}
+        $f(\alpha\boldsymbol{x}+\beta\boldsymbol{y})=\alpha f(\boldsymbol{x})+\beta f(\boldsymbol{y})\mid\alpha+\beta=1$
+    \end{definition}
+    \begin{definition}[Linear function (again)]
+        $f$ is linear if it satisfies the superposition property. 
+    \end{definition}
+    \begin{definition}[Affine function (again)]
+        $f$ is affine if it satisfies the restricted superposition property. 
+    \end{definition}
+
+    \begin{theorem}(Linearity implies inner product)
+        \label{th:linearity->inner-product-again}
+
+        If $f$ is linear, then $f(\boldsymbol{x})=\boldsymbol{a}^T\boldsymbol{x}$.
+    \end{theorem}
+    \begin{proof}
+        See Theorem [\ref{th:linearity->inner-product}].
+    \end{proof}
+    \begin{theorem}(Inner product implies linearity)
+        \label{th:inner-product->linearity}
+        (This is the converse of the above theorem (Theorem [\ref{th:linearity->inner-product-again}])).
+
+        If $f(\boldsymbol{x})=\boldsymbol{a}^T\boldsymbol{x}$, then $f$ is linear.
+    \end{theorem}
+    \begin{proof}
+        We use properties of vector addition and scalar-vector multiplication and show that the superposition property (See definition [\ref{def:superposition-property-again}]) holds.
+
+        Given, for two $n$-vectors $\boldsymbol{x,y}$: 
+        \begin{equation}
+            \begin{aligned}
+                f(\boldsymbol{x})&=\boldsymbol{a}^T\boldsymbol{x}, f(\boldsymbol{y})=\boldsymbol{a}^T\boldsymbol{y}\\
+                \therefore f(\alpha\boldsymbol{x})&=\boldsymbol{a}^T(\alpha\boldsymbol{x})=\alpha\boldsymbol{a}^T\boldsymbol{x}\\
+                \therefore f(\beta\boldsymbol{y})&=\boldsymbol{a}^T(\beta\boldsymbol{y})=\beta\boldsymbol{a}^T\boldsymbol{y}\\
+                \therefore f(\alpha\boldsymbol{x})+f(\beta\boldsymbol{y})&=\alpha\boldsymbol{a}^T\boldsymbol{x}+\beta\boldsymbol{a}^T\boldsymbol{y}\\
+                \therefore f(\alpha\boldsymbol{x})+f(\beta\boldsymbol{y})&=\alpha f(\boldsymbol{x})+\beta f(\boldsymbol{y})\\
+                \therefore\text{ $f$ satisfies the}&\text{ superposition property, and is linear.}
+            \end{aligned}
+        \end{equation}
+    \end{proof}
+    \begin{theorem}(Affinity implies a special inner product)
+        \label{th:affinity->special-inner-product}
+
+        If $f$ is affine, then $f(\boldsymbol{x})=\boldsymbol{a}^T\boldsymbol{x}+b\mid b\ne 0$.
+
+    \end{theorem}
+    \begin{proof}
+        We use the definition of affine functions, properties of vector addition and scalar-vector multiplication and arrive at a special inner product when we apply $f$ to an arbitrary $n$-vector.
+        \begin{reflection}[Reflection inside another Reflection]
+            I thought that I nailed these implications, but proving them succinctly is still a challenge. For instance, I have spent quite some time on this confusion: If $f$ is linear (and every affine function is linear), we already know that $f(\boldsymbol{x})=\boldsymbol{a}^T\boldsymbol{x}$. Then, how do you accommodate the additional $b$ when the restricted superposition property ($\alpha+\beta+\dots+\omega=1$) is satisfied? Perhaps we'll need to somehow split $\boldsymbol{a}^T\boldsymbol{x}$ enabled by the fact that the sum of the coefficients is $1$?
+
+            Then, I drew this picture on paper:
+            \begin{figure}[H]
+                \caption{One way to think about the fine line between affine and linear functions}
+                \label{fig:affine-vs-linear}
+                \begin{tikzpicture}[
+                        binary tree layout,
+                        level distance=3cm,
+                        sibling distance=5cm,
+                    ]
+                    \node { 
+                        $f(\boldsymbol{x})=\boldsymbol{a}^T\boldsymbol{x}+b$
+                    }
+                    child {
+                        node {
+                            $\text{if }\alpha+\beta\ne 1\text{ then }b=0$
+                        }
+                        edge from parent 
+                        node[midway, left, red] {linear}
+                    }
+                    child {
+                        node {
+                            $\text{else (that is, }\alpha+\beta=1\text{) }b\ne 0$
+                        }
+                        edge from parent 
+                        node[midway, right, red] {affine}
+                    };
+                \end{tikzpicture}
+            \end{figure}
+        \end{reflection}
+            \textcolor{red}{\textbf{TBD: Revisit}}
+    \end{proof}
+    \begin{theorem}(A special inner product implies affinity)
+        \label{th:special-inner-product->affinity}
+        (This is the converse of the above theorem (Theorem [\ref{th:affinity->special-inner-product}])).
+
+        If $f(\boldsymbol{x})=\boldsymbol{a}^T\boldsymbol{x}+b\mid b\ne 0$, then $f$ is affine.
+    \end{theorem}
+    \begin{proof}
+            \textcolor{red}{\textbf{TBD: Revisit}}
+    \end{proof}
+\end{reflection}
+
+\subsection*{A civil engineering example.} 
+
+Many scalar-valued functions that arise in science and engineering are well approximated by linear or affine functions.
 
 
 
