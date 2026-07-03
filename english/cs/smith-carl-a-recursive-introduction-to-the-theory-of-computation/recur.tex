@@ -1,0 +1,392 @@
+% use lualatex to compile, for some reason xelatex fails for the {Libertinus Serif} font.
+\documentclass[11pt]{book}
+%\documentclass[11pt]{amsart} % fails on title, date, etc.
+
+% ---------- Fonts (LuaLaTeX / XeLaTeX) ----------
+\usepackage{fontspec}
+\setmainfont{Libertinus Serif}
+%\setmainfont{TeX Gyre Pagella}
+%\setsansfont{TeX Gyre Heros}
+\setmonofont{Inconsolata}
+
+% ---------- Page layout ----------
+\usepackage[a4paper,margin=1.1in]{geometry}
+
+% ---------- Math & theorem setup ----------
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{plain}
+%\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{exercise}{Exercise}[chapter]
+
+
+
+\usepackage{xcolor}
+\newtheoremstyle{problemstyle} % name
+  {3pt} % Space above
+  {3pt} % Space below
+  {\normalfont} % Body font
+  {} % Indent
+  {\bfseries\color{blue}} % Theorem head font
+  {.} % Punctuation
+  { } % Space after head
+  {} % Head spec
+\theoremstyle{problemstyle}
+\newtheorem{problem}{Problem}
+
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\renewcommand\qedsymbol{$\blacksquare$}
+% the reflection box
+\usepackage[framemethod=tikz]{mdframed}
+\theoremstyle{definition}
+\newtheorem{reflection}{Reflection}
+\mdfdefinestyle{reflectionbox}{
+  innertopmargin=\topskip,
+  roundcorner=5pt,
+  linecolor=cyan,
+  backgroundcolor=cyan!20,
+}
+\surroundwithmdframed[style=reflectionbox]{reflection}
+% the reflection box
+% quotes
+\usepackage[style=english]{csquotes}
+\MakeOuterQuote{"}
+% quotes
+
+% epigraphs
+% I chose epigraph-keys for its simplicity
+\usepackage{epigraph-keys}
+% epigraphs
+
+%images
+\usepackage{graphicx}
+\usepackage{float}
+\usetikzlibrary{graphs,graphdrawing,intersections,calc,patterns}
+\usegdlibrary{trees}
+%images
+% ---------- Typography ----------
+\usepackage{microtype}
+
+%plots
+\usepackage{pgfplots}
+%plots
+
+% multiple columns
+\usepackage{multicol}
+\setlength{\columnseprule}{1pt}
+\def\columnseprulecolor{\color{blue}}
+% multiple columns
+%multirow (tables) using makecell
+\usepackage{makecell}
+\renewcommand\theadfont{\bfseries}
+%multirow (tables) using makecell
+
+%canceling terms
+\usepackage{cancel}
+%canceling terms
+
+%customize lists
+\usepackage{enumitem}
+%customize lists
+
+% for dotdiv operator
+\usepackage{mathabx}
+% for dotdiv operator
+% comment out large portions, but document them in source 
+\usepackage{comment}
+% comment out large portions, but document them in source 
+
+% bib
+\usepackage[
+  backend=biber,
+  style=numeric
+]{biblatex}
+
+\addbibresource{refs.bib}
+% bib
+
+%macros
+%macros
+% https://github.com/plk/biber/issues/373
+\DeclareBibliographyAlias{movie}{misc}
+% https://github.com/plk/biber/issues/373
+% ---------- Hyperlinks ----------
+\usepackage[hidelinks]{hyperref}
+
+% ---------- Metadata ----------
+\title{Notes on \\ \emph{Recursive Introduction to the Theory of Computation}
+\\ \emph{by Carl Smith \cite{carl-smith-1994}}
+\\ }
+\author{Kedar Mhaswade}
+\date{30 June 2026}
+
+\begin{document}
+\maketitle
+\begin{reflection}[Introduction]
+    These are the author's highly personal notes based on this book \cite{carl-smith-1994}. They may occasionally sound like author's conversation with the reader (or even himself). Even if they are personal and appear in the public domain, they may help the reader, although the author isn't exactly sure how. He wrote them for 0) the love of mathematics and writing 1) \LaTeX{} practice (of writing hopefully readable mathematics, albeit longer than appearing in standard texts), and 2) reliable archival (paper, on which most work is created, tends to get lost) that incurs minimal overhead.
+
+    These notes are interspersed with ``reflection boxes'' like this one. They are meant to express author's `rough' thinking process (mental catharsis of sorts), of which frustration is often an inseparable part. The author writes mostly in first person for an authentic conversational tone.
+
+\end{reflection}
+
+\section{Preface}
+
+\epigraph[author={Paul Halmos}, source={I Want to be a Mathematician \cite{halmos-iwtbam}}, width={0.7\textwidth}]
+{
+    Audience, level, and treatment--a description of such matters is what prefaces are supposed to be about.
+}
+
+This is a graduate-level textbook that can be covered in one semester. It defines `computation' succinctly:
+\epigraph[author={Carl Smith}, width={0.7\textwidth}]
+{
+    Computation is the \textbf{movement and transformation of `data' through `processors'}, which are understood as expressly designed systems made of well-defined components.
+}
+
+The book describes three ``models of computation'', each offering a different perspective. 
+
+It also describes which functions are \emph{computable} (emphasis mine):
+\epigraph[author={Carl Smith}, width={0.7\textwidth}]
+{
+    Given the \textbf{firm knowledge of what is and what is not computable}, we move on to consider the complexity of computing the things that are computable.
+}
+
+About `recursion' in the title of the book:
+\epigraph[author={Carl Smith}, width={0.7\textwidth}]
+{
+    The title of this book contains the word `recursion,' which has several meanings, many of which are appropriate. The original meaning of the word \textbf{recurse} was ``a looking back.'' Indeed, in this book we look back at the fundamental results that shaped the theory of computation as it is today.  The object of study for most of the book is the \textbf{partial recursive functions}, functions that derive their name from the way they are defined, using an
+operator that `looks back' to prior function values. There is also a \textbf{recursion theorem}, which enables us to construct programs that can look back on their own code. In this treatment, recursion theorems are introduced relatively early and used often.
+}
+
+
+\begin{reflection}
+    For a while now, I wanted to understand the basic theory of computation better. In particular, I wanted to understand the equivalence between Turing machines and recursive functions as ``models of computation.'' A cursory glance at the book finally made me commit to doing it along with other things I have committed to. 
+
+    The textbook is about a fundamental computation itself. It may not be relevant in the age of faulty A.I., but I don't care. This was overlooked during my previous graduate days, and I wanted to try and fill that gap. There are several excellent books on this topic, but I will take a look at them later. For now, I have this book.
+
+    I may not be able to finish it in time, but try I shall.
+\end{reflection}
+
+\chapter{Models of Computation}
+\epigraph[author={Carl Smith}, width={0.7\textwidth}] {
+    The first artifact of computation that we will dismiss is the notion that arguments may be of different types. All our inputs, outputs, temporary variables, etc., will be natural numbers (members of $\;\mathbb{N}$). We will argue informally that \textbf{all the other commonly used argument types are included solely for convenience of programming and are not essential to computation}.
+}
+\section{Random Access Machines}
+\section{Partial Recursive Functions}
+\subsection*{Base Functions}
+Not all of these need be `functions', but are defined as such to keep the notation consistent.
+\begin{equation}
+    \label{eq:base-functions}
+    \begin{aligned}
+        &\text{(Zero) }&Z(x)=0\;\forall x\\
+        &\text{(Successor) }&S(x)=x+1\;\forall x\\
+        &\text{(Projection or Selection) }&U^n_j(x_1,x_2,\dots,x_j,\dots,x_n)=x_j
+    \end{aligned}
+\end{equation}
+\begin{reflection}[No Identity Function!]
+    Interestingly, he doesn't define the identity function, $I(x)=x$, as a base function. However, $I=U_1^1$. His thrust may be on defining more generic (and hence more powerful) functions.
+\end{reflection}
+\begin{definition}[Functions defined by `primitive' recursion]
+    \label{def:primitive-recursion}
+    A function $f$ of $n+1$ arguments is defined by \emph{primitive recursion} from 1) $g$, a function of $n$ arguments, and 2) $h$, a function of $n+2$ arguments, if and only if for each\footnote{I think he means for every sequence of $n$ arguments, $x_1, x_2,\dots,x_n$, not for each argument like $x_1$.} $x_1,x_2,\dots,x_n$: 
+    \begin{equation}
+        \label{eq:primitive-recursion}
+        \begin{aligned}
+            f(x_1,x_2,\dots,x_n,0)&=g(x_1,x_2,\dots,x_n)\\
+            f(x_1,x_2,\dots,x_n,y+1)&=h(x_1,x_2,\dots,x_n,y,f(x_1,x_2,\dots,x_n, y))
+        \end{aligned}
+    \end{equation}
+    For the $n=0$ case (i.e., functions applied to zero arguments\footnote{Many programming languages call such functions \texttt{void}.}), we adopt the convention that a function of $0$ arguments is a \emph{constant}.
+\end{definition}
+
+\epigraph[author={Carl Smith}, width={0.7\textwidth}]
+{
+    The recursion of the above definition is `primitive' because the value $f(x_1,x_2,\dots,x_n,y)$ can be determined from the value of $f(x_1,x_2,\dots,x_n,z)$  for some $z<y$ (``looking back''). \textbf{Forms of recursion that are not primitive will be discussed extensively later in the book\footnote{`Non-primitive' recursive functions? I am curious!}}.
+}
+
+\begin{reflection}[General vs. Concrete]
+    This definition [\ref{eq:primitive-recursion}] appears too complicated at first. A typical definition of a recursive function usually refers to the hackneyed `factorial' ($\text{factorial}:\mathbb{N}\rightarrow\mathbb{N}$) that is applied to a nonnegative integer:
+    \[ 
+    \text{factorial}(x)=\begin{cases}
+			1, & \text{if $n=0$}\\
+            x\times\text{factorial}(x-1), & \text{otherwise}
+		 \end{cases}
+    \]
+    This is typical in formal sciences, especially math and computer science. We tend to \emph{generalize} operations. In time, we become better at finding a \emph{level of generality} that balances flexibility with complexity. In this case, to define $f$ in terms of itself, we also define $g$ and $h$. To keep them generic, we consider functions with several arguments.
+
+    How does one \emph{conceive} a definition such as [\ref{def:primitive-recursion}]? I believe they start with some definition and refine it to a sufficient level of generality. Experience may be their guide to judge that level. With functions, their \emph{arguments} and \emph{return value}s are all we have. Using that effectively may have also helped such a conception. $f:\mathbb{N}^{n+1}\rightarrow\mathbb{N}$ is defined by cases:
+    \begin{enumerate}
+        \item If the last argument is $0$, $f$ returns what $g:\mathbb{N}^n\rightarrow\mathbb{N}$, applied to the remaining ($n$) arguments, returns.
+        \item Otherwise, $f$ returns what $h:\mathbb{N}^{n+2}\rightarrow\mathbb{N}$, applied to the remaining ones ($n$) and two carefully chosen arguments (that is, a total of $n+2$ arguments), returns. In this case, the calculation of the last argument to $h$ requires a recursive application of $f$.
+    \end{enumerate}
+
+    Nonetheless, it feels mysterious at first.
+\end{reflection}
+
+\begin{definition}[Functions defined by `composition']
+    \label{def:composition}
+    A function $f$ of $n$ arguments is defined by \emph{composition} from 1) $g$, a function of $m$ arguments, and 2) functions $h_1,h_2,\dots,h_m$, each of $n$ arguments, if and only if, for each $x_1,x_2,\dots,x_n$:
+    \begin{equation}
+        \label{eq:composition}
+        \begin{aligned}
+            f(x_1,x_2,\dots,x_n)&=g(h_1(x_1,x_2,\dots,x_n),h_2(x_1,x_2,\dots,x_n),\dots,h_m(x_1,x_2,\dots,x_n))
+        \end{aligned}
+    \end{equation}
+    The $m=1$ case yields the traditional composition scheme, e.g., $f(x)=g(h(x))$.
+\end{definition}
+\begin{definition}[Class of primitive recursive functions]
+    The class of primitive recursive functions is the smallest class of functions containing all the base functions that is closed under the operations of primitive recursion and composition.
+\end{definition}
+
+\subsection*{Examples}
+\begin{reflection}[Creating functions from the `base functions']
+    The book provides a definition of a function that adds its two arguments. Starting from the definition [\ref{def:primitive-recursion}] and base functions [\ref{eq:base-functions}], I will try to \emph{derive} it here. Let's denote the function as $A$ which returns an integer when applied to two integer arguments, $x,y$.
+    
+    From equation [\ref{eq:primitive-recursion}], it follows that
+    \begin{equation}
+        \begin{aligned}
+            A(x,0)&=g(x)\\
+            A(x,y+1)&=h(x,y,A(x,y))
+        \end{aligned}
+    \end{equation}
+
+    Since our function $A$ applies to two arguments, \textbf{our job is to find definitions of $g$ (applies to one argument) and $h$ (applies to three arguments) so that $A$ returns the sum of its arguments}.
+
+    From the first of these equations, it is sufficiently clear that $g$ is the identity function, $g=U^1_1$, which returns its argument when applied to any argument: $g(x)=x$.
+
+    If $y\ne0$, applying $A$ results in at least one more application of $A$. This process continues until $y$ becomes zero, when applying $A$ results in applying $g$, which returns the first argument ($x$). We say that, at that point, the (primitive) recursion `bottoms out.' We can visualize applications of $h$ thus:
+            \begin{figure}[H]
+                %\caption{}
+                \label{fig:linear-recursion}
+                \begin{tikzpicture}[
+                        tree layout,
+                    ]
+                    \node { 
+                        {\tiny 1)}$A(x,y)=h(x,y-1,A(x,y-1))$
+                    }
+                    child {
+                        node {{\tiny 2)}$h(x, y-2,A(x,y-2))$}
+                        child {
+                            node {{\tiny 3)} $h(x,y-3,A(x,y-3))$}
+                            child {
+                                node {$\dots$}
+                                child {
+                                    node {{\tiny y)} $h(x,0,A(x,0))=h(x,0,x)$}
+                                }
+                            }
+                        }
+                    }
+                    ;
+                \end{tikzpicture}
+            \end{figure}
+
+            Therefore, one application of $A$ to two arguments, $x, y$, results in $y$ applications of $h$; in each application of $h$, the last argument is decremented. What should $h$ return in general then?
+
+            If $h$ returned the successor of its last argument, every application of $h$ simply counts up from $x$, $y$ times!
+            Therefore, $h$ is just the successor of its last argument: $h(x,y,z)=S(z)$. In general, using our base functions:
+            \begin{equation}
+                \label{eq:addition-by-primitive-recursion}
+                \begin{aligned}
+                    g(x)&=x\\
+                    h(x_1,x_2,x_3)&=S(x_3)\\
+                    \text{$A$ is now defined }&\text{by primitive recursion:}\\
+                    A(x_1,0)&=g(x_1)\\
+                    A(x_1,x_2+1)&=h(x_1,x_2,A(x_1,x_2))
+                \end{aligned}
+            \end{equation}
+\end{reflection}
+
+\begin{reflection}[Defining multiplication, $M$, by primitive recursion and composition]
+            \begin{equation}
+                \begin{aligned}
+                    M(x_1,0)&=g(x_1)\\
+                    M(x_1,x_2+1)&=h(x_1,x_2,M(x_1,x_2))
+                \end{aligned}
+            \end{equation}
+
+    Define $g,h$.
+
+    Since the product of anything and $0$ is $0$, $g$ is the zero function, which we simply write as $0$.
+
+    It is similar to addition, but I needed some experimentation. When the recursion bottoms out, $M$ returns what $g$ returns (i.e., $0$). If $h$ returns the sum of its first and last arguments, things work out nicely. Consider $M(2,3)$:
+            \begin{equation}
+                \begin{aligned}
+                    M(2,3)&=h(2,2,M(2,2))\\
+                          &=h(2,2,h(2,1,M(2,1)))\\
+                          &=h(2,2,h(2,1,h(2,0,M(2,0))))\\
+                          &=h(2,2,h(2,1,h(2,0,0)))\\
+                          &=h(2,2,h(2,1,2))\\
+                          &=h(2,2,4)\\
+                          &=6
+                \end{aligned}
+            \end{equation}
+    Therefore, 
+            \begin{equation}
+                \begin{aligned}
+                    g(x)&=0\\
+                    h(x_1,x_2,x_3)&=A(x_1,x_3)\quad\text{See equation [\ref{eq:addition-by-primitive-recursion}]}\\
+                    \text{$M$ is now defined }&\text{by primitive recursion:}\\
+                    M(x_1,0)&=0\\
+                    M(x_1,x_2+1)&=h(x_1,x_2,M(x_1,x_2))
+                \end{aligned}
+            \end{equation}
+
+    Indeed, one can start mechanically\footnote{Some creativity is also needed.} to define new functions from simple, yet general (and hence powerful) base functions (See equation [\ref{eq:base-functions}]), primitive recursion (See definition [\ref{def:primitive-recursion}]), and composition (See definition [\ref{def:composition}])! 
+\end{reflection}
+
+\epigraph[author={Carl Smith}, width={0.8\textwidth}] {
+    We can now define a very large class of functions. This class is large enough to include all the functions that we can actually compute today. In fact, all the functions we are likely to ever be able to compute are included in the class of primitive recursive functions (which is closed under primitive recursion and composition).
+}
+
+\begin{reflection}[The predecessor function]
+    We already have a successor function, $S$ (See equation [\ref{eq:base-functions}]). Let's define a predecessor function, $P$. The only peculiarity is that the predecessor of any number less than or equal to $0$ is $0$. Such subtraction where a negative number is \emph{never} produced is called ``proper subtraction''.
+
+    We start with primitive recursion: $P$ is applied to one argument, therefore, $n=0$, i.e., $g$ is a `constant' (applies to $0$ arguments) and $h$ applies to $2$ arguments:
+            \begin{equation}
+                \begin{aligned}
+                    P(0)&=0\\
+                    P(x+1)&=h(x,P(x))
+                \end{aligned}
+            \end{equation}
+    Our task is the same: Define $h$.
+
+    Applying $P$ to a familiar number like $2$, we get: 
+    \[
+        P(2)=h(1,P(1))=h(1,h(0,P(0)))=h(1,h(0,0))
+    \]
+
+    This should return $1$. That means, $h$ should just return the first argument. It just works! 
+    \[
+        P(2)=h(1,P(1))=h(1,h(0,P(0)))=h(1,h(0,0))=h(1,0)=1
+    \]
+
+    Here is how we define the predecessor function by primitive recursion:
+            \begin{equation}
+                \label{eq:predecessor}
+                \begin{aligned}
+                    h(x_1,x_2)&=x_1\\
+                    P(0)&=0\\
+                    P(x+1)&=h(x,P(x))
+                \end{aligned}
+            \end{equation}
+\end{reflection}
+
+Functions are great. Their syntax can result in complicated expressions, however. Therefore, the book adopts a more familiar or succinct notation for the reminder of our discussion:
+\begin{itemize}
+    \item Since the projection function \emph{selects and returns the $j^{th}$ argument}, we simply make it return $x_j$, instead of $U^n_j(x_1,x_2,\dots,x_n)$.
+    \item $x+y$ is preferred to $A(x,y)$.
+    \item $x\times y$ is preferred to $M(x,y)$.
+    \item Proper subtraction (the one that never produces a negative number) is shown by the $\dotdiv$ symbol\footnote{Macro `\textbackslash dotdiv' from the \texttt{mathabx} package.}: $x\dotdiv y$.
+\end{itemize}
+
+
+\printbibliography
+\end{document}
