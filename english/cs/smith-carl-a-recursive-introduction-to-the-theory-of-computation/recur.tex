@@ -131,6 +131,19 @@
 
 \begin{document}
 \maketitle
+\cleardoublepage
+\chapter*{}
+\thispagestyle{empty} % Remove headers and footers
+
+\vspace*{\fill} % Push the text vertically down the page
+
+\begin{center}
+    \textit{These notes are dedicated to the memory of Carl Smith (1950-2004).}
+\end{center}
+
+\vspace*{\fill} % Center the text vertically on the page
+\cleardoublepage
+
 \begin{reflection}[Introduction]
     These are the author's highly personal notes based on this book \cite{carl-smith-1994}. They may occasionally sound like author's conversation with the reader (or even himself). Even if they are personal and appear in the public domain, they may help the reader, although the author isn't exactly sure how. He wrote them for 0) the love of mathematics and writing 1) \LaTeX{} practice (of writing hopefully readable mathematics, albeit longer than appearing in standard texts), and 2) reliable archival (paper, on which most work is created, tends to get lost) that incurs minimal overhead.
 
@@ -176,7 +189,7 @@ operator that `looks back' to prior function values. There is also a \textbf{rec
 \end{reflection}
 
 \chapter{Models of Computation}
-\epigraph[author={Carl Smith}, width={0.7\textwidth}] {
+\epigraph[author={Carl Smith}, width={0.8\textwidth}] {
     The first artifact of computation that we will dismiss is the notion that arguments may be of different types. All our inputs, outputs, temporary variables, etc., will be natural numbers (members of $\;\mathbb{N}$). We will argue informally that \textbf{all the other commonly used argument types are included solely for convenience of programming and are not essential to computation}.
 }
 \section{Random Access Machines}
@@ -347,25 +360,26 @@ Not all of these need be `functions', but are defined as such to keep the notati
 }
 
 \begin{reflection}[The predecessor function]
-    We already have a successor function, $S$ (See equation [\ref{eq:base-functions}]). Let's define a predecessor function, $P$. The only peculiarity is that the predecessor of any number less than or equal to $0$ is $0$. Such subtraction where a negative number is \emph{never} produced is called ``proper subtraction''.
+    \label{def:pr-function}
+    We already have a successor function, $S$ (See equation [\ref{eq:base-functions}]). Let's define a predecessor function, $PR$. The only peculiarity is that the predecessor of any number less than or equal to $0$ is $0$. Such subtraction where a negative number is \emph{never} produced is called ``proper subtraction''.
 
-    We start with primitive recursion: $P$ is applied to one argument, therefore, $n=0$, i.e., $g$ is a `constant' (applies to $0$ arguments) and $h$ applies to $2$ arguments:
+    We start with primitive recursion: $PR$ is applied to one argument, therefore, $n=0$, i.e., $g$ is a `constant' (applies to $0$ arguments) and $h$ applies to $2$ arguments:
             \begin{equation}
                 \begin{aligned}
-                    P(0)&=0\\
-                    P(x+1)&=h(x,P(x))
+                    PR(0)&=0\\
+                    PR(x+1)&=h(x,PR(x))
                 \end{aligned}
             \end{equation}
     Our task is the same: Define $h$.
 
     Applying $P$ to a familiar number like $2$, we get: 
     \[
-        P(2)=h(1,P(1))=h(1,h(0,P(0)))=h(1,h(0,0))
+        PR(2)=h(1,PR(1))=h(1,h(0,PR(0)))=h(1,h(0,0))
     \]
 
     This should return $1$. That means, $h$ should just return the first argument. It just works! 
     \[
-        P(2)=h(1,P(1))=h(1,h(0,P(0)))=h(1,h(0,0))=h(1,0)=1
+        PR(2)=h(1,PR(1))=h(1,h(0,PR(0)))=h(1,h(0,0))=h(1,0)=1
     \]
 
     Here is how we define the predecessor function by primitive recursion:
@@ -373,8 +387,8 @@ Not all of these need be `functions', but are defined as such to keep the notati
                 \label{eq:predecessor}
                 \begin{aligned}
                     h(x_1,x_2)&=x_1\\
-                    P(0)&=0\\
-                    P(x+1)&=h(x,P(x))
+                    PR(0)&=0\\
+                    PR(x+1)&=h(x,PR(x))
                 \end{aligned}
             \end{equation}
 \end{reflection}
@@ -386,6 +400,242 @@ Functions are great. Their syntax can result in complicated expressions, however
     \item $x\times y$ is preferred to $M(x,y)$.
     \item Proper subtraction (the one that never produces a negative number) is shown by the $\dotdiv$ symbol\footnote{Macro `\textbackslash dotdiv' from the \texttt{mathabx} package.}: $x\dotdiv y$.
 \end{itemize}
+
+A few functions useful for testing conditions are defined next. However, the author does not provide English names for them\footnote{I'll try to name them, hopefully succinctly.}. I'll reuse his notation for these functions and provide the informal and formal definitions (using primitive recursion) for them.
+
+\subsection*{The \texttt{logical true} function, $sg$}
+This function can be used to turn any function into a function with range $\{0, 1\}$. Informally:
+\[
+    sg(x)=\begin{cases}
+			0, & \text{if $x=0$}\\
+            1, & \text{otherwise}
+	\end{cases}
+\]
+Formally:
+            \begin{equation}
+                \label{eq:logical-true}
+                \begin{aligned}
+                    h_2(x,y)&=S(Z(x))\\
+                    sg(0)&=0\\
+                    sg(x+1)&=h_2(x+1,x+1)
+                \end{aligned}
+            \end{equation}
+
+\begin{reflection}
+    Such formalism is perhaps necessary as a practice. For defining functions by primitive recursion, we define $h$ in terms of \emph{known functions} (which themselves may be defined by base functions, primitive recursion, and composition). We don't use $1$ as it is not a previously defined function. 
+\end{reflection}
+\subsection*{The \texttt{logical false} function, $\overline{sg}$}
+This function can also be used to turn any function into a function with range $\{0, 1\}$. Informally:
+\[
+    \overline{sg}(x)=\begin{cases}
+			1, & \text{if $x=0$}\\
+            0, & \text{otherwise}
+	\end{cases}
+\]
+Formally:
+            \begin{equation}
+                \label{eq:logical-false}
+                \begin{aligned}
+                    h_2(x,y)&=Z(x)\\
+                    \overline{sg}(0)&=S(Z(x))\\
+                    \overline{sg}(x+1)&=h_2(x+1,x+1)
+                \end{aligned}
+            \end{equation}
+
+\epigraph[author={Carl Smith},width={0.8\textwidth}] {
+    By interpreting $0$ as `false' and $1$ as `true' a $0,1$-valued function represents a \emph{predicate}. Logical predicates that can be represented by $0,1$-valued primitive recursive functions are called \emph{primitive recursive predicates}.
+}
+\begin{reflection}[Other logical operations as primitive recursive functions]
+    I thought of defining other basic logical operations primitive-recursively. We can of course exploit logical formulas and tautologies.
+    \begin{enumerate}
+        \item \texttt{logical not}. We can either compose it from the \texttt{logical true} and \texttt{logical false} functions above (See equations [\ref{eq:logical-true}], [\ref{eq:logical-false}]), or we can define it from scratch by primitive recursion.
+            \begin{equation}
+                \label{eq:logical-not-composition}
+                \begin{aligned}
+                    not(x)&=sg(\overline{sg}(x))\\
+                    &\text{Or,}\\
+                    not(x)&=\overline{sg}(sg(x))\\
+                \end{aligned}
+            \end{equation}
+            Or,
+            \begin{equation}
+                \label{eq:logical-not-primitive-composition}
+                \begin{aligned}
+                    h_2(x_1,x_2)&=Z(x_1)\\
+                    &\text{And,}\\
+                    not(0)&=S(Z(x))\\
+                    not(x+1)&=h_2(x,not(x))
+                \end{aligned}
+            \end{equation}
+
+        \item \texttt{logical (inclusive) or}. Some experimentation helps us arrive at:
+            \begin{equation}
+                \label{eq:logical-or}
+                \begin{aligned}
+                    g(x)&=sg(x)\\
+                    h_3(x_1,x_2,x_3)&=S(Z(x_1))\quad\quad\text{(Basically $1$)}\\
+                    &\text{And,}\\
+                    or(x_1,0)&=g(x_1)\\
+                    or(x_1,x_2+1)&=h_3(x_1,x_2,or(x_1,x_2))
+                \end{aligned}
+            \end{equation}
+
+        \item \texttt{logical and}. 
+            \begin{equation}
+                \label{eq:logical-and}
+                \begin{aligned}
+                    g(x)&=Z(x)\\
+                    h_3(x_1,x_2,x_3)&=sg(x_1)\\
+                    &\text{And,}\\
+                    and(x_1,0)&=g(x_1)\\
+                    and(x_1,x_2+1)&=h_3(x_1,x_2,and(x_1,x_2))
+                \end{aligned}
+            \end{equation}
+        \item \texttt{logical xor}. 
+        \item \texttt{logical (material) implication}. 
+    \end{enumerate}
+\end{reflection}
+
+\subsection*{The \texttt{proper subtraction} function, $\dotdiv$}
+\label{ss:psub}
+We denote this\footnote{Read `$x_1$ \emph{dot-minus} $x_2$'.} by $\texttt{PSUB}(x_1,x_2)$, but adopt the more symbolic $x_1\dotdiv x_2$, just like we adopt $x_1+x_2$ instead of $A(x_1,x_2)$ for the \texttt{sum} function.
+
+Informally, 
+    \[ 
+    x_1\dotdiv x_2=
+        \begin{cases}
+            x_1-x_2, & \text{if $x_1\geq x_2$}\\
+            0, & \text{otherwise}
+		 \end{cases}
+    \]
+Some experimentation shows that once the third argument of the $h_3$ function becomes zero (through recursion), it should stay $0$. This suggests:
+
+            \begin{equation}
+                \label{eq:proper-subtraction}
+                \begin{aligned}
+                    g(x)&=x\\
+                    h_3(x_1,x_2,x_3)&=PR(x_3)\quad\quad\text{(See reflection[\ref{def:pr-function}])}\\
+                    &\text{And,}\\
+                    x_1\dotdiv 0&=g(x_1)\\
+                    x_1\dotdiv (x_2+1)&=h_3(x_1,x_2,(x_1\dotdiv x_2))
+                \end{aligned}
+            \end{equation}
+
+
+\subsection*{The \texttt{difference} function, $\lvert x_1-x_2\rvert$}
+We denote it by $\texttt{DIFF}(x_1,x_2)$, but adopt the symbolic notation, $\lvert x_1-x_2\rvert$.
+
+Informally,
+    \[ 
+    \left\lvert x_1-x_2\right\rvert=
+        \begin{cases}
+			x_1-x_2, & \text{if $x_1\geq x_2$}\\
+            x_2-x_1, & \text{otherwise}
+		 \end{cases}
+    \]
+
+There are similarities between $\texttt{DIFF}$ and $\texttt{PSUB}$ (See [\ref{ss:psub}]). This yields another informal definition of $\texttt{DIFF}$:
+
+    \[ 
+        \left\lvert x_1-x_2\right\rvert=(x_1\dotdiv x_2)+(x_2\dotdiv x_1)
+    \]
+
+    Therefore, we can define $\texttt{DIFF}$ by composition:
+
+    \[ 
+        \texttt{DIFF}(x_1,x_2)=\texttt{A}(\texttt{PSUB}(x_1,x_2),\texttt{PSUB}(x_2,x_1))
+    \]
+
+    How can we define it by primitive recursion (See definition [\ref{def:primitive-recursion}])?
+ 
+    \vspace{5mm}
+    \textbf{\textcolor{red}{\Large{TBD}}}
+    \vspace{5mm}
+
+\subsection*{The \texttt{logical equality} function, $\epsilon$}
+Informally,
+
+    \[ 
+    \epsilon(x_1,x_2)=
+        \begin{cases}
+			1, & \text{if $\lvert x_1-x_2\rvert=0$}\\
+            0, & \text{otherwise}
+		 \end{cases}
+    \]
+
+By composition, $\epsilon(x_1,x_2)=\overline{sg}(\lvert x_1-x_2\rvert)$.
+
+By primitive recursion (some experimentation helps; $h_3$ should return $1$, when $x_1-x_2=1$ and $0$ otherwise),
+            \begin{equation}
+                \label{eq:logical-equality}
+                \begin{aligned}
+                    g(x)&=not(x)\quad\quad\text{See equation [\ref{eq:logical-not-primitive-composition}]}\\
+                    h_3(x_1,x_2,x_3)&=\overline{sg}(x_1-x_2-1) \\
+                    &\text{And,}\\
+                    \epsilon(x_1,0)&=g(x_1)\\
+                    \epsilon(x_1,x_2+1)&=h_3(x_1,x_2,\epsilon(x_1,x_2))
+                \end{aligned}
+            \end{equation}
+
+\subsection*{The \texttt{logical inequality} function, $\overline\epsilon$}
+Informally, $\overline\epsilon(x_1,x_2)=not(\epsilon(x_1,x_2))$.
+
+\begin{exercise}[The `rm' function is primitive recursive]
+    Show that $rm(x, y)=\text{`The remainder left after dividing $x$ by $y$'}$ is primitive recursive.
+\end{exercise}
+\textbf{Solution.}
+The division algorithm states that for any two integers (for now, we consider nonnegative integers), $x,y (y\ne0)$, there exist two integers, $q,r$, such that $x=by+r\mid 0\leq r<y$.
+
+We need to define a function $rm(x,y)$ by primitive recursion. It's a partial function. It is not defined for $y=0$.
+
+            \begin{equation}
+                \begin{aligned}
+                    rm(0,y)&=0\\
+                    rm(x+1,y)&=h(x,y,rm(x,y))
+                \end{aligned}
+            \end{equation}
+
+In this case, we don't need $g$, or, if we need it, then it is the zero function, $Z$ (See equation [\ref{eq:base-functions}]): $rm$ returns $0$ when $x$ is $0$. We adopt the simpler syntax.
+
+Small examples help. When the first argument of $rm$ is nonzero, $rm$ will be called recursively, every time with predecessor of the first argument; recursion eventually bottoms out when it becomes zero:
+
+\[
+    rm(3,2)=h(2,2,rm(2,2))=h(2,2,h(1,2,rm(1,2)))=h(2,2,h(1,2,h(0,2,rm(0,2))))=h(2,2,h(1,2,h(0,2,0)))
+\]
+
+It becomes clear that $h(x,y,z)$ returns what $rm(z+1,y)$ returns.
+
+This gives the recursive definition as:
+            \begin{equation}
+                \label{eq:my-answer-rm}
+                \begin{aligned}
+                    rm(0,y)&=0\\
+                    rm(x+1,y)&=rm(rm(x,y)+1,y)
+                \end{aligned}
+            \end{equation}
+
+The textbook answer (which uses $S$ for the successor function and $M$ for the multiplication function) has a different answer. I will explore more:
+            \begin{equation}
+                \label{eq:textbook-answer-rm}
+                \begin{aligned}
+                    rm(0,y)&=0\\
+                    rm(x+1,y)&=h(x,y,rm(x,y))\\
+                             &=M(S(rm(x,y)),\overline\epsilon(S(rm(x,y)),y))
+                \end{aligned}
+            \end{equation}
+
+Is my answer (equation [\ref{eq:my-answer-rm}]) wrong? I hope not, although it does not follow \emph{the form} of the primitive recursive functions (See definition [\ref{def:primitive-recursion}]), but neither does the textbook answer (See equation [\ref{eq:textbook-answer-rm}]). My definition does make $rm$ primitive recursive because the function is defined in terms of itself, allowing recursion.
+
+\begin{exercise}[The `integer division' is primitive recursive]
+Show that integer division is primitive recursive. Make and state a convention about division by 0.
+\end{exercise}
+\textbf{Solution.}
+
+
+
+
+
+
 
 
 \printbibliography
