@@ -105,6 +105,25 @@
 \usepackage{comment}
 % comment out large portions, but document them in source 
 
+% general-purpose box with counters and labels for referencing
+\usepackage{tcolorbox}
+\tcbuselibrary{skins}
+
+% Create an environment called "mybox" with an automatic counter
+\NewTColorBox[auto counter, number within=section]{mybox}{o}{
+  colback=blue!15!white,
+  colframe=blue!75!white,
+  fonttitle=\bfseries,
+  title=Box \thetcbcounter: #1
+}
+% general-purpose box with counters and labels for referencing
+% tbd command
+\newcommand{\tbd}{
+    \vspace{5mm}
+    \textbf{\textcolor{red}{\Large{TBD}}}
+    \vspace{5mm}
+}
+% tbd command
 % bib
 \usepackage[
   backend=biber,
@@ -220,12 +239,16 @@ Not all of these need be `functions', but are defined as such to keep the notati
     For the $n=0$ case (i.e., functions applied to zero arguments\footnote{Many programming languages call such functions \texttt{void}.}), we adopt the convention that a function of $0$ arguments is a \emph{constant}.
 \end{definition}
 
+\begin{mybox}[What is Primitive Recursion?]
+    \label{box:primitive-recursion}
 \epigraph[author={Carl Smith}, width={0.7\textwidth}]
 {
     The recursion of the above definition is `primitive' because the value $f(x_1,x_2,\dots,x_n,y)$ can be determined from the value of $f(x_1,x_2,\dots,x_n,z)$  for some $z<y$ (``looking back''). \textbf{Forms of recursion that are not primitive will be discussed extensively later in the book\footnote{`Non-primitive' recursive functions? I am curious!}}.
 }
+\end{mybox}
 
 \begin{reflection}[General vs. Concrete]
+    \label{reflection:general-vs-concrete}
     This definition [\ref{eq:primitive-recursion}] appears too complicated at first. A typical definition of a recursive function usually refers to the hackneyed `factorial' ($\text{factorial}:\mathbb{N}\rightarrow\mathbb{N}$) that is applied to a nonnegative integer:
     \[ 
     \text{factorial}(x)=\begin{cases}
@@ -422,7 +445,7 @@ Formally:
             \end{equation}
 
 \begin{reflection}
-    Such formalism is perhaps necessary as a practice. For defining functions by primitive recursion, we define $h$ in terms of \emph{known functions} (which themselves may be defined by base functions, primitive recursion, and composition). We don't use $1$ as it is not a previously defined function. 
+    Such formalism is perhaps necessary as a practice. For defining functions by primitive recursion, we define $h$ in terms of \emph{known functions} (which themselves may be defined by base functions, primitive recursion, and composition). We don't use $1$ as it is not a previously defined function, but we could easily have done that: $f(x)=S(Z(x))$. In mathematics, we solve new problems by referring to already solved problems.
 \end{reflection}
 \subsection*{The \texttt{logical false} function, $\overline{sg}$}
 This function can also be used to turn any function into a function with range $\{0, 1\}$. Informally:
@@ -548,9 +571,7 @@ There are similarities between $\texttt{DIFF}$ and $\texttt{PSUB}$ (See [\ref{ss
 
     How can we define it by primitive recursion (See definition [\ref{def:primitive-recursion}])?
  
-    \vspace{5mm}
-    \textbf{\textcolor{red}{\Large{TBD}}}
-    \vspace{5mm}
+    \tbd
 
 \subsection*{The \texttt{logical equality} function, $\epsilon$}
 Informally,
@@ -631,11 +652,141 @@ Show that integer division is primitive recursive. Make and state a convention a
 \end{exercise}
 \textbf{Solution.}
 
+Let's denote it by:$\;\textfractionsolidus\;$.
+
+\begin{reflection}
+    I took inspiration from JavaScript, which defines anything divided by 0 to be a special literal, \texttt{NaN}, which is not a real number.
+\end{reflection}
+            \begin{equation}
+                \label{eq:integer-division}
+                \begin{aligned}
+                    g(x)&=\texttt{NaN}\\
+                    h_3(x_1,x_2,x_3)&=??\\
+                    &\text{And,}\\
+                    x_1\;\textfractionsolidus\;0=g(x_1)\\
+                    x_1\;\textfractionsolidus\;(x_2+1)&=h_3(x_1,x_2,x_1\;\textfractionsolidus\;x_2)
+                \end{aligned}
+            \end{equation}
+\begin{reflection}
+    This is tricky! I feel stuck. $h_3(x_1,x_2,x_3)=0$ if $x_1\leq x_2$, but otherwise I am not sure yet.
+
+    After a while, I reminded myself of the grade-school maxim, ``Division is repeated subtraction.'' Then there was a ray of hope, although it renders a recursive definition for $h_3$. Is that okay?
+\end{reflection}
 
 
+    \[ 
+    h_3(x_1,x_2,x_3)=
+        \begin{cases}
+            1 + h_3(x_1-x_2,x_2,x_3), & \text{if $x_1\geq x_2$}\\
+            0, & \text{otherwise}
+		 \end{cases}
+    \]
 
+    That feels convoluted. The function we seek is defined by cases thus:
 
+    \begin{equation}
+      \label{eq:integer-division-another-recursion}
+      x_1\;\textfractionsolidus\;x_2=
+        \begin{cases}
+            \texttt{NaN}, & \text{if $x_2=0$,}\\
+            0, & \text{else if $x_1<x_2$,}\\
+            1 + (x_1-x_2)\;\textfractionsolidus\;x_2&\text{otherwise}
+		 \end{cases}
+    \end{equation}
 
+    \begin{reflection}
+        According to the definition [\ref{def:primitive-recursion}], equation [\ref{eq:integer-division-another-recursion}] may not be primitive recursive, but according to the box [\ref{box:primitive-recursion}] (and like the factorial function (See reflection [\ref{reflection:general-vs-concrete}])), it is.
+
+    The book does not provide a solution to this problem; I'll need to ask someone to check.
+
+        That raises another question: Are functions, like equation [\ref{eq:integer-division-another-recursion}], that clearly set up recurrence, \emph{not} defined by primitive recursion?
+    \end{reflection}
+
+    \tbd
+
+\begin{exercise}[$\left\lfloor{\sqrt{x}}\right\rfloor$]
+    Show that $f(x)=\text{`The largest integer less than or equal to $\sqrt{x}$'}$ is primitive recursive.
+\end{exercise}
+\begin{proof}
+Let me first write down the \emph{skeleton}. We don't need $g$ because $f(0)$ is just $0$. We may also do $g(x)=Z(x)=0$:
+            \begin{equation}
+                \label{eq:floor-root-x}
+                \begin{aligned}
+                    h_2(x_1,x_2)&=\;??\\
+                    &\text{And,}\\
+                    f(0)&=Z(x)\\
+                    f(x_1+1)&=h_2(x_1,f(x_1))
+                \end{aligned}
+            \end{equation}
+
+We need to define $h_2$.
+
+\begin{reflection}
+    Hmm. Tricky again! The floor function is introduced because $\sqrt{x}$ may not be integral or rational; flooring converts the argument into an integer. But the $h_2$ function seems elusive.
+\end{reflection}
+\begin{reflection}[Patience is key, but ...]
+    The definition of $h_2$ is still elusive\dots
+
+    I made a table of applications of $h_2$ to small arguments. That helps!
+\begin{table}[H]
+  \begin{center}
+    \caption{Applications of $f,h_2$ to a Few Small Arguments. What is $h_2$?}
+    \label{tab:floor-root-x}
+    \begin{tabular}{|l|l|l|l|} 
+      \hline
+        \textbf{$f$} & \textbf{$h_2$} & \textbf{$h_2$ Simplified} & \textbf{$h_2$ Return}\\
+      \hline
+        $f(9)$ & $h_2(\sqrt{8},\lfloor\sqrt{8}\rfloor)$ & $h_2(2.82, 2)$ & $\boldsymbol{3}$\\
+      \hline
+        $f(8)$ & $h_2(\sqrt{7},\lfloor\sqrt{7}\rfloor)$ & $h_2(2.64, 2)$ & $2$\\
+      \hline
+        $f(7)$ & $h_2(\sqrt{6},\lfloor\sqrt{6}\rfloor)$ & $h_2(2.44, 2)$ & $2$\\
+      \hline
+        $f(6)$ & $h_2(\sqrt{5},\lfloor\sqrt{5}\rfloor)$ & $h_2(2.23, 2)$ & $2$\\
+      \hline
+        $f(5)$ & $h_2(\sqrt{4},\lfloor\sqrt{4}\rfloor)$ & $h_2(2, 2)$ & $2$\\
+      \hline
+        $f(4)$ & $h_2(\sqrt{3},\lfloor\sqrt{3}\rfloor)$ & $h_2(1.73, 1)$ & $\boldsymbol{2}$\\
+      \hline
+        $f(3)$ & $h_2(\sqrt{2},\lfloor\sqrt{2}\rfloor)$ & $h_2(1.41, 1)$ & $1$\\
+      \hline
+        $f(2)$ & $h_2(\sqrt{1},\lfloor\sqrt{1}\rfloor)$ & $h_2(1, 1)$ & $1$\\
+      \hline
+        $f(1)$ & $h_2(\sqrt{0},\lfloor\sqrt{0}\rfloor)$ & $h_2(1, 0)$ & $\boldsymbol{1}$\\
+      \hline
+        $f(0)$ & NA & NA & NA, $f$ returns $0$\\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+
+    Initially, I guessed it incorrectly. But then, something struck me. I observed that $h_2(x_1,x_2)$ is a step function returning $x_2$, stepping up to $x_2+1$ only when its first argument is the square root of a number one less than a perfect square (e.g., $\sqrt{8},\sqrt{3}$), and its second argument is always an integer. Here is an attempt to define it:
+     
+    \begin{equation}
+        \label{eq:floor-sqrt-x-1}
+        h_2(x_1,x_2)=\begin{cases}
+            x_2, & \text{if $(x_2+1)^2-(x_1)^2>1$}\\
+            x_2+1, & \text{otherwise}
+		 \end{cases}
+    \end{equation}
+
+    This appears to work. And we know how to convert such functions into boolean functions (using $sg,\overline{sg}$).
+\end{reflection}
+
+We assume a function, $\text{sq}$, which squares its argument.
+    \begin{equation}
+        \label{eq:floor-sqrt-x-2}
+        \begin{aligned}
+            h_2(x_1,x_2)&=x_2+\overline{sg}(\text{sq}(x_2)-\text{sq}(x_1)-1)\\
+            &\text{And,}\\
+            f(0)&=Z(x)\\
+            f(x_1+1)&=h_2(x_1,f(x_1))
+        \end{aligned}
+    \end{equation}
+
+Therefore, $f(x)=\text{`The largest integer less than or equal to $\sqrt{x}$'}$ is primitive recursive.
+
+\end{proof}
 
 
 \printbibliography
