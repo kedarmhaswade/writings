@@ -117,6 +117,11 @@
   title=Box \thetcbcounter: #1
 }
 % general-purpose box with counters and labels for referencing
+
+% the stylized "diagonal" fraction look
+\usepackage{xfrac}
+% the stylized "diagonal" fraction look
+
 % tbd command
 \newcommand{\tbd}{
     \vspace{5mm}
@@ -652,7 +657,7 @@ Show that integer division is primitive recursive. Make and state a convention a
 \end{exercise}
 \textbf{Solution.}
 
-Let's denote it by:$\;\textfractionsolidus\;$.
+Let's denote it by:$\sfrac{}{}$
 
 \begin{reflection}
     I took inspiration from JavaScript, which defines anything divided by 0 to be a special literal, \texttt{NaN}, which is not a real number.
@@ -663,8 +668,8 @@ Let's denote it by:$\;\textfractionsolidus\;$.
                     g(x)&=\texttt{NaN}\\
                     h_3(x_1,x_2,x_3)&=??\\
                     &\text{And,}\\
-                    x_1\;\textfractionsolidus\;0=g(x_1)\\
-                    x_1\;\textfractionsolidus\;(x_2+1)&=h_3(x_1,x_2,x_1\;\textfractionsolidus\;x_2)
+                    x_1\;\sfrac{}{}\;0=g(x_1)\\
+                    x_1\;\sfrac{}{}\;(x_2+1)&=h_3(x_1,x_2,x_1\;\sfrac{}{}\;x_2)
                 \end{aligned}
             \end{equation}
 \begin{reflection}
@@ -686,11 +691,11 @@ Let's denote it by:$\;\textfractionsolidus\;$.
 
     \begin{equation}
       \label{eq:integer-division-another-recursion}
-      x_1\;\textfractionsolidus\;x_2=
+        x_1\;\sfrac{}{}\;x_2=
         \begin{cases}
             \texttt{NaN}, & \text{if $x_2=0$,}\\
             0, & \text{else if $x_1<x_2$,}\\
-            1 + (x_1-x_2)\;\textfractionsolidus\;x_2&\text{otherwise}
+            1 + (x_1-x_2)\;\sfrac{}{}\;x_2&\text{otherwise}
 		 \end{cases}
     \end{equation}
 
@@ -773,7 +778,7 @@ We need to define $h_2$.
     This appears to work. And we know how to convert such functions into boolean functions (using $sg,\overline{sg}$).
 \end{reflection}
 
-We assume a function, $\text{sq}$, which squares its argument.
+We assume a function, $\text{sq}$, which squares its argument: $\text{sq}(x)=x\times x$. Since multiplication is primitive recursive, $\text{sq}$ is so too.
     \begin{equation}
         \label{eq:floor-sqrt-x-2}
         \begin{aligned}
@@ -788,6 +793,34 @@ Therefore, $f(x)=\text{`The largest integer less than or equal to $\sqrt{x}$'}$ 
 
 \end{proof}
 
+\begin{exercise}
+    Suppose that $f$ is primitive recursive.
+
+    Show that 
+    \begin{equation}
+        \label{eq:sum-of-primitive-recursive-functions}
+        \begin{aligned}
+            \sum_{y\leq z}f(x_1,x_2,\dots,y)&=f(x_1,x_2,\dots,0)+\dots+f(x_1,x_2,\dots,z)
+        \end{aligned}
+    \end{equation}
+    is primitive recursive.
+\end{exercise}
+\begin{reflection}[Notational Fastidiousness ...]
+    Equation [\ref{eq:sum-of-primitive-recursive-functions}] is fine, but I will employ a more standard notation:
+    \begin{equation}
+        \label{eq:std-sum-of-primitive-recursive-functions}
+        \begin{aligned}
+            \sum_{y=0}^{z}f(x_1,x_2,\dots,y)&=f(x_1,x_2,\dots,0)+\dots+f(x_1,x_2,\dots,z)
+        \end{aligned}
+    \end{equation}
+
+    We are asked to prove that a function that returns a finite sum of applying a primitive recursive function to various arguments is also primitive recursive.
+
+    Informally, since $f, +$ are primitive recursive, by definition, $f_2(x_1)=f(x_1,0)+f(x_1,1)$ is primitive recursive, but we have to prove it rigorously.
+\end{reflection}
+\begin{proof}
+
+\end{proof}
 
 \printbibliography
 \end{document}
