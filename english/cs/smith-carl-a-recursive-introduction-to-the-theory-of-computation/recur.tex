@@ -820,7 +820,63 @@ Therefore, $f(x)=\text{`The largest integer less than or equal to $\sqrt{x}$'}$ 
 \end{reflection}
 \begin{proof}
 
+    I need to write down the rigorous version of the observation above.
+
+    \tbd
+
 \end{proof}
 
+\begin{exercise}
+    Suppose that $f$ is primitive recursive.
+
+    Show that 
+    \begin{equation}
+        \label{eq:sum-of-primitive-recursive-functions}
+        \begin{aligned}
+            \Pi_{y=0}^{y\leq z}f(x_1,x_2,\dots,y)&=f(x_1,x_2,\dots,0)\times f(x_1,x_2,\dots,1)\times\dots\times f(x_1,x_2,\dots,z)
+        \end{aligned}
+    \end{equation}
+    is primitive recursive.
+\end{exercise}
+\begin{proof}
+    \begin{reflection}
+    Informally, since $f, \times$ are primitive recursive, by definition, $f_2(x_1)=f(x_1,0)\times f(x_1,1)$ is primitive recursive, but we have to prove it rigorously.
+    \end{reflection}
+
+    \tbd
+\end{proof}
+
+\begin{exercise}
+    Suppose that $g_1,g_2,\text{ and }, g_3$ are primitive recursive functions of $n$ arguments, and that $h_1$ and $h_2$ are primitive recursive predicates of $n$ arguments. Show that $f$, a function of $n$ arguments defined as follows, is primitive recursive:
+    \begin{equation}
+        \label{eq:3-primitive-recursive-predicates}
+        f(x_1,x_2,\dots,x_n)=\begin{cases}
+            g_1(x_1,x_2,\dots,x_n), & \text{if $h_1(x_1,x_2,\dots,x_n)$,}\\
+            g_2(x_1,x_2,\dots,x_n), & \text{else if $h_2(x_1,x_2,\dots,x_n)$ and not $h_1(x_1,x_2,\dots,x_n)$,}\\
+            g_3(x_1,x_2,\dots,x_n), & \text{otherwise.}
+		 \end{cases}
+    \end{equation}
+
+\end{exercise}
+
+
+    We prove this by exhaustion.
+
+    Since $h_1,h_2$ return either \texttt{true} or \texttt{false} on every input, by multiplication theorem, the number of choices of values of $h_1,h_2$ is 4. The following table emerges:
+\begin{table}[H]
+  \begin{center}
+    \caption{$f$ is Either $g_1,g_2$, or $g_3$}
+    \label{tab:f-is-g}
+    \begin{tabular}{|l|l|l|} 
+      \hline
+        $h_1$ & $h_2$ & $f$\\
+      \hline
+        \texttt{true} & \texttt{false} & $g_1$\\
+    \end{tabular}
+  \end{center}
+\end{table}
+
+
 \printbibliography
+
 \end{document}
