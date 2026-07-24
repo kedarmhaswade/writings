@@ -712,7 +712,7 @@ Let's denote it by:$\sfrac{}{}$
 \begin{exercise}[$\left\lfloor{\sqrt{x}}\right\rfloor$]
     Show that $f(x)=\text{`The largest integer less than or equal to $\sqrt{x}$'}$ is primitive recursive.
 \end{exercise}
-\begin{proof}
+\textbf{Solution}.
 Let me first write down the \emph{skeleton}. We don't need $g$ because $f(0)$ is just $0$. We may also do $g(x)=Z(x)=0$:
             \begin{equation}
                 \label{eq:floor-root-x}
@@ -791,8 +791,6 @@ We assume a function, $\text{sq}$, which squares its argument: $\text{sq}(x)=x\t
 
 Therefore, $f(x)=\text{`The largest integer less than or equal to $\sqrt{x}$'}$ is primitive recursive.
 
-\end{proof}
-
 \begin{exercise}
     Suppose that $f$ is primitive recursive.
 
@@ -818,13 +816,10 @@ Therefore, $f(x)=\text{`The largest integer less than or equal to $\sqrt{x}$'}$ 
 
     Informally, since $f, +$ are primitive recursive, by definition, $f_2(x_1)=f(x_1,0)+f(x_1,1)$ is primitive recursive, but we have to prove it rigorously.
 \end{reflection}
-\begin{proof}
-
     I need to write down the rigorous version of the observation above.
 
     \tbd
 
-\end{proof}
 
 \begin{exercise}
     Suppose that $f$ is primitive recursive.
@@ -838,15 +833,14 @@ Therefore, $f(x)=\text{`The largest integer less than or equal to $\sqrt{x}$'}$ 
     \end{equation}
     is primitive recursive.
 \end{exercise}
-\begin{proof}
     \begin{reflection}
     Informally, since $f, \times$ are primitive recursive, by definition, $f_2(x_1)=f(x_1,0)\times f(x_1,1)$ is primitive recursive, but we have to prove it rigorously.
     \end{reflection}
 
     \tbd
-\end{proof}
 
 \begin{exercise}
+    \label{ex:3-2-primitive-recursive}
     Suppose that $g_1,g_2,\text{ and }, g_3$ are primitive recursive functions of $n$ arguments, and that $h_1$ and $h_2$ are primitive recursive predicates of $n$ arguments. Show that $f$, a function of $n$ arguments defined as follows, is primitive recursive:
     \begin{equation}
         \label{eq:3-primitive-recursive-predicates}
@@ -859,6 +853,8 @@ Therefore, $f(x)=\text{`The largest integer less than or equal to $\sqrt{x}$'}$ 
 
 \end{exercise}
 
+\textbf{Solution}.
+\begin{proof}
 
     We prove this by exhaustion.
 
@@ -871,12 +867,59 @@ Therefore, $f(x)=\text{`The largest integer less than or equal to $\sqrt{x}$'}$ 
       \hline
         $h_1$ & $h_2$ & $f$\\
       \hline
+        \texttt{true} & \texttt{true} & $g_1$\\
+      \hline
         \texttt{true} & \texttt{false} & $g_1$\\
+      \hline
+        \texttt{false} & \texttt{true} & $g_2$\\
+      \hline
+        \texttt{false} & \texttt{false} & $g_3$\\
+      \hline
     \end{tabular}
   \end{center}
 \end{table}
 
+There is no input $(x_1,x_2,\dots,x_n)$ such that when $f$ is applied to it, the result is not one of $g_1,g_2$, or $g_3$. Thus, in any case, $f$ returns what either of $g_1,g_2$, or $g_3$ returns. Since those functions are primitive recursive, in effect, $f$ is also primitive recursive.
 
+\end{proof}
+\begin{exercise}
+    State and prove the $n$-ary version of the previous exercise (\ref{ex:3-2-primitive-recursive}).
+
+    You start with $n$ primitive recursive functions and $n-1$ primitive recursive predicates. The resulting scheme is called `course of values' recursion.
+\end{exercise}
+\textbf{Solution}.
+First, we state the problem:
+    \label{ex:n-primitive-recursive}
+    Suppose that $g_1,g_2,g_3,\dots, g_n$ are $n$ primitive recursive functions of $m$ arguments, and that $h_1,h_2,\dots,h_{n-1}$ are $n-1$ primitive recursive predicates of $m$ arguments. Show that $f$, a function of $m$ arguments defined as follows, is primitive recursive\footnote{}:
+    \begin{equation}
+        \label{eq:n-primitive-recursive-predicates}
+        f(x_1,x_2,\dots,x_m)=\begin{cases}
+            g_1(x_1,x_2,\dots,x_m), & \text{if $h_1(x_1,x_2,\dots,x_m)$,}\\
+            g_2(x_1,x_2,\dots,x_m), & \text{else if $h_2(x_1,x_2,\dots,x_m)$ and not $h_1(x_1,x_2,\dots,x_m)$,}\\
+            g_3(x_1,x_2,\dots,x_m), & \text{else if $h_3(x_1,x_2,\dots,x_m)$ and not $h_2(x_1,x_2,\dots,x_m)$}\\
+            &\text{and not $h_1(x_1,x_2,\dots,x_m)$}\\
+            \vdots & \vdots\\
+            g_{n-1}(x_1,x_2,\dots,x_m), & \text{else if $h_{n-1}(x_1,x_2,\dots,x_m)$ and not $h_i(x_1,x_2,\dots,x_m)$}\\
+            & \forall i, 1\leq i\leq n-2,\\
+            g_n(x_1,x_2,\dots,x_m), & \text{otherwise.}
+		 \end{cases}
+    \end{equation}
+
+\begin{proof}
+
+    We use a direct argument. To improve the readability of the notation, we will not specify the arguments of $f$, any of the $g$ functions, and any of the $h$ predicates. For example, we'll denote $f(x_1,x_2,\dots,x_m)$ as $f()$.
+
+    There are $n$ $g$ functions (all primitive recursive) and $n-1$ $h$ predicates (all primitive recursive).
+
+    We want to show that our scheme of applying the $n-1$ predicates \emph{in order} divides \emph{all} possible inputs $(x_1,x_2,\dots,x_m)$ into $n$ groups. 
+
+    $h_1$ divides all inputs into two groups: all members of one group (say, \texttt{1T}) return \texttt{true}, and those of the other group (say, \texttt{1F}) return \texttt{false}. At this point, the number of groups is $2=1+1$, that is, one more than the number of predicates applied so far. 
+
+    If we need to apply $h_2$ to some input (because applying $h_1$ to it returns \texttt{false}), the \texttt{1F} group is divided into two groups in a similar way: \texttt{2T} and \texttt{2F}. Again, at this point, the number of groups is $3=2+1$, that is, one more than the number of predicates applied so far. If we had no more predicates, the process stops. Applying $f$ to any input now would result in applying $g_1,g_2$, or $g_3$ to it. 
+
+    The `process' ensures that having to apply a new predicate (which increments the number of predicates) also increments the number of groups for the `universe of inputs'. $n-1$ predicates create $n$ groups. Inductively, this always remains true. $f$ must therefore be, in effect, one of $g_1,g_2,\dots,g_n$.
+
+\end{proof}
 \printbibliography
 
 \end{document}
