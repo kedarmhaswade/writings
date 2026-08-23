@@ -70,8 +70,8 @@
 %images
 \usepackage{graphicx}
 \usepackage{float}
-\usetikzlibrary{graphs,graphdrawing,intersections,calc,patterns}
-\usegdlibrary{trees}
+\usetikzlibrary{graphs,graphdrawing,arrows.meta,intersections,calc,patterns}
+\usegdlibrary{trees,layered}
 %images
 % ---------- Typography ----------
 \usepackage{microtype}
@@ -110,7 +110,7 @@
 \tcbuselibrary{skins}
 
 % Create an environment called "mybox" with an automatic counter
-\NewTColorBox[auto counter, number within=section]{mybox}{o}{
+\NewTColorBox[auto counter]{mybox}{o}{
   colback=blue!15!white,
   colframe=blue!75!white,
   fonttitle=\bfseries,
@@ -217,6 +217,55 @@ operator that `looks back' to prior function values. There is also a \textbf{rec
     The first artifact of computation that we will dismiss is the notion that arguments may be of different types. All our inputs, outputs, temporary variables, etc., will be natural numbers (members of $\;\mathbb{N}$). We will argue informally that \textbf{all the other commonly used argument types are included solely for convenience of programming and are not essential to computation}.
 }
 \section{Random Access Machines}
+Smith provides a lucid description that we produce verbatim (emphasis is ours) here. This is the essence of all register-based, stored-program machines: 
+\begin{mybox}[RAM]
+    \label{box:ram}
+    All contemporary computers allow the `random' accessing of their memory. An address is sent to the memory which returns the data stored at the given address. The name `random access machine' stems from the fact that the earlier models were \emph{not random access}; they were based on sequential tapes or they were functional in nature. We will consider these models later. As a starting point of our investigation, we will consider a model that strongly resembles assembly language programming on a conventional computer. The model that we introduce will perform very simple operations on registers. 
+
+    Every real-world computer has a fixed amount of memory. This memory can be arbitrarily extended, at great loss of efficiency, by adding a tape or disk drive. Then the ultimate capacity of the machine is limited only by one's ability to manufacture or purchase tapes or disks. Not wanting to consider matters of efficiency just yet, our random access machine (RAM) will have a potentially infinite set of registers, $R_1,R_2,\dots$, each capable of holding any natural number. 
+
+    Notice that we have just eliminated main storage and peripheral storage (and their management) as artifacts of how we (necessarily) perform computations. \textbf{We will be concerned with data, and computation on that data}. The issues of input and output will not be addressed in any detail.
+
+    RAM programs will be abstractions of assembly language programs in the sense that they use a very limited set of instruction types and the \emph{only control structure allowed is the much maligned branch instruction}. There is nothing special about our choice of instructions.
+
+    Among the possible choices for instruction sets, the one chosen here is based on \emph{some nontechnical notion of simplicity}. 
+
+    \textbf{RAM programs are finite sequences of very basic instructions}. Hence, each RAM program will reference only finitely many of the registers. Even though the memory capacity of a RAM is unlimited, any computation described by a RAM program will access only finitely much data, unless, of course, the computation described never terminates.
+
+    In case of a non terminating computation, the amount of data accessed at any given time is finite. Each instruction may have a label, where label
+    names are chosen from the list: \texttt{N0,N1,\dots}. Each instruction is of one of the following seven types:
+    \begin{enumerate}
+        \item \texttt{INC Ri}: Increments the contents of the register \texttt{Ri}.
+        \item \texttt{DEC Ri}: Decrements the contents of the register \texttt{Ri}.
+        \item \texttt{CLR Ri}: `Clear's \texttt{Ri}, which now holds 0.
+        \item \texttt{Ri$\leftarrow$Rj}: \texttt{Ri} `becomes' or `gets' \texttt{Rj}; replaces the contents of \texttt{Ri} with those of \texttt{Rj}, whose contents (the source) aren't changed.
+        \item \texttt{JMP Nix}: If \texttt{x} is \texttt{a}, then the next instruction to execute is the closest \emph{preceding} instruction with label \texttt{Ni}. If \texttt{x} is \texttt{b} then the next instruction to execute is the closest \emph{following} instruction with label \texttt{Ni}. The \texttt{a} stands for `above' and the \texttt{b} for `below.' \emph{This unusual convention allows for the pasting together of programs without paying attention to instruction labels}. This instruction can be called an `unconditional jump': the control will be transferred to the instruction labeled \texttt{Ni} above or below the current instruction.
+        \item \texttt{Rj JMP Nix}: Perform a \texttt{JMP} instruction as above if register \texttt{Rj} contains a 0. This instruction can be called a `conditional jump.' If \texttt{Rj} does not contain 0, then the control simply `falls through' to the next instruction in the program's text.
+        \item \texttt{CONTINUE} Do nothing.
+    \end{enumerate}
+\end{mybox}
+
+\begin{definition}[RAM Program]
+    \label{def:ram-program}
+    A RAM program is a finite sequence of instructions such that each \texttt{JMP} instruction (conditional or otherwise) has a valid destination, e.g., the label referred to in the instruction exists, and the final statement is a \texttt{CONTINUE}. 
+\end{definition}
+
+\begin{definition}[Halting]
+    \label{def:ram-program-halting}
+    A RAM program halts if and when it reaches the final \texttt{CONTINUE} statement. 
+\end{definition}
+\begin{definition}[A RAM Computatble Function]
+    \label{def:ram-computable-function}
+    A RAM program $\mathcal{P}$ computes a partial function $\phi(x_1,x_2,\dots,x_n)$ of $n$ arguments, if and only if 
+    \begin{enumerate}
+        \item $\mathcal{P}$ starts with $x_1,x_2,\dots,x_n$ in registers $R_1,R_2,\dots,R_n$ respectively,
+        \item All other registers used by $\mathcal{P}$ contain $0$, and
+        \item $\mathcal{P}$ halts only if $\phi(x_1,x_2,\dots,x_n)$ is defined and $R_1$ contains the value $\phi(x_1,x_2,\dots,x_n)$. 
+    \end{enumerate}
+
+    A partial function is \emph{RAM-computable} if some RAM program computes it. 
+
+\end{definition}
 \section{Partial Recursive Functions}
 \subsection*{Base Functions}
 Not all of these need be `functions', but are defined as such to keep the notation consistent.
@@ -920,6 +969,347 @@ First, we state the problem:
     The `process' ensures that having to apply a new predicate (which increments the number of predicates) also increments the number of groups for the `universe of inputs'. $n-1$ predicates create $n$ groups. Inductively, this always remains true. $f$ must therefore be, in effect, one of $g_1,g_2,\dots,g_n$.
 
 \end{proof}
+
+\begin{exercise}
+    Show that the primitive recursive predicates are closed under the operations of \texttt{and}, \texttt{or}, \texttt{not}, and \texttt{implication}.
+\end{exercise}
+\begin{reflection}
+    The so-called `closure property' is applied to certain sets. For example, we say that the set of natural numbers, $\mathbb{N}$, is closed under addition: $a+b$ returns a number that belongs to $\mathbb{N}$, the set of all primitive recursive functions is closed under the operation of forming functions by primitive recursion and composition.
+
+    What does he mean by `set of primitive recursive functions is closed under \texttt{and}'? Consider two primitive recursive predicates, $f_1,f_2$. Then, $(f_1\text{\texttt{ and }}f_2)$ returns either 0 or 1, not another predicate.
+\end{reflection}
+
+\tbd
+
+The book now discusses in more detail one of its core premises: datatype of variables over which functions are defined does not matter much. As it says in its Preface, it is only for convenience that programming languages provide various datatypes.
+
+Two passing examples are given where we have functions with 1) variables that are strings of 0's and 1's, and 2) variables that are pairs of natural numbers. In each case, the corresponding definitions (See equation [\ref{eq:base-functions}], definitions [\ref{def:primitive-recursion}], [\ref{def:composition}]) will need to be stated.
+
+\begin{definition}[Functions on Strings of 0's and 1's]
+    \label{def:functions-on-strings}
+    We collect a few mini-definitions concerning strings under this umbrella definition. The \emph{variable} is a string of 0's and 1's denoted by $x$.
+
+    An empty string $\epsilon$ is defined as a string of zero length. It serves the purpose for strings that 0 serves for natural numbers.
+
+    Juxtaposition denotes concatenation of strings.
+
+    The base function `erase' denoted by $E(x)$ erases its argument: $E(x)=\epsilon$.
+
+    The base function `concat 0' denoted by $S_0(x)$ appends a `0' to its argument: $S_0(x)=x0$.
+
+    The base function `concat 1' denoted by $S_1(x)$ appends a `1' to its argument: $S_1(x)=x1$.
+
+    The projection function, as usual, selects the said argument: $U^n_j(x_1,x_2,\dots,x_j,\dots,x_n)=x_j$.
+
+    Functions of 01-strings are defined by composition in a manner similar to the functions of natural numbers defined by composition (See definition [\ref{def:composition}]).
+
+    A function $f$ on $n$ strings is defined by primitive recursion of three functions of strings, $g$ of $n-1$ strings and $h_0,h_1$ of $n+1$ strings, as follows:
+
+    \begin{equation}
+        \label{eq:primitive-recursive-functions-of-strings}
+        \begin{aligned}
+            f(\epsilon,x_2,\dots,x_n)&=g(x_1,x_2,\dots,x_n)\\
+            f(y0,x_2,x_3,\dots,x_n)&=h_0(y,f(y,x_2,x_3,\dots,x_n),x_2,x_3,\dots,x_n)\\
+            f(y1,x_2,x_3,\dots,x_n)&=h_1(y,f(y,x_2,x_3,\dots,x_n),x_2,x_3,\dots,x_n)\\
+        \end{aligned}
+    \end{equation}
+\end{definition}
+
+\begin{reflection}
+    It does not matter, but why change the order and number of arguments? Isn't the following definition that aligns better with the definition of primitive recursive functions of natural numbers (See definition [\ref{def:primitive-recursion}]) equivalent ($g$ takes $n$ strings, $f$ takes $n+1$, and $h_0,h_1$ take $n+2$)? 
+    \begin{equation}
+        \label{eq:alt-primitive-recursive-functions-of-strings}
+        \begin{aligned}
+            f(x_1,\dots,x_{n},\epsilon)&=g(x_1,x_2,\dots,x_{n})\\
+            f(x_1,x_2,\dots,x_n,y0)&=h_0(x_1,x_2,\dots,x_n,y,f(x_1,x_2,\dots,x_n,y))\\
+            f(x_1,x_2,\dots,x_n,y1)&=h_1(x_1,x_2,\dots,x_n,y,f(x_1,x_2,\dots,x_n,y))\\
+        \end{aligned}
+    \end{equation}
+\end{reflection}
+
+
+\begin{exercise}
+    Show, using the full formalism, that the functions $dell$ and $con$ below are primitive recursive:
+\end{exercise}
+    \begin{equation}
+        \label{eq:dell-con}
+        \begin{aligned}
+            dell(x)&=\begin{cases}
+            \epsilon, & \text{if $x=\epsilon$,}\\
+            x\text{ with the last character (0 or 1) removed}, & \text{otherwise.}\\
+		 \end{cases}\\
+            con(x,y)&=xy
+        \end{aligned}
+    \end{equation}
+
+\textbf{Solution}.
+\begin{proof}
+    To prove that $dell$ is primitive recursive, we need to define the functions $g,h_0,h_1$, such that:
+    \begin{equation}
+        \label{eq:dell-1}
+        \begin{aligned}
+            dell(\epsilon) &= g()\\
+            dell(y0) &= h_0(y,dell(y))\\
+            dell(y1) &= h_1(y,dell(y))\\
+        \end{aligned}
+    \end{equation}
+
+    From the first equation above, $g$ is the empty string $\epsilon$. Functions $h_0,h_1$ just choose their first argument, $y$:
+    \begin{equation}
+        \label{eq:dell-2}
+        \begin{aligned}
+            g(x) &= \epsilon\\
+            h_0(x,y) &= x\\
+            h_1(x,y) &= x\\
+        \end{aligned}
+    \end{equation}
+
+    To prove that $con$ is primitive recursive, we need to define the functions $g,h_0,h_1$, such that:
+    \begin{equation}
+        \label{eq:con-1}
+        \begin{aligned}
+            con(x,\epsilon) &= g(x)\\
+            con(x,y0) &= h_0(x,y,con(x,y))\\
+            con(x,y1) &= h_1(x,y,con(x,y))\\
+        \end{aligned}
+    \end{equation}
+
+    It follows from the above that $g(x)$ is just the identity function: $g(x)=x$.
+
+    Some experimentation shows that $h_0, h_1$ return the 0- and 1-successor of the third argument respectively:
+    \begin{equation}
+        \label{eq:con-2}
+        \begin{aligned}
+            g(x) &= x\\
+            h_0(x,y,z) &= S_0(z)\\
+            h_1(x,y,z) &= S_1(z)\\
+        \end{aligned}
+    \end{equation}
+\end{proof}
+
+\begin{exercise}
+    Define the primitive recursive functions over variables that are pairs of natural numbers.
+\end{exercise}
+\textbf{Solution}.
+\begin{reflection}
+    We must define a pair of natural numbers denoted as $(x,y)$. Is $(x,y)$ different from $(y,x)$? Our choice dictates the operations we'll designate as `base functions.' It's a pair of natural numbers, so they retain some properties of natural numbers.
+\end{reflection}
+
+After some consideration, we adopt an \emph{ordered} pair. Therefore, we denote the ordered pair ($(\mathbb{N},\mathbb{N})$) of natural numbers as $(x,y)$. Functions on pairs may return pairs (pairs can be said to be `closed' under those functions), natural numbers, or something else.
+
+It's perhaps straightforward to designate a zero, two successors, and two projections of a pair:
+    \begin{equation}
+        \label{eq:base-functions-of-a-pair}
+        \begin{aligned}
+            Z(x,y)&=(0,0)\\
+            S_1(x,y)&=(x+1,y)\\
+            S_2(x,y)&=(x,y+1)\\
+            U_1(x,y)&=x\\
+            U_2(x,y)&=y
+        \end{aligned}
+    \end{equation}
+
+    Composition can be similar: A function $f$ is defined by composition of $g,h$ as: $f(x,y)=g(h(x,y))$, where $f,g,h$ accept and return a pair.
+
+    \begin{reflection}
+        I struggled with clarity here. Then, to some disgrace, I played chess. Not everything, except precious time of course, was lost. Fortunately, I recovered in time from the apparent loss of focus. Then, I made a deal with my daughter: I won't fall into the `unplanned chess abyss' for more than 4 hours in the next 5 weeks. Let's see if I follow through.
+
+        The struggle is with whether a pair of natural numbers makes sense \emph{only} as a pair. Is a pair of natural numbers a partition of a natural numbers? I favor not. A pair is just an ordered 2-tuple. This vision leads to a graph of pairs like the sequence of natural numbers. We use the two successor functions for each node:
+        \begin{figure}[H]
+            \centering
+            \tikz [>={Stealth[round,sep]}]
+            \graph[layered layout, nodes=draw]
+            {
+                "(0,0)" -> {"(1,0)" -> {"(2,0)" -> {"(3,0)" ->{"(....)"},"(2,1)"},"(1,1)" -> {"(2,1)","(1,2)"}},"(0,1)" -> {"(1,1)", "(0,2)" -> {"(1,2)","(0,3)" -> {"(.....)"}}}};
+            };
+        \end{figure}
+
+        The domain of all the `pair functions' is this infinite graph (which is also the set $\{(a,b)\mid a\in\mathbb{N},b\in\mathbb{N}\}$) of pairs, just like how the domain of all the `natural number functions' is $\mathbb{N}$.
+    \end{reflection}
+    
+    Let us first consider the case where we have four functions: $g$ taking one pair, $f$ two, and $h_1,h_2$ three. We define $f$ primitive-recursively:
+
+    \begin{equation}
+        \label{eq:primitive-recursive-on-pairs-1}
+        \begin{aligned}
+            f((x_0,y_0),(0,0))&=g(x_0,y_0)\\
+            f((x_0,y_0),(x+1,y))&=h_1((x_0,y_0),(x,y),f((x_0,y_0),(x,y)))\\
+            f((x_0,y_0),(x,y+1))&=h_2((x_0,y_0),(x,y),f((x_0,y_0),(x,y)))\\
+        \end{aligned}
+    \end{equation}
+
+
+\begin{exercise}
+    Prove that a primitive recursive function is defined on \textbf{all its arguments}.
+
+    Hint: Use a structural induction over the number of applications of primitive recursion and composition used to define a function.
+\end{exercise}
+\textbf{Solution}.
+\begin{reflection}
+    Initially, I was confused about the question. Reading further, however, made me realize that the question is about whether a primitive recursive function is defined for every member of its domain. Such relations are also called \emph{total}. A \emph{total} satisfies the `$\geq1$ arrows out' property, a function satisfies the `$\leq1$ arrows out' property. Thus, for a relation to be a `total function,' it must satisfy the `$=1$ arrows out' property. In other words, our relation (or function) must be \emph{defined} for every member of its domain.
+
+    Needn't (from the definition [\ref{def:primitive-recursion}]) $g,h$ be total for $f$ to be a total? I guess we assume that.
+
+    Setting up the recurrence shouldn't be very hard; I'll revisit this one.
+\end{reflection}
+\tbd
+
+\begin{reflection}
+    The next discussion in the book is somewhat confusing. He says several things that don't readily align with each other. He uses the above exercise to state that primitive recursive functions are total (they are defined for all their inputs) and shows a simple RAM program that does not halt:
+
+    \texttt{N1 INC R1}
+
+    \texttt{\quad JMP N1a}
+
+    \texttt{\quad CONTINUE}
+
+    This helps him conclude that there are RAM programs that compute functions that are not primitive recursive (I am uncomfortable with this).
+
+But I understand that he's trying to show that primitive recursive functions and RAM programs are equivalent models of computation.
+
+
+    This discussion apparently `motivates' him to define yet another operator to define functions from functions. This operator is similar to `\texttt{while} loops' in programming languages. I need to analyze this closely.
+\end{reflection}
+
+\begin{definition}[Functions defined by `Minimalization']
+    \label{def:minimalization}
+    A function $f$ of $n$ arguments is defined by minimalization from a function $h$ of $n+1$ arguments if $f(x_1,x_2,\dots,x_n)$ is the least $y$ such that
+
+    1) $h(x_1,x_2,\dots,x_n,y)=0$, and
+
+    2) $h(x_1,x_2,\dots,x_n,z)$ is defined for every $z<y$.
+
+    Such a $y$ may not exist, in which case, $f(x_1,x_2,\dots,x_n)$ is undefined. 
+\end{definition}
+
+\begin{reflection}
+    This definition requires that we evaluate 
+
+    $h(x_1,x_2,\dots,x_n,0)$, 
+
+    $h(x_1,x_2,\dots,x_n,1)$,
+
+    $h(x_1,x_2,\dots,x_n,2)$,
+
+    $\dots$.
+
+    (in other words, we `loop over' the last argument to $h$ and find the $y$ (if it exists) that satisfies both conditions).
+
+    How does one come up with such a `minimalization' definition (to rectify the above limitation of primitive recursion) in the first place?
+
+    I want to clarify this a bit more. How can I define a single variable function $f(x)\mid x\in\mathbb{N}$ from minimalization of another function $h(x,y)\mid x,y\in\mathbb{N}$? What does it all mean?
+
+    \textbf{Before that: `Partial' recursive functions consist of base functions ($Z,S,U$) combined using the rules of defining new functions by primitive recursion, composition, and minimalization}.
+\end{reflection}
+
+\begin{definition}[Class of Partial Recursive Functions]
+    \label{def:partial-recursive-functions}
+    The class of partial recursive functions is the smallest class of functions containing the base functions (equation [\ref{eq:base-functions}]) that is closed under the operations of primitive recursion (definition [\ref{def:primitive-recursion}]), composition (definition [\ref{def:composition}]) and minimalization (definition [\ref{def:minimalization}]).
+
+\end{definition}
+I skipped a few definitions and exercises! 
+
+\tbd
+
+\epigraph[author={Carl Smith}]{
+The partial recursive functions appear to be quite different from the RAM computable functions. The RAM programs suggest an imperative implementation while a functional programming approach is more suitable for the partial recursive functions. We will prove that the RAM computable functions are precisely the partial recursive functions. Toward that goal, we present our first theorem.
+}
+
+\begin{theorem}
+    Every partial recursive function is RAM computable.
+\end{theorem}
+\begin{proof}
+    We'll skip the detailed proof, but outline the sketch here.
+
+    This proof is a structural induction argument. For the base case, we show that the RAM computable functions contain the base functions.  The inductive step(s) start with some partial recursive functions that are assumed to be RAM computable and show that if they are combined via the operations of primitive recursion, composition and/ or minimalization, then the resultant function is RAM computable. 
+
+    The induction is over the implicit structure of the partial recursive functions. Each partial recursive function, $\psi$, is defined in terms of other partial recursive functions. Then $\psi$ will follow the functions used to define it in the ordering of the partial recursive functions. Hence, an ordering of the partial recursive functions is induced by their definitions.
+
+    The base functions ($Z,S,U$) form the beginning of the ordering. The implicit induction hypothesis assumes that all functions prior to $\psi$ in this unspecified ordering are RAM computable. The induction step then uses the definition of $\psi$ to show that $\psi$ is RAM computable. There will be a case for each possible way that $\psi$ could have been defined from partial recursive functions that appear before $\psi$ in the ordering.
+
+A RAM program for $Z$ (the Zero function):
+
+    \texttt{N0 CLR R1}
+
+    \texttt{\quad CONTINUE}
+
+A RAM program for $S$ (the Successor function):
+
+    \texttt{N0 INC R1}
+
+    \texttt{\quad CONTINUE}
+
+    A RAM program for $U_j^{n}$ (the Projection function):
+
+    \texttt{N0 R1\leftarrow Rj}
+
+    \texttt{\quad CONTINUE}
+
+
+    Thus, all the primitive recursive base functions are RAM computable.
+
+
+    Suppose that $f$, a function of $n+1$ arguments, is defined by primitive recursion from $g$ and $h$. Suppose $\mathcal{P}_g$ is a RAM program computing $g$ and $\mathcal{P}_h$ is a RAM program computing $h$. Suppose that neither $\mathcal{P}_g$ nor $\mathcal{P}_h$ references any register $R_j$ for any $j\geq k$. Let $N1$ be a label that is not used in $\mathcal{P}_h$. Below is a program computing $f$.
+
+    \begin{reflection}
+        Smith tries to teach us how to stitch existing RAM programs together to write other RAM programs. We have all used the essential facility of `defining' and `calling' functions or procedures in higher-level programming languages. Smith's idea sounds similar, however, we must do it with the 7 instructions (see box [\ref{box:ram}]).
+
+        Our job is to write a RAM program using these instructions to calculate $f$, which is defined (definition [\ref{def:primitive-recursion}]) primitive-recursively from $g,h$, given their RAM programs.
+
+        I am used to writing RAM programs in higher-level languages, where `functions' are taken for granted. Here, Smith wants us to not assume that facility. Am I excited to write this? As an assignment, yes, but as a matter of practicality, not so much. This is even more so when you feel that your progress is slow.
+
+
+        \textbf{I read the program. It is a well-written program; an excellent example of how much can be done using simple constructs! I changed my mind. I decided to analyze it properly}.
+
+        It is a faithful reproduction of the definition [\ref{def:primitive-recursion}]. It clearly demonstrates that recursion and iteration (realized by the so-called `loops') are equivalent. Smith sets up the initial conditions, invokes $\mathcal{P}_g$, and then `loops over' the last argument ($y+1$) of $f$ (which is also the penultimate argument of $\mathcal{P}_h$), while preserving the result of each invocation. One must be precise, but I understand the program logic.
+
+    \end{reflection}
+
+
+\begin{table}[H]
+  \begin{center}
+    \caption{Primitive Recursion is RAM-computable}
+    \label{tab:primitive-recursion-is-ram-computable}
+    \begin{tabular}{|l|l|} 
+      \hline
+        \qquad$\mathtt{R_{k+1}\leftarrow R_1}$ & \texttt{Save the $n$ arguments to $g,f,h$}\\ \hline
+        \qquad$\vdots$&\texttt{These $n$ arguments are initially}\\ \hline
+        \qquad$\mathtt{R_{k+n}\leftarrow R_n}$&\texttt{placed in as many registers $\mathtt{R_1}$ to $\mathtt{R_n}$}\\ \hline
+        \qquad$\mathtt{CLR\quad R_{k+n+1}}$&\texttt{Initialize the iteration number}\\ \hline
+        \qquad$\mathtt{R_k\leftarrow R_{n+1}}$&\texttt{The $n+1^{th}$ arg to $f$ is $y+1$}\\ \hline
+        \qquad&\texttt{Treat it as the number of iterations}\\ \hline
+        \qquad$\mathtt{P_g}$&\texttt{Compute $g$; its arguments are in place}\\ \hline
+        \qquad$\mathtt{R_{k+n+2}\leftarrow R_1}$&\texttt{$\mathcal{P}_g$ places $g$'s return value in $\mathtt{R_1}$; save it}\\ \hline
+        $\mathtt{N1\quad R_k\;JMP\;N2b}$&\texttt{Test for termination;$\mathtt{R_k}$ had preserved num iterations}\\ \hline
+        \qquad$\mathtt{R_1\leftarrow R_{k+1}}$ & \texttt{Restore the $n$ arguments to $g,f,h$}\\ \hline
+        \qquad$\vdots$&\\ \hline
+        \qquad$\mathtt{R_n\leftarrow R_{k+n}}$&\\ \hline
+        \qquad$\mathtt{R_{n+1}\leftarrow R_{k+n+1}}$&\texttt{$(n+1)^{th}$ argument of $f$}\\ \hline
+        \qquad$\mathtt{R_{n+2}\leftarrow R_{k+n+2}}$&\texttt{$(n+2)^{th}$ argument of $h$}\\ \hline
+        \qquad$\mathtt{CLR\quad R_{n+3}}$&\texttt{Clear scratch registers} \\ \hline
+        \qquad$\vdots$&\\ \hline
+        \qquad$\mathtt{CLR\quad R_{k-1}}$& \\ \hline
+        \qquad$\mathtt{P_h}$&\texttt{Compute $h$; its arguments are in place}\\ \hline
+        \qquad$\mathtt{R_{k+n+2}\leftarrow R_1}$&\texttt{$\mathcal{P}_h$ places $h$'s return value in $\mathtt{R_1}$; save it}\\ \hline
+        \qquad$\mathtt{INC\;R_{k+n+1}}$&\texttt{Prepare for the next iteration}\\ \hline 
+        \qquad$\mathtt{DEC\;R_{k}}$&\texttt{$\mathtt{R_k}$ had $y+1$ to begin with}\\ \hline 
+        \qquad$\mathtt{JMP\;N1a}$&\\ \hline
+        \texttt{N2\; CONTINUE}&\\ \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+Hence, the result of combining RAM computable functions by primitive recursion will always result in a RAM computable function. Now, continuing with the inductive step, we proceed to consider combining RAM programs by composition (See definition [\ref{def:composition}]).
+
+\begin{reflection}
+    This one feels much easier: Arrange for a loop to `load up' each of the $m$ $\mathcal{P}_h$ programs that receive the $n$ arguments in place. The results are collected in $m$ registers. Then $\mathcal{P}_g$ is loaded and run, effectively calculating $f$. 
+
+    I will skip the program.
+\end{reflection}
+
+Hence, if RAM computable functions are combined by composition, the result is a RAM computable function.
+
+\end{proof}
+
 \printbibliography
 
 \end{document}

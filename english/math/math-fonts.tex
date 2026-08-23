@@ -1,0 +1,112 @@
+% Source - https://tex.stackexchange.com/a/30066
+% Posted by Mico, modified by community. See post 'Timeline' for change history
+% Retrieved 2026-08-09, License - CC BY-SA 4.0
+
+% !TeX program = lualatex
+\documentclass{article}
+\usepackage{xfrac,unicode-math}
+\defaultfontfeatures{Scale=MatchLowercase}
+
+%% Load 10 math fonts; 1 of them with and without some "stylistic sets"
+\setmathfont{Latin Modern Math}[version=lm]
+\setmathfont{XITS Math}[version=xits]
+\setmathfont{Stix Math}[version=stix]
+\setmathfont{Stix Two Math}[version=stix2]  % https://github.com/stipub/stixfonts/
+\setmathfont{Stix Two Math}[StylisticSet={1,2,8}, version=stix2_128] 
+\setmathfont{TeX Gyre Termes Math}[version=termes]
+\setmathfont{Cambria Math}[version=cambria]
+\setmathfont{TeX Gyre Pagella Math}[version=pagella]
+\setmathfont{Asana Math}[version=asana]
+\setmathfont{Libertinus Math}[version=libertinus]
+\setmathfont{TeX Gyre DejaVu Math}[version=dejavu]
+%%\setmathfont{Neo Euler}[version=euler] % status: "abandoned"
+
+\setlength\parindent{0pt} % just for this example
+\newcommand{\abc}{abcdefghijklmnopqrstuvwxyz}
+\newcommand{\ligs}{\ ff fi fl ffi ffl}
+\newcommand{\abctextrm}{Text roman:  \abc\ligs}
+\newcommand{\abctextit}{Text italic: \ \ \textit{\abc\ligs}}
+\newcommand{\abcmathit}{Math italic: \ $\abc$}
+\newcommand{\formulas}{%
+  $\displaystyle
+   \int_{0}^{1}\! x^{2}\,\mathrm{d}x = \sfrac{1}{3} 
+   \qquad
+   \sum_{k=0}^{\infty} \frac{1}{k^{2}}=\frac{\pi^{2}}{6}
+   \qquad 
+   \mathcal{ABC}\ \mathfrak{ABC}\ \mathbb{CNQR}$}
+\newcommand{\doall}{\abctextrm\par\abctextit\par\abcmathit\par\formulas}
+
+\begin{document}
+
+%% Latin Modern (the default on most systems)
+\setmainfont{Latin Modern Roman}
+\mathversion{lm}
+\section*{Latin Modern Roman, Latin Modern Math}
+\doall
+
+%% Various Times Roman clones
+\setmainfont{XITS}
+\mathversion{xits}
+\section*{XITS, XITS Math}
+\doall
+
+\setmainfont{STIX}
+\mathversion{stix}
+\section*{STIX, STIX Math}
+\doall
+
+\clearpage
+\setmainfont{Stix Two Text}
+\mathversion{stix2}
+\section*{Stix Two Text, Stix Two Math}
+\doall
+
+\setmainfont{Stix Two Text}
+\mathversion{stix2_128}
+\section*{Stix Two Text, Stix Two Math w/ stylistic sets 1, 2 \& 8}
+\doall
+
+\setmainfont{TeX Gyre Termes}
+\mathversion{termes}
+\section*{Termes, Termes Math}
+\doall
+
+\clearpage
+%% Palatino clones
+\setmainfont{TeX Gyre Pagella}
+\mathversion{pagella}
+\section*{Pagella, Pagella Math}
+\doall
+
+\setmainfont{Palatino nova}[UprightFont=*-Regular,
+             BoldFont=*-Bold, ItalicFont=*-Italic]
+\mathversion{asana}
+\section*{Palatino nova, Asana Math}
+\doall
+
+%% Others
+
+\setmainfont[Ligatures={TeX,Common}]{Cambria}
+\mathversion{cambria}
+\section*{Cambria, Cambria Math}
+\doall
+
+\clearpage
+\setmainfont{Libertinus Serif}
+\mathversion{libertinus}
+\section*{Libertinus Serif, Libertinus Math}
+\doall
+
+\setmainfont{DejaVu Serif}
+\mathversion{dejavu}
+\section*{DejaVu Serif, DejaVu Math}
+\doall
+
+
+%%  Neo Euler Math has status "abandoned"
+%\setmainfont{Palatino Linotype}
+%\mathversion{euler}
+%\section*{Palatino Linotype, Neo Euler Math}
+%\doall
+\end{document}
+
