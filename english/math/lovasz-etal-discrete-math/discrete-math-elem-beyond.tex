@@ -1,0 +1,238 @@
+% use lualatex to compile, for some reason xelatex fails for the {Libertinus Serif} font.
+\documentclass[11pt]{book}
+%\documentclass[11pt]{amsart} % fails on title, date, etc.
+
+% ---------- Fonts (LuaLaTeX / XeLaTeX) ----------
+\usepackage{fontspec}
+\setmainfont{Libertinus Serif}
+%\setmainfont{TeX Gyre Pagella}
+%\setsansfont{TeX Gyre Heros}
+\setmonofont{Inconsolata}
+
+% ---------- Page layout ----------
+\usepackage[a4paper,margin=1.1in]{geometry}
+
+% ---------- Math & theorem setup ----------
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{plain}
+%\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{exercise}{Exercise}
+\counterwithin{exercise}{section}
+
+
+
+\usepackage{xcolor}
+\newtheoremstyle{problemstyle} % name
+  {3pt} % Space above
+  {3pt} % Space below
+  {\normalfont} % Body font
+  {} % Indent
+  {\bfseries\color{blue}} % Theorem head font
+  {.} % Punctuation
+  { } % Space after head
+  {} % Head spec
+\theoremstyle{problemstyle}
+\newtheorem{problem}{Problem}[chapter]
+
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\renewcommand\qedsymbol{$\blacksquare$}
+% the reflection box
+\usepackage[framemethod=tikz]{mdframed}
+\theoremstyle{definition}
+\newtheorem{reflection}{Reflection}
+\mdfdefinestyle{reflectionbox}{
+  innertopmargin=\topskip,
+  roundcorner=5pt,
+  linecolor=cyan,
+  backgroundcolor=cyan!20,
+}
+\surroundwithmdframed[style=reflectionbox]{reflection}
+% the reflection box
+% quotes
+\usepackage[style=english]{csquotes}
+\MakeOuterQuote{"}
+% quotes
+
+% epigraphs
+% I chose epigraph-keys for its simplicity
+\usepackage{epigraph-keys}
+% epigraphs
+
+%images
+\usepackage{graphicx}
+\usepackage{float}
+\usetikzlibrary{graphs,graphdrawing,arrows.meta,intersections,calc,patterns}
+\usegdlibrary{trees,layered}
+%images
+% ---------- Typography ----------
+\usepackage{microtype}
+
+%plots
+\usepackage{pgfplots}
+%plots
+
+% multiple columns
+\usepackage{multicol}
+\setlength{\columnseprule}{1pt}
+\def\columnseprulecolor{\color{blue}}
+% multiple columns
+%multirow (tables) using makecell
+\usepackage{makecell}
+\renewcommand\theadfont{\bfseries}
+%multirow (tables) using makecell
+
+%canceling terms
+\usepackage{cancel}
+%canceling terms
+
+%customize lists
+\usepackage{enumitem}
+%customize lists
+
+% for dotdiv operator
+\usepackage{mathabx}
+% for dotdiv operator
+% comment out large portions, but document them in source 
+\usepackage{comment}
+% comment out large portions, but document them in source 
+
+% general-purpose box with counters and labels for referencing
+\usepackage{tcolorbox}
+\tcbuselibrary{skins}
+
+% Create an environment called "mybox" with an automatic counter
+\NewTColorBox[auto counter]{mybox}{o}{
+  colback=blue!15!white,
+  colframe=blue!75!white,
+  fonttitle=\bfseries,
+  title=Box \thetcbcounter: #1
+}
+% general-purpose box with counters and labels for referencing
+
+% the stylized "diagonal" fraction look
+\usepackage{xfrac}
+% the stylized "diagonal" fraction look
+
+% tbd command
+\newcommand{\tbd}{
+    \vspace{5mm}
+    \textbf{\textcolor{red}{\Large{TBD}}}
+    \vspace{5mm}
+}
+% tbd command
+% bib
+\usepackage[
+  backend=biber,
+  style=numeric
+]{biblatex}
+
+\addbibresource{refs.bib}
+% bib
+
+%macros
+%macros
+% https://github.com/plk/biber/issues/373
+\DeclareBibliographyAlias{movie}{misc}
+% https://github.com/plk/biber/issues/373
+% ---------- Hyperlinks ----------
+\usepackage[hidelinks]{hyperref}
+
+% ---------- Metadata ----------
+\title{Problems from \\ \emph{Discrete Mathematics {\tiny Elementary and Beyond}}
+\\ \emph{by L\'aszl\'o Lov\'asz \cite{lovasz-etal}}
+\\ }
+\author{Kedar Mhaswade}
+\date{23 August 2026}
+
+\begin{document}
+\maketitle
+\cleardoublepage
+\chapter*{}
+\thispagestyle{empty} % Remove headers and footers
+
+\vspace*{\fill} % Push the text vertically down the page
+
+\begin{center}
+    \textit{These solutions are mainly for my idea of fun, but are also dedicated to all the combinatorists past and present.}
+\end{center}
+
+\vspace*{\fill} % Center the text vertically on the page
+\cleardoublepage
+
+\begin{reflection}[Introduction]
+    These are the author's solutions to the problems from this amazing textbook (\cite{lovasz-etal}). They may occasionally sound like author's conversation with the reader (or even himself). Even if they are personal and appear in the public domain, they may help the reader, although the author isn't exactly sure how. He wrote them for 0) the love of mathematics and writing, 1) \LaTeX{} practice (of writing hopefully readable mathematics, albeit longer than appearing in standard texts), and 2) reliable archival (paper, on which most work is created, tends to get lost) that incurs minimal overhead.
+
+    These notes are interspersed with `reflection boxes' like this one. They are meant to express author's `rough' thinking process (mental catharsis of sorts), of which frustration is often an inseparable part. The author writes mostly in first person for an authentic conversational tone.
+
+    My best friend, Deepa Joshi, once asked me to write about the `trail of events' that led to whatever I was reading at the time she observed that I had opened yet another `good book.' I try to fulfill her wish: Reading Don Knuth's books is what I normally do\footnote{His books are like mathematical axioms; I don't need a `trail of events' that lead me to his books.}. While reading one of his books, it occurred to me that fixing some big gaps in my understanding of discrete mathematics (maybe I have forgotten things) would be a step in the right direction. I chose two books, from a wondrous garden of excellent books on combinatorics\footnote{The choice is very, very difficult.}: 1) Lov\'asz's present book (\cite{lovasz-etal}), which is supposedly elementary (at least partly), and 2) Robert Beeler's book, \emph{How to Count}.
+
+    So, I am starting with solutions to the problems from this book. I may occasionally write about the exposition, but, unlike my other attempts, these notes are primarily my solutions to the problems occurring in the book.
+
+    Why Lov\'asz? Because he is one\footnote{One other is the great Richard Stanley; I need to work hard to enjoy his book, Enumerative Combinatorics, which I plan to defer reading for now.} of Knuth's `heroes of combinatorics' (\cite{bhavana-knuth}). Another reason was that I had access to the digital copy of this book\footnote{Thanks to Springer, who made it available legally to the public during the recent pandemic years.}.
+
+\end{reflection}
+
+\section{Preface}
+
+\epigraph[author={Paul Halmos}, source={I Want to be a Mathematician \cite{halmos-iwtbam}}, width={0.7\textwidth}]
+{
+    Audience, level, and treatment--a description of such matters is what prefaces are supposed to be about.
+}
+
+\epigraph[author={Lov\'asz et.al.}, width={0.7\textwidth},source={Preface to \cite{lovasz-etal}}]
+{
+The aim of this book is not to cover `discrete mathematics' in depth (it should be clear from the description above that such a task would be ill-defined and impossible anyway). Rather, we discuss a number of selected results and methods, mostly from the areas of combinatorics and graph theory, with a little elementary number theory, probability, and combinatorial geometry.
+
+\dots
+
+Another important ingredient of mathematics is problem solving. You won't be able to learn any mathematics without dirtying your hands and trying out the ideas you learn about in the solution of problems. To some, this may sound frightening, but in fact, most people pursue this type of activity almost every day: Everybody who plays a game of chess or solves a puzzle is solving discrete mathematical problems. The reader is strongly advised to answer the questions posed in the text and to go through the problems at the end of each chapter of this book. Treat it as puzzle solving, and if you find that some idea that you came up with in the solution plays some role later, be satisfied that you are beginning to get the essence of how mathematics develops.
+}
+
+\chapter{Let's Count!}
+
+\section{A Party}
+The book introduces the art of counting gently, using a running example of seven friends partying at Alice's house on her birthday: Alice, Bob, Carl, Diane, Eve, Frank, and George. They initially sit at a round table and eat.
+
+Counting problems can be daunting. My main challenge is to think about a given counting problem in more than one equivalent way. 
+
+Authors choose not to explicitly declare the multiplication principle which is useful many a time:
+\begin{definition}[Multiplication Principle]
+If one choice can be made in $m_1$ ways and another choice in $m_2$ ways, and the two choices are independent, then the two choices together can be made in $m_1\cdot m_2$ ways.
+
+In general, if there are $n$ choices, the first one can be made in $m_1$ ways, second in $m_2$ ways, and so on, and the choices are independent, then the total number of ways in which those choices can be made together is $m_1\cdot m_2\cdot\dots\cdot m_n$ ways.
+\end{definition}
+
+\begin{exercise}
+    How many ways can these people be seated at the table if Alice, too, can sit anywhere?
+    \label{ex:1.1.1}
+\end{exercise}
+\textbf{Solution}.
+
+Since Alice can sit at one of the seven chairs, she can make the choice in seven ways. Once Alice makes a choice, Bob can choose any one of the remaining six seats. Is Bob's choice \emph{independent} of Alice's? Clearly, Bob can't choose the seat that Alice chose. However, regardless of that, Bob has six seats to choose from. The number of Bob's choices is independent of the choice Alice makes. From multiplication principle it follows that Alice and Bob can be seated in $7\cdot 6=42$ different ways. 
+
+This process continues in order and George has the Hobson's choice to take the only remaining seat when it's his turn to choose. 
+
+
+
+
+
+
+
+
+
+
+
+
+\printbibliography
+
+\end{document}
