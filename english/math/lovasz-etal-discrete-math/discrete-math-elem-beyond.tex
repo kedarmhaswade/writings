@@ -21,6 +21,7 @@
 \theoremstyle{plain}
 %\newtheorem{theorem}[definition]{Theorem}
 \newtheorem{theorem}{Theorem}
+\counterwithin{theorem}{section}
 \newtheorem{lemma}{Lemma}
 \newtheorem{proposition}{Proposition}
 \newtheorem{corollary}{Corollary}
@@ -99,9 +100,9 @@
 \usepackage{enumitem}
 %customize lists
 
-% for dotdiv operator
-\usepackage{mathabx}
-% for dotdiv operator
+% for dotdiv operator; but this package changes many symbols unpleasantly
+%\usepackage{mathabx}
+% for dotdiv operator; but this package changes many symbols unpleasantly
 % comment out large portions, but document them in source 
 \usepackage{comment}
 % comment out large portions, but document them in source 
@@ -112,8 +113,10 @@
 
 % Create an environment called "mybox" with an automatic counter
 \NewTColorBox[auto counter]{mybox}{o}{
-  colback=blue!15!white,
-  colframe=blue!75!white,
+  parbox=false,
+  before upper={\indent},
+  colback=pink!30!white,
+  colframe=red!75!white,
   fonttitle=\bfseries,
   title=Box \thetcbcounter: #1
 }
@@ -122,6 +125,16 @@
 % the stylized "diagonal" fraction look
 \usepackage{xfrac}
 % the stylized "diagonal" fraction look
+
+% for \num formatting
+\usepackage{siunitx}
+% for \num formatting
+% typeset algorithms
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+% typeset algorithms
+
+
 
 % tbd command
 \newcommand{\tbd}{
@@ -201,15 +214,22 @@ Another important ingredient of mathematics is problem solving. You won't be abl
 \chapter{Let's Count!}
 
 \section{A Party}
-The book introduces the art of counting gently, using a running example of seven friends partying at Alice's house on her birthday: Alice, Bob, Carl, Diane, Eve, Frank, and George. They initially sit at a round table and eat.
+This section introduces the art of counting gently, using a running example of seven friends partying at Alice's house on her birthday: Alice, Bob, Carl, Diane, Eve, Frank, and George. They initially sit at a round table and eat.
 
-Counting problems can be daunting. My main challenge is to think about a given counting problem in more than one equivalent way. 
+Counting problems can be daunting. 
+
+My main challenges in solving counting problems:
+\begin{itemize}
+    \item Interpret the given problem correctly. This makes a combinatorial problem as a `word problem.' The language skill is critical.
+    \item Think about a given counting problem in more than one equivalent way. 
+\end{itemize}
 
 Authors choose not to explicitly declare the multiplication principle which is useful many a time:
 \begin{definition}[Multiplication Principle]
-If one choice can be made in $m_1$ ways and another choice in $m_2$ ways, and the two choices are independent, then the two choices together can be made in $m_1\cdot m_2$ ways.
+    \label{def:mp}
+If one choice can be made in $m_1$ ways and another choice in $m_2$ ways, and the two choices are independent, then the two choices together can be made in $m_1\times m_2$ ways.
 
-In general, if there are $n$ choices, the first one can be made in $m_1$ ways, second in $m_2$ ways, and so on, and the choices are independent, then the total number of ways in which those choices can be made together is $m_1\cdot m_2\cdot\dots\cdot m_n$ ways.
+In general, if there are $n$ choices, the first one can be made in $m_1$ ways, second in $m_2$ ways, and so on, and the choices are independent, then the total number of ways in which those choices can be made together is $m_1\times m_2\times\dots\times m_n$.
 \end{definition}
 
 \begin{exercise}
@@ -218,15 +238,618 @@ In general, if there are $n$ choices, the first one can be made in $m_1$ ways, s
 \end{exercise}
 \textbf{Solution}.
 
-Since Alice can sit at one of the seven chairs, she can make the choice in seven ways. Once Alice makes a choice, Bob can choose any one of the remaining six seats. Is Bob's choice \emph{independent} of Alice's? Clearly, Bob can't choose the seat that Alice chose. However, regardless of that, Bob has six seats to choose from. The number of Bob's choices is independent of the choice Alice makes. From multiplication principle it follows that Alice and Bob can be seated in $7\cdot 6=42$ different ways. 
+Since Alice can sit at one of the seven chairs, she can make the choice in seven ways. Once Alice makes a choice, Bob can choose any one of the remaining six seats. Is Bob's choice \emph{independent} of Alice's? Clearly, Bob can't choose the seat that Alice chose. However, regardless of that, Bob has six seats to choose from. The number of Bob's choices is independent of the choice Alice makes. From multiplication principle it follows that Alice and Bob can be seated in $7\times 6=42$ different ways. 
 
-This process continues in order and George has the Hobson's choice to take the only remaining seat when it's his turn to choose. 
+This process continues until George has the Hobson's choice of taking the only remaining seat when it's his turn to choose. It follows from the multiplication principle (See definition [\ref{def:mp}]) that the total number of ways these 7 friends can \emph{choose} 7 seats together is $7\times 6\times 5\times\dots\times 2\times 1=7!=5040$.
+
+We have counted the number of ways a seating arrangement can be done, given the constraints, without listing the arrangements and enumerating them. Enumerating is one way of counting, but it is not the only way. Counting \emph{without} enumerating is a huge time-saver, provided our argument (based on the multiplication principle in this case) is correct. 
+
+On the other hand, \emph{enumerating} such arrangements is also an important aspect of combinatorial problems. 
+
+\subsection*{Pairing Chess Players}
+$6$ friends ($2n$, in general) want to play chess on $3$ chessboards ($n$, in general). In how many ways can they be paired? Consider that the chessboards are numbers $1,2,3,\dots,n$.
+
+Well, we must convey the constraints clearly. The book calls a set of these constraints `a sense of pairing' and names them after the player who suggests them. At least three pairing schemes are suggested:
+\begin{enumerate}
+    \item Bob's sense (``I think you should not count it as a different pairing if two people at the same board switch places,'' says Bob, ``and it shouldn't matter which pair sits at which board.'')
+
+    \item Carl's sense (``Yes, I think we have to agree on what the question really means,'' adds Carl. ``If we include in it who plays white on each board, then if a pair switches places we do get a different matching. But Bob is right that it doesn't matter which pair uses which board.'') 
+
+    \item Diane's sense: ("What do you mean it does not matter? You sit at the first board, which is closest to the peanuts, and I sit at the last, which is farthest," says Diane.)
+\end{enumerate}
 
 
+\begin{exercise}
+    What is the number of pairings in Carl's sense (when it matters who sits on which side of the board, but the boards are all alike), and in Diane's sense (when it is the other way around)?
+    \label{ex:1.1.2}
+\end{exercise}
+\textbf{Solution}.
+
+\begin{mybox}[Wrong Answers Only!]
+The book calculates the number of pairings in Bob's sense: $15$. Indeed, as a game of chess is played between two opponents, the number of pairings is the same as the number of games played when any two players are chosen (with 6 choices for the first player, and having made that choice, 5 for the second) and they play only one game between them, although two are possible, for example, George (White) versus Carol (Black) and Carol (White) versus George (Black). The number of games is: 
+\[
+    \frac{6\times 5}{2}=15
+\]
+
+In Carl's sense, this number doubles. The Diane-Frank pairing is distinct from the Frank-Diane pairing. We always give the first player White pieces and the second player Black. Thus, every pair plays two games and there are $15$ pairs as above. Therefore, the number of pairings in Carl's sense is $30$.
+
+In Diane's sense, we consider the Bob-Carol pairing on board 1 distinct from the Bob-Carol pairing on board 2 or board 3. It's like pairing them up on board 1 first ($15$ pairings, since sides don't matter), then on board 2 ($15$ more pairings), and lastly on board 3 (still $15$ more pairings) giving $45$ pairings.
+    \label{box:wrong-1}
+\end{mybox}
+
+\begin{reflection}[I want to work harder]
+    \label{ref:work-harder}
+    My initial answer above (box [\ref{box:wrong-1}]) shows my gross misunderstanding of the problem. I had read the relevant section from the book and thought I had understood it, but alas, I hadn't! A serious discussion with my son, Apoorv Mhaswade, revealed it to me. I am very grateful to him! 
+
+    This also means that passive reading is not enough. For serious study of known material, one must actively engage in quizzing oneself. One must experiment, solve problems, and, if solutions are provided, check them thoroughly. I thank Lov\'asz for providing the correct solutions. While studying by oneself, this can feel onerous, but there's no choice to get more familiar with a vast body of known technical matter. For new research, this means becoming more immune to confirmation bias.
+
+    Combinatorial problems act as if they have a knack of fooling you! Wrong thinking about a concrete problem can lead to the correct answer, giving you a false confidence that you are right. My attempt above demonstrates that I completely misinterpreted the problem and each of the `senses' in which the counting is specified. This is frustrating, but it emphasizes the indispensability of hard work.
 
 
+    First, we need to pair 6 players across 3 chessboards. This is different from 6 people shaking hands. The handshake custom doesn't care on which side of the handshake you are and, unlike the chessboard, there's no `handshake board.' 
+
+    Alice initially thinks that the number of ways of pairing six people on three chessboards is equivalent to the number of ways of seating them on six chairs and placing a chessboard between each pair across it. If this is how want to pair them up, then let that be. The number of ways of seating six friends in six chairs simultaneously is clearly $6!=720$. Alice is right in her own right although each player may be paired with the same opponent on the same board.
+
+    It's important to note (although not mentioned explicitly) that all the players sit and start playing their `round' simultaneously. It's \emph{not} that players finish playing on board 1 (while board 2 and board 3 are unused), then board 2, and finally board 3; in other words, they \emph{do not use the available boards sequentially}. 
+
+    The arrangement initially proposed by Alice can also be realized another way: For the board 1, we can choose the first player in $6$ ways and the second player in $5$ ways, since sides matter (Bob with White pieces versus Carl with Black must be counted differently from Bob with Black versus Carl with White). Those are $6\times 5=30$ pairings. Once those two players occupy board 1, we only have $6-2=4$ choices for the first player on board 2 and $3$ for the second. That gives $4\times 3=12$ independent choices for board 2. Similarly, $2\times 1=2$ independent choices for board 3. Together (from Multiplication Principle (definition [\ref{def:mp}])), the total number of choices for the matching or pairing is
+    \[
+        30\times 12\times 2=720
+    \]
+
+    Listing all the pairs across three boards is mechanical.
+
+    However, Bob thinks that once two are paired, they must not be paired again\footnote{To emphasize, they must not be paired again on any board.}. This means that the board 1 pair can only be chosen $5$ ways\footnote{\textbf{Not} $6\times 5=30$ as in Alice's scheme, where each pair plays many times on the same board.} (you choose a player and their opponent can be chosen from the remaining $5$, giving $5$ pairs); simultaneously, the board 2 pair can only be independently chosen $3$ ways; and the board 3 pair can be chosen independently once.
+
+    Therefore, the total number of choices for pairing in Bob's sense is
+    \[
+        5\times 3\times 1=15
+    \]
+    This number of pairings is the same in any scenario. One scenario is listed below (table [\ref{tab:bob-sense-bob-b1}]).
+\begin{table}[H] 
+\centering
+\begin{tabular}{|c|c|c|}
+ \hline
+ Board 1&Board 2&Board 3\\ \hline
+ \hline
+    Bob-Carl&Diane-Eve&Frank-George\\ \hline
+    Bob-Diane&Carl-Frank&Eve-George\\ \hline
+    Bob-Eve&Carl-George&Diane-Frank\\ \hline
+    Bob-Frank&Carl-Eve&Diane-George\\ \hline
+    Bob-George&Carl-Diane&Eve-Frank\\ \hline
+\end{tabular}
+
+\label{tab:bob-sense-bob-b1}
+    \caption{A Scenario for Pairings in Bob's Sense (Bob \emph{Sticks} to Board 1)}
+\end{table}
+
+    In this scenario, Bob only plays on board 1. It's possible that Carl plays only on board 1, or Diane only plays on board 1, and so on. In each of those scenarios (there are 6), the \emph{number of pairings stays the same}, 15.
+
+    Carl's wording ("If we include in it who plays white\dots") is arguably confusing. What I now think he means is that a Bob (White)-Carl (Black) pair on a given board is distinct from Bob (Black)-Carl (White) pair \emph{on the same board}, but not distinct on another board: A pair plays twice on a board; they don't play again on any other board.
+
+    Thus, Carl wants to count each pair on the same board twice. Therefore, the total number of choices for pairing in Carl's sense is
+    \[
+       10\times 6\times 2=120 
+    \], or equivalently,
+    \[
+        (5\times 2)\times(3\times 2)\times(1\times 2)=5\times 3\times 1\times 2^3=15\times 2^3=120
+    \]
+
+    Carl multiplies Bob's count by $2^n$.
+
+    Diane's assertion is also tricky to state clearly. I think she wants to retain Bob's sense of not pairing the same players again on the same board, but not retain his sense of not pairing them on another board. Consider an arrangement of three boards in Bob's sense: Board 1: Bob-Carl, Board 2: Diane-Eve, Board 3: Frank-George. This 3-board arrangement is counted by Bob. However, Diane counts this and all its rearrangements (permutations) distinctly: 
+
+\begin{table}[H] 
+\centering
+\begin{tabular}{|c|c|c|}
+ \hline
+ Board 1&Board 2&Board 3\\ \hline
+ \hline
+    Bob-Carl&Diane-Eve&Frank-George\\ \hline
+    Bob-Carl&Frank-George&Diane-Eve\\ \hline
+    Diane-Eve&Bob-Carl&Frank-George\\ \hline
+    Diane-Eve&Frank-George&Bob-Carl\\ \hline
+    Frank-George&Bob-Carl&Diane-Eve\\ \hline
+    Frank-George&Diane-Eve&Bob-Carl\\ \hline
+\end{tabular}
+
+\label{tab:diane-sense}
+\caption{Diane Counts What Bob and Carl Don't}
+\end{table}
+
+    These are the placements of 3 pairs in 3 places (across each chessboard). Their number is $3\times 2\times 1=3!=6$. Each such 3-pair from Bob's pairings is multiplied by this number by Diane. Therefore, in Diane's sense, the number of pairings is $15\times 3!=15\times 6=90$.
+
+    Diane multiplies Bob's count by $n!$.
+
+    It turns out that Alice's initial estimate, $(2n)!$, equals Bob's count ($(2n-1)\times(2n-3)\times\dots\times 3\times 1$) multiplied by Carl's factor ($2^{n}$) and Diane's factor ($n!$). 
+\end{reflection}
+
+\begin{exercise}
+    What is the number of pairings (in all the various senses as above) in a party of $10$?
+    \label{ex:1.1.3}
+\end{exercise}
+\textbf{Solution}.
+
+\begin{mybox}[Wrong Answers Again!]
+\label{box:wrongagain}
+In Bob's sense, 
+\[
+    \frac{10\times 9}{2}=45
+\]
+
+In Carl's sense, $10\times 9=90$.
+
+In Diane's sense, $45\times 3=135$.
+\end{mybox}
+
+\begin{reflection}
+    Answers in the above box are also wrong because I did that exercise before I reflected on the previous one (See reflection [\ref{ref:work-harder}]).
+
+    The correct answers follow.
+
+In Bob's sense, $9\times 7\times 5\times 3\times 1=945$.
+
+In Carl's sense, $945\times 2\times2\times2\times2\times2=945\times 2^5=30440$.
+
+In Diane's sense, $945\times5\times4\times3\times2\times1=945\times 5!=113400$.
+
+Interestingly, 
+    \[
+        945\times2^5\times5!=10!
+    \]
+\end{reflection}
+
+\section{Sets and the Like}
+Sets are complicated, but here's an introduction. Sets are a fundamental tool that helps with counting problems.
+
+\begin{definition}[Set]
+Any collection of distinct objects, called elements, is a set.
+    \label{def:set}
+\end{definition}
+\begin{definition}[Empty Set or Null Set]
+    A set with no elements is called an Empty Set. It's denoted by $\emptyset$.
+    \label{def:empty-set}
+\end{definition}
+\begin{definition}[Cardinality of a Set]
+    \label{def:set-cardinality}
+    The number of elements of a set is its cardinality.
+
+    For example, the cardinality $\lvert\mathbb{P}\rvert$ of the set $\mathbb{P}=\{1,4,9,16\}$ is $5$.
+
+    We'll not discuss infinite sets (sets whose cardinality is $\infty$) here.
+
+\end{definition}
+\begin{definition}[Subset]
+    A set $\mathbb{A}$ is called a subset of set $\mathbb{B}$ if every element of $\mathbb{A}$ is an element of $\mathbb{B}$.
+
+    In other words, $\mathbb{A}$ consists of certain elements of $\mathbb{B}$. 
+
+    We can allow $\mathbb{A}$ to consist of all elements of $\mathbb{B}$ (in which case $\mathbb{A}=\mathbb{B}$) or none of them (in which case $\mathbb{A}=\emptyset$), and still consider it a subset. So the empty set is a subset of every set.
+
+    This is denoted by $\mathbb{A}\subseteq\mathbb{B}$. If $\lvert\mathbb{A}\rvert\ne\lvert\mathbb{B}\rvert$, then $\mathbb{A}$ is called a \emph{proper subset} of $\mathbb{B}$, denoted by $\mathbb{A}\subset\mathbb{B}$.
+    \label{def:subset}
+\end{definition}
+
+We consider operations on two sets.
+
+\begin{definition}[Intersection]
+    The intersection, $\mathbb{A}\cap\mathbb{B}$, of two sets, $\mathbb{A}$ and $\mathbb{B}$, is the set consisting of elements common to both the sets.
+
+    When there are no common elements, this set is $\emptyset$, and the two sets are said to be \emph{disjoint} with each other.
+    \label{def:set-intersection}
+\end{definition}
+\begin{definition}[Union]
+    The union, $\mathbb{A}\cup\mathbb{B}$, of two sets, $\mathbb{A}$ and $\mathbb{B}$, is the set consisting of elements from either set.
+
+    \label{def:set-union}
+\end{definition}
+\begin{definition}[Difference]
+    The difference, $\mathbb{A}\setminus\mathbb{B}$, between two sets, $\mathbb{A}$ and $\mathbb{B}$, is the set consisting of elements from $\mathbb{A}$ but not $\mathbb{B}$.
+    The difference, $\mathbb{B}\setminus\mathbb{A}$, between two sets, $\mathbb{B}$ and $\mathbb{A}$, is the set consisting of elements from $\mathbb{B}$ but not $\mathbb{A}$.
+
+    \label{def:set-difference}
+\end{definition}
+\begin{definition}[Symmetric Difference]
+    The symmetric difference, $\mathbb{A}\triangle\mathbb{B}$, between two sets, $\mathbb{A}$ and $\mathbb{B}$, is the set consisting of elements from exactly one of the two sets.
+
+    \label{def:set-difference}
+\end{definition}
+
+The exposition here brightly illuminates the relevant portion of set theory! The authors compare sets with natural numbers and draw parallels between them to the extent possible. They challenge readers to think of set intersection like multiplication (this may not be natural), set union like addition (quite natural), and the two set differences like subtraction (somewhat natural) of numbers. These similarities and differences beget some remarkable set identities that may reveal as a positive side-effect of solving the following exercises.
 
 
+\begin{exercise}
+    Name sets whose elements are (a) buildings, (b) people, (c) students, (d) trees, (e) numbers, (f) points
+    \label{ex:1.2.1}
+\end{exercise}
+\textbf{Solution}.
+\begin{enumerate}[label=({\alph*})]
+    \item Apartment complex.
+    \item Organization.
+    \item School magazine committee.
+    \item Orchard.
+    \item Days in a leap year's months.
+    \item Circle.
+\end{enumerate}
+\begin{exercise}
+    What are the elements of the following sets: (a) army, (b) mankind, (c) library, (d) the animal kingdom?
+    \label{ex:1.2.2}
+\end{exercise}
+\textbf{Solution}.
+It's not easy to list the \emph{type} of every element of the given sets.
+\begin{enumerate}[label=({\alph*})]
+    \item Soldiers.
+    \item Humans.
+    \item Books.
+    \item Animals.
+\end{enumerate}
+\begin{exercise}
+    Name sets having cardinality (a) $52$, (b) $13$, (c) $32$, (d) $100$, (e) $90$, (f) \num[group-separator={,}]{2000000}.
+    \label{ex:1.2.3}
+\end{exercise}
+\textbf{Solution}.
+\begin{reflection}
+    I spent time figuring out some realistic, but mathematically interesting sets of given cardinalities. A time-consuming, but interesting exercise! Which set has exactly $2$ million elements? A city of that population--that's alright, but is it interesting?
+\end{reflection}
+
+\begin{enumerate}[label=({\alph*})]
+    \item $\mathbb{D}=\{\texttt{\spadesuit-1,\spadesuit-2,\dots,\spadesuit-K,\spadesuit-A,\heartsuit-1,\dots,\diamondsuit-9,\dots,\clubsuit-A}\}$: Deck of playing cards. $\lvert\mathbb{D}\rvert=52$.
+    \item $\mathbb{H}$: Hand of bridge (the card game). $\lvert\mathbb{H}\rvert=13$.
+    \item $\mathbb{B}_5=\{\texttt{00000,00001,\dots,01011,\dots,11110,11111}\}$: Binary $5$-strings. $\lvert\mathbb{B}_5\rvert=32$.  Also,
+
+        $\mathcal{P}(\mathbb{S})=\{\emptyset,\{1\},\{4\},\dots,\{1,4,9,16,25\}\}$: Power-set of the set $\mathbb{S}=\{1,4,9,16,25\}$. $\lvert\mathcal{P}(\mathbb{S})\rvert=32$.
+    \item $\mathbb{O}$: Possible `breakfast-lunch-dinner' orders at an all-day restaurant with $5$ choices for breakfast, $5$ for lunch, and $4$ for dinner. $\lvert\mathbb{O}\rvert=100$.
+    \item $\mathbb{D}_{15}=\{\text{AC,AD,AE,\dots,BD,BE,\dots,MO}\}$: Diagonals of a regular 15-gon, ABCDEFGHIJKLMNO. $\lvert\mathbb{D}_{15}\rvert=90$.
+    \item $\mathfrak{L}$: Black-on-white or white-on-black car license plates of the form \texttt{<c><c><c><d><d><d>}, where `\texttt{<c>}' is any letter from `A' to 'J' (both inclusive) and `\texttt{<d>}' is any decimal digit. An element of this set is \texttt{EGA340}; another is \colorbox{black}{\textcolor{white}{\texttt{EGA340}}}. 
+
+        $\mathfrak{L}=\{\texttt{AAA000,AAA001,\dots,JJJ998,JJJ999,}\colorbox{black}{\textcolor{white}{\texttt{AAA000,AAA001,\dots,JJJ998,JJJ999}}}\}$. $\lvert\mathfrak{L}\rvert=\num[group-separator={,}]{2000000}$.
+\end{enumerate}
+
+\begin{reflection}
+    Below are the textbook answers to this exercise. I argue that mine are better ;-)
+    (a) all cards in a deck; (b) all spades in a deck; (c) a deck of Swiss cards\footnote{I guess they mean piquet cards.}; (d) nonnegative integers with at most two digits; (e) nonnegative integers with exactly two digits; (f) inhabitants of Budapest, Hungary.
+\end{reflection}
+\begin{exercise}
+    What are the elements of the following (admittedly peculiar) set: $\{\text{Alice}, \{1\}\}$
+    \label{ex:1.2.4}
+\end{exercise}
+\textbf{Solution}.
+Alice (a person) and a (singular) set whose only element is $1$.
+
+\begin{exercise}
+    Is an `element of a set' a special case of a `subset of a set'?
+    \label{ex:1.2.5}
+\end{exercise}
+\textbf{Solution}.
+I don't think so. An element of a set is a single object, which might not be a set. A subset of a set, however, is always a set. How can we allow `a special case' of a set to not be a set?
+\begin{reflection}
+    The textbook answer simply says, "No!"
+\end{reflection}
+\begin{exercise}
+    List all subsets of $\mathbb{S}=\{0,1,3\}$. How many do you get?
+    \label{ex:1.2.6}
+\end{exercise}
+\textbf{Solution}.
+$\emptyset,\{0\},\{1\},\{3\},\{0,1\},\{0,3\},\{1,3\},\{0,1,3\}$. Eight.
+\begin{exercise}
+    Define at least three sets of which $\mathbb{A}=\{\text{Alice, Diane, Eve}\}$ is a subset.
+    \label{ex:1.2.7}
+\end{exercise}
+\textbf{Solution}. 
+
+Left as an exercise to the readers of the note-taking readers of Lov\'asz.
+\begin{exercise}
+    List all subsets of $\mathbb{S}=\{a,b,c,d,e\}$, containing $a$ but not $b$.
+    \label{ex:1.2.8}
+\end{exercise}
+\textbf{Solution}. 
+
+These are the $8$ subsets of the set $\{c,d,e\}$, to each of which we add an $a$.
+\begin{reflection}[Always review your answers]
+    I got this right while checking my answers after solving all the exercises, but before looking at the answers provided at the end of the book. I wrote "These are the $16$ subsets of the set $\{a,c,d,e\}$" before!
+\end{reflection}
+
+\begin{exercise}
+    Define a set of which both $\{1,3,4\}$ and $\{0,3,5\}$ are subsets. Find such a set with the smallest possible number of elements.
+    \label{ex:1.2.9}
+\end{exercise}
+\textbf{Solution}. 
+$\mathbb{S}=\{0,1,2,3,4,5\}$. However, this is not such a set with smallest number of elements; $\mathbb{T}=\{0,1,3,4,5\}$ is. 
+\begin{exercise}
+    \begin{enumerate}[label={(\alph*)}]
+        \item Which set would you call the union of $\mathbb{A}=\{a,b,c\}$, $\mathbb{B}=\{a,b,d\}$, and $\mathbb{C}=\{b, c, d, e\}$?
+        \item Find the union of the first two sets, and then the union of this with the third. Also, find the union of the last two sets, and then the union of this with the first set. Try to formulate what you have observed.
+        \item Give a definition of the union of more than two sets.
+    \end{enumerate}
+    \label{ex:1.2.10}
+\end{exercise}
+\textbf{Solution}. 
+    \begin{enumerate}[label={(\alph*)}]
+        \item The set $\mathbb{U}=\{a,b,c,d,e\}$ can be called the union of \emph{three} given sets, denoted by $\mathbb{A}\cup\mathbb{B}\cup\mathbb{C}$.
+        \item $\mathbb{A}\cup\mathbb{B}=\{a,b,c,d\}$.
+
+            $(\mathbb{A}\cup\mathbb{B})\cup\mathbb{C}=\{a,b,c,d,e\}$
+
+              $\mathbb{B}\cup\mathbb{C}=\{a,b,c,d,e\}$.
+
+              $(\mathbb{B}\cup\mathbb{C})\cup\mathbb{A}=\{a,b,c,d,e\}$.
+
+            Conjecture: $(\mathbb{A}\cup\mathbb{B})\cup\mathbb{C}=\mathbb{A}\cup(\mathbb{B}\cup\mathbb{C})$. This is already proved (proof tbd) for equation [1.3] in the book. 
+        \item This definition assumes the definition [\ref{def:set-union}] of union of two sets.
+
+        \begin{definition}[(Proposed) Union of $n\geq2$ Sets]
+            Consider $n$ sets, $\mathbb{A}_1,\mathbb{A}_2,\dots,\mathbb{A}_n$. $\mathbb{U}$, their union, is defined as the set you get after you carry out the following algorithm:
+
+            \begin{algorithm}[H]
+    \begin{algorithmic}[1] % The number tells where the line numbering should start
+        \State $\mathtt{U}\gets\mathtt{A}_1\cup\mathtt{A}_2$
+        \State i\gets 3
+            \While{$i\leq n$} \Comment{Take the union of two sets $n-2$ times more}
+                \State $\mathtt{U}\gets\mathtt{U}\cup\mathtt{A}_i$
+                \State $i\gets i+1$
+            \EndWhile\label{loop1}
+            \State$\triangleright$ $\mathtt{U}$ is the union of \emph{all} the given sets
+    \end{algorithmic}
+    \end{algorithm}
+
+        \label{def:set-union-2}
+        \end{definition}
+
+        \begin{reflection}
+            The textbook defines it more succinctly and correctly. I like their definition better:
+            \begin{definition}[Union of sets]
+                The union of any set of sets consists of those elements that are elements of at least one of the sets.
+            \end{definition}
+        \end{reflection}
+    \end{enumerate}
+\begin{exercise}
+    Explain the connection between the notion of the union of sets and exercise [\ref{ex:1.2.9}].
+    \label{ex:1.2.11}
+\end{exercise}
+\textbf{Solution}. 
+The union, $\mathbb{U}$, of given sets is the set with smallest cardinality, such that every given set is a subset of $\mathbb{U}$. 
+\begin{exercise}
+    We form the union of a set $\mathbb{A}$ with $5$ elements and a set $\mathbb{B}$ with $9$ elements.  Which of the following numbers can we get as the cardinality of their union $\mathbb{U}$: $4$, $6$, $9$, $10$, $14$, $20$?
+    \label{ex:1.2.12}
+\end{exercise}
+\textbf{Solution}. 
+$\mathbb{U}$ must have at least $9$ elements because $\mathbb{B}$, which has $9$ elements, is its subset. Therefore, it couldn't have $4$ or $6$ elements. Similarly, it couldn't have $20$ elements; to get to that many elements, after we choose all the elements of $\mathbb{B}$, we have only $\mathbb{A}$ to choose from, which can only offer at most $5$ elements. Thus, $\mathbb{U}$ could have any of $9,10,11,12,13$, or $14$ elements. In this case, $9$ (all the elements of $\mathbb{A}$ are also in $\mathbb{B}$; $\mathbb{A}\subset\mathbb{B}$), $10$ ($\mathbb{A}$ and $\mathbb{B}$ have four common elements) or $14$ ($\mathbb{A}$ and $\mathbb{B}$ are disjoint).
+\begin{reflection}[A rare typo]
+    The textbook gives $6,9,10,14$ as the answer. Including $6$ is a typo.
+\end{reflection}
+\begin{exercise}
+    We form the union of two sets. We know that one of them has $n$ elements and the other has $m$ elements. What can we infer about the cardinality of their union?
+    \label{ex:1.2.13}
+\end{exercise}
+\textbf{Solution}.
+Two extremities as far as union $\mathbb{U}$ of two sets is concerned are 1) one of them is a subset of another, and 2) the two sets are disjoint. In 1), one of the sets (the subset) does not contribute new elements to the union. Therefore, in that case, the set with higher cardinality determines that of the union. In 2), since all elements from both the sets must be in the union, the union has $m+n$ elements; the union of any two sets cannot have a cardinality larger than that. $\therefore\max(m,n)\leq\lvert\mathbb{U}\rvert\leq(m+n)$.
+
+\begin{exercise}
+    What is the intersection of
+    \begin{enumerate}[label={(\alph*)}]
+        \item The sets $\mathbb{A}=\{0,1,3\}$ and $\mathbb{B}=\{1,2,3\}$,
+        \item The set of girls in this class and the set of boys in this class, and
+        \item The set of prime numbers and the set of even numbers?
+    \end{enumerate}
+    \label{ex:1.2.14}
+\end{exercise}
+\textbf{Solution}.
+    \begin{enumerate}[label={(\alph*)}]
+        \item $\mathbb{A}\cap\mathbb{B}=\{1,3\}$.
+        \item $\emptyset$\footnote{We are sensitive to both the difficulty of one's sex-assignment at birth and we are sensitive to one's gender identity, but to keep things simple, we stick to the `binary notions' of human body.}
+        \item $\{2\}$.
+    \end{enumerate}
+\begin{exercise}
+    We form the intersection of two sets. We know that one of them, $\mathbb{A}$, has $n$ elements and the other, $\mathbb{B}$, has m elements. What can we infer about the cardinality of their intersection?
+    \label{ex:1.2.15}
+\end{exercise}
+\textbf{Solution}.
+If $\mathbb{A},\mathbb{B}$ are \emph{disjoint}, their intersection, $\mathbb{A}\cap\mathbb{B}$ is the empty set, $\emptyset$. The cardinality of the intersection is incremented for each common element. The number of common elements in any two sets can at most equal the number of elements in the set with a smaller cardinality. $\therefore 0\leq\lvert\mathbb{A}\cap\mathbb{B}\rvert\leq\min(\lvert\mathbb{A}\rvert,\lvert\mathbb{B}\rvert)$.
+\begin{exercise}
+Prove
+    \begin{enumerate}[label={(\alph*)}]
+        \item The commutativity of the union and intersection of any two sets, $\mathbb{A},\mathbb{B}$:
+            \begin{align}
+                \mathbb{A}\cap\mathbb{B}&=\mathbb{B}\cap\mathbb{A}\nonumber\\
+                \mathbb{A}\cup\mathbb{B}&=\mathbb{B}\cup\mathbb{A}
+                \label{eq:set-commut}
+            \end{align}
+        \item The associativity of the union and intersection of any three sets, $\mathbb{A},\mathbb{B},\mathbb{C}$:
+            \begin{align}
+                (\mathbb{A}\cap\mathbb{B})\cap\mathbb{C}&=\mathbb{A}\cap(\mathbb{B}\cap\mathbb{C})\nonumber\\
+                (\mathbb{A}\cup\mathbb{B})\cup\mathbb{C}&=\mathbb{A}\cup(\mathbb{B}\cup\mathbb{C})
+                \label{eq:set-assoc}
+            \end{align}
+        \item The set-specific property, distribution of union over intersection involving any three sets, $\mathbb{A},\mathbb{B},\mathbb{C}$:
+            \begin{align}
+                \mathbb{A}\cup(\mathbb{B}\cap\mathbb{C})&=(\mathbb{A}\cup\mathbb{B})\cap(\mathbb{A}\cup\mathbb{C})
+                \label{eq:set-peculiar-distributivity}
+            \end{align}
+    \end{enumerate}
+
+    \label{ex:1.2.16}
+\end{exercise}
+\textbf{Solution}.
+    \begin{enumerate}[label={(\alph*)}]
+        \item 
+            \begin{proof}
+
+            By definition, $\mathbb{A}\cup\mathbb{B}$ contains elements in either $\mathbb{A}$ or $\mathbb{B}$.
+
+            By definition, $\mathbb{B}\cup\mathbb{A}$ contains elements in either $\mathbb{B}$ or $\mathbb{A}$.
+
+            Since the `elements in either $\mathbb{B}$ or $\mathbb{A}$' are the same as the `elements in either $\mathbb{A}$ or $\mathbb{B}$,' the two sets, $\mathbb{A}\cup\mathbb{B}$ and $\mathbb{B}\cup\mathbb{A}$, are the same.
+
+            By definition, $\mathbb{A}\cap\mathbb{B}$ contains elements in both $\mathbb{A}$ and $\mathbb{B}$.
+
+            By definition, $\mathbb{B}\cap\mathbb{A}$ contains elements in both $\mathbb{B}$ and $\mathbb{A}$.
+
+            Since the `elements in both $\mathbb{B}$ and $\mathbb{A}$' are the same as the `elements in both $\mathbb{A}$ and $\mathbb{B}$,' the two sets, $\mathbb{A}\cap\mathbb{B}$ and $\mathbb{B}\cap\mathbb{A}$, are the same.
+            \end{proof}
+        \item
+            \begin{proof}
+                Items common to all the sets are the same as the items common to first two and the last or the items common to the first and the last two.
+            \end{proof}
+        \item
+            \begin{proof}
+                We can take a `truth-table-like' approach and show exhaustively that 1) every element that belongs to the set $\mathbb{A}\cup(\mathbb{B}\cap\mathbb{C})$ also belongs to the set $(\mathbb{A}\cup\mathbb{B})\cap(\mathbb{A}\cup\mathbb{C})$, and 2) every element that does not belong to the set $\mathbb{A}\cup(\mathbb{B}\cap\mathbb{C})$ also does not belong to the set set $(\mathbb{A}\cup\mathbb{B})\cap(\mathbb{A}\cup\mathbb{C})$.
+            \end{proof}
+    \end{enumerate}
+\begin{exercise}
+    Prove that, for any two sets $\mathbb{A},\mathbb{B}$, 
+    \begin{align}
+        \lvert\mathbb{A}\cup\mathbb{B}\rvert+\lvert\mathbb{A}\cap\mathbb{B}\rvert=\lvert\mathbb{A}\rvert+\lvert\mathbb{B}\rvert
+    \end{align}
+    \label{ex:1.2.17}
+\end{exercise}
+\textbf{Solution}.
+\begin{reflection}
+    A lot of math is practiced with pen on paper; we are fortunate to have both! I was stumped by this at first, but somehow referred to two earlier exercises and made a connection that showed a ray of hope. I think the proof is right. Let's see\dots
+\end{reflection}
+\begin{proof}
+    We reproduce the inequalities from the solutions to exercises [\ref{ex:1.2.13}] and [\ref{ex:1.2.15}].
+    \begin{align*}
+        \max(\lvert\mathbb{A}\rvert,\lvert\mathbb{B}\rvert)&\leq\lvert\mathbb{\mathbb{A}\cup\mathbb{B}}\rvert\leq(\lvert\mathbb{A}\rvert+\lvert\mathbb{B}\rvert)\\
+        0&\leq\lvert\mathbb{A}\cap\mathbb{B}\rvert\leq\min(\lvert\mathbb{A}\rvert,\lvert\mathbb{B}\rvert)
+    \end{align*}
+    Adding these two inequalities, we get
+    \begin{equation*}
+        \lvert\mathbb{\mathbb{A}\cup\mathbb{B}}\rvert+\lvert\mathbb{A}\cap\mathbb{B}\rvert\leq(\lvert\mathbb{A}\rvert+\lvert\mathbb{B}\rvert)+\min(\lvert\mathbb{A}\rvert,\lvert\mathbb{B}\rvert)
+    \end{equation*}
+    Subtracting the nonnegative number, $\lvert\mathbb{A}\rvert+\lvert\mathbb{B}\rvert$, from both sides of the inequality gives us the following inequality:
+    \begin{equation*}
+        \lvert\mathbb{\mathbb{A}\cup\mathbb{B}}\rvert+\lvert\mathbb{A}\cap\mathbb{B}\rvert-(\lvert\mathbb{A}\rvert+\lvert\mathbb{B}\rvert)\leq\min(\lvert\mathbb{A}\rvert,\lvert\mathbb{B}\rvert)
+    \end{equation*}
+
+    The only value of $\lvert\mathbb{\mathbb{A}\cup\mathbb{B}}\rvert+\lvert\mathbb{A}\cap\mathbb{B}\rvert-(\lvert\mathbb{A}\rvert+\lvert\mathbb{B}\rvert)$ that satisfies the above inequality is $0$, because, the minimum of the cardinalities of two sets is 0; there's no set with a negative cardinality.
+
+    \[
+        \therefore \lvert\mathbb{\mathbb{A}\cup\mathbb{B}}\rvert+\lvert\mathbb{A}\cap\mathbb{B}\rvert-(\lvert\mathbb{A}\rvert+\lvert\mathbb{B}\rvert)=0,
+    \]
+
+    giving 
+
+    \[
+        \lvert\mathbb{\mathbb{A}\cup\mathbb{B}}\rvert+\lvert\mathbb{A}\cap\mathbb{B}\rvert=(\lvert\mathbb{A}\rvert+\lvert\mathbb{B}\rvert)
+    \]
+
+\end{proof}
+\begin{reflection}[A succinct proof]
+    The common elements of $\mathbb{A}$ and $\mathbb{B}$ are counted twice on both sides; the elements in either $\mathbb{A}$ or $\mathbb{B}$ but not both are counted once on both sides.
+
+    (I really like this one; I should've thought of it. Indeed, brevity is the soul of wit.)
+\end{reflection}
+
+\begin{exercise}
+
+    \begin{enumerate}[label={(\alph*)}]
+        \item What is the symmetric difference of the set\footnote{We prefer this notation to $\mathbb{Z}_{+}$ that the book uses; see \url{https://math.stackexchange.com/a/1402225/83821}.} $\mathbb{Z}_{\geq0}$ of nonnegative integers and the set $\mathbb{E}$ of even integers ($\mathbb{E}=\{\dots,-4,-2,0,2,4,\dots\}$ contains both negative and positive even integers).
+
+        \item Form the symmetric difference of $\mathbb{A}$ and $\mathbb{B}$ to get a set $\mathbb{C}$. Form the symmetric difference of $\mathbb{A}$ and $\mathbb{C}$. What did you get? Give a proof of the answer.
+    \end{enumerate}
+    \label{ex:1.2.18}
+\end{exercise}
+\textbf{Solution}.
+    \begin{enumerate}[label={(\alph*)}]
+        \item 
+            \begin{align*}
+                \mathbb{Z}_{\geq0}=\{&0,1,2,3,4,5,\dots\}\\
+                \mathbb{E}=\{\dots,-4,-2,&0,2,4,\dots\}
+            \end{align*}
+
+            Positive odd numbers belong \emph{only} to $\mathbb{Z}_{\geq0}$, and negative even numbers \emph{only} to $\mathbb{E}$.
+            \[
+                \therefore \mathbb{Z}_{\geq0}\triangle\mathbb{E}=\{\dots,-6,-4,-2,1,3,5,\dots\}
+            \]
+
+        \item $\mathbb{B}$.
+            \begin{proof}
+                We make an exclusive argument based on elements of the sets, $\mathbb{A,B,C}$. We know that 
+                \[
+                    \mathbb{C}=\mathbb{A}\triangle\mathbb{B}
+                \]
+
+                For every element $e\in\mathbb{C}$, by definition, either 1) $e\in\mathbb{A},e\not\in\mathbb{B}$, or 2) $e\in\mathbb{B},e\not\in\mathbb{A}$.
+
+                Now, when we form $\mathbb{A}\triangle\mathbb{C}$, again, by definition, we must not choose those elements of $\mathbb{C}$ that are also in $\mathbb{A}$. Thus, we'll end up choosing the elements of $\mathbb{C}$ that are only members of $\mathbb{B}$ (and not of $\mathbb{A}$). Therefore, $(\mathbb{A}\triangle\mathbb{B})\triangle\mathbb{A}=\mathbb{B}$.
+            \end{proof}
+            \begin{reflection}
+                The textbook does not provide a proof. I believe mine is valid.
+            \end{reflection}
+    \end{enumerate}
+
+
+    \section{The Number of Subsets}
+
+\begin{theorem}
+    A set with $n$ elements has $2^n$ subsets.
+\end{theorem}
+This section is beautifully written. It provides two proofs of this theorem. It also carefully distinguishes between choosing a subset and enumerating all subsets of a given set.
+
+I wish, however, that they had more clearly stated the idea of `ordering' a set.
+
+\begin{exercise}
+    Under the correspondence between numbers and subsets described above, 
+    \begin{enumerate}[label={(\alph*)}] 
+        \item Which numbers correspond to subsets with $1$ element?
+        \item Which number corresponds to the whole set? 
+        \item Which sets correspond to even numbers?
+    \end{enumerate}
+    \label{ex:1.3.1}
+\end{exercise}
+\textbf{Solution}.
+    \begin{enumerate}[label={(\alph*)}] 
+        \item In the binary representations of the subsets with $1$ element we must have exactly one $1$. Such representations, owing to the place-value system, correspond to \emph{positive} powers of $2$.
+        \item In the binary representation of the subset that is the same as the given set, we must have $n$ $1$'s, which corresponds to $2^n-1$.
+        \item The rightmost bit in binary representations of even numbers is 0. This means the \emph{last element} in the preferred order of set elements is not in the corresponding subsets.
+    \end{enumerate}
+
+\begin{exercise}
+    What is the number of subsets of a set with $n$ elements, containing a given element?
+    \label{ex:1.3.2}
+\end{exercise}
+\textbf{Solution}.
+Presence of a `given set element' in any subset is indicated by a 1 at the position representing that element in the binary representation of the corresponding integer. Thus, all but one position (in the binary representations), i.e., $n-1$ positions, can have either a 0 or a 1. From multiplication principle (definition [\ref{def:mp}]), we say that there are such $2^{n-1}$ subsets:
+\[
+    \underbrace{2\times2\times2\times\dots\times2}_{n-1}=2^{n-1}=\frac{1}{2}\times2^n
+\]
+Exactly half of all the subsets of any nonempty set contain a given element.
+\begin{exercise}
+    Show that a nonempty set has the same number of odd subsets (i.e., subsets with an odd number of elements) as even subsets.
+    \label{ex:1.3.3}
+\end{exercise}
+\textbf{Solution}.
+\begin{mybox}[Wrong answers at first!]
+An empty set has just one subset: $\emptyset$ (i.e., itself). Its corresponding binary representations are: $\{\mathtt{0}\}$. 
+
+Subsets of every other set has $2^n$ (which is even for any $n\geq1$) binary representations, each corresponding to a subset of it. Of these, the subsets with an odd cardinality (odd subsets) have a 1 in the rightmost position: $\{\mathtt{1,11,101,111,\dots}\}$. 
+
+We just showed above (exercise [\ref{ex:1.3.2}]) that the number of such subsets (with a 1 in any position of their corresponding binary representation) is half the total number of subsets of any (nonempty) set (Note: In our scheme, the `last' element is a member of every odd subset and not a member of any even subset).
+    \label{box:wrong-odd-even-subset-proof}
+\end{mybox}
+\begin{reflection}
+    I was confident about my answer above until I wrote down the subsets of the set $\{a,b,c\}$. Consider one of its subsets: $\{a\}$, whose cardinality is $1$ (making it an odd subset), binary representation is $\mathtt{100}$, and yet, it does not have a 1 in the last position. The proof (box [\ref{box:wrong-odd-even-subset-proof}]) is bogus.
+
+    \textbf{More time has passed}. 
+
+    I have observed a few things, but a rough proof sketch isn't coming to me yet. 
+
+    Let's denote a (sub)set with even number of elements as $\mathbb{E}_i$ ($i$ is even) and a set with odd number as $\mathbb{O}_i$ ($i$ is odd); the cardinality of the sets is $i$. We call $\mathbb{E}_i$ `even set' and $\mathbb{O}_i$ `odd set' (or subset, depending on the context).
+
+    I see that, for instance, with a $3$-set, of its $8$ subsets, there are
+    \begin{enumerate}
+        \item $4$ even subsets ($1\;\mathbb{E}_0+3\;\mathbb{O}_2)$, and
+        \item $4$ odd subsets ($3\;\mathbb{E}_1+1\;\mathbb{O}_3)$
+    \end{enumerate}
+
+    With a $4$-set, of its $16$ subsets, there are
+    \begin{enumerate}
+        \item $8$ even subsets ($1\;\mathbb{E}_0+6\;\mathbb{E}_2+1\;\mathbb{E}_4)$, and
+        \item $8$ odd subsets ($4\;\mathbb{O}_1+4\;\mathbb{O}_3)$
+    \end{enumerate}
+
+    This reminds me of the famous Pascal's triangle, but a I am looking for clarity.
+\end{reflection}
 
 
 
