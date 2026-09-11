@@ -97,7 +97,7 @@
 %canceling terms
 
 %customize lists
-\usepackage{enumitem}
+\usepackage{enumitem}%can't use \usepackage[shortlabels]{enumitem}; option clash
 %customize lists
 
 % for dotdiv operator; but this package changes many symbols unpleasantly
@@ -143,6 +143,12 @@
     \vspace{5mm}
 }
 % tbd command
+
+% paragraph globals
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5\baselineskip}
+\usepackage{indentfirst}
+% paragraph globals
 % bib
 \usepackage[
   backend=biber,
@@ -161,8 +167,8 @@
 \usepackage[hidelinks]{hyperref}
 
 % ---------- Metadata ----------
-\title{Problems from \\ \emph{Discrete Mathematics {\tiny Elementary and Beyond}}
-\\ \emph{by L\'aszl\'o Lov\'asz \cite{lovasz-etal}}
+\title{Problems from \\ \emph{Discrete Mathematics {\small Elementary and Beyond}}
+\\ \emph{by L\'aszl\'o Lov\'asz et.al. \cite{lovasz-etal}}
 \\ }
 \author{Kedar Mhaswade}
 \date{23 August 2026}
@@ -181,6 +187,26 @@
 
 \vspace*{\fill} % Center the text vertically on the page
 \cleardoublepage
+
+% A.I. Declaration 
+\chapter*{}
+\thispagestyle{empty} % Remove headers and footers
+
+\vspace*{\fill} % Push the text vertically down the page
+\begin{mybox}[How I have Used A.I. in This Work]
+    I can't believe I had an urge to write this declaration. A number of developments in the `outside world' dominated currently by the achievements of A.I. prompted me to do this. As I read this book and solved problems from it, I decided to write down how I have used A.I. (by that I mean Large Language Models, A.I. coding assistants, etc.) in this work. I will make this a practice. This policy is strictly maintained throughout this work. The current A.I. models appear as L.L.M's first. Therefore, A.I. and L.L.M. mean the same thing in the context of this work.
+    \begin{enumerate}
+        \item By default, I have not discussed the exposition or problems with an L.L.M. If a particular topic is discussed with an L.L.M, it is mentioned. If there's no mention, I guarantee that no `conversation with L.L.M' is involved.
+        \item All programs are written without a coding assistant, unless stated otherwise explicitly. Minimum editing, code-completion facilities of an I.D.E. are used.
+        \item Solutions to all the problems in this book (unlike, for example, Knuth's books) are known. There is no reason for me to consult an L.L.M, except when the given exposition and/or solutions are unclear or incorrect. Again, such occurrences are expected to be few, if any.
+        \item I do not hate A.I. It's just that, for whatever reason, I don't feel the need to solicit its help in understanding known material lucidly presented in this book.
+    \end{enumerate}
+    \label{box:aipolicy}
+\end{mybox}
+
+\vspace*{\fill} % Center the text vertically on the page
+\cleardoublepage
+% A.I. Declaration 
 
 \begin{reflection}[Introduction]
     These are the author's solutions to the problems from this amazing textbook (\cite{lovasz-etal}). They may occasionally sound like author's conversation with the reader (or even himself). Even if they are personal and appear in the public domain, they may help the reader, although the author isn't exactly sure how. He wrote them for 0) the love of mathematics and writing, 1) \LaTeX{} practice (of writing hopefully readable mathematics, albeit longer than appearing in standard texts), and 2) reliable archival (paper, on which most work is created, tends to get lost) that incurs minimal overhead.
@@ -811,7 +837,7 @@ I wish, however, that they had more clearly stated the idea of `ordering' a set.
 \textbf{Solution}.
 Presence of a `given set element' in any subset is indicated by a 1 at the position representing that element in the binary representation of the corresponding integer. Thus, all but one position (in the binary representations), i.e., $n-1$ positions, can have either a 0 or a 1. From multiplication principle (definition [\ref{def:mp}]), we say that there are such $2^{n-1}$ subsets:
 \[
-    \underbrace{2\times2\times2\times\dots\times2}_{n-1}=2^{n-1}=\frac{1}{2}\times2^n
+    \underbrace{2\times2\times2\times\dots\times2}_{n-1}=2^{n-1}=\frac{1}{2}\times2^n=2^{n-1}
 \]
 Exactly half of all the subsets of any nonempty set contain a given element.
 \begin{exercise}
@@ -830,7 +856,7 @@ We just showed above (exercise [\ref{ex:1.3.2}]) that the number of such subsets
 \begin{reflection}
     I was confident about my answer above until I wrote down the subsets of the set $\{a,b,c\}$. Consider one of its subsets: $\{a\}$, whose cardinality is $1$ (making it an odd subset), binary representation is $\mathtt{100}$, and yet, it does not have a 1 in the last position. The proof (box [\ref{box:wrong-odd-even-subset-proof}]) is bogus.
 
-    \textbf{More time has passed}. 
+    \textbf{More time passed}. 
 
     I have observed a few things, but a rough proof sketch isn't coming to me yet. 
 
@@ -838,8 +864,8 @@ We just showed above (exercise [\ref{ex:1.3.2}]) that the number of such subsets
 
     I see that, for instance, with a $3$-set, of its $8$ subsets, there are
     \begin{enumerate}
-        \item $4$ even subsets ($1\;\mathbb{E}_0+3\;\mathbb{O}_2)$, and
-        \item $4$ odd subsets ($3\;\mathbb{E}_1+1\;\mathbb{O}_3)$
+        \item $4$ even subsets ($1\;\mathbb{E}_0+3\;\mathbb{E}_2)$, and
+        \item $4$ odd subsets ($3\;\mathbb{O}_1+1\;\mathbb{O}_3)$
     \end{enumerate}
 
     With a $4$-set, of its $16$ subsets, there are
@@ -848,8 +874,221 @@ We just showed above (exercise [\ref{ex:1.3.2}]) that the number of such subsets
         \item $8$ odd subsets ($4\;\mathbb{O}_1+4\;\mathbb{O}_3)$
     \end{enumerate}
 
-    This reminds me of the famous Pascal's triangle, but a I am looking for clarity.
+    This reminds me of the famous Pascal's triangle and the sum of binomial coefficients ($\sum_{i=0}^{n}\binom{n}{i}=2^n$), but I'm looking for another proof.
+
+    More time passed.
+
+    I was sitting at the window, tired and yawning, and suddenly an `inductive argument' came to me. Perhaps it was inspired by a discussion I had with Deepa (when she said, ``Let's both solve this independently and compare notes,'' a few days ago). I was thinking about induction more conventionally, but was not forming the proposition correctly. However, now I see a ray of hope.
+
 \end{reflection}
+\begin{reflection}
+
+    How can we make subsets progressively, for instance, of the $3$-set, $\{a,b,c\}$?
+
+    I first wrote down the subsets of the $2$-set, $\{a,b\}$, as: 
+    \[
+    \emptyset(\mathbb{E}_0),\{a\} (\mathbb{O}_1),\{b\} (\mathbb{O}_1),\{a,b\}(\mathbb{E}_2)
+    \]
+
+    There are $2$ even subsets and 2 odd. 
+
+    Now consider the third element, $c$, of the $3$-set, $\{a,b,c\}$. We can form its subsets from those of the $2$-set above. Let's start with the $\emptyset$ (which is an even set). We can choose to either \emph{merge} $c$ in it or not. This gives two possibilities: $\emptyset$ (an even set) itself, and \emph{the set} $\{c\}$ (an odd set). Thus, one even set begets one even set and one odd set, both subsets of the augmented set.
+
+    How about $\{a\}$, which is an odd set? This gives (not accepting $c$) $\{a\}$ (an odd set) and (accepting $c$) $\{a,c\}$ (an even set).
+
+    $\{b\}$ gives $\{b\}$ and $\{b,c\}$.
+
+    $\{a,b\}$ gives $\{a,b\}$ and $\{a,b,c\}$.
+
+    To sum up,
+    \begin{enumerate}
+        \item $\mathbb{E}_0$ gives one $\mathbb{E}_0$, one $\mathbb{O}_1$.
+        \item $\mathbb{O}_1$ gives one $\mathbb{O}_1$, one $\mathbb{E}_2$.
+        \item Another $\mathbb{O}_1$ gives one $\mathbb{O}_1$, one $\mathbb{E}_2$.
+        \item $\mathbb{E}_2$ gives one $\mathbb{E}_2$, one $\mathbb{O}_3$.
+\end{enumerate}
+
+    Thus, in general, each of the $2^k$ subsets (regardless of whether it's even or odd) of a $k$-set creates $2$ subsets of the $k+1$-set, one even and another odd, effectively doubling the total number of subsets and maintaining the invariant: the number of even sets equals that of the odd sets.
+\end{reflection}
+\begin{exercise}
+    What is the number of integers with (a) at most $n$ (decimal) digits; (b) exactly $n$ digits (don't forget that there are positive and negative numbers!)?
+    
+    \label{ex:1.3.4}
+\end{exercise}
+\textbf{Solution}.
+\begin{reflection}
+    This is tricky! 
+
+    Let $N_n$ be the number of decimal integers of $n$ digits.
+
+    Let $N_{\leq n}$ be the number of decimal integers of at most $n$ digits.
+
+    I realized that $0$ and $-0$ are the same number, and that means there are $19$ one-digit decimal numbers: 
+    \[
+        N_1=10\text{ ($0$ to $9$) }+9\text{ ($-1$ to $-9$) }=19=N_{\leq1}
+    \]
+
+    $N_2$ clearly equals $2\times9\times10=180$ because the sign can be chosen $2$ ways, the first digit $9$ ways, and the third digit $10$ ways. 
+
+    Then, $N_{\leq2}=N_2+N_{\leq1}=180+19=200-1=199$.
+
+    $N_3$ clearly equals $2\times9\times10\times10=2\times9\times100=1800$. 
+
+    Then, $N_{\leq3}=N_3+N_{\leq2}=1800+199=2000-1=1999$.
+
+    A pattern emerges.
+
+\end{reflection}
+
+\[
+N_n = \begin{cases} 
+    19 & \text{if } n=1, \\
+    2\times9\times10^{n-1} & \text{otherwise}
+\end{cases}
+\]
+\[
+    N_{\leq n}=2\times10^{n}-1 
+\]
+
+\begin{reflection}
+    Solving problems is a joy in itself. No problem is big or small. You just have to work hard on the problem that you feel like solving. The feeling must bear determined pursuit till the problem cracks.
+
+    What if you run into a hard problem or a research problem? 
+
+    There's no satisfying answer to that question. I have struggled with it. I have always resisted the temptation of looking at the answers (if we are fortunate to have them). That stalls my apparent progress. But I haven't found a way around it.
+
+    If the problem just does not budge, well, then I see the solution, begrudgingly.
+
+    The progress, as a result, is slow and I must be at peace with it.
+\end{reflection}
+
+\begin{reflection}[Answer Check]
+    I checked answers for the above exercises. This time, I got all of them right. That makes me feel good for some reason. No boasting of course, but a sense of satisfaction. 
+
+    I found a mistake in the answer of the exercise [\ref{ex:1.3.4}] published in the book. The book says: (a) $2\cdot10^n-1$ (b) $2\cdot(10^n-10^{n-1})$. The answer (b) is wrong when $n=1$. There are $19$ integers with \emph{exactly one digit}, and not $2\cdot(10^1-10^0)=2\cdot9=18$ as it says. We need to handle $n=1$ as a special case.
+
+    Even so, their answer to the question, "How many integers with exactly $n$ digits are there?", is instructive: $2\cdot(10^n-10^{n-1})$. This is the same as our answer: $2\times9\times10^{n-1}$ reached by multiplication principle.
+
+    However, their thesis is correct too. The number of integers with at most $n$ digits equals the number of integers with at most $n-1$ digits $+$ the number of integers with exactly $n$ digits:
+    \[
+        N_{\leq n}=N_{\leq(n-1)}+N_n
+    \]
+    \[
+        \therefore N_n=N_{\leq n}-N_{\leq(n-1)}=2\times10^n-1-(2\times10^{n-1}-1)=2\times(10^n-10^{n-1})
+    \]
+
+\end{reflection}
+\section{The Approximate Number of Subsets}
+Another well-written section. In this section, authors ask how many decimal digits an integer expressed as a power of another integer, say $2^{100}$, has. 
+
+\epigraph[source={Pg. 14}]{
+    What does it mean that a number has exactly $k$ digits? It means that it is between $10^{k-1}$ and $10^k$ (the lower bound is allowed, the upper is not). We want to find the value of $k$ for which $10^{k-1}\leq2^{100}<10^k$. \dots $\therefore k-1\leq100\log 2<k$, that is $k-1\leq30.10299<k$ and $\therefore k=31$.
+}
+
+They introduce the functions `largest integer not exceeding $x$'. This is the `integer part of $x$' or `floor of $x$' function, denoted as $\lfloor x\rfloor$ and the `least integer greater than $x$' or the `ceiling of $x$' function, denoted as $\lceil x\rceil$.
+
+\begin{exercise}
+    How many bits (binary digits) does $2^{100}$ have if written in base $2$?
+    
+    \label{ex:1.4.1}
+\end{exercise}
+\textbf{Solution}. We assume nonnegative integers. Writing a number in base $2$ means writing it as a string of bits. From multiplication principle (definition [\ref{def:mp}]), since we can choose every bit in a $k$-bit string $2$ distinct ways(0 and 1), the total number of $k$-bit strings is 
+\[
+    \underbrace{2\times2\times2\times\dots\times2}_k=2^k
+\]
+All the integers from $0$ to $2^k-1$ (both inclusive) are represented by such a $k$-bit string. Similarly, all the integers from $0$ to $2^{k+1}-1$ (both inclusive) are represented by a $k+1$-bit string. Since $2^k-1<2^k<2^{k+1}-1$, to represent $2^k$, we need at least a $k+1$-bit string. Therefore, to represent $2^{100}$, we need a $\mathbf{101}$-bit string:
+\[
+    \underbrace{1000\dots0}_{\mathbf{101}}=2^{100}
+\]
+\begin{exercise}
+    Find a formula for the number of (decimal) digits of $2^n$.
+    \label{ex:1.4.2}
+\end{exercise}
+\textbf{Solution}. The book derives $k$, the number of decimal digits to represent $2^{n}$:
+\[
+    k=1+\lfloor n\log2\rfloor
+\]
+
+\section{Sequences}
+\begin{theorem}[Number of Strings]
+    The number of $n$-strings composed of $k$ given elements is $k^n$.
+\end{theorem}
+
+This is the same as the multiplication principle (definition [\ref{def:mp}]). It is generalized below as a theorem.
+
+Many counting problems are about sets or sequences. Identifying which is which helps. This section describes how `thinking sequences' helps. This is a part of the art of \emph{modeling} counting problems correctly.
+
+\begin{theorem}[Generalized Number of Strings]
+    Suppose that we want to form strings of length $n$ by using any of a given set of $k_1$ symbols as the first element of the string, any of a given set of $k_2$ symbols as the second element of the string, etc., any of a given set of $k_n$ symbols as the last element of the string. Then the total number of strings we can form is $k_1\times k_2\times k_3\times\dots\times k_n$.
+\end{theorem}
+
+\begin{exercise}
+    Draw a tree illustrating the way we counted the number of strings of length $2$ formed from the characters a, b, and c, and explain how it gives the answer. Do the same for the more general problem when $n=3,k_1=2,k_2=3,k_3 = 2$.
+    \label{ex:1.5.1}
+\end{exercise}
+\textbf{Solution}.
+\begin{figure}[H]
+  \centering
+    \includegraphics[scale=0.4]{images/trees-sequences-1-resz20}
+    \caption{Counting the Number of Strings ($3\times3=9$ and $2\times3\times3=18$)}
+  \label{fig:counting-num-strings}
+\end{figure}
+\begin{exercise}
+    In a sports shop there are T-shirts of $5$ different colors, shorts of $4$ different colors, and socks of $3$ different colors. How many different uniforms can you compose from these items?
+    \label{ex:1.5.2}
+\end{exercise}
+\textbf{Solution}.
+If each sock color can be picked independently of that of the other, the number of uniforms is $5\times4\times3\times3=180$, otherwise it is $5\times4\times3=60$.
+\begin{exercise}
+    On a Toto (soccer poll) ticket, you have to bet 1, 2, or X for each of $13$ games. In how many different ways can you fill out the ticket?
+    \label{ex:1.5.3}
+\end{exercise}
+\textbf{Solution}.
+\[
+    \underbrace{3\times3\times3\dots\times3}_{\mathbf{13}}=3^{13}
+\]
+\begin{exercise}
+    We roll a die twice; how many different outcomes can we have? (A $1$ followed by a $4$ is different from a $4$ followed by a $1$.)
+    \label{ex:1.5.4}
+\end{exercise}
+\textbf{Solution}.
+Unless the die changes colors between the two rolls, the number of outcomes is
+\[
+    6\times6-6=30
+\]
+We subtract $6$ because we must count $6$ scores like $(1,1)$ once.
+\begin{exercise}
+    We have $20$ different presents that we want to distribute to $12$ children.  It is not required that every child get something; it could even happen that we give all the presents to the same child. In how many ways can we distribute the presents?
+    \label{ex:1.5.5}
+\end{exercise}
+\textbf{Solution}.
+\begin{reflection}
+    These reflection boxes have become bits and pieces of my journal! It's September 2026. Strange experiences fueled by A.I. are making the existential crisis worse at least for some humans. Yesterday, I added my A.I. policy to this work (See box [\ref{box:aipolicy}]). It was a `nobody's reaction' to the big events in the world. 
+
+    Have I felt the need to discuss my math problems with a `trusted and intelligent ally?' Yes, of course. However, I am purposely avoiding ChatGPT, although we have had several memorable encounters. Perhaps discussing my thoughts on this `known knowledge' with ChatGPT is the right thing to do. What is not so clear is what to do with `possibly new research.' Although humans have plagiarized others' work, only a part of those cases have been identified and shamed. In some cases, plagiarized work may have been rewarded. In some other cases, jury is out on identifying some work as plagiarism. Is ChatGPT's alleged plagiarism worrisome?
+
+    I think so. It's a deliberate breach of trust by a machine. True, the machine has no conscience, but it has learned to betray just like humans do. This is not the place to discuss why that is only begrudgingly acceptable in humans and totally unacceptable in machines. 
+
+    Anyway, many need to discuss something with another `intelligent' ally. The ability to be alone seems reserved for the mystics like Grothendieck.
+
+    So, this problem was tricky! I didn't immediately grasp a `pattern.' I discussed it with my daughter. She was confused about it too.  Did my conscious/subconscious gain something from this discussion? I don't know. I don't remember a particularly insightful comment from her that suddenly illuminated a dark room. We did start with a `smaller version' of the problem: $2$ different presents to be distributed among $3$ children. We listed different ways of distributing presents and were still not sure if we overcounted or undercounted. However, I wholeheartedly acknowledge this interaction. It has helped\footnote{This is not to say that I want to be fairer than ChatGPT, but to emphasize that it's unclear how human mind works; giving credit to everyone actively involved in a joint endeavor is the least we could do!}. 
+
+    A while later, a thought came to my mind: Is distributing $n$ different presents among $m$ children analogous to placing $n$ balls in $m$ urns? I place \emph{all} the balls in \emph{some} urns, ensure that I haven't placed the balls like that before, and increment a counter that counts the distributions like, for example, 
+    \[
+        \mathtt{\underbrace{|b_1,b_2|}_{u_1}\underbrace{|\quad|}_{u_2}\underbrace{|\quad|}_{u_3}}
+    \]
+    \[
+        \mathtt{\underbrace{|\quad|}_{u_1}\underbrace{|b_1|}_{u_2}\underbrace{|b_2|}_{u_3}}
+    \]
+
+    are two different distributions with $3$ urns and $2$ balls.
+
+    To complete one distribution, we must place all the balls (in \emph{some} urns).
+
+    Even so, I was still not seeing it through. Another idea came. Since we must place all the balls to call the placement a valid distribution, what if we started with 
+\end{reflection}
+
+
 
 
 
