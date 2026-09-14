@@ -189,10 +189,6 @@
 \cleardoublepage
 
 % A.I. Declaration 
-\chapter*{}
-\thispagestyle{empty} % Remove headers and footers
-
-\vspace*{\fill} % Push the text vertically down the page
 \begin{mybox}[How I have Used A.I. in This Work]
     I can't believe I had an urge to write this declaration. A number of developments in the `outside world' dominated currently by the achievements of A.I. prompted me to do this. As I read this book and solved problems from it, I decided to write down how I have used A.I. (by that I mean Large Language Models, A.I. coding assistants, etc.) in this work. I will make this a practice. This policy is strictly maintained throughout this work. The current A.I. models appear as L.L.M's first. Therefore, A.I. and L.L.M. mean the same thing in the context of this work.
     \begin{enumerate}
@@ -203,11 +199,8 @@
     \end{enumerate}
     \label{box:aipolicy}
 \end{mybox}
-
-\vspace*{\fill} % Center the text vertically on the page
-\cleardoublepage
 % A.I. Declaration 
-
+\newpage
 \begin{reflection}[Introduction]
     These are the author's solutions to the problems from this amazing textbook (\cite{lovasz-etal}). They may occasionally sound like author's conversation with the reader (or even himself). Even if they are personal and appear in the public domain, they may help the reader, although the author isn't exactly sure how. He wrote them for 0) the love of mathematics and writing, 1) \LaTeX{} practice (of writing hopefully readable mathematics, albeit longer than appearing in standard texts), and 2) reliable archival (paper, on which most work is created, tends to get lost) that incurs minimal overhead.
 
@@ -478,7 +471,7 @@ We consider operations on two sets.
 \begin{definition}[Symmetric Difference]
     The symmetric difference, $\mathbb{A}\triangle\mathbb{B}$, between two sets, $\mathbb{A}$ and $\mathbb{B}$, is the set consisting of elements from exactly one of the two sets.
 
-    \label{def:set-difference}
+    \label{def:set-sym-difference}
 \end{definition}
 
 The exposition here brightly illuminates the relevant portion of set theory! The authors compare sets with natural numbers and draw parallels between them to the extent possible. They challenge readers to think of set intersection like multiplication (this may not be natural), set union like addition (quite natural), and the two set differences like subtraction (somewhat natural) of numbers. These similarities and differences beget some remarkable set identities that may reveal as a positive side-effect of solving the following exercises.
@@ -769,7 +762,7 @@ Prove
 \begin{exercise}
 
     \begin{enumerate}[label={(\alph*)}]
-        \item What is the symmetric difference of the set\footnote{We prefer this notation to $\mathbb{Z}_{+}$ that the book uses; see \url{https://math.stackexchange.com/a/1402225/83821}.} $\mathbb{Z}_{\geq0}$ of nonnegative integers and the set $\mathbb{E}$ of even integers ($\mathbb{E}=\{\dots,-4,-2,0,2,4,\dots\}$ contains both negative and positive even integers).
+        \item What is the symmetric difference (See definition [\ref{def:set-sym-difference}]) of the set\footnote{We prefer this notation to $\mathbb{Z}_{+}$ that the book uses; see \url{https://math.stackexchange.com/a/1402225/83821}.} $\mathbb{Z}_{\geq0}$ of nonnegative integers and the set $\mathbb{E}$ of even integers ($\mathbb{E}=\{\dots,-4,-2,0,2,4,\dots\}$ contains both negative and positive even integers).
 
         \item Form the symmetric difference of $\mathbb{A}$ and $\mathbb{B}$ to get a set $\mathbb{C}$. Form the symmetric difference of $\mathbb{A}$ and $\mathbb{C}$. What did you get? Give a proof of the answer.
     \end{enumerate}
@@ -1052,40 +1045,118 @@ If each sock color can be picked independently of that of the other, the number 
     \label{ex:1.5.4}
 \end{exercise}
 \textbf{Solution}.
+\begin{mybox}[Start with a Wrong Answer First!]
+    I can't believe I wrote this answer at first:
+
 Unless the die changes colors between the two rolls, the number of outcomes is
 \[
     6\times6-6=30
 \]
 We subtract $6$ because we must count $6$ scores like $(1,1)$ once.
+\end{mybox}
+\begin{reflection}[Corrected on Rechecking]
+    I happened to reread my solution above before checking the textbook answers and I was surprised at my own folly. The above answer is a correct answer to a different problem. Therefore it is wrong for this problem. 
+
+    If we have \emph{two} dice (one red and one blue) that we roll together and we treat red:3, blue:4 different from red:4, blue:3, then the total number of outcomes is $30$ (we must count red:x and blue:x once).
+
+    Here, we first roll the die, note its score (first score), then roll it again, and note its score (second score). This creates distinct \emph{2-sequences} such as $\langle1,1\rangle,\langle1,2\rangle,\dots\langle2,1\rangle,\dots\langle6,6\rangle$.
+
+    For each score on the first roll of the die, we may have $6$ scores ($1$ through $6$) on the second roll of the die. We may have $6$ scores ($1$ through $6$) on the first roll. Therefore, the total number of outcomes is 
+    \[
+        6\times 6=36
+    \]
+\end{reflection}
 \begin{exercise}
     We have $20$ different presents that we want to distribute to $12$ children.  It is not required that every child get something; it could even happen that we give all the presents to the same child. In how many ways can we distribute the presents?
     \label{ex:1.5.5}
 \end{exercise}
 \textbf{Solution}.
 \begin{reflection}
-    These reflection boxes have become bits and pieces of my journal! It's September 2026. Strange experiences fueled by A.I. are making the existential crisis worse at least for some humans. Yesterday, I added my A.I. policy to this work (See box [\ref{box:aipolicy}]). It was a `nobody's reaction' to the big events in the world. 
+    These reflection boxes have become bits and pieces of my journal! It's September 2026. Strange experiences fueled by A.I. are making the existential crisis worse at least for some humans. Yesterday, I added my A.I. policy to this work. It was  `a nobody's reaction' to the big events in the world. 
 
     Have I felt the need to discuss my math problems with a `trusted and intelligent ally?' Yes, of course. However, I am purposely avoiding ChatGPT, although we have had several memorable encounters. Perhaps discussing my thoughts on this `known knowledge' with ChatGPT is the right thing to do. What is not so clear is what to do with `possibly new research.' Although humans have plagiarized others' work, only a part of those cases have been identified and shamed. In some cases, plagiarized work may have been rewarded. In some other cases, jury is out on identifying some work as plagiarism. Is ChatGPT's alleged plagiarism worrisome?
 
-    I think so. It's a deliberate breach of trust by a machine. True, the machine has no conscience, but it has learned to betray just like humans do. This is not the place to discuss why that is only begrudgingly acceptable in humans and totally unacceptable in machines. 
+    I think so. It's a deliberate breach of trust by a machine (a recursively self-improving one). True, the machine has no conscience, but it has learned to betray just like humans do. This is not the place to discuss why that is only begrudgingly acceptable in humans and totally unacceptable in machines. 
 
     Anyway, many need to discuss something with another `intelligent' ally. The ability to be alone seems reserved for the mystics like Grothendieck.
+\end{reflection}
+\begin{reflection}[Back to Work!]
 
     So, this problem was tricky! I didn't immediately grasp a `pattern.' I discussed it with my daughter. She was confused about it too.  Did my conscious/subconscious gain something from this discussion? I don't know. I don't remember a particularly insightful comment from her that suddenly illuminated a dark room. We did start with a `smaller version' of the problem: $2$ different presents to be distributed among $3$ children. We listed different ways of distributing presents and were still not sure if we overcounted or undercounted. However, I wholeheartedly acknowledge this interaction. It has helped\footnote{This is not to say that I want to be fairer than ChatGPT, but to emphasize that it's unclear how human mind works; giving credit to everyone actively involved in a joint endeavor is the least we could do!}. 
 
-    A while later, a thought came to my mind: Is distributing $n$ different presents among $m$ children analogous to placing $n$ balls in $m$ urns? I place \emph{all} the balls in \emph{some} urns, ensure that I haven't placed the balls like that before, and increment a counter that counts the distributions like, for example, 
+    A while later, a thought came to my mind: Is distributing $n$ different presents among $m$ children analogous to placing $n$ different balls (that is each ball somehow differs from all others) in $m$ urns? I place \emph{all} the balls in \emph{some} urns, ensure that I haven't placed the balls like that before, and increment a counter that counts the distributions like, for example, 
     \[
-        \mathtt{\underbrace{|b_1,b_2|}_{u_1}\underbrace{|\quad|}_{u_2}\underbrace{|\quad|}_{u_3}}
+        \underbrace{|b_1,b_2|}_{u_1}\underbrace{|\quad|}_{u_2}\underbrace{|\quad|}_{u_3}
     \]
     \[
-        \mathtt{\underbrace{|\quad|}_{u_1}\underbrace{|b_1|}_{u_2}\underbrace{|b_2|}_{u_3}}
+        \underbrace{|\quad|}_{u_1}\underbrace{|b_1|}_{u_2}\underbrace{|b_2|}_{u_3}
     \]
 
     are two different distributions with $3$ urns and $2$ balls.
 
     To complete one distribution, we must place all the balls (in \emph{some} urns).
 
-    Even so, I was still not seeing it through. Another idea came. Since we must place all the balls to call the placement a valid distribution, what if we started with 
+    Even so, I was still not seeing it through. Another `inductive' idea came. What if we distributed $n$ balls in $m$ urns, and now an $n+1^{th}$ distinct ball comes along? How will every distribution and eventually, the total count change? 
+
+    Well, each distribution like
+    \[
+        \overbrace{
+        \underbrace{\underbrace{|\quad|}_{u_1}\underbrace{|b_1|}_{u_2}\underbrace{|b_2|}_{u_3}\dots\underbrace{|\dots,b_n|}_{u_m}}_{m\text{ urns}}
+    }^{n\text{ balls}}
+    \]
+
+    will have to accommodate a new ball!
+
+    The new distinct ball will have to be placed in exactly one of the $m$ urns at a time. Every time we place it, a new placement results.  
+
+    Here is a placement, resulting from the above placement, where we choose to place the $n+1^{th}$ ball in $u_1$:
+    \[
+        \overbrace{
+            \underbrace{\underbrace{|b_{n+1}|}_{u_1}\underbrace{|b_1|}_{u_2}\underbrace{|b_2|}_{u_3}\dots\underbrace{|\dots,b_n|}_{u_m}}_{m\text{ urns}}
+    }^{n+1\text{ balls}}
+    \]
+    or $u_2$ (and not $u_1$):
+    \[
+        \overbrace{
+            \underbrace{\underbrace{|\quad|}_{u_1}\underbrace{|b_1,b_{n+1}|}_{u_2}\underbrace{|b_2|}_{u_3}\dots\underbrace{|\dots,b_n|}_{u_m}}_{m\text{ urns}}
+    }^{n+1\text{ balls}}
+    \]
+
+    \textbf{Thus, the total number of new placements of $n+1$ balls in $m$ urns resulting from each previous placement of $n$ balls in $m$ urns is $m$}.
+
+    If we define a bifunction, $F(n,m)$, as the total number of ways we can place $n$ balls in $m$ urns, we get the following recurrence:
+    \begin{align}
+        F(0,m)&=1\nonumber\\
+        F(n+1,m)&=m\times F(n,m)
+        \label{eq:rec-n-balls-m-urns}
+    \end{align}
+    $F(0,m)=1$, because there is one way to place $0$ balls in $m$ urns: Leave them empty.
+
+    We must solve the recurrence (equation [\ref{eq:rec-n-balls-m-urns}]). It's customary to prove that the solution is
+    \[
+        F(n,m)=m^n
+    \]
+
+    Therefore, the total number of ways to distribute $20$ \emph{different} presents among $12$ children is 
+    \[
+        F(20,12)=12^{20}
+    \]
+
+    Is this correct? 
+
+    Is the analogy correct? 
+
+    As of now, I believe so.
+
+    I wanted to find another way of solving it.
+
+    I tried to set up the recurrence another way (thinking inductively seems to help): If we have placed $n$ balls in $m$ urns, how can we enhance the placements when we get a new urn? In other words, how can we express $F(n, m+1)$ in terms of $F(n,m)$?
+
+    Identifying a pattern in redistributing $n$ balls in $m$ urns into $m+1$ urns seems much harder. I went back to using paper and pencil. However, I couldn't extract a pattern.
+
+    Why is placing a fixed number of balls in increasing number of urns easier to extract a pattern for counting from, than placing in a fixed number of urns an increasing number of balls?
+    
+    Is there another way of doing this? How can I verify my answer before looking the textbook answers?
 \end{reflection}
 
 
