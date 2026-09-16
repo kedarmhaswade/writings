@@ -152,7 +152,8 @@
 % bib
 \usepackage[
   backend=biber,
-  style=numeric
+  style=numeric,
+  backref=true
 ]{biblatex}
 
 \addbibresource{refs.bib}
@@ -165,6 +166,7 @@
 % https://github.com/plk/biber/issues/373
 % ---------- Hyperlinks ----------
 \usepackage[hidelinks]{hyperref}
+\usepackage{footnotebackref} % obvious
 
 % ---------- Metadata ----------
 \title{Problems from \\ \emph{Discrete Mathematics {\small Elementary and Beyond}}
@@ -1130,7 +1132,7 @@ We subtract $6$ because we must count $6$ scores like $(1,1)$ once.
         F(n+1,m)&=m\times F(n,m)
         \label{eq:rec-n-balls-m-urns}
     \end{align}
-    $F(0,m)=1$, because there is one way to place $0$ balls in $m$ urns: Leave them empty.
+    $F(0,m)=1$, because there is one way to place $0$ balls in $m$ urns: Leave them empty\footnote{Is this confusing? Is there really one way to place $0$ balls in $m$ urns? I have another `base case,' that resolves the confusion: Think of the base case as placing $1$ ball, $b_1$, in $m$ urns. Since $b_1$ can be placed in either $u_1$, or $u_2$, and so on, there are $m$ ways to do so. Therefore, $F(1,m)=m$, and that is good enough to solve the recurrence.}.
 
     We must solve the recurrence (equation [\ref{eq:rec-n-balls-m-urns}]). It's customary to prove that the solution is
     \[
@@ -1141,8 +1143,10 @@ We subtract $6$ because we must count $6$ scores like $(1,1)$ once.
     \[
         F(20,12)=12^{20}
     \]
-
-    Is this correct? 
+    \label{ref:n-balls-m-urns}
+\end{reflection}
+\begin{reflection}
+    Is the above argument correct? 
 
     Is the analogy correct? 
 
@@ -1156,8 +1160,48 @@ We subtract $6$ because we must count $6$ scores like $(1,1)$ once.
 
     Why is placing a fixed number of balls in increasing number of urns easier to extract a pattern for counting from, than placing in a fixed number of urns an increasing number of balls?
     
-    Is there another way of doing this? How can I verify my answer before looking the textbook answers?
+    Is there another way of doing this? How can I verify my answer before seeing the textbook answers?
 \end{reflection}
+
+\begin{exercise}
+    We have $20$ \textbf{kinds} of presents; this time, we have a large supply of each kind. We want to give presents to $12$ children. Again, it is not required that every child get\footnote{The mood is subjunctive, where the base form of the verb is used. The book most probably has a typo; it uses `gets' here. The previous exercise (\ref{ex:1.5.5}), however, correctly uses the subjunctive.} something; but no child can get two copies of the same present. In how many ways can we give presents?
+    \label{ex:1.5.6}
+\end{exercise}
+\textbf{Solution}.
+We make an inductive argument similar to the above argument of placing $n$ balls in $m$ urns, but keep some subtle differences in mind. This time, we have unlimited balls of each of $n$ \emph{kinds}\footnote{A \emph{kind} can be realized most effectively by numbering, e.g. the $k_1$ balls are all numbered $1$, $k_2$ numbered $2$, and so on. Another way to realize them is by the way of colors.}. We try to find $F(n+1,m)$ in terms of $F(n,m)$, where $F(x,y)$ denotes the number of ways of placing balls of $x$ distinct kinds in $m$ urns such that no urn has more than 1 ball of \emph{the same kind}\footnote{Combinatorial problems is about constraints such as these. We must model the problems correctly and satisfy those constraints!}.
+
+After we have placed $n$ balls in $m$ urns the way we must, consider any placement like below:
+    \[
+        \overbrace{
+        \underbrace{\underbrace{|\quad|}_{u_1}\underbrace{|b_1|}_{u_2}\underbrace{|b_2|}_{u_3}\dots\underbrace{|\dots,b_n|}_{u_m}}_{m\text{ urns}}
+    }^{\text{balls of at most } n\text{ kinds}}
+    \]
+
+Here, $b_i$ means a ball of $i^{th}$ \emph{kind}, not $i^{th}$ ball; we have only ordered the kinds of balls, not the balls themselves.
+
+Unlimited number of a new kind of ball, $b_{n+1}$, become available. We must place any number of balls of this kind in the same $m$ urns without violating the constraint that no two $b_{n+1}$'s may be placed in the same urn. Of course, no $b_{n+1}$ is placed any of our placements so far.
+
+A subtle difference between the previous problem and this one is that here every $F(n,m)$ placement is also a valid placement for $F(n+1,m)$, because a placement of $n$ kinds of ball in $m$ urns such that no urn gets two or more balls of the same kind is also a placement of $n+1$ kinds of ball in $m$ urns (with the same constraint). In the previous problem, we had to ensure that we place all the $n+1$ balls in $m$ urns for $F(n+1,m)$.
+
+We make two equivalent arguments:
+\begin{enumerate}
+    \item An additive argument: We can certainly choose to place one $b_{n+1}$ in any one of the $m$ urns. This can be done in $\binom{m}{1}$ ways. We can place a $b_{n+1}$ in any two of the $m$ urns. This can be done in $\binom{m}{2}$ ways. Total number of ways of doing this is
+        \[
+            \binom{m}{1}+\binom{m}{2}+\dots+\binom{m}{m}=\sum_{i=1}^m\binom{m}{i}
+        \]
+        ($i$ does not assume $0$, because that means we are not placing a ball of a new kind in any urn.)
+    \item A `binary' argument: We have $m$ urns. We either place a ball of new kind in an urn or not. This is analogous to creating all binary $m$-strings with the exception of the $m$-string: $\underbrace{\mathtt{00\dots0}}_{\mathbf{m}}$. The number of such binary $m$-strings, and hence the number of placements, is $2^m-1$.
+\end{enumerate}
+
+It turns out that the sum in item 1) above evaluates to the number in item 2). 
+
+Thus, each placement of $n$ kinds of balls in $m$ urns creates $2^m-1$ placements of $n+1$ kinds. This sets up the following recurrence:
+
+    \begin{align}
+        F(0,m)&=1\nonumber\\
+        F(n+1,m)=F(n,m)+(2^m-1)\times F(n,m)&=2^m\times F(n,m)
+        \label{eq:rec-n-kinds-of-ball-m-urns}
+    \end{align}
 
 
 
