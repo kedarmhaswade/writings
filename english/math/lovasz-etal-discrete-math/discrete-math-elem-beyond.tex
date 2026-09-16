@@ -1164,8 +1164,8 @@ We subtract $6$ because we must count $6$ scores like $(1,1)$ once.
 \end{reflection}
 
 \begin{exercise}
-    We have $20$ \textbf{kinds} of presents; this time, we have a large supply of each kind. We want to give presents to $12$ children. Again, it is not required that every child get\footnote{The mood is subjunctive, where the base form of the verb is used. The book most probably has a typo; it uses `gets' here. The previous exercise [\ref{ex:1.5.5}], however, correctly uses the subjunctive.} something; but no child can get two copies of the same present. In how many ways can we give presents?
     \label{ex:1.5.6}
+    We have $20$ \textbf{kinds} of presents; this time, we have a large supply of each kind. We want to give presents to $12$ children. Again, it is not required that every child get\footnote{The mood is subjunctive, where the base form of the verb is used. The book most probably has a typo; it uses `gets' here. The previous exercise [\ref{ex:1.5.5}], however, correctly uses the subjunctive.} something; but no child can get two copies of the same present. In how many ways can we give presents?
 \end{exercise}
 \textbf{Solution}.
 We make an inductive argument similar to the above argument of placing $n$ balls in $m$ urns, but keep some subtle differences in mind. This time, we have unlimited balls of each of $n$ \emph{kinds}\footnote{A \emph{kind} can be realized most effectively by numbering, e.g. the $k_1$ balls are all numbered $1$, $k_2$ numbered $2$, and so on. Another way to realize them is by the way of colors.}. We try to find $F(n+1,m)$ in terms of $F(n,m)$, where $F(x,y)$ denotes the number of ways of placing balls of $x$ distinct kinds in $m$ urns such that no urn has more than 1 ball of \emph{the same kind}\footnote{Combinatorial problems is about constraints such as these. We must model the problems correctly and satisfy those constraints!}.
@@ -1217,7 +1217,7 @@ The solution of the recurrence in equation [\ref{eq:rec-n-kinds-of-ball-m-urns}]
     I was nervous about some of the solutions!
     \begin{enumerate}
         \item Exercise [\ref{ex:1.5.1}] The book reports that the second tree should have $12$ leaves. I believe that is wrong. It should have $2\times3\times3=18$ leaves. 
-        \item I am very happy that answers to exercises [\ref{ex:1.5.5}] and [1.5.6]\footnote{\LaTeX is tricky. Somehow, the command \textbackslash ref with the correct label, ex:1.5.6, shows up as 12 here. So, I resorted to using it verbatim.} are correct! The textbook answers do not provide any explanation, whatsoever.
+        \item I am very happy that answers to exercises [\ref{ex:1.5.5}] and [\ref{ex:1.5.6}] are correct! The textbook answers do not provide any explanation, whatsoever.
     \end{enumerate}
 \end{reflection}
 
