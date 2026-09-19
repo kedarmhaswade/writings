@@ -4,9 +4,9 @@
 
 % ---------- Fonts (LuaLaTeX / XeLaTeX) ----------
 \usepackage{fontspec}
-%\setmainfont{Libertinus Serif}
+\setmainfont{Libertinus Serif}
 %\setmainfont{TeX Gyre Pagella}
-%\setsansfont{TeX Gyre Heros}
+\setsansfont{TeX Gyre Heros}
 \setmonofont{Inconsolata}
 
 % ---------- Page layout ----------
@@ -27,6 +27,8 @@
 \newtheorem{corollary}{Corollary}
 \newtheorem{exercise}{Exercise}
 \counterwithin{exercise}{section}
+\theoremstyle{definition}
+\newtheorem{example}{Example}
 
 
 
@@ -128,6 +130,9 @@
 
 % for \num formatting
 \usepackage{siunitx}
+\sisetup{
+  group-separator = {,}
+}
 % for \num formatting
 % typeset algorithms
 \usepackage{algorithm}
@@ -173,10 +178,12 @@
 \\ \emph{by L\'aszl\'o Lov\'asz et.al. \cite{lovasz-etal}}
 \\ }
 \author{Kedar Mhaswade}
-\date{23 August 2026}
+\date{23 August 2026\tiny{ (start date)}}
 
 \begin{document}
 \maketitle
+\tableofcontents
+\newpage
 \cleardoublepage
 \chapter*{}
 \thispagestyle{empty} % Remove headers and footers
@@ -410,9 +417,9 @@ In Diane's sense, $45\times 3=135$.
 
 In Bob's sense, $9\times 7\times 5\times 3\times 1=945$.
 
-In Carl's sense, $945\times 2\times2\times2\times2\times2=945\times 2^5=30440$.
+    In Carl's sense, $945\times 2\times2\times2\times2\times2=945\times 2^5=\num{30440}$.
 
-In Diane's sense, $945\times5\times4\times3\times2\times1=945\times 5!=113400$.
+    In Diane's sense, $945\times5\times4\times3\times2\times1=945\times 5!=\num{113400}$.
 
 Interestingly, 
     \[
@@ -505,7 +512,7 @@ It's not easy to list the \emph{type} of every element of the given sets.
     \item Animals.
 \end{enumerate}
 \begin{exercise}
-    Name sets having cardinality (a) $52$, (b) $13$, (c) $32$, (d) $100$, (e) $90$, (f) \num[group-separator={,}]{2000000}.
+    Name sets having cardinality (a) $52$, (b) $13$, (c) $32$, (d) $100$, (e) $90$, (f) \num{2000000}.
     \label{ex:1.2.3}
 \end{exercise}
 \textbf{Solution}.
@@ -523,7 +530,7 @@ It's not easy to list the \emph{type} of every element of the given sets.
     \item $\mathbb{D}_{15}=\{\text{AC,AD,AE,\dots,BD,BE,\dots,MO}\}$: Diagonals of a regular 15-gon, ABCDEFGHIJKLMNO. $\lvert\mathbb{D}_{15}\rvert=90$.
     \item $\mathfrak{L}$: Black-on-white or white-on-black car license plates of the form \texttt{<c><c><c><d><d><d>}, where `\texttt{<c>}' is any letter from `A' to 'J' (both inclusive) and `\texttt{<d>}' is any decimal digit. An element of this set is \texttt{EGA340}; another is \colorbox{black}{\textcolor{white}{\texttt{EGA340}}}. 
 
-        $\mathfrak{L}=\{\texttt{AAA000,AAA001,\dots,JJJ998,JJJ999,}\colorbox{black}{\textcolor{white}{\texttt{AAA000,AAA001,\dots,JJJ998,JJJ999}}}\}$. $\lvert\mathfrak{L}\rvert=\num[group-separator={,}]{2000000}$.
+        $\mathfrak{L}=\{\texttt{AAA000,AAA001,\dots,JJJ998,JJJ999,}\colorbox{black}{\textcolor{white}{\texttt{AAA000,AAA001,\dots,JJJ998,JJJ999}}}\}$. $\lvert\mathfrak{L}\rvert=\num{2000000}$.
 \end{enumerate}
 
 \begin{reflection}
@@ -1221,6 +1228,124 @@ The solution of the recurrence in equation [\ref{eq:rec-n-kinds-of-ball-m-urns}]
     \end{enumerate}
 \end{reflection}
 
+\section{Permutations}
+\begin{definition}[Permutation of Objects]
+    If we have a \textbf{list} of $n$ objects (an \textbf{ordered set}, where it is specified which element is the first, second, etc.), and we rearrange them so that they are in another order, this is called \textbf{permuting} them; the new order is called a permutation of the objects. 
+
+    We also call the rearrangement that does not change anything a permutation.
+\end{definition}
+\begin{example}
+    $n!=n\times(n-1)\times(n-2)\times\dots\times2\times1$ is the number of ways to order $n$ objects.
+\end{example}
+
+\begin{theorem}
+The number of permutations of $n$ objects is $n!$.
+    \label{th:n-perms}
+\end{theorem}
+
+\begin{reflection}[The Decision Tree Based Exposition]
+    I like how the authors contrast two combinatorial objects (number of subsets of an $n$-set and the number of permutations of $n$ objects) using a `decision tree.' In either case, \textbf{the combinatorial object we seek is found at a leaf of the decision tree}.
+    \begin{enumerate}
+    \item While thinking of subsets of an $n$-set, we ask if each of the set elements is in the subset we are making. In this case, our decision tree is always an $n$-level `binary tree'. The number of leaves is $2^n$. Each leaf is a subset.
+    \item While thinking of permutations of $n$ objects, we assume some order and ask which is the first element, second element, and so on. In this case, our decision tree is always an $n$-level `level tree' with $n$ nodes at the first level, $n\times(n-1)$ nodes at the second level, and so on. The number of leaves is $n!$. Each leaf is a permutation.
+    \end{enumerate}
+\end{reflection}
+\begin{exercise}
+    \label{ex:1.6.1}
+    $n$ boys and $n$ girls go out to dance. In how many ways can they all dance simultaneously? (We assume that only couples of mixed gender dance with each other.)
+\end{exercise}
+\textbf{Solution}.
+An inductive argument comes to mind.
+
+Let there be $n$ boys and $n$ girls such that a boy pairs up with a girl to dance and all the $n$ pairs dance simultaneously. We denote the boys from $b_1$ to $b_n$ and girls from $g_1$ to $g_n$. 
+
+With $n$ boys and $n$ girls, a `dance pairing' has exactly $n$ boy-girl pairs like $b_i-g_j$. For $n=2$, we have the following two dance pairings:
+\begin{enumerate}
+    \item $\{b_1-g_1,b_2-g_2\}$
+    \item $\{b_1-g_2,b_2-g_1\}$
+\end{enumerate}
+
+Consider an arbitrary dance pairing of $n$ boys and $n$ girls:
+\[
+    \{\underbrace{b_1-g_2,b_2-g_3,\dots,b_n-g_m}_{n\text{ boy-girl pairs}}\}
+\]
+
+A new boy, $b_{n+1}$, and a new girl, $g_{n+1}$, arrive. We can pair up $b_{n+1}$ with any of $g_1,g_2,\dots,g_{n},g_{n+1}$. There are $n+1$ choices. Then $g_{n+1}$ would pair up with $b_{n+1}$'s dancing partner's previous dancing partner, if any. This creates exactly $n+1$ new dance pairings from one previous dance pairing. For example, if $b_{n+1}$ is paired up with $g_2$ from the above dance pairing, $g_{n+1}$ would be paired up with $b_1$. Then, we get a new dance pairing:
+\[
+    \{\underbrace{b_{n+1}-g_2,b_2-g_3,\dots,b_n-g_m,b_1-g_{n+1}}_{n+1\text{ boy-girl pairs}}\}
+\]
+
+If $D(n)$ denotes the total number of dance pairings with $n$ boys and $n$ girls, then,
+\begin{equation}
+    D(n+1)=(n+1)\times D(n)
+    \label{eq:dance-pairings}
+\end{equation}
+
+The solution of equation [\ref{eq:dance-pairings}] is
+\[
+    D(n)=n!
+\]
+
+\begin{reflection}[An Arguably Simpler Argument]
+    The above inductive argument seems correct. However, there is another argument based on permutations\footnote{Deepa Joshi formulated this argument in a conversation.}.
+
+    We imagine that the dance floor comprises `dance stations,' like, for instance, chessboards. $g_1$ comes to the first dance station. She has $n$ choices of a boy partner. After they pair up, the next girl, $g_2$, comes to the next dance station. She only has $n-1$ choices for a boy partner. Together, they have $n\times(n-1)$ choices regardless of the choices made by the rest. Continuing further, $g_{n-1}$ only has two choices. Therefore, from either the theorem [\ref{th:n-perms}] or the multiplication principle (definition [\ref{def:mp}]), the total number of dance pairings (which is what the exercise asks for) is $n!$.
+\end{reflection}
+\begin{reflection}[Developing `Combinatorial' Perspectives]
+
+    After the second argument above, it occurred to me that, much like the rest of mathematics, discrete mathematics is about developing alternative perspectives. The previous inductive argument came to me rather automatically, or intuitively. However, in time, we must develop the habit of thinking about the same problem more than one way. Indeed, like the great George P\'olya said, ``It is better to solve one problem five different ways, than to solve five problems one way.''  
+\end{reflection}
+\begin{reflection}[I'm Having Fun!]
+    I am relearning discrete mathematics in my not-so-typical student life by the way of this amazing book. Although the style is fairly standard (definitions, exposition, theorems, proofs, exercises, problems) in such mathematical works, reading this book is a joy. The problems are thought-provoking and challenging.
+
+    Yes, I want to finish a first reading of this book soon, solve several problems, and improve my understanding of discrete math. Nonetheless, I'm having fun!
+
+\end{reflection}
+
+\begin{exercise}
+    \label{ex:1.6.2}
+    Two questions:
+    \begin{enumerate}[label=({\alph*})]
+        \item In how many ways can 8 people play chess in Alice's interpretation of the question?
+        \item Can you give a general formula for $2n$ people?
+    \end{enumerate}
+\end{exercise}
+\textbf{Solution}.
+I have written about it above (See reflection [\ref{ref:work-harder}]). Alice wants an even number of people to sit on as many chairs (presumably arranged across a table with a chessboard between people sitting opposite each other) and play chess. One person may play the same person again, with the same color or different, on the same board or different.
+    \begin{enumerate}[label=({\alph*})]
+        \item $8$ people can sit on $8$ chairs $8!=\num{40320}$ ways.
+        \item $2n!$.
+
+    \end{enumerate}
+
+\begin{reflection}[Answer Check 1.6.\textasteriskcentered]
+    The answer to exercise [\ref{ex:1.6.1}] is correct.
+
+    It turns out that `Alice's interpretation' is actually Bob's (because Alice does say that the number of ways of sitting her six friends to play chess is $6!=720$). And, in Bob's interpretation, the answers are a) $7\times5\times3\times1=105$, and b) $(2n-1)\times(2n-3)\dots\times3\times1$.
+
+    If we were to do dance pairings like Bob thought of chess games among (an even number of) chess players, we must allow a boy to dance with another boy and a girl with another girl.
+\end{reflection}
+
+\section{The Number of `Ordered Subsets'}
+This section introduces the idea of an `ordered' subset (or ordered set). How can a set be ordered, aren't $\{2,1\}$ and $\{1,2\}$ the same set? Right, they are the same set, but not the same ordered set. Simply speaking, an ordered set is a way to order the elements of a set according to an ordering rule. If no such rule exists, the set cannot be ordered. Fortunately, many sets are ordered.
+
+By extension, when we impose an order on the subsets of a set, we get its ordered subsets. We use the parentheses to denote an ordered set\footnote{The $\langle\rangle$ is used for sequences which are different.}.
+\begin{example}[Ordered $2$-subsets of $\{1,2,3\}$]
+    Here are the two ordered $2$-subsets of $\{1,2,3\}$:
+    \begin{enumerate}
+        \item $(1,2)$
+        \item $(2,1)$
+    \end{enumerate}
+    The ordering criterion decides which set or subset is considered before others. Thus,
+    \begin{enumerate}
+        \item $(2,1)$
+        \item $(1,2)$
+    \end{enumerate}
+
+    are also ordered $2$-subsets of the given set.
+
+    The number of ordered sets created by ordering all the elements of an $n$-set is $n!$.
+\end{example}
 
 
 
