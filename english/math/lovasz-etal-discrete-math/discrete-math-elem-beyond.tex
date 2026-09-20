@@ -1329,7 +1329,7 @@ I have written about it above (See reflection [\ref{ref:work-harder}]). Alice wa
 \section{The Number of `Ordered Subsets'}
 This section introduces the idea of an `ordered' subset (or ordered set). How can a set be ordered, aren't $\{2,1\}$ and $\{1,2\}$ the same set? Right, they are the same set, but not the same ordered set. Simply speaking, an ordered set is a way to order the elements of a set according to an ordering rule. If no such rule exists, the set cannot be ordered. Fortunately, many sets are ordered.
 
-By extension, when we impose an order on the subsets of a set, we get its ordered subsets. We use the parentheses to denote an ordered set\footnote{The $\langle\rangle$ is used for sequences which are different.}.
+By extension, when we impose an order on the subsets of a set, we get its ordered subsets. We use the pair of parentheses to denote an ordered set\footnote{The $\langle\rangle$ is used for sequences, which are different.}.
 \begin{example}[Ordered $2$-subsets of $\{1,2,3\}$]
     Here are the two ordered $2$-subsets of $\{1,2,3\}$:
     \begin{enumerate}
@@ -1346,6 +1346,40 @@ By extension, when we impose an order on the subsets of a set, we get its ordere
 
     The number of ordered sets created by ordering all the elements of an $n$-set is $n!$.
 \end{example}
+
+\begin{example}[A Competition]
+At a competition of $100$ athletes, only the order of the first $10$ is recorded.  How many different outcomes does the competition have?
+
+This question can be answered along the lines of the arguments we have seen. The first place can be won by any of the athletes; no matter who wins, there are $99$ possible second place winners, so the first two prizes can go $100\times99$ ways. Given the first two, there are $98$ athletes who can be third, etc. So the answer is $100\times99\times\dots\times91$.
+\end{example}
+\begin{exercise}
+    \label{ex:1.7.1}
+    Illustrate this argument by a tree.
+\end{exercise}
+\textbf{Solution}.
+Left as an exercise to the reader.
+\begin{exercise}
+    Suppose that we record the order of all 100 athletes.
+    \begin{enumerate}[label={(\alph*})]
+        \item \label{item:a}How many different outcomes can we have then?
+        \item \label{item:b}How many of these give the same result for the first $10$ places?
+        \item Show that the result above for the number of possible outcomes for the first $10$ places can be also obtained using \ref{item:a} and \ref{item:b}.
+    \end{enumerate}
+    \label{ex:1.7.2}
+\end{exercise}
+\textbf{Solution}.
+    \begin{enumerate}[label={(\alph*})]
+        \item \label{item:ra}We are now counting the number of ordered $100$-sets. That number is $100!$ We denote all the outcomes as `T-100.'
+        \item \label{item:rb}Once we have chosen one outcome for the $10$ best athletes, the next best, $11^{th}$, athlete can be chosen $90$ ways, and the next after that $89$ ways, and so on. This number is $90\times89\times\dots\times2\times1=90!$. Let's call it a T-10 group. Therefore, $\lvert\text{T-10}\rvert=90!$.
+        \item It follows from \ref{item:rb} that each T-10 has the same size. It then follows that the number of outcomes of $100$ athletes equals the number of T-10 groups, $N_{\text{T-10}}$, multiplied by the size of each T-10 group. That is,
+            \[
+                \lvert\text{T-100}\rvert=\lvert\text{T-10}\rvert\times N_{\text{T-10}}
+            \]
+            \[
+                \therefore N_{\text{T-10}}=\frac{100!}{90!}=100\times99\times\dots\times92\times91
+            \]
+
+    \end{enumerate}
 
 
 
