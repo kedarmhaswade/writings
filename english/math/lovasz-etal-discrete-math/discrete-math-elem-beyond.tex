@@ -1429,13 +1429,63 @@ In the orders of the $n$-strings of $k$ elements, each order has $n$ elements. T
 
 In the ordered $k$-subsets of an $n$-set, each subset has $k$ elements. The tree is $n$-ary at the first level, $n\times(n-1)$-ary at the second level, and so on (up to $n\times(n-1)\times(n-2)\times\dots\times(n-k+1)$ leaves), and $k$ levels.
 
+\begin{reflection}[Answer Check 1.7.\textasteriskcentered]
+    The answer in the book for exercise [\ref{ex:1.7.4}] is somewhat underwhelming: ``In one case, repetition is not allowed, while in the other case, it is allowed.'' (By `one case' they mean the ordered $k$-subsets, I suppose. My slight objection to that answer is that since we must fill $n$ places, repetitions must be allowed in the case of $n$-strings).
+\end{reflection}
 \section{The Number of $k$-subsets of an $n$-set}
 \begin{theorem}
+    \label{th:n-choose-k}
     It follows from theorem [\ref{th:ordered-k-subsets}] that, the number of $k$-subsets\footnote{Not `ordered.'} of an $n$-set is
-    \[
+    \begin{equation}
         \binom{n}{k}=\frac{n\times(n-1)\times\dots\times(n-k+1)}{k!}=\frac{n!}{k!(n-k)!}
-    \]
+        \label{eq:n-choose-k}
+    \end{equation}
 \end{theorem}
+This is because the number of permutations (orders) of a $k$-set is $k!$.
+
+
+The number of $k$-subsets of an $n$-set is such an important quantity that there is a special notation for it: $\dbinom{n}{k}$ (read ``n choose k'').
+
+\begin{exercise}
+    Which problems discussed during the party were special cases of theorem [\ref{th:n-choose-k}] ?
+    \label{ex:1.8.1}
+\end{exercise}
+\textbf{Solution}.
+The number of different lottery tickets ($\dbinom{90}{5}$), the number of handshakes at the start ($\dbinom{7}{2}$), etc.
+\begin{exercise}
+    Tabulate the values of $\dbinom{n}{k}$ for $0\leq k\leq n\leq5$.
+    \label{ex:1.8.2}
+\end{exercise}
+\textbf{Solution}.
+\begin{table}[H] 
+\centering
+\begin{tabular}{|c|c|}
+ \hline
+    $k$&$\dbinom{5}{k}$\\ \hline
+ \hline
+    0&1\\ \hline
+    1&5\\ \hline
+    2&10\\ \hline
+    3&10\\ \hline
+    4&5\\ \hline
+    5&1\\ \hline
+\end{tabular}
+\end{table}
+\begin{exercise}
+    Find the values of $\dbinom{n}{k}$ for $k=0,1,n - 1,n$ using equation [\ref{eq:n-choose-k}], and explain the results in terms of the combinatorial meaning of $\dbinom{n}{k}$.
+    \label{ex:1.8.3}
+\end{exercise}
+\textbf{Solution}.
+\[
+    \dbinom{n}{0}=\frac{n!}{0!\times n!}=1=\dbinom{n}{n}
+\]
+\[
+    \dbinom{n}{1}=\frac{n!}{1!\times(n-1)!}=\frac{n\times(n-1)!}{1\times(n-1)!}=n=\dbinom{n}{n-1}
+\]
+While forming a $k$-subset of an $n$-set, we can either explicitly choose $k$ elements($\binom{n}{k}$), or reject $n-k$ elements ($\binom{n}{n-k}$). Therefore,
+\[
+    \dbinom{n}{k}=\dbinom{n}{n-k}\forall 0\leq k\leq n
+\]
 
 
 
