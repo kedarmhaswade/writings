@@ -1014,6 +1014,7 @@ All the integers from $0$ to $2^k-1$ (both inclusive) are represented by such a 
 \section{Sequences}
 \begin{theorem}[Number of Strings]
     The number of $n$-strings composed of $k$ given elements is $k^n$.
+    \label{th:number-of-strings}
 \end{theorem}
 
 This is the same as the multiplication principle (definition [\ref{def:mp}]). It is generalized below as a theorem.
@@ -1326,7 +1327,7 @@ I have written about it above (See reflection [\ref{ref:work-harder}]). Alice wa
     If we were to do dance pairings like Bob thought of chess games among (an even number of) chess players, we must allow a boy to dance with another boy and a girl with another girl.
 \end{reflection}
 
-\section{The Number of `Ordered Subsets'}
+\section{The Number of `Ordered' $k$-subsets of an $n$-set}
 This section introduces the idea of an `ordered' subset (or ordered set). How can a set be ordered, aren't $\{2,1\}$ and $\{1,2\}$ the same set? Right, they are the same set, but not the same ordered set. Simply speaking, an ordered set is a way to order the elements of a set according to an ordering rule. If no such rule exists, the set cannot be ordered. Fortunately, many sets are ordered.
 
 By extension, when we impose an order on the subsets of a set, we get its ordered subsets. We use the pair of parentheses to denote an ordered set\footnote{The $\langle\rangle$ is used for sequences, which are different.}.
@@ -1380,7 +1381,61 @@ Left as an exercise to the reader.
             \]
 
     \end{enumerate}
+\begin{theorem}[The Number of Ordered $k$-subsets of an $n$-set]
+    An $n$-set has
+    \[
+        n\times(n-1)\times(n-2)\times\dots\times(n-k+1)
+    \]
+    \textbf{ordered} $k$-subsets.
+    \label{th:ordered-k-subsets}
+\end{theorem}
 
+[\ref{th:ordered-k-subsets}] is an important theorem! The following follows from it: 
+
+Consider an $n$-set. Then,
+
+The number of \emph{ordered} $n$-sets= The number of their \emph{ordered} $k$-subsets $\times$ The number of $n-k$ objects, that is,
+\[
+    n!=\big(n\times(n-1)\times(n-2)\times\dots\times(n-k+2)\times(n-k+1)\big)\times(n-k)!
+\]
+
+Alternatively, the number of \emph{ordered} $k$-subsets of an $n$-set is $\frac{n!}{(n-k)!}$.
+\begin{exercise}
+    If you generalize the solution of exercise [\ref{ex:1.7.2}], you get the answer in the form
+    \[
+        \frac{n!}{(n-k)!}
+    \]
+    Check that this is the same number as given in Theorem [\ref{th:ordered-k-subsets}].
+    \label{ex:1.7.3}
+\end{exercise}
+\textbf{Solution}. See above.
+\begin{exercise}
+    Explain the similarity and the difference between the counting questions answered by Theorem [\ref{th:ordered-k-subsets}] and Theorem [\ref{th:number-of-strings}].
+    \label{ex:1.7.4}
+\end{exercise}
+\textbf{Solution}.
+\begin{figure}[H]
+  \centering
+    \includegraphics[scale=0.4]{images/count-k-strings-ordered-k-subsets-s}
+    \caption{Comparing the Number of $n$-strings of $k$ Elements with that of Ordered $k$-subsets of an $n$-set}
+  \label{fig:count-k-strings-ordered-k-subsets-s}
+\end{figure}
+
+The two `trees' in Figure [\ref{fig:count-k-strings-ordered-k-subsets-s}] illustrate the similarity and difference between the two counts that count the number of orders. 
+
+The similarity is in terms of `order,' that is, we are ordering elements of a set by answering questions such as, ``In this order, what is the first (then second, third, and so on) element?'' The orders are obtained at the leaves.
+
+In the orders of the $n$-strings of $k$ elements, each order has $n$ elements. The tree is $k$-ary, and has $n$ levels.
+
+In the ordered $k$-subsets of an $n$-set, each subset has $k$ elements. The tree is $n$-ary at the first level, $n\times(n-1)$-ary at the second level, and so on (up to $n\times(n-1)\times(n-2)\times\dots\times(n-k+1)$ leaves), and $k$ levels.
+
+\section{The Number of $k$-subsets of an $n$-set}
+\begin{theorem}
+    It follows from theorem [\ref{th:ordered-k-subsets}] that, the number of $k$-subsets\footnote{Not `ordered.'} of an $n$-set is
+    \[
+        \binom{n}{k}=\frac{n\times(n-1)\times\dots\times(n-k+1)}{k!}=\frac{n!}{k!(n-k)!}
+    \]
+\end{theorem}
 
 
 
