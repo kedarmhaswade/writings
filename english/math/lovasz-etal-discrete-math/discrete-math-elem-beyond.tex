@@ -138,7 +138,9 @@
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 % typeset algorithms
-
+% for leftbar indentation (https://tex.stackexchange.com/a/735168/64425)
+\usepackage{framed}
+% for leftbar indentation (https://tex.stackexchange.com/a/735168/64425)
 
 
 % tbd command
@@ -1327,7 +1329,7 @@ I have written about it above (See reflection [\ref{ref:work-harder}]). Alice wa
     If we were to do dance pairings like Bob thought of chess games among (an even number of) chess players, we must allow a boy to dance with another boy and a girl with another girl.
 \end{reflection}
 
-\section{The Number of `Ordered' $k$-subsets of an $n$-set}
+\section{The Number of `Ordered' k-subsets of an n-set}
 This section introduces the idea of an `ordered' subset (or ordered set). How can a set be ordered, aren't $\{2,1\}$ and $\{1,2\}$ the same set? Right, they are the same set, but not the same ordered set. Simply speaking, an ordered set is a way to order the elements of a set according to an ordering rule. If no such rule exists, the set cannot be ordered. Fortunately, many sets are ordered.
 
 By extension, when we impose an order on the subsets of a set, we get its ordered subsets. We use the pair of parentheses to denote an ordered set\footnote{The $\langle\rangle$ is used for sequences, which are different.}.
@@ -1432,7 +1434,7 @@ In the ordered $k$-subsets of an $n$-set, each subset has $k$ elements. The tree
 \begin{reflection}[Answer Check 1.7.\textasteriskcentered]
     The answer in the book for exercise [\ref{ex:1.7.4}] is somewhat underwhelming: ``In one case, repetition is not allowed, while in the other case, it is allowed.'' (By `one case' they mean the ordered $k$-subsets, I suppose. My slight objection to that answer is that since we must fill $n$ places, repetitions must be allowed in the case of $n$-strings).
 \end{reflection}
-\section{The Number of $k$-subsets of an $n$-set}
+\section{The Number of k-subsets of an n-set}
 \begin{theorem}
     \label{th:n-choose-k}
     It follows from theorem [\ref{th:ordered-k-subsets}] that, the number of $k$-subsets\footnote{Not `ordered.'} of an $n$-set is
@@ -1486,6 +1488,71 @@ While forming a $k$-subset of an $n$-set, we can either explicitly choose $k$ el
 \[
     \dbinom{n}{k}=\dbinom{n}{n-k}\forall 0\leq k\leq n
 \]
+
+\begin{theorem}[Properties of Binomial Coefficients]
+    \label{th:binomial-coeffs-identities}
+    Binomial coefficients (numbers $\dbinom{n}{k}\forall k,n\geq0, k\leq n$ for various values of $k$ for a given value of $n$) satisfy the following identities:
+
+    \begin{align}
+        \dbinom{n}{k}&=\dbinom{n}{n-k} \label{eq:nck=ncn-k}\\
+        \dbinom{n-1}{k-1}+\dbinom{n-1}{k}&=\dbinom{n}{k} \forall n,k>0\label{eq:n-1ck-1}\\
+        \dbinom{n}{0}+\dbinom{n}{1}+\dbinom{n}{2}+\dots+\dbinom{n}{n-1}+\dbinom{n}{n}&=2^n\label{eq:bin-coeffs-sum}
+    \end{align}
+\end{theorem}
+\begin{proof}
+    A combinatorial proof for equation [\ref{eq:nck=ncn-k}] is elegant. We show a 1:1 correspondence between the $k$-subset and $n-k$-subset of an $n$-set.
+
+    A combinatorial proof for equation [\ref{eq:n-1ck-1}] is harder, I guess. So, algebraic manipulation is used. First, if $n$ equals $k$,
+    \[
+        \dbinom{n-1}{n-1}+\dbinom{n-1}{n}=\dbinom{n}{n}
+    \]
+    holds, because $\dbinom{n-1}{n-1}$,$\dbinom{n}{n}$ are both $1$ and $\dbinom{n-1}{n}$ is $0$ (because there is no $n$-subset of an $(n-1)$-set). 
+
+    When $k<n$, the following holds:
+    \[
+        \frac{n}{k(n-k)}=\frac{1}{k}+\frac{1}{n-k}
+    \]
+    We can multiply both sides by $(n-1)!$ and divide by $(k-1)!(n-k-1)!$ to get it in the coveted form:
+    \[
+        \frac{n(n-1)!}{k(k-1)!(n-k)(n-k-1)!}=\frac{(n-1)!}{k(k-1)!(n-k-1)!}+\frac{(n-1)!}{k!(n-k)(n-k-1)!}
+    \]
+    or,
+    \[
+        \frac{n!}{k!(n-k)!}=\frac{(n-1)!}{k!(n-k-1)!}+\frac{(n-1)!}{(k-1)!(n-k)!}
+    \]
+    that is,
+    \[
+        \frac{n!}{k!(n-k)!}=\frac{(n-1)!}{k!((n-1)-k)!}+\frac{(n-1)!}{(k-1)!((n-1)-(k-1))!}
+    \]
+    or,
+    \[
+        \dbinom{n-1}{k-1}+\dbinom{n-1}{k}=\dbinom{n}{k}
+    \]
+\end{proof}
+    \begin{reflection}
+        I like this argument for the equation [\ref{eq:n-1ck-1}] better than given in the book. The book assumes what needs to be proved and reaches a tautology.
+
+        What can be a `combinatorial argument' here? Translating into words this identity means the following:
+        \begin{leftbar}
+            The sum of the number of $k$-subsets and the number of $(k-1)$-subsets of an $(n-1)$-set equals the number of $k$-subsets of an $n$-set.
+        \end{leftbar}
+
+        However, that is not very helpful, is it?
+
+        After a while, a thought occurred to me when I focused on $\dbinom{n}{k}$. An argument emerged as follows.
+        \begin{proof}
+            $\dbinom{n}{k}$ is the number of $k$-subsets of an $n$-set. Let's say a new element is added to the $n$-set, making it an $(n+1)$-set. 
+
+        What are $k$-subsets of the new $(n+1)$-set?
+
+        All the $k$-subsets of the previous $n$-set are also the $k$-subsets of the new $(n+1)$-set. The new element can also be added to make every $(k-1)$-subset of the previous $n$-set so that it becomes the $k$-subset of the new $(n+1)$-set. There is no other $k$-subset of the new $(n+1)$-set. Therefore,
+        \[
+            \dbinom{n}{k}+\dbinom{n}{k-1}=\dbinom{n+1}{k}
+        \]
+        Setting $n=m-1$ restates the same result in the desired form.
+        \end{proof}
+    \end{reflection}
+
 
 
 
