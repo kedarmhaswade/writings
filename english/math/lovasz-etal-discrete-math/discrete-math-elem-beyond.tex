@@ -167,7 +167,6 @@
 % bib
 
 %macros
-%macros
 % https://github.com/plk/biber/issues/373
 \DeclareBibliographyAlias{movie}{misc}
 % https://github.com/plk/biber/issues/373
@@ -201,7 +200,9 @@
 
 % A.I. Declaration 
 \begin{mybox}[How I have Used A.I. in This Work]
-    I can't believe I had an urge to write this declaration. A number of developments in the `outside world' dominated currently by the achievements of A.I. prompted me to do this. As I read this book and solved problems from it, I decided to write down how I have used A.I. (by that I mean Large Language Models, A.I. coding assistants, etc.) in this work. I will make this a practice. This policy is strictly maintained throughout this work. The current A.I. models appear as L.L.M's first. Therefore, A.I. and L.L.M. mean the same thing in the context of this work.
+    Update on 27 September 2026: I have used ChatGPT to draw a few tikz pictures in this work.
+
+    I can't believe I had an urge to write this declaration. A number of developments in the `outside world' dominated currently by the achievements of A.I. prompted me to do this. As I read this book and solved problems from it, I decided to write down how I have used A.I. (by that I mean Large Language Models, A.I. coding assistants, etc.) in this work. I will make this a practice. This policy is maintained throughout this work. The current A.I. models appear as L.L.M's first. Therefore, A.I. and L.L.M. mean the same thing in the context of this work.
     \begin{enumerate}
         \item By default, I have not discussed the exposition or problems with an L.L.M. If a particular topic is discussed with an L.L.M, it is mentioned. If there's no mention, I guarantee that no `conversation with L.L.M' is involved.
         \item All programs are written without a coding assistant, unless stated otherwise explicitly. Minimum editing, code-completion facilities of an I.D.E. are used.
@@ -1479,24 +1480,24 @@ The number of different lottery tickets ($\dbinom{90}{5}$), the number of handsh
 \end{exercise}
 \textbf{Solution}.
 \[
-    \dbinom{n}{0}=\frac{n!}{0!\times n!}=1=\dbinom{n}{n}
+    \binom{n}{0}=\frac{n!}{0!\times n!}=1=\binom{n}{n}
 \]
 \[
-    \dbinom{n}{1}=\frac{n!}{1!\times(n-1)!}=\frac{n\times(n-1)!}{1\times(n-1)!}=n=\dbinom{n}{n-1}
+    \binom{n}{1}=\frac{n!}{1!\times(n-1)!}=\frac{n\times(n-1)!}{1\times(n-1)!}=n=\binom{n}{n-1}
 \]
 While forming a $k$-subset of an $n$-set, we can either explicitly choose $k$ elements($\binom{n}{k}$), or reject $n-k$ elements ($\binom{n}{n-k}$). Therefore,
 \[
-    \dbinom{n}{k}=\dbinom{n}{n-k}\forall 0\leq k\leq n
+    \binom{n}{k}=\binom{n}{n-k}\forall 0\leq k\leq n
 \]
 
 \begin{theorem}[Properties of Binomial Coefficients]
     \label{th:binomial-coeffs-identities}
-    Binomial coefficients (numbers $\dbinom{n}{k}\forall k,n\geq0, k\leq n$ for various values of $k$ for a given value of $n$) satisfy the following identities:
+    Binomial coefficients (numbers $\binom{n}{k}\forall k,n\geq0, k\leq n$ for various values of $k$ for a given value of $n$) satisfy the following identities:
 
     \begin{align}
-        \dbinom{n}{k}&=\dbinom{n}{n-k} \label{eq:nck=ncn-k}\\
-        \dbinom{n-1}{k-1}+\dbinom{n-1}{k}&=\dbinom{n}{k} \forall n,k>0\label{eq:n-1ck-1}\\
-        \dbinom{n}{0}+\dbinom{n}{1}+\dbinom{n}{2}+\dots+\dbinom{n}{n-1}+\dbinom{n}{n}&=2^n\label{eq:bin-coeffs-sum}
+        \binom{n}{k}&=\binom{n}{n-k} \label{eq:nck=ncn-k}\\
+        \binom{n-1}{k-1}+\binom{n-1}{k}&=\binom{n}{k} \forall n,k>0\label{eq:n-1ck-1}\\
+        \binom{n}{0}+\binom{n}{1}+\binom{n}{2}+\dots+\binom{n}{n-1}+\binom{n}{n}&=2^n\label{eq:bin-coeffs-sum}
     \end{align}
 \end{theorem}
 \begin{proof}
@@ -1504,9 +1505,9 @@ While forming a $k$-subset of an $n$-set, we can either explicitly choose $k$ el
 
     A combinatorial proof for equation [\ref{eq:n-1ck-1}] is harder, I guess. So, algebraic manipulation is used. First, if $n$ equals $k$,
     \[
-        \dbinom{n-1}{n-1}+\dbinom{n-1}{n}=\dbinom{n}{n}
+        \binom{n-1}{n-1}+\binom{n-1}{n}=\binom{n}{n}
     \]
-    holds, because $\dbinom{n-1}{n-1}$,$\dbinom{n}{n}$ are both $1$ and $\dbinom{n-1}{n}$ is $0$ (because there is no $n$-subset of an $(n-1)$-set). 
+    holds, because $\binom{n-1}{n-1}$,$\binom{n}{n}$ are both $1$ and $\binom{n-1}{n}$ is $0$ (because there is no $n$-subset of an $(n-1)$-set). 
 
     When $k<n$, the following holds:
     \[
@@ -1526,10 +1527,11 @@ While forming a $k$-subset of an $n$-set, we can either explicitly choose $k$ el
     \]
     or,
     \[
-        \dbinom{n-1}{k-1}+\dbinom{n-1}{k}=\dbinom{n}{k}
+        \binom{n-1}{k-1}+\binom{n-1}{k}=\binom{n}{k}
     \]
 \end{proof}
     \begin{reflection}
+        \label{ref:n-1ck-1}
         I like this argument for the equation [\ref{eq:n-1ck-1}] better than given in the book. The book assumes what needs to be proved and reaches a tautology.
 
         What can be a `combinatorial argument' here? Translating into words this identity means the following:
@@ -1539,21 +1541,562 @@ While forming a $k$-subset of an $n$-set, we can either explicitly choose $k$ el
 
         However, that is not very helpful, is it?
 
-        After a while, a thought occurred to me when I focused on $\dbinom{n}{k}$. An argument emerged as follows.
+        After a while, a thought occurred to me when I focused on $\binom{n}{k}$. An argument emerged as follows.
         \begin{proof}
-            $\dbinom{n}{k}$ is the number of $k$-subsets of an $n$-set. Let's say a new element is added to the $n$-set, making it an $(n+1)$-set. 
+            $\binom{n}{k}$ is the number of $k$-subsets of an $n$-set. Let's say a new element is added to the $n$-set, making it an $(n+1)$-set. 
 
         What are $k$-subsets of the new $(n+1)$-set?
 
         All the $k$-subsets of the previous $n$-set are also the $k$-subsets of the new $(n+1)$-set. The new element can also be added to make every $(k-1)$-subset of the previous $n$-set so that it becomes the $k$-subset of the new $(n+1)$-set. There is no other $k$-subset of the new $(n+1)$-set. Therefore,
         \[
-            \dbinom{n}{k}+\dbinom{n}{k-1}=\dbinom{n+1}{k}
+            \binom{n}{k}+\binom{n}{k-1}=\binom{n+1}{k}
         \]
-        Setting $n=m-1$ restates the same result in the desired form.
+        Setting $n=m-1$ restates the same result in the desired form:
+            \[
+                \binom{m-1}{k}+\binom{m-1}{k-1}=\binom{m}{k}
+            \]
         \end{proof}
     \end{reflection}
+Finally, we prove equation [\ref{eq:bin-coeffs-sum}] through the combinatorial interpretation again.  Again, let $\mathbb{S}$ be an $n$-element set. The first term on the left-hand side counts the $0$-element subsets of $\mathbb{S}$ (there is only one, the empty set); the second term counts $1$-element subsets; the next term, $2$-element subsets, etc. In the whole sum, every subset of $\mathbb{S}$ is counted exactly once. We know that $2^n$ (the right-hand side) is the number of all subsets of $\mathbb{S}$. This proves [\ref{eq:bin-coeffs-sum}], and completes the proof of theorem [\ref{th:binomial-coeffs-identities}].
+
+\begin{reflection}
+    With all the `shifting desires'\footnote{Those are Einstein's words.} of my psyche, I am holding well. It's been a month since I began reading and solving problems from this book, and, although there have been occasional lapses in my playful determination of finishing a first reading of it, I am having fun!
+
+    Nobody else cares, of course. But why do I care that nobody does!
+\end{reflection}
+
+\begin{exercise}
+    Find a proof of equation [\ref{eq:nck=ncn-k}] using the algebraic formula for $\dbinom{n}{k}$ and a proof of equation [\ref{eq:n-1ck-1}], using the combinatorial meaning of both sides.
+    \label{ex:1.8.4}
+\end{exercise}
+\textbf{Solution}.
+\begin{enumerate}
+\item
+    \begin{proof}
+        We make a simple algebraic argument to prove the identity in equation [\ref{eq:nck=ncn-k}].
+        \begin{align*}
+            \binom{n}{k}&=\frac{n!}{k!(n-k)!}\\
+                        &=\frac{n!}{(n-k)!k!}\\
+                        &=\frac{n!}{(n-k)!(n-(n-k))!}\\
+                        &=\binom{n}{n-k}
+        \end{align*}
+    \end{proof}
+\item I am so glad to find this as an exercise, after the fact that I thought of it as a self-exercise. I have already proved this above (see reflection [\ref{ref:n-1ck-1}])!
+\end{enumerate}
+\begin{exercise}
+    Prove that 
+    \begin{equation}
+        \label{eq:nc2+n+1c2}
+        \binom{n}{2}+\binom{n+1}{2}=n^2
+    \end{equation}
+    ; give two proofs, one using the combinatorial interpretation, and the other using the algebraic formula for the binomial coefficients.
+    \label{ex:1.8.5}
+\end{exercise}
+\textbf{Solution}.
+\begin{proof}
+    We provide the straightforward algebraic argument based on equation [\ref{eq:n-choose-k}].
+
+    Manipulating the left-hand side of equation [\ref{eq:n-choose-k}] with $k=2$ we get:
+    \begin{align*}
+        \binom{n}{2}&=\frac{n\times(n-1)}{2}\\
+        \binom{n+1}{2}&=\frac{(n+1)\times(n)}{2}\\
+        \therefore\binom{n}{2}+\binom{n+1}{2}&=\frac{n\times(n-1)+(n+1)\times n)}{2}\\
+                                             &=\frac{n^2-\cancel{n}+n^2+\cancel{n}}{2}\\
+                                             &=\frac{\cancel{2}n^2}{\cancel{2}}\\
+                                             &=n^2
+    \end{align*}
+\end{proof}
+\begin{proof}
+    We argue based on combinatorial meaning of the two sides of identity [\ref{eq:nc2+n+1c2}], but we manipulate its left-hand side, based on equation [\ref{eq:n-1ck-1}]. Our argument still exploits the combinatorial meaning because we have made a combinatorial argument in proving identity [\ref{eq:n-1ck-1}].
+    \begin{align*}
+        \text{(From}&\text{ equation [\ref{eq:n-1ck-1}]):}\\
+        \binom{n+1}{2}&=\binom{n}{2}+\binom{n}{1}\\
+        \therefore\binom{n}{2}+\binom{n+1}{2}&=2\binom{n}{2}+n
+    \end{align*}
+
+    So, our task is to prove $2\times\dbinom{n}{2}+n$ equals $n^2$.
+
+    We count each $2$-subset (a pair of elements) of an $n$-set \emph{twice} and then add the count of singleton sets (that is, $n$) to it. 
+
+    Let's utilize an $n\times n$ grid of circles to visualize our choices of the pair.
+
+    If we number the $n$ elements of the set arbitrarily, we get pairs like 
+    \[
+        \{(1,2),(2,1),\dots,(3,4),(4,3),\dots,(n-1,n),(n,n-1)\}
+    \]
+
+    Since we are choosing each pair twice, we differentiate our choice such as $(1,3)$ from $(3,1)$. In the $n\times n$ grid, we denote a pair by a circle, and address it using its row, followed by its column. If the row is less than column, we show it in blue, otherwise in red. We denote the elements of the singleton set by a black circle on the principal diagonal:
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+  % Parameters
+  \def\n{5}           % Grid size (nxn)
+  \def\spacing{0.8}   % Distance between circle centers (in cm)
+  \def\radius{0.15}   % Circle radius (in cm)
+
+  % Nested loops for rows and columns
+  \foreach \row in {1,...,\n} {
+    \foreach \col in {1,...,\n} {
+      % Conditional color logic
+      \ifnum\row<\col
+        \def\circlecolor{blue}% Upper triangle (row < column)
+      \else
+        \ifnum\row>\col
+          \def\circlecolor{red}% Lower triangle (row > column)
+        \else
+          \def\circlecolor{black}% Principal diagonal (row == column)
+        \fi
+      \fi
+
+      % Plotting circles: \col determines horizontal position, -\row determines vertical position
+      \fill[\circlecolor] (\col*\spacing, -\row*\spacing) circle (\radius);
+    }
+  }
+\end{tikzpicture}
+    \caption{Choosing a Pair Twice (Upper/Lower Triangles) and Singles (Diagonal Elements) (with $n=5$)}
+    \label{fig:nc2+n+1c2}
+\end{figure}
+
+    Our (double) count of pairs ($2\times\binom{n}{2}$) plus a count of singles ($\binom{n}{1}=n$) covers the $n\times n$ grid, proving that the total count is $n^2$.
+
+\end{proof}
+\begin{exercise}
+    \label{ex:1.8.6}
+    Prove (again in two ways) that
+    \begin{equation}
+        \label{eq:nckn-1ck-1}
+        \binom{n}{k}=\frac{n}{k}\binom{n-1}{k-1}
+    \end{equation}
+\end{exercise}
+\textbf{Solution}.
+\begin{proof}
+    An algebraic argument is straightforward, using the relevant formulas. We'll skip that.
+\end{proof}
+\begin{proof}
+
+    A combinatorial argument is \tbd
+\end{proof}
+\begin{reflection}
+    This is just a side-note on exercise [\ref{ex:1.8.6}]. I am still thinking about the combinatorial proof.
+    
+    However, it occurred to me that this identity demonstrates the fact that $\dbinom{n}{k}$ grows exponentially, because an ``additive increase in the problem's size increases the number of outcomes by a multiplicative factor.''
+
+\end{reflection}
+\begin{exercise}
+    \label{ex:1.8.7}
+    Prove (in two ways) that for $0\leq c\leq b\leq a$,
+    \begin{equation}
+        \label{eq:abc-identity}
+        \binom{a}{b}\times\binom{b}{c}=\binom{a}{a-c}\times\binom{a-c}{b-c}
+    \end{equation}
+\end{exercise}
+\textbf{Solution}.
+\begin{proof}
+    An algebraic argument is straightforward, using the relevant formulas. We'll skip that.
+\end{proof}
+\begin{proof}
+    A combinatorial argument is \tbd
+\end{proof}
+
+\section*{Review Exercises}
+
+\begin{exercise}
+    \label{ex:1.8.8}
+    In how many ways can you seat $12$ people at two round tables with $6$ places each? Think of possible ways of defining when two seatings are different, and find the answer for each.
+\end{exercise}
+\textbf{Solution}.
+\begin{reflection}
+    This is a creative problem, indeed. It is similar to the chess problem in the book (assigning 6 friends to 3 chessboards to play chess), but there are nuances. It's creative because the authors ask us to design and solve our own problems based on the given theme!
+
+    I am still thinking about what a \emph{seating} is. Is 
+    \begin{enumerate}[label=\arabic*)]
+        \item assigning $12$ people (p1, p2,\dots, p12) to $12$ chairs a seating,
+        \item assigning $6$ out of $12$ chairs (c1, c2,\dots, c12) to two tables (t1, t2) first, then assigning $6$ out of $12$ people to t1 (or t2), and finally assigning the chosen $6$ to chairs around those tables a seating, 
+        \item or something else \emph{a seating}?
+    \end{enumerate}
+
+    Let's start with a picture.
+    
+\end{reflection}
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+% Left table
+\draw (0,0) circle (1.3cm);
+      \node at (0,0) {t1};
+\node[draw, minimum size=0.55cm, inner sep=0pt] at (0, 2)   {c1};
+\node[draw, minimum size=0.55cm, inner sep=0pt] at (-1.73,1) {c2};
+\node[draw, minimum size=0.55cm, inner sep=0pt] at (-1.73,-1) {c3};
+\node[draw, minimum size=0.55cm, inner sep=0pt] at (0,-2)  {c4};
+\node[draw, minimum size=0.55cm, inner sep=0pt] at (1.73,-1) {c5};
+\node[draw, minimum size=0.55cm, inner sep=0pt] at (1.73,1) {c6};
+
+% Right table
+\draw (6,0) circle (1.3cm);
+
+      \node at (6,0) {t2};
+\node[draw, minimum size=0.55cm, inner sep=0pt] at (6, 2)    {c7};
+\node[draw, minimum size=0.55cm, inner sep=0pt] at (4.27,1)  {c8};
+\node[draw, minimum size=0.55cm, inner sep=0pt] at (4.27,-1) {c9};
+\node[draw, minimum size=0.55cm, inner sep=0pt] at (6,-2)    {c10};
+\node[draw, minimum size=0.55cm, inner sep=0pt] at (7.73,-1) {c11};
+\node[draw, minimum size=0.55cm, inner sep=0pt] at (7.73,1)  {c12};
+  \end{tikzpicture}
+  \caption{Two Tables and 12 Chairs}
+  \label{fig:2t6c}
+\end{figure}
+
+\begin{enumerate}[label=\arabic*)]
+    \item Scheme: "Ignore Tables." In this scheme, we treat $12$ chairs as if the tables were absent and treat any assignment of $12$ people to $12$ chairs a valid seating. We show two (different) example assignments in table [\ref{tab:12c12p}].
+\begin{table}[H] 
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|}
+ \hline
+    c1&c2&c3&c4&c5&c6&c7&c8&c9&c10&c11&c12\\ \hline
+    \hline
+    p1&p2&p3&p4&p5&p6&p7&p8&p9&p10&\textbf{p11}&\textbf{p12}\\\hline
+    p1&p2&p3&p4&p5&p6&p7&p8&p9&p10&\textbf{p12}&\textbf{p11}\\\hline
+\end{tabular}
+    \caption{12 People on 12 Chairs}
+    \label{tab:12c12p}
+\end{table}
+The number of such seatings is the same as the permutations of $12$ objects, which is 
+        \[
+            12!
+        \]
+
+        In this scheme, there are $6!$ assignments on each table for which the people on the other table don't move (as if they were glued to chairs). Therefore, of the $12!$ seatings, $(6!)^2$ seatings are such that either table is `unchanged.'
+
+    \item Scheme: "Confinement." In this scheme, we choose $6$ of $12$ people and `confine' them to a table (either t1 or t2). A seating is a concatenation of two permutations of $6$ objects. The first (or last) $6$ are assigned to c1 through c6 on t1, and the last (or first) $6$ to c7 through c12 on t2.
+        The number of such seatings is
+        \[
+            2\times\binom{12}{6}\times6!\times6!
+        \]
+
+    \item Scheme: "Pairwise Across Tables." Members of a pair never sit at the same table! In this scheme, following things happen:
+        \begin{enumerate}[label=\alph*)]
+            \item A pair is chosen, one person is assigned to one table and the other to the other table. Then second pair is chosen and assigned similarly, and so on. A seating is complete when all the 6 on each table are occupied. This can be done in $11\times9\times7\times5\times3\times1$ ways.        
+            \item Members of the first pair have $6$ choices on their tables, members of the second pair $5$, and so on. So, we must multiply the above count by $(6!)^2$.
+            \item Members of each pair can either go to t1 or t2, and we have $6$ pairs. Therefore, we must multiply the above by $2^6$.
+        \end{enumerate}
+        The number of such seatings is 
+        \[
+            12\times9\times7\times5\times3\times1\times6!\times6!\times2^6
+        \]
+
+\end{enumerate}
+\begin{exercise}
+    \label{ex:1.8.9}
+    Name sets with cardinality (a) $365$, (b) $12$, (c) $7$, (d) $11.5$, (e) $0$, (f) $1024$.
+\end{exercise}
+\textbf{Solution}.
+\begin{enumerate}[label=\arabic*)]
+    \item "Year 2025."
+    \item "English Months."
+    \item "Week."
+    \item There's no such set.
+    \item "Binary $10$-strings."
+\end{enumerate}
+\begin{exercise}
+    \label{ex:1.8.10}
+    List all subsets of $\{a,b,c,d,e\}$ containing $\{a,e\}$ but not containing $c$.
+\end{exercise}
+\textbf{Solution}. Since we must choose $a$ and $e$ and not choose $c$, subsets of $\{a,b,c,d,e\}$ we're looking for are the subsets of $\{a,b,d,e\}$. We can use the `tree' to construct all the subsets. Here's the set of all those subsets:
+\[
+    \{\{a,b,d,e\},\{a,b,e\},\{a,d,e\},\{a,e\}\}
+\]
+\begin{exercise}
+    \label{ex:1.8.11}
+    We have not written up all subset relations between various sets of numbers\footnote{This refers to the long chain appearing in the book: $\emptyset\subseteq\mathbb{N}\subseteq\mathbb{Z}_{\geq0}\subseteq\mathbb{Z}\subseteq\mathbb{Q}\subseteq\mathbb{R}$.}; for example, $\mathbb{Z}\subseteq\mathbb{R}$ is also true. How many such relations can you find between the sets $\emptyset,\mathbb{N},\mathbb{Z}_{\geq0},\mathbb{Z},\mathbb{Q},\mathbb{R}$?
+\end{exercise}
+\textbf{Solution}.
+The subset relation, $\subseteq$, is binary; it needs two sets. We have $6$ sets and the relation exists between any two of them, when applied non-commutatively. That is, $\emptyset\subseteq\mathbb{Q}$, but $\mathbb{Q}\not\subseteq\emptyset$. Therefore, the number of subset relations among $6$ sets equals the number of $2$-subsets of a $6$-set:
+\[
+    \binom{6}{2}=\frac{6\times5}{2}=15
+\]
+\begin{exercise}
+    \label{ex:1.8.12}
+    What is the intersection of
+    \begin{enumerate}[label=\alph*)]
+        \item the set of positive integers whose last digit is $3$, and the set of even numbers;
+        \item the set of integers divisible by 5 and the set of even integers?
+    \end{enumerate}
+\end{exercise}
+\textbf{Solution}.
+    \begin{enumerate}[label=\alph*)]
+        \item $\emptyset$.
+        \item Set of integers divisible by $10$: $\{x\mid x\bmod10=0\}$.
+    \end{enumerate}
+\begin{exercise}
+    \label{ex:1.8.13}
+    Let $\mathbb{A}=\{a,b,c,d,e\}$ and $\mathbb{B}=\{c,d,e\}$. List of subsets of $\mathbb{A}$ whose intersection with $\mathbb{B}$ has $1$ element.
+\end{exercise}
+\textbf{Solution}.
+\begin{enumerate}
+    \item $\{c\}$
+    \item $\{d\}$
+    \item $\{e\}$
+    \item $\{a,c\}$
+    \item $\{b,c\}$
+    \item $\{a,b,c\}$
+    \item $\{a,d\}$
+    \item $\{b,d\}$
+    \item $\{a,b,d\}$
+    \item $\{a,e\}$
+    \item $\{b,e\}$
+    \item $\{a,b,e\}$
+\end{enumerate}
+\begin{exercise}
+    \label{ex:1.8.14}
+    Three sets have $5$, $10$, and $15$ elements, respectively. How many elements can their union and their intersection have?
+\end{exercise}
+\textbf{Solution}.
+Let $\lvert\mathbb{A}\rvert=5,\lvert\mathbb{B}\rvert=10,\lvert\mathbb{C}\rvert=15$.
+
+Let's think of their union, $\mathbb{D}=\mathbb{A}\cup\mathbb{B}\cup\mathbb{C}$, first. 
+
+$\mathbb{D}$ must have at least $15$ elements (when $(\mathbb{A}\subset\mathbb{C})\land(\mathbb{B}\subset\mathbb{C})$) and at most $5+10+15=30$ elements (when $\mathbb{A}\cap\mathbb{B}\cap\mathbb{C}=\emptyset$). Can it have every integer number of elements between $15$ and $30$? Yes. We start with the elements such that $\mathbb{C}$ contains both $\mathbb{B},\mathbb{A}$. Then, we replace one element in $\mathbb{A}$ with an element that is \emph{only} in $\mathbb{A}$. In that case, $\mathbb{D}$ has $1+15=16$ elements. We continue this process with other elements in $\mathbb{A}$, and then with $\mathbb{B}$, until all the sets are disjoint, in which case $\lvert\mathbb{D}\rvert$ reaches $30$. Therefore, $15\leq\lvert\mathbb{D}\rvert\leq30$.
+
+For their intersection, $\mathbb{E}=\mathbb{A}\cap\mathbb{B}\cap\mathbb{C}$, we can start with disjoint sets. Then, $\mathbb{E}=\emptyset$ and $\lvert\mathbb{E}\rvert=0$; we replace an element of all with one element common to all and $\lvert\mathbb{E}\rvert=1$. Gradually $\lvert\mathbb{E}\rvert$ rises, but only up to $5$, when $\mathbb{A}$ is contained in both $\mathbb{B},\mathbb{C}$. Therefore, $0\leq\lvert\mathbb{E}\rvert\leq5$.
+\begin{exercise}
+    \label{ex:1.8.15}
+    What is the symmetric difference of $\mathbb{A}$ and $\mathbb{A}$?
+\end{exercise}
+\textbf{Solution}. There is no element in $\mathbb{A}$ that is not in $\mathbb{A}$. Therefore, $\mathbb{A}\triangle\mathbb{A}=\emptyset$.
+\begin{exercise}
+    \label{ex:1.8.16}
+    Form the symmetric difference of $\mathbb{A}$ and $\mathbb{B}$ to get a set $\mathbb{C}$. Form the symmetric difference of $\mathbb{A}$ and $\mathbb{C}$. What set do you get?
+\end{exercise}
+\textbf{Solution}. By definition, $\mathbb{C}$ contains elements of either $\mathbb{A}$, or $\mathbb{B}$, \emph{but not both}. Now if we take the symmetric difference between $\mathbb{C}$ and $\mathbb{A}$, we must get only those elements that are in $\mathbb{B}$, because we reject those elements in $\mathbb{C}$ that are also in $\mathbb{A}$. Therefore,
+\[
+    (\mathbb{A}\triangle\mathbb{B})\triangle\mathbb{A}=\mathbb{B}
+\]
+
+\begin{reflection}
+    The book helps improve our \emph{intuitive understanding} of set operations by \emph{comparing} addition of two natural numbers with the union of two sets and their multiplication with the intersection of two sets.
+
+    With what number operation can we compare the symmetric difference of two sets? There doesn't seem an equivalent.
+\end{reflection}
+\begin{exercise}
+    \label{ex:1.8.17}
+    Let $\mathbb{A,B,C}$ be three sets and assume that $\mathbb{A}$ is a subset of $\mathbb{C}$. Prove that
+    \begin{equation}
+        \label{eq:a+bc=(a+b)c}
+        \mathbb{A}\cup(\mathbb{B}\cap\mathbb{C})=(\mathbb{A}\cup\mathbb{B})\cap\mathbb{C}
+    \end{equation}
+    Show by an example that the condition that $\mathbb{A}$ is a subset of $\mathbb{C}$ cannot be omitted.
+\end{exercise}
+\textbf{Solution}.
+
+First a proof of the identity
+\begin{equation}
+    \mathbb{A}\cup(\mathbb{B}\cap\mathbb{C})=(\mathbb{A}\cup\mathbb{B})\cap(\mathbb{A}\cup\mathbb{C})
+    \label{eq:a+bc=(a+b)(a+c)}
+\end{equation}
+\begin{proof}
+    We use venn diagrams to show the sets formed by the two sides of equation [\ref{eq:a+bc=(a+b)(a+c)}].
+\begin{figure}[H]
+  \centering
+\begin{tikzpicture}[scale=0.5]
+
+\def\r{1.2}
+
+% ==================================================
+% 1. A union B
+% ==================================================
+
+\begin{scope}[shift={(0,0)}]
+
+  \fill[blue!30] (-0.8*\r,0) circle (\r);
+  \fill[blue!30] (0.8*\r,0) circle (\r);
+
+  \draw (-0.8*\r,0) circle (\r);
+  \draw (0.8*\r,0) circle (\r);
+  \draw (0,-0.8*\r) circle (\r);
+
+  \node at (-1.2*\r,\r) {$A$};
+  \node at (1.2*\r,\r) {$B$};
+  \node at (0,-1.9*\r) {$C$};
+
+  \node at (0,1.5*\r) {$A\cup B$};
+
+\end{scope}
 
 
+% ==================================================
+% 2. A union C
+% ==================================================
+
+\begin{scope}[shift={(5,0)}]
+
+  \fill[green!30] (-0.8*\r,0) circle (\r);
+  \fill[green!30] (0,-0.8*\r) circle (\r);
+
+  \draw (-0.8*\r,0) circle (\r);
+  \draw (0.8*\r,0) circle (\r);
+  \draw (0,-0.8*\r) circle (\r);
+
+  \node at (-1.2*\r,\r) {$A$};
+  \node at (1.2*\r,\r) {$B$};
+  \node at (0,-1.9*\r) {$C$};
+
+  \node at (0,1.5*\r) {$A\cup C$};
+
+\end{scope}
+
+
+% ==================================================
+% 3. (A union B) intersection (A union C)
+% ==================================================
+
+\begin{scope}[shift={(10,0)}]
+
+  % A
+  \fill[red!35] (-0.8*\r,0) circle (\r);
+
+  % B intersection C
+  \begin{scope}
+    \clip (0.8*\r,0) circle (\r);
+    \fill[red!35] (0,-0.8*\r) circle (\r);
+  \end{scope}
+
+  % Circle boundaries
+  \draw (-0.8*\r,0) circle (\r);
+  \draw (0.8*\r,0) circle (\r);
+  \draw (0,-0.8*\r) circle (\r);
+
+  \node at (-1.2*\r,\r) {$A$};
+  \node at (1.2*\r,\r) {$B$};
+  \node at (0,-1.9*\r) {$C$};
+
+  \node at (0,1.5*\r)
+    {$(A\cup B)\cap(A\cup C)$};
+
+\end{scope}
+
+
+% ==================================================
+% 4. B intersection C
+% ==================================================
+
+\begin{scope}[shift={(15,0)}]
+
+  % B intersection C
+  \begin{scope}
+    \clip (0.8*\r,0) circle (\r);
+    \fill[orange!40] (0,-0.8*\r) circle (\r);
+  \end{scope}
+
+  % Circle boundaries
+  \draw (-0.8*\r,0) circle (\r);
+  \draw (0.8*\r,0) circle (\r);
+  \draw (0,-0.8*\r) circle (\r);
+
+  \node at (-1.2*\r,\r) {$A$};
+  \node at (1.2*\r,\r) {$B$};
+  \node at (0,-1.9*\r) {$C$};
+
+  \node at (0,1.5*\r) {$B\cap C$};
+
+\end{scope}
+
+
+% ==================================================
+% 5. A union (B intersection C)
+% ==================================================
+
+\begin{scope}[shift={(20,0)}]
+
+  % B intersection C
+  \begin{scope}
+    \clip (0.8*\r,0) circle (\r);
+    \fill[purple!35] (0,-0.8*\r) circle (\r);
+  \end{scope}
+
+  % Union with A
+  \fill[purple!35] (-0.8*\r,0) circle (\r);
+
+  % Circle boundaries
+  \draw (-0.8*\r,0) circle (\r);
+  \draw (0.8*\r,0) circle (\r);
+  \draw (0,-0.8*\r) circle (\r);
+
+  \node at (-1.2*\r,\r) {$A$};
+  \node at (1.2*\r,\r) {$B$};
+  \node at (0,-1.9*\r) {$C$};
+
+  \node at (0,1.5*\r) {$A\cup(B\cap C)$};
+
+\end{scope}
+
+\end{tikzpicture}
+    \caption{Visualizing $(A\cup B)\cap(A\cup C)$ and $A\cup(B\cap C)$}
+  \label{fig:au(bnc)}
+\end{figure}
+
+We see that the left-hand side and the right-hand side refer to the same set.
+\end{proof}
+
+\begin{equation}
+    \label{eq:acupc=c}
+    \mathbb{A}\subset\mathbb{C}\implies\mathbb{A}\cup\mathbb{C}=\mathbb{C}
+\end{equation}
+
+Since $\mathbb{A}\cup(\mathbb{B}\cap\mathbb{C})=(\mathbb{A}\cup\mathbb{B})\cap(\mathbb{A}\cup\mathbb{C})$ (identity [\ref{eq:a+bc=(a+b)(a+c)}]), it follows from the equation [\ref{eq:acupc=c}] that 
+\[
+    \mathbb{A}\subset\mathbb{C}\implies\mathbb{A}\cup(\mathbb{B}\cap\mathbb{C})=(\mathbb{A}\cup\mathbb{B})\cap\mathbb{C}
+\]
+
+\begin{example}[Does it Hold if $\mathbb{A}\not\subset\mathbb{C}$?]
+    Let
+    \begin{align*}
+        \mathbb{A}&=\{1,2,3\}\\
+        \mathbb{B}&=\{2,4\}\\
+        \mathbb{C}&=\{4\}\text{ \tiny{(violates the subset precondition)}}\\
+    \end{align*}
+    Then, 
+    \begin{align*}
+        \mathbb{A}\cup\mathbb{B}&=\{1,2,3,4\}\\
+        \mathbb{A}\cup\mathbb{C}&=\{1,2,3,4\}\\
+        \mathbb{B}\cap\mathbb{C}&=\{4\}\\
+    \end{align*}
+    And,
+    \begin{align*}
+        \mathbb{A}\cup(\mathbb{B}\cap\mathbb{C})=\{1,2,3\}\cup\{4\}&=\{1,2,3,4\}\\
+        (\mathbb{A}\cup\mathbb{B})\cap\mathbb{C}=\{1,2,3,4\}\cap\{4\}&=\{4\}\\
+        \therefore\mathbb{A}\cup(\mathbb{B}\cap\mathbb{C})&\ne(\mathbb{A}\cup\mathbb{B})\cap\mathbb{C}\\
+        (\because\mathbb{A}\not\subset\mathbb{C})&
+    \end{align*}
+\end{example}
+\begin{exercise}
+    What is the difference $\mathbb{A}\setminus\mathbb{B}$ if
+    \begin{enumerate}[label=(\alph*)]
+        \item $\mathbb{A}$ is the set of primes and $\mathbb{B}$ is the set of odd integers?
+        \item $\mathbb{A}$ is the set of nonnegative real numbers and $\mathbb{B}$ is the set of nonpositive real numbers?
+    \end{enumerate}
+    \label{ex:1.8.18}
+\end{exercise}
+\textbf{Solution}.
+    \begin{enumerate}[label=(\alph*)]
+        \item We have 
+        \begin{align*}
+            \mathbb{A}&=\{2,3,5,7,11,13,\dots\}\\
+            \mathbb{B}&=\{\dots,-5,-3,-1,1,3,5,7,9,11,13,\dots\}
+        \end{align*}
+            Since $2$ is the only even prime, $\mathbb{A}\setminus\mathbb{B}$ is the set $\{2\}$.
+        \item We have
+        \begin{align*}
+            \mathbb{A}&=\mathbb{R}_{\geq0}\cup\{0\}\\
+            \mathbb{B}&=\mathbb{R}_{\leq0}\cup\{0\}\\
+            \because\mathbb{A}\cap\mathbb{B}=\{0\},\mathbb{A}\setminus\mathbb{B}&=\mathbb{R}_{\geq0}
+        \end{align*}
+    \end{enumerate}
+\begin{reflection}
+    Does it mean I \emph{discovered} this (rather unuseful) property?
+    \begin{align*}
+        \mathbb{A}\setminus\mathbb{B}=\mathbb{A}\setminus(\mathbb{A}\cap\mathbb{B})
+    \end{align*}
+\end{reflection}
 
 
 
