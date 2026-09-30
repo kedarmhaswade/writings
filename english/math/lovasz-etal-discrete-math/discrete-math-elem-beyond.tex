@@ -2042,7 +2042,7 @@ We see that the left-hand side and the right-hand side refer to the same set.
     \mathbb{A}\subset\mathbb{C}\implies\mathbb{A}\cup\mathbb{C}=\mathbb{C}
 \end{equation}
 
-Since $\mathbb{A}\cup(\mathbb{B}\cap\mathbb{C})=(\mathbb{A}\cup\mathbb{B})\cap(\mathbb{A}\cup\mathbb{C})$ (identity [\ref{eq:a+bc=(a+b)(a+c)}]), it follows from the equation [\ref{eq:acupc=c}] that 
+Since $\mathbb{A}\cup(\mathbb{B}\cap\mathbb{C})=(\mathbb{A}\cup\mathbb{B})\cap(\mathbb{A}\cup\mathbb{C})$ (identity [\ref{eq:a+bc=(a+b)(a+c)}]), it follows from the equation [\refeq{eq:acupc=c}] that 
 \[
     \mathbb{A}\subset\mathbb{C}\implies\mathbb{A}\cup(\mathbb{B}\cap\mathbb{C})=(\mathbb{A}\cup\mathbb{B})\cap\mathbb{C}
 \]
@@ -2102,15 +2102,154 @@ Since $\mathbb{A}\cup(\mathbb{B}\cap\mathbb{C})=(\mathbb{A}\cup\mathbb{B})\cap(\
             \mathbb{A}&=(\mathbb{D}_{1}\cup(\mathbb{A}\cap\mathbb{B}), \&(\mathbb{D}_{1}\cap(\mathbb{A}\cap\mathbb{B})=\emptyset)\nonumber\\
             \mathbb{B}&=(\mathbb{D}_{2}\cup(\mathbb{A}\cap\mathbb{B}), \&(\mathbb{D}_{2}\cap(\mathbb{A}\cap\mathbb{B})=\emptyset)\nonumber\\
         \text{Then}\quad&\nonumber\\
-            \mathbb{A}\setminus\mathbb{B}&=\mathbb{D}_1\setminus\mathbb{D}_2\label{eq:set-minus-discovery-1}\\
+            \mathbb{A}\setminus\mathbb{B}&=\mathbb{D}_1\label{eq:set-minus-discovery-1}\\
         \text{And}\quad&\nonumber\\
-            \mathbb{B}\setminus\mathbb{A}&=\mathbb{D}_2\setminus\mathbb{D}_1\label{eq:set-minus-discovery-2}
+            \mathbb{B}\setminus\mathbb{A}&=\mathbb{D}_2\label{eq:set-minus-discovery-2}
     \end{align}
 
     ?
 
     Looks like that!
 \end{reflection}
+\begin{exercise}
+    \label{ex:1.8.19}
+    Prove that for any three sets $\mathbb{A,B,C}$,
+    \begin{align}
+        \label{eq:bowtie-in-3-set-venn}
+        ((\mathbb{A}\setminus\mathbb{B})\cup(\mathbb{B}\setminus\mathbb{A}))\cap\mathbb{C}&=((\mathbb{A}\cap\mathbb{B})\cup(\mathbb{B}\cap\mathbb{C}))\setminus(\mathbb{A}\cap\mathbb{B}\cap\mathbb{C})
+    \end{align}
+\end{exercise}
+\textbf{Solution}.
+
+\begin{figure}[H]
+  \centering
+\begin{tikzpicture}
+
+\def\r{1.5}
+
+% Circle centers
+\coordinate (A) at (-0.8*\r,0);
+\coordinate (B) at ( 0.8*\r,0);
+\coordinate (C) at (0,-0.8*\r);
+
+% ==================================================
+% ((A \ B) union (B \ A)) intersection C
+% ==================================================
+
+% --------------------------------------------------
+% (A \ B) intersection C
+% --------------------------------------------------
+
+\begin{scope}
+  \clip (A) circle (\r);
+  \clip (C) circle (\r);
+  \fill[blue!35] (A) circle (\r);
+  \fill[white] (B) circle (\r);
+\end{scope}
+
+% --------------------------------------------------
+% (B \ A) intersection C
+% --------------------------------------------------
+
+\begin{scope}
+  \clip (B) circle (\r);
+  \clip (C) circle (\r);
+  \fill[blue!35] (B) circle (\r);
+  \fill[white] (A) circle (\r);
+\end{scope}
+
+% --------------------------------------------------
+% Circle boundaries
+% --------------------------------------------------
+
+\draw (A) circle (\r);
+\draw (B) circle (\r);
+\draw (C) circle (\r);
+
+% --------------------------------------------------
+% Labels
+% --------------------------------------------------
+
+\node at (-1.2*\r,1.1*\r) {$A$};
+\node at ( 1.2*\r,1.1*\r) {$B$};
+\node at (0,-1.9*\r) {$C$};
+
+% --------------------------------------------------
+% Set expression
+% --------------------------------------------------
+
+\node at (0,1.8*\r)
+  {$((A\setminus B)\cup(B\setminus A))\cap C$};
+
+\end{tikzpicture}
+\begin{tikzpicture}
+
+\def\r{1.5}
+
+% Circle centers
+\coordinate (A) at (-0.8*\r,0);
+\coordinate (B) at ( 0.8*\r,0);
+\coordinate (C) at (0,-0.8*\r);
+
+% ==================================================
+% ((A intersection C) union (B intersection C))
+% \ (A intersection B intersection C)
+% ==================================================
+
+% --------------------------------------------------
+% (A intersection C) \ C
+% --------------------------------------------------
+
+\begin{scope}
+  \clip (A) circle (\r);
+  \clip (C) circle (\r);
+  \fill[blue!35] (A) circle (\r);
+  \fill[white] (B) circle (\r);
+\end{scope}
+
+% --------------------------------------------------
+% (B intersection C) \ A
+% --------------------------------------------------
+
+\begin{scope}
+  \clip (B) circle (\r);
+  \clip (C) circle (\r);
+  \fill[blue!35] (B) circle (\r);
+  \fill[white] (A) circle (\r);
+\end{scope}
+
+% --------------------------------------------------
+% Circle boundaries
+% --------------------------------------------------
+
+\draw (A) circle (\r);
+\draw (B) circle (\r);
+\draw (C) circle (\r);
+
+% --------------------------------------------------
+% Labels
+% --------------------------------------------------
+
+\node at (-1.2*\r,1.1*\r) {$A$};
+\node at ( 1.2*\r,1.1*\r) {$B$};
+\node at (0,-1.9*\r) {$C$};
+
+% --------------------------------------------------
+% Set expression
+% --------------------------------------------------
+
+\node at (0,1.8*\r)
+  {$((A\cap C)\cup(B\cap C))\setminus(A\cap B\cap C)$};
+
+\end{tikzpicture}
+    \caption{Figures drawn using Tikz by ChatGPT; Thanks!}
+  \label{fig:thanks-tikz-chatgpt-1}
+\end{figure}
+\begin{reflection}
+    Is there another way to prove?
+\end{reflection}
+
+
 
 
 
