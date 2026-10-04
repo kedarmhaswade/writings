@@ -1,3 +1,4 @@
+#pre-commit is uninstalled at the moment (03 October 2026)
 repos:
   - repo: git@github.com:kedarmhaswade/writings.git
     rev: fbdec26  # Use the latest stable version
