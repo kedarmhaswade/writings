@@ -1,0 +1,9 @@
+repos:
+  - repo: git@github.com:kedarmhaswade/writings.git
+    rev: dc15676  # Use the latest stable version
+    hooks:
+      - id: codespell
+        types: [tex]
+        # Optional: add arguments to ignore certain words or write a custom dictionary
+        # args: ["-L", "mytechnicalword,anotherword"] 
+
