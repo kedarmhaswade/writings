@@ -1,6 +1,6 @@
 repos:
   - repo: git@github.com:kedarmhaswade/writings.git
-    rev: dc15676  # Use the latest stable version
+    rev: fbdec26  # Use the latest stable version
     hooks:
       - id: codespell
         types: [tex]
