@@ -2248,6 +2248,58 @@ Since $\mathbb{A}\cup(\mathbb{B}\cap\mathbb{C})=(\mathbb{A}\cup\mathbb{B})\cap(\
 \begin{reflection}
     Is there another way to prove?
 \end{reflection}
+\begin{exercise}
+    \label{ex:1.8.20}
+    Let $\mathbb{A}$ be a set and let $\binom{\mathbb{A}}{2}$ denote the set of all $2$-element subsets of $\mathbb{A}$.  Which of the following statements is true?
+    \begin{enumerate}[label=(\alph*)]
+        \item\label{it:aub=}$\dbinom{\mathbb{A}\cup\mathbb{B}}{2}=\dbinom{\mathbb{A}}{2}\cup\dbinom{\mathbb{B}}{2}$
+        \item\label{it:aubsupset=}$\dbinom{\mathbb{A}\cup\mathbb{B}}{2}\supseteq\dbinom{\mathbb{A}}{2}\cup\dbinom{\mathbb{B}}{2}$
+        \item\label{it:anb=}$\dbinom{\mathbb{A}\cap\mathbb{B}}{2}=\dbinom{\mathbb{A}}{2}\cap\dbinom{\mathbb{B}}{2}$
+
+        \item\label{it:anbsubset=}$\dbinom{\mathbb{A}\cap\mathbb{B}}{2}\subseteq\dbinom{\mathbb{A}}{2}\cap\dbinom{\mathbb{B}}{2}$
+    \end{enumerate}
+\end{exercise}
+\textbf{Solution}. \ref{it:aub=} is not true because there are elements in $\dbinom{\mathbb{A}\cup\mathbb{B}}{2}$ that are not in $\dbinom{\mathbb{A}}{2}\cup\dbinom{\mathbb{B}}{2}$ (e.g. a $2$-subset whose one element is exclusively in $\mathbb{A}$ and another exclusively in $\mathbb{B}$ is in $\dbinom{\mathbb{A}\cup\mathbb{B}}{2}$, but not in $\dbinom{\mathbb{A}}{2}\cup\dbinom{\mathbb{B}}{2}$). 
+
+Consequently, every \emph{pair of elements} exclusively in $\mathbb{A}$ or exclusively in $\mathbb{B}$ is also in the set $\dbinom{\mathbb{A}\cup\mathbb{B}}{2}$, which means that $\dbinom{\mathbb{A}\cup\mathbb{B}}{2}$ is a superset of $\dbinom{\mathbb{A}}{2}\cup\dbinom{\mathbb{B}}{2}$ (the equality holds when $\mathbb{A}$ and $\mathbb{B}$ are the same set). Therefore, \ref{it:aubsupset=} is true.
+
+Pairs of elements common to $\mathbb{A}$ and $\mathbb{B}$ are the only ones that are the members of both $\dbinom{\mathbb{A}\cap\mathbb{B}}{2}$ and $\dbinom{\mathbb{A}}{2}\cap\dbinom{\mathbb{B}}{2}$. Therefore, \ref{it:anb=} and \ref{it:anbsubset=} are also true.
+\begin{exercise}
+    \label{ex:1.8.21}
+    Let $\mathbb{B}$ be a subset of $\mathbb{A}$, $\lvert\mathbb{A}\rvert=n$, and $\lvert\mathbb{B}\rvert=k$. What is the number of all subsets of A whose intersection with $\mathbb{B}$ has $1$ element?
+\end{exercise}
+\textbf{Solution}.
+If we represent the sets by circles, since $\mathbb{B}\subset\mathbb{A}$, the circle representing $\mathbb{B}$ is \emph{inside (or coincides with)} the cicle representing $\mathbb{A}$. To satisfy our condition, exactly one element of any subset of $\mathbb{A}$ must be in $\mathbb{B}$. 
+
+How many $1$-subsets of $\mathbb{A}$ share $1$ element with $\mathbb{B}$? Clearly, each element of $\mathbb{B}$ (which can be chosen $k\times\dbinom{n-k}{0}=k$ ways, since $\lvert\mathbb{B}\rvert=k$ and we choose no element from the remaining $n-k$). 
+
+How many $2$-subsets of $\mathbb{A}$ have that property? The subsets for which one element is in $\mathbb{B}$ and one in the set $\mathbb{A}\setminus\mathbb{B}$. The number of $2$-subsets is, therefore, equal to the number of ways to choose the two elements together, that is, $k\times(n-k)$ or $k\times\dbinom{n-k}{1}$.
+
+The $3$-subsets satisfying that condition are the ones for which one element is in $\mathbb{B}$ and two in the set $\mathbb{A}\setminus\mathbb{B}$. That number is $k\times\dbinom{n-k}{2}$. 
+
+This continues up to the $(n-1)$-subsets of $\mathbb{A}$. Therefore, the total number of subsets of $\mathbb{A}$ with one element in $\mathbb{B}$, $s_{\scriptscriptstyle 1B}$ is
+\begin{align*}
+    s_{\scriptscriptstyle 1B}&=k\times\dbinom{n-k}{0}+k\times\dbinom{n-k}{1}+k\times\dbinom{n-k}{2}+\dots+k\times\dbinom{n-k}{n-k}\\
+    &\text{(since there are $n-k$ elements in $\mathbb{A}\setminus\mathbb{B}$)}\\
+    &=k\times\sum_{i=0}^{n-k}\dbinom{n-k}{i}\\
+    &=k\times2^{n-k}
+\end{align*}
+\begin{reflection}[An Alternative Solution]
+    Deepa Joshi made a compelling argument: Since $\lvert\mathbb{A}\rvert=n$, $\lvert\mathbb{B}\rvert=k$, and $\mathbb{B}\subset\mathbb{A}$, the set $\mathbb{A}\setminus\mathbb{B}$ has $n-k$ elements. If we add an element of $\mathbb{B}$ (which is also an element of $\mathbb{A}$) to each subset of $\mathbb{A}\setminus\mathbb{B}$, we get a set whose intersection with $\mathbb{B}$ has just one element (namely, the element that was added).
+
+    Since the number of subsets of $\mathbb{A}\setminus\mathbb{B}$ is $2^{n-k}$ and there are $k$ ways to choose one element of $\mathbb{B}$, by the multiplication principle (definition [\ref{def:mp}]) , the number of ways of making the two choices together is 
+    \[
+        k\times2^{n-k}
+    \]
+
+    (This argument feels elegant!)
+\end{reflection}
+
+
+
+
+
+
 
 
 
