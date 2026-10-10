@@ -2294,7 +2294,105 @@ This continues up to the $(n-1)$-subsets of $\mathbb{A}$. Therefore, the total n
 
     (This argument feels elegant!)
 \end{reflection}
+\begin{exercise}
+    \label{ex:1.8.22}
+    Compute the binary form of $25$ and $35$, and compute their sum in the binary notation. Check the results against adding $25$ and $35$ in the usual decimal notation and then converting it to binary.
+\end{exercise}
+\textbf{Solution}. \tbd
+\begin{exercise}
+    \label{ex:1.8.23}
+    Prove that every positive integer can be written as the sum of different powers of $\mathit{2}$. Also prove that for a given number, there is only one way to do so.
+\end{exercise}
+\textbf{Solution}.
+\begin{reflection}
+    There are several ways to prove this. Since we are asked to prove that as a review exercise on a chapter on discrete mathematics, perhaps we should make a combinatorial argument. 
+\end{reflection}
 
+\begin{proof}
+We \emph{write} a natural number ($a$) in the \emph{place-value system} of any base greater than 1 ($b$) by repeatedly dividing $a$ by $b$. From the division algorithm, it follows that for any two integers $a,b\;(b\ne0)$, there exist two integers $q, r$, called quotient and remainder respectively, such that
+\[
+    a=bq+r\land0\leq r<b
+\]
+
+On the first division, we get $a=bq_1+r_1\;(0\leq r_1<b)$. Then we write $r_1$.
+
+If $q_1$ is larger than $b$, we perform another division to get $q_1=bq_2+r_2$, or $a=b(bq_2+r_2)+r_1=b^2q_2+br_2+r_1\;(0\leq r_1,r_2<b)$. Then we write $r_2$ to the left of $r_1$. So far, we have written two `digits' both less than $b$: $r_2r_1$ and we need to `process the remains' in $q_2$.
+
+It follows that the quotient $q_i$ become smaller with each division. We stop the process when a certain $q_i$ becomes less than $b$, after which all $q_i$ are $0$. This is the digit we finally write. The \emph{value} of our number is
+\begin{equation}
+    \label{eq:place-value-val}
+    a=b^{n-1}q_{n}+b^{n-2}r_{n-1}+\dots+b^2r_3+br_2+r_1
+\end{equation}
+and we \emph{write} it as\footnote{In practice, we usually start writing from the big end, i.e., $q_n$ in this case.}:
+\begin{equation}
+    \label{eq:place-value-rep}
+    q_nr_{n-1}\dots r_3r_2r_1
+\end{equation}
+
+Each of the digits in equation [\ref{eq:place-value-rep}] is less than $b$. This means that when $b=2$, each of the digits in equation [\ref{eq:place-value-rep}] is either $0$ or $1$. It then follows that the value of the number given by equation [\ref{eq:place-value-val}] is a sum of powers of $2$.
+
+    From the multiplication principle (definition [\ref{def:mp}]), it follows that if we have $n$ binary digits (bits), we can choose them together $2^n$ \emph{distinct ways}: each representation (a binary $n$-string) differs from every other representation in at least one bit. Thus, the set of $2^n$ binary representations and the set of numbers each binary representation represents form a bijection (a 1:1 mapping). This proves that every binary representation uniquely represents an integer.
+\end{proof}
+\begin{exercise}
+    \label{ex:1.8.24}
+    How many bits does $10^{100}$ have if written in base $2$?
+\end{exercise}
+\textbf{Solution}.
+If we have $n$ \emph{bits} to write the \emph{binary} representation of a number, the minimum value of that number occurs when the most significant bit is 1 and other bits are zero:
+\[
+    \mathtt{1\underbrace{000\dots0}_{\text{$n-1$ bits}}}:\quad1\times2^{n-1}+\underbrace{0\times2^{n-2}+\dots+0\times2^1+0\times2^0}_{n-1\text{ bits}}=2^{n-1}
+\]
+and the maximum value occurs when \emph{all} bits are $1$:
+\[
+    \mathtt{\underbrace{1111\dots1}_{\text{$n$ bits}}}:\quad\underbrace{1\times2^{n-1}+1\times2^{n-2}+\dots+1\times2^1+1\times2^0}_{n\text{ bits}}=2^n-1
+\]
+
+Therefore, the number that we want to represent as a binary string, $10^{100}$, must be between these two limits:
+\[
+    2^{n-1}\leq10^{100}\leq(2^n-1)
+\]
+or, equivalently,
+\[
+    2^{n-1}\leq10^{100}<2^n
+\]
+Taking logarithms to the base $2$, we get
+\begin{align*}
+    n-1&\leq100\times\log_2{10}<n\\
+    n-1&\leq100\times3.321928094887362<n\\
+    n-1&\leq332.1928094887362<n\\
+    \therefore n&=333
+\end{align*}
+\begin{reflection}
+    The number, $1$ followed by $100$ zeros, $10^{100}$, has a special name: Googol. 
+    Will there be enough space to write here the number of digits (and bits) that the number $10^{10^{100}}$ (Googolplex) has?
+\end{reflection}
+\begin{exercise}
+    \label{ex:1.8.25}
+    Starting from Washington, DC, how many ways can you visit $5$ of the $50$ state capitals and return to Washington?
+\end{exercise}
+\textbf{Solution}.
+There are various ways of prove this, but for brevity, the answer\footnote{Note: Washington, DC, is not one of the $50$ state capitals; had it been, the answer would be different.} is $50\times49\times48\times47\times46$.
+\begin{exercise}
+    \label{ex:1.8.26}
+    Find the number of all $\mathit{20}$-digit integers in which no two consecutive digits are the same.
+\end{exercise}
+\textbf{Solution}.
+There are $9$ choices ($1,2,3,\dots,\text{ or },9$) for the most significant digit of an $n$-digit integer. For every other digit, however, there are $10$ choices ($0,1,2,\dots,\text{ or },9$). In a number $C$ that has no consecutive pair, after we choose a first digit (say $3$), we may not choose $3$ for the second digit (but we may choose $3$ for any subsequent digit). That leaves only $9$ choices for the second digit. The number of choices for subsequent digits also remains $9$. Thus, the digits of $C$ can be chosen together
+\[
+    \underbrace{9\times9\times9\times\dots\times9}_{n\text{ digits }}=9^n
+\]
+ways.
+
+Therefore, the number of $20$-digit numbers with no consecutive pair of the same digit is $9^{20}$.
+\begin{reflection}[Two Ways]
+    The above argument sounds correct. However, I am a bit apprehensive. I feel the need of solving this problem another way. Addressing this apprehension is why Lov\'asz et.al. want us to solve combinatorial problems two different ways.
+
+    Solving it another way is somewhat challenging. Let's think of $4$-digit decimal numbers. There are $9\times10\times10\times10=9000$ of them. How many of them have at least one consecutive pair of a digit (e.g. $1128$)? Directly counting them by fixing a same-digit-consecutive-pair in various positions and counting choices for the remaining digits feels tricky in the general case. There is an overcounting trap laid by numbers like $1111$ or $2244$.
+
+    Will an inductive argument help? For example, there are $9$ numbers with a same-digit-consecutive-pair in $2$-digit numbers:$11,22,33,44,55,66,77,88,99$. How can we use that fact to ascertain the $3$-digit numbers with a same-digit-consecutive-pair? In the range $100$-$199$, there are $100$, $(110,111,112,\dots,119$, and $(122,133,\dots,188,199)$, that is, $1+10+8=19$. This holds for every hundred up to $900$-$999$. That gives us $19\times9=171$ such numbers for the $3$-digit case. However, I don't see a pattern yet.
+
+
+\end{reflection}
 
 
 
