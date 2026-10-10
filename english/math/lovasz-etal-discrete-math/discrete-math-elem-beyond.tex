@@ -2390,9 +2390,21 @@ Therefore, the number of $20$-digit numbers with no consecutive pair of the same
     Solving it another way is somewhat challenging. Let's think of $4$-digit decimal numbers. There are $9\times10\times10\times10=9000$ of them. How many of them have at least one consecutive pair of a digit (e.g. $1128$)? Directly counting them by fixing a same-digit-consecutive-pair in various positions and counting choices for the remaining digits feels tricky in the general case. There is an overcounting trap laid by numbers like $1111$ or $2244$.
 
     Will an inductive argument help? For example, there are $9$ numbers with a same-digit-consecutive-pair in $2$-digit numbers:$11,22,33,44,55,66,77,88,99$. How can we use that fact to ascertain the $3$-digit numbers with a same-digit-consecutive-pair? In the range $100$-$199$, there are $100$, $(110,111,112,\dots,119$, and $(122,133,\dots,188,199)$, that is, $1+10+8=19$. This holds for every hundred up to $900$-$999$. That gives us $19\times9=171$ such numbers for the $3$-digit case. However, I don't see a pattern yet.
-
-
 \end{reflection}
+\begin{exercise}
+    \label{ex:1.8.27}
+    Alice has $10$ balls (all different). First, she splits them into two piles; then she picks one of the piles with at least two elements, and splits it into two; she repeats this until each pile has only one element.
+    \begin{enumerate}[label=(\alph*)]
+        \item How many steps does this take?
+        \item Show that the number of different ways in which she can carry out this procedure is
+            \[
+                \binom{10}{2}\times\binom{9}{2}\times\binom{8}{2}\times\dots\times\binom{3}{2}\times\binom{2}{2}
+            \]
+            [Hint: Imagine the procedure backward.]
+    \end{enumerate}
+\end{exercise}
+\textbf{Solution}.
+
 
 
 
