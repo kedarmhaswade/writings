@@ -2400,10 +2400,30 @@ Therefore, the number of $20$-digit numbers with no consecutive pair of the same
             \[
                 \binom{10}{2}\times\binom{9}{2}\times\binom{8}{2}\times\dots\times\binom{3}{2}\times\binom{2}{2}
             \]
+    \end{enumerate}
             [Hint: Imagine the procedure backward.]
+\end{exercise}
+\textbf{Solution}.
+    \begin{enumerate}[label=(\alph*)]
+        \item If there are $2$ balls, the only step is to split them into two parts of $1$ ball each and the procedure ends. Any number of balls $n>2$, can be split into two parts with one part of $2$ balls (which, if chosen, can be split in $2$ parts) and one of $n-2$. Thus, the minimum number of steps is $2$.
+
+            If, instead of splitting $n$ balls such that there are $2$ in one part, we split $n$ balls into two parts with $1$ in one part and $n-1$ in the other, we must only choose the part that has $n-1$ balls. This procedure, if continued like this, will take the maximum number of steps, $n-1$.
+
+            Therefore, the number of steps is any integer between $[2, n-1]$. The procedure can be 'short-circuited' by splitting into two parts with one part of $2$ balls and choosing that part next.
+
+        \item \tbd (I need to think a bit more; I will revisit this.)
+    \end{enumerate}
+\begin{exercise}
+    \label{ex:1.8.28}
+    You want to send postcards to $12$ friends. In the shop there are only $3$ kinds of postcards. In how many ways can you send the postcards, if
+    \begin{enumerate}[label=(\alph*)]
+        \item there is a large number of each kind of postcard, and you want to send one card to each friend;
+        \item there is a large number of each kind of postcard, and you are willing to send one or more postcards to each friend (but no one should get two identical cards);
+        \item the shop has only $4$ of each kind of postcard, and you want to send one card to each friend?
     \end{enumerate}
 \end{exercise}
 \textbf{Solution}.
+
 
 
 
