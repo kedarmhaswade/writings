@@ -1,11 +1,20 @@
 Index: words to proverb numbers
 Use libreoffice --headless --convert-to pdf input.txt
 
-ankush 255
+(Transliteration uses https://en.wikipedia.org/wiki/Harvard-Kyoto)
+
+(nasals use the anusvAra: aM)
+
+aMkuz 255
 akkala 604, 683, 1206, 1467, 1493, 1588, 1838
-akhara 155
-anga 1, 104, 215, 265, 325-327, 477, 519,  
-avadaana 1725
-avadhaNaa 891, 1104
+akhar 155
+aMga 1, 104, 215, 265, 325-327, 477, 519,  
+aMgaThA 324, 329
+aMgaDA 476
+aMgaNa 935, 974, 1833
+aMgArA 1537
+
+avadAna 1725
+avadhaNA 891, 1104
 
 ghoDaa 130, 144-153, 156, 174 180, 181, 188, 189, 192, 194, 672, 976, 1576, 1691, 1711, 1774, 1849
