@@ -2444,14 +2444,22 @@ Therefore, the number of $20$-digit numbers with no consecutive pair of the same
                             \item[]{$\vdots$}
                             \item[$12$)] G:$12$, B:$0$. There is $\dbinom{12}{12}=1$ way of doing this: every friend gets a G card.
                         \end{enumerate}
+                        The sum of these ways (when I decide to send no R card) is
+                        \[
+                            \binom{12}{0}+\binom{12}{1}+\dots+\binom{12}{11}+\binom{12}{12}=2^{12}
+                        \]
                     \item R:$1$ -- send an R card to one friend who can be chosen $\dbinom{12}{1}$ ways.
+                        The sum of these ways (when I decide to send one R card) is
+                        \[
+                            12\times(\binom{11}{0}+\binom{11}{1}+\dots+\binom{11}{10}\binom{11}{11})=12\times2^{11}
+                        \]
                     \item[]{$\vdots$}
                     \item[l)] R:$12$ -- send every friend an R card; this can be done one way.
                 \end{enumerate}
 
                 I soon realized that I solved the problem the hard way.
 
-                Deepa Joshi heard the problem and said, ``Well, it's $3^{12}$, because every friend can receive an R, G, or B card and there are $12$ friends. Use the multiplication principle!''
+                Deepa Joshi heard the problem and said, ``Well, it's $3^{12}$, because every friend can receive an R, G, or B card and there are $12$ friends. Use the multiplication principle!'' I wonder why it did not occur to me!
             \end{reflection}
     \end{enumerate}
 

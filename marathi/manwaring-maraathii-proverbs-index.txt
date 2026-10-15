@@ -13,6 +13,21 @@ aMgaThA 324, 329
 aMgaDA 476
 aMgaNa 935, 974, 1833
 aMgArA 1537
+aMguSTa 328
+aghADI 95
+ajagara 308
+aMjira 823
+aDakA 213, 704, 845, 1041, 1657
+aDakhaLaNa 37
+aDacaNa 866
+aNI 574
+aMta 675, 1171, 1534
+aMtakALa 705
+aMtharUNa 936, 944
+adA 1023, 1024, 1047
+aMdhaLA 91, 92, 96, 708, 867-878, 883, 886, 1769, 1840
+aMdhAra 998, 1031, 1158, 1767
+adhoLI 43
 
 avadAna 1725
 avadhaNA 891, 1104
