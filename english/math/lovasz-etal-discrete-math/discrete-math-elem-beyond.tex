@@ -2417,12 +2417,43 @@ Therefore, the number of $20$-digit numbers with no consecutive pair of the same
     \label{ex:1.8.28}
     You want to send postcards to $12$ friends. In the shop there are only $3$ kinds of postcards. In how many ways can you send the postcards, if
     \begin{enumerate}[label=(\alph*)]
-        \item there is a large number of each kind of postcard, and you want to send one card to each friend;
-        \item there is a large number of each kind of postcard, and you are willing to send one or more postcards to each friend (but no one should get two identical cards);
-        \item the shop has only $4$ of each kind of postcard, and you want to send one card to each friend?
+        \item there is a large number of each kind of postcards, and you want to send one card to each friend;
+        \item there is a large number of each kind of postcards, and you are willing to send one or more postcards to each friend (but no one should get two identical cards);
+        \item the shop has only $4$ of each kind of postcards, and you want to send one card to each friend?
     \end{enumerate}
 \end{exercise}
 \textbf{Solution}.
+    \begin{enumerate}[label=(\alph*)]
+        \item $3^{12}$. 
+            \begin{reflection}[All Textbook Combinatorial Problems are Word-problems]
+                I was a bit confused by this problem and actually worked out a solution that equals 
+                \[
+                    \binom{12}{0}\times2^{12}+\binom{12}{1}\times2^{11}+\binom{12}{2}\times2^{10}+\dots+\binom{12}{11}\times2^1+\binom{12}{12}\times1
+                \]
+                , which is what we get on evaluating the binomial expansion
+                \[
+                    (2+1)^{12}=3^{12}
+                \]
+                I considered three kinds of postcards: R, G, and B. Then, I send no R card but all $12$ cards are either G or B kind:
+                \begin{enumerate}[label=\alph*)]
+                    \item R:$0$ -- can be done only one way.
+                        \begin{enumerate}[label=\arabic*)]
+                            \item G:$0$, B:$12$. There is $\dbinom{12}{0}=1$ way of doing this: every friend gets a B card.
+                            \item G:$1$, B:$11$. There are $\dbinom{12}{1}=12$ ways of doing this.
+                            \item G:$2$, B:$10$. There are $\dbinom{12}{2}$ ways of doing this.
+                            \item[]{$\vdots$}
+                            \item[$12$)] G:$12$, B:$0$. There is $\dbinom{12}{12}=1$ way of doing this: every friend gets a G card.
+                        \end{enumerate}
+                    \item R:$1$ -- send an R card to one friend who can be chosen $\dbinom{12}{1}$ ways.
+                    \item[]{$\vdots$}
+                    \item[l)] R:$12$ -- send every friend an R card; this can be done one way.
+                \end{enumerate}
+
+                I soon realized that I solved the problem the hard way.
+
+                Deepa Joshi heard the problem and said, ``Well, it's $3^{12}$, because every friend can receive an R, G, or B card and there are $12$ friends. Use the multiplication principle!''
+            \end{reflection}
+    \end{enumerate}
 
 
 
