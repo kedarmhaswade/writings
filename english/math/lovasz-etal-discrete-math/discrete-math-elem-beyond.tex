@@ -2537,13 +2537,13 @@ We use equation [\ref{eq:n-1ck-1}] twice, once on $\dbinom{n}{k}$ and once on $\
     I want to solve it two different ways! The first thought was an indirect way.
 \end{reflection}
 \begin{enumerate}[label=(\alph*)]
-    \item For simplicity, we number them $1,2,3,\dots,n-1,n$ in a clockwise manner. There are $\dbinom{n}{3}$ ways to choose $3$ (let's call the selection a triplet) from $n$ people sitting around a table. In a triplet like $(1,2,3)$ or $(2,3,14)$ at least one pair of neighbors is chosen. We do not want to choose such triplets. How many such `neighbor-triplets' are there? 
+    \item For simplicity, we number them $1,2,3,\dots,n-1,n$ in a clockwise manner. There are $\dbinom{n}{3}$ ways to choose $3$ (let's call the selection a triplet) from $n$ people sitting around a table. In a triplet like $\{1,2,3\}$ or $\{2,3,14\}$ at least one pair of neighbors is chosen. We do not want to choose such triplets. How many such `neighbor-triplets' are there? 
 
-        Triplets with the starting neighbor pair $1,2$ are: $(1,2,3),(1,2,4),(1,2,5),\dots,(1,2,n)$. These are $n-3+1=n-2$.
+        Triplets with the starting neighbor pair $1,2$ are: $\{1,2,3),\{1,2,4\},\{1,2,5\},dots,\{1,2,n\}$. These are $n-3+1=n-2$.
 
-        Triplets with the starting neighbor pair $2,3$ are: $(2,3,4),(2,3,5),\dots,(2,3,n)$, but not $(2,3,1)$ because we already covered that in $(1,2,3)$. These are $(n-3)$. The number of such triplets is the same for every triplet up to the triplet whose starting neighbor pair is $n-2,n-1$. 
+        Triplets with the starting neighbor pair $2,3$ are: $\{2,3,4\},\{2,3,5\},\dots,\{2,3,n\}$, but not $\{2,3,1\}$ because we already covered that in $\{1,2,3\}$. These are $(n-3)$. The number of such triplets is the same for every triplet up to the triplet whose starting neighbor pair is $n-2,n-1$. 
 
-        The last starting neighbor pair, $n-1,n$ has two fewer, that is $n-4$, because both triplets $(n-1,n,1)$ and $(n,1,2)$ are already counted.
+        The last starting neighbor pair, $n-1,n$ has two fewer, that is $n-4$, because both triplets $\{n-1,n,1\}$ and $\{n,1,2\}$ are already counted.
 
         Thus, the number of overcounted triplets is
         \[
@@ -2554,9 +2554,24 @@ We use equation [\ref{eq:n-1ck-1}] twice, once on $\dbinom{n}{k}$ and once on $\
         \[
             \binom{n}{3}-(n^2-3n)=\frac{n\times(n-1)\times(n-2)}{6}-n^2+3n=\frac{n\times(n-4)\times(n-5)}{6}
         \]
-    \item 
+    \item Another way to calculate the number of neighbor-triplets is to consider the selection with a slight twist. A neighbor-triplet has a neighbor pair and a third person (who may be a neighbor of one of the members of the pair). With $n$ people, the number of neighbor-pairs ($\{1,2\},\{2,3\},\dots,\{n-1,n\},\{n,1\}$) is $n$; we order the pairs in a clockwise manner for the ease of counting. 
+
+        Once a pair is chosen, to avoid overcounting, we pick the third member of the triplet only in one (clockwise or counter clockwise) direction. Thus, for the pair $\{3,4\}$, we pick one person from $\{5,6,7,\dots,n-1,n,1\}$, for which we have $n-3$ choices; we skip $2$, because we have already considered the triplet $\{3,4,2\}$ while dealing with the pair $\{2,3\}$ as $\{2,3,4\}$. From the multiplication principle, it follows that the ways to choose such triplets is $n\times(n-3)=n^2-3n$.
+
+        Therefore, the number of triplets without any neighbor is
+        \[
+            \binom{n}{3}-(n^2-3n)
+        \]
+
 \end{enumerate}
 
+\begin{reflection}
+    Phew!
+
+    This has been a great ride. I need to verify my answers, but completing the attempt to solve these exercises does feel like an achievement of sorts and small achievements like this satisfy me.
+
+    Should I go ahead with the next chapter for that means progress? Yes, but not before revising the ideas in this chapter.
+\end{reflection}
 
 
 
