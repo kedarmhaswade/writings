@@ -2461,7 +2461,104 @@ Therefore, the number of $20$-digit numbers with no consecutive pair of the same
 
                 Deepa Joshi heard the problem and said, ``Well, it's $3^{12}$, because every friend can receive an R, G, or B card and there are $12$ friends. Use the multiplication principle!'' I wonder why it did not occur to me!
             \end{reflection}
+
+        \item I took time to realize\footnote{Deepa Joshi helped again!} that I should focus on the choices for one friend. Since there are many cards of three kinds and a friend can get one or more cards of unique kind, the choices for each friend are: R (1), G (1), B (1), R, G (2), G, B (2), B, R (2), R, G, B (3). These are $7$. Therefore, the number of ways of sending that many postcards, from multiplication principle, is
+            \[
+                7^{12}
+            \]
+
+        \item I put my heart into this one and decided to solve it two different ways. I am glad I was able to get the same answer! I wonder where the intuition of solving problems comes from!
+            \begin{enumerate}[label=\arabic*)]
+                \item There are 3 kinds of postcard and 4 postcards of a kind. That makes $3\times4=12$ postcards. There are $12$ friends and $12$ cards. That makes $12!$ friend-postcard assignments possible. However, every R card is indistinguishable from every other R card. Thus, if we, only for brevity, mark the R cards as R1, R2, R3, R4 (and G and B cards similarly), then the two assignments for friends numbered $1$ through $12$: 1) \textbf{R1, R2}, R3, R4, B1, B2, B3, B4, G1, G2, G3, G4, and (for example), and 2) \textbf{R2, R1}, R3, R4, B1, B2, B3, B4, G1, G2, G3, G4 are identical and must not be counted as different.
+
+                    In other words, the $4!$ R assignments, $4!$ G assignments, and $4!$ B assignments result in overcounting. By addressing this overcounting, the number of ways to send postcards (with the new constraint) is
+                    \[
+                        \frac{12!}{4!\times4!\times4!}
+                    \]
+                \item We can devise a single assignment of $12$ cards to $12$ friends by another strategy: Choose any $4$ friends and assign a card of any kind two them. Then, assign $4$ cards of another kind to any $4$ of the remaining $8$. Then, the remaining $4$ friends get a card of the remaining kind. Together, these assignments can be done (by using the multiplication principle)
+                    \[
+                        \binom{12}{4}\times\binom{8}{4}\times\binom{4}{4}=\frac{12!}{4!\times\cancel{8!}}\times\frac{\cancel{8!}}{4!\times4!}\times1=\frac{12!}{4!\times4!\times4!}
+                    \] ways.
+            \end{enumerate}
     \end{enumerate}
+\begin{exercise}
+    \label{ex:1.8.29}
+    What is the number of ways to color $n$ objects with $3$ colors if every color must be used at least once?
+\end{exercise}
+\textbf{Solution}.
+We state that an object is colored entirely in one color. If $n<3$, there's no way of doing this because at least one color will be unused.
+
+For $n\geq3$, we can choose any $3$ objects and color them in $3$ colors such that every color is used at least once $\dbinom{n}{3}\times3!$ ways. Once that constraint has been satisfied, the remaining $n-3$ objects can be colored such that every object is colored in any one of the $3$ colors. Therefore, the total number of ways to do this is
+\[
+    \binom{n}{3}\times3!\times3^{n-3}
+\]
+\begin{exercise}
+    \label{ex:1.8.30}
+    Draw a tree for Alice's solution of enumerating the number of ways $6$ people can play chess, and explain Alice's argument using the tree.
+\end{exercise}
+\textbf{Solution}.
+
+\tbd
+\begin{exercise}
+    \label{ex:1.8.31}
+    How many different words can you get by rearranging the letters in the word MATHEMATICS?
+\end{exercise}
+\textbf{Solution}.
+We make $11$-letter words by rearranging in $11$ positions the $11$ letters of the word MATHEMATICS, which has $2$ M's, $2$ A's, and $2$ T's. Therefore, we must account for overcounting. The number of ways to achieve this is
+\[
+    \frac{11!}{2!\times2!\times2!}
+\]
+\begin{exercise}
+    \label{ex:1.8.32}
+    Find all positive integers $a$, $b$, and $c$ for which
+    \[
+        \binom{a}{b}\times\binom{b}{c}=2\binom{a}{c}
+    \]
+\end{exercise}
+\textbf{Solution}.
+\tbd
+\begin{exercise}
+    \label{ex:1.8.33}
+    Prove that
+    \begin{equation}
+        \label{eq:nckn-2ck}
+        \binom{n}{k}=\binom{n-2}{k}+2\binom{n-2}{k-1}+\binom{n-2}{k-2}
+    \end{equation}
+\end{exercise}
+\textbf{Solution}.
+We use equation [\ref{eq:n-1ck-1}] twice, once on $\dbinom{n}{k}$ and once on $\dbinom{n-1}{k-1}$, and what needs to be proved follows.
+
+\begin{exercise}
+    \label{ex:1.8.34}
+    $20$ persons are sitting around a table. How many ways can we choose $3$ persons, no two of whom are neighbors?
+\end{exercise}
+\textbf{Solution}.
+\begin{reflection}
+    I want to solve it two different ways! The first thought was an indirect way.
+\end{reflection}
+\begin{enumerate}[label=(\alph*)]
+    \item For simplicity, we number them $1,2,3,\dots,n-1,n$ in a clockwise manner. There are $\dbinom{n}{3}$ ways to choose $3$ (let's call the selection a triplet) from $n$ people sitting around a table. In a triplet like $(1,2,3)$ or $(2,3,14)$ at least one pair of neighbors is chosen. We do not want to choose such triplets. How many such `neighbor-triplets' are there? 
+
+        Triplets with the starting neighbor pair $1,2$ are: $(1,2,3),(1,2,4),(1,2,5),\dots,(1,2,n)$. These are $n-3+1=n-2$.
+
+        Triplets with the starting neighbor pair $2,3$ are: $(2,3,4),(2,3,5),\dots,(2,3,n)$, but not $(2,3,1)$ because we already covered that in $(1,2,3)$. These are $(n-3)$. The number of such triplets is the same for every triplet up to the triplet whose starting neighbor pair is $n-2,n-1$. 
+
+        The last starting neighbor pair, $n-1,n$ has two fewer, that is $n-4$, because both triplets $(n-1,n,1)$ and $(n,1,2)$ are already counted.
+
+        Thus, the number of overcounted triplets is
+        \[
+            (n-2)\times1+(n-3)\times(n-2)+(n-4)\times1=2n\cancel{-6}+n^2-5n\cancel{+6}=n^2-3n
+        \]
+
+        Therefore, the number of triplets without any neighbor is
+        \[
+            \binom{n}{3}-(n^2-3n)=\frac{n\times(n-1)\times(n-2)}{6}-n^2+3n=\frac{n\times(n-4)\times(n-5)}{6}
+        \]
+    \item 
+\end{enumerate}
+
+
+
 
 
 
