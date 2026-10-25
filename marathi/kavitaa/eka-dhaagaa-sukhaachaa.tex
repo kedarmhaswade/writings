@@ -1,0 +1,70 @@
+\documentclass[17pt]{extarticle}  % print quality
+\usepackage{polyglossia}
+\usepackage[margin=20mm]{geometry}
+\setdefaultlanguage{marathi}
+\setotherlanguages{english}
+\usepackage{fourier}
+%\textbf with "Sanskrit Text" produces the shape warning because the default Sanskrit Text font on Windows does not have a bold equivalent; try Yashomudra or Shobhika; now I like Tiro better
+\newfontfamily\devanagarifont[Script=Devanagari]{Sanskrit Text}
+%\newfontfamily\devanagarifont[Script=Devanagari]{Tiro Devanagari Marathi}
+
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}% Remove paragraph indent
+\usepackage[skip=\medskipamount]{parskip}
+\usepackage{fontawesome}
+\usepackage[style=english]{csquotes}
+\usepackage{verse}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    citecolor=blue,
+    urlcolor=purple,
+}
+
+% control hyphenation: https://tex.stackexchange.com/a/177179/64425
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+% control hyphenation: https://tex.stackexchange.com/a/177179/64425
+
+\begin{document}
+
+\title{एक धागा सुखाचा (जगाच्या पाठीवर)}
+\author{ग. दि. माडगूळकर}
+\date{}
+\maketitle
+\hrule
+\vspace{5mm}
+
+%\textenglish {
+
+%This document is a sample document to test font families and font typefaces.
+%}
+
+एक धागा सुखाचा, शंभर धागे दु:खाचे\\
+जरतारी हें वस्त्र माणसा तुझिया आयुष्याचें
+\vspace{\baselineskip}
+
+\vin पांघरसी जरि असला कपडा\\
+\vin येसी उघडा, जासी उघडा\\
+कपड्यासाठीं करिसी नाटक, तीन प्रवेशांचें !
+\vspace{\baselineskip}
+
+\vin मुकीं अंगडीं बालपणाचीं\\
+\vin रंगित वसनें तारुण्याचीं\\
+जीर्ण शाल मग उरे शेवटीं, लेणें वार्धक्याचें !
+\vspace{\baselineskip}
+
+\vin या वस्त्रांतें विणतो कोण ?\\
+\vin एकसारखीं नसतीं दोन\\
+कुणा न दिसले त्रिखंडांत, त्या हात विणकर्‍याचे !
+
+
+
+\vspace{5mm}
+\hrule
+\end{document}

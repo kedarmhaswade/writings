@@ -2593,15 +2593,158 @@ We use equation [\ref{eq:n-1ck-1}] twice, once on $\dbinom{n}{k}$ and once on $\
     Suppose that we want to prove a property of positive integers. Also suppose that we can prove two facts:
     \begin{enumerate}[label=\alph*)]
         \item $1$ has the property, and
-        \item Whenever $n-1; n>1$ has the property, then $n$ also has that property
+        \item Whenever $n; n>1$ has the property, then $n+1$ also has that property\footnote{For some reason, the book favors: "Whenever $n-1; n>1$ has the property, then $n$ also has that property;" we'll stick to $P(n)\implies P(n+1)$, rather than $P(n-1)\implies P(n)$, however. Clearly, it is a question of preference.}
     \end{enumerate}
     Then, every natural number has that property.
 \end{definition}
 \begin{exercise}
     \label{ex:2.1.1}
+    Prove, using induction but also without it, that $n(n+1)$ is an even number for every nonnegative integer $n$.
+\end{exercise}
+\begin{reflection}
+    Only for practice.
+\end{reflection}
+\textbf{Solution}.
+\begin{proof}
+    We use mathematical induction. Let $P(n)$ be the proposition that $n(n+1)$ is even $\forall n>0$.
+
+    \textbf{Base case}. We prove that $P(n)$ is true for $n=1$. That is, $P(1)$ is true.
+
+    By definition, $P(1)=1(1+1)=1\cdot 2=2$. Since $2$ is even, $n(n+1)$ is even and $P(1)$ is true.
+
+    \textbf{Inductive hypothesis}. Let $P(n)$ be true for some $n=k$, that is, $k(k+1)$ is even. Therefore,
+    \begin{equation}
+        \label{eq:kk+1even}
+        k(k+1)=2m\mid m\in\mathbb{N}
+    \end{equation}
+    We will show that $P(k+1)=(k+1)(k+2)$ is even.
+    \begin{align*}
+        (k+1)(k+2)&=k^2+2k+k+2\\
+        &=k^2+k+2k+2\\
+        &=2m+2(k+1)\text{ (from equation [\ref{eq:kk+1even}])}\\
+        &=2(m+k+1)\text{ (which is even, by definition)}
+    \end{align*}
+    Therefore, $P(k+1)$ is even. The property holds for all $n\in\mathbb{N}$.
+\end{proof}
+\begin{proof}
+    We use contradiction.
+
+    Let $n(n+1)$ be odd. Since the product of two numbers is odd, they must be odd. Thus, $n$ and $n+1$ are both odd. The difference between them is $n+1-n=1$. That is a contradiction because the difference between any two odd numbers must be even.
+
+    Therefore, $n(n+1)$ is even.
+\end{proof}
+\begin{exercise}
+    \label{ex:2.1.2}
+    Prove by induction that the sum of the first $n$ positive integers is $\frac{n(n+1)}{2}$.
 \end{exercise}
 \textbf{Solution}.
+It's fairly straightforward to realize that 
+\[
+    \frac{n(n+1)}{2}+(n+1)=\frac{(n+1)(n+2)}{2}
+\]
+, which proves the result.
+\begin{exercise}
+    \label{ex:2.1.3}
+    Observe that $n(n+1)/2$ is the number of handshakes among $n+1$ people. 
 
+    Suppose that everyone counts only handshakes with people older than him/her (pretty snobbish, isn't it?). Who will count the largest number of handshakes? How many people count $6$ handshakes? (We assume that no two people have exactly the same age.)
+
+    Give a proof of the result of exercise [\ref{ex:2.1.2}], based on your answers to these questions.
+\end{exercise}
+\textbf{Solution}.
+$n+1$ people convened. Everyone shook hands with everyone else. After they are done, an observer asks each person, "How many times did \emph{you} shake hands?". Since each of the $n+1$ people shook hands with $n$ other people, everyone says, "$n$ times." The observer concludes that the combined number of `shaking hands' of $n+1$ people, $T$, is $n(n+1)$.
+
+However, is $T$ the number of `handshakes'? No! Since a handshake comprises two shaking hands, the observer must have counted each handshake twice. Therefore, the number of handshakes among $n+1$ people is $\frac{T}{2}=\frac{n(n+1)}{2}$.
+
+\begin{reflection}
+    I got distracted a bit at this point. I knew I was close to seeing the connection between this and the previous problem, but there was a gap. [More time elapsed ...] I think I see it now ...
+\end{reflection}
+
+Counting $T$ and then halving it is equivalent to imposing an order on counting. Here is a way to impose the order after ensuring that each person has a unique age.:
+\begin{enumerate}
+    \item A person, p1, arrives at the scene and sits. There's no handshake yet.
+    \item An older person, p2, arrives. p1 gets up in reverence and shakes hands with p2. Both sit. The number of handshakes is $1=\frac{1\times2}{2}=1$.
+    \item A still older person, p3, arrives. p1 and p2 get up in reverence and shake hands with p3 in order. The number of handshakes is now $1+2=\frac{2\times3}{2}=3=1+2$.
+    \item A still older person, p4, arrives. p1, p2, and p3 get up in reverence and shake hands with p4 in order. The number of handshakes is now $3+3=\frac{3\times4}{2}=6=1+2+3$.
+    \item A still older person, p5, arrives. p1, p2, p3, p4 get up in reverence and shake hands with p5 in order. The number of handshakes is now $6+4=\frac{4\times5}{2}=10=1+2+3+4$.
+    \item The pattern continues. After p(n+1) has arrived, we have $\frac{n(n+1)}{2}=1+2+3+\dots+n$ handshakes.
+\end{enumerate}
+\begin{exercise}
+    \label{ex:2.1.4}
+    Give a proof of exercise [\ref{ex:2.1.2}], based on Figure [\ref{fig:sum-of-n}].
+    \begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[
+    dot/.style={circle, draw=black, line width=0.5pt,
+                minimum size=2.2mm, inner sep=0pt},
+    solid/.style={dot, fill=black},
+    empty/.style={dot, fill=white}
+]
+
+\def\dx{0.8}  % horizontal spacing
+\def\dy{0.8}  % vertical spacing
+
+% ================================================
+% Left figure: triangular array of solid circles
+% ================================================
+
+\foreach \row in {1,...,5} {
+    \foreach \col in {1,...,\row} {
+        \node[solid] at ({(\col-1)*\dx},{-(\row-1)*\dy}) {};
+    }
+}
+
+% ================================================
+% Right figure: triangular solid region, empty above
+% ================================================
+
+\begin{scope}[xshift=5.0cm]
+    \foreach \row in {1,...,5} {
+        \foreach \col in {1,...,5} {
+            \ifnum\col>\row
+                \node[empty] at ({(\col-1)*\dx},{-(\row-1)*\dy}) {};
+            \else
+                \node[solid] at ({(\col-1)*\dx},{-(\row-1)*\dy}) {};
+            \fi
+        }
+    }
+\end{scope}
+\end{tikzpicture}
+        \caption{The sum of the first $n$ integers (Tikz code by ChatGPT; Thanks!)}
+  \label{fig:sum-of-n}
+\end{figure}
+\end{exercise}
+\textbf{Solution}.
+This is the Gauss trick.
+\begin{exercise}
+    \label{ex:2.1.5}
+    Prove the following identity:
+    \begin{equation}
+        \label{eq:1.2+2.3+...}
+        1\cdot2+2\cdot3+3\cdot4+\dots+(n-1)\cdot n=\frac{(n-1)\cdot n\cdot(n+1)}{3}
+    \end{equation}
+\end{exercise}
+\textbf{Solution}.
+\begin{reflection}
+    Discovering a closed-form formula for an expression such as the left-hand side of the identity [\ref{eq:1.2+2.3+...}] (of course, without using the mathematical induction) is tricky; proving an established truth using induction is easier. Perhaps that is why P\'olya\footnote{I vaguely remember reading it attributed to P\'olya.} called induction a `diabolical technique' of proving something. 
+
+    I will try to discover this identity.
+\end{reflection}
+\begin{proof}
+    We use mathematical induction to prove that the proposition 
+    \[
+        P(n):0\cdot1+1\cdot2+2\cdot3+\dots+(n-1)\cdot n=\frac{(n-1)\cdot n\cdot(n+1)}{3}
+    \]
+
+    is true $\forall n\in\mathbb{N}$.
+
+    It is straightforward to see that
+
+    \[
+        \frac{(n-1)\cdot\boldsymbol{n}\cdot(n+1)}{3}+n\cdot\boldsymbol{(n+1)}=\frac{(n-1)\cdot n\cdot(n+1)+3n\cdot(n+1)}{3}=\frac{n\cdot\boldsymbol{(n+1)}\cdot(n+2)}{3}
+    \]
+    , from which the proof follows.
+\end{proof}
 
 
 
