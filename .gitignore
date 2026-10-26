@@ -11,8 +11,7 @@
 *.cb
 *.cb2
 .*.lb
-# sometimes .pdf are needed
-# *.pdf 
+ *.tex~ 
 
 ## Intermediate documents:
 *.dvi

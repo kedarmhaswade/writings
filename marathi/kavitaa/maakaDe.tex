@@ -1,0 +1,65 @@
+\documentclass[17pt]{extarticle}  % print quality
+\usepackage{polyglossia}
+\usepackage[margin=10mm]{geometry}
+\setdefaultlanguage{marathi}
+\setotherlanguages{english}
+\usepackage{fourier}
+%\textbf with "Sanskrit Text" produces the shape warning because the default Sanskrit Text font on Windows does not have a bold equivalent; try Yashomudra or Shobhika; now I like Tiro better
+\newfontfamily\devanagarifont[Script=Devanagari]{Sanskrit Text}
+%\newfontfamily\devanagarifont[Script=Devanagari]{Tiro Devanagari Marathi}
+
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}% Remove paragraph indent
+\usepackage[skip=\medskipamount]{parskip}
+\usepackage{fontawesome}
+\usepackage[style=english]{csquotes}
+\usepackage{verse}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    citecolor=blue,
+    urlcolor=purple,
+}
+
+% control hyphenation: https://tex.stackexchange.com/a/177179/64425
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+% control hyphenation: https://tex.stackexchange.com/a/177179/64425
+
+\begin{document}
+
+\title{माकडे (गझल, १९८१)}
+\author{मंगेश पाडगांवकर}
+\date{}
+\maketitle
+\hrule
+
+थोर आपण मानिली ही भ्रष्ट सारी माकडे\\
+अन् दिले हातांत त्यांच्या पेटलेले काकडे\\
+
+कां अता छाती पिटावी लागतां आगी घरां ?\\
+देव येइल कोणता हे निस्तराया साकडे?\\
+
+धर्म यांचा मारणे सोयीप्रमाणे या उड्या\\
+याचसाठी लाभलेले पाय यांना फाकडे\\
+
+काल ज्या झाडांवरी ही आश्रयाला थांबली\\
+आज ही शत्रूप्रमाणे पाहती त्यांच्याकडे\\
+
+जा कुठेही हीच तेथे चेहरे फेंदारुनी\\
+पाय जेथे टाकिती ते सर्व रस्ते वाकडे\\
+
+पक्ष यांचा कोठला, टोळी तयांची कोठली ?\\
+जात यांची एक अंती, प्रश्न सारे तोकडे\\
+
+हालवोनी शेपट्यांना घोषणा यांनी दिल्या ...\\
+आणिली तुमच्या चितेस्तव शोधुनी ही लाकडे!\\
+
+\vspace{5mm}
+\hrule
+\end{document}
