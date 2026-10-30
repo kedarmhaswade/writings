@@ -2746,7 +2746,114 @@ This is the Gauss trick.
     , from which the proof follows.
 \end{proof}
 
+\begin{reflection}[A Slightly Less Diabolical Way]
+    We can easily deduce the following from the left-hand side of equation [\ref{eq:1.2+2.3+...}] (note the indices of the sum; they are from $0$ to $n-1$):
+    \begin{equation*}
+        1\cdot2+2\cdot3+3\cdot4+\dots+(n-1)\cdot n=\sum_{i=1}^{n-1}i(i+1)=\sum_{i=1}^{n-1}(i^2+i)\\
+    \end{equation*}
+    \begin{equation*}
+        =\frac{(n-1)n(2n-1)}{6}+\frac{(n-1)n}{2}=\frac{(n-1)n\cdot2(n+1)}{6}=\frac{(n-1)n(n+1)}{3}
+    \end{equation*}, which was to be demonstrated.
 
+    If, on the other hand, the left-hand side were:
+    \[
+        1\cdot2+2\cdot3+3\cdot4+\dots+\boldsymbol{n\cdot (n+1)}
+    \]
+    , the closed-form formula would be:
+    \[
+        \sum_{i=1}^{\boldsymbol{n}}(i^2+i)=\frac{n(n+1)(2n+1)}{6}+\frac{n(n+1)}{2}=\boldsymbol{\frac{n(n+1)(n+2)}{3}}
+    \]
+\end{reflection}
+
+\begin{reflection}[Using a Technique I Learned Previously]
+    I thought of the previous exercise (\ref{ex:2.1.5}) more generally. It is a finite sum of products of two numbers which are in arithmetic progression:
+    \[
+        S_n=a_1\cdot b_1+a_2\cdot b_2+\dots+a_n\cdot b_n\mid a_1,a_2,\dots,a_n\text{ and }b_1,b_2,\dots,b_n\text {are in A.P.}
+    \]
+    Will we be able to get a generalized result of the sum in terms of $a_1,b_1,n,d_a,d_b$?
+
+    I haven't worked this out on paper yet, but I believe we might be able to generalize! First, let me write down a few terms of our sum for various values of $n$. The leading $+$ in the table cells means we add a new product term to the sum for a previous value of $n$.
+\begin{table}[H] 
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|}
+ \hline
+    1&2&3&4&5&&n\\ \hline
+    \hline
+    \makecell{1$\cdot$2\\2}&\makecell{+2$\cdot$3\\8}&\makecell{+3$\cdot$4\\20}&\makecell{+4$\cdot$5\\40}&\makecell{+5$\cdot$6\\70}&\dots&$+(n-1)\cdot n$\\ \hline
+\end{tabular}
+    \caption{The First Few Terms}
+\end{table}
+
+    Polynomials, one of the most familiar algebraic constructs, can help! Polynomials in a single variable are real-valued functions ($f:\mathbb{R}\to\mathbb{R}$), however, in this case we can look only at the values of polynomials for integral values of its variable (treating the function as $f:\mathbb{N}\to\mathbb{R}$).
+
+    Let $n$ be the variable of the polynomial, which assumes only integral values. Let's assume that the sum $S_n$ is a polynomial\footnote{We get a hint from exercise \ref{ex:2.1.5} anyway.} in $n$. 
+
+    Here are the terms of $S_n$ and various finite differences for various $n$ (we assume a $\cdot$, but don't write it in expressions involving products):
+\begin{table}[H] 
+\centering
+\begin{tabular}{|c|c|c|}
+ \hline
+    $\boldsymbol{n}$&Sum&$\Delta_1$\\ \hline
+    \hline
+    $1$&$S_1=a_1 b_1$&-\\\hline
+    $2$&$S_2=S_1+(a_1+d_a)(b_1+d_b)$&$(a_1+d_a)(b_1+d_b)$\\\hline
+    $3$&$S_3=S_2+(a_1+2d_a)(b_1+2d_b)$&$(a_1+2d_a)(b_1+2d_b)$\\\hline
+    $4$&$S_4=S_3+(a_1+3d_a)(b_1+3d_b)$&$(a_1+3d_a)(b_1+3d_b)$\\\hline
+    $5$&$S_5=S_4+(a_1+4d_a)(b_1+4d_b)$&$(a_1+4d_a)(b_1+4d_b)$\\\hline
+    $\vdots$&$\vdots$&$\vdots$\\\hline
+    ${\scriptstyle n-1}$&${\scriptstyle S_{n-1}=S_{n-2}+(a_1+(n-2)d_a)(b_1+(n-2)d_b)}$&${\scriptstyle (a_1+(n-2)d_a)(b_1+(n-2)d_b)}$\\\hline
+    ${\scriptstyle n}$&${\scriptstyle S_n=S_{n-1}+(a_1+(n-1)d_a)(b_1+(n-1)d_b)}$&${\scriptstyle (a_1+(n-1)d_a)(b_1+(n-1)d_b)}$\\\hline
+\end{tabular}
+    \caption{Terms of the Sum and First Finite Differences}
+    \label{tab:a1b1+a2b2+...}
+\end{table}
+
+\begin{table}[H] 
+\centering
+\begin{tabular}{|c|c|c|}
+ \hline
+    $\boldsymbol{n}$&$\Delta_2$&$\Delta_3$\\ \hline
+    \hline
+    $1$&-&-\\\hline
+    $2$&-&-\\\hline
+    $3$&$a_1d_b+b_1d_a+3d_ad_b$&-\\\hline
+    $4$&$a_1d_b+b_1d_a+5d_ad_b$&$2d_ad_b$\\\hline
+    $5$&$a_1d_b+b_1d_a+7d_ad_b$&$2d_ad_b$\\\hline
+    $\vdots$&$\vdots$&$\vdots$\\\hline
+    $n-1$&$a_1d_b+b_1d_a+(2n-5)d_ad_b$&$2d_ad_b$\\\hline
+    $n$&$a_1d_b+b_1d_a+(2n-3)d_ad_b$&$2d_ad_b$\\\hline
+\end{tabular}
+    \caption{Terms of Second and Third Finite Differences}
+    \label{tab:a1b1+a2b2+...}
+\end{table}
+
+    The technique is called `finite differences.' We get a sequence of terms (which are partial sums), $S_i$. Then, $\Delta_i=S_i-S_{i-1}\forall i\mid 2\leq i\leq n$ are called the first finite differences. The differences in first differences are called second finite differences ($\Delta^2_i$), and so on.
+
+
+    \textbf{According to a theorem, if the $n^{th}$ finite differences, $\Delta_n$'s, are the same, the degree of the polynomial generating the terms is also $n$} (and vice versa).
+
+    Therefore, the polynomial in $n$ whose coefficients we seek is:
+    \begin{equation}
+        \label{eq:poly-we-seek}
+        c_0+c_1n+c_2n^2+c_3n^3\mid c_3\ne0
+    \end{equation}
+
+    We find the coefficients by considering the terms of the sum we know. We only make one change for the ease of calculation: Make\footnote{This is only to adjust $n$ so that it works for all cases. For example, in the given sum $1\cdot2+2\cdot3+3\cdot4+\dots+(n-1)\cdot n$, with only one term (the first one) the sum is $1\cdot 2=2$, but if we substitute $n=1$ in $\frac{(n-1)n(n+1)}{3}$, we get $0$. We work around this problem, by making the first term $0\cdot0=0$.} the first term of the sum $0\cdot 0$. :
+\begin{table}[H] 
+\centering
+\begin{tabular}{|c|c|c|}
+ \hline
+    $\boldsymbol{n}$&Expression$c_0+c_1n+c_2n^2+c_3n^3$&Value\\\hline
+    \hline
+    $1$&$c_0+c$&$0$\\\hline
+    $2$&$$&$a_1+b_1$\\\hline
+    $3$&$$&$a_1+b_1+(a_1+d)\cdot(b_1+d)$\\\hline
+    $4$&$$&$$\\\hline
+\end{tabular}
+\end{table}
+
+
+\end{reflection}
 
 
 
