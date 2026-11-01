@@ -2854,6 +2854,117 @@ This is the Gauss trick.
 
 
 \end{reflection}
+\begin{exercise}
+    \label{ex:2.1.6}
+    Use the method of the young Gauss to give a third proof of the formula in exercise \ref{ex:2.1.2}.
+\end{exercise}
+\textbf{Solution}. The generalization of the concrete example (when $n=1000$) is easy.
+\begin{exercise}
+    \label{ex:2.1.7}
+    How would the young Gauss prove the formula 
+    \begin{equation}
+        \label{eq:1+3+...+2n-1}
+        1+3+5+\dots+(2n-1)=n^2
+    \end{equation}
+    for the sum of the first $n$ odd numbers?
+\end{exercise}
+\textbf{Solution}.
+\begin{proof}
+    We prove it the Gauss way.
+\begin{align*}
+    S  & =1      &+3      &+\dots&+(2n-1)&\\
+    S  & =(2n-1) &+(2n-3) &+\dots&+     1&\\
+    2S & =2n     &+2n      &+\dots&+2n
+\end{align*}
+There are $n$ addends in $2S$, each of which is $2n$. Therefore,
+\[
+    2S=2n\times n
+\]
+\[
+    \therefore S=n^2
+\]
+\end{proof}
+\begin{exercise}
+    \label{ex:2.1.8}
+    Prove that the sum of the first $n$ squares $1+4+9+\dots+n^2$ is $\frac{n(n+1)(2n+1)}{6}$.
+\end{exercise}
+\begin{reflection}
+    This is a classic problem in number theory and the technique of finite differences can be applied to it. A blind application of the young Gauss's insight does not work immediately. There are several subproblems here. Why doesn't Gauss's technique work as is? Is the product $n(n+1)(2n+1)$ divisible by $6\forall n\in\mathbb{N}$ (it must be, because, otherwise the sum of integers won't be an integer)?
+
+    
+\end{reflection}
+\textbf{Solution}.
+It's pretty straightforward to prove using induction and finite differences.
+\begin{exercise}
+    \label{ex:2.1.9}
+    Prove that the sum of the first $\mathit{n}$ powers of $\mathit{2}$ (starting with $\mathit{1=2^0}$) is $\mathit{2^n-1}$.
+\end{exercise}
+\textbf{Solution}.
+\begin{reflection}
+    Here, the technique of polynomials does not work because the sum is expected to be exponential in $n$.
+\end{reflection}
+Using induction, it's fairly easy to see that if
+\[
+    \sum_{i=0}^{n-1}2^i=\underbrace{1+2+4+\dots+2^{n-1}}_{n\text{ powers of $2$}}=2^n
+\]
+, then 
+\[
+    \boldsymbol{1+2+4+\dots+2^{n-1}}+2^n=\boldsymbol{2^n}+2^n=2\times2^n=2^1\times2^n=2^{n+1}
+\]
+, and the proof follows from induction.
+
+The book then explains an inductive argument that the number of subsets of an $n$-set, $\mathbb{S}$, is $2^n$. The argument revolves around fixing an element $a$ of the set and then considering the number of subsets ($2^{n-1}$) of the set $\mathbb{S}-\{a\}$.
+
+\begin{exercise}
+    \label{ex:2.1.10}
+    Use induction to prove Theorem \ref{th:number-of-strings} (the number of strings of length $n$ composed of $k$ given elements is $k^n$) and Theorem \ref{th:n-perms} (the number of permutations of a set with $n$ elements is $n!$).
+\end{exercise}
+\textbf{Solution}. Inductive arguments are straightforward.
+\begin{exercise}
+    \label{ex:2.1.11}
+    Use induction on $n$ to prove the "handshake theorem" (the number of handshakes between $n$ people is $\frac{n(n-1)}{2}$).
+\end{exercise}
+\textbf{Solution}. 
+\[
+    \underbrace{\frac{(n-1)(n-2)}{2}}_{\text{num of handshakes between n-1 people}}+\overbrace{(n-1)}^{\text{num of handshakes of nth person}}=\frac{n(n-1)}{2}
+\]
+\begin{exercise}
+    \label{ex:2.1.12}
+    Read carefully the following induction proof:
+
+    ASSERTION: $n(n+1)$ is an odd number for every $n$.
+
+    PROOF: Suppose that this is true for $n-1$ in place of $n$; we prove it for $n$, using the induction hypothesis. We have
+\[
+    n(n+1)=(n-1)n+2n
+\]
+Now here $(n-1)n$ is odd by the induction hypothesis and $2n$ is even.  Hence $n(n+1)$ is the sum of an odd number and an even number and it is odd.
+
+The assertion that we `proved' is obviously wrong for $n=10:10\cdot11=110$ is even. 
+
+What is wrong with the proof?
+\end{exercise}
+\textbf{Solution}.
+
+The `proof' does not prove the mundane base case! For an inductive proof to be valid, we must show that it holds for a base case like, for example, $n=0$ or $n=1$. For both these values, the product $n(n+1)$ fails to be odd. Therefore, the proof is bogus.
+\begin{exercise}
+    \label{ex:2.1.13}
+Read carefully the following induction proof:
+
+    ASSERTION: If we have $n$ lines in a (2-D?) plane, no two of which are parallel, then they all go through one point.
+
+PROOF: The assertion is true for one line (and also for $2$, since we
+have assumed that no two lines are parallel). 
+
+Suppose that it is true for any set of $n-1$ lines. We are going to prove that it is also true for $n$ lines, using this induction hypothesis.
+
+    So consider a set $\mathbb{S}=\{a,b,c,d,\dots\}$ of $n$ lines in the plane, no two of which are parallel. Delete the line $c$; then we are left with a set $\mathbb{S'}$ of $n-1$ lines, and obviously, no two of these are parallel. So we can apply the induction hypothesis and conclude that there is a point $P$ such that all the lines in $\mathbb{S'}$ go through $P$. In particular, $a$ and $b$ go through $P$, and so $P$ must be the point of intersection of $a$ and $b$.
+
+    Now put $c$ back and delete $d$, to get a set $\mathbb{S''}$ of $n-1$ lines. Just as above, we can use the induction hypothesis to conclude that these lines go through the same point $P'$; but just as above, $P'$ must be the point of intersection of $a$ and $b$. Thus $P'=P$. But then we see that $c$ goes through $P$. The other lines also go through $P$ (by the choice of $P$), and so all the $n$ lines go through $P$.  
+
+    But the assertion we `proved' is clearly wrong; where is the error?
+\end{exercise}
+\textbf{Solution}.
 
 
 
