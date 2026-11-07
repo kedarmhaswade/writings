@@ -983,10 +983,10 @@ N_n = \begin{cases}
     \]
 
 \end{reflection}
-\section{The Approximate Number of Subsets}
+\section{The Approximate Number of Subsets}\label{sec:approx-num-subsets}
 Another well-written section. In this section, authors ask how many decimal digits an integer expressed as a power of another integer, say $2^{100}$, has. 
 
-\epigraph[source={Pg. 14}]{
+\epigraph[source={pg. 14}]{
     What does it mean that a number has exactly $k$ digits? It means that it is between $10^{k-1}$ and $10^k$ (the lower bound is allowed, the upper is not). We want to find the value of $k$ for which $10^{k-1}\leq2^{100}<10^k$. \dots $\therefore k-1\leq100\log 2<k$, that is $k-1\leq30.10299<k$ and $\therefore k=31$.
 }
 
@@ -2805,7 +2805,7 @@ This is the Gauss trick.
     ${\scriptstyle n}$&${\scriptstyle S_n=S_{n-1}+(a_1+(n-1)d_a)(b_1+(n-1)d_b)}$&${\scriptstyle (a_1+(n-1)d_a)(b_1+(n-1)d_b)}$\\\hline
 \end{tabular}
     \caption{Terms of the Sum and First Finite Differences}
-    \label{tab:a1b1+a2b2+...}
+    \label{tab:a1b1+a2b2+...1}
 \end{table}
 
 \begin{table}[H] 
@@ -2824,7 +2824,7 @@ This is the Gauss trick.
     $n$&$a_1d_b+b_1d_a+(2n-3)d_ad_b$&$2d_ad_b$\\\hline
 \end{tabular}
     \caption{Terms of Second and Third Finite Differences}
-    \label{tab:a1b1+a2b2+...}
+    \label{tab:a1b1+a2b2+...2}
 \end{table}
 
     The technique is called `finite differences.' We get a sequence of terms (which are partial sums), $S_i$. Then, $\Delta_i=S_i-S_{i-1}\forall i\mid 2\leq i\leq n$ are called the first finite differences. The differences in first differences are called second finite differences ($\Delta^2_i$), and so on.
@@ -3055,7 +3055,7 @@ i.e.,
 
 There is a formula that gives a very good approximation of $n!$ We state it without proof, since the proof (although not terribly difficult) needs calculus.
 
-\begin{theorem}[Stirling's Formula]
+\begin{theorem}[Stirling's Formula or Stirling's Approximation]
     \label{th:stirling-formula}
     \[
         n!\sim(\frac{n}{e})^n\sqrt{2{\pi}n}
@@ -3072,7 +3072,51 @@ There is a formula that gives a very good approximation of $n!$ We state it with
 \begin{reflection}
     Stirling's formula (\ref{th:stirling-formula}) is amazing. How does one go about creating it? Should I check its Wikipedia page, or ask ChatGPT about it?
 
-    I better do calculus well!
+    I better learn calculus well!
+
+    Even so, Stirling's Approximation is unlike usual closed-form formulas; you must find $n^n$ in order to find $n!$. However, taking logarithms on both sides helps in certain cases. For instance, 
+    \[
+        \ln{n!}=n\ln{n}-n+O(\ln{n})
+    \]
+\end{reflection}
+
+We have seen before (section \ref{sec:approx-num-subsets}) that the number of digits in the decimal representation of any number is its logarithm to base $10$ rounded up. We can utilize it to find the number of decimal digits in $100!$. From the statement of Stirling's approximation for $n=100$,
+
+\[
+    100!\approx(\frac{100}{e})^{100}\sqrt{200\pi}
+\]
+\[
+    \therefore\log_{10}{100!}\approx157.96964174385386
+\]
+
+Thus, the number of digits in $100!$ is $158$.
+\section{Inclusion-Exclusion}
+\begin{reflection}
+    This book usually introduces a new topic by way of a problem!
+\end{reflection}
+\epigraph[
+    width={\linewidth},
+    quote style={\upshape}
+]{
+    In a class of $40$, many students are collecting the pictures of their favorite rock stars. 
+
+    Eighteen students have a picture of the Beatles, $16$ students have a picture of the Rolling Stones and $12$ students have a picture of Elvis Presley (this happened a long time ago, when we were young). There are $7$ students who have pictures of both the Beatles and the Rolling Stones, $5$ students who have pictures of both the Beatles and Elvis Presley, and $3$ students who have pictures of both the Rolling Stones and Elvis Presley.  Finally, there are $2$ students who possess pictures of all three groups. 
+
+    Question: How many students in the class have no picture of any of the rock groups?
+}
+\begin{reflection}
+    This is the grade-school Venn-diagram problem. The answer is $7$.
+\end{reflection}
+
+The book also describes one solution.  However, it states:
+\epigraph[source={pg. 30},
+    quote style={\itshape}]{
+        We can not find any error in this answer [$7$], looking at it from any direction.  But learning from our previous experience, we must be much more careful: We have to give an exact proof!
+}
+\begin{reflection}
+    And then it demonstrates how to find the answer using the \emph{Inclusion-Exclusion formula}. I was seeing it for the first time, and it felt magical. I also wondered if this formula was designed exclusively to solve problems like this one.
+
+    It makes use of exercise \ref{ex:1.3.3}: \emph{The number of even subsets of a nonempty $n$-set is equal to the number of its odd subsets.} However, that observation alone is not enough to set up Inclusion-Exclusion.
 \end{reflection}
 
 
