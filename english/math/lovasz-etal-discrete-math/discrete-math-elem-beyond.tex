@@ -3163,7 +3163,7 @@ The book also describes one solution.  However, it states:
         \label{eq:inclusion-exclusion-formula-4-sets-wrong}
     \end{equation}
      }
-     Since these notes are also a journal of sorts, I admit that I went wrong here and I realized my mistake \textbf{only after checking my answers} for an exercise that appeared later in this section (see exercise \ref{ex:2.3.1}). Clearly, I didn't consider all the $2$-subsets ($\binom{4}{2}=6$) of the $4$-set\footnote{And I can't believe that!}. The correct formula is: 
+     Since these notes are also a journal of sorts, I admit that I went wrong here and I realized my mistake \textbf{only after checking my answers} for an exercise that appeared later in this section (see exercise \ref{ex:2.3.1} below). Clearly, I didn't consider all the $2$-subsets ($\binom{4}{2}=6$) of the $4$-set\footnote{And I can't believe that!}. The correct formula is: 
     \begin{equation}
         \begin{aligned}
         n&=n_{\mathbb{U}\setminus{\mathbb{A}\cup\mathbb{B}\cup\mathbb{C}}\cup\mathbb{D}}\\
@@ -3206,8 +3206,39 @@ We apply equation [\ref{eq:inclusion-exclusion-formula-4-sets}], treating $\math
     \therefore n&=79-55+19-3\\
     \therefore n&=40
 \end{align*}
+\section{Pigeonholes}
+Using a catchy question, "Can we find in New York two persons having the same number of strands of hair?", the book introduces this rather obvious, but powerful principle. Surprisingly, there are plenty of practical situations where this principle applies. The exposition is highly readable.
+\begin{definition}[The Pigeonhole Principle]
+    \label{def:php}
+    If we have $n$ boxes (pigeonholes) and we place more than $n$ objects (pigeons) into them, then there will be at least one box that contains more than one object.
+\end{definition}
+\begin{reflection}[Reinterpretation]
+    Luckily, this story of a genius of combinatorics, Lajos Pósa, appeared on my Twitter feed \cite{posa-story}. I am reproducing it verbatim:
+\vspace{5mm}
 
+\hrule
 
+In 1959, Paul Erdős met a Hungarian boy who was not then twelve years old. His name was Lajos Pósa.  During lunch, Erdős gave him a problem that had once taken him about ten minutes to solve.
+
+Choose any $n+1$ distinct positive integers from $1$ to $2n$. Prove that at least two must be relatively prime.
+
+Pósa continued eating his soup. Then he noticed something wonderfully simple. Arrange the integers into pairs:
+
+$(1,2),(3,4),(5,6),\dots,(2n−1,2n)$.
+
+There are only $n$ pairs. If you select $n+1$ distinct integers, at least one pair must be selected completely. And any two consecutive integers are relatively prime.
+
+Problem solved.
+
+According to an account reproduced by David Wells, Pósa saw the idea in about half a minute. Erdős was so impressed that he compared the boy's insight to Gauss's celebrated childhood arithmetic feat. What makes this story memorable is the contrast. A problem that appears to demand number theory yields to one elementary observation and the pigeonhole principle.
+
+Sometimes a beautiful mathematical proof is simply the right way to look at the numbers. And sometimes that insight arrives before the soup is finished.
+
+\vspace{5mm}
+
+\hrule
+
+\end{reflection}
 
 
 
