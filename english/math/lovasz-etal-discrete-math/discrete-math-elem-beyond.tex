@@ -3114,9 +3114,45 @@ The book also describes one solution.  However, it states:
         We can not find any error in this answer [$7$], looking at it from any direction.  But learning from our previous experience, we must be much more careful: We have to give an exact proof!
 }
 \begin{reflection}
-    And then it demonstrates how to find the answer using the \emph{Inclusion-Exclusion formula}. I was seeing it for the first time, and it felt magical. I also wondered if this formula was designed exclusively to solve problems like this one.
+    And then it demonstrates how to find the answer using the \emph{Inclusion-Exclusion formula}. I was seeing it for the first time, and it felt enigmatic. I also wondered if this formula was designed exclusively to solve problems like this one.
 
     It makes use of exercise \ref{ex:1.3.3}: \emph{The number of even subsets of a nonempty $n$-set is equal to the number of its odd subsets.} However, that observation alone is not enough to set up Inclusion-Exclusion.
+
+    I will try to generalize the principle, although I am still looking for my own explanation of how it works. We consider a universe of elements, which is a set, $\mathbb{U}$, and three sets, $\mathbb{A,B,C}$.
+
+    Let us have $n$ elements in the universe, that is, $\lvert\mathbb{U}\rvert=n$. Every object is a member of either $0,1,2,$ or $3$ of the three sets.
+
+    The Inclusion-Exclusion formula then states that
+    \begin{equation}
+        \label{eq:inclusion-exclusion-formula-3-sets-alt}
+        n-(n_{\mathbb{A}}+n_{\mathbb{B}}+n_{\mathbb{C}})+(n_{\mathbb{A}\cap\mathbb{B}}+n_{\mathbb{B}\cap\mathbb{C}}+n_{\mathbb{C}\cap\mathbb{A}})-n_{\mathbb{A}\cap\mathbb{B}\cap\mathbb{C}}=n_{\mathbb{U}\setminus{\mathbb{A}\cup\mathbb{B}\cup\mathbb{C}}}
+    \end{equation}
+
+    Actually, I like the following form better:
+    \begin{equation}
+        \label{eq:inclusion-exclusion-formula-3-sets}
+        n=n_{\mathbb{U}\setminus{\mathbb{A}\cup\mathbb{B}\cup\mathbb{C}}}+(n_{\mathbb{A}}+n_{\mathbb{B}}+n_{\mathbb{C}})-(n_{\mathbb{A}\cap\mathbb{B}}+n_{\mathbb{B}\cap\mathbb{C}}+n_{\mathbb{C}\cap\mathbb{A}})+n_{\mathbb{A}\cap\mathbb{B}\cap\mathbb{C}}
+    \end{equation}
+
+    If we only had two sets, $\mathbb{A,B}$, then it takes the form:
+    \begin{equation}
+        \label{eq:inclusion-exclusion-formula-2-sets}
+        n=n_{\mathbb{U}\setminus{\mathbb{A}\cup\mathbb{B}}}+(n_{\mathbb{A}}+n_{\mathbb{B}})-n_{\mathbb{A}\cap\mathbb{B}}
+    \end{equation}
+
+    The 2-set formula \ref{eq:inclusion-exclusion-formula-2-sets}, when stated in words, is clear: To calculate the number of elements in the universe $n$, we start with the elements that are not members of any of the sets (that is, they belong to the set $\mathbb{U}$ minus the union of $\mathbb{A}$ and $\mathbb{B}$: $\mathbb{U}\setminus(\mathbb{A}\cup\mathbb{B})$) and add to it the number of elements in $\mathbb{A}$ and the number of elements in $\mathbb{B}$, but in doing so, we add each element common to both the sets twice; therefore we must subtract the number of common elements from the sum, $n_{\mathbb{A}\cap\mathbb{B}}$.
+
+    This process can be continued to any finite number of sets. Adopting it to four sets $\mathbb{A,B,C,D}$:
+    \begin{equation}
+        \begin{aligned}
+        n&=n_{\mathbb{U}\setminus{\mathbb{A}\cup\mathbb{B}\cup\mathbb{C}}\cup\mathbb{D}}\\
+         &+(n_{\mathbb{A}}+n_{\mathbb{B}}+n_{\mathbb{C}}+n_{\mathbb{D}})\\
+         &-(n_{\mathbb{A}\cap\mathbb{B}}+n_{\mathbb{B}\cap\mathbb{C}}+n_{\mathbb{C}\cap\mathbb{D}}+n_{\mathbb{D}\cap\mathbb{A}})\\
+         &+(n_{\mathbb{A}\cap\mathbb{B}\cap\mathbb{C}}+n_{\mathbb{A}\cap\mathbb{B}\cap\mathbb{D}}+n_{\mathbb{B}\cap\mathbb{C}\cap\mathbb{D}})\\
+         &-(n_{\mathbb{A}\cap\mathbb{B}\cap\mathbb{C}\cap\mathbb{D}})
+        \end{aligned}
+        \label{eq:inclusion-exclusion-formula-4-sets}
+    \end{equation}
 \end{reflection}
 
 
