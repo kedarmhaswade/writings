@@ -3134,6 +3134,13 @@ The book also describes one solution.  However, it states:
         n=n_{\mathbb{U}\setminus{\mathbb{A}\cup\mathbb{B}\cup\mathbb{C}}}+(n_{\mathbb{A}}+n_{\mathbb{B}}+n_{\mathbb{C}})-(n_{\mathbb{A}\cap\mathbb{B}}+n_{\mathbb{B}\cap\mathbb{C}}+n_{\mathbb{C}\cap\mathbb{A}})+n_{\mathbb{A}\cap\mathbb{B}\cap\mathbb{C}}
     \end{equation}
 
+    Applying equation [\ref{eq:inclusion-exclusion-formula-3-sets}] to the above problem, we get:
+    \[
+        40=x+(18+16+12)-(7+5+3)-2
+    \]
+    \[
+        \therefore x=40-46+15-2=7
+    \]
     If we only had two sets, $\mathbb{A,B}$, then it takes the form:
     \begin{equation}
         \label{eq:inclusion-exclusion-formula-2-sets}
@@ -3143,17 +3150,63 @@ The book also describes one solution.  However, it states:
     The 2-set formula \ref{eq:inclusion-exclusion-formula-2-sets}, when stated in words, is clear: To calculate the number of elements in the universe $n$, we start with the elements that are not members of any of the sets (that is, they belong to the set $\mathbb{U}$ minus the union of $\mathbb{A}$ and $\mathbb{B}$: $\mathbb{U}\setminus(\mathbb{A}\cup\mathbb{B})$) and add to it the number of elements in $\mathbb{A}$ and the number of elements in $\mathbb{B}$, but in doing so, we add each element common to both the sets twice; therefore we must subtract the number of common elements from the sum, $n_{\mathbb{A}\cap\mathbb{B}}$.
 
     This process can be continued to any finite number of sets. Adopting it to four sets $\mathbb{A,B,C,D}$:
+    \textcolor{red}{
     \begin{equation}
         \begin{aligned}
         n&=n_{\mathbb{U}\setminus{\mathbb{A}\cup\mathbb{B}\cup\mathbb{C}}\cup\mathbb{D}}\\
-         &+(n_{\mathbb{A}}+n_{\mathbb{B}}+n_{\mathbb{C}}+n_{\mathbb{D}})\\
-         &-(n_{\mathbb{A}\cap\mathbb{B}}+n_{\mathbb{B}\cap\mathbb{C}}+n_{\mathbb{C}\cap\mathbb{D}}+n_{\mathbb{D}\cap\mathbb{A}})\\
-         &+(n_{\mathbb{A}\cap\mathbb{B}\cap\mathbb{C}}+n_{\mathbb{A}\cap\mathbb{B}\cap\mathbb{D}}+n_{\mathbb{B}\cap\mathbb{C}\cap\mathbb{D}})\\
-         &-(n_{\mathbb{A}\cap\mathbb{B}\cap\mathbb{C}\cap\mathbb{D}})
+         &\quad+(n_{\mathbb{A}}+n_{\mathbb{B}}+n_{\mathbb{C}}+n_{\mathbb{D}})\\
+         &\quad-(n_{\mathbb{A}\cap\mathbb{B}}+n_{\mathbb{B}\cap\mathbb{C}}+n_{\mathbb{C}\cap\mathbb{D}}+n_{\mathbb{D}\cap\mathbb{A}})\\
+         &\quad+(n_{\mathbb{A}\cap\mathbb{B}\cap\mathbb{C}}+n_{\mathbb{A}\cap\mathbb{B}\cap\mathbb{D}}+n_{\mathbb{B}\cap\mathbb{C}\cap\mathbb{D}})\\
+         &\quad-(n_{\mathbb{A}\cap\mathbb{B}\cap\mathbb{C}\cap\mathbb{D}})
+        \end{aligned}
+            \tag{wrong-n-2-subsets}
+        \label{eq:inclusion-exclusion-formula-4-sets-wrong}
+    \end{equation}
+     }
+     Since these notes are also a journal of sorts, I admit that I went wrong here and I realized my mistake \textbf{only after checking my answers} for an exercise that appeared later in this section (see exercise \ref{ex:2.3.1}). Clearly, I didn't consider all the $2$-subsets ($\binom{4}{2}=6$) of the $4$-set\footnote{And I can't believe that!}. The correct formula is: 
+    \begin{equation}
+        \begin{aligned}
+        n&=n_{\mathbb{U}\setminus{\mathbb{A}\cup\mathbb{B}\cup\mathbb{C}}\cup\mathbb{D}}\\
+         &\quad+(n_{\mathbb{A}}+n_{\mathbb{B}}+n_{\mathbb{C}}+n_{\mathbb{D}})\\
+            &\quad-(n_{\mathbb{A}\cap\mathbb{B}}+n_{\mathbb{A}\cap\mathbb{C}}+n_{\mathbb{A}\cap\mathbb{D}}+n_{\mathbb{B}\cap\mathbb{C}}+n_{\mathbb{B}\cap\mathbb{D}}+n_{\mathbb{C}\cap\mathbb{D}})\\
+         &\quad+(n_{\mathbb{A}\cap\mathbb{B}\cap\mathbb{C}}+n_{\mathbb{A}\cap\mathbb{B}\cap\mathbb{D}}+n_{\mathbb{B}\cap\mathbb{C}\cap\mathbb{D}})\\
+         &\quad-(n_{\mathbb{A}\cap\mathbb{B}\cap\mathbb{C}\cap\mathbb{D}})
         \end{aligned}
         \label{eq:inclusion-exclusion-formula-4-sets}
     \end{equation}
 \end{reflection}
+\begin{exercise}
+    \label{ex:2.3.1}
+    In a class of all boys, $18$ boys like to play chess, $23$ like to play soccer, $21$ like biking and $17$ like hiking. The number of those who like to play both chess and soccer is $9$. We also know that $7$ boys like chess and biking, $6$ boys like chess and hiking, $12$ like soccer and biking, $9$ boys like soccer and hiking, and finally $1$2 boys like biking and hiking. There are $4$ boys who like chess, soccer, and biking, $3$ who like chess, soccer, and hiking, $5$ who like chess, biking, and hiking, and $7$ who like soccer, biking, and hiking. Finally there are $3$ boys who like all four activities. In addition we know that everybody likes at least one of these activities. How many boys are there in the class?
+\end{exercise}
+\textbf{Solution}.
+\begin{mybox}[Sloppiness!]
+We apply equation [\ref{eq:inclusion-exclusion-formula-4-sets-wrong}], treating $\mathbb{A}$ as chess players, $\mathbb{B}$ as soccer players, $\mathbb{C}$ as bikers, and $\mathbb{D}$ as hikers. We get:
+\begin{align*}
+    n&=0\\
+    &\quad+(18+23+21+17)\\
+    &\quad-(9+7+6+12)\\
+    &\quad+(4+3+5+7)\\
+    &\quad-3\\
+    \therefore n&=79-34+19-3\\
+    \therefore n&=61
+\end{align*}
+\end{mybox}
+
+\begin{reflection}
+    When you get too comfortable, you become sloppy! Grrr!
+\end{reflection}
+We apply equation [\ref{eq:inclusion-exclusion-formula-4-sets}], treating $\mathbb{A}$ as chess players, $\mathbb{B}$ as soccer players, $\mathbb{C}$ as bikers, and $\mathbb{D}$ as hikers. We get:
+\begin{align*}
+    n&=0\\
+    &\quad+(18+23+21+17)\\
+    &\quad-(9+7+6+12+\boldsymbol{9+12})\\
+    &\quad+(4+3+5+7)\\
+    &\quad-3\\
+    \therefore n&=79-55+19-3\\
+    \therefore n&=40
+\end{align*}
+
 
 
 
