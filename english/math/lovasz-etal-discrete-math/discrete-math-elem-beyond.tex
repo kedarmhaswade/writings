@@ -160,7 +160,8 @@
 \usepackage[
   backend=biber,
   style=numeric,
-  backref=true
+  backref=true,
+  sorting=none
 ]{biblatex}
 
 \addbibresource{refs.bib}
@@ -3207,7 +3208,7 @@ We apply equation [\ref{eq:inclusion-exclusion-formula-4-sets}], treating $\math
     \therefore n&=40
 \end{align*}
 \section{Pigeonholes}
-Using a catchy question, "Can we find in New York two persons having the same number of strands of hair?", the book introduces this rather obvious, but powerful principle. Surprisingly, there are plenty of practical situations where this principle applies. The exposition is highly readable.
+Using a catchy question, "Can we find in New York two persons having the same number of strands of hair?\footnote{We need to assume something. We assume that no New Yorker has more than half a million hair strands and the population of New York is estimated to be 10 million.}", the book introduces this rather obvious, but powerful principle. Surprisingly, there are plenty of practical situations where this principle applies. The exposition is highly readable\footnote{Such proofs, whose verification is impossible, are called \emph{pure existence proofs}}.
 \begin{definition}[The Pigeonhole Principle]
     \label{def:php}
     If we have $n$ boxes (pigeonholes) and we place more than $n$ objects (pigeons) into them, then there will be at least one box that contains more than one object.
@@ -3239,6 +3240,57 @@ Sometimes a beautiful mathematical proof is simply the right way to look at the 
 \hrule
 
 \end{reflection}
+
+\epigraph[source={Pg. 35}]{
+Very often, the above statement is formulated using pigeons and their holes, and is referred to as the Pigeonhole Principle. The Pigeonhole Principle is simple indeed: Everybody understands it immediately. Nevertheless, it deserves a name, since we use it very often as the basic tool of many proofs. We will see many examples for the use of the Pigeonhole Principle, but to show you its power, we discuss one of them right away. This is not a theorem of any significance; rather, and exercise whose solution is given in detail.
+}
+\textbf{Exercise.} We shoot $50$ shots at a square target, the side of which is $70$ cm long. We are quite a good shot, because all of our shots hit the target.  Prove that there are two bullet holes that are closer than $15$ cm.
+\textbf{Solution}.
+\begin{reflection}
+    I was seeing this problem for the first time. Although I know the pigeonhole principle, I find it difficult to begin to make a good argument. Is it because two dimensions are involved? If 10 shots fired were all on a single line $70$ cm long, then using the principle, we can see that two are less than $7.5$ cm apart.
+
+    Should I think of a grid? Should I think of a `smaller version' of the problem? Thus, if the target were a square of side $7$ cm, we fired $5$ shots that all hit the target, will there be two bullet holes closer than $1.5$ cm? Or is that minimum distance more? 
+
+    Why is it difficult to apply what I seem to have understood of the pigeonhole principle (which sounds obvious) to this problem, even when I saw it applied to the problem of the number of hair strands of New Yorkers and to the Erdős-Pósa problem?
+
+    I call this a problem with `far transfer' of learned information and suspect it troubles many humans. Is a sufficiently trained artificial neural network (ANN) expected to do better than humans in such cases? Where does the critical insight that makes the solution self-explanatory (of the kind that the young Gauss or young Pósa demonstrated) come from? If an artificial neural network can't solve this problem, is it safe to conclude that its training is far too less? Assuming an ANN can't solve this solved problem, are the arguments applicable to its incapacity also applicable to that of humans who have a brain with a connectionist architecture of organic molecules?
+
+    Should I derive motivation from organizational principles suggested by George Pólya in his wonderful little book (sitting in front me on my desk), \emph{How to Solve It} \cite{polya-htsi}? Is there a battery of techniques that we apply in some order?
+\end{reflection}
+
+\begin{reflection}
+    This problem has stalled my progress. I am close to seeing the textbook solution; my patience has waned.
+
+    However, as I sat grimacing, disillusioned by this problem, perhaps because it is \textbf{Friday, the 13th} November today, I suddenly remembered an observation made in a book, The Clock We Live On \cite{asimov-clock}, by Issac Asimov: There is a Friday the 13th in every year. Can we use the pigeonhole principle to prove it?
+\end{reflection}
+
+\textbf{
+    Imagine that our target is an old chessboard. One row and one column of it has fallen off, so it has $\boldsymbol{49}$ squares. The board received $\boldsymbol{50}$ shots, so there must be a square that received at least two shots (putting bullet holes in pigeonholes). We claim that these two shots are closer to each other than $15\;$cm.
+}
+\begin{reflection}
+    Those three lines clear everything up! I am embarrassed that I, a lifelong chess player--albeit a mediocre one, couldn't make this connection to a wonderfully crafted problem (even when I was familiar with the pigeonhole principle)!
+\end{reflection}
+
+The book then formally (using contradiction) proves what is intuitively clear: No two points in a square $10\;\text{cm}\times10\;\text{cm}$ can be more than $15\;\text{cm}$, or to be precise, $10\sqrt{2}\;\text{cm}$ (the length of its diagonal) apart. That proof is instructive too. It then says:
+\epigraph[source={Pg. 36, 37}]{
+    If this is the first time you have seen this type of proof, you may be surprised: we did not argue directly to prove what we wanted, but instead assumed that the assertion was not true, and then using these additional assumptions, we argued until we got a contradiction. This form of proof is called \textbf{indirect}, and it is quite often used in mathematical reasoning, as we will see throughout this book. (Mathematicians are strange creatures, one may observe: They go into long arguments based on assumptions they know are false, and their happiest moments are when they find a contradiction between statements they have proved.)
+}
+\begin{exercise}
+    \label{ex:2.4.1}
+    Prove that we can select $20$ New Yorkers who all have the same number of strands of hair.
+\end{exercise}
+\textbf{Solution}. 
+\begin{proof}
+    We argue indirectly.
+
+    We assume that every New Yorker has any number of hair strands in the range $[1,500000]$ and the population of NYC is ten million. We (hypothetically) carry out the experiment on every New Yorker and note down the number of their hair strands. This generates a one-to-many mapping Number of hair strands $\mapsto$ Number of people having that many hair strands: $N_h\mapsto N_p$.
+
+If every value of $N_h$ (between $1$ and $500000$) is mapped to a value less than $20$, the total number of people in NYC would be less than $500000\times20=10000000$. This contradicts our assumption that the population of NYC is ten million. Therefore, there must be at least one mapping $N_{h_1}\mapsto N_{p_1}\mid N_{p_1}\geq20$. We can then select $20$ from among them (all of whom have exactly $N_{h_1}$ hair strands).
+\end{proof}
+
+
+
+
 
 
 
