@@ -32,6 +32,7 @@ mkdir -p "$BUILD_DIR/chapters" || exit 1
 TEMP_JOB="${BASENAME}_temp"
 TEMP_PDF="${BUILD_DIR}/${TEMP_JOB}.pdf"
 FINAL_PDF="${BUILD_DIR}/${BASENAME}.pdf"
+COMMIT_PDF="${BASENAME}.pdf"
 
 # Remove any stale temporary PDF
 rm -f "$TEMP_PDF"
@@ -63,6 +64,8 @@ fi
 # Atomic replacement (same filesystem)
 if mv -f -- "$TEMP_PDF" "$FINAL_PDF"; then
     echo "SUCCESS: $FINAL_PDF updated."
+    cp ${FINAL_PDF} ${COMMIT_PDF}
+    echo "Also SUCCESS: ${COMMIT_PDF} updated."
 else
     echo "ERROR: Could not replace final PDF."
     exit 1

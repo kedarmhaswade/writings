@@ -3288,6 +3288,51 @@ The book then formally (using contradiction) proves what is intuitively clear: N
 If every value of $N_h$ (between $1$ and $500000$) is mapped to a value less than $20$, the total number of people in NYC would be less than $500000\times20=10000000$. This contradicts our assumption that the population of NYC is ten million. Therefore, there must be at least one mapping $N_{h_1}\mapsto N_{p_1}\mid N_{p_1}\geq20$. We can then select $20$ from among them (all of whom have exactly $N_{h_1}$ hair strands).
 \end{proof}
 
+\section{The Twin Paradox and the Good Old Logarithm}
+
+\epigraph[source={Pg. 37}]{
+    Having taught the Pigeonhole Principle to his class, the professor decides to play little game: "I bet that there are two of you who have the same birthday! What do you think?" Several students reply immediately: "There are 366 possible birthdays, so you could only conclude this if there were at least 367 of us in the class! But there are only 50 of us, and so you'd lose the bet." Nevertheless, the professor insists on betting, and he wins.
+
+How can we explain this? 
+
+The first thing to realize is that the Pigeonhole Principle tells us that with 367 students in the class, the professor \textbf{always} wins the bet. But this is uninteresting as bets go; it is enough for him that he has a good chance of winning. With 366 students, he may already lose; could it be that with only 50 students he still has a good chance of winning?
+
+The surprising answer is that even with as few as $23$ students, his chance of winning is slightly larger than $50\%$. We can view this fact as a "Probabilistic Pigeonhole Principle", but the usual name for it is the Twin Paradox.
+}
+
+\begin{reflection}
+    I wonder why it is called `Twin Paradox'. Shouldn't it be `Birthday Paradox', or `Birthday-buddy Paradox'?
+\end{reflection}
+The number of "birthday sequences" of $50$ students, like 
+\[
+    \underbrace{25\text{ Dec}}_{1}, \underbrace{7\text{ May}}_{2},\dots,\underbrace{16\text{ Jan}}_{50}
+\]
+is
+\begin{equation}
+    \label{eq:num-bday-seq}
+    N_{lbs}=366\times366\times\dots\times366=366^{50}
+\end{equation}
+The professor loses his bet when the $50$ students all have different birthdays. The number of losing birthday sequences is 
+\begin{equation}
+    \label{eq:num-losing-bday-seq}
+    N_{bs}=366\times365\times\dots\times(366-50+1)=366\times365\times364\times\dots\times\317
+\end{equation}
+This section estimates the value of the quotient, $R_{L_P}$:
+\begin{align}
+    \label{eq:losing-prob-reciprocal}
+    R_{L_P}=\frac
+    {\overbrace{n^k}^{\text{number of $k$-strings composed of $n$ given elements}}} 
+    {\underbrace{^nP_k}_{\text{number of ordered $k$-subsets of an $n$-set}}}=
+    \frac{
+        n\times{n}\times{n}\times\dots\times{n}
+    }{
+        n\times(n-1)\times(n-2)\times\dots\times(n-k+1)
+    }
+\end{align}
+The pr
+\begin{align}
+    \label{eq:losing-prob}
+\end{align}
 
 
 
