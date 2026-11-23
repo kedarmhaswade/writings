@@ -23,6 +23,7 @@
 \newtheorem{theorem}{Theorem}
 \counterwithin{theorem}{section}
 \newtheorem{lemma}{Lemma}
+\counterwithin{lemma}{section}
 \newtheorem{proposition}{Proposition}
 \newtheorem{corollary}{Corollary}
 \newtheorem{exercise}{Exercise}
@@ -3310,17 +3311,30 @@ The number of "birthday sequences" of $50$ students, like
 is
 \begin{equation}
     \label{eq:num-bday-seq}
-    N_{lbs}=366\times366\times\dots\times366=366^{50}
+    n^k=366\times366\times\dots\times366=366^{50}
 \end{equation}
 The professor loses his bet when the $50$ students all have different birthdays. The number of losing birthday sequences is 
 \begin{equation}
     \label{eq:num-losing-bday-seq}
-    N_{bs}=366\times365\times\dots\times(366-50+1)=366\times365\times364\times\dots\times\317
+    ^nP_k=366\times365\times\dots\times(366-50+1)=366\times365\times364\times\dots\times317
 \end{equation}
-This section estimates the value of the quotient, $R_{L_P}$:
+The probability that the professor loses, $L_p$, is
 \begin{align}
-    \label{eq:losing-prob-reciprocal}
-    R_{L_P}=\frac
+    \label{eq:losing-prob}
+    L_p=\frac{^nP_k}{n^k}
+\end{align}
+Therefore, the probability that the professor wins, $W_p$, is
+\begin{align}
+    \label{eq:winning-prob}
+    W_p=1-L_p=1-\frac{^nP_k}{n^k}
+\end{align}
+
+We can readily determine this probability for $n=366,k=50$, but there's fun in \emph{estimating} the  value in the general case.
+
+Consider the quotient, $R_{L_p}$, which is the reciprocal of $L_p$:
+\begin{align}
+    \label{eq:RLp}
+    R_{L_p}=\frac
     {\overbrace{n^k}^{\text{number of $k$-strings composed of $n$ given elements}}} 
     {\underbrace{^nP_k}_{\text{number of ordered $k$-subsets of an $n$-set}}}=
     \frac{
@@ -3329,10 +3343,30 @@ This section estimates the value of the quotient, $R_{L_P}$:
         n\times(n-1)\times(n-2)\times\dots\times(n-k+1)
     }
 \end{align}
-The pr
+
+The quotient in equation \ref{eq:RLp} is that of two numbers that are each a product of $k$ terms. Each term in the numerator is greater than the corresponding term in the denominator. This means that $R_{L_p}$ is greater than $1$. However, it is not at all apparent by how much. 
+
+Logarithms let us turn multiplications of terms into additions of more complicated ones:
 \begin{align}
-    \label{eq:losing-prob}
+    \label{eq:lnRLp}
+    \ln{R_{L_p}}=\ln\frac{n}{n-1}+\ln\frac{n}{n-2}+\dots+\ln\frac{n}{n-k+2}+\ln\frac{n}{n-k+1}
 \end{align}
+
+So, we have reduced it to the summation of logarithms of certain fractions. Rather than getting exact answers, making a good approximation often helps. What are the useful bounds for $\ln{x}$? Here's a lemma in that regard:
+
+\begin{lemma}[Bounds for $\ln{x}$]
+    $\frac{x-1}{x}\leq\ln{x}\leq x-1\;\forall{x>0}$.
+\end{lemma}
+
+\begin{reflection}
+    Thanks to Desmos, I plotted the three functions; they clearly display the bounds.
+\begin{figure}[H]
+  \centering
+    \includegraphics[scale=0.3]{images/three-graphs}
+    \caption{$y=1-\frac{1}{x},y=\ln{x},y=x-1$}
+  \label{fig:three-graphs}
+\end{figure}
+\end{reflection}
 
 
 
