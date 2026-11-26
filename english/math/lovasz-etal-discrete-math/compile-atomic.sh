@@ -64,7 +64,7 @@ fi
 # Atomic replacement (same filesystem)
 if mv -f -- "$TEMP_PDF" "$FINAL_PDF"; then
     echo "SUCCESS: $FINAL_PDF updated."
-    cp ${FINAL_PDF} ${COMMIT_PDF}
+        cp ${FINAL_PDF} ${COMMIT_PDF}
     echo "Also SUCCESS: ${COMMIT_PDF} updated."
 else
     echo "ERROR: Could not replace final PDF."

@@ -3363,11 +3363,127 @@ So, we have reduced it to the summation of logarithms of certain fractions. Rath
 \begin{figure}[H]
   \centering
     \includegraphics[scale=0.3]{images/three-graphs}
-    \caption{$y=1-\frac{1}{x},y=\ln{x},y=x-1$}
+    \caption{$y=1-\frac{1}{x},y=\ln{x},y=x-1$. $\ln{x}$ is \emph{squeezed between} the other two.}
   \label{fig:three-graphs}
 \end{figure}
+
+    It's not clear why these two functions were chosen as bounds. However, they seem to help find a closed-form formula for our expression \ref{eq:lnRLp} for $R_{L_p}$.
 \end{reflection}
 
+Using the lower bound for a typical sum of \ref{eq:lnRLp} we get:
+\[
+    \ln\frac{n}{n-j}\geq\frac{\frac{n}{\cancel{n-j}}-1}{\frac{n}{\cancel{n-j}}}
+\]
+i.e.,
+\[
+    \ln\frac{n}{n-j}\geq\frac{j}{n}
+\]
+
+From this and equation \ref{eq:lnRLp}, it follows that ($j$ goes from $1$ to $k-1$):
+\begin{align}
+    \ln{R_{L_p}}&\geq\frac{1}{n}+\frac{2}{n}+\dots+\frac{k-2}{n}+\frac{k-1}{n}\notag\\
+    \therefore\ln{R_{L_p}}&\geq\frac{1+2+\dots+(k-2)+(k-1)}{n}\notag\\
+    \therefore\ln{R_{L_p}}&\geq\frac{(k-1)k}{2n}\label{eq:lnRLplb}
+\end{align}
+
+Estimating the upper bound:
+\[
+    \ln{\frac{n}{n-j}}\leq\frac{n}{n-j}-1\leq\frac{j}{n-j}
+\]
+
+is complicated because the denominator is different for every $j$. However, we can do a trick of selecting the lowest of all denominators for every fraction clearly without affecting the sum. If something is smaller than $\frac{j}{n-j}$, it is also smaller than $\frac{j}{n-k+1}$ if $n-k+1$ is smaller than $n-j$ for every $j$ we consider.
+\begin{align}
+    \therefore\ln{R_{L_p}}&\leq\frac{1}{n-k+1}+\frac{2}{n-k+1}+\dots+\frac{k-1}{n-k+1}\notag\\
+                          &\leq\frac{(k-1)k}{2(n-k+1)}
+    \label{eq:lnRLpub}
+\end{align}
+
+From equations \ref{eq:lnRLplb} and \ref{eq:lnRLpub}, we get
+\[
+    \frac{(k-1)k}{2n}\leq\ln{R_{L_p}}\leq\frac{(k-1)k}{2(n-k+1)}
+\]
+And
+\begin{align}
+    \label{eq:lnRLpbounds}
+    e^{\frac{(k-1)k}{2n}}\leq{R_{L_p}}\leq{e^{\frac{(k-1)k}{2(n-k+1)}}}
+\end{align}
+
+For $k=50,n=366$, we get
+\[
+    28.4172\leq{R_{L_p}}\leq{47.6724}
+\]
+
+\[
+    \therefore0.03519\geq{L_p}\geq0.02098
+\]
+or,
+\[
+    -0.03519\leq{-L_p}\leq-0.02098
+\]
+that is,
+\[
+    1-0.03519\leq{1-L_p}\leq1-0.02098
+\]
+that is,
+\[
+    96.481\%\leq{W_p}\leq97.902\%
+\]
+
+The exact value is $96.686\%$.
+
+Thus, the professor can expect to lose only about 3 times in 100 attempts!
+
+\section{Review Exercises}
+\begin{exercise}
+    \label{ex:2.5.1}
+    What is the following sum?
+    \[
+        \frac{1}{1\cdot2}+\frac{1}{2\cdot3}+\dots+\frac{1}{(n-1)\cdot{n}}
+    \]
+    Experiment, conjecture the value, and then prove it by induction.
+\end{exercise}
+\textbf{Solution}. There are $n-1$ terms in the summation. So, this summation is
+\[
+    \sum_{i=1}^{n-1}\frac{1}{i\cdot(i+1)}
+\]
+Experimentation shows that
+\begin{enumerate}
+    \item For $n=1,\text{sum}=0$
+    \item For $n=2,\text{sum}=\frac{1}{2}$
+    \item For $n=3,\text{sum}=\frac{2}{3}$
+    \item For $n=4,\text{sum}=\frac{3}{4}$
+\end{enumerate}
+
+In general, we expect the sum to be $\frac{n-1}{n}$. The inductive proof is straightforward.
+
+\begin{reflection}
+    It's more challenging when induction proofs require us to first find the closed-form formula that we prove using the diabolical technique!
+\end{reflection}
+\begin{exercise}
+    \label{ex:2.5.2}
+    What is the following sum?
+    \[
+        0\cdot\binom{n}{0}+1\cdot\binom{n}{1}+2\cdot\binom{n}{2}+\dots+(n-1)\cdot\binom{n}{n-1}+n\cdot\binom{n}{n}
+    \]
+    Experiment, conjecture the value, and then prove it. (Try to prove it by induction and also by combinatorial arguments.)
+\end{exercise}
+\textbf{Solution}. 
+\begin{reflection}
+    As usual, this problem stunned me; I was seeing it for the first time. I decided to try it out on `small numbers\footnote{See Richard Guy's exciting paper on this topic, \emph{The Strong Law of Small Numbers} \cite{guy1988}.}.' Here's my exploration:
+\begin{figure}[H]
+  \centering
+    \includegraphics[scale=0.3]{images/n2ton-s}
+    \caption{Small Experiments to Determine the Sum in exercise \ref{ex:2.5.2}}
+  \label{fig:n2ton}
+\end{figure}
+
+I conjecture that the sum is 
+    \[
+        \frac{n}{2}\cdot2^n
+    \]
+
+    Now comes the hard part of proving it using a combinatorial argument.
+\end{reflection}
 
 
 
